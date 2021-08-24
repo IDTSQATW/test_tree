@@ -1,0 +1,48 @@
+Objective: check Pass-through mode can work (cmd 2C-02) under Quick Chip Mode.
+ 
+====================================
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+>>> PassThrough = START
+CMD: 2C 01 01
+EXR: 2C 00 00 00
+MESSAGE: Place card (ViVOtech test card) on reader --> Click OK
+
+>>> cmd 2C-02 Poll For Token
+CMD: 2C 02 14 32
+EXR: 2C 00 00 05
+MESSAGE: Remove card --> Click OK
+
+>>> PassThrough STOP
+CMD: 2C 01 00
+EXR: 2C 00 00 00
+
+====================================
+>>> Quick Chip mode = 03
+CMD: 01 01 03
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+>>> PassThrough = START
+CMD: 2C 01 01
+EXR: 2C 00 00 00
+MESSAGE: Place card (ViVOtech test card) on reader --> Click OK
+
+>>> cmd 2C-02 Poll For Token
+CMD: 2C 02 14 32
+EXR: 2C 00 00 05
+MESSAGE: Remove card --> Click OK
+
+>>> PassThrough STOP
+CMD: 2C 01 00
+EXR: 2C 00 00 00
+
+>>> CL transaction
+SWIPEKB: Click OK --> Tap card. (NOTE: No CL card data output/ No beep & LEDs)
+MESSAGECK: No CL card data output/ No beep & LEDs
+
+====================================
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00

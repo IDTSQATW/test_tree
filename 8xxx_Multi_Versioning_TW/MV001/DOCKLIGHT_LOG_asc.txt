@@ -1,0 +1,28 @@
+Docklight Log File (ASCII) - Started 2019/1/29 14:32:58.120 
+ TEST CASE: MV001
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Get Product Type *** USAT_SRED
+
+2019/1/29 14:32:59.547 [TX] - ViVOtech2<NUL><HT>	<SOH><NUL><NUL>??
+2019/1/29 14:32:59.573 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL><ACK>?`<ETX>V4<STX> 
+g€ 
+
+ Result = PASSED
+ 
+
+ ---------- END OF TEST ----------
+
+ 
+
+ ///// NOTICE ///////////////////////////////////////////////////////////
+
+Please make sure reader return correct data that meet spec!!
+
+
+Docklight Log File (ASCII) - Stopped 2019/1/29 14:33:00.203 
+

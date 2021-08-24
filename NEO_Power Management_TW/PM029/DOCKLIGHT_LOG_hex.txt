@@ -1,0 +1,23 @@
+Docklight Log File (HEX) - Started 2020/12/9 09:57:49.238 
+ TEST CASE: PM029
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- F0-02 Get Battery Level
+
+2020/12/9 09:57:50.367 [TX] - 56 69 56 4F 74 65 63 68 32 00 F0 02 00 00 CA 95 
+2020/12/9 09:57:50.423 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 F0 00 00 01 C0 1E 09  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2020/12/9 09:57:51.613 
+

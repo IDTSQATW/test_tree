@@ -1,0 +1,109 @@
+DL_SCRIPTVERSION
+1
+40679
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+'------------------------------------------------------------
+DL.OpenProject "PT05000.ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+
+result = 1
+'------------------------------------------------------------
+'Configure prompting
+'------------------------------------------------------------
+FileInput.OpenFile "C:\vivotech\regress\regression\regress_test\test_tree\Regress.Config"
+Dim Prompting(1)
+
+Do Until FileInput.EndOfFile
+  result2 = FileInput.GetLine() 'by pass variable name
+  result2 = FileInput.GetLine()
+  Prompting(0) = result2
+  result2 = FileInput.GetLine() 'by pass variable name
+  result2 = FileInput.GetLine()	 
+  Prompting(1) = result2
+Loop
+'============================================================
+'If result <> 0 Then
+'  DL.AddComment "--- Profile.1"
+'  DL.ResetReceiveCounter "EMV.Response"
+'  DL.SendSequence "Profile.1"
+'  result = DL.WaitForSequence("EMV.Response", 1, '10000)
+'End If
+
+'------------------------------------------------------------
+'Prompt of test being run
+'------------------------------------------------------------
+If Prompting(0) = "ON" Then
+  MyInput = MsgBox("You will now run test PT05000." &Chr(13) & "Objective: Verify that error is returned when PT mode disabled and Poll for Token command is sent.", VBOKOnly, "Test: PT05000")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- Pass-Through Mode - (START)"
+  DL.SendSequence "Pass-Through Mode - (START)"
+  result = DL.WaitForSequence("Pass-Through Mode - (START) (OK)", 1, 10000)
+End If
+
+DL.Pause 1500
+
+If result <> 0 Then
+  DL.AddComment "--- Pass-Through Mode - (STOP)"
+  DL.SendSequence "Pass-Through Mode - (STOP)"
+  result = DL.WaitForSequence("Pass-Through Mode - (STOP) (OK)", 1, 10000)
+End If
+
+DL.Pause 1500
+
+If result <> 0 Then
+  DL.AddComment "--- Poll for Token - Poll for Token when PT mode disabled"
+  DL.SendSequence "Poll for Token - Poll for Token when PT mode disabled"
+  result = DL.WaitForSequence("Poll for Token - Poll for Token when PT mode disabled (OK)", 1, 10000)
+End If
+'------------------------------------------------------------
+'Steps to execute
+'------------------------------------------------------------
+DL.Pause 1500
+
+result = DL.WaitForSequence("Poll for Token from card response received (FAILED)", 1, 10000)
+'------------------------------------------------------------
+MsgBox "Tap the card then press OK button.", VBOKOnly, "Test: PT05000"
+'------------------------------------------------------------
+
+If result = 1 then
+  result = 0 ' FAIL
+ElseIf result = 0 then
+  result = 1 ' PASS
+End If
+
+'MyInput = MsgBox("Did you hear the buzzer and/or LCD indication that card was read?", VBYesNo, "Test: PT05000")
+
+'If MyInput = 6  Then ' Yes
+'  result = 0 'FAIL
+'End If
+
+'If MyInput = 7 Then ' No
+'  result = 1 'PASS
+'End If
+
+'------------------------------------------------------------
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If

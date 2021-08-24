@@ -1,0 +1,30 @@
+Docklight Log File (HEX) - Started 10/10/2016 15:44:00.129 
+ TEST CASE: DTX005
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Enable Custom Display Mode
+
+10/10/2016 15:44:01.821 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 08 00 00 A2 8B 
+10/10/2016 15:44:01.826 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Display CUSTOM MODE OK
+ List Directory OK
+ --- Display Text: Offline available fund
+
+10/10/2016 15:44:01.839 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 03 00 1F 00 00 31 00 34 00 35 00 4F 66 66 6C 69 6E 65 20 61 76 61 69 6C 61 62 6C 65 20 66 75 6E 64 00 06 8C 
+10/10/2016 15:44:01.877 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 04 00 C1 07 40 CA E4  Display Control OK
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 10/10/2016 15:44:10.811 
+

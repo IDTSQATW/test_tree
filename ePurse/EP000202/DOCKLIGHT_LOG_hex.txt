@@ -1,0 +1,71 @@
+Docklight Log File (HEX) - Started 2017/6/14 11:34:55.798 
+ TEST CASE: EP000202
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+--- Turn On Antenna
+
+2017/6/14 11:34:58.105 [TX] - 56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 94 1F 
+2017/6/14 11:34:58.132 [RX] - 56 69 56 4F 74 65 63 68 32 00 28 00 00 00 D6 6A  Turn On Antenna (OK)
+ 
+--- Start PT Mode
+
+2017/6/14 11:34:58.148 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+2017/6/14 11:34:58.176 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  PT Command (OK)
+ 
+--- Poll for Token
+
+2017/6/14 11:34:58.193 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 00 B1 E4 
+2017/6/14 11:34:58.352 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 05 03 D3 AC 5A E3 2D 39  
+--- Get PCD&PICC Parameters
+
+2017/6/14 11:35:03.201 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 05 00 00 F7 6B 
+2017/6/14 11:35:03.227 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 0F 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 D2 DA  
+--- Initialize Blocks
+
+2017/6/14 11:35:08.219 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 08 00 32 33 10 87 19 00 00 78 E6 FF FF 87 19 00 00 00 FF 00 FF B7 1A 00 00 48 E5 FF FF B7 1A 00 00 00 FF 00 FF 88 19 00 00 77 E6 FF FF 88 19 00 00 00 FF 00 FF E5 79 
+2017/6/14 11:35:08.327 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  PT Command (OK)
+ 
+--- Read 3 Initialized Blocks
+
+2017/6/14 11:35:08.346 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 33 10 3F 8F 
+2017/6/14 11:35:08.394 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 30 87 19 00 00 78 E6 FF FF 87 19 00 00 00 FF 00 FF B7 1A 00 00 48 E5 FF FF B7 1A 00 00 00 FF 00 FF 88 19 00 00 77 E6 FF FF 88 19 00 00 00 FF 00 FF 4C D2  Read Initialized Blocks (OK)
+ 
+--- Test 2 ---
+ 
+========== TEST2 ==============================================
+
+ 
+--- Decrement Block *Original - minus 1 @ block 16 without BACKUP - Define 2 send 1
+
+2017/6/14 11:35:08.471 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 0A 00 07 32 10 04 01 00 00 00 E7 97 
+2017/6/14 11:35:08.537 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 05 00 00 F7 6B  Operation Blocks defined less than received ERROR message (FAILED)
+ Result = PASSED
+ 
+--- Increment Block *Original - plus 1 @ block 16 without BACKUP - Define 2 send 1
+
+2017/6/14 11:35:08.561 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 0A 00 07 B2 10 04 01 00 00 00 4C 6E 
+2017/6/14 11:35:08.626 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 05 00 00 F7 6B  Operation Blocks defined less than received ERROR message (FAILED)
+ Result = PASSED
+ 
+--- Read Blocks 3 again
+
+2017/6/14 11:35:08.651 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 33 10 3F 8F 
+2017/6/14 11:35:08.699 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 30 87 19 00 00 78 E6 FF FF 87 19 00 00 00 FF 00 FF B7 1A 00 00 48 E5 FF FF B7 1A 00 00 00 FF 00 FF 88 19 00 00 77 E6 FF FF 88 19 00 00 00 FF 00 FF 4C D2  Read Initialized Blocks (OK)
+ Result = PASSED
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2017/6/14 11:35:11.378 
+

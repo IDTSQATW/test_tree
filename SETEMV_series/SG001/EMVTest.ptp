@@ -1,0 +1,198 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+63
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+EMV.TTQ
+56 69 56 4F 74 65 63 68 32 00 04 00 00 07 9F 66 04 A0 B0 C0 D0 CE 23
+0
+5
+
+SEND
+1
+EMV.Date
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 9A 03 08 11 20 8A DC
+0
+5
+
+SEND
+2
+EMV.CountryCode
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 9F 1A 02 80 5F 6E 74
+0
+5
+
+SEND
+3
+EMV.CurrencyCode
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 5F 2A 02 7F 23 DB D7
+0
+5
+
+SEND
+4
+EMV.CurrencyCode.TerminalType
+56 69 56 4F 74 65 63 68 32 00 04 00 00 08 FF FB 01 03 9F 35 01 22 E6 F7
+0
+5
+
+SEND
+5
+EMV.GetConfiguration
+56 69 56 4F 74 65 63 68 32 00 03 02 00 00 5B 91
+0
+5
+
+SEND
+6
+EMV.English
+56 69 56 4F 74 65 63 68 32 00 04 00 00 08 FF FB 01 00 9F 35 01 22 34 19
+0
+5
+
+RECEIVE
+0
+EMV.Response
+56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
+-1
+1
+COMMENT =EMV Confirm
+1
+1
+0
+0
+
+RECEIVE
+1
+EMV.ConfigHeader
+56 69 56 4F 74 65 63 68 32 00 03
+-1
+1
+COMMENT {CONFIG}
+0
+1
+0
+0
+
+RECEIVE
+2
+EMV.ConfigResponse
+??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
+EMV.ConfigResponseXX
+## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+4
+TLV1.TTQ
+9F 66 04 A0 B0 C0 D0
+-1
+1
+COMMENT {TLV1:TTQ}
+0
+1
+0
+0
+
+RECEIVE
+5
+TLV2.Date
+9A 03 08 11 20
+-1
+1
+COMMENT {TLV2:Date}
+0
+1
+0
+0
+
+RECEIVE
+6
+TLV3.CountryCode
+9F 1A 02 80 5F
+-1
+1
+COMMENT {TLV3:Country}
+0
+1
+0
+0
+
+RECEIVE
+7
+TLV4.Currency
+5F 2A 02 7F 23
+-1
+1
+COMMENT {TLV4:Currency}
+0
+1
+0
+0
+
+RECEIVE
+8
+TLV5.French
+FF FB 01 03
+-1
+1
+COMMENT {TLV5:French}
+0
+1
+0
+0
+
+RECEIVE
+9
+TLV6.TType
+9F 35 01 22
+-1
+1
+COMMENT {TLV6:TType}
+0
+1
+0
+0
+
+RECEIVE
+10
+ERROR.CRC
+56 69 56 4F 74 65 63 68 32 00 ?? 04 00 00 ?? ??
+-1
+1
+COMMENT =CRC Error
+1
+1
+0
+0
+

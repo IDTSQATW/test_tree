@@ -1,0 +1,4 @@
+/// AT cmd -- 02-40 (w/ SmartTap tag, Get VAS Only Mode), case 0.1 + 0.2 
+[TX] - 56 69 56 4F 74 65 63 68 32 00 02 40 00 1B 30 9F 02 06 00 00 00 00 00 01 9C 01 00 FF EE 08 0A DF EF 1A 01 0A DF ED 28 01 00 B6 14
+
+[XX] - 00 00 00

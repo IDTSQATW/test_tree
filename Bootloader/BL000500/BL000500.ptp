@@ -1,0 +1,270 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+------------------GET BOOTLOADER VERSION (only works in Bootloader mode)------------------
+
+0
+5
+
+SEND
+1
+***** Precondition: Have serial port plugged in and set Docklight to 115200 baud.
+
+0
+5
+
+SEND
+2
+***** Precondition: Make sure 'VP6K READY!!!' Receive Sequence box is CHECKED below.
+
+0
+5
+
+SEND
+3
+***** Step 1: Start communication on Docklight.
+
+0
+5
+
+SEND
+4
+***** Step 2: Uplug and replug power source only.
+
+0
+5
+
+SEND
+5
+***** Step 3: Bootloader version should appear in the Communication 'ASCII' tab window in Docklight
+
+0
+5
+
+SEND
+6
+Get Bootloader Version
+56 69 56 4F 74 65 63 68 32 00 77 01 00 00 8F 40
+0
+5
+
+SEND
+7
+------------------REBOOT in Linux Image------------------
+
+0
+5
+
+SEND
+8
+***** Step 1: While in Linux image send the 'Reboot' command.
+
+0
+5
+
+SEND
+9
+Reboot
+56 69 56 4F 74 65 63 68 32 00 77 05 00 00 4F 9C
+0
+5
+
+SEND
+10
+------------------REBOOT in Bootloader mode------------------
+
+0
+5
+
+SEND
+11
+***** Perform 'GET BOOTLOADER VERSION' steps above to get device to stay in bootloader mode.
+
+0
+5
+
+SEND
+12
+***** Precondition: Uncheck 'VP6K READY!!!' Receive Sequence below.
+
+0
+5
+
+SEND
+13
+***** Step 1: While in Bootloader mode send the 'Reboot' command.
+
+0
+5
+
+SEND
+14
+Reboot
+56 69 56 4F 74 65 63 68 32 00 77 05 00 00 4F 9C
+0
+5
+
+SEND
+15
+------------------CONTINUE REBOOT in Bootloader mode.------------------
+
+0
+5
+
+SEND
+16
+***** Perform 'GET BOOTLOADER VERSION' steps above to get device to stay in bootloader mode.
+
+0
+5
+
+SEND
+17
+***** Precondition: Uncheck 'VP6K READY!!!' Receive Sequence below.
+
+0
+5
+
+SEND
+18
+***** Step 1: While in Bootloader mode send 'Continue Boot' command.
+
+0
+5
+
+SEND
+19
+Continue Boot
+56 69 56 4F 74 65 63 68 32 00 77 06 00 00 1F C5
+0
+5
+
+SEND
+20
+***** Device will reboot to Linux image.
+
+0
+5
+
+SEND
+21
+------------------CONTINUE REBOOT in Linux mode.------------------
+
+0
+5
+
+SEND
+22
+***** Command does not work in Linux mode 
+
+0
+5
+
+SEND
+23
+------------------DOWNLOAD APPLICATION IMAGE in Bootloader mode------------------
+
+0
+5
+
+SEND
+24
+**** Precondition: Make sure 'VP6K READY!!!' Receive Sequence box is CHECKED below.
+
+0
+5
+
+SEND
+25
+***** Perform 'GET BOOTLOADER VERSION' steps above to get device to stay in bootloader mode.
+
+0
+5
+
+SEND
+26
+***** Step 1: Send 'Download Application Image' command.
+
+0
+5
+
+SEND
+27
+DOWNLOAD
+56 69 56 4F 74 65 63 68 32 00 77 04 00 00 7F AB
+0
+5
+
+SEND
+28
+***** Step 2: Open Tera Term app to send hex file image via serial @ 115200 baud or use the USB Download utility to send hex image via USB.
+
+0
+5
+
+SEND
+29
+------------------DOWNLOAD APPLICATION IMAGE in Linux image-----------------
+
+0
+5
+
+SEND
+30
+***** Reader currently returns a 'Unknown Command' response at the moment. Issue logged.
+
+0
+5
+
+RECEIVE
+0
+VP-AR READY!!!
+56 50 2D 41 52 20 52 65 61 64 79 ##
+6
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+Reboot OK
+56 69 56 4F 74 65 63 68 32 00 77 00 00 00 ##
+-1
+0
+COMMENT Reboot OK
+0
+1
+0
+0
+
+RECEIVE
+2
+VP6K Ready
+56 50 36 4B 20 52 45 41 44 59 ##
+6
+0
+COMMENT 
+0
+1
+0
+0
+

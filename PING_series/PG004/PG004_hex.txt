@@ -1,0 +1,33 @@
+Docklight Log File (HEX) - Started 6/14/2016 11:20:19.531 
+ TEST CASE: PG004
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 19200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Long ping 
+
+6/14/2016 11:20:21.073 [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 10 00 11 22 33 44 55 66 77 88 99 AA BB CC DD EE FF CA D5 
+6/14/2016 11:20:21.098 [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Status Code = '00'
+ --- Long ping 1st part
+
+6/14/2016 11:20:21.123 [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 10 00 11 22 33 44 55  --- Long ping 2nd part
+
+6/14/2016 11:20:23.144 [TX] - 66 77 88 99 AA BB CC DD EE FF CA D5  --- Long ping 
+
+6/14/2016 11:20:26.164 [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 10 00 11 22 33 44 55 66 77 88 99 AA BB CC DD EE FF CA D5 
+6/14/2016 11:20:26.189 [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Status Code = '00'
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 6/14/2016 11:20:27.474 
+

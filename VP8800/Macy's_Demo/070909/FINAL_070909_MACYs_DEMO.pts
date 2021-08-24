@@ -1,0 +1,1268 @@
+DL_SCRIPTVERSION
+1
+34013
+
+'===========================================================
+'   Initializations
+'===========================================================
+Dim COM_Port
+IP_Address = "192.168.50.118" '*****Sulak change this to your local IP address*****
+COM_Port = "COM1"
+Dim Global
+Global = 123
+'For i = 1 to 100
+'Tap_SMS
+'Next
+'Demo
+'===========================================================
+'   START DEMO
+'===========================================================
+DL.SendSequence "Cancel Command"
+DL.SendSequence "Clear Display"
+START_DEMO
+
+Sub START_DEMO()
+For n = 1 to 100 
+'DL.SendSequence "Cancel Command"
+'DL.SendSequence "Clear Display"
+'DL.SendSequence "Clear Display"
+	Global = 123
+	result1 = 0
+	result2 = 0
+	result3 = 0	
+	result4 = 0
+	result5 = 0
+	result6 = 0
+	result7 = 0
+	result8 = 0
+	result9 = 0
+	result10 = 0
+	result11 = 0
+	result12 = 0
+	result13 = 0
+	result14 = 0
+	result15 = 0
+	result16 = 0
+	result17 = 0
+	result18 = 0
+	result19 = 0
+	result20 = 0
+	result21 = 0
+	result22 = 0
+	result23 = 0
+	result24 = 0
+
+	DL.ResetReceiveCounter("CARD: Smoothie King")
+	DL.ResetReceiveCounter("CARD: McDonalds")
+	DL.ResetReceiveCounter("CARD: Rita Ramirez")
+	DL.ResetReceiveCounter("CARD: Jim Musco")
+	DL.ResetReceiveCounter("CARD: Bruce Donis")
+	DL.ResetReceiveCounter("CARD: Bob Snodgrass")
+	DL.ResetReceiveCounter("CARD: Dale Grant")
+	DL.ResetReceiveCounter("CARD: Mark Wallace")
+	DL.ResetReceiveCounter("CARD: Chris Ahrens")
+	DL.ResetReceiveCounter("CARD: Greg Egan")
+	DL.ResetReceiveCounter("CARD: Jim Brown")
+	DL.ResetReceiveCounter("CARD: Jose Perez")
+	DL.ResetReceiveCounter("CARD: Mike Delagrange")
+	DL.ResetReceiveCounter("CARD: Dom Richhio")
+	DL.ResetReceiveCounter("CARD: Jimmy Stone")
+	DL.ResetReceiveCounter("CARD: Efrain Irizarry")
+	DL.ResetReceiveCounter("CARD: Wayne Berger")
+	DL.ResetReceiveCounter("CARD: Brian Leinbach")
+	DL.ResetReceiveCounter("CARD: Larry Lewark")
+	DL.ResetReceiveCounter("CARD: Jeff Ball")
+	DL.ResetReceiveCounter("CARD: Bill Barton")
+	DL.ResetReceiveCounter("CARD: Sulak Soysa")
+	DL.ResetReceiveCounter("CARD: Mohammad Khan")
+	DL.ResetReceiveCounter("CARD: Roshan")
+
+	Slideshow
+	Tap_SMS
+	WELCOME
+	LineItemDisp
+	LineItemDisp3
+	Demo
+	
+	While Global = 123 
+		DL.AddComment "Global is 123"
+	Wend
+	DL.AddComment "*** Global is " & Global
+	'DL.Pause 3000	
+	If Global = 1 Or Global = 0 Then
+		DL.AddComment "In here BB!!!"
+		ActTrans
+	End If
+	Sig_Cap
+	PIN_Entry
+	DL.WaitForSequence "PIN entered"
+	Thank_You
+
+	CustInfo1
+	Global = 123
+	While Global = 123 
+		DL.AddComment "Global is 123"
+	Wend
+	DL.AddComment "*** Global is " & Global
+	'DL.Pause 3000	
+	If Global = 1 Or Global = 0 Then
+		DL.AddComment "In here BB!!!"
+		CustInfo2
+	End If
+
+	Global = 123
+	While Global = 123 
+		DL.AddComment "Global is 123"
+	Wend
+	DL.AddComment "*** Global is " & Global
+	'DL.Pause 3000	
+	If Global = 1 Or Global = 0 Then
+		DL.AddComment "In here BB!!!"
+		Slideshow2
+	End If
+
+	DL.SendSequence "Restarting DEMO....."
+	Global = 123
+	DL.Pause 3000
+	
+Next
+End Sub
+'===========================================================
+'   WELCOME
+'===========================================================
+
+Sub WELCOME()
+DL.AddComment "Global is " & Global
+'DL.Pause 5000
+
+DL.SendSequence "Start Non-Secure"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+'MsgBox "Begin: Display WELCOME screen", VBOKOnly, "Demo Step"
+DL.SendSequence "Set BACKGROUND to Macy's"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+DL.SendSequence "Set FOREGROUND to BLACK"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+''''DL.SendSequence "Clear screen"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+DL.SendSequence "BMP: Welcome to macy's"
+'DL.SendSequence "Text: Welcome To macy's (centered)"
+'DL.SendSequence "Set BACKGROUND to Macy's"
+'DL.SendSequence "Set FOREGROUND to BLACK"
+
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+'DL.Pause 15000
+'Trigger = 11
+DL.Pause 3500
+'DL.SendSequence "Clear screen"
+End Sub
+
+
+
+'===========================================================
+'   Slideshow
+'===========================================================
+
+Sub Slideshow()
+Timeout1 = 2500
+
+For i = 1 to 1
+DL.AddComment "------ Iteration #" & i & " ------"
+DL.AddComment "------ Iteration #" & i & " ------"
+DL.AddComment "------ Iteration #" & i & " ------"
+
+'DL.ResetReceiveCounter "Display item (OK)"
+DL.SendSequence "Start Non-Secure"
+'resultDM = DL.WaitForSequence("Display item (OK)", 1, 5000)
+'DL.SendSequence "BMP: duck"
+'DL.Pause Timeout1
+'DL.SendSequence "BMP: macystar"
+'DL.Pause Timeout1
+'DL.SendSequence "BMP: falls"
+DL.Pause Timeout1
+DL.SendSequence "BMP: M1"
+DL.Pause Timeout1
+DL.SendSequence "BMP: M2"
+DL.Pause Timeout1
+DL.SendSequence "BMP: M3"
+DL.Pause Timeout1
+DL.SendSequence "BMP: M4"
+DL.Pause Timeout1
+DL.SendSequence "BMP: M5"
+DL.Pause Timeout1
+'DL.ResetReceiveCounter "Display item (OK)"
+'DL.SendSequence "Stop Non-Secure"
+'resultDM = DL.WaitForSequence("Display item (OK)", 1, 5000)
+Next
+
+End Sub
+
+'===========================================================
+'   Tap_SMS
+'===========================================================
+
+'Tap_SMS
+DL.AddComment "Outside!!!"
+
+Sub Tap_SMS()
+DL.SendSequence "Set BACKGROUND to RED3"
+DL.SendSequence "Set FOREGROUND to SNOW"
+
+'DL.ResetReceiveCounter "OK button pressed"
+DL.ResetReceiveCounter "REDOK Button Pressed"
+DL.ResetReceiveCounter "Card Tap Read"
+result = 0
+
+DL.SendSequence "Start Non-Secure"
+'DL.SendSequence "Tap SMS"
+DL.SendSequence "BMP: SMS Tap"
+'DL.SendSequence "OK Button"
+DL.SendSequence "REDOK Button"
+DL.SendSequence "Read Button"
+'result = DL.WaitForSequence ("OK button pressed", 1, 10000)
+result = DL.WaitForSequence ("REDOK Button Pressed", 1, 20000)
+If result = 0 Then
+	DL.AddComment "TIMED OUT!!!"
+	DL.SendSequence "Cancel Command"
+	Exit Sub
+ElseIf result = 1 Then
+	DL.AddComment "PRESSED OK!!!"
+End If
+
+'DL.StopCommunication
+'DL.SetChannelSettings(COM_Port & ":" & "115200" & ",NONE,8,1")
+'DL.StartCommunication
+
+DL.ResetReceiveCounter "CARD: Smoothie King"
+DL.ResetReceiveCounter "CARD: McDonalds"
+DL.ResetReceiveCounter "Card Tap Read"
+
+result = 0
+DL.SendSequence "Activate Transaction"
+result = DL.WaitForSequence("Card Tap Read", 1, 20000)
+DL.SendSequence "Text:SPACEs"
+DL.SendSequence "BMP: SMS Thank You"
+
+'DL.Pause 3000
+If result = 0 Then
+	DL.AddComment "TIMED OUT!!!"
+	DL.SendSequence "Cancel Command"
+	DL.SendSequence "Clear Display"
+	Exit Sub
+ElseIf result = 1 Then
+	DL.AddComment "--- CARD WAS TAPPED ---"
+End If
+
+If result = 1 Then
+	result1 = DL.GetReceiveCounter("CARD: Smoothie King")
+	DL.AddComment "CARD: Smoothie King = " & result1
+	
+	result2 = DL.GetReceiveCounter("CARD: McDonalds")
+	DL.AddComment "CARD: McDonalds = " & result2
+	
+	result3 = DL.GetReceiveCounter("CARD: Rita Ramirez")
+	DL.AddComment "CARD: Rita Ramirez = " & result3
+	
+	result4 = DL.GetReceiveCounter("CARD: Jim Musco")
+	DL.AddComment "CARD: Jim Musco = " & result4
+	
+	result5 = DL.GetReceiveCounter("CARD: Bruce Donis")
+	DL.AddComment "CARD: Bruce Donis = " & result5
+	
+	result6 = DL.GetReceiveCounter("CARD: Bob Snodgrass")
+	DL.AddComment "CARD: Bob Snodgrass = " & result6
+	
+	result7 = DL.GetReceiveCounter("CARD: Dale Grant")
+	DL.AddComment "CARD: Dale Grant = " & result7
+	
+	result8 = DL.GetReceiveCounter("CARD: Mark Wallace")
+	DL.AddComment "CARD: Mark Wallace = " & result8
+	
+	result9 = DL.GetReceiveCounter("CARD: Chris Ahrens")
+	DL.AddComment "CARD: Chris Ahrens = " & result9
+	
+	result10 = DL.GetReceiveCounter("CARD: Greg Egan")
+	DL.AddComment "CARD: Greg Egan = " & result10
+	
+	result11 = DL.GetReceiveCounter("CARD: Jim Brown")
+	DL.AddComment "CARD: Jim Brown = " & result11
+	
+	result12 = DL.GetReceiveCounter("CARD: Jose Perez")
+	DL.AddComment "CARD: Jose Perez = " & result12
+		
+	result13 = DL.GetReceiveCounter("CARD: Mike Delagrange")
+	DL.AddComment "CARD: Mike Delagrange = " & result13
+	
+	result14 = DL.GetReceiveCounter("CARD: Dom Richhio")
+	DL.AddComment "CARD: Dom Richhio = " & result14
+	
+	result15 = DL.GetReceiveCounter("CARD: Jimmy Stone")
+	DL.AddComment "CARD: Jimmy Stone = " & result15
+	
+	result16 = DL.GetReceiveCounter("CARD: Efrain Irizarry")
+	DL.AddComment "CARD: Efrain Irizarry = " & result16
+	
+	result17 = DL.GetReceiveCounter("CARD: Wayne Berger")
+	DL.AddComment "CARD: Wayne Berger = " & result17
+	
+	result18 = DL.GetReceiveCounter("CARD: Brian Leinbach")
+	DL.AddComment "CARD: Brian Leinbach = " & result18
+	
+	result19 = DL.GetReceiveCounter("CARD: Larry Lewark")
+	DL.AddComment "CARD: Larry Lewark = " & result19
+	
+	result20 = DL.GetReceiveCounter("CARD: Jeff Ball")
+	DL.AddComment "CARD: Jeff Ball = " & result20
+	
+	result21 = DL.GetReceiveCounter("CARD: Bill Barton")
+	DL.AddComment "CARD: Bill Barton = " & result21
+	
+	result22 = DL.GetReceiveCounter("CARD: Sulak Soysa")
+	DL.AddComment "CARD: Sulak Soysa = " & result22
+	
+	result23 = DL.GetReceiveCounter("CARD: Mohammad Khan")
+	DL.AddComment "CARD: Mohammad Khan = " & result23
+	
+	result24 = DL.GetReceiveCounter("CARD: Roshan")
+	DL.AddComment "CARD: Roshan = " & result24
+
+
+	DL.StopCommunication
+	DL.SetChannelSettings(IP_Address & ":9080")
+	DL.StartCommunication
+	
+	'DL.StopCommunication
+	'DL.SetChannelSettings(COM_Port & ":" & "115200" & ",NONE,8,1")
+	'DL.StartCommunication
+
+	If result1 = 1 Then
+	DL.SendSequence "Send Smoothie King Data"
+	ElseIf result2 = 1 Then
+	DL.SendSequence "Send McDonalds Data"
+
+	ElseIf result3 = 1 Then
+	DL.SendSequence "Send Rita Ramirez Data"
+	ElseIf result4 = 1 Then
+	DL.SendSequence "Send Jim Musco Data"
+	ElseIf result5 = 1 Then
+	DL.SendSequence "Send Bruce Donis Data"
+	ElseIf result6 = 1 Then
+	DL.SendSequence "Send Bob Snodgrass Data"
+	ElseIf result7 = 1 Then
+	DL.SendSequence "Send Dale Grant Data"
+	ElseIf result8 = 1 Then
+	DL.SendSequence "Send Mark Wallace Data"
+	ElseIf result9 = 1 Then
+	DL.SendSequence "Send Chris Ahrens Data"
+	ElseIf result10 = 1 Then
+	DL.SendSequence "Send Greg Egan Data"
+	ElseIf result11 = 1 Then
+	DL.SendSequence "Send Jim Brown Data"
+	ElseIf result12 = 1 Then
+	DL.SendSequence "Send Jose Perez Data"
+	ElseIf result13 = 1 Then
+	DL.SendSequence "Send Mike Delagrange Data"
+	ElseIf result14 = 1 Then
+	DL.SendSequence "Send Dom Richhio Data"
+	ElseIf result15 = 1 Then
+	DL.SendSequence "Send Jimmy Stone Data"
+	ElseIf result16 = 1 Then
+	DL.SendSequence "Send Efrain Irizarry Data"
+	ElseIf result17 = 1 Then
+	DL.SendSequence "Send Wayne Berger Data"
+	ElseIf result18 = 1 Then
+	DL.SendSequence "Send Brian Leinbach Data"
+	ElseIf result19 = 1 Then
+	DL.SendSequence "Send Larry Lewark Data"
+	ElseIf result20 = 1 Then
+	DL.SendSequence "Send Jeff Ball Data"
+	ElseIf result21 = 1 Then
+	DL.SendSequence "Send Bill Barton Data"
+	ElseIf result22 = 1 Then
+	DL.SendSequence "Send Sulak Soysa Data"
+	ElseIf result23 = 1 Then
+	DL.SendSequence "Send Mohammad Khan Data"
+	ElseIf result24 = 1 Then
+	DL.SendSequence "Send Roshan Data"
+
+	End If	
+
+End If
+
+DL.ResetReceiveCounter "Card Tap Read"
+DL.ResetReceiveCounter "REDOK Button Pressed"
+'DL.ResetReceiveCounter "OK button pressed"
+
+DL.StopCommunication
+DL.SetChannelSettings(COM_Port & ":" & "115200" & ",NONE,8,1")
+DL.StartCommunication
+
+'DL.SendSequence "Tap SMS Confirmation"
+'DL.SendSequence "BMP: SMS Thank You"
+'DL.SendSequence "Clear Display"
+DL.Pause 3000
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Clear Display"
+DL.SendSequence "Clear Display"
+'DL.SendSequence "Text:SPACEs"
+
+End Sub
+
+
+'===========================================================
+'   LineItemDisp
+'===========================================================
+
+Sub LineItemDisp()
+'DL.StopCommunication
+'DL.StartCommunication
+'DL.SendSequence "Line item display delete"
+'DL.SendSequence "Clear Area - Line Item Display"
+'DL.SendSequence "Clear display"
+'DL.SendSequence "Stop Non-Secure"
+DL.AddComment " I AM IN LineItemDisp"
+
+'For i = 1 to 100 
+'DL.SendSequence "Start Non-Secure"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Clear display"
+DL.SendSequence "Set FOREGROUND to BLACK"
+DL.SendSequence "New Create Line Item"
+DL.SendSequence "Set BACKGROUND to RED3"
+DL.SendSequence "Set FOREGROUND to SNOW"
+DL.SendSequence "Clear Area - Line Item Display"
+DL.SendSequence "Subtotal: RAL"
+DL.SendSequence "Tax: RAL"
+DL.SendSequence "Total: RAL"
+DL.SendSequence "Amount Due: RAL"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Set FOREGROUND to BLUE"
+DL.SendSequence "Waiting for CASHIER"
+DL.AddComment " I AM IN LineItemDisp XXX"
+End Sub
+
+Sub LineItemDisp3()
+DL.SendSequence "Set FOREGROUND to BLUE"
+DL.SendSequence "Scanning items..."
+
+DL.Pause 500
+DL.SendSequence "Set FOREGROUND to BLACK"
+DL.SendSequence "Item 1"
+DL.SendSequence "Set BACKGROUND to RED3"
+DL.SendSequence "Set FOREGROUND to SNOW"
+DL.SendSequence "Subtotal 1"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Set FOREGROUND to BLACK"
+
+DL.Pause 500
+DL.SendSequence "Set FOREGROUND to BLACK"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Item 2"
+DL.SendSequence "Set BACKGROUND to RED3"
+DL.SendSequence "Set FOREGROUND to SNOW"
+DL.SendSequence "Subtotal 2"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Set FOREGROUND to BLACK"
+
+DL.Pause 500
+DL.SendSequence "Set FOREGROUND to BLACK"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Item 3"
+DL.SendSequence "Set BACKGROUND to RED3"
+DL.SendSequence "Set FOREGROUND to SNOW"
+DL.SendSequence "Subtotal 3"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Set FOREGROUND to BLACK"
+
+'End Sub
+
+'Demo2
+
+'Sub Demo2()
+DL.Pause 500
+DL.SendSequence "Set FOREGROUND to BLACK"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Item 4"
+DL.SendSequence "Set BACKGROUND to RED3"
+DL.SendSequence "Set FOREGROUND to SNOW"
+DL.SendSequence "Subtotal 4"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Set FOREGROUND to BLACK"
+
+DL.Pause 500
+DL.SendSequence "Set FOREGROUND to BLACK"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Item 5"
+DL.SendSequence "Set BACKGROUND to RED3"
+DL.SendSequence "Set FOREGROUND to SNOW"
+DL.SendSequence "Subtotal 5"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Set FOREGROUND to BLACK"
+
+DL.Pause 500
+DL.SendSequence "Set FOREGROUND to BLACK"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Item 6"
+DL.SendSequence "Set BACKGROUND to RED3"
+DL.SendSequence "Set FOREGROUND to SNOW"
+DL.SendSequence "Subtotal 6"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Set FOREGROUND to BLACK"
+
+DL.Pause 500
+DL.SendSequence "Set FOREGROUND to BLACK"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Item 7"
+DL.SendSequence "Set BACKGROUND to RED3"
+DL.SendSequence "Set FOREGROUND to SNOW"
+DL.SendSequence "Subtotal 7"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Set FOREGROUND to BLACK"
+
+DL.Pause 500
+DL.SendSequence "Set FOREGROUND to BLACK"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Item 8"
+DL.SendSequence "Set BACKGROUND to RED3"
+DL.SendSequence "Set FOREGROUND to SNOW"
+DL.SendSequence "Subtotal 8"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Set FOREGROUND to BLACK"
+
+DL.Pause 500
+DL.SendSequence "Set FOREGROUND to BLACK"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Item 9"
+DL.SendSequence "Set BACKGROUND to RED3"
+DL.SendSequence "Set FOREGROUND to SNOW"
+DL.SendSequence "Subtotal 9"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Set FOREGROUND to BLACK"
+
+DL.Pause 500
+DL.SendSequence "Set FOREGROUND to BLACK"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Item 10"
+DL.SendSequence "Set BACKGROUND to RED3"
+DL.SendSequence "Set FOREGROUND to SNOW"
+DL.SendSequence "Subtotal 10"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Set FOREGROUND to BLACK"
+
+DL.Pause 500
+DL.SendSequence "Set FOREGROUND to BLACK"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Item 11"
+DL.SendSequence "Set BACKGROUND to RED3"
+DL.SendSequence "Set FOREGROUND to SNOW"
+DL.SendSequence "Subtotal 11"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Set FOREGROUND to BLACK"
+
+DL.Pause 500
+DL.SendSequence "Set FOREGROUND to BLACK"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Item 12"
+DL.SendSequence "Set BACKGROUND to RED3"
+DL.SendSequence "Set FOREGROUND to SNOW"
+DL.SendSequence "Subtotal 12"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Set FOREGROUND to BLACK"
+
+DL.Pause 500
+DL.SendSequence "Set FOREGROUND to BLACK"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Item 13"
+DL.SendSequence "Set BACKGROUND to RED3"
+DL.SendSequence "Set FOREGROUND to SNOW"
+DL.SendSequence "Subtotal 13"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Set FOREGROUND to BLACK"
+
+DL.Pause 500
+DL.SendSequence "Set FOREGROUND to BLACK"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Item 14"
+DL.SendSequence "Set BACKGROUND to RED3"
+DL.SendSequence "Set FOREGROUND to SNOW"
+DL.SendSequence "Subtotal 14"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Set FOREGROUND to BLACK"
+
+DL.Pause 500
+DL.SendSequence "Set FOREGROUND to BLACK"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Item 15"
+DL.SendSequence "Set BACKGROUND to RED3"
+DL.SendSequence "Set FOREGROUND to SNOW"
+DL.SendSequence "Subtotal 15"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Set FOREGROUND to BLACK"
+
+
+DL.SendSequence "Set FOREGROUND to GREEN4"
+DL.SendSequence "Scanning complete 1"
+DL.SendSequence "Scanning complete 2"
+DL.SendSequence "Set BACKGROUND to RED3"
+DL.SendSequence "Set FOREGROUND to SNOW"
+DL.SendSequence "Tax amount"
+DL.SendSequence "Total amount"
+DL.SendSequence "Amount Due amount"
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Set FOREGROUND to BLACK"
+DL.SendSequence "OK Button"
+DL.ResetReceiveCounter "BUTTON WAS PRESSED"
+DL.SendSequence "Read Button"
+'result = DL.WaitForSequence ("BUTTON WAS PRESSED", 1, 5000)
+'If result = 1 Then
+'	#include "X:\01\DocLightScriptSample\OnReceive.pts"
+'End If
+
+DL.Pause 1500
+'Next
+DL.ResetReceiveCounter "OK button pressed"
+End Sub
+
+
+
+
+'===========================================================
+'   Demo
+'===========================================================
+
+Sub Demo()
+'MsgBox "Next: Display 'Is the amount correct?' screen", VBOKOnly, "Demo Step"
+DL.SendSequence "Set FOREGROUND to RED3"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+DL.SendSequence "Text: Is the amount correct (0,25)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set BACKGROUND to SNOW"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+DL.SendSequence "Set FOREGROUND to BLACK"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text Amount: 100.00 (85)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set BACKGROUND to Macy's"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+DL.SendSequence "Text: Acct"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+
+DL.SendSequence "Set BACKGROUND to Macy's"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+DL.SendSequence "Set FOREGROUND to RED3"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Yes Button (95,190)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "No Button (295,190)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+'DL.ResetReceiveCounter "BUTTON WAS PRESSED"
+DL.AddComment "-----Here 1-----"
+DL.SendSequence "Read Button"
+'DL.AddComment "1BUTTON WAS PRESSED = " & DL.GetReceiveCounter("BUTTON WAS PRESSED")
+DL.AddComment "-----Here 2-----"
+'DL.ResetReceiveCounter "BUTTON WAS PRESSED"
+'TwoButtonsRunNum = 1
+'result = DL.WaitForSequence ("Yes button pressed", 1, 255000)
+'result = DL.WaitForSequence ("BUTTON WAS PRESSED", 1, 255000)
+
+'If result = 1 Then
+'	DL.SendSequence "Activate Transaction"
+'	result = DL.WaitForSequence ("Card Tap Read", 1, 20000)
+'	DL.ResetReceiveCounter "Card Tap Read"
+'ElseIf result = 0 Then 
+'	DL.SendSequence "Activate Transaction"
+'	result = DL.WaitForSequence ("Card Tap Read", 1, 20000)
+'	DL.ResetReceiveCounter "Card Tap Read"
+'End If
+
+'DL.ResetReceiveCounter "BUTTON WAS PRESSED"
+'DL.SendSequence "Cancel Command"
+'CancelCommandOK = DL.WaitForSequence ("Cancel Command OK", 1, 10000)
+'If CancelCommandOK = 1 Then
+'	DL.AddComment "CANCELLLLLLLLED!!!!"
+'End If
+DL.AddComment "-----Here 3-----"
+result = 0
+DL.AddComment "-----Here 4-----"
+result = DL.WaitForSequence("BUTTON WAS PRESSED", 1, 10000)
+DL.AddComment "-----Here 5-----"
+DL.AddComment "2BUTTON WAS PRESSED = " & DL.GetReceiveCounter("BUTTON WAS PRESSED")
+DL.AddComment "-----Here 6-----"
+
+End Sub
+
+
+'===========================================================
+'   Activate Transaction
+'===========================================================
+
+Sub ActTrans()
+DL.SendSequence "Set BACKGROUND to RED3"
+DL.SendSequence "Set FOREGROUND to SNOW"
+'MsgBox "Next: Display 'Please Present Card'", VBOKOnly, "Demo Step"
+'DL.SendSequence "Set FOREGROUND to BLACK"
+result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+DL.ResetReceiveCounter "Display item (OK)"
+DL.Pause 700
+DL.SendSequence "Activate Transaction"
+result = DL.WaitForSequence ("Card Tap Read", 1, 20000)
+DL.ResetReceiveCounter "Card Tap Read"
+'DL.SendSequence "Set BACKGROUND to Macy's"
+'DL.SendSequence "Set FOREGROUND to BLACK"
+End Sub
+
+
+'===========================================================
+'   Sig_Cap
+'===========================================================
+
+
+Sub Sig_Cap()
+
+DL.SendSequence "Set FOREGROUND to BLACK"
+DL.SendSequence "Signature Capture"
+
+End Sub
+
+
+'===========================================================
+'   PIN_Entry
+'===========================================================
+
+Sub PIN_Entry()
+'----- PIN Entry -----
+
+DL.SendSequence "Stop Non-Secure"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set BACKGROUND to Macy's"
+DL.SendSequence "Set FOREGROUND to RED3"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "PIN Entry"
+Trigger = 3
+'result = DL.WaitForSequence ("PIN entered", 1, 245000)
+'DL.ResetReceiveCounter "PIN entered"
+'---------------------
+End Sub
+
+
+'===========================================================
+'   Thank_You
+'===========================================================
+
+Sub Thank_You()
+'----- Thank You -----
+
+DL.SendSequence "Start Non-Secure"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+'MsgBox "Next: Display 'Thank You'", VBOKOnly, "Demo Step"
+DL.SendSequence "Set FOREGROUND to RED3"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+DL.ResetReceiveCounter "Display item (OK)"
+DL.SendSequence "Thank You for shopping with us."
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Processing..."
+Trigger = 4
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.Pause 3000
+
+'---------------------
+End Sub
+
+
+'===========================================================
+'   CustInfo1
+'===========================================================
+
+Sub CustInfo1()
+
+'----- CUST INFO -----
+'MsgBox "Next: Display Customer Info screen", VBOKOnly, "Demo Step"
+
+DL.SendSequence "Start Non-Secure"
+'DL.Pause 2000
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to RED3"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+'End Sub
+
+'Sub CustInfo1_5()
+DL.SendSequence "Text: Is this correct (0,25)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to BLACK"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: Billing Information (45,50)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+'DL.SendSequence "Text: Name Phone (45,68)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+'DL.SendSequence "Set FOREGROUND to MEDBLUE"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+'DL.SendSequence "Text: John Smith and Phone (155,68)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to BLACK"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+'DL.SendSequence "Text: Shipping Info (45,95)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+'End Sub
+
+'CustInfo2
+
+'Sub CustInfo2()
+'DL.ResetReceiveCounter "Display item (OK)"
+DL.SendSequence "Text: Name (45,110)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to MEDBLUE"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: John Smith (165,110)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to BLACK"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+
+DL.SendSequence "Text: Address 1 (45,125)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to MEDBLUE"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: 1234 First St. (165,125)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to BLACK"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: Address 2 (45,140)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to BLACK"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: City (45,155)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to MEDBLUE"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: Lorain (165,155)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to MEDBLUE"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to BLACK"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: State (315,155)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to MEDBLUE"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: OH (380,155)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to BLACK"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: Zip Code (45,170)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to MEDBLUE"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: 44052 (165,170)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to BLACK"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: Phone (45,185)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to MEDBLUE"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: (555) 555-1234 (165,185)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to RED3"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Yes Button (105,215)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "No Button (290,215)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Read Button"
+
+End Sub
+
+
+
+
+'===========================================================
+'   CustInfo2
+'===========================================================
+
+Sub CustInfo2()
+
+'----- CUST INFO -----
+'MsgBox "Next: Display Customer Info screen", VBOKOnly, "Demo Step"
+
+DL.SendSequence "Start Non-Secure"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to RED3"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: Is this correct (0,25)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to BLACK"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: Shipping Information (45,50)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+'DL.SendSequence "Text: Name Phone (45,68)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+'DL.SendSequence "Set FOREGROUND to MEDBLUE"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+'DL.SendSequence "Text: John Smith and Phone (155,68)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to BLACK"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+'DL.SendSequence "Text: Shipping Info (45,95)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+'End Sub
+
+'CustInfo2
+
+'Sub CustInfo2()
+'DL.ResetReceiveCounter "Display item (OK)"
+DL.SendSequence "Text: Name (45,110)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to MEDBLUE"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: Jane Smith (165,110)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to BLACK"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+
+DL.SendSequence "Text: Address 1 (45,125)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to MEDBLUE"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: 1234 First St. (165,125)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to BLACK"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: Address 2 (45,140)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to BLACK"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: City (45,155)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to MEDBLUE"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: Lorain (165,155)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to MEDBLUE"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to BLACK"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: State (315,155)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to MEDBLUE"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: OH (380,155)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to BLACK"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: Zip Code (45,170)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to MEDBLUE"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: 44052 (165,170)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to BLACK"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: Phone (45,185)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to MEDBLUE"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Text: (555) 555-1234 (165,185)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Set FOREGROUND to RED3"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Yes Button (105,215)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "No Button (290,215)"
+'result = DL.WaitForSequence ("Display item (OK)", 1, 5000)
+'DL.ResetReceiveCounter "Display item (OK)"
+
+DL.SendSequence "Read Button"
+
+End Sub
+
+
+
+
+
+'===========================================================
+'   Slideshow2
+'===========================================================
+
+Sub Slideshow2()
+Timeout1 = 5000
+
+For i = 1 to 1
+DL.AddComment "------ Iteration #" & i & " ------"
+DL.AddComment "------ Iteration #" & i & " ------"
+DL.AddComment "------ Iteration #" & i & " ------"
+
+'DL.ResetReceiveCounter "Display item (OK)"
+DL.SendSequence "Start Non-Secure"
+'resultDM = DL.WaitForSequence("Display item (OK)", 1, 5000)
+DL.SendSequence "BMP: duck"
+DL.Pause Timeout1
+DL.SendSequence "BMP: falls"
+DL.Pause Timeout1
+DL.SendSequence "BMP: macystar"
+DL.Pause Timeout1
+'DL.ResetReceiveCounter "Display item (OK)"
+'DL.SendSequence "Stop Non-Secure"
+'resultDM = DL.WaitForSequence("Display item (OK)", 1, 5000)
+Next
+
+End Sub
+
+
+' ModbusCrcScript.pts
+' Automatically calculating a two-byte CRC value for Send Sequences.
+' Date: 2006-09-15
+' Author: Heggelbacher
+' This example makes use of the DL.CalcChecksum() function available
+' in Docklight Scripting V1.7. It has been cross-checked against the
+' CRC reference algorithm listed in the MODBUS specification
+' "MODBUS over serial line specification and implementation guide V1.0"
+' (see www.modbus.org) 
+
+DL.StartCommunication
+
+' Endless loop until stopped by user
+Do
+    DL.Pause 1 ' (the pause reduces CPU load while idle)
+Loop
+
+
+Sub DL_OnSend()
+    ' For all Send Sequences with minimum 3 bytes length (one byte user data,
+    ' two bytes CRC, perform the following manipulation:
+    ' - Calculate a 16 bit crc value on the characters 1 .. (DL.OnSend_Size() - 2)
+    ' - Write the low byte to character no. DL.OnSend_GetSize()-1
+    ' - Write the high byte to character no. DL.OnSend_GetSize()
+    ' Example:
+    ' Send Sequence name: MyCommand
+    ' Send Sequence in HEX representation: 02 04 00 00 00 01 00 00
+    ' --> Data transmitted by Docklight:   02 04 00 00 00 01 31 F9
+    '     (with "31" as the low byte CRC, "F9" as the high byte)
+
+    ' Check if there is at least one byte of user data
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+      ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+    
+    'result2 = DL.OnSend_GetName()
+	'DL.AddComment "Result2 = " & result2
+	'If result2 = "PIN Entry" And ButtonPressed = 38 Then
+	'	Thank_You
+	'End If
+
+End Sub
+
+
+
+Do
+    DL.Pause 1 ' (the pause reduces CPU load while idle)
+Loop
+
+Sub DL_OnReceive()
+resultName = DL.OnReceive_GetName()
+DL.AddComment "resultName = " & resultName
+
+Select Case resultName
+	Case "Yes button pressed"
+		Global = 1
+		DL.AddComment "Here111"
+		'ActTrans
+	Case "No button pressed"
+		Global = 0
+		DL.AddComment "Here222"
+		'ActTrans
+End Select
+
+End Sub
+
+
+
+
+

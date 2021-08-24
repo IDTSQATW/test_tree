@@ -1,0 +1,35 @@
+Docklight Log File (HEX) - Started 1/4/2017 17:45:45.653 
+ TEST CASE: DIR014
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- File Download - part 1 - apple/applefile.x:30bytes
+
+1/4/2017 17:45:47.148 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 24 00 21 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 33 30 00 32 00 61 61 61 61 61 61 61 61 61 62 5F 41 
+1/4/2017 17:45:47.156 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ --- File Download - part 2 - apple/applefile.x:30bytes
+
+1/4/2017 17:45:47.178 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 24 00 21 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 33 30 00 30 00 63 63 63 63 63 63 63 63 63 64 72 FA 
+1/4/2017 17:45:47.186 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ --- File Download - part 3 - apple/applefile.x:30bytes
+
+1/4/2017 17:45:47.212 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 24 00 21 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 33 30 00 31 00 65 65 65 65 65 65 65 65 65 66 67 AE 
+1/4/2017 17:45:47.222 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 0A 00 04 00 00 00 0C 38 B2  --- File Download - part 3 - apple/applefile.x:30bytes
+
+1/4/2017 17:45:47.253 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 24 00 21 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 33 30 00 31 00 65 65 65 65 65 65 65 65 65 66 67 AE 
+1/4/2017 17:45:47.262 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 0A 00 04 00 00 00 0D 28 93  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 1/4/2017 17:45:48.488 
+

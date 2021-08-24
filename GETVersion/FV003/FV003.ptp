@@ -1,0 +1,105 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+GETFirmwareVersion
+56 69 56 4F 74 65 63 68 00 43 29 00 00 00 A8 FB
+0
+5
+
+SEND
+1
+GETFirmwareVersionP1 (invalid command)
+56 69 56 4F 74 65 63 68 00 43 29 00 00 00 11 64 F4
+0
+5
+
+SEND
+2
+GETFirmwareVersionP2 (invalid command)
+56 69 56 4F 74 65 63 68 32 00 29 00 00 00 11 FA 69
+0
+5
+
+SEND
+3
+Get Bootloader Version
+56 69 56 4F 74 65 63 68 32 00 29 04 00 00 1E 7C
+0
+5
+
+RECEIVE
+0
+Status Code = '00'
+56 69 56 4F 74 65 63 68 00 41 29 00 00 ##
+-1
+1
+COMMENT Status Code = '00'
+1
+1
+0
+1
+
+RECEIVE
+1
+Recognized as invalid FW Version command P1 (OK)
+56 69 56 4F 74 65 63 68 00 4E 00 06 00 00 AC 4B
+-1
+1
+COMMENT Recognized as invalid FW Version command P1 (OK)
+1
+1
+0
+1
+
+RECEIVE
+2
+Recognized as invalid FW Version command P2 (OK)
+56 69 56 4F 74 65 63 68 32 00 29 04 00 00 7C 1E
+-1
+1
+COMMENT Recognized as invalid FW Version command P2 (OK)
+0
+1
+0
+0
+
+RECEIVE
+3
+Positive Response
+56 69 56 4F 74 65 63 68 32 00 29 00 ##
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+4
+Negative Response
+56 69 56 4F 74 65 63 68 32 00 29 02 00 00 CE BE
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

@@ -1,0 +1,31 @@
+Docklight Log File (HEX) - Started 2020/12/24 15:54:56.856 
+ TEST CASE: PM001
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Auto Poll
+
+2020/12/24 15:54:57.984 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 F6 24 
+2020/12/24 15:54:58.011 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  
+
+ --- Burst Mode: OFF
+
+2020/12/24 15:54:58.030 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 00 B9 2E 
+2020/12/24 15:54:58.060 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  
+
+ --- Tap 3 cards:
+ 
+
+ ViVOtech card: 
+ Result = PASSED
+ 
+
+ VISA card: 
+ Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2020/12/24 15:55:36.752 
+

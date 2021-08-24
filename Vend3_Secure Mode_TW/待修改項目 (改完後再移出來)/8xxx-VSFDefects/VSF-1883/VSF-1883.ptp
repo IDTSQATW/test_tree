@@ -1,0 +1,100 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM3
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Enable Backwards Compatibility
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 59 01 01 4B AF
+0
+5
+
+SEND
+1
+Enable Pass Through
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19
+0
+5
+
+SEND
+2
+Pass-Through - STOP
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38
+0
+5
+
+SEND
+3
+Enable Antenna
+56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 94 1F
+0
+5
+
+SEND
+4
+Exchange Contactless Data
+56 69 56 4F 74 65 63 68 32 00 2C 03 00 14 00 A4 04 00 0E 32 50 41 59 2E 53 59 53 2E 44 44 46 30 31 00 72 6F
+0
+5
+
+RECEIVE
+0
+Enable Backwards Compatibility (OK)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+Pass-Through - START and STOP (OK)
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B
+-1
+1
+COMMENT Pass-Through - START and STOP (OK)
+1
+1
+0
+1
+
+RECEIVE
+2
+Antenna Enabled (OK)
+56 69 56 4F 74 65 63 68 32 00 28 00 00 00 D6 6A
+-1
+1
+COMMENT Antenna Enabled (OK)
+1
+1
+0
+1
+
+RECEIVE
+3
+Exchange Contactless Data 0A (OK)
+56 69 56 4F 74 65 63 68 32 00 2C 0A 00 04 00 04 00 05 2A 70
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

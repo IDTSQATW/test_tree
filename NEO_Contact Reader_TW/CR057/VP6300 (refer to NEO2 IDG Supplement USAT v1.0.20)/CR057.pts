@@ -1,0 +1,454 @@
+DL_SCRIPTVERSION
+1
+52839
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "CR057" ' !!!!! EDIT THIS !!!!!
+' Objective: to verify spec Contact Default Setting
+' GR spec --> NEO IDG Supplement for UniPay III and UniPay 1.5  v1.88
+' JIRA: CS-1535 -- Tag 9F53 is one Terminal configuration now, default is 0x50.
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  genFlag = result
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+End Sub
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+result = 1
+errorCounter = 0
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+DL.ResetReceiveCounter
+DL.AddComment "--- 04-0A"
+DL.SendSequence "04-0A"
+result = DL.WaitForSequence ("04 00", 1, 5000)
+dl.pause 10000
+
+errorCounter = 0
+
+if result <> 0 then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-04 Contact Retrieve Terminal Data"
+   DL.SendSequence "60-04 Contact Retrieve Terminal Data"
+   result = DL.WaitForSequence ("60 00", 1, 2000)
+   dl.pause 1000
+
+   if result <> 0 then
+      result = DL.WaitForSequence ("5F36", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "5F36: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "5F36: PASS"
+      End If
+
+      result = DL.WaitForSequence ("9F1A", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "9F1A: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "9F1A: PASS"
+      End If
+
+      if readerType <> "NEO2" then result = DL.WaitForSequence ("9F35", 1, 300)
+      if readerType = "NEO2" then result = DL.WaitForSequence ("9F35 (NEO2)", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "9F35: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "9F35: PASS"
+      End If
+
+      if readerType <> "NEO2" then result = DL.WaitForSequence ("9F33", 1, 300)
+      if readerType = "NEO2" then result = DL.WaitForSequence ("9F33 (NEO2)", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "9F33: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "9F33: PASS"
+      End If
+
+      if readerType <> "NEO2" then result = DL.WaitForSequence ("9F40", 1, 300)
+      if readerType = "NEO2" then result = DL.WaitForSequence ("9F40 (NEO2)", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "9F40: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "9F40: PASS"
+      End If
+
+      result = DL.WaitForSequence ("9F1E", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "9F1E: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "9F1E: PASS"
+      End If
+
+      result = DL.WaitForSequence ("9F15", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "9F15: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "9F15: PASS"
+      End If
+
+      result = DL.WaitForSequence ("9F16", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "9F16: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "9F16: PASS"
+      End If
+
+      result = DL.WaitForSequence ("9F1C", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "9F1C: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "9F1C: PASS"
+      End If
+
+      result = DL.WaitForSequence ("9F4E", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "9F4E: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "9F4E: PASS"
+      End If
+
+      result = DL.WaitForSequence ("DF26", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "DF26: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "DF26: PASS"
+      End If
+
+      result = DL.WaitForSequence ("DF10", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "DF10: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "DF10: PASS"
+      End If
+
+      if readerType <> "NEO2" then result = DL.WaitForSequence ("DF11", 1, 300)
+      if readerType = "NEO2" then result = DL.WaitForSequence ("DF11 (NEO2)", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "DF11: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "DF11: PASS"
+      End If
+
+      result = DL.WaitForSequence ("DF27", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "DF27: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "DF27: PASS"
+      End If
+
+      result = DL.WaitForSequence ("DFEE15", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "DFEE15: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "DFEE15: PASS"
+      End If
+
+      result = DL.WaitForSequence ("DFEE16", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "DFEE16: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "DFEE16: PASS"
+      End If
+
+      result = DL.WaitForSequence ("DFEE17", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "DFEE17: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "DFEE17: PASS"
+      End If
+
+      result = DL.WaitForSequence ("DFEE18", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "DFEE18: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "DFEE18: PASS"
+      End If
+
+      if readerType <> "NEO2" then result = DL.WaitForSequence ("DFEE1E", 1, 300)
+      if readerType = "NEO2" then result = DL.WaitForSequence ("DFEE1E (NEO2)", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "DFEE1E: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "DFEE1E: PASS"
+      End If
+
+      result = DL.WaitForSequence ("DFEE1F", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "DFEE1F: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "DFEE1F: PASS"
+      End If
+
+      result = DL.WaitForSequence ("DFEE1B", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "DFEE1B: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "DFEE1B: PASS"
+      End If
+
+      result = DL.WaitForSequence ("DFEF7D", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "DFEF7D: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "DFEF7D: PASS"
+      End If
+
+      result = DL.WaitForSequence ("DFEF7E", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "DFEF7E: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "DFEF7E: PASS"
+      End If
+
+      result = DL.WaitForSequence ("DFEE22", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "DFEE22: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "DFEE22: PASS"
+      End If
+
+      result = DL.WaitForSequence ("DFEE1A", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "DFEE1A: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "DFEE1A: PASS"
+      End If
+
+      result = DL.WaitForSequence ("DFEF4B", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "DFEF4B: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "DFEF4B: PASS"
+      End If
+
+      result = DL.WaitForSequence ("DFED48", 1, 300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "DFED48: ** FAIL **"
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "DFED48: PASS"
+      End If
+   end if
+end if
+'------------------------------------------------------------
+If errorCounter <> 0 Then
+   DL.AddComment vbCrLf & vbCrLf & "Found " & errorCounter & " errors in testing. Please check the log file for details."
+   result = 0
+End If
+'------------------------------------------------------------
+DL.AddComment vbcrlf & "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
+
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'DL.pause 1000
+
+'If 0 Then
+' If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+' Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+' End If
+'End If
+
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+
+

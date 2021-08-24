@@ -1,0 +1,27 @@
+Docklight Log File (HEX) - Started 2016/6/3 14:08:00.041 
+ TEST CASE: RD00301
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+User selected 'No'
+
+
+2016/6/3 14:08:02.767 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 05 00 02 14 05 A2 DD 
+2016/6/3 14:08:02.927 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  GR - Set Source success (OK)
+ Result = PASSED
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2016/6/3 14:08:05.586 
+

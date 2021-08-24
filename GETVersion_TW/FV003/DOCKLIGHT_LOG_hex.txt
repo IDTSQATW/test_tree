@@ -1,0 +1,38 @@
+Docklight Log File (HEX) - Started 2019/3/12 17:06:52.096 
+ TEST CASE: FV003
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- GETFirmwareVersion Protocol 1
+
+2019/3/12 17:06:53.492 [TX] - 56 69 56 4F 74 65 63 68 00 43 29 00 00 00 A8 FB 
+2019/3/12 17:06:53.518 [RX] - 56 69 56 4F 74 65 63 68 00 41 29 00 00  
+
+2019/3/12 17:06:53.526 [RX] - 10 AD 1A 56 69 56 4F 74 65 63 68 00 44 4E 45 4F 20 76 31 2E 30 30 2E 31 32 32 2E 31 00 ED F2  
+
+ Result = PASSED
+ 
+
+ --- GETFirmwareVersion Protocol 2
+
+2019/3/12 17:06:53.754 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 00 DE A0 
+2019/3/12 17:06:53.779 [RX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 0F 
+2019/3/12 17:06:53.788 [RX] - 4E 45 4F 20 76 31 2E 30 30 2E 31 32 32 2E 31 50 F1  
+
+ Result = PASSED
+ 
+
+ ---------- END OF TEST ----------
+
+ 
+
+ ///// NOTICE ///////////////////////////////////////////////////////////
+
+Please check ASCII screen, make sure reader return correct data that meet spec!!
+
+
+Docklight Log File (HEX) - Stopped 2019/3/12 17:06:54.108 
+

@@ -1,0 +1,26 @@
+Docklight Log File (HEX) - Started 2017/5/8 11:03:40.378 
+ TEST CASE: BT004
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM90 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+
+ --- 30-13 Get FW version of BLE
+
+2017/5/8 11:03:41.492 [TX] - 56 69 56 4F 74 65 63 68 32 00 30 13 00 00 3D 52 
+2017/5/8 11:03:41.550 [RX] - 56 69 56 4F 74 65 63 68 32 00 30 00 00 12 49 44 54 45 43 48 5F 50 6F 72 74 2D 76 31 2E 30 32 37 CD 2E 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+
+ --- 30-13 Get FW version of BLE
+
+2017/5/8 11:04:30.472 [TX] - 56 69 56 4F 74 65 63 68 32 00 30 13 00 00 3D 52  
+
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+
+
+Docklight Log File (HEX) - Stopped 2017/5/8 11:04:34.546 
+

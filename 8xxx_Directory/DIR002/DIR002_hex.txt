@@ -1,0 +1,26 @@
+Docklight Log File (HEX) - Started 2/10/2016 13:59:17.121 
+ TEST CASE: DIR002
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- List Directory (83-22) - Recursive
+
+2/10/2016 13:59:18.459 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 22 00 04 31 30 00 00 9D 9B 
+2/10/2016 13:59:18.508 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00  List Directory OK
+
+2/10/2016 13:59:18.514 [RX] - 22 03  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2/10/2016 13:59:19.808 
+

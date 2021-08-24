@@ -1,0 +1,12 @@
+Docklight Log File (HEX) - Started  
+ --- Row 4 Button1
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 15 32 35 00 31 31 35 00 37 38 00 33 38 00 31 00 31 00 33 00 31 00 3D 0B  --- Row 4 Button2
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 16 31 32 39 00 31 31 35 00 37 38 00 33 38 00 31 00 31 00 32 00 32 00 E1 6F 
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 83 06 00 0B 14 63 61 6E 63 65 6C 4B 65 79 00 F4 07    ----- Expecting DONE Button
+
+ [RX] - 00 2A 00 FC 
+
+Docklight Log File (HEX) - Stopped  
+

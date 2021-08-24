@@ -1,0 +1,10 @@
+Docklight Log File (HEX) - Started 10/9/2008 14:59:56.48 
+ --- Invalid Button Font Size
+
+10/9/2008 14:59:56.50 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 12 30 00 30 00 35 30 00 35 30 00 31 00 35 00 35 00 31 00 F3 8E 
+10/9/2008 14:59:56.78 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 0A 00 04 00 03 00 04 E0 EA  Button was rejected - OK
+ Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped 10/9/2008 14:59:58.63 
+

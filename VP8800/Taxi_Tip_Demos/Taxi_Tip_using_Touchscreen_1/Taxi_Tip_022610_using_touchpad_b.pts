@@ -1,0 +1,1062 @@
+DL_SCRIPTVERSION
+1
+61391
+
+DL.ClearCommWindows
+
+
+'### Global Variables
+Dim ControlID
+Dim ControlID_Pressed
+Dim Yes_ID
+Dim No_ID
+Dim InputField_ID
+Dim NextScreen
+Dim GetInputFieldValue
+Dim TipDigitCount
+Dim Accept1_ID_Pressed
+Dim Accept2_ID_Pressed
+Dim Accept3_ID_Pressed
+Dim Accept4_ID_Pressed
+Dim TipAmount_ID
+
+DL.AddComment "Test run started!"
+
+TimeOut = 400
+Dim Polling
+Polling = 0
+
+For x = 1 to 10
+	DL.AddComment vbCrLf & "$$$$$ BEGIN ITERATION #" & x & " $$$$$" & vbCrLf
+	Main
+	DL.AddComment vbCrLf & "$$$$$ END ITERATION #" & x & " $$$$$" & vbCrLf
+Next
+
+Sub Main()
+	DL.SendSequence "Cancel Command"
+
+	DL.AddComment "----- BLACK foreground, Yellow Background -----"
+	DL.SendSequence "BLACK foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Clear Display -----"
+	DL.SendSequence "Clear Display"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Enable Custom Disp Mode -----"
+	DL.SendSequence "Enable Custom Disp Mode"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: CMT Taxi Tip Flow -----"
+	DL.SendSequence "Text: CMT Taxi Tip Flow"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+	DL.Pause 3000
+	
+	Screen1	
+	Screen2a
+	Screen2b
+	Screen3	
+	Screen4_Card	
+	'Screen4_PIN	
+	Screen5
+	DL.Pause 2000
+	Screen7a
+	Screen7b
+	DL.Pause 2000
+	'''Screen6a	
+	Screen6b
+	
+
+	DL.AddComment "----- Text: Please wait... -----"
+	DL.SendSequence "Text: Please wait..."
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+	DL.Pause 3000
+	
+End Sub
+
+
+Sub Screen1()
+
+	DL.AddComment "#######################################"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#        Screen1 - Fare display       #"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#######################################"
+
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Clear Event Queue -----"
+	DL.SendSequence "Clear Event Queue"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- BLACK foreground, Yellow Background -----"
+	DL.SendSequence "BLACK foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+	
+	DL.AddComment "----- Clear Display -----"
+	DL.SendSequence "Clear Display"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: Fare -----"
+	DL.SendSequence "Text: Fare"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: Subtotal -----"
+	DL.SendSequence "Text: Subtotal"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Display Amount: $9,999.99 -----"
+	DL.SendSequence "Display Amount: $9,999.99"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	'DL.AddComment "----- Text: Please use Keypad to confirm or cancel -----"
+	'DL.SendSequence "Text: Please use Keypad to confirm or cancel"
+	'*DL.WaitForSequence "--- Response Received"
+	'DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- GREEN foreground, Yellow Background -----"
+	DL.SendSequence "GREEN foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Button: OK -----"
+	DL.SendSequence "Button: OK"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+	
+	DL.AddComment "----- RED foreground, Yellow Background -----"
+	DL.SendSequence "RED foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Button: Cancel -----"
+	DL.SendSequence "Button: Cancel"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Get Event -----"
+	DL.SendSequence "Get Event"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+End Sub 'For Screen1
+
+
+Sub Screen2a()
+'Local Variables
+Dim Accept1_ID
+Dim Accept2_ID
+Dim Accept3_ID
+Dim Accept4_ID
+
+	DL.AddComment "#######################################"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#        Screen2a - Tip entry         #"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#######################################"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Clear Event Queue -----"
+	DL.SendSequence "Clear Event Queue"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	'DL.AddComment "----- BLACK foreground, Yellow Background -----"
+	'DL.SendSequence "BLACK foreground, Yellow Background"
+	'*DL.WaitForSequence "--- Response Received"
+	'DL.ResetReceiveCounter "--- Response Received"
+	
+	DL.AddComment "----- Enable Custom Disp Mode -----"
+	DL.SendSequence "Enable Custom Disp Mode"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Clear Display -----"
+	DL.SendSequence "Clear Display"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- BLUE foreground, Yellow Background -----"
+	DL.SendSequence "BLUE foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	'DL.AddComment "----- Text: Please enter tip option using keypad -----"
+	'DL.SendSequence "Text: Please enter tip option using keypad"
+	'*DL.WaitForSequence "--- Response Received"
+	'DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: Please select Tip option -----"
+	DL.SendSequence "Text: Please select Tip option"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	'DL.AddComment "----- 1. -----"
+	'DL.SendSequence "1."
+	'*DL.WaitForSequence "--- Response Received"
+	'DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- 10% -----"
+	DL.SendSequence "10%"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- 999.99 - 1 -----"
+	DL.SendSequence "$999.99 - 1"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Button: Accept 1 -----"
+	DL.SendSequence "Button: Accept 1"
+	DL.WaitForSequence "--- Response Received"
+	Accept1_ID = ControlID
+	DL.ResetReceiveCounter "--- Response Received"
+	
+	'DL.AddComment "----- 2. -----"
+	'DL.SendSequence "2."
+	'*DL.WaitForSequence "--- Response Received"
+	'DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- 15% -----"
+	DL.SendSequence "15%"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- 999.99 - 2 -----"
+	DL.SendSequence "$999.99 - 2"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Button: Accept 2 -----"
+	DL.SendSequence "Button: Accept 2"
+	DL.WaitForSequence "--- Response Received"
+	Accept2_ID = ControlID
+	DL.ResetReceiveCounter "--- Response Received"
+
+	'DL.AddComment "----- 3. -----"
+	'DL.SendSequence "3."
+	'*DL.WaitForSequence "--- Response Received"
+	'DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- 20% -----"
+	DL.SendSequence "20%"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- $999.99 - 3 -----"
+	DL.SendSequence "$999.99 - 3"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Button: Accept 3 -----"
+	DL.SendSequence "Button: Accept 3"
+	DL.WaitForSequence "--- Response Received"
+	Accept3_ID = ControlID
+	DL.ResetReceiveCounter "--- Response Received"
+
+	'DL.AddComment "----- 4. -----"
+	'DL.SendSequence "4."
+	'*DL.WaitForSequence "--- Response Received"
+	'DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: Other tip amount -----"
+	DL.SendSequence "Text: Other tip amount"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Button: Accept 4 -----"
+	DL.SendSequence "Button: Accept 4"
+	DL.WaitForSequence "--- Response Received"
+	Accept4_ID = ControlID
+	DL.ResetReceiveCounter "--- Response Received"
+	
+	DL.AddComment "----- BLACK foreground, Yellow Background -----"
+	DL.SendSequence "BLACK foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"	
+
+	DL.AddComment "----- Text: Tip -----"
+	DL.SendSequence "Text: Tip"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: Amount -----"
+	DL.SendSequence "Text: Amount"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- BLACK foreground, WHITE Background -----"
+	DL.SendSequence "BLACK foreground, WHITE Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: $999.99 - Tip -----"
+	DL.SendSequence "Text: $999.99 - Tip"
+	DL.WaitForSequence "--- Response Received"
+	TipAmount_ID = ControlID
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- BLUE foreground, Yellow Background -----"
+	DL.SendSequence "BLUE foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	'DL.AddComment "----- Text: Please use Keypad to confirm or cancel - Screen2a -----"
+	'DL.SendSequence "Text: Please use Keypad to confirm or cancel - Screen2a"
+	'*DL.WaitForSequence "--- Response Received"
+	'DL.ResetReceiveCounter "--- Response Received"
+
+	'Text: Proceed with selected Tip? - Screen2a
+	DL.AddComment "----- Text: Proceed with selected Tip? - Screen2a -----"
+	DL.SendSequence "Text: Proceed with selected Tip? - Screen2a"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- GREEN foreground, Yellow Background -----"
+	DL.SendSequence "GREEN foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+	
+	DL.AddComment "----- Button: Yes - Screen 2a -----"
+	DL.SendSequence "Button: Yes - Screen 2a"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- RED foreground, Yellow Background -----"
+	DL.SendSequence "RED foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Button: No - Screen 2a -----"
+	DL.SendSequence "Button: No - Screen 2a"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	
+	'DL.AddComment "----- Get Event -----"
+	'DL.SendSequence "Get Event"
+	'DL.WaitForSequence "--- Response Received"
+	'DL.ResetReceiveCounter "--- Response Received"
+
+	NextScreen = 0
+	GetInputFieldValue = 0
+
+
+	While NextScreen = 0
+
+		Accept1_ID_Pressed = 0
+		Accept2_ID_Pressed = 0
+		Accept3_ID_Pressed = 0
+		Accept4_ID_Pressed = 0
+
+		DL.AddComment "----- Get Event -----"
+		DL.SendSequence "Get Event"
+		result = DL.WaitForSequence ("--- Response Received",1,-1)
+		DL.ResetReceiveCounter "--- Response Received"
+		
+		If result = 1 Then 
+
+			If Accept1_ID = ControlID_Pressed Then
+				DL.AddComment vbCrLf & "Accept1_ID = " & Accept1_ID & ", ControlID_Pressed = " & ControlID_Pressed
+				Accept1_ID_Pressed = 1
+				NextScreen = 0
+			ElseIf Accept2_ID = ControlID_Pressed Then
+				DL.AddComment vbCrLf & "Accept2_ID = " & Accept2_ID & ", ControlID_Pressed = " & ControlID_Pressed
+				Accept2_ID_Pressed = 1
+				NextScreen = 0
+			ElseIf Accept3_ID = ControlID_Pressed Then
+				DL.AddComment vbCrLf & "Accept3_ID = " & Accept3_ID & ", ControlID_Pressed = " & ControlID_Pressed
+				Accept3_ID_Pressed = 1
+				NextScreen = 0
+			ElseIf Accept4_ID = ControlID_Pressed Then
+				DL.AddComment vbCrLf & "Accept1_ID = " & Accept1_ID & ", ControlID_Pressed = " & ControlID_Pressed
+				Accept4_ID_Pressed = 1
+				NextScreen = 1
+
+			ElseIf Yes_ID = ControlID_Pressed Then
+				DL.AddComment vbCrLf & "Yes_ID = " & Yes_ID & ", ControlID_Pressed = " & ControlID_Pressed
+				'Yes_ID = 1
+				NextScreen = 1
+
+			ElseIf No_ID = ControlID_Pressed Then
+				DL.AddComment vbCrLf & "No_ID = " & No_ID & ", ControlID_Pressed = " & ControlID_Pressed
+				'No_ID = 1
+				NextScreen = 1
+			End If
+
+			If NextScreen = 0 Then
+
+				DL.AddComment "----- BLACK foreground, WHITE Background -----"
+				DL.SendSequence "BLACK foreground, WHITE Background"
+				DL.WaitForSequence "--- Response Received"
+				DL.ResetReceiveCounter "--- Response Received"
+
+				If Accept1_ID_Pressed = 1 Then
+					DL.SendSequence "Change Amount 10%", TipAmount_ID, "H"
+				ElseIf Accept2_ID_Pressed = 1 Then
+					DL.SendSequence "Change Amount 15%", TipAmount_ID, "H"
+				ElseIf Accept3_ID_Pressed = 1 Then
+					DL.SendSequence "Change Amount 20%", TipAmount_ID, "H"
+				End If
+
+				DL.WaitForSequence "--- Response Received"
+				DL.ResetReceiveCounter "--- Response Received"
+				
+				DL.AddComment "----- BLACK foreground, Yellow Background -----"
+				DL.SendSequence "BLACK foreground, Yellow Background"
+				DL.WaitForSequence "--- Response Received"
+				DL.ResetReceiveCounter "--- Response Received"				
+			End If				
+		Else
+		End If
+	Wend
+
+
+End Sub 'For Screen2a
+
+
+Sub Screen2b()
+
+	DL.AddComment "#######################################"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#        Screen2b - Tip entry         #"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#######################################"
+	
+	DL.ResetReceiveCounter "--- Response Received"
+	
+	DL.AddComment "----- Disable Custom Disp Mode -----"
+	DL.SendSequence "Disable Custom Disp Mode"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+	
+	DL.AddComment "----- Clear Event Queue -----"
+	DL.SendSequence "Clear Event Queue"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- BLACK foreground, Yellow Background -----"
+	DL.SendSequence "BLACK foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Clear Display -----"
+	DL.SendSequence "Clear Display"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+	
+	'DL.AddComment "----- Text: Please enter tip option using keypad - Screen2b -----"
+	'DL.SendSequence "Text: Please enter tip option using keypad - Screen2b"
+	'*DL.WaitForSequence "--- Response Received"
+	'DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: Please enter tip amount using keypad - Screen2b -----"
+	DL.SendSequence "Text: Please enter tip amount using keypad - Screen2b"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	'DL.AddComment "----- Display Amount: $999.99 -----"
+	'DL.SendSequence "Display Amount: $999.99"
+	'*DL.WaitForSequence "--- Response Received"
+	'DL.ResetReceiveCounter "--- Response Received"
+	
+	DL.AddComment "----- Amount: $ -----"
+	DL.SendSequence "Amount: $"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Input Field: Tip Amount -----"
+	DL.SendSequence "Input Field: Tip Amount"
+	DL.WaitForSequence "--- Response Received"
+	InputField_ID = ControlID
+	DL.AddComment vbCrLf & "InputField_ID = " & InputField_ID
+	DL.ResetReceiveCounter "--- Response Received"
+
+	'DL.AddComment "----- Text: Please use Keypad to confirm or cancel - Screen2b -----"
+	'DL.SendSequence "Text: Please use Keypad to confirm or cancel - Screen2b"
+	'*DL.WaitForSequence "--- Response Received"
+	'DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: Is amount OK? - Screen2b -----"
+	DL.SendSequence "Text: Is amount OK? - Screen2b"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- GREEN foreground, Yellow Background -----"
+	DL.SendSequence "GREEN foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+	
+	DL.AddComment "----- Button: Yes - Screen 2b -----"
+	DL.SendSequence "Button: Yes - Screen 2b"
+	DL.WaitForSequence "--- Response Received"
+	Yes_ID = ControlID
+	DL.AddComment vbCrLf & "Yes_ID = " & Yes_ID
+	'DL.Pause 60000
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- RED foreground, Yellow Background -----"
+	DL.SendSequence "RED foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Button: No - Screen 2b -----"
+	DL.SendSequence "Button: No - Screen 2b"
+	DL.WaitForSequence "--- Response Received"
+	No_ID = ControlID	
+	DL.AddComment vbCrLf & "No_ID = " & No_ID
+	'DL.Pause 60000
+	DL.ResetReceiveCounter "--- Response Received"
+
+	
+	
+	NextScreen = 0
+	GetInputFieldValue = 0
+
+	While NextScreen = 0
+
+		DL.AddComment "----- Get Event -----"
+		DL.SendSequence "Get Event"
+		result = DL.WaitForSequence ("--- Response Received",1,-1)
+		DL.ResetReceiveCounter "--- Response Received"
+		
+		If result = 1 Then 
+
+			If No_ID = ControlID_Pressed Then
+				DL.AddComment vbCrLf & "No_ID = " & No_ID & ", ControlID_Pressed = " & ControlID_Pressed
+				NextScreen = 1
+			ElseIf Yes_ID = ControlID_Pressed Then
+				DL.AddComment vbCrLf & "Yes_ID = " & Yes_ID & ", ControlID_Pressed = " & ControlID_Pressed
+				NextScreen = 1
+			End If
+			If NextScreen = 1 Then
+				DL.AddComment "----- Get Input Field Value -----"
+				GetInputFieldValue = 1
+				
+				If GetInputFieldValue = 1 Then
+					DL.SendSequence "Get Input Field Value", InputField_ID, "H"
+					DL.AddComment vbCrLf & "InputField_ID = " & InputField_ID					
+					'DL.Pause 1000000
+					DL.AddComment vbCrLf & "TipDigitCount = " & TipDigitCount
+				End If
+				'DL.Pause 60000
+			End If				
+		Else
+		End If
+	Wend
+
+End Sub 'For Screen2b
+
+
+Sub Screen3()
+
+	DL.AddComment "#######################################"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#        Screen3 - Fare confirmation  #"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#######################################"
+	
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Enable Custom Disp Mode -----"
+	DL.SendSequence "Enable Custom Disp Mode"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Clear Event Queue -----"
+	DL.SendSequence "Clear Event Queue"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- BLACK foreground, Yellow Background -----"
+	DL.SendSequence "BLACK foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Clear Display -----"
+	DL.SendSequence "Clear Display"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: Fare Subtotal - Screen3 -----"
+	DL.SendSequence "Text: Fare Subtotal - Screen3"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	'DL.Pause 600000
+	'DL.AddComment "----- Text: Subtotal - Screen3 -----"
+	'DL.SendSequence "Text: Subtotal - Screen3"
+	'*DL.WaitForSequence "--- Response Received"
+	'DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: Tip Amount - Screen3 -----"
+	DL.SendSequence "Text: Tip Amount - Screen3"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	'DL.AddComment "----- Text: Amount - Screen3 -----"
+	'DL.SendSequence "Text: Amount - Screen3"
+	'*DL.WaitForSequence "--- Response Received"
+	'DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: Total charged to Card -----"
+	DL.SendSequence "Text: Total charged to Card"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- $9,999.99 - Screen3 -----"
+	DL.SendSequence "$9,999.99 - Screen3"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- $999.99 - Screen3 -----"
+	DL.SendSequence "$999.99 - Screen3"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- $99,999.99 - Screen3 -----"
+	DL.SendSequence "$99,999.99 - Screen3"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	'DL.AddComment "----- Text: Please use Keypad to confirm or cancel - Screen3 -----"
+	'DL.SendSequence "Text: Please use Keypad to confirm or cancel - Screen3"
+	'*DL.WaitForSequence "--- Response Received"
+	'DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- BLUE foreground, Yellow Background -----"
+	DL.SendSequence "BLUE foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"	
+
+	DL.AddComment "----- Text: Proceed with payment? - Screen3 -----"
+	DL.SendSequence "Text: Proceed with payment? - Screen3"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- GREEN foreground, Yellow Background -----"
+	DL.SendSequence "GREEN foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+	
+	DL.AddComment "----- Button: Yes - Screen 3 -----"
+	DL.SendSequence "Button: Yes - Screen 3"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- RED foreground, Yellow Background -----"
+	DL.SendSequence "RED foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"		
+
+	DL.AddComment "----- Button: No - Screen 3 -----"
+	DL.SendSequence "Button: No - Screen 3"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- BLACK foreground, Yellow Background -----"
+	DL.SendSequence "BLACK foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Get Event -----"
+	DL.SendSequence "Get Event"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+	
+End Sub 'For Screen3
+
+
+Sub Screen4_Card()
+
+	DL.AddComment "#######################################"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#        Screen4 - Card swipe/tap     #"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#######################################"
+
+	DL.AddComment "----- Card swipe or tap -----"
+	DL.SendSequence "Card swipe or tap"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	'DL.AddComment "----- Card swipe or tap - NEW -----"
+	'DL.SendSequence "Card swipe or tap - NEW"
+	'*DL.WaitForSequence "--- Response Received"
+	'DL.ResetReceiveCounter "--- Response Received"
+
+End Sub 'For Screen4_Card
+
+
+Sub Screen4_PIN()
+
+	DL.AddComment "#######################################"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#        Screen4 - PIN entry	     #"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#######################################"
+
+	DL.AddComment "----- PIN entry -----"
+	DL.SendSequence "PIN entry"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+End Sub 'For Screen4_PIN
+
+
+Sub Screen5()
+
+	DL.AddComment "#######################################"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#        Screen5 - Approval           #"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#######################################"
+
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- BLACK foreground, Yellow Background -----"
+	DL.SendSequence "BLACK foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Clear Display -----"
+	DL.SendSequence "Clear Display"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: Processing... -----"
+	DL.SendSequence "Text: Processing..."
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+End Sub 'For Screen5
+
+
+Sub Screen6a()
+
+	DL.AddComment "#######################################"
+	DL.AddComment "#                                     #"
+	DL.AddComment "# Screen6a - Approval confirmation    #"
+	DL.AddComment "# and receipt request                 #"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#######################################"
+
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Clear Event Queue -----"
+	DL.SendSequence "Clear Event Queue"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- BLACK foreground, Yellow Background -----"
+	DL.SendSequence "BLACK foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Clear Display -----"
+	DL.SendSequence "Clear Display"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: Payment - Screen6a -----"
+	DL.SendSequence "Text: Payment - Screen6a"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: Approved - Screen6a -----"
+	DL.SendSequence "Text: Approved - Screen6a"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: Receipt? - Screen6a -----"
+	DL.SendSequence "Text: Receipt? - Screen6a"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: Please use Keypad to confirm or cancel - Screen6a -----"
+	DL.SendSequence "Text: Please use Keypad to confirm or cancel - Screen6a"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+	
+	DL.AddComment "----- Get Event -----"
+	DL.SendSequence "Get Event"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+		
+End Sub 'For Screen6a
+
+
+Sub Screen6b()
+
+	DL.AddComment "#######################################"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#        Screen6b - Thank You         #"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#######################################"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- BLACK foreground, Yellow Background -----"
+	DL.SendSequence "BLACK foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Clear Display -----"
+	DL.SendSequence "Clear Display"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: Thank You -----"
+	DL.SendSequence "Text: Thank You"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+End Sub 'For Screen6b
+
+
+Sub Screen7a()
+
+	DL.AddComment "#######################################"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#        Screen7a - Payment Approved  #"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#######################################"
+
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Enable Custom Disp Mode -----"
+	DL.SendSequence "Enable Custom Disp Mode"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Clear Event Queue -----"
+	DL.SendSequence "Clear Event Queue"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- BLACK foreground, Yellow Background -----"
+	DL.SendSequence "BLACK foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Clear Display -----"
+	DL.SendSequence "Clear Display"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: Payment Approved -----"
+	DL.SendSequence "Text: Payment Approved"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- BLUE foreground, Yellow Background -----"
+	DL.SendSequence "BLUE foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"	
+
+	DL.AddComment "----- Text: Do you need a receipt? - Screen7a -----"
+	DL.SendSequence "Text: Do you need a receipt? - Screen7a"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- GREEN foreground, Yellow Background -----"
+	DL.SendSequence "GREEN foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Button: Yes - Screen 7a -----"
+	DL.SendSequence "Button: Yes - Screen 7a"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- RED foreground, Yellow Background -----"
+	DL.SendSequence "RED foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"	
+
+	DL.AddComment "----- Button: No - Screen 7a -----"
+	DL.SendSequence "Button: No - Screen 7a"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- BLACK foreground, Yellow Background -----"
+	DL.SendSequence "BLACK foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+	
+	DL.AddComment "----- Get Event -----"
+	DL.SendSequence "Get Event"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+End Sub 'For Screen7a
+
+
+Sub Screen7b()
+
+	DL.AddComment "#######################################"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#        Screen7b - Payment Declined   #"
+	DL.AddComment "#                                     #"
+	DL.AddComment "#######################################"
+
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Clear Event Queue -----"
+	DL.SendSequence "Clear Event Queue"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- BLACK foreground, Yellow Background -----"
+	DL.SendSequence "BLACK foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Clear Display -----"
+	DL.SendSequence "Clear Display"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: Payment Declined-----"
+	DL.SendSequence "Text: Payment Declined"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	'DL.AddComment "----- Text: Declined -----"
+	'DL.SendSequence "Text: Declined"
+	'DL.WaitForSequence "--- Response Received"
+	'DL.ResetReceiveCounter "--- Response Received"
+
+	'DL.AddComment "----- Text: Please press Enter to continue -----"
+	'DL.SendSequence "Text: Please press Enter to continue"
+	'DL.WaitForSequence "--- Response Received"
+	'DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- BLUE foreground, Yellow Background -----"
+	DL.SendSequence "BLUE foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Text: Please select Enter to proceed -----"
+	DL.SendSequence "Text: Please select Enter to proceed"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+	DL.AddComment "----- Button: Enter - Screen 7b -----"
+	DL.SendSequence "Button: Enter - Screen 7b"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+	
+	DL.AddComment "----- BLACK foreground, Yellow Background -----"
+	DL.SendSequence "BLACK foreground, Yellow Background"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"	
+
+	DL.AddComment "----- Get Event -----"
+	DL.SendSequence "Get Event"
+	DL.WaitForSequence "--- Response Received"
+	DL.ResetReceiveCounter "--- Response Received"
+
+End Sub 'For Screen7b
+
+
+
+
+
+' ModbusCrcScript.pts
+' Automatically calculating a two-byte CRC value for Send Sequences.
+' Date: 2006-09-15
+' Author: Heggelbacher
+' This example makes use of the DL.CalcChecksum() function available
+' in Docklight Scripting V1.7. It has been cross-checked against the
+' CRC reference algorithm listed in the MODBUS specification
+' "MODBUS over serial line specification and implementation guide V1.0"
+' (see www.modbus.org) 
+
+DL.StartCommunication
+' Endless loop until stopped by user
+Do
+    DL.Pause 1 ' (the pause reduces CPU load while idle)
+Loop
+
+Sub DL_OnSend()
+    ' For all Send Sequences with minimum 3 bytes length (one byte user data,
+    ' two bytes CRC, perform the following manipulation:
+    ' - Calculate a 16 bit crc value on the characters 1 .. (DL.OnSend_Size() - 2)
+    ' - Write the low byte to character no. DL.OnSend_GetSize()-1
+    ' - Write the high byte to character no. DL.OnSend_GetSize()
+    ' Example:
+    ' Send Sequence name: MyCommand
+    ' Send Sequence in HEX representation: 02 04 00 00 00 01 00 00
+    ' --> Data transmitted by Docklight:   02 04 00 00 00 01 31 F9
+    '     (with "31" as the low byte CRC, "F9" as the high byte)
+
+    ' Check if there is at least one byte of user data
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub
+
+Sub DL_OnReceive()
+resultName = DL.OnReceive_GetName()
+DL.AddComment "resultName = " & resultName
+
+Select Case resultName
+	Case "Control Displayed with ID"
+		result = DL.OnReceive_GetData("H")	' get the result as string of Hex-values
+		DL.AddComment result	
+		' one possible solution to get single characters
+		MyArray = Split(result , " ", -1, 1)
+
+		' ### Prints each byte in array
+		'For i = 0 to UBound(MyArray)
+   		'	DL.AddComment "i = " & i & "Array - " & (MyArray(i))
+		'Next
+		' ### Extracts 4 byte Control ID
+		ControlID = MyArray(14) & " " & MyArray(15) & " " & MyArray(16) & " " & MyArray(17)
+		' ### Prints 4 byte Control ID
+		DL.AddComment "Control ID = " & ControlID
+	Case "ENTER Key PRESSED"
+		ENTER_Key_Pressed = 1
+
+	Case "Button with ID pressed"
+		result = DL.OnReceive_GetData("H")	' get the result as string of Hex-values
+		DL.AddComment result	
+		' one possible solution to get single characters
+		MyArray = Split(result , " ", -1, 1)
+		
+		' ### Extracts 4 byte Control ID
+		ControlID_Pressed = MyArray(18) & " " & MyArray(19) & " " & MyArray(20) & " " & MyArray(21)
+	Case "???----- 83 Command OK-----"
+		If GetInputFieldValue = 1 Then
+		result = DL.OnReceive_GetData("H")	' get the result as string of Hex-values
+		DL.AddComment result	
+		' one possible solution to get single characters
+		MyArray = Split(result , " ", -1, 1)
+		
+		' ### Extracts 4 byte Control ID
+		TipDigitCount = MyArray(13)
+		DL.AddComment vbCrLf & "TipDigitCount = " & 	TipDigitCount 
+		DL.Pause 60000
+		End If
+		
+End Select
+
+
+
+End Sub
+

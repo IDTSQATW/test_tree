@@ -1,0 +1,451 @@
+DL_SCRIPTVERSION
+1
+43740
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "ECA15-3" ' !!!!! EDIT THIS !!!!!
+' Objective: 
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+      
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+dim r(35)
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+countf = 0
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+sub countfail()
+    for i = 0 to 35
+        if r(i) = 0 then
+           countf = countf + 1
+        end if
+    next
+end sub
+
+sub precondition()
+    dl.resetreceivecounter
+    dl.addcomment "Erase All Keys..."
+    dl.sendsequence "Erase All Keys"
+    result = dl.waitforsequence("erase key ok", 1, 2000)
+    dl.pause 500
+    if result <> 0 then
+       dl.resetreceivecounter
+       dl.addcomment vbcrlf
+       dl.addcomment "Set DUKPT Key Encryption Type..."
+       dl.sendsequence "1-use AES to encrypt (C7-32)"
+       result = dl.waitforsequence("set dukpt type", 1, 2000)
+       dl.pause 500
+       if result <> 0 then
+          dl.resetreceivecounter
+          dl.addcomment vbcrlf
+          dl.addcomment "Get DUKPT Key Encryption Type..."
+          dl.sendsequence "Get account DUKPT encryption type (C7-33)"
+          result = dl.waitforsequence("get dukpt type", 1, 2000)
+          dl.pause 500
+          if result <> 0 then
+             dl.addcomment vbcrlf & "OK!"
+          else
+             dl.addcomment vbcrlf & "Get DUKPT Key Encryption Type: FAIL!"
+          end if
+       else
+          dl.addcomment vbcrlf & "Set DUKPT Key Encryption Type: FAIL!"
+       end if
+    else
+       dl.addcomment vbcrlf & "Erase All Keys: FAIL!"
+    end if
+end sub
+
+sub loadkey_D()
+    dl.addcomment vbcrlf
+    dl.addcomment "Loading DUKPT key..."
+       dl.resetreceivecounter
+       dl.sendsequence "Load Plaintext KPK Component (the 1st)"
+       result = dl.waitforsequence("load kpk ok", 1, 2000)
+       dl.pause 500
+       if result <> 0 then
+          dl.resetreceivecounter
+          dl.sendsequence "Load Plaintext KPK Component (the last)"
+          result = dl.waitforsequence("load kpk ok", 1, 2000)
+          dl.pause 500
+          if result <> 0 then
+             dl.resetreceivecounter
+             dl.sendsequence "Load KPK"
+             result = dl.waitforsequence("load kpk ok", 1, 2000)
+             dl.pause 500
+             if result <> 0 then
+                dl.resetreceivecounter
+                dl.sendsequence "Load DUKPT key (key index 5)"
+                result = dl.waitforsequence("dukpt ok", 1, 2000)
+                dl.pause 500
+                if result <> 0 then
+                   dl.addcomment vbcrlf & "OK!"
+                else
+                   dl.addcomment vbcrlf & "Load DUKPT key (key index 5): FAIL!"
+                end if
+             else
+                dl.addcomment vbcrlf & "Load KPK: FAIL!"
+             end if
+          else
+             dl.addcomment vbcrlf & "Load Plaintext KPK Component (the last): FAIL!"
+          end if
+       else
+          dl.addcomment vbcrlf & "Load Plaintext KPK Component (the 1st): FAIL!"
+       end if 
+end sub
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+precondition()
+if result <> 0 then
+   loadkey_D()
+end if
+'------------------------------------------------------------
+if result <> 0 then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Data Encryption: Enable"
+   DL.SendSequence "Data Encryption Enable (C7-36)"
+   result = DL.WaitForSequence("enc on", 1, 2000)
+else 
+   countf = countf + 1
+end if
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Poll on Demand"
+   DL.SendSequence "Poll on Demand"
+   result = DL.WaitForSequence("Poll Response", 1, 2000)
+   dl.pause 500
+else 
+   countf = countf + 1
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Burst mode Off"
+   DL.SendSequence "burst mode off"
+   result = DL.WaitForSequence("burst off", 1, 2000)
+   dl.pause 500
+else 
+   countf = countf + 1
+End If
+'------------------------------------------------------------
+readercheck = msgbox ("This is VP3300 & F/W ver. greater than v1.10?", vbyesno)
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set TTQ (9F66) = 20 00 40 00"
+   if  readercheck  = 7 then DL.SendSequence "TTQ 20 00 40 00"
+   if  readercheck  = 6 then DL.SendSequence "TTQ 20 00 40 00 (VP3300)"
+   result = DL.WaitForSequence("set ttq resp ok", 1, 2000)
+   dl.pause 500
+else 
+   countf = countf + 1
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 02-01"
+   DL.SendSequence "02-01"
+   result = DL.WaitForSequence("02 0B", 1, 2000)
+   dl.pause 500
+else 
+   countf = countf + 1
+End If
+'------------------------------------------------------------
+at()
+'------------------------------------------------------------
+precondition()
+if result <> 0 then
+   loadkey_D()
+end if
+'------------------------------------------------------------
+at()
+'------------------------------------------------------------
+sub at()
+If result <> 0 Then
+   a1 = MsgBox("Click OK and then Tap VISA qVSDC", VBOKOnly)
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 02-40 Activate Transaction"
+   DL.SendSequence "02-40"
+   result = DL.WaitForSequence("02-01 resp", 1, 10000)
+
+   if result <> 0 then
+      r(0) = dl.waitforsequence("Tag FFEE12", 1, 2000)
+           if r(0) = 0 then dl.addcomment vbcrlf & "Tag FFEE12...FAIL!"
+      r(1) = dl.waitforsequence("CR", 1, 1000)
+           if r(1) = 0 then dl.addcomment vbcrlf & "Clearing Record...FAIL!"
+      r(2) = dl.waitforsequence("Tag 50", 1, 1000)
+           if r(2) = 0 then dl.addcomment vbcrlf & "Tag 50...FAIL!"
+      r(3) = dl.waitforsequence("Tag 57 - Enc dukpt", 1, 1000)
+           if r(3) = 0 then dl.addcomment vbcrlf & "Tag 57 - Enc dukpt...FAIL!"
+      r(4) = dl.waitforsequence("Tag 5A - Enc dukpt", 1, 1000)
+           if r(4) = 0 then dl.addcomment vbcrlf & "Tag 5A - Enc dukpt...FAIL!"
+      r(5) = dl.waitforsequence("Tag 82", 1, 1000)
+           if r(5) = 0 then dl.addcomment vbcrlf & "Tag 82...FAIL!"
+      r(6) = dl.waitforsequence("Tag 84", 1, 1000)
+           if r(6) = 0 then dl.addcomment vbcrlf & "Tag 84...FAIL!"
+      r(32) = dl.waitforsequence("Tag 95", 1, 1000)
+           if r(32) = 0 then dl.addcomment vbcrlf & "Tag 95...FAIL!"
+      r(7) = dl.waitforsequence("Tag 9A", 1, 1000)
+           if r(7) = 0 then dl.addcomment vbcrlf & "Tag 9A...FAIL!"
+      r(8) = dl.waitforsequence("Tag 9C", 1, 1000)
+           if r(8) = 0 then dl.addcomment vbcrlf & "Tag 9C...FAIL!"
+      r(9) = dl.waitforsequence("Tag 5F24", 1, 1000)
+           if r(9) = 0 then dl.addcomment vbcrlf & "Tag 5F24...FAIL!"
+      r(10) = dl.waitforsequence("Tag 5F2A", 1, 1000)
+           if r(10) = 0 then dl.addcomment vbcrlf & "Tag 5F2A...FAIL!"
+      r(11) = dl.waitforsequence("Tag 5F2D", 1, 1000)
+           if r(11) = 0 then dl.addcomment vbcrlf & "Tag 5F2D...FAIL!"
+      r(12) = dl.waitforsequence("Tag 5F34", 1, 1000)
+           if r(12) = 0 then dl.addcomment vbcrlf & "Tag 5F34...FAIL!"
+      r(13) = dl.waitforsequence("Tag 9F02", 1, 1000)
+           if r(13) = 0 then dl.addcomment vbcrlf & "Tag 9F02...FAIL!"
+      r(14) = dl.waitforsequence("Tag 9F03", 1, 1000)
+           if r(14) = 0 then dl.addcomment vbcrlf & "Tag 9F03...FAIL!"
+      r(15) = dl.waitforsequence("Tag 9F06", 1, 1000)
+           if r(15) = 0 then dl.addcomment vbcrlf & "Tag 9F06...FAIL!"
+      r(16) = dl.waitforsequence("Tag 9F09", 1, 1000)
+           if r(16) = 0 then dl.addcomment vbcrlf & "Tag 9F09...FAIL!"
+      r(17) = dl.waitforsequence("Tag 9F10", 1, 1000)
+           if r(17) = 0 then dl.addcomment vbcrlf & "Tag 9F10...FAIL!"
+      r(18) = dl.waitforsequence("Tag 9F1A", 1, 1000)
+           if r(18) = 0 then dl.addcomment vbcrlf & "Tag 9F1A...FAIL!"
+      r(19) = dl.waitforsequence("Tag 9F21", 1, 1000)
+           if r(19) = 0 then dl.addcomment vbcrlf & "Tag 9F21...FAIL!"
+      r(20) = dl.waitforsequence("Tag 9F26", 1, 1000)
+           if r(20) = 0 then dl.addcomment vbcrlf & "Tag 9F26...FAIL!"
+      r(21) = dl.waitforsequence("Tag 9F27", 1, 1000)
+           if r(21) = 0 then dl.addcomment vbcrlf & "Tag 9F27...FAIL!"
+      r(22) = dl.waitforsequence("Tag 9F35", 1, 1000)
+           if r(22) = 0 then dl.addcomment vbcrlf & "Tag 9F35...FAIL!"
+      r(23) = dl.waitforsequence("Tag 9F36", 1, 1000)
+           if r(23) = 0 then dl.addcomment vbcrlf & "Tag 9F36...FAIL!"
+      r(24) = dl.waitforsequence("Tag 9F37", 1, 1000)
+           if r(24) = 0 then dl.addcomment vbcrlf & "Tag 9F37...FAIL!"
+      r(25) = dl.waitforsequence("Tag 9F39", 1, 1000)
+           if r(25) = 0 then dl.addcomment vbcrlf & "Tag 9F39...FAIL!"
+      r(26) = dl.waitforsequence("Tag 9F5D", 1, 1000)
+           if r(26) = 0 then dl.addcomment vbcrlf & "Tag 9F5D...FAIL!"
+      r(27) = dl.waitforsequence("Tag 9F66", 1, 1000)
+           if r(27) = 0 then dl.addcomment vbcrlf & "Tag 9F66...FAIL!"
+      r(28) = dl.waitforsequence("Tag 9F6C", 1, 1000)
+           if r(28) = 0 then dl.addcomment vbcrlf & "Tag 9F6C...FAIL!"
+      r(29) = dl.waitforsequence("Tag FFEE01", 1, 1000)
+           if r(29) = 0 then dl.addcomment vbcrlf & "Tag FFEE01...FAIL!"
+      r(30) = dl.waitforsequence("Tag 5A - mask", 1, 1000)
+           if r(30) = 0 then dl.addcomment vbcrlf & "Tag 5A - mask...FAIL!"
+      r(31) = dl.waitforsequence("Tag DFEE26", 1, 1000)
+           if r(31) = 0 then dl.addcomment vbcrlf & "Tag DFEE26...FAIL!"
+      t1 = dl.waitforsequence("FFEE13", 1, 2000)
+           if t1 = 1 then
+              r(33) = 0
+              dl.addcomment vbcrlf & "FFEE13...FAIL!"
+           else 
+              r(33) = 1
+           end if
+      t2 = dl.waitforsequence("FFEE14", 1, 2000)
+           if t2 = 1 then 
+              r(34) = 0
+              dl.addcomment vbcrlf & "FFEE14...FAIL!"
+           else
+              r(34) = 1
+           end if
+      r(35) = dl.waitforsequence("Tag 57 - mask", 1, 1000)
+           if r(35) = 0 then dl.addcomment vbcrlf & "Tag 57 - mask...FAIL!"
+
+      countfail()
+   else 
+      countf = countf + 1
+   end if
+   dl.pause 500
+else 
+   countf = countf + 1
+End If
+end sub
+'------------------------------------------------------------
+if countf <> 0 then
+   result = 0
+   dl.addcomment vbcrlf
+   dl.addcomment "=============="
+   dl.addcomment "FAIL items: " & countf
+   dl.addcomment "=============="
+else
+   result = 1
+end if
+
+DL.AddComment vbcrlf & "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'DL.pause 1000
+
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 

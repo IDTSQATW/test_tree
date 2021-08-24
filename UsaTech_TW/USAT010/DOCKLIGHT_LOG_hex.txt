@@ -1,0 +1,27 @@
+Docklight Log File (HEX) - Started 2018/9/5 17:05:37.463 
+ TEST CASE: USAT010
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Get Serial Number
+
+2018/9/5 17:05:38.754 [TX] - 56 69 56 4F 74 65 63 68 32 00 12 01 00 00 18 A5 
+2018/9/5 17:05:38.765 [RX] - 56 69 56 4F 74 65 63 68 32 00 12 00 00 0A 36 33 30 4E 30 30 30 30 30 31 65 05  
+
+ --- USATech: Serial Number Request
+
+2018/9/5 17:05:44.320 [TX] - 37 30 04 
+2018/9/5 17:05:44.325 [RX] - 56 61 6C 75 65  SN --> 36 33 30 4E 30 30 30 30 30 31 0D  
+---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2018/9/5 17:16:52.164 
+

@@ -1,0 +1,843 @@
+DL_SCRIPTVERSION
+1
+18754
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "KMT011" ' !!!!! EDIT THIS !!!!!
+' Refer to #CS-2129: ALL EMV Hardware - Expand CAPK group from 8 to no limit
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  genFlag = result
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+End Sub
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+keyCounter = 0
+unLoadedCnt = 0
+
+Sub prNumKeyLoaded ()
+    DL.AddComment vbcrlf
+    DL.AddComment vbCrLf & "Number of key(s) already loaded: " & keyCounter &vbCrLf
+End Sub
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   DL.AddComment "--- Delete All CA Public Key"
+   DL.SendSequence "DeleteAllKeys"
+   result1 = DL.WaitForSequence("Successful Command", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+   DL.ResetReceiveCounter "Successful Command"
+   prNumKeyLoaded ()
+   DL.Pause 400
+   DL.AddComment "Set Test Key A0 00 00 00 04 - Index 00"
+   DL.SendSequence " Set Test Key A0 00 00 00 04 - Index 00"
+   result = DL.WaitForSequence("Successful Command", 1, 10000)
+   keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key A0 00 00 00 04 - Index 02"
+  DL.SendSequence " Set Test Key A0 00 00 00 04 - Index 02"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key A0 00 00 00 04 - Index 05"
+  DL.SendSequence " Set Test Key A0 00 00 00 04 - Index 05"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key A0 00 00 00 04 - Index EF"
+  DL.SendSequence " Set Test Key A0 00 00 00 04 - Index EF"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key A0 00 00 00 04 - Index F1"
+  DL.SendSequence " Set Test Key A0 00 00 00 04 - Index F1"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key A0 00 00 00 04 - Index F3"
+  DL.SendSequence " Set Test Key A0 00 00 00 04 - Index F3"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key A0 00 00 00 04 - Index F5"
+  DL.SendSequence " Set Test Key A0 00 00 00 04 - Index F5"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key A0 00 00 00 04 - Index F6"
+  DL.SendSequence " Set Test Key A0 00 00 00 04 - Index F6"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key A0 00 00 00 04 - Index F7"
+  DL.SendSequence " Set Test Key A0 00 00 00 04 - Index F7"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key A0 00 00 00 04 - Index F8"
+  DL.SendSequence " Set Test Key A0 00 00 00 04 - Index F8"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key A0 00 00 00 04 - Index F9"
+  DL.SendSequence " Set Test Key A0 00 00 00 04 - Index F9"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key A0 00 00 00 04 - Index FA"
+  DL.SendSequence " Set Test Key A0 00 00 00 04 - Index FA"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key B0 12 34 56 78 - Index F3"
+  DL.SendSequence " Set Test Key B0 12 34 56 78 - Index F3"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key B0 12 34 56 78 - Index F5"
+  DL.SendSequence " Set Test Key B0 12 34 56 78 - Index F5"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key B0 12 34 56 78 - Index F6"
+  DL.SendSequence " Set Test Key B0 12 34 56 78 - Index F6"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key B0 12 34 56 78 - Index F7"
+  DL.SendSequence " Set Test Key B0 12 34 56 78 - Index F7"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key B0 12 34 56 78 - Index F8"
+  DL.SendSequence " Set Test Key B0 12 34 56 78 - Index F8"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key B0 12 34 56 78 - Index F9"
+  DL.SendSequence " Set Test Key B0 12 34 56 78 - Index F9"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: aa"
+  DL.SendSequence " aa"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: ab"
+  DL.SendSequence " ab"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: ac"
+  DL.SendSequence " ac"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: ad"
+  DL.SendSequence " ad"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: ae"
+  DL.SendSequence " ae"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: af"
+  DL.SendSequence " af"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: ba"
+  DL.SendSequence " ba"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: bb"
+  DL.SendSequence " bb"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: bc"
+  DL.SendSequence " bc"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: bd"
+  DL.SendSequence " bd"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: be"
+  DL.SendSequence " be"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: bf"
+  DL.SendSequence " bf"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: ca"
+  DL.SendSequence " ca"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: cb"
+  DL.SendSequence " cb"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: cc"
+  DL.SendSequence " cc"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: cd"
+  DL.SendSequence " cd"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: ce"
+  DL.SendSequence " ce"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: cf"
+  DL.SendSequence " cf"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: da"
+  DL.SendSequence " da"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: db"
+  DL.SendSequence " db"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: dc"
+  DL.SendSequence " dc"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: dd"
+  DL.SendSequence " dd"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: de"
+  DL.SendSequence " de"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: df"
+  DL.SendSequence " df"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 06"
+  DL.SendSequence " 06"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 07"
+  DL.SendSequence " 07"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 08"
+  DL.SendSequence " 08"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 09"
+  DL.SendSequence " 09"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 10"
+  DL.SendSequence " 10"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 11"
+  DL.SendSequence " 11"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 12"
+  DL.SendSequence " 12"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 13"
+  DL.SendSequence " 13"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 14"
+  DL.SendSequence " 14"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 15"
+  DL.SendSequence " 15"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 16"
+  DL.SendSequence " 16"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 17"
+  DL.SendSequence " 17"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 18"
+  DL.SendSequence " 18"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 19"
+  DL.SendSequence " 19"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 20"
+  DL.SendSequence " 20"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 21"
+  DL.SendSequence " 21"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 22"
+  DL.SendSequence " 22"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter "Successful Command"
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 23"
+  DL.SendSequence " 23"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+  keyCounter = keyCounter + 1
+End If
+'------------------------------------------------------------items 61+62+63
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 24"
+  DL.SendSequence "24"
+  result = DL.WaitForSequence("Successful Command", 1, 5000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 25"
+  DL.SendSequence "25"
+  result = DL.WaitForSequence("Successful Command", 1, 5000)
+  keyCounter = keyCounter + 1
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  prNumKeyLoaded ()
+  DL.Pause 400
+  DL.AddComment "Set Test Key: 26"
+  DL.SendSequence "26"
+  result = DL.WaitForSequence("Successful Command", 1, 5000)
+  keyCounter = keyCounter + 1
+End If
+'------------------------------------------------------------items 64~90
+if result <> 0 then
+   for i = 64 to 90
+       if result <> 0 then
+          DL.ResetReceiveCounter
+          prNumKeyLoaded ()
+          DL.Pause 400
+          DL.AddComment "Set Test Key: " & i
+          DL.SendSequence i
+          result = DL.WaitForSequence("Successful Command", 1, 5000)
+          keyCounter = keyCounter + 1
+       end if
+   next
+end if
+'------------------------------------------------------------
+If result <> 0 Then
+  prNumKeyLoaded ()
+  If keyCounter < 60 Then
+	result = 0
+  End If
+End If
+
+DL.AddComment vbCrLf & "Tried to load " & (keyCounter +  unLoadedCnt) & " keys." & " The number of actually loaded is " & keyCounter & "." & vbCrLf
+'============================================================
+DL.AddComment vbCrLf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
+
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'DL.pause 1000
+'If 0 Then
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+'End If
+
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub

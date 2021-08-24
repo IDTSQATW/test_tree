@@ -1,0 +1,86 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM4
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Capture and verify signature (PNG)
+56 69 56 4F 74 65 63 68 32 00 83 02 00 02 28 02 09 D5
+0
+5
+
+SEND
+1
+Capture and verify signature (PNG) w/ 15 sec timeout
+56 69 56 4F 74 65 63 68 32 00 83 02 00 02 0A 02 8D B5
+0
+5
+
+SEND
+2
+Welcome (Reset to Initial State)
+56 69 56 4F 74 65 63 68 32 00 83 01 00 00 33 15
+0
+5
+
+RECEIVE
+0
+Signature Response
+56 69 56 4F 74 65 63 68 32 00 83 00 ##
+-1
+1
+COMMENT Pass
+0
+1
+0
+0
+
+RECEIVE
+1
+Signature Response (Timeout)
+56 69 56 4F 74 65 63 68 32 00 83 08 00 04 ?? ??
+-1
+1
+COMMENT Pass
+0
+1
+0
+0
+
+RECEIVE
+2
+Welcome Response
+56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
+8100 Error Response
+56 69 56 4F 74 65 63 68 32 00 83 0C 00 04 00 03 00 14 53 FE
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

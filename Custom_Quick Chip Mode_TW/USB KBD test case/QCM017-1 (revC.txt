@@ -1,0 +1,106 @@
+Objective: Encryption OFF mode, AppleVAS + SmartTap integration test w/ iPhone bank card + VAS card.
+
+--------------------
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+>>> Set Merchant 4 - pass.com.apple.wallet.dev_Panera
+CMD: 04 11 04 01 06 41 3B 95 7A 52 59 98 3B 60 8C FC 89 CF B1 DA B9 0C E7 05 AD 8E FF 78 E9 DE 12 2C CF 8D 2C BF 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+EXR: 04 00 00 00
+
+--------------------------------------------------------------------------------
+>>> Apple VAS Only + ST Get VAS Only 
+CMD: 04 00 DFED23 02 01 00 DFED24 04 00 00 00 02 DFED25 05 01 00 00 00 00 DFED26 01 01 DFEF1A 01 02 DFED28 01 00
+EXR: 04 00 00 00
+
+SWIPEKB: Click OK --> Tap iPhone (Card: Panera Bread)
+EXR: 9F 25 20 06 41 3B 95 7A 52 59 98 3B 60 8C FC 89 CF B1 DA B9 0C E7 05 AD 8E FF 78 E9 DE 12 2C CF 8D 2C BF
+EXR: 9F 27
+
+--------------------------------------------------------------------------------
+>>> Apple VAS Only + ST Secure Get VAS Only 
+CMD: 04 00 DFED23 02 01 00 DFED24 04 00 00 00 02 DFED25 05 01 00 00 00 00 DFED26 01 01 DFEF1A 01 0A DFED28 01 00
+EXR: 04 00 00 00
+
+SWIPEKB: Click OK --> Tap iPhone (Card: Panera Bread)
+EXR: 9F 25 20 06 41 3B 95 7A 52 59 98 3B 60 8C FC 89 CF B1 DA B9 0C E7 05 AD 8E FF 78 E9 DE 12 2C CF 8D 2C BF
+EXR: 9F 27
+
+--------------------------------------------------------------------------------
+>>> Apple Pay Only + ST Pay Only 
+CMD: 04 00 DFED23 02 01 00 DFED24 04 00 00 00 03 DFED25 05 01 00 00 00 00 DFED26 01 01 DFEF1A 01 03
+EXR: 04 00 00 00
+
+SWIPEKB: Click OK --> Tap iPhone (MasterCard card)
+EXR: 84
+EXR: A0 00 00
+
+--------------------------------------------------------------------------------
+>>> Apple VAS & Pay + ST Get VAS & Pay 
+CMD: 04 00 DFED23 02 01 00 DFED24 04 00 00 00 01 DFED25 05 01 00 00 00 00 DFED26 01 01 DFEF1A 01 01 DFED28 01 00
+EXR: 04 00 00 00
+
+SWIPEKB: Click OK --> Tap iPhone (Card: MasterCard; but Panera Bread enabled AUTO SELECT)
+EXR: 84
+EXR: A0 00 00
+EXR: 9F 25 20 06 41 3B 95 7A 52 59 98 3B 60 8C FC 89 CF B1 DA B9 0C E7 05 AD 8E FF 78 E9 DE 12 2C CF 8D 2C BF
+EXR: 9F 27
+
+--------------------------------------------------------------------------------
+>>> Apple VAS & Pay + ST Secure Get VAS & Pay 
+CMD: 04 00 DFED23 02 01 00 DFED24 04 00 00 00 01 DFED25 05 01 00 00 00 00 DFED26 01 01 DFEF1A 01 09 DFED28 01 00
+EXR: 04 00 00 00
+
+SWIPEKB: Click OK --> Tap iPhone (Card: MasterCard; but Panera Bread enabled AUTO SELECT)
+EXR: 84
+EXR: A0 00 00
+EXR: 9F 25 20 06 41 3B 95 7A 52 59 98 3B 60 8C FC 89 CF B1 DA B9 0C E7 05 AD 8E FF 78 E9 DE 12 2C CF 8D 2C BF
+EXR: 9F 27
+
+--------------------------------------------------------------------------------
+>>> Apple VAS or Pay + ST Get VAS or Pay 
+CMD: 04 00 DFED23 02 01 00 DFED24 04 00 00 00 00 DFED25 05 01 00 00 00 00 DFED26 01 01 DFEF1A 01 00 DFED28 01 00
+EXR: 04 00 00 00
+
+SWIPEKB: Click OK --> Tap iPhone (Card: Panera Bread)
+EXR: 9F 25 20 06 41 3B 95 7A 52 59 98 3B 60 8C FC 89 CF B1 DA B9 0C E7 05 AD 8E FF 78 E9 DE 12 2C CF 8D 2C BF
+EXR: 9F 27
+
+SWIPEKB: Click OK --> Tap iPhone (MasterCard; but Panera Bread disabled AUTO SELECT)
+EXR: 84
+EXR: A0 00 00
+
+--------------------------------------------------------------------------------
+>>> Apple VAS or Pay + ST Secure Get VAS or Pay 
+CMD: 04 00 DFED23 02 01 00 DFED24 04 00 00 00 00 DFED25 05 01 00 00 00 00 DFED26 01 01 DFEF1A 01 08 DFED28 01 00
+EXR: 04 00 00 00
+
+SWIPEKB: Click OK --> Tap iPhone (Card: Panera Bread)
+EXR: 9F 25 20 06 41 3B 95 7A 52 59 98 3B 60 8C FC 89 CF B1 DA B9 0C E7 05 AD 8E FF 78 E9 DE 12 2C CF 8D 2C BF
+EXR: 9F 27
+
+SWIPEKB: Click OK --> Tap iPhone (MasterCard card)
+EXR: 84
+EXR: A0 00 00
+
+--------------------
+>>> Quick Chip mode = 04
+CMD: 01 01 04
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+--------------------------------------------------------------------------------
+>>> Apple VAS & Pay + ST Get VAS & Pay 
+CMD: 04 00 DFED23 02 01 00 DFED24 04 00 00 00 01 DFED25 05 01 00 00 00 00 DFED26 01 01 DFEF1A 01 01 DFED28 01 00
+EXR: 04 00 00 00
+
+SWIPEKB: Click OK --> Tap iPhone (Card: MasterCard; but Panera Bread enabled AUTO SELECT)
+EXR: 84
+EXR: A0 00 00
+EXR: 9F 25 20 06 41 3B 95 7A 52 59 98 3B 60 8C FC 89 CF B1 DA B9 0C E7 05 AD 8E FF 78 E9 DE 12 2C CF 8D 2C BF
+EXR: 9F 27
+
+--------------------
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 01 00 00 00

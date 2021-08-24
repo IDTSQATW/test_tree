@@ -1,0 +1,30 @@
+Docklight Log File (HEX) - Started 2015/3/16 08:55:50.904 
+ TEST CASE: USAT018
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+
+2015/3/16 08:55:55.761 [TX] - F6 F6 F6 
+2015/3/16 08:55:56.765 [TX] - F7 F7 F7 
+2015/3/16 08:55:57.775 [TX] - F9 F9 F9 
+2015/3/16 08:55:58.785 [TX] - FE FE FE  
+ 
+
+ --- USA Tech (Please tap card)
+
+2015/3/16 08:56:01.134 [TX] - 80 50 6C 65 61 73 65 20 74 61 70 20 63 61 72 64 20 F8 
+2015/3/16 08:56:02.166 [RX] - 40 1B 41 02 52 46 49 44 2D 36 32 37 39 32 35 37 37 34 39 31 33 32 33 34 33 3D 31 30 31 32 38 31 33 30 30 37 32 31 30 34 33 35 30 30 30 30 03 00 0D  
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 2015/3/16 08:56:14.778 
+

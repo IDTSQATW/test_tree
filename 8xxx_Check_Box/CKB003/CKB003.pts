@@ -1,0 +1,313 @@
+DL_SCRIPTVERSION
+1
+11856
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "CKB003" ' !!!!! EDIT THIS !!!!!
+'+++
+' This test is to verify reader is able to present the check boxes w/ or w/o checked marks
+'--- 
+
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+Dim ControlID
+Dim Global_Verdict
+DebuggerOption = 1
+Global_Verdict = "INCONCLUSIVE"
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+      
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON " Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+
+MyInput = MsgBox ("Are you testing the 8100?", VBYesNo, "Test Step")
+'------------------------------------------------------------
+
+If MyInput = 6 Then
+
+  DL.AddComment "--- Reset Initial State"
+  DL.SendSequence " Reset Initial State"
+  result = DL.WaitForSequence("Clear display Response", 1, 3000)
+  verdict(result)
+'------------------------------------------------------------
+  If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Clear Display"
+  DL.SendSequence " Clear Display"
+  result = DL.WaitForSequence("Clear display Response", 1, 3000)
+  End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Check Box Left Marked "
+  DL.SendSequence " Check Box Left Marked"
+  result = DL.WaitForSequence("Invalid 8100 Response", 1, 4000)
+  End If
+
+Else
+  DL.AddComment "--- Reset Initial State"
+  DL.SendSequence " Reset Initial State"
+  result = DL.WaitForSequence("Clear display Response", 1, 3000)
+  verdict(result)
+'------------------------------------------------------------
+  If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Clear Display"
+  DL.SendSequence " Clear Display"
+  result = DL.WaitForSequence("Clear display Response", 1, 3000)
+  verdict(result)
+  End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Check Box Left Marked 4P "
+  DL.SendSequence " Check Box Left Marked 4P"
+  result = DL.WaitForSequence("Check Box Response", 1, 4000)
+  verdict(result)
+  End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Check Box Right "
+  DL.SendSequence " Check Box Right"
+  result = DL.WaitForSequence("Check Box Response", 1, 4000)
+  verdict(result)
+  End If
+	If result <> 0 Then
+   		prompt3 = prompt3 & "Do you see one checked and unchecked box?"
+   		confirm = InputBox(prompt3, "Enter (Y / y / N / n)", "Y / N")  
+   		result = (confirm = "y" Or confirm = "Y")
+	End If
+End If
+
+
+'------------------------------------------------------------
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+'========================================
+'= Debugger
+'========================================
+Function Debugger(itemNameString, itemName)
+	If DebuggerOption = 0 Then
+	ElseIf DebuggerOption = 1 Then
+		If itemName = "" Then
+			DL.AddComment "Debugger: " & itemNameString
+		Else
+			DL.AddComment "Debugger: " & itemNameString & " = " & itemName
+		End If
+	End If
+End Function
+
+'========================================
+'= Verdict Function
+'========================================
+Function verdict(result)
+	If result = 1 Then
+		verdict = "PASS"
+		Debugger "TEST VERDICT IS", verdict
+		If Global_Verdict = "FAIL" Then
+			Global_Verdict = "FAIL"
+   			MasterResult = 0
+		ElseIf Global_Verdict = "INCONCLUSIVE" Then
+			Global_Verdict = "PASS"
+  			MasterResult = 1
+			'DL.AddComment "Debug - IN HERE 111!!!"
+			'DL.Pause 3000
+		ElseIf Global_Verdict = "PASS" Then
+			Global_Verdict = "PASS"
+  			MasterResult = 1
+			'DL.AddComment "Debug - IN HERE 222!!!"
+			'DL.Pause 3000
+		End If
+		'DL.AddComment vbCrLf & "Global V = " & Global_Verdict
+		Debugger "Global_Verdict", Global_Verdict
+	ElseIf result = 0 Then
+		verdict = "FAIL"
+		Debugger "TEST VERDICT IS", verdict
+		Global_Verdict = "FAIL"
+ 		MasterResult = 0
+		'DL.AddComment vbCrLf & "Global V = " & Global_Verdict
+		Debugger "Global_Verdict", Global_Verdict
+		
+	End If
+End Function
+
+

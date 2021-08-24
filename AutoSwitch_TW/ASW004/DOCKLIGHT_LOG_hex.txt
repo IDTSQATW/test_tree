@@ -1,0 +1,8 @@
+Docklight Log File (HEX) - Started 2021/1/25 11:53:22.202 
+ TEST CASE: ASW004
+
+ --- Set POS COM PORT Settings
+
+
+Docklight Log File (HEX) - Stopped 2021/1/25 11:53:22.282 
+

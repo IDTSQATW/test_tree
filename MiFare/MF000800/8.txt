@@ -1,0 +1,41 @@
+Docklight Log File (HEX) - Started 2016/6/3 14:32:16.022 
+ TEST CASE: MF000800
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ ----- PT_Start commands -----
+
+2016/6/3 14:32:18.150 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+2016/6/3 14:32:18.208 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  PT command (OK)
+ Result = PASSED
+
+2016/6/3 14:32:18.249 [TX] - 56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 94 1F 
+2016/6/3 14:32:18.307 [RX] - 56 69 56 4F 74 65 63 68 32 00 28 00 00 00 D6 6A  Antenna Enable (OK)
+ Result = PASSED
+
+2016/6/3 14:32:18.342 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 00 B1 E4 
+2016/6/3 14:32:18.544 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 05  Poll for Token (OK)
+
+2016/6/3 14:32:18.561 [RX] - 03 D3 AC 5A E3 2D 39  Result = PASSED
+ Result = PASSED
+ ----- MiFare Read 1 Block - Start at Block 4 -----
+
+2016/6/3 14:32:18.598 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 04 0B 58 
+2016/6/3 14:32:18.667 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 10 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 22 9D  MiFare Read 1 Block - Start at Block 4 (OK)
+ Result = FAILED
+ 
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 2016/6/3 14:32:31.246 
+

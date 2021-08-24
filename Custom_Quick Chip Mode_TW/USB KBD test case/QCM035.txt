@@ -1,0 +1,30 @@
+Objective: Verify tag DFEF65
+
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+--------------------
+--------------------
+>>> Set CT terminal data = 5C (disable DFEF61 error report)
+CMD: 60 06 08 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 DFEF65 01 00
+EXR: 60 00 00 00
+
+--------------------
+>>> Fallback to MSR transaction (default: can retry ICC card 3 times)
+SWIPEKB: Click OK -> Insert IDT test card 3 times -> Remove card -> Swipe any card.
+MESSAGECK: After inserted card, did not return tag DFEF61
+MESSAGECK: After fallback to MSR, LED 3 was turned ON (flash status)
+
+--------------------
+--------------------
+>>> Set CT terminal data = 5C (enable DFEF61 error report)
+CMD: 60 06 08 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 DFEF65 01 01
+EXR: 60 00 00 00
+
+--------------------
+>>> Fallback to MSR transaction (default: can retry ICC card 3 times)
+SWIPEKB: Click OK -> Insert IDT test card 3 times -> Remove card -> Swipe any card.
+EXR: DFEF6102F220
+EXR: DFEF6102F222
+MESSAGECK: After fallback to MSR, LED 3 was turned ON (flash status)

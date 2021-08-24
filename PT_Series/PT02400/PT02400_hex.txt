@@ -1,0 +1,10 @@
+Docklight Log File (HEX) - Started 11/3/2008 14:47:37.20 
+ --- Long Beep; 800 ms (03h)
+
+11/3/2008 14:47:37.75 [TX] - 56 69 56 4F 74 65 63 68 32 00 0B 02 00 01 03 C9 E7 
+11/3/2008 14:47:38.58 [RX] - 56 69 56 4F 74 65 63 68 32 00 0B 00 00 00 7A F8  Buzzer Control - Long Beep OK (SUCCESS)
+ Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped 11/3/2008 14:47:40.23 
+

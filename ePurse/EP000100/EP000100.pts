@@ -1,0 +1,424 @@
+DL_SCRIPTVERSION
+1
+370
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "EP000100" ' !!!!! EDIT THIS !!!!!
+
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description	
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+	
+  'Display Test Steps 	
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()	 
+  Prompting(1) = result
+
+  'Set Docklight COM Port	
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()	 
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()	 
+  POSBaudRate(1) = result
+	
+Loop
+
+Sub StepPrompt(PromptString)
+	DL.AddComment PromptString
+	If Prompting(1) = "ON" Then
+		MsgBox PromptString, VBOKOnly, "Test Step"
+	Else
+	End If
+	
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON " Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+Function ReverseResult(ResultParam)
+	If ResultParam = 1 Then
+		result = 0
+	ElseIf ResultParam = 0 Then
+		result = 1
+	End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+	DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+	MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+
+Initialize_Reader
+DL.AddComment vbCrLf & "--- Test 1 ---"
+Test1
+'DL.AddComment vbCrLf & "--- Test 2 ---"
+'Test2
+'DL.AddComment vbCrLf & "--- Test 3 ---"
+'Test3
+'DL.AddComment vbCrLf & "--- Test 4 ---"
+'Test4
+'------------------------
+DL.Pause 1500
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If 0 Then
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+	MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+	MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+
+
+'------------------------------------------------------------
+' WRITE FINAL VERDICT FILE(!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+'---------------------------------------------------------
+' EP0001.00, EP0002.00 , EP0004.00
+' Decrement and Increment amount of 1. Amount should return to
+' initialized amount.
+'---------------------------------------------------------
+
+Sub Test1()
+	DL.AddComment vbCrLf & "========== TEST1 =============================================="	& vbCrLf
+	DL.AddComment vbCrLf & "--- Decrement Block *Original - minus 1 @ block 16 without BACKUP - Define 1 send 1"
+	DL.SendSequence "Decrement Block *Original - minus 1 @ block 16 without BACKUP - Define 1 send 1"
+	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+	PrintMyResult(result)
+	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.AddComment vbCrLf & "--- Increment Block *Original - plus 1 @ block 16 without BACKUP - Define 1 send 1"
+	DL.SendSequence "Increment Block *Original - plus 1 @ block 16 without BACKUP - Define 1 send 1"
+	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+	PrintMyResult(result)
+	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.AddComment vbCrLf & "--- Read Blocks 3 again"
+	DL.SendSequence "Read 3 Blocks again"
+	result = DL.WaitForSequence ("Read Initialized Blocks (OK)", 1, 5000)
+	PrintMyResult(result)
+
+	'DL.Pause 25000
+
+End Sub
+
+
+'---------------------------------------------------------
+' EP0002.01, EP0002.02
+' Decrement and Increment amount of 1 and send less operation 
+' blocks than defined (defined 2, but send only 1). Error should be returned.
+'---------------------------------------------------------
+
+Sub Test2()
+	
+	DL.AddComment vbCrLf & "========== TEST2 =============================================="	& vbCrLf	
+	DL.AddComment vbCrLf & "--- Decrement Block *Original - minus 1 @ block 16 without BACKUP - Define 2 send 1"
+	DL.SendSequence "Decrement Block *Original - minus 1 @ block 16 without BACKUP - Define 2 send 1"
+	result = DL.WaitForSequence ("Operation Blocks defined less than received ERROR message (FAILED)", 1, 5000)
+	DL.ResetReceiveCounter "Operation Blocks defined less than received ERROR message (FAILED)"
+
+	DL.AddComment vbCrLf & "--- Increment Block *Original - plus 1 @ block 16 without BACKUP - Define 2 send 1"
+	DL.SendSequence "Increment Block *Original - plus 1 @ block 16 without BACKUP - Define 2 send 1"
+	result = DL.WaitForSequence ("Operation Blocks defined less than received ERROR message (FAILED)", 1, 5000)
+	DL.ResetReceiveCounter "Operation Blocks defined less than received ERROR message (FAILED)"
+
+	DL.AddComment vbCrLf & "--- Read Blocks 3 again"
+	DL.SendSequence "Read 3 Blocks again"
+	result = DL.WaitForSequence ("Read Initialized Blocks (OK)", 1, 5000)
+
+	'DL.Pause 25000
+
+End Sub
+
+'---------------------------------------------------------
+' EP0003.00, EP0003.01, EP0003.02, EP0005.00
+' Decrement and Increment same amount with BACKUP. 
+'---------------------------------------------------------
+Sub Test3()
+
+	DL.AddComment vbCrLf & "========== TEST3 =============================================="	& vbCrLf
+
+	'----- EP0003.02 Assign Backup (Debit) -----
+	DL.AddComment vbCrLf & "--- Decrement Block *Original - minus 1 @ block 16 with BACKUP"
+	DL.SendSequence "Decrement Block *Original - minus 1 @ block 16 with BACKUP"
+	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.AddComment vbCrLf & "--- Read 3 Blocks again"
+	DL.SendSequence "Read 3 Blocks again"
+	result = DL.WaitForSequence ("Read Block Decremented (OK)", 1, 5000)
+
+	'----- EP0003.00 Backup -----
+	DL.AddComment vbCrLf & "--- Increment Block *Original - plus 1 @ block 16 with BACKUP"
+	DL.SendSequence "Increment Block *Original - plus 1 @ block 16 with BACKUP"
+	esult = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.AddComment vbCrLf & "--- Read 3 Blocks again"
+	DL.SendSequence "Read 3 Blocks again"
+	result = DL.WaitForSequence ("BACKUP block updated (OK)", 1, 5000)
+
+	'----- EP0003.01 Assign Backup (Credit) -----
+	DL.AddComment vbCrLf & "--- Initialize Blocks" 
+	DL.SendSequence "Initialize Blocks"
+	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.AddComment vbCrLf & "--- Read 3 Initialized Blocks" 
+	DL.SendSequence "Read 3 Initialized Blocks"
+	result = DL.WaitForSequence ("Read Initialized Blocks (OK)", 1, 5000)
+	DL.ResetReceiveCounter "Read Initialized Blocks (OK)"
+
+	DL.AddComment vbCrLf & "--- Increment Block *Original - plus 1 @ block 16 with BACKUP"
+	DL.SendSequence "Increment Block *Original - plus 1 @ block 16 with BACKUP"
+	esult = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.AddComment vbCrLf & "--- Read 3 Blocks again"
+	DL.SendSequence "Read 3 Blocks again"
+	result = DL.WaitForSequence ("BACKUP block updated (OK)", 1, 5000)
+
+
+
+End Sub
+
+'---------------------------------------------------------
+' EP0005.00
+' Overwrite a predefined backup
+'---------------------------------------------------------
+Sub Test4()
+
+	DL.AddComment vbCrLf & "========== TEST4 =============================================="	& vbCrLf
+
+	'----- EP0003.02 Assign Backup (Debit) -----
+	DL.AddComment vbCrLf & "--- Decrement Block *Original - minus 1 @ block 16 with BACKUP"
+	DL.SendSequence "Decrement Block *Original - minus 1 @ block 16 with BACKUP"
+	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.AddComment vbCrLf & "--- Read 3 Blocks again"
+	DL.SendSequence "Read 3 Blocks again"
+	result = DL.WaitForSequence ("Read Block Decremented (OK)", 1, 5000)
+
+	DL.AddComment vbCrLf & "--- Write Block 18"
+	DL.SendSequence "Overwrite backup block 18"
+	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.AddComment vbCrLf & "--- Read 3 Blocks again"
+	DL.SendSequence "Read 3 Blocks again"
+	result = DL.WaitForSequence ("Overwrite backup block 18 (OK)", 1, 5000)
+	
+	DL.SendSequence "Increment Block *Original - plus 1 @ block 16 with BACKUP"
+	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+	DL.ResetReceiveCounter "PT Command (OK)"
+	
+	DL.AddComment vbCrLf & "--- Read 3 Blocks again"
+	DL.SendSequence "Read 3 Blocks again"
+	result = DL.WaitForSequence ("BACKUP block updated (OK)", 1, 5000)
+	
+
+End Sub
+
+
+'----------------------------------------------------
+' Initialize the reader in PT state
+'----------------------------------------------------
+
+Sub Initialize_Reader()
+	
+	MsgBox "Please place MiFare Sample card 308-001 on reader", VBOKOnly, "Test Step"
+	'DL.SendSequence "Ping Reader"
+	'result = DL.WaitForSequence ("", 1, 5000)
+	
+	DL.AddComment vbCrLf & "--- Start PT Mode" 
+	DL.SendSequence "Start PT Mode"
+	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.AddComment vbCrLf & "--- Turn On Antenna"
+	DL.SendSequence "Turn On Antenna"
+	result = DL.WaitForSequence ("Turn On Antenna (OK)", 1, 5000)
+
+	DL.AddComment vbCrLf & "--- Poll for Token" 
+	DL.SendSequence "Poll for Token"
+	result = DL.WaitForSequence ("Poll for Token (OK)", 1, 5000)
+	
+	DL.AddComment vbCrLf & "--- Get PCD&PICC Parameters" 
+	DL.SendSequence "Get PCD&PICC Parameters"
+	result = DL.WaitForSequence ("Get PCD&PICC Parameters (OK)", 1, 5000)
+
+	DL.AddComment vbCrLf & "--- Initialize Blocks" 
+	DL.SendSequence "Initialize Blocks"
+	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.AddComment vbCrLf & "--- Read 3 Initialized Blocks" 
+	DL.SendSequence "Read 3 Initialized Blocks"
+	result = DL.WaitForSequence ("Read Initialized Blocks (OK)", 1, 5000)
+	DL.ResetReceiveCounter "Read Initialized Blocks (OK)"
+	
+End Sub
+
+
+'===============================================
+'Pass Through CRC Calculation
+'===============================================
+
+'Do
+'    DL.Pause 1 ' (the pause reduces CPU load while idle)
+'Loop
+
+Sub DL_OnSend()
+    ' For all Send Sequences with minimum 3 bytes length (one byte user data,
+    ' two bytes CRC, perform the following manipulation:
+    ' - Calculate a 16 bit crc value on the characters 1 .. (DL.OnSend_Size() - 2)
+    ' - Write the low byte to character no. DL.OnSend_GetSize()-1
+    ' - Write the high byte to character no. DL.OnSend_GetSize()
+    ' Example:
+    ' Send Sequence name: MyCommand
+    ' Send Sequence in HEX representation: 02 04 00 00 00 01 00 00
+    ' --> Data transmitted by Docklight:   02 04 00 00 00 01 31 F9
+    '     (with "31" as the low byte CRC, "F9" as the high byte)
+
+    ' Check if there is at least one byte of user data
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Left(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Right(crcStr, 2)) ' high byte
+    End If
+End Sub
+
+
+
+

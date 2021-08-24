@@ -1,0 +1,321 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM4
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+---  Buzzer & LED ---
+
+0
+5
+
+SEND
+1
+One beep with LED All On
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 01 FF 01 F9 77
+0
+5
+
+SEND
+2
+Double beep with All LED Off
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 02 FF 00 88 3E
+0
+5
+
+SEND
+3
+Three short beep with LED 1 On
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 03 01 01 57 29
+0
+5
+
+SEND
+4
+Four short beep with LED 3 On
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 04 03 01 A5 CA
+0
+5
+
+SEND
+5
+One long beep (800ms) with LED All On
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 08 FF 01 00 00
+0
+5
+
+SEND
+6
+--- get memory ---
+
+0
+5
+
+SEND
+7
+Get memory
+56 69 56 4F 74 65 63 68 32 00 82 04 00 00 77 88
+0
+5
+
+SEND
+8
+--- PING PONG ---
+
+0
+5
+
+SEND
+9
+PING-PONG
+50 49 4E 47
+0
+5
+
+SEND
+10
+Ping
+56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD
+0
+5
+
+SEND
+11
+--- get module versions ---
+
+0
+5
+
+SEND
+12
+Get AR Module Versions
+56 69 56 4F 74 65 63 68 32 00 09 20 00 00 56 11
+0
+5
+
+SEND
+13
+--- misc ---
+56 69 56 4F 74 65 63 68 32 00 83 01 00 00 33 15
+0
+5
+
+SEND
+14
+Cancel Transactions (05-01)
+56 69 56 4F 74 65 63 68 32 00 05 01 00 00 92 EF
+0
+5
+
+SEND
+15
+Reset to Initial State (83-01)
+56 69 56 4F 74 65 63 68 32 00 83 01 00 00 33 15
+0
+5
+
+SEND
+16
+Check Master Key Present (80-02)
+56 69 56 4F 74 65 63 68 32 00 80 02 00 00 BF D7
+0
+5
+
+SEND
+17
+Set Param to Default (04-09)
+56 69 56 4F 74 65 63 68 32 00 04 09 00 00 87 30
+0
+5
+
+SEND
+18
+Get Params (03-02)
+56 69 56 4F 74 65 63 68 32 00 03 02 00 00 5B 91
+0
+5
+
+SEND
+19
+Set Params (04-00) on FFFC
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF FC 01 01 00 00
+0
+5
+
+SEND
+20
+--- backwards compatibility ---
+
+0
+5
+
+SEND
+21
+Enable Backwards Compatibility
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 59 01 01 4B AF
+0
+5
+
+SEND
+22
+Disable Backwards Compatibility
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 59 01 00 6A BF
+0
+5
+
+SEND
+23
+Auto Poll
+56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 F6 24
+0
+5
+
+SEND
+24
+Poll on Demand
+56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34
+0
+5
+
+SEND
+25
+Burst On
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 01 98 3E
+0
+5
+
+SEND
+26
+Burst Off
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 00 B9 2E
+0
+5
+
+SEND
+27
+Burst Auto
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 02 98 3E
+0
+5
+
+RECEIVE
+0
+buzzLed Resp
+56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53
+-1
+1
+COMMENT Passed
+0
+1
+0
+0
+
+RECEIVE
+1
+Get Mem Resp
+56 69 56 4F 74 65 63 68 32 00 82 00 00 2F 54 6F 74 61 6C 20 6D 65 6D 3D ?? ?? ?? ?? ?? ?? ?? 75 73 65 64 20 6D 65 6D 3D ?? ?? ?? ?? ?? ?? 66 72 65 65 20 6D 65 6D 3D ?? ?? ?? ?? ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+PONG Resp
+50 4F 4E 47
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
+get module version Resp
+56 69 56 4F 74 65 63 68 32 00 09 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+4
+Ping Resp
+56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+5
+Cancel Transaction Resp
+56 69 56 4F 74 65 63 68 32 00 05 00 00 00 D8 A2
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+6
+Check Master Key Present Resp
+56 69 56 4F 74 65 63 68 32 00 80 00 ?? ?? ##
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+7
+set backwards compatibility resp
+56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+8
+general 01-xx resp
+56 69 56 4F 74 65 63 68 32 00 01 00 00 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

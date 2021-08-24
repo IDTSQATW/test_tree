@@ -1,0 +1,17 @@
+Docklight Log File (HEX) - Started 11/14/2008 13:55:15.04 
+ --- Pass-Through - STOP
+
+11/14/2008 13:55:15.07 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38 
+11/14/2008 13:55:15.27 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 0C 00 00 69 FA  --- Pass-Through - START
+
+11/14/2008 13:55:26.65 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+11/14/2008 13:55:27.27 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START or STOP (SUCCESS)
+ --- Antenna Control - Enable RF Antenna
+
+11/14/2008 13:55:30.51 [TX] - 56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 94 1F 
+11/14/2008 13:55:31.27 [RX] - 56 69 56 4F 74 65 63 68 32 00 28 00 00 00 D6 6A  Antenna Control - Enable (SUCCESS)
+ Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped 11/14/2008 13:55:33.30 
+

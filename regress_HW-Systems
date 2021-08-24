@@ -1,0 +1,12 @@
+# Regression List
+
+# Test			Family		Directory				Call
+#==========================================================================================
+
+Test1_MSR_Tran		System_Test	HW-Sytem_Test/Test1_MSR_Tran		run_test.pl
+Test2_Burst_Range	System_Test	HW-Sytem_Test/Test2_Burst_Range		run_test.pl
+Test3_APoll_GTR_Range	System_Test	HW-Sytem_Test/Test3_APoll_GTR_Range	run_test.pl
+Test4_APoll_GFTD_Range	System_Test	HW-Sytem_Test/Test4_APoll_GFTD_Range	run_test.pl
+Test5_PollOnD_AT_Range	System_Test	HW-Sytem_Test/Test5_PollOnD_AT_Range	run_test.pl
+Test6_Library_Pres	System_Test	HW-Sytem_Test/Test6_Library_Pres	run_test.pl
+

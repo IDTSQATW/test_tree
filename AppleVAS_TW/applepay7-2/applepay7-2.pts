@@ -1,0 +1,455 @@
+DL_SCRIPTVERSION
+1
+28944
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "applepay7-2" ' !!!!! EDIT THIS !!!!!
+' Objective: test AndroidPay
+' TS-9598: Android Pay issue on Vendi with firmware 98.1
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  genFlag = result
+Loop
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If  
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+countf = 0
+
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Burst OFF"
+   if readerType <> "NEO2" then
+      DL.SendSequence "Burst OFF"
+   else
+      DL.SendSequence "Burst OFF (NEO2)"
+   end if
+   result = DL.WaitForSequence("04 00" , 1, 3000)
+End If
+
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Poll On Demand"
+   DL.SendSequence "Set Poll Mode - Poll On Demand"
+   result = DL.WaitForSequence("01 00" , 1, 3000)
+End If
+'============================================================
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set Merchant 1 - Blank "
+   DL.SendSequence "Set Merchant 1 - Blank"
+   result = DL.WaitForSequence("Set Merchant blank response" , 1, 10000)
+End If
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set Merchant 2 - Blank "
+   DL.SendSequence " Set Merchant 2 - Blank "
+   result = DL.WaitForSequence("Set Merchant blank response", 1, 10000)
+End If
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set Merchant 3 - Blank"
+   DL.SendSequence " Set Merchant 3 - Blank"
+   result = DL.WaitForSequence("Set Merchant blank response", 1, 10000)
+End If
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set Merchant 4 - Blank "
+   DL.SendSequence " Set Merchant 4 - Blank "
+   result = DL.WaitForSequence("Set Merchant blank response", 1, 10000)
+End If
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set Merchant 5 - Blank "
+   DL.SendSequence " Set Merchant 5 - Blank "
+   result = DL.WaitForSequence("Set Merchant blank response", 1, 10000)
+End If
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set Merchant 6 - Blank "
+   DL.SendSequence " Set Merchant 6 - Blank "
+   result = DL.WaitForSequence("Set Merchant blank response", 1, 10000)
+End If
+'============================================================
+'============================================================
+' AndroidPay
+'============================================================
+'============================================================
+If result <> 0 Then
+   result = MsgBox("Click OK --> tap AndroidPay", VBOKOnly, "AppleVAS")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 02-40 ACT - VAS Only "
+   if readerType <> "NEO2" then
+      DL.SendSequence "02-40 ACT - VAS Only", i, "D"
+      result = DL.WaitForSequence("02-40 VAS fail response" , 1, 5000)
+   else
+      DL.SendSequence "02-40 ACT - VAS Only (NEO2)", i, "D"
+      result = DL.WaitForSequence("AndroidPay" , 1, 5000)
+      if result <> 0 then result = DL.WaitForSequence("DFEE26" , 1, 3000)
+   end if
+   dl.pause 500
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   DL.Pause 1000
+   result = MsgBox("Click OK --> tap AndroidPay", VBOKOnly, "AppleVAS")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 02-40 ACT - VAS OR Pay "
+   if readerType <> "NEO2" then
+      DL.SendSequence "02-40 ACT - VAS OR Pay", i, "D"
+   else
+      DL.SendSequence "02-40 ACT - VAS OR Pay (NEO2)", i, "D"
+   end if
+   dl.pause 500
+   result = DL.WaitForSequence("AndroidPay" , 1, 10000)
+   if result <> 0 then result = DL.WaitForSequence("DFEE26" , 1, 3000)
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   DL.Pause 1000
+   result = MsgBox("Click OK --> tap AndroidPay", VBOKOnly, "AppleVAS")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 02-40 ACT - VAS AND Pay "
+   if readerType <> "NEO2" then
+      DL.SendSequence "02-40 ACT - VAS AND Pay", i, "D"
+   else
+      DL.SendSequence "02-40 ACT - VAS AND Pay (NEO2)", i, "D"
+   end if
+   dl.pause 500
+   result = DL.WaitForSequence("AndroidPay" , 1, 10000)
+   if result <> 0 then result = DL.WaitForSequence("DFEE26" , 1, 3000)
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   DL.Pause 1000
+   result = MsgBox("Click OK --> tap AndroidPay", VBOKOnly, "AppleVAS")
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 02-40 ACT - Pay Only "
+   if readerType <> "NEO2" then
+      DL.SendSequence "02-40 ACT - Pay Only", i, "D"
+   else
+      DL.SendSequence "02-40 ACT - Pay Only (NEO2)", i, "D"
+   end if
+   dl.pause 500
+   result = DL.WaitForSequence("AndroidPay" , 1, 10000)
+   if result <> 0 then result = DL.WaitForSequence("DFEE26" , 1, 3000)
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   result = MsgBox("Click OK --> tap AndroidPay", VBOKOnly, "AppleVAS")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 02-01 ACT - VAS Only "
+   if readerType <> "NEO2" then
+      DL.SendSequence "ACT - VAS Only", i, "D"
+      result = DL.WaitForSequence("VAS fail response" , 1, 5000)
+   else
+      DL.SendSequence "ACT - VAS Only (NEO2)", i, "D"
+      result = DL.WaitForSequence("02-01 AndroidPay" , 1, 5000)
+      if result <> 0 then result = DL.WaitForSequence("DFEE26" , 1, 3000)
+   end if
+   dl.pause 500
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   DL.Pause 1000
+   result = MsgBox("Click OK --> tap AndroidPay", VBOKOnly, "AppleVAS")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 02-01 ACT - VAS OR Pay "
+   if readerType <> "NEO2" then
+      DL.SendSequence "ACT - VAS OR Pay", i, "D"
+   else
+      DL.SendSequence "ACT - VAS OR Pay (NEO2)", i, "D"
+   end if
+   dl.pause 500
+   result = DL.WaitForSequence("02-01 AndroidPay" , 1, 10000)
+   if result <> 0 then result = DL.WaitForSequence("DFEE26" , 1, 3000)
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   DL.Pause 1000
+   result = MsgBox("Click OK --> tap AndroidPay", VBOKOnly, "AppleVAS")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 02-01 ACT - VAS AND Pay "
+   if readerType <> "NEO2" then
+      DL.SendSequence "ACT - VAS AND Pay", i, "D"
+   else
+      DL.SendSequence "ACT - VAS AND Pay (NEO2)", i, "D"
+   end if
+   dl.pause 500
+   result = DL.WaitForSequence("02-01 AndroidPay" , 1, 10000)
+   if result <> 0 then result = DL.WaitForSequence("DFEE26" , 1, 3000)
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   DL.Pause 1000
+   result = MsgBox("Click OK --> tap AndroidPay", VBOKOnly, "AppleVAS")
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 02-01 ACT - Pay Only "
+   if readerType <> "NEO2" then
+      DL.SendSequence "ACT - Pay Only", i, "D"
+   else
+      DL.SendSequence "ACT - Pay Only (NEO2)", i, "D"
+   end if
+   dl.pause 500
+   result = DL.WaitForSequence("02-01 AndroidPay" , 1, 10000)
+   if result <> 0 then result = DL.WaitForSequence("DFEE26" , 1, 3000)
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   if countf <> 0 then
+      result = 0
+   else
+      result = 1
+   end if
+End If
+'============================================================
+DL.AddComment vbCrLf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'DL.pause 1000
+
+'If 0 Then
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+'End If
+
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+'DL.pause 1000
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub

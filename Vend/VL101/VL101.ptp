@@ -1,0 +1,290 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Set LCD Message
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 00 05 01 C3 BC
+0
+5
+
+SEND
+1
+Disable blue LED
+56 69 56 4F 74 65 63 68 32 00 F0 F6 00 00 58 AA
+0
+5
+
+SEND
+2
+Set Blue LED
+56 69 56 4F 74 65 63 68 32 00 F0 F7 00 00 68 9D
+0
+5
+
+SEND
+3
+Set LED Pattern 1 ONCE
+56 69 56 4F 74 65 63 68 32 00 F0 F7 00 13 00 80 00 1F C0 00 1F E0 00 7F 60 00 7F 20 00 7F E0 00 1F 51 FC
+0
+5
+
+SEND
+4
+Set LED Pattern 2 REPEAT
+56 69 56 4F 74 65 63 68 32 00 F0 F7 00 13 01 80 02 1F C0 02 1F E0 02 1F 60 02 1F 20 02 1F F0 02 7F A6 76
+0
+5
+
+SEND
+5
+Set LED Pattern 3 REPEAT
+56 69 56 4F 74 65 63 68 32 00 F0 F7 00 19 01 80 00 0F C0 00 0F E0 00 0F 60 00 0F 20 00 0F 00 00 1F F0 00 7F 00 00 1F 08 62
+0
+5
+
+SEND
+6
+Activate Transaction
+56 69 56 4F 74 65 63 68 32 00 02 01 00 0A 28 9F 02 06 00 00 00 00 10 00 2C 8B
+0
+5
+
+SEND
+7
+ViVOtech UI
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F8 01 00 88 02
+0
+5
+
+SEND
+8
+EMEA UI
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F8 01 03 EB 32
+0
+5
+
+SEND
+9
+Clear Vend Display
+56 69 56 4F 74 65 63 68 32 00 F0 F9 00 00 69 86
+0
+5
+
+SEND
+10
+Set Both Lines LCD Display
+56 69 56 4F 74 65 63 68 32 00 F0 FC 00 1E 54 68 69 73 20 69 73 20 61 20 74 65 73 74 2E 2E 54 68 69 73 20 69 73 20 6E 65 77 21 3F 21 F5 EC
+0
+5
+
+SEND
+11
+LCD Line2 (... test vend ...)
+56 69 56 4F 74 65 63 68 32 00 F0 FD 00 10 2E 2E 20 20 74 65 73 74 20 76 65 6E 64 20 2E 2E 99 3D
+0
+5
+
+SEND
+12
+LCD Line2 (... run vend ...)
+56 69 56 4F 74 65 63 68 32 00 F0 FD 00 10 2E 2E 2E 20 72 75 6E 20 76 65 6E 64 20 2E 2E 2E C5 91
+0
+5
+
+SEND
+13
+LCD Line1 (Welcome to Vend)
+56 69 56 4F 74 65 63 68 32 00 F0 FC 00 10 57 65 6C 63 6F 6D 65 20 74 6F 20 56 65 6E 64 20 C9 85
+0
+5
+
+SEND
+14
+LCD Line1 (Please tap card)
+56 69 56 4F 74 65 63 68 32 00 F0 FC 00 10 50 6C 65 61 73 65 20 74 61 70 20 63 61 72 64 20 F1 C6
+0
+5
+
+SEND
+15
+LCD Line1 (Pls swipe card)
+56 69 56 4F 74 65 63 68 32 00 F0 FC 00 10 50 6C 73 20 73 77 69 70 65 20 63 61 72 64 20 20 9E 9F
+0
+5
+
+SEND
+16
+LCD Line1 (Card is read OK)
+56 69 56 4F 74 65 63 68 32 00 F0 FC 00 10 43 61 72 64 20 69 73 20 72 65 61 64 20 4F 4B 20 32 48
+0
+5
+
+SEND
+17
+LCD Line1 (No card is read)
+56 69 56 4F 74 65 63 68 32 00 F0 FC 00 10 4E 6F 20 63 61 72 64 20 69 73 20 72 65 61 64 20 11 4A
+0
+5
+
+SEND
+18
+LCD Line1 (Push DONE Button)
+56 69 56 4F 74 65 63 68 32 00 F0 FC 00 10 50 75 73 68 20 44 4F 4E 45 20 42 75 74 74 6F 6E 4C FA
+0
+5
+
+SEND
+19
+LCD Line1 (Push SWIPE Butn)
+56 69 56 4F 74 65 63 68 32 00 F0 FC 00 10 50 75 73 68 20 53 57 49 50 45 20 42 75 74 6E 20 E0 05
+0
+5
+
+SEND
+20
+LCD Line1 (Button is OK)
+56 69 56 4F 74 65 63 68 32 00 F0 FC 00 10 42 75 74 74 6F 6E 20 69 73 20 4F 4B 20 20 20 20 51 5E
+0
+5
+
+SEND
+21
+LCD Line1 (No button read)
+56 69 56 4F 74 65 63 68 32 00 F0 FC 00 10 4E 6F 20 62 75 74 74 6F 6E 20 72 65 61 64 20 20 47 1A
+0
+5
+
+SEND
+22
+yellow led off
+56 69 56 4F 74 65 63 68 32 00 F0 FA 00 00 39 DF
+0
+5
+
+SEND
+23
+yellow led on
+56 69 56 4F 74 65 63 68 32 00 F0 FB 00 00 09 E8
+0
+5
+
+SEND
+24
+beep
+56 69 56 4F 74 65 63 68 32 00 F0 FE 00 00 F9 03
+0
+5
+
+SEND
+25
+set Done&Swipe buttons
+56 69 56 4F 74 65 63 68 32 00 F0 F4 00 03 01 01 10 E7 FB
+0
+5
+
+SEND
+26
+get button cfg
+56 69 56 4F 74 65 63 68 32 00 F0 F5 00 00 08 F3
+0
+5
+
+RECEIVE
+0
+Positive Response
+56 69 56 4F 74 65 63 68 32 00 F0 00 00 00 FB AA
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+Error Response
+56 69 56 4F 74 65 63 68 32 00 F0 02 00 00 95 CA
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+UI Change Response
+56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
+Activate Response
+56 69 56 4F 74 65 63 68 32 00 02 ?? ##
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+4
+card burst resp 
+01 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+5
+Done button resp
+02 02 5B 2F
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+6
+Swipe button resp
+02 03 4B 0E
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

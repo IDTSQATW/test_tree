@@ -1,0 +1,162 @@
+DL_SCRIPTVERSION
+1
+37101
+
+'DL.SendSequence "Welcome - Centered"
+Dim Delay
+Delay = 600
+'DL.Pause 1500
+Continue = 0
+
+
+DL.SendSequence "Enable Custom Mode"
+DL.Pause Delay
+DL.SendSequence "Event queue clear"
+DL.Pause Delay
+DL.SendSequence "Cancel Command"
+DL.Pause Delay
+DL.SendSequence "Welcome - Centered"
+DL.Pause 2500
+Amount_OK
+
+DL.AddComment "Waiting to continue..."
+While Continue = 0
+Wend
+
+If Continue = 1 Then
+	Continue = 0	
+	'PIN_Entry
+End If
+
+DL.AddComment "COMPLETE"
+
+
+'If Continue = 1 Then
+'	Continue = 0
+'	DL.SendSequence "From your account"
+'	DL.SendSequence "Processing..."
+'	DL.Pause 3500
+'	DL.SendSequence "Authorized - Thank You"	
+'	DL.Pause 3500
+'ElseIf Continue = 2 Then
+'	DL.SendSequence "Thank you"
+
+'End If
+
+
+
+'DL.SendSequence "From your account"
+'DL.SendSequence "Processing..."
+'DL.Pause 3500
+'DL.SendSequence "Authorized - Thank You"
+'DL.Pause 3500
+
+Sub PIN_Entry()
+		DL.Pause Delay
+		DL.SendSequence "Disable Custom Mode"
+		DL.Pause Delay
+		DL.AddComment "SEND DUKPT CMD"
+		'DL.SendSequence "Master Session PIN"
+		DL.SendSequence "DUKPT PIN"
+End Sub
+
+Sub Amount_OK()
+DL.SendSequence "Amount OK?"
+DL.Pause Delay
+DL.SendSequence "$100.00"
+DL.Pause Delay
+DL.SendSequence "DEBIT button"
+DL.Pause Delay
+DL.SendSequence "CREDIT button"
+DL.Pause Delay
+DL.SendSequence "CANCEL button"
+DL.Pause Delay
+DL.SendSequence "Get Event"
+
+End Sub
+
+Sub SigCap()
+
+	DL.SendSequence "Sig Cap - BMP"
+	'DL.SendSequence "Display signature"
+	'DL.SendSequence "Display green done button signature"
+	'DL.SendSequence "Display yellow clear button signature"
+	'DL.SendSequence "Start sig capture"
+	'DL.SendSequence "Get event"
+
+End Sub
+
+' ModbusCrcScript.pts
+' Automatically calculating a two-byte CRC value for Send Sequences.
+' Date: 2006-09-15
+' Author: Heggelbacher
+' This example makes use of the DL.CalcChecksum() function available
+' in Docklight Scripting V1.7. It has been cross-checked against the
+' CRC reference algorithm listed in the MODBUS specification
+' "MODBUS over serial line specification and implementation guide V1.0"
+' (see www.modbus.org) 
+
+DL.StartCommunication
+' Endless loop until stopped by user
+Do
+    DL.Pause 1 ' (the pause reduces CPU load while idle)
+Loop
+
+Sub DL_OnSend()
+    ' For all Send Sequences with minimum 3 bytes length (one byte user data,
+    ' two bytes CRC, perform the following manipulation:
+    ' - Calculate a 16 bit crc value on the characters 1 .. (DL.OnSend_Size() - 2)
+    ' - Write the low byte to character no. DL.OnSend_GetSize()-1
+    ' - Write the high byte to character no. DL.OnSend_GetSize()
+    ' Example:
+    ' Send Sequence name: MyCommand
+    ' Send Sequence in HEX representation: 02 04 00 00 00 01 00 00
+    ' --> Data transmitted by Docklight:   02 04 00 00 00 01 31 F9
+    '     (with "31" as the low byte CRC, "F9" as the high byte)
+
+    ' Check if there is at least one byte of user data
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub
+
+'================================================================
+
+Do
+    DL.Pause 1 ' (the pause reduces CPU load while idle)
+Loop
+
+Sub DL_OnReceive()
+resultName = DL.OnReceive_GetName()
+DL.AddComment "resultName = " & resultName
+
+Select Case resultName
+	Case "DEBIT pressed"
+		PIN_Entry
+		'Continue = 1
+	Case "CREDIT pressed"
+		'SigCap		
+		Continue = 1
+	Case "CANCEL pressed"
+		Continue = 2
+		'DL.SendSequence "Welcome - Centered"
+		'Continue = 1
+	'Case "Button pressed - green done button"
+		'Continue = 1
+	'Case "Button pressed - yellow clear button"
+	'	DL.SendSequence "Clear sig capture"
+	'	DL.SendSequence "Get Event"
+	Case "PIN entry received"
+		Continue = 1
+	Case "DUKPT Entry"
+		Continue = 1
+	Case "Sig Cap received"
+		Continue = 1
+		
+End Select
+
+End Sub

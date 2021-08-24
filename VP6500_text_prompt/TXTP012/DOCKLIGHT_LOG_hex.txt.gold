@@ -1,0 +1,9 @@
+Docklight Log File (HEX) - Started  
+ --- Out of Range X and Y Pixel
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 83 03 00 16 33 39 39 00 32 39 39 00 31 00 32 00 32 00 57 65 6C 63 6F 6D 65 00 8F F5 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 04 00 00 00 07 03 30  Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

@@ -1,0 +1,319 @@
+DL_SCRIPTVERSION
+1
+2860
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "actTrans02-01M" ' !!!!! EDIT THIS !!!!!
+'Test Activate transaction with cmd 02-01
+
+Test_ID = "Vend3"
+errLimit = 100
+loopInSec = 5
+loopLimit = 4
+
+
+Script_Version = "actTrans02-01M Ver 0.01"
+Date_Time = "D" & Year(Now) & "." & Month(Now)  & "." & Day(Now) & "_T" & Hour(Now) & "." & Minute(Now) &  "." & Second(Now)
+DL.ClearCommWindows
+DL.StartLogging Date_Time & "_" & Test_ID & "_DOCKLIGHT_LOG" ,False, "H"
+', false, true
+DL.AddComment vbCrLf & Script_Version & vbCrLf & "Test: " & Test_ID & vbCrLf
+
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile "Loop.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+      
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+'   
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+
+Dim prompt
+Dim confirm
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 1
+
+Sub PrintMyResult(ResultX)
+
+      If ResultX = 0 Then
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      ElseIf ResultX = 1 Then
+            DL.AddComment "Result = PASSED"
+      End If
+
+End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'-------------------------------------------------------------
+' sub for card present token
+'-------------------------------------------------------------
+Sub sendToken (token_ID)
+FileOutput.CreateFile "DLtoken.tkn", False, True
+FileOutput.WriteLine token_ID
+FileOutput.CloseFile
+End Sub
+
+
+errCounter = 0
+overallCount = 0
+oddEvenFlg = 0
+loopInterval = loopInSec * 1000
+result = 1
+'-------------------------------------------------------------
+' sub for error check
+'-------------------------------------------------------------
+Sub chkErr ()
+  If result = 0 Then
+     errCounter = errCounter + 1
+     DL.AddComment vbCrLf & " *** Error in response. " & errCounter & " error(s) found at this point in iteration " & overallCount & vbCrLf
+     result = 1
+  End If
+  DL.Pause 1000
+End Sub
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+'=========================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- PT off."
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38", "H"
+  DL.Pause 1000
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Ping..."
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get fw ver."
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 29 00 00 00 DE A0", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- get processor type"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 09 02 00 00 F0 F9", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- get processor id"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 12 03 00 00 78 CB", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- get serial number"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 12 01 00 00 18 A5", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- set param default"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 04 09 00 00 87 30", "H"
+  DL.Pause 8000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- set BC off"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 59 01 00 6A BF", "H"
+  DL.Pause 2000
+
+'  DL.ResetReceiveCounter
+'  DL.AddComment vbCrLf & "--- set BC on"
+'  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 59 01 01 4B AF", "H"
+'  DL.Pause 2000
+
+
+'  DL.ResetReceiveCounter
+'  DL.AddComment vbCrLf & "--- set auto poll"
+'  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 F6 24", "H"
+'  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- set burst auto"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 02 FB 0E", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- disable blue led"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 F0 F6 00 00 58 AA", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- Set security log cfg (default + enable key event log)"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 82 07 00 02 01 09 EB BE", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- Get security log cfg"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 82 07 00 01 00 6D CF", "H"
+  DL.Pause 2000
+'============================================================
+' set specific cfg if any
+'============================================================
+
+'============================================================
+Do Until overallCount = loopLimit
+
+result = 1
+'DL.AddComment vbCrLf & "overallCount = " & overallCount &  vbCrLf
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Get VIVO Wallet card ready "
+  SendToken("1")
+  DL.SendSequence "Activate Transaction w/ date & time (02-01)"
+  result = DL.WaitForSequence("Wallet Response", 1, 10000)
+  chkErr()
+
+DL.pause (loopInSec * 1000)
+overallCount = overallCount + 1
+DL.AddComment vbCrLf & "Test Loop " & overallCount & " is done." & vbCrLf
+  
+Loop
+
+DL.AddComment vbCrLf & "End of test loop. Total error number is " & errCounter & vbCrLf
+
+If errCounter <> 0 Then
+   result = 0
+Else
+   result = 1
+End If
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+If 0 Then
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+End If
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+If 0 Then
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+MasterResult = 0
+End If
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+If 0 Then
+If MasterResult = 0 Then 
+	FileOutput.CreateFile "MR_FAIL"
+ElseIf MasterResult = 1 Then
+	FileOutput.CreateFile "MR_PASS"
+End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+End If
+FileOutput.CloseFile 

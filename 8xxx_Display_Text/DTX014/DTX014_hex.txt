@@ -1,0 +1,54 @@
+Docklight Log File (HEX) - Started 10/29/2013 15:16:09.456 
+ TEST CASE: DTX014
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM4 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+
+10/29/2013 15:16:12.713 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 0D 00 00 52 60 
+10/29/2013 15:16:12.719 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Display CUSTOM MODE OK
+ List Directory OK
+ resultName = Display CUSTOM MODE OK
+ resultName = List Directory OK
+
+10/29/2013 15:16:12.744 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 08 00 00 A2 8B 
+10/29/2013 15:16:12.847 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Display CUSTOM MODE OK
+ List Directory OK
+ resultName = Display CUSTOM MODE OK
+ resultName = List Directory OK
+ --- Wordwrap 1
+
+10/29/2013 15:16:13.187 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 03 00 24 30 30 00 30 30 00 31 00 34 00 30 00 41 42 43 45 44 46 47 68 69 6A 6B 6C 6D 6E 6F 70 20 31 32 33 34 35 36 00 3B 68 
+10/29/2013 15:16:13.195 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 04 00 14 57 18 91 C2  Display Control OK
+ resultName = Display Control OK
+ 56 69 56 4F 74 65 63 68 32 00 83 00 00 04 00 14 57 18 91 C2
+ Control ID = 00 14 57 18
+ Debugger: ControlID = 00 14 57 18
+
+10/29/2013 15:16:13.266 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 16 00 11 00 14 57 18 48 65 6C 6C 6F 20 57 6F 72 6C 64 21 00 60 A1 
+10/29/2013 15:16:13.275 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Display CUSTOM MODE OK
+ List Directory OK
+ resultName = Display CUSTOM MODE OK
+ resultName = List Directory OK
+ --- Disable Custom Display Mode
+
+10/29/2013 15:16:20.844 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 09 00 00 92 BC 
+10/29/2013 15:16:20.852 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Display CUSTOM MODE OK
+ List Directory OK
+ resultName = Display CUSTOM MODE OK
+ resultName = List Directory OK
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 10/29/2013 15:16:22.217 
+

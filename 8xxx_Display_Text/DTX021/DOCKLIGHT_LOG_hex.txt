@@ -1,0 +1,30 @@
+Docklight Log File (HEX) - Started 10/10/2016 18:57:25.753 
+ TEST CASE: DTX021
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+--- Enable Custom Display Mode
+
+10/10/2016 18:57:27.496 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 08 00 00 A2 8B 
+10/10/2016 18:57:27.501 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  
+
+--- Send Display Text at  X Boundary
+
+10/10/2016 18:57:30.553 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 03 00 10 34 37 31 00 30 30 30 00 31 00 31 00 33 00 42 00 51 5B 
+10/10/2016 18:57:30.563 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 0A 00 04 00 00 00 07 89 D9  
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 10/10/2016 18:57:34.843 
+

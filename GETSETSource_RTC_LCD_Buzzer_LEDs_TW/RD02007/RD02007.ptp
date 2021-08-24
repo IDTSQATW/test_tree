@@ -1,0 +1,694 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+Get Source
+56 69 56 4F 74 65 63 68 32 00 01 05 00 00 A3 F9
+0
+5
+
+SEND
+1
+Set Source - RTC_None - All Internal
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 05 05 E0 ED
+0
+5
+
+SEND
+2
+Set Source - LCD_None - All Internal
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 11 05 57 22
+0
+5
+
+SEND
+3
+Set Source - Buzzer_None - All Internal
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 14 05 A2 DD
+0
+5
+
+SEND
+4
+Set Source - Power LED_None - All Internal
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 15 01 17 AE
+0
+5
+
+SEND
+5
+Set Source - Transaction LED_None - All Internal
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 15 04 B2 FE
+0
+5
+
+SEND
+6
+Set Source - NONE - All Not allowed
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 25 05 06 EB
+0
+5
+
+SEND
+7
+Set Source - RTC_Internal - All Internal
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 15 05 93 EE
+0
+5
+
+SEND
+8
+Set Source - RTC_External - All Internal
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 25 05 06 EB
+0
+5
+
+SEND
+9
+Set Source - RTC Internal and All external
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 1A 0A 42 0F
+0
+5
+
+SEND
+10
+Set Source - RTC External and All external
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 2A 0A D7 0A
+0
+5
+
+SEND
+11
+---- Set  Buzzer, LED ---
+
+0
+5
+
+SEND
+12
+One beep with LED All On (01-02)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 01 FF 01 F9 77
+0
+5
+
+SEND
+13
+Double beeps with LED All Off (01-02)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 02 FF 00 88 3E
+0
+5
+
+SEND
+14
+Three beeps with LED 1 On (01-02)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 03 01 01 57 29
+0
+5
+
+SEND
+15
+Three beeps with LED 1 Off (01-02)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 03 01 00 76 39
+0
+5
+
+SEND
+16
+Four beeps with LED 2 On (01-02)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 04 02 01 94 F9
+0
+5
+
+SEND
+17
+Four beeps with LED 2 Off (01-02)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 04 02 00 B5 E9
+0
+5
+
+SEND
+18
+One 200ms beep with LED 3 On (01-02)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 05 03 01 95 FD
+0
+5
+
+SEND
+19
+One 400ms beep with LED 3 Off (01-02)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 06 03 00 E4 B4
+0
+5
+
+SEND
+20
+One 600ms beep with LED 0 On (01-02)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 07 00 01 A6 C6
+0
+5
+
+SEND
+21
+One 800ms beep with LED 0 Off (01-02)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 08 00 00 B6 FA
+0
+5
+
+SEND
+22
+--- Set UI Scheme and Poll Mode ---
+
+0
+5
+
+SEND
+23
+Set Params (04-00) on FFF8 to 00 (UI: VivoTech)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F8 01 00 88 02
+0
+5
+
+SEND
+24
+Set Params (04-00) on FFF8 to 00 (UI: VivoTech) (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 37 01 00 00 00
+0
+5
+
+SEND
+25
+--- LCD ---
+
+0
+5
+
+SEND
+26
+One beep with LED All On and LCD Index 00  (01-02)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 00 01 FF 01 5A 3C
+0
+5
+
+SEND
+27
+Double beeps with LED All Off and LCD Index 01 (01-02)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 01 02 FF 00 9F 03
+0
+5
+
+SEND
+28
+One beep with LED All On and LCD Index 02  (01-02)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 02 01 FF 01 32 D1
+0
+5
+
+SEND
+29
+Double beeps with LED All Off and LCD Index 03 (01-02)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 03 02 FF 00 F7 EE
+0
+5
+
+SEND
+30
+One beep with LED All On and LCD Index 04  (01-02)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 04 01 FF 01 AB F6
+0
+5
+
+SEND
+31
+Double beeps with LED All Off and LCD Index 05 (01-02)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 05 02 FF 00 6E C9
+0
+5
+
+SEND
+32
+One beep with LED All On and LCD Index 06  (01-02)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 06 01 FF 01 C3 1B
+0
+5
+
+SEND
+33
+Double beeps with LED All Off and LCD Index 07 (01-02)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 07 02 FF 00 06 24
+0
+5
+
+RECEIVE
+0
+VP8xxx - Get Source reject acknowledged (OK)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 00 7C 33
+-1
+1
+COMMENT VP8xxx - Get Source reject acknowledged (OK)
+1
+1
+0
+1
+
+RECEIVE
+1
+Generic 04-xx positive resp
+56 69 56 4F 74 65 63 68 32 00 04 00 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+GR - Set Source success (OK)
+56 69 56 4F 74 65 63 68 32 00 01 00 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
+Asyn msg for one short beep
+45 00 55 00 04 02 11 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+4
+Asyn msg for double short beeps
+45 00 55 00 04 02 12 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+5
+Asyn msg for three short beeps
+45 00 55 00 04 02 13 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+6
+Asyn msg for four short beeps
+45 00 55 00 04 02 14 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+7
+Asyn msg for 200ms  long  beep
+45 00 55 00 04 02 20 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+8
+Asyn msg for 400ms  long  beep
+45 00 55 00 04 02 21 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+9
+Asyn msg for 600ms  long  beep
+45 00 55 00 04 02 22 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+10
+Asyn msg for 800ms  long  beep
+45 00 55 00 04 02 23 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+11
+Asyn msg for LED 0 On
+45 00 55 00 04 01 01 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+12
+Asyn msg for LED 0 On
+45 00 55 00 04 01 01 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+13
+Asyn msg for LED 0 Off
+45 00 55 00 04 01 00 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+14
+Asyn msg for LED 1 On
+45 00 55 00 04 01 11 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+15
+Asyn msg for LED 1 Off
+45 00 55 00 04 01 10 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+16
+Asyn msg for LED 2 On
+45 00 55 00 04 01 21 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+17
+Asyn msg for LED 2 Off
+45 00 55 00 04 01 20 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+18
+Asyn msg for LED 3 On
+45 00 55 00 04 01 31 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+19
+Asyn msg for LED 3 Off
+45 00 55 00 04 01 30 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+20
+Asyn msg All LEDs on for LED0
+45 00 55 00 0F ## ## ## ## ## ## ## ## ## ## ## ## 01 01 00 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+21
+Asyn msg All LEDs off for LED0
+45 00 55 00 0F ## ## ## ## ## ## ## ## ## ## ## ## 01 00 00 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+22
+Asyn msg All LEDs on for LED1
+45 00 55 00 0F ## ## ## ## ## ## ## ## ## ## ## ## 01 11 00 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+23
+Asyn msg All LEDs off for LED1
+45 00 55 00 0F ## ## ## ## ## ## ## ## ## ## ## ## 01 10 00 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+24
+Asyn msg All LEDs on for LED2
+45 00 55 00 0F ## ## ## ## ## ## ## ## ## ## ## ## 01 21 00 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+25
+Asyn msg All LEDs off for LED2
+45 00 55 00 0F ## ## ## ## ## ## ## ## ## ## ## ## 01 20 00 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+26
+Asyn msg All LEDs on for LED3
+45 00 55 00 0F ## ## ## ## ## ## ## ## ## ## ## ## 01 31 00 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+27
+Asyn msg All LEDs off for LED3
+45 00 55 00 0F ## ## ## ## ## ## ## ## ## ## ## ## 01 30 00 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+28
+Asyn msg for LCD Index 00
+45 00 55 00 04 03 00 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+29
+Asyn msg for LCD Index 01
+45 00 55 00 04 03 01 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+30
+Asyn msg for LCD Index 02
+45 00 55 00 04 03 02 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+31
+Asyn msg for LCD Index 03
+45 00 55 00 04 03 03 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+32
+Asyn msg for LCD Index 04
+45 00 55 00 04 04 00 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+33
+Asyn msg for LCD Index 05
+45 00 55 00 04 05 00 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+34
+Asyn msg for LCD Index 06
+45 00 55 00 04 03 06 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+35
+Asyn msg for LCD Index 07
+45 00 55 00 04 03 07 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

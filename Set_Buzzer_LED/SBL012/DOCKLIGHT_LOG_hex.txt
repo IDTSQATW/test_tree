@@ -1,0 +1,23 @@
+Docklight Log File (HEX) - Started  
+ TEST CASE: SBL012
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM28 @ 19200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- One Beep and Turn Off LED 1
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 01 01 00 16 57 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  Passed  
+
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

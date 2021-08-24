@@ -1,0 +1,28 @@
+Docklight Log File (HEX) - Started 2016/5/10 15:48:40.696 
+ TEST CASE: LO002_3
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+
+** 1=CL **
+ 
+
+Cycle: 1
+ 
+
+ --- 2C-01 PT 0FF
+
+2016/5/10 15:48:55.363 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38 
+2016/5/10 15:48:55.421 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 0C 00 00 69 FA  
+
+ --- 02-01 Activate Transaction Command
+
+2016/5/10 15:48:55.903 [TX] - 56 69 56 4F 74 65 63 68 32 00 02 01 00 15 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20 FD 31 
+2016/5/10 15:48:56.007 [RX] - 56 69 56 4F 74 65 63 68 32 00 02 0B 00 00 79 7E 
+
+Docklight Log File (HEX) - Stopped 2016/5/10 15:49:02.718 
+

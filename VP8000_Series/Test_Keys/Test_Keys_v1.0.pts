@@ -1,0 +1,111 @@
+DL_SCRIPTVERSION
+1
+51202
+
+' Supports single or multiple device Test Key loading.
+' Version 1.0
+
+'Initializations
+'Change the Single_COM_Port based on your PC connection to the reader
+
+Single_COM_Port = "1" 
+
+Dim COM_Port(4)
+
+COM_Port(0) = "5"
+COM_Port(1) = "7"
+COM_Port(2) = "8"
+COM_Port(3) = "9"
+COM_Port(4) = "16"
+
+Dim Single_COM_Port
+
+
+Num_Devices = 5
+
+' End Initializations
+
+Single_Device
+'Multiple_Devices
+'ActivateTrans_to_ALL
+
+Sub ActivateTrans_to_ALL()
+
+For i = 1 to 10000
+
+For j = 0 to 4
+
+DL.StopCommunication
+DL.SetChannelSettings("COM" & COM_Port(j) & ":" & "115200" & ",NONE,8,1")
+DL.StartCommunication
+
+DL.Pause 500
+
+'DL.SendSequence "Cancel Command"
+'DL.Pause 500
+DL.SendSequence "Activate_Trans"
+DL.Pause 2500
+DL.SendSequence "Cancel Command"
+DL.Pause 500
+DL.SendSequence "Thank You"
+
+Next
+Next
+
+End Sub
+
+
+Sub Single_Device()
+
+DL.StopCommunication
+DL.SetChannelSettings("COM" & Single_COM_Port & ":" & "115200" & ",NONE,8,1")
+DL.StartCommunication
+DL.Pause 1500
+DL.SendSequence "Erase Keys"
+DL.Pause 1500
+DL.SendSequence "Set Unencrypted KLK, Component 0"
+DL.Pause 1500
+DL.SendSequence "Set Unencrypted KLK, Component 1"
+DL.Pause 1500
+DL.SendSequence "Replace encrypted KLK"
+DL.Pause 1500
+DL.SendSequence "Load Initial DUKPT key"
+DL.Pause 1500
+DL.SendSequence "Load master key 5"
+DL.Pause 1500
+DL.SendSequence "Clear Display"
+DL.Pause 1500
+DL.SendSequence "Thank You"
+DL.Pause 1500
+DL.AddComment "Done with COM " & Single_COM_Port & "."
+
+End Sub
+
+
+
+Sub Multiple_Devices()
+
+For i = 0 to 4
+DL.StopCommunication
+DL.SetChannelSettings("COM" & COM_Port(i) & ":" & "115200" & ",NONE,8,1")
+DL.StartCommunication
+DL.Pause 1500
+DL.SendSequence "Erase Keys"
+DL.Pause 1500
+DL.SendSequence "Set Unencrypted KLK, Component 0"
+DL.Pause 1500
+DL.SendSequence "Set Unencrypted KLK, Component 1"
+DL.Pause 1500
+DL.SendSequence "Replace encrypted KLK"
+DL.Pause 1500
+DL.SendSequence "Load Initial DUKPT key"
+DL.Pause 1500
+DL.SendSequence "Load master key 5"
+DL.Pause 1500
+DL.SendSequence "Clear Display"
+DL.Pause 1500
+DL.SendSequence "Thank You"
+DL.Pause 1500
+DL.AddComment "Done with COM " & COM_Port(i) & "."
+Next
+End Sub

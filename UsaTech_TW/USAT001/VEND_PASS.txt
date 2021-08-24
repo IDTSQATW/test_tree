@@ -1,0 +1,33 @@
+Docklight Log File (HEX) - Started 2015/4/14 14:05:53.961 
+ TEST CASE: USAT015
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Config buttons: enable 2 buttons
+
+2015/4/14 14:05:55.491 [TX] - 56 69 56 4F 74 65 63 68 32 00 F0 F4 00 03 01 01 10 E7 FB 
+2015/4/14 14:05:55.575 [RX] - 56 69 56 4F 74 65 63 68 32 00 F0 00 00 00 FB AA  
+
+
+2015/4/14 14:05:56.933 [TX] - F9 F9 F9 
+2015/4/14 14:05:57.944 [TX] - C0 61 62 63 64 66 67 68 69 6A 6B 6C 6D 6E 6F 70 71 F8 
+2015/4/14 14:05:59.454 [TX] - 80 61 62 63 64 66 67 68 69 6A 6B 6C 6D 6E 6F 70 71 F8 
+2015/4/14 14:06:00.965 [TX] - F6 F6 F6 
+2015/4/14 14:06:01.978 [TX] - F7 F7 F7 
+2015/4/14 14:06:05.703 [RX] - 41 41 41  
+
+ Did you hear a tone & see triple A strings on Docklight? YES
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2015/4/14 14:06:14.921 
+

@@ -1,0 +1,26 @@
+this file only to explain hoe to edit the "InterfaceSetting.xml" file.
+
+1.Serials COM Setting:
+    the atrribute of:
+	[type]: com
+	[com]
+	[baud]
+	[parity]
+	[stop]
+	[data]
+    should be set.
+    
+    For exzample:
+    	<settings type="com" com="1" baud="19200" parity="N" stop="1" data="8"/>
+
+
+2.USB HID Setting:
+    the atrribute of:
+	[type]: usbhid
+	[vid]
+	[pid]
+    should be set.
+    
+    For exzample:
+ 	<settings type="Usbhid" vid="0ACD" pid="3520"/>
+

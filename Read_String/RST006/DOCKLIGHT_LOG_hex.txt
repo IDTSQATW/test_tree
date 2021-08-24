@@ -1,0 +1,9 @@
+Docklight Log File (HEX) - Started  
+ --- Key 1470
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 83 07 00 13 1E 32 00 33 00 34 00 35 00 36 00 37 00 38 00 39 00 30 00 C2 80 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 04 34 37 30 00 A9 C8  Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

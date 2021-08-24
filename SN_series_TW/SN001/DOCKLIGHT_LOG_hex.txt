@@ -1,0 +1,25 @@
+Docklight Log File (HEX) - Started 2019/1/30 13:18:26.852 
+ TEST CASE: SN001
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Get Serial Number
+
+2019/1/30 13:18:28.088 [TX] - 56 69 56 4F 74 65 63 68 32 00 12 01 00 00 18 A5 
+2019/1/30 13:18:28.114 [RX] - 56 69 56 4F 74 65 63 68 32 00 12 00 00 0A  Accepted, Serial Number already set and data follows: 
+
+2019/1/30 13:18:28.122 [RX] - 36 33 30 5A 30 30 30 30 30 39 12 B0  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2019/1/30 13:18:28.728 
+

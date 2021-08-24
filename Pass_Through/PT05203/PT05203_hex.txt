@@ -1,0 +1,33 @@
+Docklight Log File (HEX) - Started 9/25/2009 12:26:26.98 
+ TEST CASE: PT05203
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Pass-Through Mode - (START)
+
+9/25/2009 12:26:28.89 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+9/25/2009 12:26:29.20 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through Mode - (STOP)  (OK)
+ Pass-Through Mode - (START) (OK)
+ Result = PASSED
+ --- Poll for Token - Mifare Type A - Standard card (OK)
+ Press OK, then tap Mifare Type A (Standard) card.
+
+9/25/2009 12:26:47.42 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51 
+9/25/2009 12:26:48.73 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 05 03  Poll for Token - Mifare Type A - Standard card (OK)
+
+9/25/2009 12:26:48.73 [RX] - A4 18 CE 7D AA 06  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 9/25/2009 12:26:51.89 
+

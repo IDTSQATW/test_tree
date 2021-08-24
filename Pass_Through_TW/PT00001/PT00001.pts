@@ -1,0 +1,279 @@
+DL_SCRIPTVERSION
+1
+57892
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "PT00001" ' !!!!! EDIT THIS !!!!!
+'+++
+' This test case was modified from PT00201
+' For Vendi issue: power LED 0 behavior is incorrect if sent pass-through off cmd under vivotech or VISA Wave UI.
+'---
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  genFlag = result
+Loop
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+result = 1
+countf = 0
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX = 1 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+      Else
+            MasterResult = 0
+            countf = countf + 1
+      End If
+End Sub
+
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+dl.addcomment "--- Poll on demand"
+dl.sendsequence "poll on demand"
+dl.pause 1000
+
+if result <> 0 then
+   s = "EMEA"
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   dl.addcomment "--- UI scheme: EMEA"
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then dl.sendsequence "emea ui"
+   if readerType = "NEO2" then dl.sendsequence "emea ui (NEO2)"
+   result = dl.waitforsequence("ui ok resp", 1, 2000)
+   dl.pause 1000
+
+   pt()
+end if
+
+if result <> 0 then
+   s = "ViVOpay"
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   dl.addcomment "--- UI scheme: ViVOpay"
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then dl.sendsequence "vivopay ui"
+   if readerType = "NEO2" then dl.sendsequence "vivopay ui (NEO2)"
+   result = dl.waitforsequence("ui ok resp", 1, 2000)
+   dl.pause 1000
+
+   pt()
+end if
+
+if result <> 0 then
+   s = "Visa Wave"
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   dl.addcomment "--- UI scheme: Visa Wave"
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then dl.sendsequence "visawave ui"
+   if readerType = "NEO2" then dl.sendsequence "visawave ui (NEO2)"
+   result = dl.waitforsequence("ui ok resp", 1, 2000)
+   dl.pause 1000
+
+   pt()
+end if
+
+sub pt()
+    if result <> 0 then
+       dl.resetreceivecounter
+       dl.addcomment vbcrlf
+       DL.AddComment "--- Pass-Through ON"
+       DL.SendSequence "PT start"
+       result = DL.WaitForSequence("passthrough ok resp", 1, 2000)
+    end if
+
+    if result <> 0 then
+       dl.resetreceivecounter
+       dl.addcomment vbcrlf
+       dl.addcomment "--- Pass-Through OFF"
+       dl.sendsequence "PT stop"
+       result = dl.waitforsequence("passthrough ok resp", 1, 2000)
+    end if
+
+    if result <> 0 then
+       check = msgbox("Is power LED correct status under " & s & " UI?", vbyesno)
+       if check = 6 then
+          result = 1
+       else
+          result = 0
+       end if
+    end if
+
+    dl.pause 1000
+    PrintMyResult(result)
+end sub
+
+if countf <> 0 then
+   result = 0
+else
+   result = 1
+end if
+
+dl.addcomment vbcrlf
+DL.AddComment "---------- END OF TEST ----------"
+DL.Pause 1000
+dl.addcomment vbcrlf
+PrintMyResult(result)
+
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+	MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+	MasterVerdict = "FAILED"
+End If
+
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If 0 Then
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'------------------------------------------------------------
+' WRITE FINAL VERDICT FILE(!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub

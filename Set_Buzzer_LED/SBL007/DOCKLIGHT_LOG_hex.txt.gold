@@ -1,0 +1,9 @@
+Docklight Log File (HEX) - Started  
+ --- One long beep of 400ms
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 06 00 00 B7 E1 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  Passed  Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

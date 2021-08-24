@@ -1,0 +1,20 @@
+Docklight Log File (HEX) - Started 11/3/2008 14:51:52.25 
+ --- Pass-Through Mode - (START)
+
+11/3/2008 14:51:58.00 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+11/3/2008 14:51:58.02 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through Mode - (STOP)  (OK)
+ Pass-Through Mode - (START) (OK)
+ --- Pass-Through Mode - (STOP)
+
+11/3/2008 14:51:59.57 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38 
+11/3/2008 14:51:59.57 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through Mode - (STOP)  (OK)
+ Pass-Through Mode - (START) (OK)
+ --- Poll for Token - Poll for Token when PT mode disabled
+
+11/3/2008 14:52:01.14 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51 
+11/3/2008 14:52:01.14 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 0C 00 00 69 FA  Poll for Token - Poll for Token when PT mode disabled (OK)
+ Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped 11/3/2008 14:52:19.87 
+

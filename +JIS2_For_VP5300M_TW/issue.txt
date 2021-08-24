@@ -1,0 +1,27 @@
+Test case 5-1 ////////////////////////////////////////////////////// 
+依據 Tag DFEE23 的Field 3 是0x86 判定Card type 是 JIS1
+但是卡片有JIS2 track, card type 是否應判定為 0x85 (JIS2)
+
+Note.
+Test case 5-2/ 5-3/ 6-1/ 6-2/ 7-1/ 
+
+
+Test case 6-1 //////////////////////////////////////////////////////
+According to NEO2 IDG Supplement for VP5300M_Appendix M_Table 6_6-1Patten
+==> JIS1 Track 1 & 2 doesn't existed
+==> Swipe test card, reader output track 1 only
+==> Expected behavior is that reader should output track 3 data only
+
+
+Test case 6-2 ////////////////////////////////////////////////////// 
+依據Tag DFEE23 Filed 8 的值0xB4，Bit 5 是1 (First byte of service code was '2' or '6'.)
+但是卡片沒有JIS1 的Track1 or Track2
+所以Field 8的值應該要是0x94
+
+
+Test case 7-1 ////////////////////////////////////////////////////// 
+Insert 卡片--> 要求選擇語言 --> 停在Processing
+
+
+
+

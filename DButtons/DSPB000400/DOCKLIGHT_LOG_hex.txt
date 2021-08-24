@@ -1,0 +1,27 @@
+Docklight Log File (HEX) - Started  
+ TEST CASE: DSPB000400
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM5 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 15 30 00 30 00 00 00 31 00 34 00 33 00 63 61 6E 63 65 6C 00 0D 00 1B 36 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 00 C9 F3  Result = FAILED
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 83 06 00 20 1E 62 61 63 6B 73 70 61 63 65 4B 65 79 00 63 61 6E 63 65 6C 4B 65 79 00 6F 6B 61 79 4B 65 79 00 77 43 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 00 C9 F3  Result = FAILED
+ 
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped  
+

@@ -1,0 +1,32 @@
+Docklight Log File (HEX) - Started 2/10/2016 13:59:47.759 
+ TEST CASE: DIR008
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Create Directory 'apple' (83-25)
+
+2/10/2016 13:59:49.081 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 25 00 06 61 70 70 6C 65 00 11 7E 
+2/10/2016 13:59:49.126 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ --- Create Directory 'apple' (83-25)
+
+2/10/2016 13:59:49.170 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 25 00 06 61 70 70 6C 65 00 11 7E 
+2/10/2016 13:59:49.218 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 04 00 00 00 11 71 C7  --- Delete Directory - apple
+
+2/10/2016 13:59:49.254 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 26 00 06 61 70 70 6C 65 00 55 53  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+
+2/10/2016 13:59:49.306 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2/10/2016 13:59:50.513 
+

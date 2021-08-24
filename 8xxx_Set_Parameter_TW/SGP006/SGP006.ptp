@@ -1,0 +1,2015 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+Get EMV Parameters
+56 69 56 4F 74 65 63 68 32 00 03 02 00 00 5B 91
+0
+5
+
+SEND
+1
+Get Default EMV Parameters
+56 69 56 4F 74 65 63 68 32 00 03 02 00 00 5B 91
+0
+5
+
+SEND
+2
+Default NVM
+56 69 56 4F 74 65 63 68 32 00 04 09 00 00 87 30
+0
+5
+
+SEND
+3
+9f 02
+56 69 56 4F 74 65 63 68 32 00 04 00 00 09 9F 02 06 00 00 00 00 10 00 A0 AA
+0
+5
+
+SEND
+4
+9f 03
+56 69 56 4F 74 65 63 68 32 00 04 00 00 09 9F 03 06 00 00 00 00 20 00 E6 E8
+0
+5
+
+SEND
+5
+9f 33
+56 69 56 4F 74 65 63 68 32 00 04 00 00 06 9F 33 03 00 09 E8 88 BD
+0
+5
+
+SEND
+6
+9f 40
+56 69 56 4F 74 65 63 68 32 00 04 00 00 08 9F 40 05 60 00 00 30 31 78 1A
+0
+5
+
+SEND
+7
+9f 1a
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 9F 1A 02 09 78 EB 81
+0
+5
+
+SEND
+8
+9f 1b
+56 69 56 4F 74 65 63 68 32 00 04 00 00 07 9F 1B 04 00 00 18 00 6B 6B
+0
+5
+
+SEND
+9
+9f 35
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 9F 35 01 26 58 7B
+0
+5
+
+SEND
+10
+5f 2a
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 5F 2A 02 09 78 BA 9E
+0
+5
+
+SEND
+11
+9c
+56 69 56 4F 74 65 63 68 32 00 04 00 00 03 9C 01 01 DC BA
+0
+5
+
+SEND
+12
+ff fc
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF FC 01 00 48 DE
+0
+5
+
+SEND
+13
+ff fc (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 39 01 00 00 00
+0
+5
+
+SEND
+14
+ff fd
+56 69 56 4F 74 65 63 68 32 00 04 00 00 08 FF FD 05 F8 50 AC F8 01 71 BF
+0
+5
+
+SEND
+15
+ff fd (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 09 DF 81 22 05 F8 50 AC F8 01 00 00
+0
+5
+
+SEND
+16
+ff fe
+56 69 56 4F 74 65 63 68 32 00 04 00 00 08 FF FE 05 F8 50 AC A0 01 E5 E0
+0
+5
+
+SEND
+17
+ff fe (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 09 DF 81 20 05 F8 50 AC A0 01 00 00
+0
+5
+
+SEND
+18
+ff ff
+56 69 56 4F 74 65 63 68 32 00 04 00 00 08 FF FF 05 00 00 00 00 01 47 C5
+0
+5
+
+SEND
+19
+ff ff (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 09 DF 81 21 05 00 00 00 00 01 00 00
+0
+5
+
+SEND
+20
+ff fb 02
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF FB 01 02 9A 7B
+0
+5
+
+SEND
+21
+ff fb 02 (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 38 01 02 00 00
+0
+5
+
+SEND
+22
+ff fb 01
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF FB 01 01 F9 4B
+0
+5
+
+SEND
+23
+ff fb 01 (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 38 01 01 00 00
+0
+5
+
+SEND
+24
+ff fb 03
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF FB 01 03 BB 6B
+0
+5
+
+SEND
+25
+ff fb 03 (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 38 01 03 00 00
+0
+5
+
+SEND
+26
+ff fa
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 FF FA 02 00 00 DA 59
+0
+5
+
+SEND
+27
+ff fa (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 06 DF EF 29 02 00 00 00 00
+0
+5
+
+SEND
+28
+ff f9 
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F9 01 02 FA 15
+0
+5
+
+SEND
+29
+ff f9 (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 1C 01 02 00 00
+0
+5
+
+SEND
+30
+ff f8
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F8 01 00 88 02
+0
+5
+
+SEND
+31
+ff f8 (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 37 01 00 00 00
+0
+5
+
+SEND
+32
+ff f7 
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 01 98 3E
+0
+5
+
+SEND
+33
+ff f7 (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 7E 01 01 00 00
+0
+5
+
+SEND
+34
+ff f7 (NEO2_SRED)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 7E 01 00 00 00
+0
+5
+
+SEND
+35
+ff f5 
+56 69 56 4F 74 65 63 68 32 00 04 00 00 09 FF F5 06 00 00 00 00 90 00 88 C3
+0
+5
+
+SEND
+36
+ff f5 (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 0A DF 81 26 06 00 00 00 00 90 00 00 00
+0
+5
+
+SEND
+37
+ff f4
+56 69 56 4F 74 65 63 68 32 00 04 00 00 06 FF F4 03 00 00 00 42 70
+0
+5
+
+SEND
+38
+ff f4 (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 07 DF EE 35 03 00 00 00 00 00
+0
+5
+
+SEND
+39
+9f 66
+56 69 56 4F 74 65 63 68 32 00 04 00 00 07 9F 66 04 A0 00 00 00 18 00
+0
+5
+
+SEND
+40
+ff f2
+56 69 56 4F 74 65 63 68 32 00 04 00 00 0B FF F2 08 30 30 30 30 30 30 30 31 E7 0A
+0
+5
+
+SEND
+41
+ff f2 (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 0C DF EE 6B 08 30 30 30 30 30 30 30 31 00 00
+0
+5
+
+SEND
+42
+ff f1
+56 69 56 4F 74 65 63 68 32 00 04 00 00 09 FF F1 06 00 00 00 01 00 01 1F F3
+0
+5
+
+SEND
+43
+ff f1 (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 0A DF EE 34 06 00 00 00 01 00 01 00 00
+0
+5
+
+SEND
+44
+ff f3
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 FF F3 02 04 FF 99 78
+0
+5
+
+SEND
+45
+ff f3 (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 06 DF EE 44 02 04 FF 00 00
+0
+5
+
+SEND
+46
+ff f0 
+56 69 56 4F 74 65 63 68 32 00 04 00 00 06 FF F0 03 00 00 01 65 E9
+0
+5
+
+SEND
+47
+ff f0 (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 07 DF EE 67 03 00 00 01 00 00
+0
+5
+
+SEND
+48
+df 63
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 63 01 01 2F AD
+0
+5
+
+SEND
+49
+df 63 (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 63 01 01 00 00
+0
+5
+
+SEND
+50
+df 64
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 64 01 01 BF 28
+0
+5
+
+SEND
+51
+df 64 (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 64 01 01 00 00
+0
+5
+
+SEND
+52
+df 65 
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 65 01 01 8F 1F
+0
+5
+
+SEND
+53
+df 65 (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 65 01 01 00 00
+0
+5
+
+SEND
+54
+df 66 
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 66 01 01 DF 46
+0
+5
+
+SEND
+55
+df 66 (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 66 01 01 00 00
+0
+5
+
+SEND
+56
+5f 36
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 5F 36 01 01 29 C5
+0
+5
+
+SEND
+57
+9f 09
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 9F 09 02 00 01 B6 54
+0
+5
+
+SEND
+58
+9f 15
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 9F 15 02 00 01 23 00
+0
+5
+
+SEND
+59
+9f 53
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 9F 53 01 01 16 06
+0
+5
+
+SEND
+60
+9f 6d 
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 9F 6D 02 00 00 B4 D7
+0
+5
+
+SEND
+61
+df 28 
+56 69 56 4F 74 65 63 68 32 00 04 00 00 06 DF 28 03 00 08 B8 F9 56
+0
+5
+
+SEND
+62
+df 28 (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 07 DF EE 28 03 00 08 B8 00 00
+0
+5
+
+SEND
+63
+df 29
+56 69 56 4F 74 65 63 68 32 00 04 00 00 06 DF 29 03 00 68 B8 82 F7
+0
+5
+
+SEND
+64
+df 29 (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 07 DF EE 29 03 00 68 B8 00 00
+0
+5
+
+RECEIVE
+0
+Set Parameter Response
+56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
+-1
+1
+COMMENT Set Parameter Successful
+0
+1
+0
+0
+
+RECEIVE
+1
+9f 02 Response
+9F 02 06 00 00 00 00 10 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+9f 03 Response
+9F 03 06 00 00 00 00 20 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
+9f 33 Response
+9F 33 03 00 09 E8
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+4
+9f 40 Response
+9F 40 05 60 00 00 30 31
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+5
+9f 1a Response
+9F 1A 02 09 78
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+6
+9f 1b Response
+9F 1B 04 00 00 18 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+7
+9f 35 Response
+9F 35 01 26
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+8
+5f 2a Response
+5F 2A 02 09 78
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+9
+9c Response
+9C 01 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+10
+ff fc Response
+FF FC 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+11
+ff fc Response (NEO2)
+DF EE 39 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+12
+ff fd Response
+FF FD 05 F8 50 AC F8 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+13
+ff fd Response (NEO2)
+DF 81 22 05 F8 50 AC F8 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+14
+ff fe Response
+FF FE 05 F8 50 AC A0 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+15
+ff fe Response (NEO2)
+DF 81 20 05 F8 50 AC A0 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+16
+ff ff Response
+FF FF 05 00 00 00 00 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+17
+ff ff Response (NEO2)
+DF 81 21 05 00 00 00 00 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+18
+ff fb Response 02
+FF FB 01 02
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+19
+ff fb Response 02 (NEO2)
+DF EE 38 01 02
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+20
+ff fb Response 01
+FF FB 01 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+21
+ff fb Response 01 (NEO2)
+DF EE 38 01 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+22
+ff fb Response 03
+FF FB 01 03
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+23
+ff fb Response 03 (NEO2)
+DF EE 38 01 03
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+24
+ff fa Response
+FF FA 02 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+25
+ff fa Response (NEO2)
+DF EF 29 02 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+26
+ff f9 Response
+FF F9 01 02
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+27
+ff f9 Response (NEO2)
+DF EE 1C 01 02
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+28
+ff f8 Response
+FF F8 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+29
+ff f8 Response (NEO2)
+DF EE 37 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+30
+ff f7 Response
+FF F7 01 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+31
+ff f7 Response (NEO2)
+DF EE 7E 01 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+32
+ff f7 Response (NEO2_SRED)
+DF EE 7E 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+33
+ff f5 Response
+FF F5 06 00 00 00 00 90 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+34
+ff f5 Response (NEO2)
+DF 81 26 06 00 00 00 00 90 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+35
+ff f4 Response
+FF F4 03 00 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+36
+ff f4 Response (NEO2)
+DF EE 35 03 00 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+37
+9f 66 Response
+9F 66 04 A0 00 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+38
+ff f2 Response
+FF F2 08 30 30 30 30 30 30 30 31
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+39
+ff f2 Response (NEO2)
+DF EE 6B 08 30 30 30 30 30 30 30 31
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+40
+ff f1 Response
+FF F1 06 00 00 00 01 00 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+41
+ff f1 Response (NEO2)
+DF EE 34 06 00 00 00 01 00 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+42
+ff f3 Response
+FF F3 02 04 FF
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+43
+ff f3 Response (NEO2)
+DF EE 44 02 04 FF
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+44
+ff f0 Response
+FF F0 03 00 00 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+45
+ff f0 Response (NEO2)
+DF EE 67 03 00 00 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+46
+df 63 Response
+DF 63 01 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+47
+df 63 Response (NEO2)
+DF EE 63 01 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+48
+df 64 Response
+DF 64 01 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+49
+df 64 Response (NEO2)
+DF EE 64 01 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+50
+df 65 Response
+DF 65 01 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+51
+df 65 Response (NEO2)
+DF EE 65 01 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+52
+df 66 Response
+DF 66 01 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+53
+df 66 Response (NEO2)
+DF EE 66 01 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+54
+5f 36 Response
+5F 36 01 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+55
+9f 09 Response
+9F 09 02 00 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+56
+9f 15 Response
+9F 15 02 00 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+57
+9f 53 Response
+9F 53 01 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+58
+9f 6d Response
+9F 6D 02 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+59
+df 28 Response
+DF 28 03 00 08 B8
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+60
+df 28 Response (NEO2)
+DF EE 28 03 00 08 B8
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+61
+df 29 Response
+DF 29 03 00 68 B8
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+62
+df 29 Response (NEO2)
+DF EE 29 03 00 68 B8
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+63
+9f 02 Default Response
+9F 02 06 00 00 00 00 00 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+64
+9f 03 Default Response
+9F 03 06 00 00 00 00 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+65
+9f 33 Default Response
+9F 33 03 00 08 E8
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+66
+9f 40 Default Response
+9F 40 05 60 00 00 30 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+67
+9f 1a Default Response
+9F 1A 02 08 40
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+68
+9f 1b Default Response
+9F 1B 04 00 00 17 70
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+69
+9f 35 Default Response
+9F 35 01 22
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+70
+5f 2a Default Response
+5F 2A 02 08 40
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+71
+9c Default Response
+9C 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+72
+ff fc Default Response
+FF FC 01 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+73
+ff fc Default Response (NEO2)
+DF EE 39 01 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+74
+ff fd Default Response
+FF FD 05 F8 50 AC F8 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+75
+ff fd Default Response (NEO2)
+DF 81 22 05 F8 50 AC F8 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+76
+ff fd Default Response (NEO2_SRED)
+DF 81 22 05 F8 50 AC F8 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+77
+ff fe Default Response
+FF FE 05 F8 50 AC A0 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+78
+ff fe Default Response (NEO2)
+DF 81 20 05 F8 50 AC A0 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+79
+ff fe Default Response (NEO2_SRED)
+DF 81 20 05 F8 50 AC A0 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+80
+ff ff Default Response
+FF FF 05 00 00 00 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+81
+ff ff Default Response (NEO2)
+DF 81 21 05 00 00 00 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+82
+ff ff Default Response (NEO2_SRED)
+DF 81 21 05 00 00 00 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+83
+ff fb Default Response
+FF FB 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+84
+ff fb Default Response (NEO2)
+DF EE 38 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+85
+ff fa Default Response
+FF FA 02 03 E8
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+86
+ff fa Default Response (NEO2)
+DF EF 29 02 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+87
+ff f9 Default Response
+FF F9 01 03
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+88
+ff f9 Default Response (NEO2)
+DF EE 1C 01 03
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+89
+ff f8 Default Response
+FF F8 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+90
+ff f8 Default Response (NEO2)
+DF EE 37 01 03
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+91
+ff f7 Default Response
+FF F7 01 02
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+92
+ff f7 Default Response (NEO2)
+DF EE 7E 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+93
+ff f5 Default Response
+FF F5 06 00 00 00 00 80 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+94
+ff f5 Default Response (NEO2)
+DF 81 26 06 00 00 00 00 80 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+95
+ff f5 Default Response (NEO2_SRED)
+DF 81 26 06 00 00 00 00 20 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+96
+ff f4 Default Response
+FF F4 03 00 06 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+97
+ff f4 Default Response (NEO2)
+DF EE 35 03 00 06 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+98
+ff f4 Default Response (NEO2_SRED)
+DF EE 35 03 00 06 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+99
+9f 66 Default Response
+9F 66 04 80 00 40 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+100
+9f 66 Default Response (NEO2)
+9F 66 04 30 00 40 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+101
+ff f2 Default Response
+FF F2 08 30 30 30 30 30 30 30 30
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+102
+ff f2 Default Response (NEO2)
+DF EE 6B 08 00 00 00 00 00 00 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+103
+ff f1 Default Response
+FF F1 06 00 00 00 01 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+104
+ff f1 Default Response (NEO2)
+DF EE 34 06 00 00 00 01 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+105
+ff f3 Default Response
+FF F3 02 07 FF
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+106
+ff f3 Default Response (NEO2)
+DF EE 44 02 9D FF
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+107
+ff f0 Default Response
+FF F0 03 02 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+108
+ff f0 Default Response (NEO2)
+DF EE 67 03 02 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+109
+df 63 Default Response
+DF 63 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+110
+df 63 Default Response (NEO2)
+DF EE 63 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+111
+df 64 Default Response
+DF 64 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+112
+df 64 Default Response (NEO2)
+DF EE 64 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+113
+df 65 Default Response
+DF 65 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+114
+df 65 Default Response (NEO2)
+DF EF 2A 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+115
+df 65 Default Response (NEO2_SRED)
+DF EF 06 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+116
+df 66 Default Response
+DF 66 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+117
+df 66 Default Response (NEO2)
+DF EF 2B 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+118
+df 66 Default Response (NEO2_SRED)
+DF EF 07 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+119
+5f 36 Default Response
+5F 36 01 02
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+120
+9f 09 Default Response
+9F 09 02 00 02
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+121
+9f 15 Default Response
+9F 15 02 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+122
+9f 53 Default Response
+9F 53 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+123
+9f 6d Default Response
+9F 6D 02 00 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+124
+df 28 Default Response
+DF 28 03 00 08 E8
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+125
+df 28 Default Response (NEO2)
+DF EE 28 03 00 08 E8
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+126
+df 29 Default Response
+DF 29 03 00 68 E8
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+127
+df 29 Default Response (NEO2)
+DF EE 29 03 00 68 E8
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

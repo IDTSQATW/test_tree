@@ -1,0 +1,199 @@
+000000 FindSerialDevices
+000040 FindSerialDevices: dwRequiredSize = 1
+000070 FindSerialDevices: devInfo for guids[0]
+000190 FindSerialDevices: SetupDiEnumDeviceInfo
+000210 FindSerialDevices: find com @ device path - ECP Printer Port (LPT1)
+000220 FindSerialDevices: SetupDiEnumDeviceInfo
+000230 FindSerialDevices: find com @ device path - Communications Port (COM1)
+000240 FindSerialDevices: found [COM1]
+000250 FindSerialDevices: SetupDiEnumDeviceInfo
+000260 FindSerialDevices: find com @ device path - ViVOpay USB Serial Port (COM5)
+000270 FindSerialDevices: found [COM5]
+000280 FilterSerialVivoDevices
+000290 FilterSerialVivoDevices: devPath contains [0] device paths
+000290 FilterSerialVivoDevices: iterate com ports
+000300 FilterSerialVivoDevices: port name [0], COM1
+000310 FilterSerialVivoDevices: try port [COM1 @ 9600]
+001372 FilterSerialVivoDevices: no vivopay device @ [COM1, 9600]
+001382 FilterSerialVivoDevices: try port [COM1 @ 57600]
+002424 FilterSerialVivoDevices: no vivopay device @ [COM1, 57600]
+002434 FilterSerialVivoDevices: try port [COM1 @ 115200]
+003325 FilterSerialVivoDevices: found vivopay device @ [COM1, 115200]
+003335 FilterSerialVivoDevices: port name [1], COM5
+003345 FilterSerialVivoDevices: try port [COM5 @ 9600]
+003605 FilterSerialVivoDevices: found vivopay device @ [COM5, 9600]
+162984 FindSerialDevices
+163014 FindSerialDevices: dwRequiredSize = 1
+163034 FindSerialDevices: devInfo for guids[0]
+163165 FindSerialDevices: SetupDiEnumDeviceInfo
+163175 FindSerialDevices: find com @ device path - ECP Printer Port (LPT1)
+163195 FindSerialDevices: SetupDiEnumDeviceInfo
+163205 FindSerialDevices: find com @ device path - Communications Port (COM1)
+163215 FindSerialDevices: found [COM1]
+163225 FindSerialDevices: SetupDiEnumDeviceInfo
+163235 FindSerialDevices: find com @ device path - ViVOpay USB Serial Port (COM5)
+163245 FindSerialDevices: found [COM5]
+163255 FilterSerialVivoDevices
+163265 FilterSerialVivoDevices: devPath contains [0] device paths
+163275 FilterSerialVivoDevices: iterate com ports
+163275 FilterSerialVivoDevices: port name [0], COM1
+163285 FilterSerialVivoDevices: try port [COM1 @ 9600]
+164346 FilterSerialVivoDevices: no vivopay device @ [COM1, 9600]
+164366 FilterSerialVivoDevices: try port [COM1 @ 57600]
+165408 FilterSerialVivoDevices: no vivopay device @ [COM1, 57600]
+165418 FilterSerialVivoDevices: try port [COM1 @ 115200]
+166199 FilterSerialVivoDevices: found vivopay device @ [COM1, 115200]
+166209 FilterSerialVivoDevices: port name [1], COM5
+166229 FilterSerialVivoDevices: try port [COM5 @ 9600]
+166489 FilterSerialVivoDevices: found vivopay device @ [COM5, 9600]
+183414 FindSerialDevices
+183444 FindSerialDevices: dwRequiredSize = 1
+183474 FindSerialDevices: devInfo for guids[0]
+183604 FindSerialDevices: SetupDiEnumDeviceInfo
+183664 FindSerialDevices: find com @ device path - ECP Printer Port (LPT1)
+183674 FindSerialDevices: SetupDiEnumDeviceInfo
+183684 FindSerialDevices: find com @ device path - Communications Port (COM1)
+183694 FindSerialDevices: found [COM1]
+183704 FindSerialDevices: SetupDiEnumDeviceInfo
+183704 FindSerialDevices: find com @ device path - ViVOpay USB Serial Port (COM5)
+183714 FindSerialDevices: found [COM5]
+183724 FilterSerialVivoDevices
+183734 FilterSerialVivoDevices: devPath contains [0] device paths
+183744 FilterSerialVivoDevices: iterate com ports
+183754 FilterSerialVivoDevices: port name [0], COM1
+183764 FilterSerialVivoDevices: try port [COM1 @ 9600]
+184816 FilterSerialVivoDevices: no vivopay device @ [COM1, 9600]
+184826 FilterSerialVivoDevices: try port [COM1 @ 57600]
+185877 FilterSerialVivoDevices: no vivopay device @ [COM1, 57600]
+185887 FilterSerialVivoDevices: try port [COM1 @ 115200]
+186739 FilterSerialVivoDevices: found vivopay device @ [COM1, 115200]
+186749 FilterSerialVivoDevices: port name [1], COM5
+186769 FilterSerialVivoDevices: try port [COM5 @ 9600]
+187029 FilterSerialVivoDevices: found vivopay device @ [COM5, 9600]
+204104 FindSerialDevices
+204134 FindSerialDevices: dwRequiredSize = 1
+204164 FindSerialDevices: devInfo for guids[0]
+204284 FindSerialDevices: SetupDiEnumDeviceInfo
+204294 FindSerialDevices: find com @ device path - ECP Printer Port (LPT1)
+204304 FindSerialDevices: SetupDiEnumDeviceInfo
+204314 FindSerialDevices: find com @ device path - Communications Port (COM1)
+204334 FindSerialDevices: found [COM1]
+204344 FilterSerialVivoDevices
+204414 FilterSerialVivoDevices: devPath contains [0] device paths
+204424 FilterSerialVivoDevices: iterate com ports
+204434 FilterSerialVivoDevices: port name [0], COM1
+204454 FilterSerialVivoDevices: try port [COM1 @ 9600]
+205516 FilterSerialVivoDevices: no vivopay device @ [COM1, 9600]
+205526 FilterSerialVivoDevices: try port [COM1 @ 57600]
+206577 FilterSerialVivoDevices: no vivopay device @ [COM1, 57600]
+206587 FilterSerialVivoDevices: try port [COM1 @ 115200]
+207408 FilterSerialVivoDevices: found vivopay device @ [COM1, 115200]
+218244 FindSerialDevices
+218274 FindSerialDevices: dwRequiredSize = 1
+218304 FindSerialDevices: devInfo for guids[0]
+218434 FindSerialDevices: SetupDiEnumDeviceInfo
+218454 FindSerialDevices: find com @ device path - ECP Printer Port (LPT1)
+218464 FindSerialDevices: SetupDiEnumDeviceInfo
+218464 FindSerialDevices: find com @ device path - Communications Port (COM1)
+218474 FindSerialDevices: found [COM1]
+218484 FindSerialDevices: SetupDiEnumDeviceInfo
+218494 FindSerialDevices: find com @ device path - ViVOpay USB Serial Port (COM5)
+218504 FindSerialDevices: found [COM5]
+218514 FilterSerialVivoDevices
+218524 FilterSerialVivoDevices: devPath contains [0] device paths
+218534 FilterSerialVivoDevices: iterate com ports
+218544 FilterSerialVivoDevices: port name [0], COM1
+218554 FilterSerialVivoDevices: try port [COM1 @ 9600]
+219616 FilterSerialVivoDevices: no vivopay device @ [COM1, 9600]
+219636 FilterSerialVivoDevices: try port [COM1 @ 57600]
+220687 FilterSerialVivoDevices: no vivopay device @ [COM1, 57600]
+220707 FilterSerialVivoDevices: try port [COM1 @ 115200]
+221749 FilterSerialVivoDevices: no vivopay device @ [COM1, 115200]
+221769 FilterSerialVivoDevices: port name [1], COM5
+221829 FilterSerialVivoDevices: try port [COM5 @ 9600]
+222099 FilterSerialVivoDevices: found vivopay device @ [COM5, 9600]
+243590 FindHIDDevices
+243610 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+243630 FindHIDDevices: SetupDiEnumDeviceInterfaces success
+243650 FindHIDDevices: found hid device @ \\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+243660 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+243680 FindHIDDevices: SetupDiEnumDeviceInterfaces success
+243690 FindHIDDevices: found hid device @ \\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+243710 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+243720 FindHIDDevices: SetupDiEnumDeviceInterfaces success
+243741 FindHIDDevices: found hid device @ \\?\hid#vid_1d5f&pid_1004&mi_01#7&8cc1a73&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+243751 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+243771 FindHIDDevices: SetupDiEnumDeviceInterfaces failed
+243781 FilterHIDVivoDevices
+243801 FilterHIDVivoDevices: check if [\\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}] is vivopay device
+243811 FilterHIDVivoDevices: no vivopay device found @ [\\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}]
+243831 FilterHIDVivoDevices: check if [\\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}] is vivopay device
+243851 FilterHIDVivoDevices: no vivopay device found @ [\\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}]
+243861 FilterHIDVivoDevices: check if [\\?\hid#vid_1d5f&pid_1004&mi_01#7&8cc1a73&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}] is vivopay device
+243881 FilterHIDVivoDevices:found vivopay device @ [\\?\hid#vid_1d5f&pid_1004&mi_01#7&8cc1a73&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}]
+252743 FindHIDDevices
+252763 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+252774 FindHIDDevices: SetupDiEnumDeviceInterfaces success
+252794 FindHIDDevices: found hid device @ \\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+252804 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+252824 FindHIDDevices: SetupDiEnumDeviceInterfaces success
+252834 FindHIDDevices: found hid device @ \\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+252854 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+252864 FindHIDDevices: SetupDiEnumDeviceInterfaces success
+252944 FindHIDDevices: found hid device @ \\?\hid#vid_1d5f&pid_1004&mi_01#7&8cc1a73&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+252954 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+252974 FindHIDDevices: SetupDiEnumDeviceInterfaces failed
+252984 FilterHIDVivoDevices
+253004 FilterHIDVivoDevices: check if [\\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}] is vivopay device
+253024 FilterHIDVivoDevices: no vivopay device found @ [\\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}]
+253034 FilterHIDVivoDevices: check if [\\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}] is vivopay device
+253054 FilterHIDVivoDevices: no vivopay device found @ [\\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}]
+253064 FilterHIDVivoDevices: check if [\\?\hid#vid_1d5f&pid_1004&mi_01#7&8cc1a73&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}] is vivopay device
+253074 FilterHIDVivoDevices:found vivopay device @ [\\?\hid#vid_1d5f&pid_1004&mi_01#7&8cc1a73&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}]
+256629 FindHIDDevices
+256649 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+256659 FindHIDDevices: SetupDiEnumDeviceInterfaces success
+256679 FindHIDDevices: found hid device @ \\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+256689 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+256709 FindHIDDevices: SetupDiEnumDeviceInterfaces success
+256719 FindHIDDevices: found hid device @ \\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+256739 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+256749 FindHIDDevices: SetupDiEnumDeviceInterfaces failed
+256769 FilterHIDVivoDevices
+256779 FilterHIDVivoDevices: check if [\\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}] is vivopay device
+256799 FilterHIDVivoDevices: no vivopay device found @ [\\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}]
+256809 FilterHIDVivoDevices: check if [\\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}] is vivopay device
+256819 FilterHIDVivoDevices: no vivopay device found @ [\\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}]
+259784 FindHIDDevices
+259804 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+259814 FindHIDDevices: SetupDiEnumDeviceInterfaces success
+259834 FindHIDDevices: found hid device @ \\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+259844 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+259854 FindHIDDevices: SetupDiEnumDeviceInterfaces success
+259874 FindHIDDevices: found hid device @ \\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+259934 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+259944 FindHIDDevices: SetupDiEnumDeviceInterfaces failed
+259964 FilterHIDVivoDevices
+259974 FilterHIDVivoDevices: check if [\\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}] is vivopay device
+259994 FilterHIDVivoDevices: no vivopay device found @ [\\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}]
+260004 FilterHIDVivoDevices: check if [\\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}] is vivopay device
+260024 FilterHIDVivoDevices: no vivopay device found @ [\\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}]
+272101 FindHIDDevices
+272121 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+272141 FindHIDDevices: SetupDiEnumDeviceInterfaces success
+272151 FindHIDDevices: found hid device @ \\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+272171 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+272181 FindHIDDevices: SetupDiEnumDeviceInterfaces success
+272201 FindHIDDevices: found hid device @ \\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+272211 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+272231 FindHIDDevices: SetupDiEnumDeviceInterfaces success
+272242 FindHIDDevices: found hid device @ \\?\hid#vid_1d5f&pid_1004&mi_01#7&8cc1a73&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+272252 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+272272 FindHIDDevices: SetupDiEnumDeviceInterfaces failed
+272282 FilterHIDVivoDevices
+272302 FilterHIDVivoDevices: check if [\\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}] is vivopay device
+272312 FilterHIDVivoDevices: no vivopay device found @ [\\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}]
+272332 FilterHIDVivoDevices: check if [\\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}] is vivopay device
+272342 FilterHIDVivoDevices: no vivopay device found @ [\\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}]
+272362 FilterHIDVivoDevices: check if [\\?\hid#vid_1d5f&pid_1004&mi_01#7&8cc1a73&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}] is vivopay device
+272382 FilterHIDVivoDevices:found vivopay device @ [\\?\hid#vid_1d5f&pid_1004&mi_01#7&8cc1a73&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}]

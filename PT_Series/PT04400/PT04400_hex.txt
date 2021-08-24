@@ -1,0 +1,10 @@
+Docklight Log File (HEX) - Started 11/3/2008 14:51:28.49 
+ --- Pass-Through - START
+
+11/3/2008 14:51:29.87 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+11/3/2008 14:51:29.88 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START (OK)
+ Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped 11/3/2008 14:51:32.15 
+

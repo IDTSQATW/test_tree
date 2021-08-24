@@ -1,0 +1,121 @@
+Objective: [JIRA] GRN-59 >> [Quick Chip Mode] Fallback to chip reader -> inserted card w/ opposite direction (IC chip can not be powered on) -> reinserted card normally, reader can not read the card.
+
+--------------------
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 01 00 00 00
+
+>>> Set CT terminal data = 5C (enable MSR fallback to CT function)
+CMD: 60 06 08 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 DFEF62 01 01
+EXR: 60 00 00 00
+
+--------------------
+>>> Fallback to CT
+SWIPEKB: Click OK -> Swipe Discover card (PAN=xxxx....0125) ->  LED 3 was turned ON (steady status) -> Insert Discover card.
+EXR: DF EE 25 02 02 03
+EXR: 57 13
+EXR: 5A 08
+EXR: 9F 39 01 07
+EXR: 4F
+EXR: 50
+EXR: 82
+EXR: 84
+EXR: 8A
+EXR: 8C
+EXR: 8D
+EXR: 8E
+EXR: 95
+EXR: 99
+EXR: 9B
+EXR: 9C
+EXR: 5F20
+EXR: 5F24
+EXR: 5F25
+EXR: 5F28
+EXR: 5F2A
+EXR: 5F2D
+EXR: 5F34
+EXR: 5F57
+EXR: 9F02
+EXR: 9F03
+EXR: 9F10
+EXR: 9F13
+EXR: 9F20
+EXR: 9F26
+EXR: 9F27
+EXR: 9F34
+EXR: 9F36
+EXR: 9F37
+EXR: 9F38
+EXR: 9F4D
+EXR: 9F4F
+EXR: 9F53
+EXR: 9F5B
+EXR: DFEF57
+
+>>> Fallback to CT, then Fallback to MSR
+SWIPEKB: Click OK -> Swipe Discover card ->  LED 3 was turned ON (steady status) -> Insert IDT test card 3 times -> LED 3 was turned ON (flash status) -> swipe Discover card.
+EXR: DFEF6102F220
+EXR: DFEF6102F222
+EXR: DF EE 25 02 3002
+EXR: 9F 39 01 80
+EXR: DFEE236A%B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?
+MESSAGECK: LEDs behavior are correct during testing
+
+--------------------
+>>> Quick Chip mode = 03
+CMD: 01 01 03
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+--------------------
+>>> Fallback to CT
+SWIPEKB: Click OK -> Swipe Discover card ->  LED 3 was turned ON (steady status) -> Insert Discover card.
+EXR: DF EE 25 02 02 03
+EXR: 57 13
+EXR: 5A 08
+EXR: 9F 39 01 07
+EXR: 4F
+EXR: 50
+EXR: 82
+EXR: 84
+EXR: 8A
+EXR: 8C
+EXR: 8D
+EXR: 8E
+EXR: 95
+EXR: 99
+EXR: 9B
+EXR: 9C
+EXR: 5F20
+EXR: 5F24
+EXR: 5F25
+EXR: 5F28
+EXR: 5F2A
+EXR: 5F2D
+EXR: 5F34
+EXR: 5F57
+EXR: 9F02
+EXR: 9F03
+EXR: 9F10
+EXR: 9F13
+EXR: 9F20
+EXR: 9F26
+EXR: 9F27
+EXR: 9F34
+EXR: 9F36
+EXR: 9F37
+EXR: 9F38
+EXR: 9F4D
+EXR: 9F4F
+EXR: 9F53
+EXR: 9F5B
+EXR: DFEF57
+
+--------------------
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+>>> Set CT terminal data = 5C
+CMD: 60 06 08 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 DFEF62 01 00
+EXR: 60 00 00 00

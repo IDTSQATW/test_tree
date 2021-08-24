@@ -1,0 +1,93 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+Auto Poll
+56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 F6 24
+0
+5
+
+SEND
+1
+Burst Mode On
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 01 98 3E
+0
+5
+
+SEND
+2
+Burst Mode On (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 7E 01 01 00 00
+0
+5
+
+RECEIVE
+0
+Change Poll Mode Response
+56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+Configuration Change Response
+56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+Burst Mode Androidpay Response
+01 00 ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
+Burst Mode Androidpay Response 03
+03 00 ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

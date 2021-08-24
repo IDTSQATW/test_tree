@@ -1,0 +1,8 @@
+Docklight Log File (HEX) - Started 9/8/2010 17:47:25.73 
+ TEST CASE: DSPB000300
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM5 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+

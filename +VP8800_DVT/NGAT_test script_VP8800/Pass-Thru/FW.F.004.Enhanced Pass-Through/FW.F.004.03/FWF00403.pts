@@ -1,0 +1,492 @@
+DL_SCRIPTVERSION
+1
+11022
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "FWF00403" ' !!!!! EDIT THIS !!!!!
+' Test contact activation flag in Single shot command
+
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+Dim ControlID
+Dim Global_Verdict
+DebuggerOption = 1
+Global_Verdict = "INCONCLUSIVE"
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+      
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON " Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+ 
+'------------------------------------------------------------
+DL.ResetReceiveCounter
+DL.AddComment vbCrLf + vbCrLf + "Try to Stop Pass-Through Mode", False, False
+DL.SendSequence "Stop Pass-Through Mode"
+DL.Pause 500
+
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Start Pass-Through Mode", False, False
+   DL.SendSequence "Start Pass-Through Mode"
+   result = DL.WaitForSequence("Pass-Through Mode Success", 1, 6000)
+  End If
+  DL.Pause 500
+
+'---Part1: verify deactivate single shot command has no effect before contact interface activated------
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Part1: verify deactivate single shot command has no effect before contact interface activated.", False, False
+   DL.AddComment vbCrLf + "Enhanced Pass-Through, Deactivate Contact, Contact, Poll for Card Off", False, False
+   DL.SendSequence "Enhanced Pass-Through, Deactivate Contact, Contact, Poll for Card Off"
+   result = DL.WaitForSequence("Enhanced Pass-Through Failed", 1, 800)
+   result = DL.WaitForSequence("ERR_ICC_COMMAND_NOT_ALLOWED", 1, 800)
+  End If
+  DL.Pause 500
+
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Deactivate Contact, SAM1, Poll for Card Off", False, False
+   DL.SendSequence "Enhanced Pass-Through, Deactivate Contact, SAM1, Poll for Card Off"
+   result = DL.WaitForSequence("Enhanced Pass-Through Failed", 1, 800)
+   result = DL.WaitForSequence("ERR_ICC_COMMAND_NOT_ALLOWED", 1, 800)
+  End If
+  DL.Pause 500
+  
+    If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Deactivate Contact, SAM2, Poll for Card Off", False, False
+   DL.SendSequence "Enhanced Pass-Through, Deactivate Contact, SAM2, Poll for Card Off"
+   result = DL.WaitForSequence("Enhanced Pass-Through Failed", 1, 800)
+   result = DL.WaitForSequence("ERR_ICC_COMMAND_NOT_ALLOWED", 1, 800)
+  End If
+  DL.Pause 500
+  
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Deactivate Contact, SAM3, Poll for Card Off", False, False
+   DL.SendSequence "Enhanced Pass-Through, Deactivate Contact, SAM3, Poll for Card Off"
+   result = DL.WaitForSequence("Enhanced Pass-Through Failed", 1, 800)
+   result = DL.WaitForSequence("ERR_ICC_COMMAND_NOT_ALLOWED", 1, 800)
+  End If
+  DL.Pause 500  
+
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Deactivate Contact, SAM4, Poll for Card Off", False, False
+   DL.SendSequence "Enhanced Pass-Through, Deactivate Contact, SAM4, Poll for Card Off"
+   result = DL.WaitForSequence("Enhanced Pass-Through Failed", 1, 800)
+   result = DL.WaitForSequence("ERR_ICC_COMMAND_NOT_ALLOWED", 1, 800)
+  End If
+  DL.Pause 500 
+  
+
+'---Part 2: verify deactivate single shot command is effective after contact interface activated------  
+
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Part 2: verify deactivate single shot command is effective after contact interface activated.", False, False
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Activate Contact, Contact, Poll for Card On", False, False
+   MsgBox "Please click OK to continue. After this dialog is closed, insert any contact ICC into ICC slot in 10sec.", VBOKOnly, "Test Step"
+   DL.SendSequence "Enhanced Pass-Through, Activate Contact, Contact, Poll for Card On"
+   result = DL.WaitForSequence("Enhanced Pass-Through Success", 1, 11000)
+   MsgBox "Please remove the card. Then click OK to continue.", VBOKOnly, "Test Step"
+  End If
+  DL.Pause 500
+  
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Deactivate Contact, Contact, Poll for Card Off", False, False
+   MsgBox "Please click OK to continue. After this dialog is closed, insert any contact ICC into ICC slot in 10sec.", VBOKOnly, "Test Step"
+   DL.SendSequence "Enhanced Pass-Through, Deactivate Contact, Contact, Poll for Card Off"
+   result = DL.WaitForSequence("Enhanced Pass-Through Success", 1, 11000)
+   MsgBox "Please remove the card. Then click OK to continue.", VBOKOnly, "Test Step"
+  End If
+  DL.Pause 500
+  
+'---Part 3: verify deactivate single shot command is not available after contact interface activated then deactivated before.------  
+
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Part 3: verify deactivate single shot command is not available after contact interface activated then deactivated before.", False, False
+   DL.AddComment vbCrLf + "Enhanced Pass-Through, Deactivate Contact, Contact, Poll for Card Off", False, False
+   DL.SendSequence "Enhanced Pass-Through, Deactivate Contact, Contact, Poll for Card Off"
+   result = DL.WaitForSequence("Enhanced Pass-Through Failed", 1, 800)
+   result = DL.WaitForSequence("ERR_ICC_COMMAND_NOT_ALLOWED", 1, 800)
+  End If
+  DL.Pause 500
+
+'---Part 4: verify that only one interface can be activated at a time. ------
+
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Part 4: verify that only one interface can be activated at a time.", False, False
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Activate Contact, Contact, Poll for Card On", False, False
+   MsgBox "Please click OK to continue. After this dialog is closed, insert any contact ICC into ICC slot in 10sec.", VBOKOnly, "Test Step"
+   DL.SendSequence "Enhanced Pass-Through, Activate Contact, Contact, Poll for Card On"
+   result = DL.WaitForSequence("Enhanced Pass-Through Success", 1, 11000)
+  End If
+  DL.Pause 500    
+
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   MsgBox "Please insert SAM to all SAM slots. Then click OK to continue. ", VBOKOnly, "Test Step"
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Activate Contact, SAM1, Poll for Card On", False, False
+   DL.SendSequence "Enhanced Pass-Through, Activate Contact, SAM1, Poll for Card On"
+   result = DL.WaitForSequence("Enhanced Pass-Through Failed", 1, 800)
+   result = DL.WaitForSequence("ERR_ICC_COMMAND_NOT_ALLOWED", 1, 800)
+  End If
+  DL.Pause 500
+  
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Activate Contact, SAM2, Poll for Card On", False, False
+   DL.SendSequence "Enhanced Pass-Through, Activate Contact, SAM2, Poll for Card On"
+   result = DL.WaitForSequence("Enhanced Pass-Through Failed", 1, 800)
+   result = DL.WaitForSequence("ERR_ICC_COMMAND_NOT_ALLOWED", 1, 800)
+  End If
+  DL.Pause 500
+  
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Activate Contact, SAM3, Poll for Card On", False, False
+   DL.SendSequence "Enhanced Pass-Through, Activate Contact, SAM3, Poll for Card On"
+   result = DL.WaitForSequence("Enhanced Pass-Through Failed", 1, 800)
+   result = DL.WaitForSequence("ERR_ICC_COMMAND_NOT_ALLOWED", 1, 800)
+  End If
+  DL.Pause 500  
+
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Activate Contact, SAM4, Poll for Card On", False, False
+   DL.SendSequence "Enhanced Pass-Through, Activate Contact, SAM4, Poll for Card On"
+   result = DL.WaitForSequence("Enhanced Pass-Through Failed", 1, 800)
+   result = DL.WaitForSequence("ERR_ICC_COMMAND_NOT_ALLOWED", 1, 800)
+  End If
+  DL.Pause 500 
+  
+  
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Deactivate Contact, Contact, Poll for Card Off", False, False
+   MsgBox "Please click OK to continue. After this dialog is closed, insert any contact ICC into ICC slot in 10sec.", VBOKOnly, "Test Step"
+   DL.SendSequence "Enhanced Pass-Through, Deactivate Contact, Contact, Poll for Card Off"
+   result = DL.WaitForSequence("Enhanced Pass-Through Success", 1, 11000)
+   MsgBox "Please remove the card. Then click OK to continue.", VBOKOnly, "Test Step"
+  End If
+  DL.Pause 500  
+  
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Activate Contact, SAM1, Poll for Card On", False, False
+   MsgBox "Please install(or keep) SAM in SAM1 slot. Then click OK button to continue. ", VBOKOnly, "Test Step"
+   DL.SendSequence "Enhanced Pass-Through, Activate Contact, SAM1, Poll for Card On"
+   result = DL.WaitForSequence("Enhanced Pass-Through Success", 1, 11000)
+   End If
+  DL.Pause 500
+  
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Deactivate Contact, SAM1, Poll for Card Off", False, False
+   MsgBox "Please install(or keep) SAM in SAM1 slot. Then click OK button to continue", VBOKOnly, "Test Step"
+   DL.SendSequence "Enhanced Pass-Through, Deactivate Contact, SAM1, Poll for Card Off"
+   result = DL.WaitForSequence("Enhanced Pass-Through Success", 1, 11000)
+   MsgBox "Please remove SAM from SAM2. Then click OK to continue.. Then click OK to continue.", VBOKOnly, "Test Step"
+   End If
+  DL.Pause 500  
+  
+
+'---Part 5: verify that other SAM interface can be activate and deactivate. ------
+
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Activate Contact, SAM2, Poll for Card On", False, False
+   MsgBox "Please install(or keep) SAM in SAM2 slot. Then click OK button to continue", VBOKOnly, "Test Step"
+   DL.SendSequence "Enhanced Pass-Through, Activate Contact, SAM2, Poll for Card On"
+   result = DL.WaitForSequence("Enhanced Pass-Through Success", 1, 11000)
+   End If
+  DL.Pause 500
+  
+  
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Deactivate Contact, SAM2, Poll for Card Off", False, False
+   MsgBox "Please install(or keep) SAM in SAM2 slot. Then click OK button to continue", VBOKOnly, "Test Step"
+   DL.SendSequence "Enhanced Pass-Through, Deactivate Contact, SAM2, Poll for Card Off"
+   result = DL.WaitForSequence("Enhanced Pass-Through Success", 1, 11000)
+   End If
+  DL.Pause 500
+  
+   If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Activate Contact, SAM3, Poll for Card On", False, False
+   MsgBox "Please install(or keep) SAM in SAM3 slot. Then click OK button to continue", VBOKOnly, "Test Step"
+   DL.SendSequence "Enhanced Pass-Through, Activate Contact, SAM3, Poll for Card On"
+   result = DL.WaitForSequence("Enhanced Pass-Through Success", 1, 11000)
+   End If
+  DL.Pause 500
+  
+  
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Deactivate Contact, SAM3, Poll for Card Off", False, False
+   MsgBox "Please install(or keep) SAM in SAM3 slot. Then click OK button to continue", VBOKOnly, "Test Step"
+   DL.SendSequence "Enhanced Pass-Through, Deactivate Contact, SAM3, Poll for Card Off"
+   result = DL.WaitForSequence("Enhanced Pass-Through Success", 1, 11000)
+   End If
+  DL.Pause 500 
+
+  
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Activate Contact, SAM4, Poll for Card On", False, False
+   DL.SendSequence "Enhanced Pass-Through, Activate Contact, SAM4, Poll for Card On"
+   result = DL.WaitForSequence("Enhanced Pass-Through Failed", 1, 800)
+   End If
+  DL.Pause 500
+  
+  
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf + vbCrLf + "Enhanced Pass-Through, Deactivate Contact, SAM4, Poll for Card Off", False, False
+   DL.SendSequence "Enhanced Pass-Through, Deactivate Contact, SAM4, Poll for Card Off"
+   result = DL.WaitForSequence("Enhanced Pass-Through Failed", 1, 800)
+   MsgBox "Please remove all cards and SAM from the device. Then click OK button to continue", VBOKOnly, "Test Step"
+   End If
+  DL.Pause 500  
+  
+
+DL.ResetReceiveCounter
+DL.AddComment vbCrLf + vbCrLf + "Try to Stop Pass-Through Mode", False, False
+DL.SendSequence "Stop Pass-Through Mode"
+DL.Pause 500  
+
+'--------------------------------------------------------------
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict DL.ResetReceiveCounter
+'------------------------------------------------------------
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+
+'========================================
+'= Debugger
+'========================================
+Function Debugger(itemNameString, itemName)
+	If DebuggerOption = 0 Then
+	ElseIf DebuggerOption = 1 Then
+		If itemName = "" Then
+			DL.AddComment "Debugger: " & itemNameString
+		Else
+			DL.AddComment "Debugger: " & itemNameString & " = " & itemName
+		End If
+	End If
+End Function
+
+'========================================
+'= Verdict Function
+'========================================
+Function verdict(result)
+	If result = 1 Then
+		verdict = "PASS"
+		Debugger "TEST VERDICT IS", verdict
+		If Global_Verdict = "FAIL" Then
+			Global_Verdict = "FAIL"
+   			MasterResult = 0
+		ElseIf Global_Verdict = "INCONCLUSIVE" Then
+			Global_Verdict = "PASS"
+  			MasterResult = 1
+			'DL.AddComment "Debug - IN HERE 111!!!"
+			'DL.Pause 3000
+		ElseIf Global_Verdict = "PASS" Then
+			Global_Verdict = "PASS"
+  			MasterResult = 1
+			'DL.AddComment "Debug - IN HERE 222!!!"
+			'DL.Pause 3000
+		End If
+		'DL.AddComment vbCrLf & "Global V = " & Global_Verdict
+		Debugger "Global_Verdict", Global_Verdict
+	ElseIf result = 0 Then
+		verdict = "FAIL"
+		Debugger "TEST VERDICT IS", verdict
+		Global_Verdict = "FAIL"
+ 		MasterResult = 0
+		'DL.AddComment vbCrLf & "Global V = " & Global_Verdict
+		Debugger "Global_Verdict", Global_Verdict
+		
+	End If
+End Function
+
+

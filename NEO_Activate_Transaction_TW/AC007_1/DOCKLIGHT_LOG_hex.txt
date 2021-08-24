@@ -1,0 +1,19 @@
+Docklight Log File (HEX) - Started 2020/10/27 10:13:16.616 
+ TEST CASE: AC007_1
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+The case for GR/ NEO1 product only
+ 
+
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2020/10/27 10:13:21.335 
+

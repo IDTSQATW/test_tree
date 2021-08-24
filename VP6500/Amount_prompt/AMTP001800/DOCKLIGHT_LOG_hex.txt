@@ -1,0 +1,17 @@
+Docklight Log File (HEX) - Started 9/8/2010 17:35:00.300 
+ TEST CASE: AMTP001800
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Display amount at 119,0 - $1.00 - Font 2
+
+9/8/2010 17:35:02.141 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 04 00 13 31 31 39 00 30 00 31 00 32 00 33 00 80 00 31 2E 30 30 00 F9 E1 
+9/8/2010 17:35:02.207 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00  Display amount at 119,0 - $1.00 - Font 2 - OK
+
+9/8/2010 17:35:02.207 [RX] - 00 04 00 11 46 C8 81 0D 
+
+Docklight Log File (HEX) - Stopped 9/8/2010 17:35:05.913 
+

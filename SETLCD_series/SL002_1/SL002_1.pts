@@ -1,0 +1,75 @@
+DL_SCRIPTVERSION
+1
+3332
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+'------------------------------------------------------------
+DL.OpenProject "CharacterTest.ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+
+Dim prompt
+Dim confirm
+
+DL.AddComment "<<: Demand Polling"
+'------------------------------------------------------------
+DL.SendSequence "Set Polling on Demand"
+result = DL.WaitForSequence("MESSAGE RESPONSE", 1, 3000)
+
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment Chr(13) & "#1: LED0 ON"
+   DL.SendSequence "LED0 ON"
+   result = DL.WaitForSequence("MESSAGE RESPONSE", 2, 3000)
+End If
+If result <> 0 Then
+   prompt = "Verify LED 0 is ON" &Chr(13) 
+   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment Chr(13) & "#2: LED0 OFF"
+   DL.SendSequence "LED0 OFF"
+   result = DL.WaitForSequence("MESSAGE RESPONSE", 3, 3000)
+End If
+If result <> 0 Then
+   prompt = "Verify LED 0 is OFF" &Chr(13) 
+   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment Chr(13) & "#3: LED0 FLASH"
+   DL.SendSequence "LED0 FLASH"
+   result = DL.WaitForSequence("MESSAGE RESPONSE", 4, 3000)
+End If
+If result <> 0 Then
+   prompt = "Verify LED 0 is FLASHING" &Chr(13) 
+   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+
+DL.AddComment  Chr(13) & "<<: Set it back to default"
+If result <> 0 Then
+   DL.AddComment Chr(13) & "#4: LED0 ON"
+   DL.SendSequence "LED0 ON"
+   result = DL.WaitForSequence("MESSAGE RESPONSE", 2, 3000)
+End If
+
+' CHECK RESULTS:
+'------------------------------------------------------------
+If result = 0 then
+   DL.AddComment Chr(13) & "Test = FAILED"
+Else
+   DL.AddComment Chr(13) & "Test = PASSED"
+End If
+
+
+' SCRIPT FINISH
+'------------------------------------------------------------
+DL.StopLogging

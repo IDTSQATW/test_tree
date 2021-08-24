@@ -1,0 +1,62 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM80
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+GETFirmwareVersionProtocol1
+56 69 56 4F 74 65 63 68 00 43 29 00 00 00 A8 FB
+0
+5
+
+SEND
+1
+GETFirmwareVersionProtocol2
+56 69 56 4F 74 65 63 68 32 00 29 00 00 00 DE A0
+0
+5
+
+RECEIVE
+0
+Status Code = '00' for Protocol 1
+56 69 56 4F 74 65 63 68 00 41 29 00 00 ##
+-1
+1
+COMMENT 
+1
+1
+0
+1
+
+RECEIVE
+1
+Status Code = '00' for Protocol 2
+56 69 56 4F 74 65 63 68 32 00 29 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+1
+

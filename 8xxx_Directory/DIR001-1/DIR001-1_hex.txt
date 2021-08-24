@@ -1,0 +1,40 @@
+Docklight Log File (HEX) - Started 2/10/2016 13:59:08.848 
+ TEST CASE: DIR001-1
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- List present directories and files
+
+2/10/2016 13:59:10.175 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 22 00 04 31 30 00 00 9D 9B 
+2/10/2016 13:59:10.220 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00  
+00  
+00  
+
+2/10/2016 13:59:10.226 [RX] - 22 03  --- Delete File - applefile.x in ROOT/apple
+
+2/10/2016 13:59:13.266 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 1F 00 12 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 C0 48 
+2/10/2016 13:59:13.330 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 05  
+00 04 00 00 00 02 53 95  --- Delete Directory - apple
+
+2/10/2016 13:59:13.348 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 26 00 06 61 70 70 6C 65 00 55 53 
+2/10/2016 13:59:13.400 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 05  
+00 04 00 00 00 02 53 95  --- Delete File - testfile.x in ROOT
+
+2/10/2016 13:59:13.421 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 1F 00 0B 74 65 73 74 66 69 6C 65 2E 78 00 75 CC 
+2/10/2016 13:59:13.479 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 05  
+00 04 00 00 00 02 53 95  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2/10/2016 13:59:14.749 
+

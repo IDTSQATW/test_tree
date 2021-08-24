@@ -1,0 +1,33 @@
+Docklight Log File (HEX) - Started 2018/9/3 10:22:27.681 
+ TEST CASE: CR055
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- 04-0A
+
+2018/9/3 10:22:28.823 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 0A 00 00 D7 69 
+2018/9/3 10:22:31.250 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  
+
+ --- 60-16 length error
+
+2018/9/3 10:22:38.265 [TX] - 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 00 01 F1 FB 
+2018/9/3 10:22:38.270 [RX] - 56 69 56 4F 74 65 63 68 32 00 60 04 00 00 E1 F5  
+
+ --- 60-16 data error
+
+2018/9/3 10:22:38.284 [TX] - 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 00 F1 DD  
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 2018/9/3 10:22:41.385 
+

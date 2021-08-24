@@ -1,0 +1,25 @@
+Docklight Log File (HEX) - Started 9/2/2008 11:53:50.35 
+ --- Pass-Through - STOP
+
+9/2/2008 11:53:50.37 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38 
+9/2/2008 11:53:50.43 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 0C 00 00 69 FA  --- Pass-Through - START
+
+9/2/2008 11:54:01.90 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+9/2/2008 11:54:01.94 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START or STOP (SUCCESS)
+ --- Enable RF Antenna
+
+9/2/2008 11:54:03.45 [TX] - 56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 94 1F 
+9/2/2008 11:54:03.46 [RX] - 56 69 56 4F 74 65 63 68 32 00 28 00 00 00 D6 6A  Antenna Control - Enable or Disable RF Antenna (SUCCESS)
+ --- Disable RF Antenna
+
+9/2/2008 11:54:03.49 [TX] - 56 69 56 4F 74 65 63 68 32 00 28 01 00 01 00 84 3E 
+9/2/2008 11:54:03.49 [RX] - 56 69 56 4F 74 65 63 68 32 00 28 00 00 00 D6 6A  Antenna Control - Enable or Disable RF Antenna (SUCCESS)
+ --- Poll for Token (10 seconds and 20ms)
+
+9/2/2008 11:54:09.88 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51 
+9/2/2008 11:54:11.34 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 05 03 4A D0 51 40 EC CB  Poll for Token (10 seconds and 20ms) (OK)
+ Result = FAILED
+
+
+Docklight Log File (HEX) - Stopped 9/2/2008 11:54:15.08 
+

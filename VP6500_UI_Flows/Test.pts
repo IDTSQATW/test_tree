@@ -1,0 +1,145 @@
+DL_SCRIPTVERSION
+1
+50056
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+'------------------------------------------------------------
+
+'------------------------------------------------------------
+'Configure prompting
+'------------------------------------------------------------
+FileInput.OpenFile "C:\vivotech\regress\regression\regress_test\test_tree\Regress.Config"
+Dim Prompting(1)
+
+Do Until FileInput.EndOfFile
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()	 
+  Prompting(1) = result
+Loop
+
+'------------------------------------------------------------
+'Definitions and Initializations
+'------------------------------------------------------------
+DL.OpenProject "UI_Flow7.ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+
+result = 1
+
+Dim Row(1)
+Dim Button(2)
+Dim ButtonExpect(1)
+
+Row(0) = 4
+
+Button(0) = 1
+Button(1) = 2
+
+ButtonExpect(0) = "DONE"
+ButtonExpect(1) = "CREDIT"
+
+ReadButtonTO = 20
+ReadButtonEnable = 1
+
+
+'------------------------------------------------------------
+' Display amount at 239,159 - $1.00
+'------------------------------------------------------------
+DL.SendSequence "WELCOME - Text"
+'MyMsgBox = MsgBox("Please swipe/tap your card.", VBOKOnly, "UI_Flow_Test")
+DL.Pause 1000
+'DL.SendSequence "Please Enter Phone - Text"
+'DL.Pause 1500
+'DL.SendSequence "Amount - Text"
+'DL.Pause 300
+'DL.SendSequence "Amount of C1500.99"
+'DL.Pause 300
+
+'DL.SendSequence "Yes Button"
+'DL.Pause 300
+'DL.SendSequence "No Button"
+
+'DL.SendSequence "Debit Button"
+'DL.Pause 300
+'DL.SendSequence "Credit Button"
+
+'DL.Pause 300
+'DL.SendSequence "Read Credit Button"
+'DL.Pause 300
+'result = DL.WaitForSequence("Credit Button Pressed", 1, 20000)
+'MyMsgBox = MsgBox("I am here.", VBOKOnly, "UI_Flow_Test")
+'DL.Pause 1000
+'DL.SendSequence "Signature Required - Text"
+'DL.Pause 400
+'DL.Pause 400
+'DL.SendSequence "Tap Card - Text"
+'DL.Pause 1500
+DL.SendSequence "Activate Transaction"
+DL.Pause 10000
+result = DL.WaitForSequence("Credit Button Pressed", 1, 20000)
+'MyMsgBox = MsgBox("result = " & result, VBOKOnly, "UI_Flow_Test")
+'DL.SendSequence "Cancel Button"
+'DL.Pause 1500
+'DL.SendSequence "Read Cancel Button"
+
+'result = DL.WaitForSequence("Cancel Button Pressed", 1, 20000)
+'DL.Pause 500
+
+DL.SendSequence "Pin Entry"
+DL.Pause 10000
+DL.SendSequence "Cancel Command"
+DL.Pause 500
+DL.SendSequence "Cancel button"
+DL.Pause 250
+DL.SendSequence "Read Cancel Button"
+result = DL.WaitForSequence("Cancel Button Pressed", 1, 10000)
+
+DL.SendSequence "Credit - Text"
+DL.Pause 250
+DL.SendSequence "Yes Button"
+DL.Pause 300
+DL.SendSequence "No Button"
+DL.Pause 250
+DL.SendSequence "Read Yes Button"
+result = DL.WaitForSequence("Yes Button Pressed", 1, 10000)
+
+
+'DL.Pause 10000
+  DL.SendSequence "Signature Capture"
+  result = DL.WaitForSequence("Signature Response", 1, 20000)
+
+
+
+'If result <> 0 Then
+'DL.Pause 2000
+'  DL.SendSequence " Activate Transaction"
+'  result = DL.WaitForSequence("activate transaction response", 1, 10000)
+'End If
+
+DL.SendSequence "Processing... - Text"
+DL.Pause 1500
+DL.SendSequence "Approved - Text"
+DL.Pause 500
+DL.SendSequence "THANK YOU - Text"
+
+'------------------------------------------------------------
+'Steps to execute
+'------------------------------------------------------------
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+

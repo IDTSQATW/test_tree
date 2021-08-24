@@ -1,0 +1,36 @@
+Docklight Log File (HEX) - Started 2017/12/11 14:42:06.212 
+ TEST CASE: CDTP005
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Enable Pass Through
+
+2017/12/11 14:42:07.497 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+2017/12/11 14:42:07.524 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START and STOP (OK)
+ Enter OK and then tap a type 4 card (e.g. Mifare Ultralight C).
+ 
+
+--- Poll for Token (10 Seconds)
+
+2017/12/11 14:42:08.709 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51 
+2017/12/11 14:42:09.339 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 08 04 04 87 14 9A 67 34 84 25 55  
+
+--- Pass-Through - STOP
+
+2017/12/11 14:42:09.365 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38 
+2017/12/11 14:42:09.391 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START and STOP (OK)
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2017/12/11 14:42:10.525 
+

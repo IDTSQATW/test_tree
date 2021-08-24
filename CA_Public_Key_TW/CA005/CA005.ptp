@@ -1,0 +1,67 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM90
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+get all groups
+56 69 56 4F 74 65 63 68 32 00 03 07 00 00 AB 7A
+0
+5
+
+RECEIVE
+0
+Response Get All Groups
+56 69 56 4F 74 65 63 68 32 00 03 00
+-1
+1
+COMMENT << STATUS CODE
+0
+1
+0
+0
+
+RECEIVE
+1
+group
+FF E4 01 ??
+-1
+1
+COMMENT Group
+0
+1
+0
+0
+
+RECEIVE
+2
+group (NEO2)
+DF EE 2D 01 ??
+-1
+1
+COMMENT Group
+0
+1
+0
+0
+

@@ -1,0 +1,345 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+vivotech ui
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F8 01 00 88 02
+0
+5
+
+SEND
+1
+USA Tech F6 (Disable attraction LEDs)
+F6 F6 F6
+0
+5
+
+SEND
+2
+USA Tech F7 (Enable attraction LEDs)
+F7 F7 F7
+0
+5
+
+SEND
+3
+USA Tech F9 (Clear display)
+F9 F9 F9
+0
+5
+
+SEND
+4
+USA Tech FA (Disable yellow LED)
+FA FA FA
+0
+5
+
+SEND
+5
+USA Tech FB (Enable flashing yellow LED)
+FB FB FB
+0
+5
+
+SEND
+6
+USA Tech FE (Sound buzzer once)
+FE FE FE FE FE FE
+0
+5
+
+SEND
+7
+USA Tech 80 - A
+80 41 F8
+0
+5
+
+SEND
+8
+USA Tech C0 - A
+C0 41 F8
+0
+5
+
+SEND
+9
+USA Tech 80 - Line 1
+80 20 20 4C 69 6E 65 20 31 F8
+0
+5
+
+SEND
+10
+USA Tech C0 - Line 2
+C0 20 20 4C 69 6E 65 20 32 F8
+0
+5
+
+SEND
+11
+USA Tech 80 Display text line 1
+80 61 62 63 64 66 67 68 69 6A 6B 6C 6D 6E 6F 70 71 F8
+0
+5
+
+SEND
+12
+USA Tech C0 Display text line 1
+C0 61 62 63 64 66 67 68 69 6A 6B 6C 6D 6E 6F 70 71 F8
+0
+5
+
+SEND
+13
+Clear display (Vivotech)
+56 69 56 4F 74 65 63 68 32 00 83 0D 00 00 52 60
+0
+5
+
+SEND
+14
+Disable V2 autopoll (Vivotech)
+56 69 56 4F 74 65 63 68 32 00 01 06 00 00 F3 A0
+0
+5
+
+SEND
+15
+Display text line 1 (Vivotech)
+56 69 56 4F 74 65 63 68 32 00 83 03 00 1E 30 00 30 31 35 00 31 00 31 32 00 31 00 61 62 63 64 66 67 68 69 6A 6B 6C 6D 6E 6F 70 71 00 99 ED
+0
+5
+
+SEND
+16
+Display 'Eat Death, Scum!' in center (Vivotech)
+56 69 56 4F 74 65 63 68 32 00 83 03 00 1B 30 00 30 00 31 00 33 00 35 00 45 61 74 20 64 65 61 74 68 2C 20 53 63 75 6D 21 00 A8 22
+0
+5
+
+SEND
+17
+Display text line 2 (Vivotech)
+56 69 56 4F 74 65 63 68 32 00 83 03 00 1E 30 00 30 33 35 00 31 00 31 32 00 30 00 61 62 63 64 66 67 68 69 6A 6B 6C 6D 6E 6F 70 71 00 4A 19
+0
+5
+
+SEND
+18
+USA Tech data flow (wlecome to ePort Same as Chash)
+F9 F9 F9 F9 F9 FA FA FA FA FA F7 F7 F7 F7 F7 80 57 65 6C 63 6F 6D 65 20 54 6F 20 65 50 6F 72 74 F8 0D C0 20 20 53 61 6D 65 20 61 73 20 43 61 73 68 20 20 F8 0D
+0
+5
+
+SEND
+19
+USA Tech data flow (Swipe or Tap Card to begin)
+F9 F9 F9 F9 F9 FA FA FA FA FA F7 F7 F7 F7 F7 80 20 20 53 77 69 70 65 20 4F 72 20 54 61 70 20 20 F8 0D C0 20 43 61 72 64 20 54 6F 20 42 65 67 69 6E 20 20 F8 0D
+0
+5
+
+SEND
+20
+USA Tech data flow (sPort Ver)
+F9 F9 F9 F9 F9 F6 F6 F6 F6 F6 FA FA FA FA FA F7 F7 F7 F7 F7 80 65 50 72 74 53 4E 3A 20 47 38 34 30 30 30 30 34 F8 0D C0 55 53 41 2D 47 78 31 76 36 2E 30 2E 36 43 54 36 F8 0D
+0
+5
+
+SEND
+21
+USA Tech data flow (sPort Linking to Cell)
+F9 F9 F9 F9 F9 FE FE FE FE 80 55 53 41 54 65 63 68 20 47 38 20 65 50 6F 72 74 F8 0D C0 4C 69 6E 6B 69 6E 67 20 74 6F 20 43 65 6C 6C 20 F8 0D
+0
+5
+
+SEND
+22
+USA Tech data flow (updating system)
+FA FA FA FA FA F6 F6 F6 F6 F6 FE FE FE FE FE FE FE FE F9 F9 F9 F9 F9 F9 F9 F9 F9 F9 80 4F 6E 65 20 4D 6F 6D 65 6E 74 2E 2E 2E 20 20 20 F8 0D C0 55 70 64 61 74 69 6E 67 20 53 79 73 74 65 6D 20 F8 0D 0E 0D CF
+0
+5
+
+SEND
+23
+USA Tech data flow (Link w/ host)
+F9 F9 F9 F9 F9 80 20 4C 69 6E 6B 20 57 69 74 68 20 48 6F 73 74 20 F8 0D C0 20 50 6C 65 61 73 65 20 57 61 69 74 2E 2E 2E 20 F8 0D
+0
+5
+
+SEND
+24
+USA Tech data flow (Exchanging Data)
+F9 F9 F9 F9 F9 80 4F 6E 65 20 4D 6F 6D 65 6E 74 2E 2E 2E 20 20 20 F8 0D C0 45 78 63 68 61 6E 67 69 6E 67 20 44 61 74 61 20 F8 0D 0E 0D CF 0C
+0
+5
+
+SEND
+25
+USA Tech data flow (Sending Batch)
+F9 F9 F9 F9 F9 80 4F 6E 65 20 4D 6F 6D 65 6E 74 2E 2E 2E 20 20 20 F8 0D C0 53 65 6E 64 69 6E 67 20 42 61 74 63 68 20 20 20 F8 0D
+0
+5
+
+SEND
+26
+USA Tech data flow (Geting updates)
+F9 F9 F9 F9 F9 80 4F 6E 65 20 4D 6F 6D 65 6E 74 2E 2E 2E 20 20 20 F8 0D C0 47 65 74 74 69 6E 67 20 55 70 64 61 74 65 73 20 F8 0D
+0
+5
+
+SEND
+27
+USA Tech data flow (Update Complete)
+F9 F9 F9 F9 F9 80 20 53 79 73 74 65 6D 20 55 70 64 61 74 65 20 20 F8 0D C0 20 20 20 43 6F 6D 70 6C 65 74 65 2E 2E 2E 20 20 F8 0D
+0
+5
+
+SEND
+28
+get FW ver
+56 69 56 4F 74 65 63 68 00 43 29 00 00 00 A8 FB
+0
+5
+
+SEND
+29
+Ping
+56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD
+0
+5
+
+SEND
+30
+display msg (02-01) Index 00
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 01 01 FF 01 B3 CD
+0
+5
+
+SEND
+31
+cursor flash at 8E
+0E 0D 8E
+0
+5
+
+SEND
+32
+cursor on at CF
+0E CF
+0
+5
+
+SEND
+33
+cursor off
+0C
+0
+5
+
+SEND
+34
+USA Tech (Welcome To ePort)
+80 57 65 6C 63 6F 6D 65 20 54 6F 20 65 50 6F 72 74 F8
+0
+5
+
+SEND
+35
+USA Tech (Please tap card)
+80 50 6C 65 61 73 65 20 74 61 70 20 63 61 72 64 20 F8
+0
+5
+
+SEND
+36
+USA Tech (Pls swipe card..)
+80 20 50 6C 73 20 73 77 69 70 65 20 63 61 72 64 20 F8
+0
+5
+
+SEND
+37
+USA Tech multi-action stream (FE+F9+80)
+FE FE FE F9 F9 F9 80 57 65 6C 63 6F 6D 65 20 54 6F 20 65 50 6F 72 74 F8
+0
+5
+
+SEND
+38
+USA Tech Req Module (37 32 04) 
+37 32 04
+0
+5
+
+SEND
+39
+USA Tech Req Serial No. (37 30 04) 
+37 30 04
+0
+5
+
+RECEIVE
+0
+Ping resp
+56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+USAT MSR resp
+40 1B 41 02 43 41 52 44 2D ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 03 ?? 0D
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+USAT CL resp
+40 1B 41 02 52 46 49 44 2D ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 03 ?? 0D
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
+ui ok resp
+56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

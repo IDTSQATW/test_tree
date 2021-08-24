@@ -1,0 +1,644 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM4
+COM2
+115200
+2
+35
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+------- Transaction test commands ---------
+
+0
+5
+
+SEND
+1
+Act Trans Normal (enable trans log)
+56 69 56 4F 74 65 63 68 32 00 02 01 00 24 0F 9F 02 06 00 00 00 00 01 00 9C 01 00 9A 03 09 02 11 9F 21 03 10 20 30 5F 57 01 00 DF 22 01 00 DF 11 01 01 8A 70
+0
+5
+
+SEND
+2
+Act Trans Force online  (enable trans log)
+56 69 56 4F 74 65 63 68 32 00 02 01 00 24 0F 9F 02 06 00 00 00 00 01 00 9C 01 00 9A 03 09 02 11 9F 21 03 10 20 30 5F 57 01 00 DF 22 01 01 DF 11 01 01 DB DA
+0
+5
+
+SEND
+3
+Continued Trans for online Authn (Approved)
+56 69 56 4F 74 65 63 68 32 00 02 06 00 05 00 8A 02 30 30 85 A8
+0
+5
+
+SEND
+4
+Continued Trans for online Authn (declined)
+56 69 56 4F 74 65 63 68 32 00 02 06 00 05 00 8A 02 30 35 20 F8
+0
+5
+
+SEND
+5
+Continued Trans for online verification (successful online pin request)
+56 69 56 4F 74 65 63 68 32 00 02 07 00 09 00 27 71 1C 16 CB 25 7F 8E 0C 84
+0
+5
+
+SEND
+6
+Continued Trans for online verification (pin request cancelled)
+56 69 56 4F 74 65 63 68 32 00 02 07 00 01 01 9C FD
+0
+5
+
+SEND
+7
+Cancel transaction (05-01)
+56 69 56 4F 74 65 63 68 32 00 05 01 00 00 92 EF
+0
+5
+
+SEND
+8
+----------------------Transaction Log ------------------------
+
+0
+5
+
+SEND
+9
+Get EMV Transaction Log Status (84-00)
+56 69 56 4F 74 65 63 68 32 00 84 00 00 00 2E 73
+0
+5
+
+SEND
+10
+Delete All Entries from EMV Transaction Log (84-01)
+56 69 56 4F 74 65 63 68 32 00 84 01 00 00 1E 44
+0
+5
+
+SEND
+11
+Get EMV Transaction Log (84-02)
+56 69 56 4F 74 65 63 68 32 00 84 02 00 02 40 80 01 2E
+0
+5
+
+SEND
+12
+---------------------Revocation Log -------------------------
+
+0
+5
+
+SEND
+13
+Add Entry to EMV Revocation List (84-04) - TEST
+56 69 56 4F 74 65 63 68 32 00 84 04 00 09 A0 00 00 99 99 E1 01 43 94 0E 05
+0
+5
+
+SEND
+14
+Add Entry to EMV Revocation List (84-04) - VISA
+56 69 56 4F 74 65 63 68 32 00 84 04 00 09 A0 00 00 00 03 50 01 44 55 F3 34
+0
+5
+
+SEND
+15
+Add Entry to EMV Revocation List (84-04) - MC
+56 69 56 4F 74 65 63 68 32 00 84 04 00 09 A0 00 00 00 04 FE 09 23 55 17 20
+0
+5
+
+SEND
+16
+Get EMV Revocation Log Status (84-03)
+56 69 56 4F 74 65 63 68 32 00 84 03 00 00 7E 2A
+0
+5
+
+SEND
+17
+Delete Entry from EMV Revocation List (84-05) TEST
+56 69 56 4F 74 65 63 68 32 00 84 05 00 06 A0 00 00 99 99 E1 75 D2
+0
+5
+
+SEND
+18
+Delete Entry from EMV Revocation List (84-05) VISA
+56 69 56 4F 74 65 63 68 32 00 84 05 00 06 A0 00 00 00 03 50 07 74
+0
+5
+
+SEND
+19
+Delete Entry from EMV Revocation List (84-05) MC
+56 69 56 4F 74 65 63 68 32 00 84 05 00 06 A0 00 00 00 04 FE B4 B9
+0
+5
+
+SEND
+20
+Delete All Entries from EMV Revocation List (84-06)
+56 69 56 4F 74 65 63 68 32 00 84 06 00 00 8E C1
+0
+5
+
+SEND
+21
+Get EMV Revocation List (84-07)
+56 69 56 4F 74 65 63 68 32 00 84 07 00 04 40 80 00 00 EA 81
+0
+5
+
+SEND
+22
+-----------------------Exception List-------------------------
+
+0
+5
+
+SEND
+23
+Get EMV Exception Log Status (84-08)
+56 69 56 4F 74 65 63 68 32 00 84 08 00 00 8F DA
+0
+5
+
+SEND
+24
+Add Entry to EMV Exception List (84-09) - EMV Contact V2CA0160100v4.1b
+56 69 56 4F 74 65 63 68 32 00 84 09 00 0C 08 47 61 73 90 01 01 00 10 FF FF 01 82 D1
+0
+5
+
+SEND
+25
+Add Entry to EMV Exception List (84-09) - HSIEN VISA
+56 69 56 4F 74 65 63 68 32 00 84 09 00 0C 08 40 05 57 80 00 03 86 63 FF FF 01 67 1D
+0
+5
+
+SEND
+26
+Add Entry to EMV Exception List (84-09) - CUBIC VISA
+56 69 56 4F 74 65 63 68 32 00 84 09 00 0C 08 41 76 66 22 20 00 01 91 FF FF 01 39 2A
+0
+5
+
+SEND
+27
+Delete Entry from EMV Exception List (84-0A) - EMV Contact V2CA0160100v4.1b
+56 69 56 4F 74 65 63 68 32 00 84 0A 00 0C 08 47 61 73 90 01 01 00 10 FF FF 01 A7 32
+0
+5
+
+SEND
+28
+Delete Entry from EMV Exception List (84-0A) - HSIEN VISA
+56 69 56 4F 74 65 63 68 32 00 84 0A 00 0C 08 40 05 57 80 00 03 86 63 FF FF 01 42 FE
+0
+5
+
+SEND
+29
+Delete Entry from EMV Exception List (84-0A) - CUBIC VISA
+56 69 56 4F 74 65 63 68 32 00 84 0A 00 0C 08 41 76 66 22 20 00 01 91 FF FF 01 1C C9
+0
+5
+
+SEND
+30
+Delete All Entries from EMV Exception List (84-0B)
+56 69 56 4F 74 65 63 68 32 00 84 0B 00 00 DF 83
+0
+5
+
+SEND
+31
+Get EMV Exception List (84-0C)
+56 69 56 4F 74 65 63 68 32 00 84 0C 00 04 40 80 00 00 C5 CA
+0
+5
+
+SEND
+32
+
+56 69 56 4F 74 65 63 68 32 00 84 09 00 0C 08 47 61 73 90 01 01 00 10 FF FF 00 00 00
+0
+5
+
+RECEIVE
+0
+------ R and E List common response massages ------
+
+-1
+1
+COMMENT PASS !!!
+0
+1
+0
+0
+
+RECEIVE
+1
+Add or Del Entry of EMV R or E List resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 00 73 2E
+-1
+1
+COMMENT PASS !!!
+0
+1
+0
+0
+
+RECEIVE
+2
+Get R or E log status with no record resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 0C 00 00 00 00 00 00 00 00 00 00 00 0C B7 54
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
+Get R or E log status with 1 record resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 0C 00 00 00 00 00 00 00 01 00 00 00 0C 1D 05
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+4
+Get R or E log status with 2 record resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 0C 00 00 00 00 00 00 00 02 00 00 00 0C F3 D7
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+5
+Get R or E log status with 3 records resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 0C 00 00 00 00 00 00 00 03 00 00 00 0C 59 86
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+6
+Get R or E list with no record resp
+56 69 56 4F 74 65 63 68 32 00 84 0A 00 04 00 08 00 03 A7 E4
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+7
+------  R list response messages -------
+
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+8
+Get R list with record TESTand VISA and MC resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 30 00 00 00 03 00 00 00 03 00 00 00 0C A0 00 00 99 99 00 00 00 E1 01 43 94 A0 00 00 00 03 00 00 00 50 01 44 55 A0 00 00 00 04 00 00 00 FE 09 23 55 52 16
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+9
+Get R list with record TEST and VISA resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 24 00 00 00 02 00 00 00 02 00 00 00 0C A0 00 00 99 99 00 00 00 E1 01 43 94 A0 00 00 00 03 00 00 00 50 01 44 55 88 B9
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+10
+Get R list with record TEST resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 18 00 00 00 01 00 00 00 01 00 00 00 0C A0 00 00 99 99 00 00 00 E1 01 43 94 4E F5
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+11
+Get R list with record TEST and MC resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 24 00 00 00 02 00 00 00 02 00 00 00 0C A0 00 00 99 99 00 00 00 E1 01 43 94 A0 00 00 00 04 00 00 00 FE 09 23 55 3C 91
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+12
+Get R list with record VISA resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 18 00 00 00 01 00 00 00 01 00 00 00 0C A0 00 00 00 03 00 00 00 50 01 44 55 E6 B3
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+13
+Get R list with record VISA and MC resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 24 00 00 00 02 00 00 00 02 00 00 00 0C A0 00 00 00 03 00 00 00 50 01 44 55 A0 00 00 00 04 00 00 00 FE 09 23 55 56 19
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+14
+Get R list with record MC resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 18 00 00 00 01 00 00 00 01 00 00 00 0C A0 00 00 00 04 00 00 00 FE 09 23 55 52 9B
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+15
+----- E list with responses messages ------
+
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+16
+Get E list with record EMV Contact V2CA0160100v4.1b resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 18 00 00 00 01 00 00 00 00 00 00 00 0C 08 47 61 73 90 01 01 00 10 FF FF 01 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+17
+Get E list with record EMV Contact V2CA0160100v4.1b and HSIEN VISA resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 24 00 00 00 02 00 00 00 00 00 00 00 0C 08 47 61 73 90 01 01 00 10 FF FF 01 08 40 05 57 80 00 03 86 63 FF FF 01 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+18
+Get E list with record EMV Contact V2CA0160100v4.1b and HSIEN VISA and CUBIC VISA resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 30 00 00 00 03 00 00 00 00 00 00 00 0C 08 47 61 73 90 01 01 00 10 FF FF 01 08 40 05 57 80 00 03 86 63 FF FF 01 08 41 76 66 22 20 00 01 91 FF FF 01 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+19
+Get E list with record EMV Contact V2CA0160100v4.1b and CUBIC VISA resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 24 00 00 00 02 00 00 00 00 00 00 00 0C 08 47 61 73 90 01 01 00 10 FF FF 01 08 41 76 66 22 20 00 01 91 FF FF 01 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+20
+Get E list with record EMV Contact HSIEN VISA resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 18 00 00 00 01 00 00 00 00 00 00 00 0C 08 40 05 57 80 00 03 86 63 FF FF 01 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+21
+Get E list with record EMV Contact HSIEN VISA and CUBIC VISA resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 24 00 00 00 02 00 00 00 00 00 00 00 0C 08 40 05 57 80 00 03 86 63 FF FF 01 08 41 76 66 22 20 00 01 91 FF FF 01 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+22
+Get E list with record EMV Contact CUBIC VISA resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 18 00 00 00 01 00 00 00 00 00 00 00 0C 08 41 76 66 22 20 00 01 91 FF FF 01 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+23
+------- Transaction Log response messages -------
+
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+24
+Trans resp with request online authn
+56 69 56 4F 74 65 63 68 32 00 02 30 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+25
+Continued Trans resp with status code 00h (approved)
+56 69 56 4F 74 65 63 68 32 00 02 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+26
+Continued Trans resp with status code 36h (declined)
+56 69 56 4F 74 65 63 68 32 00 02 36 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+27
+Get trans log status with 1 record resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 0C 00 00 00 00 00 00 00 01 00 00 01 58 34 45
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+28
+Get trans log status with 2 records resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 0C 00 00 00 00 00 00 00 02 00 00 01 58 DA 97
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+29
+Get trans log status with 3 records resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 0C 00 00 00 00 00 00 00 03 00 00 01 58 70 C6
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+30
+Get trans log list with 1 record resp
+56 69 56 4F 74 65 63 68 32 00 84 00 01 64 00 00 00 01 00 00 00 00 00 00 01 58 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+31
+Get trans log list with 2 records resp
+56 69 56 4F 74 65 63 68 32 00 84 00 02 BC 00 00 00 02 00 00 00 00 00 00 01 58 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+32
+Get trans log list with 3 records resp
+56 69 56 4F 74 65 63 68 32 00 84 00 04 14 00 00 00 03 00 00 00 00 00 00 01 58 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

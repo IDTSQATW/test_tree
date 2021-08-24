@@ -1,0 +1,20 @@
+Stop Pass-through
+CMD:2C 01 00
+EXR:2C 01 
+
+Start Pass-through
+CMD:2C 01 01
+EXR:56 69 56 4F 70 61 79 56 33 00 2C 01 00 00 00
+
+enhanced poll for card, timeout 10s
+CMD:2C 11 00 0A 01 00 04 00 00 00 00 00 00
+MSG:Not present card, wait for timeout...
+EXR:56 69 56 4F 70 61 79 56 33 00 2C 11 08 00 04 00 00 00 0A
+TIMEOUT:11000
+
+
+enhanced poll for card, timeout 16s
+CMD:2C 11 00 10 01 00 04 00 00 00 00 00 00
+MSG:Not present card, wait for timeout...
+EXR:56 69 56 4F 70 61 79 56 33 00 2C 11 08 00 04 00 00 00 0A
+TIMEOUT:17000

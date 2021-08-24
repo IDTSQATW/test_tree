@@ -1,0 +1,669 @@
+DL_SCRIPTVERSION
+1
+12124
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "EMA0206" ' !!!!! EDIT THIS !!!!!
+'Objective: swipe card test in burst mode
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+      
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON " Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+
+Err0BCounter = 0
+RxStatus = 0
+'============================================================
+
+sub precondition()
+    if result <> 0 then  
+    dl.resetreceivecounter
+    dL.AddComment  vbCrLf
+    dl.addcomment "Erase All Keys..."
+    dl.sendsequence "Erase All Key (83-00)"
+    result = dl.waitforsequence("Erase all key successfully", 1, 2000)
+    dl.pause 200
+    end if
+     if result <> 0 then
+       dl.resetreceivecounter
+       dl.addcomment vbcrlf
+       dl.addcomment "Set DUKPT Key Encryption Type..."
+       dl.sendsequence "1-use AES to encrypt (C7-32)"
+       result = dl.waitforsequence("Set encryption type successfully", 1, 2000)
+       dl.pause 200
+     end if 
+       if result <> 0 then
+          dl.resetreceivecounter
+          dl.addcomment vbcrlf
+          dl.addcomment "Get DUKPT Key Encryption Type..."
+          dl.sendsequence "Get account DUKPT encryption type (C7-33)"
+          result = dl.waitforsequence("Check encryption - AES", 1, 2000)
+          dl.pause 200
+       end if
+ 
+    dl.addcomment vbcrlf
+    dl.addcomment "Loading DUKPT key..."
+       dl.resetreceivecounter
+       dl.sendsequence "Load Plaintext Key - command 1 (80-00)"
+       result = dl.waitforsequence("Load Plaintext Key successfully", 1, 2000)
+       dl.pause 200
+       if result <> 0 then
+          dl.resetreceivecounter
+          dl.sendsequence "Load Plaintext Key - command 2  (80-00)"
+          result = dl.waitforsequence("Load Plaintext Key successfully", 1, 2000)
+          dl.pause 200
+       end if 
+          if result <> 0 then
+             dl.resetreceivecounter
+             dl.sendsequence "Load Encrypted KPK (80-01)"
+             result = dl.waitforsequence("Load Plaintext Key successfully", 1, 2000)
+             dl.pause 200
+          end if
+             if result <> 0 then
+                dl.resetreceivecounter
+                dl.sendsequence "Enter DUKPT Key (81-00)"
+                result = dl.waitforsequence("Load DUKPT Key successfully", 1, 2000)
+                dl.pause 200   
+             end if 
+                if result <> 0 then
+                   dl.resetreceivecounter
+                   dl.sendsequence "Dis-able Data Encryption (C7-36)"
+                   result = dl.waitforsequence("Data Encryption enable", 1, 2000)
+                   dl.pause 200
+                end if
+end sub
+
+
+sub POM()
+    If result <> 0 Then
+    dl.resetreceivecounter
+    DL.AddComment vbCrLf & vbCrLf & "Poll on Demand"
+    DL.SendSequence "Poll on Demand (01-01)"
+    result = DL.WaitForSequence("Poll mode response", 1, 10000)
+    End If
+end sub
+
+
+sub AUTOPOL()
+    If result <> 0 Then
+    dl.resetreceivecounter 
+    DL.AddComment vbCrLf & vbCrLf & "Auto Poll"
+    DL.SendSequence "Auto Poll (01-01)"
+    result = DL.WaitForSequence("Poll mode response", 1, 10000)
+    End If
+end sub
+
+
+sub BURSTON()
+    If result <> 0 Then
+    dl.resetreceivecounter 
+    DL.AddComment vbCrLf & vbCrLf & "Auto Poll"
+    DL.SendSequence "Auto Poll (01-01)"
+    result = DL.WaitForSequence("Poll mode response", 1, 10000)
+    End If
+    If result <> 0 Then
+    dl.resetreceivecounter 
+    DL.AddComment vbCrLf & vbCrLf & "Burst On"
+    DL.SendSequence "Burst On (04-00)"
+    result = DL.WaitForSequence("Burst mode response", 1, 10000)
+    End If
+end sub
+
+
+'=============================
+'TEST BEGINS
+'=============================
+ If result <> 0 Then
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "Set MSR Secure Parameters (C7-38)- 06"
+  DL.SendSequence "Set MSR Secure Parameters (C7-38)- 06"
+  result = DL.WaitForSequence("Set MSR Secure Parameters", 1, 10000)
+ End If
+'----------------------------------------------------------
+ If result <> 0 Then
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "Get MSR Secure Parameters (C7-39)"
+  DL.SendSequence "Get MSR Secure Parameters (C7-39)"
+  result = DL.WaitForSequence("Get MSR Secure Parameters", 1, 10000)
+ End If
+
+'----------------------------------------------------------
+ DL.ClearCommWindows
+ precondition()
+'----------------------------------------------------------
+ If result <> 0 Then
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "Burst mode Off"
+  DL.SendSequence "Burst Off (04-00)"
+  result = DL.WaitForSequence("Burst mode response", 1, 10000)
+ End If
+
+'----------------------------------------------------------
+'Poll on Demand + Burst mode Off
+ POM()
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- IDT"
+  DL.SendSequence "Activate Transaction (02-01) - 9F02"
+  RxStatus = DL.WaitForSequence("Activate transaction response - IDT", 1, 10000)
+  If RxStatus = 0 then
+    DL.AddComment "IDT Std MSR card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If 
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Discover"
+  DL.SendSequence "Activate Transaction (02-01) - 9F02"
+  RxStatus = DL.WaitForSequence("Activate transaction response - Discover", 1, 10000)
+  If RxStatus = 0 then
+    DL.AddComment "Discover card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If 
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- JIS1"
+  DL.SendSequence "Activate Transaction (02-01) - 9F02"
+  RxStatus = DL.WaitForSequence("Activate transaction response - JIS I ", 1, 10000)
+  If RxStatus = 0 then
+    DL.AddComment "JIS I card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If 
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- JIS2"
+  DL.SendSequence "Activate Transaction (02-01) - 9F02"
+  RxStatus = DL.WaitForSequence("Activate transaction response - JIS II", 1, 10000)
+  If RxStatus = 0 then
+    DL.AddComment "JIS II card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If 
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- AAMVA"
+  DL.SendSequence "Activate Transaction (02-01) - 9F02"
+  RxStatus = DL.WaitForSequence("Activate transaction response - AAMVA", 1, 10000)
+  If RxStatus = 0 then
+    DL.AddComment "JIS II card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Gift card"
+  DL.SendSequence "Activate Transaction (02-01) - 9F02"
+  RxStatus = DL.WaitForSequence("Activate transaction response - Gift card", 1, 10000)
+  If RxStatus = 0 then
+    DL.AddComment "Gift card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=11)"
+  DL.SendSequence "Activate Transaction (02-01) - 9F02"
+  RxStatus = DL.WaitForSequence("Activate transaction response - Real card (PAN=11)", 1, 10000)
+  If RxStatus = 0 then
+    DL.AddComment "Real card (PAN=11) does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=12)"
+  DL.SendSequence "Activate Transaction (02-01) - 9F02"
+  RxStatus = DL.WaitForSequence("Activate transaction response - Real card (PAN=12)", 1, 10000)
+  If RxStatus = 0 then
+    DL.AddComment "Real card (PAN=12) does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=20)"
+  DL.SendSequence "Activate Transaction (02-01) - 9F02"
+  RxStatus = DL.WaitForSequence("Activate transaction response - Real card (PAN=20)", 1, 10000)
+  If RxStatus = 0 then
+    DL.AddComment "Real card (PAN=20) does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- ISO4909"
+  DL.SendSequence "Activate Transaction (02-01) - 9F02"
+  RxStatus = DL.WaitForSequence("Activate transaction response - ISO4909", 1, 10000)
+  If RxStatus = 0 then
+    DL.AddComment "ISO4909 card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'-------------------------------------------------------
+'Auto poll + Burst mode OFF
+ AUTOPOL()
+'-------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "---  IDT"
+  DL.Pause 5000
+  DL.SendSequence "03-00------Get Transaction Result"
+  RxStatus = DL.WaitForSequence("get transaction result response - IDT", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "IDT card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Discover"
+  DL.Pause 5000
+  DL.SendSequence "03-00------Get Transaction Result"
+  RxStatus = DL.WaitForSequence("get transaction result response - Discover", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "Discover card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- JIS1"
+  DL.Pause 5000
+  DL.SendSequence "03-00------Get Transaction Result"
+  RxStatus = DL.WaitForSequence("get transaction result response - JIS I", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "JIS I card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- JIS2"
+  DL.Pause 5000
+  DL.SendSequence "03-00------Get Transaction Result"
+  RxStatus = DL.WaitForSequence("get transaction result response - JIS II", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "JIS II card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- AAMVA"
+  DL.Pause 5000
+  DL.SendSequence "03-00------Get Transaction Result"
+  RxStatus = DL.WaitForSequence("get transaction result response - AAMVA", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "AAMVA card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Gift card"
+  DL.Pause 5000
+  DL.SendSequence "03-00------Get Transaction Result"
+  RxStatus = DL.WaitForSequence("get transaction result response - Gift card", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "Gift card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=11)"
+  DL.Pause 5000
+  DL.SendSequence "03-00------Get Transaction Result"
+  RxStatus = DL.WaitForSequence("get transaction result response - Real card (PAN=11)", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "Real card (PAN=11) does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=12)"
+  DL.Pause 5000
+  DL.SendSequence "03-00------Get Transaction Result"
+  RxStatus = DL.WaitForSequence("get transaction result response - Real card (PAN=12)", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "Real card (PAN=12) does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=20)"
+  DL.Pause 5000
+  DL.SendSequence "03-00------Get Transaction Result"
+  RxStatus = DL.WaitForSequence("get transaction result response - Real card (PAN=20)", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "Real card (PAN=20) does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- ISO4909"
+  DL.Pause 5000
+  DL.SendSequence "03-00------Get Transaction Result"
+  RxStatus = DL.WaitForSequence("get transaction result response - ISO4909", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "ISO4909 card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+
+'-------------------------------------------------------
+'Auto poll + Burst mode ON
+ BURSTON()
+'-------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "---  IDT"
+  DL.Pause 100
+  DL.AddComment vbCrLf & "---  Please swipe card"
+  DL.Pause 3000
+  RxStatus = DL.WaitForSequence("Burst mode response - IDT", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "IDT card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Discover"
+  DL.Pause 100
+  DL.AddComment vbCrLf & "---  Please swipe card"
+  DL.Pause 3000
+  RxStatus = DL.WaitForSequence("Burst mode response - Discover", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "Discover card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- JIS1"
+  DL.Pause 100
+  DL.AddComment vbCrLf & "---  Please swipe card"
+  DL.Pause 3000
+  RxStatus = DL.WaitForSequence("Burst mode response - JIS I", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "JIS I card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- JIS2"
+  DL.Pause 100
+  DL.AddComment vbCrLf & "---  Please swipe card"
+  DL.Pause 3000
+  RxStatus = DL.WaitForSequence("Burst mode response - JIS II", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "JIS II card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- AAMVA"
+  DL.Pause 100
+  DL.AddComment vbCrLf & "---  Please swipe card"
+  DL.Pause 3000
+  RxStatus = DL.WaitForSequence("Burst mode response - AAMVA", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "AAMVA card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Gift card"
+  DL.Pause 100
+  DL.AddComment vbCrLf & "---  Please swipe card"
+  DL.Pause 3000
+  RxStatus = DL.WaitForSequence("Burst mode response - Gift card", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "Gift card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=11)"
+  DL.Pause 100
+  DL.AddComment vbCrLf & "---  Please swipe card"
+  DL.Pause 3000
+  RxStatus = DL.WaitForSequence("Burst mode response - Real card (PAN=11)", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "Real card (PAN=11) does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=12)"
+  DL.Pause 100
+  DL.AddComment vbCrLf & "---  Please swipe card"
+  DL.Pause 3000
+  RxStatus = DL.WaitForSequence("Burst mode response - Real card (PAN=12)", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "Real card (PAN=12) does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=20)"
+  DL.Pause 100
+  DL.AddComment vbCrLf & "---  Please swipe card"
+  DL.Pause 3000
+  RxStatus = DL.WaitForSequence("Burst mode response - Real card (PAN=20)", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "Real card (PAN=20) does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+'----------------------------------------------------------
+ DL.ClearCommWindows
+  dl.resetreceivecounter
+  DL.AddComment vbCrLf & vbCrLf & "--- ISO4909"
+  DL.Pause 100
+  DL.AddComment vbCrLf & "---  Please swipe card"
+  DL.Pause 3000
+  RxStatus = DL.WaitForSequence("Burst mode response - ISO4909", 1, 3000)
+  If RxStatus = 0 then
+    DL.AddComment "ISO4909 card does not return expected data"
+    Err0BCounter = Err0BCounter + 1
+  End If
+
+'**********************************
+
+If Err0BCounter <> 0 Then
+  DL.AddComment vbCRLf & vbCRLf & Err0BCounter & " command(s) found, which did not return proper card data as expected. Please check the log file for details." 
+  result = 0
+End If
+
+
+'------------------------------------------------------------
+
+dl.addcomment vbcrlf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If 0 Then
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 

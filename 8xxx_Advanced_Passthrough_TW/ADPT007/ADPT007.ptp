@@ -1,0 +1,210 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM91
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+emea ui
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F8 01 03 EB 32
+0
+5
+
+SEND
+1
+PassThrough Start
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19
+0
+5
+
+SEND
+2
+Poll for Token with ATS
+56 69 56 4F 74 65 63 68 32 00 2C 0E 00 02 0A 00 CF 3A
+0
+5
+
+SEND
+3
+PassThrough Stop
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38
+0
+5
+
+SEND
+4
+poll on demand
+56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34
+0
+5
+
+SEND
+5
+auto poll
+56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 F6 24
+0
+5
+
+RECEIVE
+0
+Positive Response
+56 69 56 4F 74 65 63 68 32 00 2C 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+Positive Response_Mifare Classic
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 07 03 04 ?? ?? ?? ?? 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+Positive Response_Mifare Ultralight
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 0A 04 07 ?? ?? ?? ?? ?? ?? ?? 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
+Positive Response_Mifare DesFire
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 10 01 07 ?? ?? ?? ?? ?? ?? ?? 06 75 77 81 02 80 02 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+4
+Positive Response_Mifare Plus
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 16 01 07 ?? ?? ?? ?? ?? ?? ?? 0C 75 77 80 02 C1 05 2F 2F 01 BC D6 60 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+5
+Positive Response_Broadcom
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 09 07 06 ?? ?? ?? ?? ?? ?? 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+6
+Positive Response_Felia
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 0B 08 08 ?? ?? ?? ?? ?? ?? ?? ?? 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+7
+Positive Response_VISA qVSDC
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 14 07 04 ?? ?? ?? ?? 0D 78 80 84 02 00 73 C8 40 13 00 90 00 3C ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+8
+Positive Response_MC Mchip
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 14 07 04 ?? ?? ?? ?? 0D 78 80 74 02 00 73 C8 40 13 00 90 00 56 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+9
+Positive Response_MC PayPass 
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 0F 02 04 ?? ?? ?? ?? 08 00 00 00 00 00 71 81 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+10
+poll ok resp
+56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+11
+ui resp ok
+56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

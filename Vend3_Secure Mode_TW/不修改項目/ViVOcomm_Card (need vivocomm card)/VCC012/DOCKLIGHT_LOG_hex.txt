@@ -1,0 +1,14 @@
+Docklight Log File (HEX) - Started 10/6/2011 16:37:46.830 
+ TEST CASE: VCC012
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM7 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+
+10/6/2011 16:37:49.671 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 01 98 3E 
+10/6/2011 16:37:50.183 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 F6 24 
+
+Docklight Log File (HEX) - Stopped 10/6/2011 16:38:07.372 
+

@@ -1,0 +1,25 @@
+Docklight Log File (HEX) - Started  
+ TEST CASE: VCC016
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM7 @ 19200 baud...
+ Set POS COM PORT - COMPLETE
+
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 01 98 3E 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 F6 24 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 01 00 10 E9 9D  
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped  
+

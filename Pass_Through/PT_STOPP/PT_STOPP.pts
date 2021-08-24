@@ -1,0 +1,90 @@
+DL_SCRIPTVERSION
+1
+30175
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+'------------------------------------------------------------
+
+'------------------------------------------------------------
+'Configure prompting
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config"
+Dim Prompting(1)
+
+Do Until FileInput.EndOfFile
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()	 
+ Prompting(1) = result
+Loop
+
+'------------------------------------------------------------
+'Definitions and Initializations
+'------------------------------------------------------------
+DL.OpenProject "PT_STOPP.ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+
+result = 1
+
+'------------------------------------------------------------
+'Load Profile 1 EMV
+'------------------------------------------------------------
+'If result <> 0 Then
+'  DL.AddComment "--- Profile.1"
+'  DL.ResetReceiveCounter "EMV.Response"
+'  DL.SendSequence "Profile.1"
+'  result = DL.WaitForSequence("EMV.Response", 1, '10000)
+'End If
+
+DL.Pause 1500
+
+
+
+'------------------------------------------------------------
+'Pass-Through - START
+'------------------------------------------------------------
+'DL.SendSequence "Pass-Through - START"
+'result = DL.WaitForSequence("Pass-Through - START and STOP (OK)", 1, 10000)
+'DL.Pause 2000
+
+'------------------------------------------------------------
+'Pass-Through - STOP
+'------------------------------------------------------------
+DL.SendSequence "Pass-Through - STOP"
+result = DL.WaitForSequence("Pass-Through - START and STOP (OK)", 1, 10000)
+DL.Pause 2000
+
+'------------------------------------------------------------
+'Prompting user with test case number
+'------------------------------------------------------------
+If Prompting(0) = "ON" Then
+  MyInput = MsgBox("You will now run test PT_STOP." &Chr(13) & "Objective: STOP pass-through mode.", VBOKOnly, "Test: PT_STOP")
+End If
+
+'------------------------------------------------------------
+'Result verdict
+'------------------------------------------------------------
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  ElseIf result = 1 then 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If

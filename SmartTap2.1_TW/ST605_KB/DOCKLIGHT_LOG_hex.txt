@@ -1,0 +1,27 @@
+Docklight Log File (HEX) - Started 2021/5/5 16:52:20.869 
+ TEST CASE: ST605
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+
+ --- 01-01 - Auto Poll
+
+2021/5/5 16:52:22.152 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 F6 24 
+2021/5/5 16:52:22.210 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  --- D1-30 - USB-KB mode
+
+2021/5/5 16:52:22.805 [TX] - 56 69 56 4F 74 65 63 68 32 00 D1 30 00 01 01 68 59 
+2021/5/5 16:52:22.864 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 D1 00 00 00 BA 50  
+
+*** Please switch to FAT tool and run file 'ST605_KB.txt' ***
+ 
+
+ ---------- END OF TEST ----------
+
+
+
+Docklight Log File (HEX) - Stopped 2021/5/5 16:52:23.674 
+

@@ -1,0 +1,50 @@
+Docklight Log File (HEX) - Started 2019/4/19 11:58:19.333 
+ TEST CASE: MF001200
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ ----- PT_Start commands -----
+
+2019/4/19 11:58:21.250 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+2019/4/19 11:58:21.278 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  PT command (OK)
+ Result = PASSED
+
+2019/4/19 11:58:21.291 [TX] - 56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 94 1F 
+2019/4/19 11:58:21.319 [RX] - 56 69 56 4F 74 65 63 68 32 00 28 00 00 00 D6 6A  Antenna Enable (OK)
+ Result = PASSED
+
+2019/4/19 11:58:21.333 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 00 B1 E4 
+2019/4/19 11:58:21.450 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 05  Poll for Token (OK)
+
+2019/4/19 11:58:21.458 [RX] - 03 F0  Result = PASSED
+ Result = PASSED
+ ----- Authenticate with VALID default Key A - Block 4 -----
+
+2019/4/19 11:58:21.469 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 04 01 FF FF FF FF FF FF 03 76 
+2019/4/19 11:58:21.468 [RX] - 46 34 59 C8 EF 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  PT command (OK)
+ Result = PASSED
+ ----- Authenticate with VALID default Key A - Block 13 -----
+
+2019/4/19 11:58:21.522 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 0D 01 FF FF FF FF FF FF 5A 7F 
+2019/4/19 11:58:21.557 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  PT command (OK)
+ Result = PASSED
+ ----- MiFare Read 1 Block - Start at Block 5 -----
+
+2019/4/19 11:58:21.575 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 05 1B 79 
+2019/4/19 11:58:21.614 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 10 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 72 9B  MiFare Read 1 Block - Start at Block 5 (OK-1)
+ Result = PASSED
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2019/4/19 11:58:24.249 
+

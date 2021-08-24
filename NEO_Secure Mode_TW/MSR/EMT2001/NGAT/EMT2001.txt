@@ -1,0 +1,25 @@
+TID:Get Data Encryption Enable Flag (C7-37)
+CMD:C7 37
+EXR:03
+
+TID:2-use TransArmor TDES to encrypt (C7-32)
+CMD:C7 32 02
+EXR:C7 00
+
+TID:0-use TDES to encrypt (C7-32)
+CMD:C7 32 00
+EXR:C7 00
+
+TID:Burst mode Off
+CMD:04 00 DF EE 7E 01 00
+EXR:04 00 00 00
+
+TID:Poll on Demand
+CMD:01 01 01
+EXR:01 00 00 00
+
+TID:Activate Transaction -- ISO4909 (3T)
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG:Swipe ISO4909 (3T) card...
+EXR:
+TIMEOUT:120000

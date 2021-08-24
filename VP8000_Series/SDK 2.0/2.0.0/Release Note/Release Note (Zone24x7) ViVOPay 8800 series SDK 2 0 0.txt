@@ -1,0 +1,69 @@
+Release Note - ViVOPay 8800 series SDK / Version 2.0.0 / ViVOtech
+=================================================================
+Release Date: 10/09/2009
+
+ Content:
+
+ 1. Download Instructions
+ 2. Required Environment(s)
+ 3. Deployment Instructions
+ 4. New Features on this Release 
+ 5. Features NOT Included on this Release
+ 6. New Bug- Fixes On this Release
+ 7. Known Issues in this Release
+ 8. Product Documents
+ 9. Special Notes
+
+1. Download Instructions:
+   ---------------------------
+			    				
+ 
+    Ftp server: ftp://ftp.zone24x7.us/ViVOtech SDK for ViVOpay 8xxx/2.0.0
+                The credentials are:
+                           Username: vivotech
+                           Password: #vivt8356#
+
+	Applications/Documents related to this release
+	----------------------------------------------						   
+		ftp://ftp.zone24x7.us/ViVOtech SDK for ViVOpay 8xxx/2.0.0/Installer Package
+		ftp://ftp.zone24x7.us/ViVOtech SDK for ViVOpay 8xxx/2.0.0/Release Note
+		ftp://ftp.zone24x7.us/ViVOtech SDK for ViVOpay 8xxx/2.0.0/SDK
+		ftp://ftp.zone24x7.us/ViVOtech SDK for ViVOpay 8xxx/2.0.0/Test Application
+
+
+2. Required Environment(s):
+    -----------------------------
+	Build environment on windows:
+		- Operating  system Microsoft Windows XP (SP2).
+
+3. Binary Deployment Instructions:
+    -----------------------------
+	1. Run the installer.
+	2. Create the project using the <install folder>\ViVOPay 8xxx SDK\include\ file directory in the installation.
+	
+4. Features on this Release:
+    ---------------------------------
+	1.  This release includes all the features mentioned in the ViVOtech ViVOpay 8800 SDK - System Requirements Specification (SRS) Version D0.1 document which was signed off by ViVOtech prior to development.
+	2.	Function naming convention suggested by ViVOTech was incorporated to this release.
+
+5. Features NOT Included on this Release:
+    ---------------------------------------------
+	1.	This release contains a draft version of the "ViVOtech ViVOpay 8800 SDK - Help Guide for the documentation".
+	
+6. New Bug- Fixes On this Release:
+   ------------------------------------
+		N/A
+
+7. Known Issues in this Release:
+    ----------------------------------
+	1.	Please refer the SDK issue.xls for details.
+	
+8. Product Documents:
+    -----------------------
+	- Release Note (Zone24x7) ViVOPay 8800 series SDK 2 0 0.txt (This file)
+
+
+9. Special Notes
+   -------------
+
+

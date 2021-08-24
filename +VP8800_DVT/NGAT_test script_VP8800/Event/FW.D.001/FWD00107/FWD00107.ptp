@@ -1,0 +1,1238 @@
+VERSION
+9
+
+COMMSETTINGS
+0
+COM1
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+---Event Transaction---
+00 00
+0
+5
+CHECKSUM 
+
+SEND
+1
+Enable Synchronous UI Events
+56 69 56 4F 70 61 79 56 33 00 01 08 00 01 01 18 E7
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+2
+Enable Asynchronous UI Events
+56 69 56 4F 70 61 79 56 33 00 01 08 00 01 02 7B D7
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+3
+UI Events(03)
+56 69 56 4F 70 61 79 56 33 00 01 08 00 01 03 00 00
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+4
+UI Events(00)
+56 69 56 4F 70 61 79 56 33 00 01 08 00 01 03 00 00
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+5
+02-11
+56 69 56 4F 70 61 79 56 33 00 02 11 00 0F 00 0A 00 00 00 00 9F 02 06 00 00 00 00 02 00 00 00
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+6
+02-05(Event Mode)
+56 69 56 4F 70 61 79 56 33 00 02 05 00 0F 00 0A 07 00 00 01 9F 02 06 00 00 00 00 02 00 00 00
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+7
+02-05(Event Mode)
+56 69 56 4F 70 61 79 56 33 00 02 05 00 0F 00 0A 07 00 00 01 9F 02 06 00 00 00 00 02 00 00 00
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+8
+02-20(Event Mode)
+56 69 56 4F 70 61 79 56 33 00 02 20 00 0F 00 0A 07 00 00 01 9F 02 06 00 00 00 00 02 00 00 00
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+9
+----Continue Transaction for Online Authorization----
+00 00
+0
+5
+CHECKSUM 
+
+SEND
+10
+02-06(Result 01)
+56 69 56 4F 70 61 79 56 33 00 02 06 00 01 01 90 AB
+0
+5
+CHECKSUM 
+
+SEND
+11
+02-06(Approved)
+56 69 56 4F 70 61 79 56 33 00 02 06 00 05 00 8A 02 30 30 95 C8
+0
+5
+CHECKSUM 
+
+SEND
+12
+02-06(Declined)
+56 69 56 4F 70 61 79 56 33 00 02 06 00 05 00 8A 02 30 35 30 98
+0
+5
+CHECKSUM 
+
+SEND
+13
+Get Input Event(0s)
+56 69 56 4F 70 61 79 56 33 00 83 06 00 01 00 30 33
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+14
+Clear Display
+56 69 56 4F 70 61 79 56 33 00 83 0D 00 00 E5 D3
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+15
+Clear Event Queue
+56 69 56 4F 70 61 79 56 33 00 83 0C 00 00 D5 E4
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+16
+Get Transaction Result
+56 69 56 4F 70 61 79 56 33 00 03 00 00 00 00 00
+0
+5
+CHECKSUM CRC-CCITT L
+
+RECEIVE
+0
+--------Header----------
+56 69 56 4F 70 61 79 56 33 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+1
+Status Success
+56 69 56 4F 70 61 79 56 33 00 02 ## 00 ?? ??
+-1
+1
+COMMENT Success
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+2
+--------Attribute Byte----------
+
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+3
+0A-Attribute(MSR1,AES,No Encrypt)
+56 69 56 4F 70 61 79 56 33 00 02 ## 00 ?? ?? 0A
+-1
+1
+COMMENT MSR1,AES,No Encrypt
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+4
+4A-Attribute(MSR1,AES,EMV Encrypt)
+56 69 56 4F 70 61 79 56 33 00 02 ## 00 ?? ?? 4A
+-1
+1
+COMMENT MSR1,AES,EMV Encrypt
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+5
+8A-Attribute(MSR1,AES,MSR Encrypt)
+56 69 56 4F 70 61 79 56 33 00 02 ## 00 ?? ?? 8A
+-1
+1
+COMMENT MSR1,AES,MSR Encrypt
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+6
+CA-Attribute(MSR1,AES,EMV&MSR Encrypt)
+56 69 56 4F 70 61 79 56 33 00 02 ## 00 ?? ?? CA
+-1
+1
+COMMENT MSR1,AES,EMV&MSR Encrypt
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+7
+08-Attribute(MSR1,TDES,No Encrypt)
+56 69 56 4F 70 61 79 56 33 00 02 ## 00 ?? ?? 08
+-1
+1
+COMMENT MSR1,TDES,No Encrypt
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+8
+48-Attribute(MSR1,TDES,EMV Encrypt)
+56 69 56 4F 70 61 79 56 33 00 02 ## 00 ?? ?? 48
+-1
+1
+COMMENT MSR1,TDES,EMV Encrypt
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+9
+88-Attribute(MSR1,TDES,MSR Encrypt)
+56 69 56 4F 70 61 79 56 33 00 02 ## 00 ?? ?? 88
+-1
+1
+COMMENT MSR1,TDES,MSR Encrypt
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+10
+C8-Attribute(MSR1,TDES,EMV&MSR Encrypt)
+56 69 56 4F 70 61 79 56 33 00 02 ## 00 ?? ?? C8
+-1
+1
+COMMENT MSR1,TDES,EMV&MSR Encrypt
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+11
+--------MSR Data---------
+DF EE 23
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+12
+DFEE23 MSR Data Exists
+DF EE 23
+-1
+1
+COMMENT MSR Data Tag
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+13
+--------POS Entry Mode---------
+9F 39
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+14
+05-POS Entry Mode(MSR)
+9F 39 01 90
+-1
+1
+COMMENT 05-POS Entry Mode(MSR)
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+15
+--------Track Data Source---------
+DF EE 30
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+16
+0C-Track Data Source(MagStripe)
+DF EE 30 01 0C
+-1
+1
+COMMENT Track Data Source(MagStripe)
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+17
+--------Encryption Status----------
+DF EE 26
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+18
+0A-Encryption Status(MSR1,AES,No Ext,No Encrypt)
+DF EE 26 01 0A
+-1
+1
+COMMENT MSR1,AES,No Ext,No Encrypt
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+19
+4A-Encryption Status(MSR1,AES,No Ext,EMV Encrypt)
+DF EE 26 01 4A
+-1
+1
+COMMENT MSR1,AES,No Ext,EMV Encrypt
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+20
+8A-Encryption Status(MSR1,AES,No Ext,MSR Encrypt)
+DF EE 26 01 8A
+-1
+1
+COMMENT MSR1,AES,No Ext,MSR Encrypt
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+21
+CA-Encryption Status(MSR1,AES,No Ext,MSR&EMV Encrypt)
+DF EE 26 01 CA
+-1
+1
+COMMENT MSR1,AES,No Ext,MSR&EMV Encrypted
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+22
+08-Encryption Status(MSR1,TDES,No Ext,No Encrypt)
+DF EE 26 01 08
+-1
+1
+COMMENT MSR1,TDES,No Ext,No Encrypt
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+23
+48-Encryption Status(MSR1,TDES,No Ext,EMV Encrypt)
+DF EE 26 01 48
+-1
+1
+COMMENT MSR1,TDES,No Ext,EMV Encrypt
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+24
+88-Encryption Status(MSR1,TDES,No Ext,MSR Encrypt)
+DF EE 26 01 88
+-1
+1
+COMMENT MSR1,TDES,No Ext,MSR Encrypt
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+25
+C8-Encryption Status(MSR1,TDES,No Ext,MSR&EMV Encrypt)
+DF EE 26 01 C8
+-1
+1
+COMMENT MSR1,TDES,No Ext,MSR&EMV Encrypted
+1
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+26
+-----Contact Dataset Tags-----
+00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+27
+Group Number
+DF EE 2D
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+28
+POS Entry Mode
+9F 39
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+29
+Application Version Number
+9F 09
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+30
+Transaction Currency Code
+5F 2A
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+31
+Transaction Currency Exponent
+5F 36
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+32
+Terminal Country Code
+9F 1A
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+33
+Terminal Floor Limit
+9F 1B
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+34
+Interface Device IFD Serial Number
+9F 1E
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+35
+Terminal Capabilities
+9F 33
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+36
+Terminal Type
+9F 35
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+37
+Additional Terminal Capabilities
+9F 40
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+38
+Terminal Language Supported
+DF EE 10
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+39
+Terminal Action Code Default
+DF EE 13
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+40
+Terminal Action Code Online
+DF EE 04
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+41
+Threshold Value for Biased Random Selection
+DF EE 05
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+42
+Target Percent for Random Selection
+DF EE 06
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+43
+Maximum Target Percent for Random Selection
+DF EE 07
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+44
+Merchant Forced Transaction Online
+DF EE 0D
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+45
+Enable Exception List
+DF EE 3E
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+46
+Default DDOL
+DF EE 0E
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+47
+Default TDOL
+DF EE 3F
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+48
+PIN Trying Limit Exceeded Message
+DF EE 40
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+49
+Last PIN Try Message
+DF EE 41
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+50
+Please Try Again Message
+DF EE 42
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+51
+Call Your Bank Message
+DF EE 43
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+52
+-----Configuration Tags-----
+00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+53
+RF Delay Time (for multi-interfaces)
+DF EF 70
+-1
+1
+COMMENT RF Delay Time (for multi-interfaces)
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+54
+Transaction Date (YYMMDD) + Tag Length
+9A 03
+-1
+1
+COMMENT Transaction Date (YYMMDD) + Tag Length
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+55
+Amount, Authorized (Numeric)
+9F 02
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+56
+Amount, Other (Numeric)
+9F 03
+-1
+1
+COMMENT Amount, Other (Numeric)
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+57
+Transaction Time (HHMMSS)
+9F 21
+-1
+1
+COMMENT Transaction Time (HHMMSS)
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+58
+Transaction Category Code
+9F 53
+-1
+1
+COMMENT Transaction Category Code
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+59
+Expresspay Terminal Transaction Capabilities
+9F 6E
+-1
+1
+COMMENT Expresspay Terminal Transaction Capabilities
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+60
+Reserved
+DF EE 45
+-1
+1
+COMMENT Reserved
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+61
+Reserved
+DF EE 46
+-1
+1
+COMMENT Reserved
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+62
+Amex ExpressPay 3.0
+DF EE 51
+-1
+1
+COMMENT Amex ExpressPay 3.0
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+63
+Reader Primary Language
+DF EE 57
+-1
+1
+COMMENT Reader Primary Language
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+64
+Reader Secondary Language
+DF EE 58
+-1
+1
+COMMENT Reader Secondary Language
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+65
+Require Heartbeat frame to stay in Idle mode
+DF EF 2A
+-1
+1
+COMMENT Require Heartbeat frame to stay in Idle mode
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+66
+Unsupported cards display option
+DF EF 2B
+-1
+1
+COMMENT Unsupported cards display option
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+67
+Enable/Disable Stop Command Processing
+DF EE 68
+-1
+1
+COMMENT Enable/Disable Stop Command Processing
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+68
+Communication Error Delay Time
+DF EE 75
+-1
+1
+COMMENT Communication Error Delay Time
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+69
+Card Disable Mask
+DF EE 79
+-1
+1
+COMMENT Card Disable Mask
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+70
+Polling Options
+DF EE 4E
+-1
+1
+COMMENT Polling Options
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+71
+Terminal IFD Serial Number
+DF EE 6B
+-1
+1
+COMMENT Terminal IFD Serial Number
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+72
+Application Capability
+DF EE 44
+-1
+1
+COMMENT Application Capability
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+73
+LCD Font Size
+DF EE 1C
+-1
+1
+COMMENT LCD Font Size
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+74
+LCD Delay Time
+DF EF 29
+-1
+1
+COMMENT LCD Delay Time
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+75
+Configuration for Masking Sensitive Data
+DF EE 1D
+-1
+1
+COMMENT Configuration for Masking Sensitive Data
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+76
+Communications Watchdog Period
+DF EF 35
+-1
+1
+COMMENT Communications Watchdog Period
+0
+1
+0
+0
+CHECKSUM 
+0
+

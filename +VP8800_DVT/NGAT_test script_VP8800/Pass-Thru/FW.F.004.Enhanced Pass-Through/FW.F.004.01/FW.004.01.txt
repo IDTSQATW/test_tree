@@ -1,0 +1,24 @@
+测试不同Poll Timeout.
+
+设置包括:
+Poll Time out: [variable]
+
+Poll for Contact: On
+Poll for Contactless: On
+
+Deactivate contact: Off
+Update LEDs: Off
+Poll for Card: [variable]
+RF Antenna: On
+
+Contact Interface to Use: ICC(20h)
+
+Beep: Single Beep(01h)
+
+LED3:Off
+LED2:Off
+LED1:Off
+LED0:Off
+
+Display String 1: null
+Display String 2: null

@@ -1,0 +1,359 @@
+DL_SCRIPTVERSION
+1
+62486
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "GTR005" ' !!!!! EDIT THIS !!!!!
+' Modify from GTR001
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  genFlag = result
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+result = 1
+countf = 0
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   DL.AddComment "--- Auto Poll"
+   DL.SendSequence " Auto Poll"
+   result = DL.WaitForSequence("Poll Response", 1, 10000)
+   dl.pause 500
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Burst Mode Off *** " & readerType 
+   if readerType <> "NEO2" then DL.SendSequence " Burst Mode Off"
+   if readerType = "NEO2" then DL.SendSequence " Burst Mode Off (NEO2)"
+   result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+   dl.pause 500
+End If
+'============================================================
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set FFFC=02 *** " & readerType
+   if readerType <> "NEO2" then DL.SendSequence "Set FFFC_02"
+   if readerType = "NEO2" then DL.SendSequence "Set FFFC_02 (NEO2)"
+   result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt2 = prompt2 & "Tap MChip card --> Click on OK"
+   result = MsgBox(prompt2, VBOKOnly, "Advanced PassThrough")
+End If
+
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Get Transaction Result (03-40)"
+   DL.SendSequence " Get Transaction Result (03-40)"
+   dl.pause 2000
+
+   if readerType <> "NEO2" then result1 = DL.WaitForSequence("03 23_02", 1, 5000)
+   if readerType = "NEO2" then result1 = DL.WaitForSequence("03 23_02 (NEO2)", 1, 5000)
+
+   if readerType <> "NEO2" then result2 = dl.waitforsequence("dfee26_02", 1, 1000)
+   if readerType = "NEO2" then result2 = dl.waitforsequence("dfee26_02 (NEO2)", 1, 1000)
+
+   if readerType <> "NEO2" then 
+      result3 = dl.waitforsequence("dfef4c_02", 1, 1000)
+      result4 = dl.waitforsequence("dfef4d_02", 1, 1000)
+   else
+      result3 = 1
+      result4 = 1
+   end if
+   result5 = dl.waitforsequence("Tag 5A", 1, 1000)
+   result6 = dl.waitforsequence("Tag 57", 1, 1000)
+   result7 = dl.waitforsequence("9f39_02", 1, 1000)
+
+   if readerType <> "NEO2" then result8 = dl.waitforsequence("df30", 1, 1000)
+   if readerType = "NEO2" then result8 = dl.waitforsequence("df30 (NEO2)", 1, 1000)
+
+   result9 = dl.waitforsequence("9f02", 1, 1000)
+
+   if result1 = 0 or result2 = 0 or result3 = 0 or result4 = 0 or result5 = 0 or result6 = 0 or result7 = 0 or result8 = 0 or result9 = 0 then
+      result = 0
+      if result1 = 0 then dl.addcomment vbcrlf & "Card data: FAIL!"
+      if result2 = 0 then dl.addcomment vbcrlf & "Tag DFEE26: FAIL!"
+      if result3 = 0 then dl.addcomment vbcrlf & "Tag DFEF4C: FAIL!"
+      if result4 = 0 then dl.addcomment vbcrlf & "Tag DFEF4D: FAIL!"
+      if result5 = 0 then dl.addcomment vbcrlf & "Tag 5A: FAIL!"
+      if result6 = 0 then dl.addcomment vbcrlf & "Tag 57: FAIL!"
+      if result7 = 0 then dl.addcomment vbcrlf & "Tag 9F39: FAIL!"
+      if result8 = 0 then dl.addcomment vbcrlf & "Tag DF30: FAIL!"
+      if result9 = 0 then dl.addcomment vbcrlf & "Tag 9F02: FAIL!"
+   end if
+End If
+'============================================================
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set FFFC(Default) *** " & readerType
+   if readerType <> "NEO2" then DL.SendSequence "Set FFFC_Default"
+   if readerType = "NEO2" then DL.SendSequence "Set FFFC_Default (NEO2)"
+   result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt2 = "Tap MChip card --> Click on OK"
+   result = MsgBox(prompt2, VBOKOnly, "Advanced PassThrough")
+End If
+
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Get Transaction Result (03-40)"
+   DL.SendSequence " Get Transaction Result (03-40)"
+   dl.pause 2000
+
+   if readerType <> "NEO2" then result1 = DL.WaitForSequence("03 23", 1, 5000)
+   if readerType = "NEO2" then result1 = DL.WaitForSequence("03 23 (NEO2)", 1, 5000)
+
+   if readerType <> "NEO2" then result2 = dl.waitforsequence("dfee26", 1, 1000)
+   if readerType = "NEO2" then result2 = dl.waitforsequence("dfee26 (NEO2)", 1, 1000)
+
+   if readerType <> "NEO2" then 
+      result3 = dl.waitforsequence("dfef4c", 1, 1000)
+      result4 = dl.waitforsequence("dfef4d", 1, 1000)
+   else
+      result3 = 1
+      result4 = 1
+   end if
+
+   result5 = dl.waitforsequence("Tag 56/ 9F6B", 1, 1000)
+   result6 = dl.waitforsequence("9f39", 1, 1000)
+
+   if readerType <> "NEO2" then result7 = dl.waitforsequence("df30", 1, 1000)
+   if readerType = "NEO2" then result7 = dl.waitforsequence("df30 (NEO2)", 1, 1000)
+
+   result8 = dl.waitforsequence("9f02", 1, 1000)
+
+   if result1 = 0 or result2 = 0 or result3 = 0 or result4 = 0 or result5 = 0 or result6 = 0 or result7 = 0 or result8 = 0 then
+      result = 0
+      if result1 = 0 then dl.addcomment vbcrlf & "Card data: FAIL!"
+      if result2 = 0 then dl.addcomment vbcrlf & "Tag DFEE26: FAIL!"
+      if result3 = 0 then dl.addcomment vbcrlf & "Tag DFEF4C: FAIL!"
+      if result4 = 0 then dl.addcomment vbcrlf & "Tag DFEF4D: FAIL!"
+      if result5 = 0 then dl.addcomment vbcrlf & "Tag 56/ 9F6B: FAIL!"
+      if result6 = 0 then dl.addcomment vbcrlf & "Tag 9F39: FAIL!"
+      if result7 = 0 then dl.addcomment vbcrlf & "Tag DF30: FAIL!"
+      if result8 = 0 then dl.addcomment vbcrlf & "Tag 9F02: FAIL!"
+   result8 = dl.waitforsequence("9f02", 1, 1000)
+   end if
+End If
+'------------------------------------------------------------
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If 0 Then
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub

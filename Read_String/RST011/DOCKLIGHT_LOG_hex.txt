@@ -1,0 +1,9 @@
+Docklight Log File (HEX) - Started  
+ --- Time Out
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 83 07 00 15 0A 31 00 32 00 33 00 34 00 35 00 36 00 37 00 38 00 39 00 30 00 51 CA 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 83 08 00 04 00 00 00 0A 38 97  Result = FAILED
+
+
+Docklight Log File (HEX) - Stopped  
+

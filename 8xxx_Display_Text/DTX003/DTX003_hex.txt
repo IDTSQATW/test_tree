@@ -1,0 +1,30 @@
+Docklight Log File (HEX) - Started 2/20/2015 15:34:37.708 
+ TEST CASE: DTX003
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM9 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Disable Custom Display Mode
+
+2/20/2015 15:34:39.474 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 09 00 00 92 BC 
+2/20/2015 15:34:39.478 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Display CUSTOM MODE OK
+ List Directory OK
+ --- Display Text: Singleshot Patch Mode
+
+2/20/2015 15:34:39.536 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 03 00 1E 00 00 31 00 34 00 35 00 53 69 6E 67 6C 65 73 68 6F 74 20 50 61 74 63 68 20 4D 6F 64 65 00 7D BC 
+2/20/2015 15:34:39.562 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 04 00 14 61 C8 F5 8C  Display Control OK
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2/20/2015 15:34:53.198 
+

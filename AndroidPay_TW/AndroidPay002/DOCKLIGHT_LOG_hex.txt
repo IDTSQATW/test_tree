@@ -1,0 +1,8 @@
+Docklight Log File (HEX) - Started 2021/2/18 17:00:32.573 
+ TEST CASE: AndroidPay002
+
+ --- Set POS COM PORT Settings
+
+
+Docklight Log File (HEX) - Stopped 2021/2/18 17:00:32.683 
+

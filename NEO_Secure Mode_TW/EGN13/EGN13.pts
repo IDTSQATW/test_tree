@@ -1,0 +1,918 @@
+DL_SCRIPTVERSION
+1
+46938
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "EGN13" ' !!!!! EDIT THIS !!!!!
+' Objective: if reader had been enabled data encryption mode, pass-through related cmd should not be encrypted.
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  genFlag = result
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+End Sub
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+result = 1
+countf = 0
+l = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " 'baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+sub precondition()
+    dl.resetreceivecounter
+    dl.addcomment "Erase All Keys..."
+    dl.sendsequence "Erase All Keys"
+    result = dl.waitforsequence("erase key ok", 1, 2000)
+    dl.pause 500
+    if result <> 0 then
+       dl.resetreceivecounter
+       dl.addcomment vbcrlf
+       dl.addcomment "Set DUKPT Key Encryption Type..."
+       dl.sendsequence "0-use TDES to encrypt (C7-32)"
+       result = dl.waitforsequence("set dukpt type", 1, 2000)
+       dl.pause 500
+       if result <> 0 then
+          dl.resetreceivecounter
+          dl.addcomment vbcrlf
+          dl.addcomment "Get DUKPT Key Encryption Type..."
+          dl.sendsequence "Get account DUKPT encryption type (C7-33)"
+          result = dl.waitforsequence("get dukpt type", 1, 2000)
+          dl.pause 500
+          if result <> 0 then
+             dl.addcomment vbcrlf & "OK!"
+          else
+             dl.addcomment vbcrlf & "Get DUKPT Key Encryption Type: FAIL!"
+          end if
+       else
+          dl.addcomment vbcrlf & "Set DUKPT Key Encryption Type: FAIL!"
+       end if
+    else
+       dl.addcomment vbcrlf & "Erase All Keys: FAIL!"
+    end if
+end sub
+
+sub loadkey_D()
+    dl.addcomment vbcrlf
+    dl.addcomment "Loading DUKPT key..."
+       dl.resetreceivecounter
+       dl.sendsequence "Load Plaintext KPK Component (the 1st)"
+       result = dl.waitforsequence("load kpk ok", 1, 2000)
+       dl.pause 500
+       if result <> 0 then
+          dl.resetreceivecounter
+          dl.sendsequence "Load Plaintext KPK Component (the last)"
+          result = dl.waitforsequence("load kpk ok", 1, 2000)
+          dl.pause 500
+          if result <> 0 then
+             dl.resetreceivecounter
+             dl.sendsequence "Load KPK"
+             result = dl.waitforsequence("load kpk ok", 1, 2000)
+             dl.pause 500
+             if result <> 0 then
+                dl.resetreceivecounter
+                dl.sendsequence "Load DUKPT key (key index 5)"
+                result = dl.waitforsequence("dukpt ok", 1, 2000)
+                dl.pause 500
+                if result <> 0 then
+                   dl.addcomment vbcrlf & "OK!"
+                else
+                   dl.addcomment vbcrlf & "Load DUKPT key (key index 5): FAIL!"
+                end if
+             else
+                dl.addcomment vbcrlf & "Load KPK: FAIL!"
+             end if
+          else
+             dl.addcomment vbcrlf & "Load Plaintext KPK Component (the last): FAIL!"
+          end if
+       else
+          dl.addcomment vbcrlf & "Load Plaintext KPK Component (the 1st): FAIL!"
+       end if 
+
+    if result <> 0 then
+       dl.resetreceivecounter
+       dl.addcomment vbcrlf
+       DL.AddComment "--- Data Encryption: Enable"
+       DL.SendSequence "Data Encryption Enable (C7-36)"
+       result = DL.WaitForSequence("enc on", 1, 2000)
+    end if
+end sub
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+if readerType <> "NEO2" then 
+   precondition()
+   if result <> 0 then loadkey_D()
+else
+   readercheck = msgbox ("Does reader has data key & encryption on (03)?", vbyesno)
+end if
+
+DL.ResetReceiveCounter
+dl.addcomment vbcrlf
+DL.AddComment "--- Pass-Through Mode, Stop "
+DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38", "H"
+dl.pause 1000
+'------------------------------------------------------------
+if readerType <> "NEO2" or readercheck = 6 then 
+
+if result <> 0 then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Poll on demand"
+   DL.SendSequence "poll on demand"
+   result = DL.WaitForSequence("poll ok resp", 1, 2000)
+end if
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+'============================================================
+DL.ClearCommWindows 
+DL.OpenProject "ADPT006.ptp"
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " 'baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+DL.StartCommunication
+
+dl.addcomment vbcrlf & "cmd: 2C-40"
+
+if result <> 0 then
+   DL.ResetReceiveCounter
+   DL.AddComment "--- Pass-Through, Start"
+   DL.SendSequence " Pass-Through, Start"
+   result = DL.WaitForSequence("Pass-Through, Start", 1, 10000)
+end if
+'------------------------------------------------------------
+If result <> 0 Then
+   MsgBox "Place tag 2 card on reader before pressing OK", VBOKOnly, "Advanced PassThrough"
+   DL.Pause 200
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Poll tag 2"
+   DL.SendSequence " Poll tag 2 "
+   result = DL.WaitForSequence("Poll tag 2 res", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.Pause 200
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Tag2 Write Data(4 bytes)"
+   DL.SendSequence " Tag2 Write Data(4 bytes)"
+   result = DL.WaitForSequence("Tag2 Write Data(4 bytes) res", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.Pause 200
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Tag2 Read Data(16 bytes)"
+   DL.SendSequence " Tag2 Read Data(16 bytes)"
+   result = DL.WaitForSequence("Tag2 Read Data(16 bytes) res", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.Pause 200
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Tag2 Select sect"
+   DL.SendSequence " Tag2 Select sect"
+   result = DL.WaitForSequence("Tag2 Select sect res", 1, 10000)
+End If
+'------------------------------------------------------------
+DL.Pause 200
+DL.ResetReceiveCounter
+dl.addcomment vbcrlf
+DL.AddComment "--- Pass-Through Mode, Stop "
+DL.SendSequence " Pass-Through Mode, Stop "
+dl.pause 1000
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+'============================================================
+DL.ClearCommWindows 
+DL.OpenProject "PUR001.ptp"
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " 'baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+DL.StartCommunication
+
+dl.addcomment vbcrlf & "cmd: 28-01, 2C-02, 2C-06, 2C-08, 2C-07, 2C-0A"
+
+if result <> 0 then
+   AInitialize_Reader
+   ATest1
+end if
+
+Sub AInitialize_Reader()
+    dl.resetreceivecounter
+    DL.AddComment vbCrLf & "--- Start PT Mode" 
+    DL.SendSequence "Start PT Mode"
+    result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+
+    if result <> 0 then
+       MsgBox "Please place MiFare Sample card 308-001 on reader", VBOKOnly
+       dl.resetreceivecounter
+	 DL.AddComment vbCrLf & "--- Turn On Antenna"
+	 DL.SendSequence "Turn On Antenna"
+	 result = DL.WaitForSequence ("Turn On Antenna (OK)", 1, 5000)
+    end if
+      
+    if result <> 0 then
+       dl.resetreceivecounter
+	 DL.AddComment vbCrLf & "--- Poll for Token" 
+	 DL.SendSequence "Poll for Token"
+	 result = DL.WaitForSequence ("Poll for Token (OK)", 1, 5000)
+    end if
+
+    if result <> 0 then
+       dl.resetreceivecounter	
+	 DL.AddComment vbCrLf & "--- Authenticate Block 10h = 16d" 
+	 DL.SendSequence "Authenticate Block 10h = 16d"
+	 result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+    end if
+
+    if result <> 0 then
+       DL.ResetReceiveCounter
+	 DL.AddComment vbCrLf & "--- Initialize Blocks" 
+	 DL.SendSequence "Initialize Blocks"
+	 result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+    end if
+
+    if result <> 0 then
+       dl.resetreceivecounter
+	 DL.AddComment vbCrLf & "--- Read 3 Initialized Blocks" 
+	 DL.SendSequence "Read 3 Initialized Blocks"
+	 result = DL.WaitForSequence ("Read Initialized Blocks (OK)", 1, 5000)
+    end if
+End Sub
+
+Sub ATest1()
+    if result <> 0 then      
+       dl.resetreceivecounter
+	 DL.AddComment vbCrLf & "--- Decrement Block *Original - minus 1 @ block 16 without BACKUP - Define 1 send 1"
+	 DL.SendSequence "Decrement Block *Original - minus 1 @ block 16 without BACKUP - Define 1 send 1"
+	 result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+    end if
+
+    if result <> 0 then
+       dl.resetreceivecounter
+	 DL.AddComment vbCrLf & "--- Increment Block *Original - plus 1 @ block 16 without BACKUP - Define 1 send 1"
+	 DL.SendSequence "Increment Block *Original - plus 1 @ block 16 without BACKUP - Define 1 send 1"
+	 result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+    end if
+
+    if result <> 0 then
+       dl.resetreceivecounter
+	 DL.AddComment vbCrLf & "--- Read Blocks 3 again"
+	 DL.SendSequence "Read 3 Blocks again"
+	 result = DL.WaitForSequence ("Read Initialized Blocks (OK)", 1, 5000)
+    end if
+
+    if result <> 0 then
+       dl.resetreceivecounter
+       DL.SendSequence "Pass-Through - STOP"
+       result = DL.WaitForSequence("Pass-Through - START and STOP (OK)", 1, 10000)
+    else
+       dl.resetreceivecounter
+       DL.SendSequence "Pass-Through - STOP"
+       resultignore = DL.WaitForSequence("Pass-Through - START and STOP (OK)", 1, 10000)
+    end if
+    dl.pause 1000
+End Sub
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+'============================================================
+DL.ClearCommWindows 
+DL.OpenProject "ADPT003.ptp"
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " 'baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+DL.StartCommunication
+
+dl.addcomment vbcrlf & "cmd: 2C-0B, 2C-13"
+
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- PassThrough Start"
+   DL.SendSequence " PassThrough Start"
+   result = DL.WaitForSequence("Positive Response", 1, 2000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   notify = msgbox("Tap MasterCard and then click OK", vbokonly)
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 2C-0B: ANT ON/ Poll for token/ 1 beep/ LED 0 ON"
+   dl.sendsequence "NCR Pass Through - Antenna On, Poll Token On, 1 Beep, LED 0 On"
+   result = DL.WaitForSequence("2c0b ok resp", 1, 10000)
+End If  
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- GR >> 2C-13: Exchange APDU Data"
+   dl.sendsequence "gr_2c-13"
+   result = DL.WaitForSequence("card ok1 resp", 1, 10000)
+   dl.pause 500
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- PassThrough Stop"
+   DL.SendSequence " PassThrough Stop"
+   result = DL.WaitForSequence("Positive Response", 1, 10000)
+else
+   DL.ResetReceiveCounter
+   DL.SendSequence " PassThrough Stop"
+   resultignore = DL.WaitForSequence("Positive Response", 1, 10000)
+End If
+dl.pause 1000
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+'============================================================
+DL.ClearCommWindows 
+DL.OpenProject "PT05701.ptp"
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " 'baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+DL.StartCommunication
+
+dl.addcomment vbcrlf & "cmd: 2C-09"
+
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   DL.AddComment "--- Pass-Through Mode - (START)"
+   DL.SendSequence "Pass-Through Mode - (START)"
+   result = DL.WaitForSequence("Pass-Through Mode - (START) (OK)", 1, 10000)
+End If
+
+If result <> 0 Then
+   msgbox "Press OK --> tap ViVOtech card", vbokonly
+   DL.ResetReceiveCounter
+   DL.AddComment "--- Poll for Token - Card Read (OK)"
+   DL.SendSequence "Poll For Token"
+   result = DL.WaitForSequence("Poll for Token - Card Read (OK)", 1, 20000)
+End If
+
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   DL.AddComment "--- High Level Halt - Type A RESPONSE"
+   DL.SendSequence "High Level Halt - Type A"
+   result = DL.WaitForSequence("High Level Halt - Type A RESPONSE (OK)", 1, 20000)
+End If
+
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   DL.AddComment "--- Pass-Through Mode - (STOP)"
+   DL.SendSequence "Pass-Through Mode - (STOP)"
+   result = DL.WaitForSequence("Pass-Through Mode - (START) (OK)", 1, 10000)
+End If
+dl.pause 1000
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+'============================================================
+DL.ClearCommWindows 
+DL.OpenProject "Type7_CEPAS1.ptp"
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " 'baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+DL.StartCommunication
+
+dl.addcomment vbcrlf & "cmd: 2C-0C, 2C-03"
+
+If result <> 0 Then
+   msgbox "Tap type 7 card (VISA qVSDC) and then click OK", vbokonly
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- PT START"
+   DL.SendSequence " PT START"
+   result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- E P4T 01"
+   DL.SendSequence " E P4T 01"
+   result = DL.WaitForSequence("poll card", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- PPSE "
+   DL.SendSequence " PPSE "
+   result = DL.WaitForSequence("ppse", 1, 10000)
+   dl.pause 500
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Select "
+   DL.SendSequence " Select "
+   result = DL.WaitForSequence("select", 1, 10000)
+   dl.pause 500
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- GPO "
+   DL.SendSequence " GPO "
+   result = DL.WaitForSequence("gpo", 1, 10000)
+   dl.pause 500
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Read Record "
+   DL.SendSequence " Read Record "
+   result = DL.WaitForSequence("rr", 1, 10000)
+   dl.pause 500
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- ccc"
+   DL.SendSequence " ccc"
+   result = DL.WaitForSequence("ccc", 1, 10000)
+   dl.pause 500
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- PT STOP"
+   DL.SendSequence " PT STOP"
+   result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
+else
+   DL.ResetReceiveCounter
+   DL.SendSequence " PT STOP"
+   resultignore = DL.WaitForSequence("Passthrough Good response", 1, 10000)
+End If
+dl.pause 1000
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+'============================================================
+DL.ClearCommWindows 
+DL.OpenProject "PT00800.ptp"
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " 'baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+DL.StartCommunication
+
+dl.addcomment vbcrlf & "cmd: 28-01, 0B-02, 0A-02"
+
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf & "--- Enable Pass Through"
+   DL.SendSequence "Enable Pass Through"
+   result = DL.WaitForSequence("Pass-Through - START and STOP (OK)", 1, 10000)
+End If
+DL.Pause 300
+
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf & "--- Antenna Enable"
+   DL.SendSequence "Antenna Enable"
+   result = DL.WaitForSequence("Antenna command status (OK)", 1, 10000)
+End If
+DL.Pause 300
+
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf & "--- Antenna Disable"
+   DL.SendSequence "Antenna Disable"
+   result = DL.WaitForSequence("Antenna command status (OK)", 1, 10000)
+End If
+DL.Pause 300
+
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf & "--- Buzzer Control - Long Beep; 200 ms (00h)"
+   DL.SendSequence "Buzzer Control - Long Beep; 200 ms (00h)"
+   result = DL.WaitForSequence("Buzzer command Status (OK)", 1, 10000)
+End If
+DL.Pause 300
+
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf & "--- LED 1 ON"
+   DL.SendSequence "LED 1 ON"
+   result = DL.WaitForSequence("LED 1 command status (OK)", 1, 10000)
+End If
+DL.Pause 300
+
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf & "--- LED 1 OFF"
+   DL.SendSequence "LED 1 OFF"
+   result = DL.WaitForSequence("LED 1 command status (OK)", 1, 10000)
+End If
+DL.Pause 300
+
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf & "--- Disable Pass Through"
+   DL.SendSequence "Pass-Through - STOP"
+   result = DL.WaitForSequence("Pass-Through - START and STOP (OK)", 1, 10000)
+else
+   DL.ResetReceiveCounter
+   DL.SendSequence "Pass-Through - STOP"
+   resultignore = DL.WaitForSequence("Pass-Through - START and STOP (OK)", 1, 10000)
+End If
+dl.pause 1000
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+'============================================================
+DL.ClearCommWindows 
+DL.OpenProject "EP000100.ptp"
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " 'baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+DL.StartCommunication
+
+dl.addcomment vbcrlf & "cmd: 2C-05"
+
+Initialize_Reader
+
+Sub Initialize_Reader()
+	MsgBox "Please place MiFare Sample card 308-001 on reader", VBOKOnly, "Test Step"
+	'DL.SendSequence "Ping Reader"
+	'result = DL.WaitForSequence ("", 1, 5000)
+	
+	DL.AddComment vbCrLf & "--- Start PT Mode" 
+	DL.SendSequence "Start PT Mode"
+	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.AddComment vbCrLf & "--- Turn On Antenna"
+	DL.SendSequence "Turn On Antenna"
+	result = DL.WaitForSequence ("Turn On Antenna (OK)", 1, 5000)
+
+	DL.AddComment vbCrLf & "--- Poll for Token" 
+	DL.SendSequence "Poll for Token"
+	result = DL.WaitForSequence ("Poll for Token (OK)", 1, 5000)
+       DL.ResetReceiveCounter
+
+	DL.AddComment vbCrLf & "--- 2C-06" 
+	DL.SendSequence "2c-06"
+	dl.pause 500
+	
+	DL.AddComment vbCrLf & "--- Get PCD&PICC Parameters" 
+	DL.SendSequence "Get PCD&PICC Parameters"
+	' result = DL.WaitForSequence ("Get PCD&PICC Parameters (OK)", 1, 5000)
+	dl.pause 500
+       DL.ResetReceiveCounter
+
+	DL.AddComment vbCrLf & "--- Initialize Blocks" 
+	DL.SendSequence "Initialize Blocks"
+	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.AddComment vbCrLf & "--- Read 3 Initialized Blocks" 
+	DL.SendSequence "Read 3 Initialized Blocks"
+	result = DL.WaitForSequence ("Read Initialized Blocks (OK)", 1, 5000)
+	DL.ResetReceiveCounter "Read Initialized Blocks (OK)"
+End Sub
+dl.pause 1000
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+'============================================================
+DL.ClearCommWindows 
+DL.OpenProject "PCD001.ptp"
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " 'baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+DL.StartCommunication
+
+dl.addcomment vbcrlf & "cmd: 2C-04"
+
+If result <> 0 Then
+   msgbox "Place MPS001 Card onto reader. When Ready Click OK", vbokonly
+   DL.Pause 400
+   DL.ResetReceiveCounter
+   DL.AddComment "--- Start PT Mode"
+   DL.SendSequence "Start PT Mode"
+   result = DL.WaitForSequence("Start Pass Through Response", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.Pause 400
+   DL.ResetReceiveCounter
+   DL.AddComment "---Turn On Antenna"
+   DL.SendSequence "Turn On Antenna"
+   result = DL.WaitForSequence("Turn On Attenna response", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.Pause 400
+   DL.ResetReceiveCounter
+   DL.AddComment "---Poll For Token"
+   DL.SendSequence "Poll For Token"
+   result = DL.WaitForSequence("Poll For Token MPS001 4 byte UID-mindy", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.Pause 400
+   DL.ResetReceiveCounter
+   DL.AddComment "--- PCD Load Key 0F0F0F0F"
+   DL.SendSequence "PCD Load Key 0F0F0F0F"
+   result = DL.WaitForSequence("Auth Sector Response", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.Pause 400
+   DL.ResetReceiveCounter
+   DL.AddComment "--- PCD Auth Sector 1 - add card snr"
+   DL.SendSequence "PCD Auth Sector 1 - add card snr"
+   result = DL.WaitForSequence("Auth Sector Response", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.Pause 400
+   DL.ResetReceiveCounter
+   DL.AddComment "--- PCD Write Block 4"
+   DL.SendSequence "PCD Write Block 4"
+   result = DL.WaitForSequence("Write Block Response", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.Pause 400
+   DL.ResetReceiveCounter
+   DL.AddComment "--- PCD Write Data - 00's"
+   DL.SendSequence "PCD Write Data - 00's"
+   result = DL.WaitForSequence("Write in Block Response", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.Pause 400
+   DL.ResetReceiveCounter
+   DL.AddComment "--- PCD Read Block 4"
+   DL.SendSequence "PCD Read Block 4"
+   result = DL.WaitForSequence("Read Block 4 Response", 1, 10000)
+End If
+'------------------------------------------------------------
+DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
+DL.Pause 1000
+
+end if
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+'============================================================
+DL.AddComment "---------- END OF TEST ----------"
+dl.addcomment vbcrlf
+dl.addcomment "*** Search 'fail' wording in test log (.txt), check if has failed cases. ***"
+
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+If 0 Then
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub

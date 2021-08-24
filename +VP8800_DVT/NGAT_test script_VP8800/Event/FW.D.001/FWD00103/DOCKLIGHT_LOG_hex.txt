@@ -1,0 +1,53 @@
+Docklight Log File (HEX) - Started 2020/10/19 09:38:40.965 
+ TEST CASE: FWD00103
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ Clear Display
+
+2020/10/19 09:38:42.105 [TX] - 56 69 56 4F 70 61 79 56 33 00 83 0D 00 00 E5 D3 
+2020/10/19 09:38:42.152 [RX] - 56 69 56 4F 70 61 79 56 33 00 83 0D 00 00 00 1E  resultName = Clear Display Success
+1E  Start Custom Display Mode
+
+2020/10/19 09:38:42.161 [TX] - 56 69 56 4F 70 61 79 56 33 00 83 08 00 00 15 38 
+2020/10/19 09:38:42.165 [RX] - 56 69 56 4F 70 61 79 56 33 00 83 08 00 00 00 A2 5B  resultName = Start Custom Display Mode Success
+ 
+
+Create List 1
+
+2020/10/19 09:38:42.673 [TX] - 56 69 56 4F 70 61 79 56 33 00 83 10 00 11 30 00 30 00 32 39 00 35 00 31 00 31 00 00 00 00 1F 77 9C 
+2020/10/19 09:38:42.728 [RX] - 56 69 56 4F 70 61 79 56 33 00 83 10 00 00 04 00 C5 B9 F8 04 CC  resultName = Create List Success
+ Control ID = 00 C5 B9 F8
+ Debugger: ControlID = 00 C5 B9 F8
+ 
+
+Create List 2
+
+2020/10/19 09:38:42.848 [TX] - 56 69 56 4F 70 61 79 56 33 00 83 10 00 13 30 00 31 30 30 00 32 39 00 35 00 31 00 31 00 00 00 00 0F 45 35 
+2020/10/19 09:38:42.915 [RX] - 56 69 56 4F 70 61 79 56 33 00 83 10 00 00 04 00 C5 B9 F8 04 CC  resultName = Create List Success
+ Control ID = 00 C5 B9 F8
+ Debugger: ControlID = 00 C5 B9 F8
+ 
+
+Create List 3
+
+2020/10/19 09:38:43.037 [TX] - 56 69 56 4F 70 61 79 56 33 00 83 10 00 13 30 00 32 30 30 00 32 39 00 35 00 31 00 31 00 00 00 00 17 5A 97 
+2020/10/19 09:38:43.099 [RX] - 56 69 56 4F 70 61 79 56 33 00 83 10 00 00 04 00 C5 B9 F8 04 CC  resultName = Create List Success
+ Control ID = 00 C5 B9 F8
+ Debugger: ControlID = 00 C5 B9 F8
+ 
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 2020/10/19 09:38:49.133 
+

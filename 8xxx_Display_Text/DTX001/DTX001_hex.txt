@@ -1,0 +1,30 @@
+Docklight Log File (HEX) - Started 2/20/2015 15:34:10.156 
+ TEST CASE: DTX001
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM9 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Enable Custom Display Mode
+
+2/20/2015 15:34:11.536 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 08 00 00 A2 8B 
+2/20/2015 15:34:11.540 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Display CUSTOM MODE OK
+ List Directory OK
+ --- Display Text: Hello EARTH!
+
+2/20/2015 15:34:11.584 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 03 00 15 00 00 31 00 34 00 35 00 48 65 6C 6C 6F 20 45 41 52 54 48 21 00 5C 6D 
+2/20/2015 15:34:11.603 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 04 00 14 61 C8 F5 8C  Display Control OK
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2/20/2015 15:34:20.478 
+

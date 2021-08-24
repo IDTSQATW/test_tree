@@ -1,0 +1,12 @@
+Docklight Log File (HEX) - Started  
+ --- Poll On Demand
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  --- LED 0 On
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 00 00 01 36 43 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

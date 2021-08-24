@@ -1,0 +1,572 @@
+DL_SCRIPTVERSION
+1
+31626
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "SL042" ' !!!!! EDIT THIS !!!!!
+
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  genFlag = result
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+   DL.AddComment "--- Chinese "
+   
+   if readerType = "GR" or readerType = "NEO1" then DL.SendSequence " Chinese "
+   if readerType = "NEO2" then DL.SendSequence " Chinese (NEO2)"
+   result = DL.WaitForSequence("Chang Config", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+   dl.resetreceivecounter
+   DL.AddComment "--- ViVOtech UI"
+   
+   if readerType = "GR" or readerType = "NEO1" then DL.SendSequence " ViVOtech UI"
+   if readerType = "NEO2" then DL.SendSequence " ViVOtech UI (NEO2)"
+   result = DL.WaitForSequence("Chang Config", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+   dut = msgbox("Is the reader vivopay 5000?", vbyesno)  
+   if dut = 6 Then
+      dl.resetreceivecounter
+      DL.AddComment "--- ViVOtech Scheme"
+      DL.SendSequence " ViVOtech Scheme"
+      DL.Pause 3000
+      result = DL.WaitForSequence("Poll On Demand Response", 1, 10000)
+   End If
+End If
+'============================================================
+If result <> 0 Then
+   dl.resetreceivecounter
+   DL.AddComment "--- Poll on Demand"
+   DL.SendSequence " Poll on Demand"
+   result = DL.WaitForSequence("Poll On Demand Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 00"
+  DL.SendSequence " Index 00"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt = prompt & "Check Character Table"
+   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 01"
+  DL.SendSequence " Index 01"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt0 = prompt0 & "Check Character Table"
+   confirm = InputBox(prompt0, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 02"
+  DL.SendSequence " Index 02"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt1 = prompt1 & "Check Character Table"
+   confirm = InputBox(prompt1, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 03"
+  DL.SendSequence " Index 03"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt2 = prompt2 & "Check Character Table"
+   confirm = InputBox(prompt2, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 04"
+  DL.SendSequence " Index 04"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt3 = prompt3 & "Check Character Table"
+   confirm = InputBox(prompt3, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 05"
+  DL.SendSequence " Index 05"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt4 = prompt4 & "Check Character Table"
+   confirm = InputBox(prompt4, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 06"
+  DL.SendSequence " Index 06"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt5 = prompt5 & "Check Character Table"
+   confirm = InputBox(prompt5, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 07"
+  DL.SendSequence " Index 07"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt6 = prompt6 & "Check Character Table"
+   confirm = InputBox(prompt6, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 08"
+  DL.SendSequence " Index 08"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt7 = prompt7 & "Check Character Table"
+   confirm = InputBox(prompt7, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 09"
+  DL.SendSequence " Index 09"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt8 = prompt8 & "Check Character Table"
+   confirm = InputBox(prompt8, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 0a"
+  DL.SendSequence " Index 0a"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt9 = prompt9 & "Check Character Table"
+   confirm = InputBox(prompt9, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 0b"
+  DL.SendSequence " Index 0b"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt10 = prompt10 & "Check Character Table"
+   confirm = InputBox(prompt10, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 0c"
+  DL.SendSequence " Index 0c"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt11 = prompt11 & "Check Character Table"
+   confirm = InputBox(prompt11, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 0d"
+  DL.SendSequence " Index 0d"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt12 = prompt12 & "Check Character Table"
+   confirm = InputBox(prompt12, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 0e"
+  DL.SendSequence " Index 0e"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt13 = prompt13 & "Check Character Table"
+   confirm = InputBox(prompt13, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 0f"
+  DL.SendSequence " Index 0f"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt14 = prompt14 & "Check Character Table"
+   confirm = InputBox(prompt14, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 10"
+  DL.SendSequence " Index 10"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt15 = prompt15 & "Check Character Table"
+   confirm = InputBox(prompt15, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 11"
+  DL.SendSequence " Index 11"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt16 = prompt16 & "Check Character Table"
+   confirm = InputBox(prompt16, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 12"
+  DL.SendSequence " Index 12"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt17 = prompt17 & "Check Character Table"
+   confirm = InputBox(prompt17, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 13"
+  DL.SendSequence " Index 13"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt18 = prompt18 & "Check Character Table"
+   confirm = InputBox(prompt18, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 14"
+  DL.SendSequence " Index 14"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt19 = prompt19 & "Check Character Table"
+   confirm = InputBox(prompt19, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+  DL.AddComment "--- Index 15"
+  DL.SendSequence " Index 15"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   prompt20 = prompt20 & "Check Character Table"
+   confirm = InputBox(prompt20, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub

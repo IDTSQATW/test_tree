@@ -1,0 +1,9 @@
+Docklight Log File (HEX) - Started  
+ --- Error Expected
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 83 06 00 01 0A C2 B2 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 00 C9 F3  Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

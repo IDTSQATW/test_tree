@@ -1,0 +1,16 @@
+6 units - 30min 38 sec
+29m 06s
+
+Combo tested - MVLoader v0.93eA and Bootloader v1.0.2
+
+When ONLY Bootloader v1.0.2 is loaded on multiple devices (no FW image), the PC recognizes the devices after a few minutes and still has issue picking up ALL devices for the first time. Powering up all the devices (all together) anytime after the first time "registration" seems to be most consistent for PC to recognize ALL devices.  Therefore, the issue of the devices not being recognized by PC for the is not entirely gone.  Still has issues with first time registration, but is definitely more robust and an improvement from before.  However, it is the first time registration that the manufacturing line will encounter.  Does this bootloader have the 1 sec window? Is the window not large enough, therefore still takes a while for register?
+
+Note the following is when Bootloader v1.0.2 and a FW image already resides on the units:
+
+1) When VLoader detects all units whether some are in bootloader mode or FW image mode, selecting "Continue Boot" button sometimes causes devices in bootloader mode to reboot several times then may eventually go to FW image mode.
+
+2) Lets say you have VLoader launched and have 4 units. 2 are plugged in FW image mode and 2 have not been plugged in yet. You plug in the last two and they go into FW image mode. Those last 2 do not go into bootloader mode.
+
+3) I have 4 devices in FW image mode. I select the "Download Image" button and they all reboot to FW image mode. I cannot successfully get the devices into bootloader mode so the download can begin.
+
+4) You have 4 devices in FW image modem and VLoader launched. You powercycle them all at once and not all the devices go into Bootloader mode. Some just reboot a few times then decide to either stay in FW image mode or bootloader mode. 

@@ -1,0 +1,2785 @@
+DL_SCRIPTVERSION
+1
+21384
+
+'-----------------------------------------------------------------------
+' This is a looping test scritp (template), which grabes .ptp files from 
+' different locations as needed and forms a dedicated looping test by
+' puting your own script statements in a single .pts file.
+' 
+' The following is an example for a command coverage test for VP8800.
+' It has been configured to run a loop test for 8100. 
+' 
+'-----------------------------------------------------------------------
+' This single loop test consists of multiple sub test projects 
+' You may enable or disable any of them by setting the sub project
+' variable runProj to "1" (enable) or "0" (disable) in the accosiated 
+' sub project section (You may use "rearch" to locate to the proper
+' test section quickly)
+'
+' For example: Diasble test for signature capture
+'
+'=================================================
+' run proj get signature (cmd 83-19, 83-1A, 83-1B) 
+'=================================================
+' result = 1
+' runProj = 0 - disable this test 
+' If runProj <> 0 Then
+'  StartProj ("C:\vivotech\regress\regression\regress_test\test_tree\Signature_Capture\SC019\SC019")
+'
+'-----------------------------------------------------------------------
+'Note:
+'This is just a template. It can be modified in any ways that may meet 
+'Your test needs 
+'
+'----------------------------------------------------------------------- 
+'============================================================
+' Global Variable definitions
+'============================================================
+Date_Time = "D" & Year(Now) & "." & Month(Now)  & "." & Day(Now) & "_T" & Hour(Now) & "." & Minute(Now) &  "." & Second(Now)
+Test_ID = "Loop002"
+
+freeMem = 15000
+freeMemCounter = 0
+preFreeMem = 30000
+minFreeMem = 30
+'============================================================
+
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+'FileInput.OpenFile "C:\vivotech\regress\regression\regress_test\test_tree\Regress.Config"
+FileInput.OpenFile "Loop.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+DebuggerOption = 1
+Dim ControlID
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+
+  'Set Test ID
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Test_ID = result
+      
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' - 
+'------------------------------------------------------------
+DL.ClearCommWindows
+DL.AddComment Date_Time
+
+FileOutput.CreateFile Date_Time & "_" & Test_ID & "_Free_Mem_Log.txt", False, False
+FileOutput.WriteLine "List free memory size below on each iteration:"
+
+DL.StartLogging Date_Time & "_" & Test_ID & "_DOCKLIGHT_LOG" ,False, "H"
+'DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+
+result = 1
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 1
+
+Sub PrintMyResult(ResultX)
+
+      If ResultX = 0 Then
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      ElseIf ResultX = 1 Then
+            DL.AddComment "Result = PASSED"
+      End If
+
+End Sub
+
+'==============================================
+' Sub: open project and set port and baudrate 
+'==============================================
+Sub StartProj (ProjectName)
+
+DL.Pause 1000
+DL.StopCommunication
+DL.AddComment vbCrLf & "Communication stopped ..." & vbCrLf
+DL.Pause 1000
+
+DL.OpenProject ProjectName & ".ptp"
+DL.Pause 3000
+DL.AddComment vbCrLf & "TEST CASE: " & ProjectName & vbCrLf
+
+DL.AddComment "--- Set POS COM PORT Settings"
+'DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+DL.AddComment vbCrLf & "Communication started ..." & vbCrLf
+DL.Pause 1000
+
+End Sub
+'==== End of open project and set port and baudrate
+Sub DL_OnSend()
+sendPeek = DL.OnSend_Peek(1)
+'DL.AddComment "sendPeek = " & sendPeek
+
+If sendPeek <> 86 Then
+  DL.AddComment "sendPeek = " & sendPeek
+Else
+    ' For all Send Sequences with minimum 3 bytes length (one byte user data,
+    ' two bytes CRC, perform the following manipulation:
+    ' - Calculate a 16 bit crc value on the characters 1 .. (DL.OnSend_Size() - 2)
+    ' - Write the low byte to character no. DL.OnSend_GetSize()-1
+    ' - Write the high byte to character no. DL.OnSend_GetSize()
+    ' Example:
+    ' Send Sequence name: MyCommand
+    ' Send Sequence in HEX representation: 02 04 00 00 00 01 00 00
+    ' --> Data transmitted by Docklight:   02 04 00 00 00 01 31 F9
+    '     (with "31" as the low byte CRC, "F9" as the high byte)
+
+    ' Check if there is at least one byte of user data
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End If 'end of sendPeek
+
+End Sub
+
+Sub DL_OnReceive()
+resultName = DL.OnReceive_GetName()
+DL.AddComment "resultName = " & resultName
+
+Select Case resultName
+	Case "Display Control OK"
+		resultRcv = DL.OnReceive_GetData("H")	' get the result as string of Hex-values
+		DL.AddComment resultRcv	
+		' one possible solution to get single characters
+		MyArray = Split(resultRcv , " ", -1, 1)
+
+		' ### Prints each byte in array
+		'For i = 0 to UBound(MyArray)
+   		'	DL.AddComment "i = " & i & "Array - " & (MyArray(i))
+		'Next
+		' ### Extracts 4 byte Control ID
+		ControlID = MyArray(14) & " " & MyArray(15) & " " & MyArray(16) & " " & MyArray(17)
+		' ### Prints 4 byte Control ID
+		DL.AddComment "Control ID = " & ControlID
+
+	Case "ENTER Key PRESSED"
+		ENTER_Key_Pressed = 1
+
+	Case "Get Mem Resp"
+		resultRcv = DL.OnReceive_GetData("H")	' get the result as string of Hex-values
+		DL.AddComment vbCrLf & resultRcv & vbCrLf
+		' one possible solution to get single characters
+		MyArray = Split(resultRcv , " ", -1, 1)
+
+            freeMem = Chr("&H" & MyArray(55)) & Chr("&H" & MyArray(56)) & Chr("&H" & MyArray(57)) & Chr("&H" & MyArray(58)) & Chr("&H" & MyArray(59))
+
+		' ### Prints free mem 5 byte freeMem
+		DL.AddComment "Free Memory = " & freeMem
+		' FileOutput.WriteLine "Free Memory = " & freeMem & "   --- " & freeMemCounter
+   		' Use iteration counter instead of freeMemCounter since freeMem info may be missed in certian iterations due to loss of IDG communications 
+		FileOutput.WriteLine "Free Memory = " & freeMem & "   --- " & Count
+		freeMemCounter = freeMemCounter + 1 
+
+End Select
+End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+'------------------------------------------------------------
+loopForever = 1
+runIt = 1
+doNotRun = 0
+Count = 0
+
+Do
+Count = Count + 1
+  DL.AddComment vbCrLf & "----- Iteration #" & count & " -----" & vbCrLf
+
+'=======================================================================
+' run proj buzz LED, get mem, ping, get version  & PING-PONG
+' (01-02 82-04 ,18-01, 09-20)
+'=======================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("sysCommon")
+
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Ping"
+  DL.SendSequence "Ping"
+  result = DL.WaitForSequence("Ping Resp", 1, 10000)
+End If
+
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- One beep with LED All On"
+  DL.SendSequence "One beep with LED All On"
+  result = DL.WaitForSequence("buzzLed Resp", 1, 10000)
+End If
+DL.Pause 2000
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Double beep with All LED Off"
+  DL.SendSequence "Double beep with All LED Off"
+  result = DL.WaitForSequence("buzzLed Resp", 1, 10000)
+End If
+DL.Pause 2000
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Three short beep with LED 1 On"
+  DL.SendSequence "Three short beep with LED 1 On"
+  result = DL.WaitForSequence("buzzLed Resp", 1, 10000)
+End If
+DL.Pause 2000
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Four short beep with LED 3 On"
+  DL.SendSequence "Four short beep with LED 3 On"
+  result = DL.WaitForSequence("buzzLed Resp", 1, 10000)
+End If
+DL.Pause 2000
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get AR Module Versions"
+  DL.SendSequence "Get AR Module Versions"
+  result = DL.WaitForSequence("get module version Resp", 1, 10000)
+End If
+DL.Pause 1000
+
+'============================================================
+'If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get memory"
+  DL.SendSequence "Get memory"
+  result = DL.WaitForSequence("Get Mem Resp", 1, 10000)
+'End If
+
+DL.Pause 2000
+  DL.AddComment "--- PING the reader and Wait for PONG"
+  DL.SendSequence "PING-PONG"
+  result = DL.WaitForSequence("PONG Resp", 1, 5000)
+DL.Pause 1000
+
+DL.Pause 2000
+  DL.AddComment "--- Cancel Transactions (05-01)"
+  DL.SendSequence "Cancel Transactions (05-01)"
+  result = DL.WaitForSequence("Cancel Transaction Resp", 1, 5000)
+DL.Pause 1000
+
+DL.Pause 2000
+  DL.AddComment "--- Check Master Key Present (80-02)"
+  DL.SendSequence "Check Master Key Present (80-02)"
+  result = DL.WaitForSequence("Check Master Key Present Resp", 1, 5000)
+DL.Pause 1000
+
+End If 'end of proj
+
+'=======================================================================
+' run proj set-get params (03-02,03-04,03-05,03-06,03-07)
+' (04-00,04-02,04-03,04-04,04-05,04-09,09-20
+'=======================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("PARAM-01-LP")
+
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- GET ALL AIDS Success"
+  DL.SendSequence "Get all AIDs"
+  result = DL.WaitForSequence("Response Get All Groups", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get all groups"
+  DL.SendSequence "get all groups"
+  result = DL.WaitForSequence("Response Get All Groups", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.Pause 400
+  DL.AddComment "--- AMEX AID"
+  DL.SendSequence "Amex AID"
+  result = DL.WaitForSequence("Response Data", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+DL.Pause 300
+  DL.AddComment "--- Default set Parameters"
+  DL.SendSequence " Default set Parameters"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+DL.Pause 300
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+DL.Pause 300
+  DL.AddComment "--- Get Default Parameters"
+  DL.SendSequence " Get Default Parameters"
+  result = DL.WaitForSequence("Get Parameter Default Response", 1, 10000)
+DL.Pause 300
+End If
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Set Default Param"
+  DL.SendSequence "Set Default Param"
+  result = DL.WaitForSequence("Create AID Response", 1, 10000)
+End If
+DL.Pause 2000
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- AR Get Module Version"
+  DL.SendSequence "AR Get Module Version"
+  result = DL.WaitForSequence("AR Get Module Version Resp", 1, 10000)
+End If
+
+End If 'end of proj
+'=======================================================================
+' run proj set group (04-03)
+'=======================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("CA013-LP")
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Set default param to remove all pre set usr AIDs ..."
+  DL.SendSequence "Set Default Param"
+  result = DL.WaitForSequence("Create Group Response", 1, 10000)
+  DL.Pause 3000
+End If
+
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Create Group 1 Successful"
+  DL.SendSequence "Create Group 1"
+  result = DL.WaitForSequence("Create Group Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Read Group 1 Success"
+  DL.SendSequence "Read Group 1"
+  result = DL.WaitForSequence("Read Group 1 Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Create Group 2 Successful"
+  DL.SendSequence "Create Group 2"
+  result = DL.WaitForSequence("Create Group Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Read Group 2 Success"
+  DL.SendSequence "Read Group 2"
+  result = DL.WaitForSequence("Read Group 2 Response", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Create Group 3 Successful"
+  DL.SendSequence "Create Group 3"
+  result = DL.WaitForSequence("Create Group Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Read Group 3 Success"
+  DL.SendSequence "Read Group 3"
+  result = DL.WaitForSequence("Read Group 3 Response", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Create Group 4 Successful"
+  DL.SendSequence "Create Group 4"
+  result = DL.WaitForSequence("Create Group Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Read Group 4 Success"
+  DL.SendSequence "Read Group 4"
+  result = DL.WaitForSequence("Read Group 4 Response", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Create Group 5 Successful"
+  DL.SendSequence "Create Group 5"
+  result = DL.WaitForSequence("Create Group Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Read Group 5 Success"
+  DL.SendSequence "Read Group 5"
+  result = DL.WaitForSequence("Read Group 5 Response", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Create Group 6 Successful"
+  DL.SendSequence "Create Group 6"
+  result = DL.WaitForSequence("Create Group Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Read Group 6 Success"
+  DL.SendSequence "Read Group 6"
+  result = DL.WaitForSequence("Read Group 6 Response", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Create Group 7 Successful"
+  DL.SendSequence "Create Group 7"
+  result = DL.WaitForSequence("Create Group Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Read Group 7 Success"
+  DL.SendSequence "Read Group 7"
+  result = DL.WaitForSequence("Read Group 7 Response", 1, 10000)
+End If
+'------------------------------------------------------------
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+End If 'end of proj
+'=======================================================================
+' run proj set AIDs (04-02)
+'=======================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("CA016-LP")
+
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Create AID 1 Successful"
+  DL.SendSequence "Create AID 1"
+  result = DL.WaitForSequence("Create AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get AID 1 Successful"
+  DL.SendSequence "Get AID 1"
+  result = DL.WaitForSequence("Get AID 1 Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Create AID 2 Successful"
+  DL.SendSequence "Create AID 2"
+  result = DL.WaitForSequence("Create AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get AID 2 Successful"
+  DL.SendSequence "Get AID 2"
+  result = DL.WaitForSequence("Get AID 2 Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Create AID 3 Successful"
+  DL.SendSequence "Create AID 3"
+  result = DL.WaitForSequence("Create AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get AID 3 Successful"
+  DL.SendSequence "Get AID 3"
+  result = DL.WaitForSequence("Get AID 3 Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Create AID 4 Successful"
+  DL.SendSequence "Create AID 4"
+  result = DL.WaitForSequence("Create AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get AID 4 Successful"
+  DL.SendSequence "Get AID 4"
+  result = DL.WaitForSequence("Get AID 4 Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Create AID 5 Successful"
+  DL.SendSequence "Create AID 5"
+  result = DL.WaitForSequence("Create AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get AID 5 Successful"
+  DL.SendSequence "Get AID 5"
+  result = DL.WaitForSequence("Get AID 5 Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Create AID 6 Successful"
+  DL.SendSequence "Create AID 6"
+  result = DL.WaitForSequence("Create AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get AID 6 Successful"
+  DL.SendSequence "Get AID 6"
+  result = DL.WaitForSequence("Get AID 6 Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Create AID 7 Successful"
+  DL.SendSequence "Create AID 7"
+  result = DL.WaitForSequence("Create AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get AID 7 Successful"
+  DL.SendSequence "Get AID 7"
+  result = DL.WaitForSequence("Get AID 7 Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Create AID 8 Successful"
+  DL.SendSequence "Create AID 8"
+  result = DL.WaitForSequence("Create AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get AID 8 Successful"
+  DL.SendSequence "Get AID 8"
+  result = DL.WaitForSequence("Get AID 8 Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+' number of AIDs exceeded ...
+'
+'If result <> 0 Then
+'  DL.AddComment "--- Create AID 9 Successful"
+'  DL.SendSequence "Create AID 9"
+'  result = DL.WaitForSequence("Create AID Response", 1, 10000)
+'End If
+
+'------------------------------------------------------------
+
+'If result <> 0 Then
+'  DL.Pause 1000
+'  DL.AddComment "--- Get AID 9 Successful"
+'  DL.SendSequence "Get AID 9"
+'  result = DL.WaitForSequence("Get AID 9 Response", 1, 10000)
+'End If
+
+'------------------------------------------------------------
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+
+End If 'end of proj
+
+'=======================================================================
+' run proj delete AIDs (04-04)
+'=======================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("CA018-LP")
+'============================================================
+If result <> 0 Then
+DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete AID 1"
+  DL.SendSequence "Delete AID 1"
+  result = DL.WaitForSequence("Delete AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete AID 2"
+  DL.SendSequence "Delete AID 2"
+  result = DL.WaitForSequence("Delete AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete AID 3"
+  DL.SendSequence "Delete AID 3"
+  result = DL.WaitForSequence("Delete AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete AID 4"
+  DL.SendSequence "Delete AID 4"
+  result = DL.WaitForSequence("Delete AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete AID 5"
+  DL.SendSequence "Delete AID 5"
+  result = DL.WaitForSequence("Delete AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete AID 6"
+  DL.SendSequence "Delete AID 6"
+  result = DL.WaitForSequence("Delete AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete AID 7"
+  DL.SendSequence "Delete AID 7"
+  result = DL.WaitForSequence("Delete AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete AID 8"
+  DL.SendSequence "Delete AID 8"
+  result = DL.WaitForSequence("Delete AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete AID 9"
+  DL.SendSequence "Delete AID 9"
+  result = DL.WaitForSequence("Delete AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+
+End If 'end of proj
+
+'=======================================================================
+' run proj delete groups (04-05)
+'=======================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("CA023-LP")
+
+'============================================================
+'If result <> 0 Then
+'  DL.Pause 1000
+'  DL.ResetReceiveCounter
+'  DL.AddComment "--- Delete Group 1"
+'  DL.SendSequence "Delete Group 1"
+'  result = DL.WaitForSequence("Set System AID Response", 1, 10000)
+'End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete Group 2"
+  DL.SendSequence "Delete Group 2"
+  result = DL.WaitForSequence("Set System AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete Group 3"
+  DL.SendSequence "Delete Group 3"
+  result = DL.WaitForSequence("Set System AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete Group 4"
+  DL.SendSequence "Delete Group 4"
+  result = DL.WaitForSequence("Set System AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete Group 5"
+  DL.SendSequence "Delete Group 5"
+  result = DL.WaitForSequence("Set System AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete Group 6"
+  DL.SendSequence "Delete Group 6"
+  result = DL.WaitForSequence("Set System AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete Group 7"
+  DL.SendSequence "Delete Group 7"
+  result = DL.WaitForSequence("Set System AID Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+End If 'end of proj
+
+
+'=============================================
+' run proj get signature (cmd 83-02 and 83-01) 
+'=============================================
+result = 1
+runProj = doNotRun
+If runProj <> 0 Then
+  StartProj ("C:\vivotech\regress\regression\regress_test\test_tree\Signature_Capture\SC001\SC001")
+  
+  DL.AddComment "--- Signature capture 1"
+  DL.SendSequence " Capture and verify signature (PNG)"
+  result = DL.WaitForSequence("Signature Response", 1, 5000)
+  
+  DL.Pause 5000
+
+  DL.AddComment "--- Welcome"
+  DL.SendSequence " Welcome"
+  result = DL.WaitForSequence("Welcome Response", 1, 10000)
+  PrintMyResult(result)
+End If 'end of proj
+
+'=============================================
+' run proj get signature (cmd 83-19, 83-1A, 83-1B) 
+'=============================================
+result = 1
+runProj = doNotRun
+If runProj <> 0 Then
+  StartProj ("C:\vivotech\regress\regression\regress_test\test_tree\Signature_Capture\SC019\SC019")
+'=============================================================
+  DL.AddComment "--- Clear Display"
+  DL.SendSequence " Clear Display"
+  result = DL.WaitForSequence("Signature Response", 1, 20000)
+ 
+'============================================================
+  DL.AddComment "--- Custom PNG 479x271"
+  DL.SendSequence " Custom PNG 479x271"
+  result = DL.WaitForSequence("Display Control OK", 1, 20000)
+  DL.Pause 5000
+'============================================================
+  DL.AddComment "--- Clear SigCap 83 1b"
+  DL.SendSequence "Clear SigCap 83 1b", ControlID, "H"
+  result = DL.WaitForSequence("Signature Response", 1, 20000)
+  DL.Pause 2000
+'============================================================
+  DL.AddComment "--- Get SigCap 83 1A"
+  DL.SendSequence " Get SigCap 83 1A", ControlID, "H"
+  result = DL.WaitForSequence("Signature Response", 1, 20000)
+  
+End If 'end of proj
+
+'=============================================
+' run proj replace amount (cmd 83-04 and 83-17) 
+'=============================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj ("AMT007-LP")
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Clear Display"
+  DL.SendSequence "Clear Display"
+  result = DL.WaitForSequence ("Display CUSTOM MODE OK", 1,3000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Disable Custom Display Mode"
+  DL.SendSequence "Disable Custom Display Mode"
+  result = DL.WaitForSequence ("Display CUSTOM MODE OK", 1,3000)
+End If
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- VP8100: Display Amount $55.66 - Line 1"
+  DL.SendSequence "VP8100: Display Amount $55.66 - Line 1"
+  DL.Pause 1000
+  DL.AddComment "--- VP8100: Display Amount $77.88 - Line 2"
+  DL.SendSequence "VP8100: Display Amount $77.88 - Line 2"
+  result = DL.WaitForSequence ("Display Control OK", 1,3000)
+  DL.Pause 3000
+  DL.SendSequence "VP8100: Change Amount - Line 1 - Part 1", ControlID, "H"
+  result = DL.WaitForSequence ("Display Control OK ", 1,3000)
+End If
+
+End If 'end of proj
+'===========================================================================
+' run proj amount display & LED + Buzzer (83-04, 01-02, 83-0D, 83-08, 83-09)
+'===========================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+ 
+ StartProj ("AMTLoop")
+
+'--- display amount page 1 ----
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Clear Display"
+  DL.SendSequence "Clear Display"
+  result = DL.WaitForSequence ("Display CUSTOM MODE OK", 1,3000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Enable Custom Display Mode"
+  DL.SendSequence "Enable Custom Display Mode"
+  result = DL.WaitForSequence ("Display CUSTOM MODE OK", 1,3000)
+End If
+'------------------------------------------------------------
+'For I = 1 To 9
+'If result <> 0 Then
+'  DL.ResetReceiveCounter
+'  DL.AddComment "--- Display Amount w/ font " & I
+'  DL.SendSequence "Display Amount w/ font " & I
+'  result = DL.WaitForSequence ("Display Amount OK resp", 1,3000)
+'End If
+'Next
+'DL.Pause 5000
+
+'--- LDEs and Buzzers ---
+
+If result <> 0 Then
+  DL.Pause 200
+  DL.ResetReceiveCounter
+  DL.AddComment "---Buzzer LED 1"
+  DL.SendSequence " Buzzer LED 1"
+  result = DL.WaitForSequence("LED Response", 1, 30000)
+End If
+If result <> 0 Then
+  DL.Pause 200
+  DL.ResetReceiveCounter
+  DL.AddComment "---Buzzer LED 2"
+  DL.SendSequence " Buzzer LED 2"
+  result = DL.WaitForSequence("LED Response", 1, 30000)
+End If
+
+End If 'end of proj
+
+'============================================================
+' run proj display text (83-03, 83-0D, 83-08, 83-09)
+'============================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+
+ StartProj("DTX015-LP")
+	If result <> 0 Then
+ 		 DL.AddComment "--- Wordwrap 1"
+ 		 DL.SendSequence "Wordwrap 1"
+  		 result = DL.WaitForSequence ("Display Control OK", 1,3000)
+             'Debugger "ControlID", ControlID
+             DL.Pause 3000
+             DL.SendSequence "Change text to 'Hello World!!!'", ControlID, "H"
+             result = DL.WaitForSequence ("List Directory OK", 1,3000)
+             'Debugger "ControlID", ControlID
+             DL.Pause 3000
+             DL.SendSequence "Change text to '!@#$% ^&*()'", ControlID, "H"
+             result = DL.WaitForSequence ("List Directory OK", 1,3000)
+             DL.Pause 3000
+	End If
+'------------------------------------------------------------
+	If result <> 0 Then
+ 		 DL.AddComment "--- Disable Custom Display Mode"
+ 		 DL.SendSequence "Disable Custom Display Mode"
+  		 result = DL.WaitForSequence ("Display CUSTOM MODE OK", 1,3000)
+	End If
+
+End If 'end of proj
+
+'============================================================
+' run proj display buttons (83-05, 83-0D, 83-0c)
+'============================================================
+result = 1
+runProj = doNotRun
+If runProj <> 0 Then
+
+ 'StartProj("C:\vivotech\regress\regression\regress_test\test_tree\8xxx_Buttons\BRB001\BRB001")
+ StartProj("BRB001-LP")
+
+
+'----------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Clear display"
+  DL.SendSequence "Clear display"
+  result = DL.WaitForSequence ("Clear display Response", 1,3000)
+'------------------------------------------------------------
+  If result <> 0 Then
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Event queue clear"
+  	DL.SendSequence "Event queue clear"
+  	result = DL.WaitForSequence ("Clear display Response", 1,3000)
+   End If
+
+'------------------------------------------------------------
+  If result <> 0 Then
+  	DL.ResetReceiveCounter "Good Box Response"
+  	DL.AddComment "--- 1,1 Done Button"
+  	DL.SendSequence "1,1 Done Button"
+  	result = DL.WaitForSequence ("Good Box Response", 1,3000)
+  End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  	DL.ResetReceiveCounter "Good Box Response"
+  	DL.AddComment "--- 1,2 Credit Button"
+  	DL.SendSequence "1,2 Credit Button"
+  	result = DL.WaitForSequence ("Good Box Response", 1,3000)
+   End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  	DL.ResetReceiveCounter "Good Box Response"
+  	DL.AddComment "--- 1,3 Debit Button"
+  	DL.SendSequence "1,3 Debit Button"
+  	result = DL.WaitForSequence ("Good Box Response", 1,3000)
+  End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  	DL.ResetReceiveCounter "Good Box Response"
+  	DL.AddComment "--- 1,4 Cancel Button"
+  	DL.SendSequence "1,4 Cancel Button"
+  	result = DL.WaitForSequence ("Good Box Response", 1,3000)
+  End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  	DL.ResetReceiveCounter "Good Box Response"
+  	DL.AddComment "--- 1,5 Clear Button"
+  	DL.SendSequence "1,5 Clear Button"
+  	result = DL.WaitForSequence ("Good Box Response", 1,3000)
+  End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  	DL.ResetReceiveCounter "Good Box Response"
+  	DL.AddComment "--- 2,1 Ok Button"
+  	DL.SendSequence "2,1 Ok Button"
+  	result = DL.WaitForSequence ("Good Box Response", 1,3000)
+  End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  	DL.ResetReceiveCounter "Good Box Response"
+  	DL.AddComment "--- 2,2 Yes Button"
+  	DL.SendSequence "2,2 Yes Button"
+  	result = DL.WaitForSequence ("Good Box Response", 1,3000)
+  End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  	DL.ResetReceiveCounter "Good Box Response"
+  	DL.AddComment "--- 2,3 NO Button"
+  	DL.SendSequence "2,3 NO Button"
+  	result = DL.WaitForSequence ("Good Box Response", 1,3000)
+  End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  	DL.ResetReceiveCounter "Good Box Response"
+  	DL.AddComment "--- 2,4 Loyalty Button"
+  	DL.SendSequence "2,4 Loyalty Button"
+  	result = DL.WaitForSequence ("Good Box Response", 1,3000)
+  End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  	DL.ResetReceiveCounter "Good Box Response"
+ 	 DL.AddComment "--- 2,5 EBT Button"
+  	DL.SendSequence "2,5 EBT Button"
+  	result = DL.WaitForSequence ("Good Box Response", 1,3000)
+  End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  	DL.ResetReceiveCounter "Good Box Response"
+  	DL.AddComment "--- 3,1 Gift Card Button"
+ 	DL.SendSequence "3,1 Gift Card Button"
+  	result = DL.WaitForSequence ("Good Box Response", 1,3000)
+  End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  	DL.ResetReceiveCounter "Good Box Response"
+  	DL.AddComment "--- 3,2 Cash Button"
+  	DL.SendSequence "3,2 Cash Button"
+  	result = DL.WaitForSequence ("Good Box Response", 1,3000)
+  End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  	DL.ResetReceiveCounter "Good Box Response"
+  	DL.AddComment "--- 3,3 Touch Button"
+  	DL.SendSequence "3,3 Touch Button"
+  	result = DL.WaitForSequence ("Good Box Response", 1,3000)
+  End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  	DL.ResetReceiveCounter "Good Box Response"
+  	DL.AddComment "--- 3,4 Accept Button"
+  	DL.SendSequence "3,4 Accept Button"
+  	result = DL.WaitForSequence ("Good Box Response", 1,3000)
+  End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  	DL.ResetReceiveCounter "Good Box Response"
+  	DL.AddComment "--- 3,5 Enter Button"
+  	DL.SendSequence "3,5 Enter Button"
+  	result = DL.WaitForSequence ("Good Box Response", 1,3000)
+   End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  	DL.ResetReceiveCounter "Good Box Response"
+  	DL.AddComment "---4,1 Does not Appl Button"
+  	DL.SendSequence "4,1 Does not Appl Button"
+  	result = DL.WaitForSequence ("Good Box Response", 1,3000)
+  End If
+'------------------------------------------------------------
+  If result <> 0 Then
+ 	 DL.ResetReceiveCounter "Good Box Response"
+ 	 DL.AddComment "--- 4,2 Agree Button"
+  	DL.SendSequence "4,2 Agree Button"
+  	result = DL.WaitForSequence ("Good Box Response", 1,3000)
+   End If
+'------------------------------------------------------------
+  If result <> 0 Then
+ 	 DL.ResetReceiveCounter "Good Box Response"
+ 	 DL.AddComment "--- 4,3 Decline Button"
+ 	 DL.SendSequence "4,3 Decline Button"
+ 	 result = DL.WaitForSequence ("Good Box Response", 1,3000)
+  End If
+DL.Pause 5000
+
+End If 'end of proj
+
+'============================================================
+' run proj input field (83-1C, 83-1E, 83-1D, 83-06)
+'============================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+
+ StartProj("INP005-LP")
+
+If result <> 0 Then
+  DL.AddComment "--- Clear Display"
+  DL.SendSequence "Clear Display"
+  result = DL.WaitForSequence ("Display CUSTOM MODE OK", 1,3000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- Disable Custom Display Mode"
+  DL.SendSequence "Disable Custom Display Mode"
+  result = DL.WaitForSequence ("Display CUSTOM MODE OK", 1,3000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- Display Text: Please enter tip"
+  DL.SendSequence "Display Text: Please enter tip"
+  result = DL.WaitForSequence ("Display Control OK", 1,3000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- UI Event Queue Clear"
+  DL.SendSequence "UI Event Queue Clear"
+  result = DL.WaitForSequence ("Display Control OK", 1,3000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- Input Field Formatting 1"
+  DL.SendSequence "Input Field Formatting 1"
+  result = DL.WaitForSequence ("Display Control OK", 1,3000)
+End If
+If result <> 0 Then
+  DL.Pause 2000
+  DL.SendSequence "Clear Input Field (83-1E)", ControlID, "H"
+  result = DL.WaitForSequence ("Display CUSTOM MODE OK", 1,3000)
+End If
+If result <> 0 Then
+  DL.Pause 1000
+  DL.SendSequence "Get Input Field Value (83-1D)", ControlID, "H"
+  result = DL.WaitForSequence ("Display CUSTOM MODE OK", 1,3000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- Read Event Request"
+  DL.SendSequence "Read Event Request"
+  resultIgnore = DL.WaitForSequence ("1 Key PRESSED", 1,5000)
+End If
+  DL.Pause 30000
+End If 'end of proj
+
+'============================================================
+' run proj line items (83-10,83-11,83-13,83-14,83-15)
+'============================================================
+result = 1
+runProj = doNotRun
+If runProj <> 0 Then
+
+  StartProj("C:\vivotech\regress\regression\regress_test\test_tree\8xxx_Line_Item_Display\LID005\LID005")
+
+  DL.AddComment "--- Clear Event Queue"
+  DL.SendSequence " Clear Even Queue"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+  'verdict(result)
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Clear Display"
+  DL.SendSequence " Clear Display"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+  'verdict(result)
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Start Custom Display Mode"
+  DL.SendSequence " Start Custom Display Mode"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+  'verdict(result)
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Line Item Box"
+  DL.SendSequence "Line Item Box"
+  result = DL.WaitForSequence("Display Control Ok", 1, 3000)
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  'Debugger "ControlID", ControlID
+  DL.AddComment "--- Line Item 1"
+  DL.SendSequence "Line Item 1", ControlID, "H"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+'------------------------------------------------------------
+DL.Pause 3000
+  DL.ResetReceiveCounter
+  'Debugger "ControlID", ControlID
+  DL.AddComment "--- Delete List"
+  DL.SendSequence "Delete List", ControlID, "H"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+'------------------------------------------------------------
+' reprint box and line items
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Line Item Box"
+  DL.SendSequence "Line Item Box"
+  result = DL.WaitForSequence("Display Control Ok", 1, 3000)
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  'Debugger "ControlID", ControlID
+  DL.AddComment "--- Line Item 1"
+  DL.SendSequence "Line Item 1", ControlID, "H"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  'Debugger "ControlID", ControlID
+  DL.AddComment "--- Line Item 2"
+  DL.SendSequence "Line Item 2", ControlID, "H"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  'Debugger "ControlID", ControlID
+  DL.AddComment "--- Line Item 3"
+  DL.SendSequence "Line Item 3", ControlID, "H"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  'Debugger "ControlID", ControlID
+  DL.AddComment "--- Line Item 4"
+  DL.SendSequence "Line Item 4", ControlID, "H"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  'Debugger "ControlID", ControlID
+  DL.AddComment "--- Line Item 5"
+  DL.SendSequence "Line Item 5", ControlID, "H"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  'Debugger "ControlID", ControlID
+  DL.AddComment "--- Display List"
+  DL.SendSequence "Display List", ControlID, "H"
+  resultIgnore = DL.WaitForSequence("Display List Response", 1, 3000)
+'--------------------------------------------------------------
+  DL.ResetReceiveCounter
+  'Debugger "ControlID", ControlID
+  DL.AddComment "--- Get Select Item "
+  DL.SendSequence "Get Select Item ", ControlID, "H"
+  resultIgore = DL.WaitForSequence("Invaild Subcommand", 1, 3000)
+'------------------------------------------------------------
+  'DL.Pause 5000
+  'DL.ResetReceiveCounter
+  'DL.AddComment "--- Get Input Event "
+  'DL.SendSequence "Get Input Event"
+  'resultIgnore = DL.WaitForSequence("Line Item 5 Response", 1, 3000)
+
+End If 'end of proj
+
+'============================================================
+' run proj display check box (83-18)
+'============================================================
+result = 1
+runProj = doNotRun
+If runProj <> 0 Then
+
+  StartProj("C:\vivotech\regress\regression\regress_test\test_tree\8xxx_Check_Box\CKB003\CKB003")
+'------------------------------------------------------------
+  If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Clear Display"
+  DL.SendSequence " Clear Display"
+  result = DL.WaitForSequence("Clear display Response", 1, 3000)
+  End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Check Box Left Marked "
+  DL.SendSequence " Check Box Left Marked"
+  result = DL.WaitForSequence("Check Box Response", 1, 4000)
+  End If
+'------------------------------------------------------------
+  If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Check Box Right "
+  DL.SendSequence " Check Box Right"
+  result = DL.WaitForSequence("Check Box Response", 1, 4000)
+  End If
+
+End If 'end of proj
+
+'============================================================
+' run proj set property (83-0B)
+'============================================================
+result = 1
+runProj = doNotRun
+If runProj <> 0 Then
+
+  StartProj("C:\vivotech\regress\regression\regress_test\test_tree\8XXX_Set_Property\SPP001\SPP001")
+ 	 If result <> 0 Then
+    		 DL.AddComment "--- Clear Event Queue"
+   		  DL.SendSequence " Clear Even Queue"
+    		 result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+ 	 End If
+'------------------------------------------------------------
+  	If result <> 0 Then
+  		DL.ResetReceiveCounter
+  		DL.AddComment "--- Clear Display"
+		  DL.SendSequence " Clear Display"
+ 		 result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+	End If
+'------------------------------------------------------------
+  	If result <> 0 Then
+ 		 DL.ResetReceiveCounter
+ 		 DL.AddComment "--- Start Custom Display Mode"
+ 		 DL.SendSequence " Start Custom Display Mode"
+ 		 result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+ 	 End if
+
+'------------------------------------------------------------
+	If result <> 0 Then
+  		DL.ResetReceiveCounter
+  		DL.AddComment "--- Get Button Press Yes"
+  		DL.SendSequence "Get Button Press Yes"
+  		result = DL.WaitForSequence("Display Button", 1, 3000)
+	End If
+'------------------------------------------------------------
+	If result <> 0 Then
+  		DL.ResetReceiveCounter
+  		DL.AddComment "--- Get Button Press No"
+  		DL.SendSequence "Get Button Press No"
+  		result = DL.WaitForSequence("Display Button", 1, 3000)
+	End If
+'------------------------------------------------------------
+  	If result <> 0 Then
+		DL.ResetReceiveCounter
+  		'Debugger "ControlID", ControlID
+  		DL.AddComment "--- Set Property Disable"
+  		DL.SendSequence "Set Property Disable", ControlID, "H"
+ 		result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+	End If
+'------------------------------------------------------------
+  	'If result <> 0 Then
+ 	'	DL.ResetReceiveCounter
+  	'	DL.AddComment "--- Get Input Event "
+  	'	DL.SendSequence " Get Input Event "
+  	'	resultIgnore = DL.WaitForSequence("Yes Button Press", 1, 20000)
+ 	'End If
+
+End If 'end of proj
+
+'============================================================
+' run proj set foreground and background (83-0A)
+'============================================================
+result = 1
+runProj = doNotRun
+If runProj <> 0 Then
+
+  StartProj("C:\vivotech\regress\regression\regress_test\test_tree\Set_Background_Color\SBC001\SBC001")
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Clear Display"
+  DL.SendSequence " Clear Display"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- White/Black"
+  DL.SendSequence "White/Black"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Please Use Other VISA Card"
+  DL.SendSequence "Please Use Other VISA Card"
+  result = DL.WaitForSequence("Test Response", 1, 3000)
+
+  DL.Pause 3000
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- White/Red"
+  DL.SendSequence "White/Red"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Please Use Other VISA Card"
+  DL.SendSequence "Please Use Other VISA Card"
+  result = DL.WaitForSequence("Test Response", 1, 3000)
+
+  DL.Pause 3000
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Black/White"
+  DL.SendSequence "Black/White"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Please Use Other VISA Card"
+  DL.SendSequence "Please Use Other VISA Card"
+  result = DL.WaitForSequence("Test Response", 1, 3000)
+
+  DL.Pause 3000
+
+'------------------------------------------------------------
+'  DL.ResetReceiveCounter
+'  DL.Pause 3000
+'  DL.AddComment "--- Clear Display"
+'  DL.SendSequence " Clear Display"
+'  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+'------------------------------------------------------------
+End If 'end of proj
+
+'=================================================================
+' run proj file management (83-22,83-23,83-24,83-25,83-26,83-1F)
+'=================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("DIR005-LP")
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.AddComment "--- Check Free Space on Drive (83-23)"
+  DL.SendSequence "Check Free Space on Drive (83-23)"
+  result = DL.WaitForSequence ("FREE SPACE OK", 1,3000)
+End If
+'------------------------------------------------------------
+'If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete File - applefile.x in ROOT/apple"
+  DL.SendSequence "Delete File - applefile.x in ROOT/apple"
+  resultIgnor = DL.WaitForSequence ("List Directory OK", 1,3000)
+'End If
+'------------------------------------------------------------
+'If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete Directory - apple"
+  DL.SendSequence "Delete Directory - apple"
+  resultIngore = DL.WaitForSequence ("List Directory OK", 1,3000)
+'End If
+'----------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- Create Directory 'apple' (83-25)"
+  DL.SendSequence "Create Directory 'apple' (83-25)"
+  result = DL.WaitForSequence ("List Directory OK", 1,3000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- File Download - part 1 - apple/applefile.x:30bytes"
+  DL.SendSequence "File Download - part 1 - apple/applefile.x:30bytes"
+  result = DL.WaitForSequence ("List Directory OK", 1,3000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- File Download - part 2 - apple/applefile.x:30bytes"
+  DL.SendSequence "File Download - part 2 - apple/applefile.x:30bytes"
+  result = DL.WaitForSequence ("List Directory OK", 1,3000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- File Download - part 3 - apple/applefile.x:30bytes"
+  DL.SendSequence "File Download - part 3 - apple/applefile.x:30bytes"
+  result = DL.WaitForSequence ("List Directory OK", 1,3000)
+End If
+'-------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- List present directories and files"
+  DL.SendSequence "List Directory (83-22) - Recursive"
+  resultIgnore = DL.WaitForSequence ("List Directory OK", 1,3000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete File - applefile.x in ROOT/apple"
+  DL.SendSequence "Delete File - applefile.x in ROOT/apple"
+  result = DL.WaitForSequence ("List Directory OK", 1,3000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete Directory - apple"
+  DL.SendSequence "Delete Directory - apple"
+  result = DL.WaitForSequence ("List Directory OK", 1,3000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- List present directories and files"
+  DL.SendSequence "List Directory (83-22) - Recursive"
+  result = DL.WaitForSequence ("List Directory OK", 1,3000)
+End If
+'------------------------------------------------------------
+End If 'end of proj
+
+'=================================================================
+' run proj transaction log list (84-00,84-01,84-02)
+'=================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("TLST001-LP")
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete All Entries from EMV Transaction Log (84-01)"
+  DL.SendSequence "Delete All Entries from EMV Transaction Log (84-01)"
+  result = DL.WaitForSequence("Add or Del Entry of EMV R or E List resp", 1, 5000)
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get EMV Transaction Log Status (84-00)"
+  DL.SendSequence "Get EMV Transaction Log Status (84-00)"
+  result = DL.WaitForSequence("Get trans log status with 0 record resp", 1, 5000)
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get EMV Transaction Log (84-02)"
+  DL.SendSequence "Get EMV Transaction Log (84-02)"
+  resultIgnore = DL.WaitForSequence("Get trans log list with 1 record resp", 1, 5000)
+End If
+
+End If 'end of proj
+
+'=================================================================
+' run proj revocation log list (84-03,84-04,84-05,84-06,84-07)
+'=================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("RLST001-LP")
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- Delete All Entries from EMV Revocation List (84-06)"
+  DL.SendSequence "Delete All Entries from EMV Revocation List (84-06)"
+  resultIgnore = DL.WaitForSequence("Add or Del Entry of EMV R or E List resp", 1, 10000)
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Add Entry to EMV Revocation List (84-04) - TEST"
+  DL.SendSequence "Add Entry to EMV Revocation List (84-04) - TEST"
+  result = DL.WaitForSequence("Add or Del Entry of EMV R or E List resp", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Get EMV Revocation Log Status (84-03)"
+  DL.SendSequence "Get EMV Revocation Log Status (84-03)"
+  result = DL.WaitForSequence("Get R or E log status with 1 record resp", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Get EMV Revocation List (84-07)"
+  DL.SendSequence "Get EMV Revocation List (84-07)"
+  result = DL.WaitForSequence("Get R list with record TEST resp", 1, 10000)
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Delete Entry from EMV Revocation List (84-05) TEST"
+  DL.SendSequence "Delete Entry from EMV Revocation List (84-05) TEST"
+  result = DL.WaitForSequence("Add or Del Entry of EMV R or E List resp", 1, 10000)
+End If
+
+End If 'end of proj
+
+'=================================================================
+' run proj exception log list (84-08,84-09,84-0A,84-0B,84-0C)
+'=================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("ELST001-LP")
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- Delete All Entries from EMV Exception List (84-0B)"
+  DL.SendSequence "Delete All Entries from EMV Exception List (84-0B)"
+  resultIgnore = DL.WaitForSequence("Add or Del Entry of EMV R or E List resp", 1, 10000)
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Add Entry to EMV Exception List (84-09) - CUBIC VISA"
+  DL.SendSequence "Add Entry to EMV Exception List (84-09) - CUBIC VISA"
+  result = DL.WaitForSequence("Add or Del Entry of EMV R or E List resp", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Get EMV Exception Log Status (84-08)"
+  DL.SendSequence "Get EMV Exception Log Status (84-08)"
+  result = DL.WaitForSequence("Get R or E log status with 1 record resp", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Get EMV Exception List (84-0C)"
+  DL.SendSequence "Get EMV Exception List (84-0C)"
+  result = DL.WaitForSequence("Get E list with record EMV Contact CUBIC VISA resp", 1, 10000)
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & vbCrLf & "--- Delete Entry from EMV Exception List (84-0A) - CUBIC VISA"
+  DL.SendSequence "Delete Entry from EMV Exception List (84-0A) - CUBIC VISA"
+  result = DL.WaitForSequence("Add or Del Entry of EMV R or E List resp", 1, 10000)
+End If
+
+End If 'end of proj
+
+'=======================================================================
+' run proj CA Key management (D0-21,D0-22,D0-23,D0-24,D0-25,D0-26,D0-27)
+'=======================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("KME036-LP")
+
+If result <> 0 Then
+  DL.Pause 400
+  DL.AddComment "DeleteAllKeys"
+  DL.SendSequence " DeleteAllKeys"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.Pause 400
+  DL.AddComment "Set Key F5 Contactless 01"
+  DL.SendSequence " Set Key F5 Contactless 01"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.Pause 400
+  DL.AddComment "Set Key F5 Contact 02"
+  DL.SendSequence " Set Key F5 Contact 02"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.Pause 400
+  DL.AddComment "Delete B0 Key Contact 02"
+  DL.SendSequence " Delete B0 Key Contact 02"
+  result = DL.WaitForSequence("Successful Command", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.Pause 400
+  DL.AddComment "Get B0 Key Contactless 01"
+  DL.SendSequence "Get B0 Key Contactless 01"
+  result = DL.WaitForSequence("Get B0 Key", 1, 10000)
+End If
+If result <> 0 Then
+  DL.Pause 400
+  DL.AddComment "Get B0 Hash Contactless 01"
+  DL.SendSequence "Get B0 Hash Contactless 01"
+  result = DL.WaitForSequence("Get B0 Hash", 1, 10000)
+End If
+If result <> 0 Then
+  DL.Pause 400
+  DL.AddComment "CA GetRids Contact 01"
+  DL.SendSequence "CA GetRids Contactless 01"
+  result = DL.WaitForSequence("Get BO Rids", 1, 10000)
+End If
+If result <> 0 Then
+  DL.Pause 400
+  DL.AddComment "Get Key IDs for B0 12 34 56 78 Contactless 01"
+  DL.SendSequence "Get Key IDs for B0 12 34 56 78 Contactless 01"
+  result = DL.WaitForSequence("Get B0 Key ID", 1, 10000)
+End If
+If result <> 0 Then
+  DL.Pause 400
+  DL.ResetReceiveCounter
+  DL.AddComment "Get B0 Key Contactless 02"
+  DL.SendSequence "Get B0 Key Contactless 02"
+  result = DL.WaitForSequence("Key Not Found", 1, 10000)
+End If
+If result <> 0 Then
+  DL.Pause 400
+  DL.ResetReceiveCounter
+  DL.AddComment "Get B0 Hash Contactless 02"
+  DL.SendSequence "Get B0 Hash Contactless 02"
+  result = DL.WaitForSequence("Key Not Found", 1, 10000)
+End If
+If result <> 0 Then
+  DL.Pause 400
+  DL.ResetReceiveCounter
+  DL.AddComment "CA GetRids Contact 02"
+  DL.SendSequence "CA GetRids Contact 02"
+  result = DL.WaitForSequence("Key Not Found", 1, 10000)
+End If
+If result <> 0 Then
+  DL.Pause 400
+  DL.ResetReceiveCounter
+  DL.AddComment "Get Key IDs for B0 12 34 56 78 Contact 02"
+  DL.SendSequence "Get Key IDs for B0 12 34 56 78 Contact 02"
+  result = DL.WaitForSequence("Key Not Found", 1, 10000)
+End If
+
+End If 'end of proj
+'=======================================================================
+' run proj KLK2 (80-xx, 81-01)
+'=======================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("KLK2-01-LP")
+'============================================================
+If result <> 0 Then
+  DL.AddComment "--- Delete KLK Keys"
+  DL.SendSequence " Delete KLK Keys"
+  result = DL.WaitForSequence("No KLK Response", 1, 30000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter "Load KLK Response"
+  DL.AddComment "--- Load KLK 1"
+  DL.SendSequence " Load KLK 1"
+  result = DL.WaitForSequence("Load KLK Response", 1, 30000)
+End If
+'============================================================
+DL.ResetReceiveCounter "Load KLK Response"
+If result <> 0 Then
+  DL.ResetReceiveCounter "Load KLK Response"
+  DL.AddComment "--- Load KLK 2"
+  DL.SendSequence " Load KLK 2"
+  result = DL.WaitForSequence("Load KLK Response", 1, 30000)
+End If
+'============================================================
+DL.ResetReceiveCounter "Load KLK Response"
+If result <> 0 Then
+  DL.ResetReceiveCounter "Load KLK Response"
+  DL.AddComment "--- Load KLK 3"
+  DL.SendSequence " Load KLK 3"
+  result = DL.WaitForSequence("Load KLK Response", 1, 30000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.AddComment "--- Load master key"
+  DL.SendSequence " Load master key"
+  result = DL.WaitForSequence("Master Session Response", 1, 10000)
+  DL.Pause 1000
+End If
+
+'============================================================
+If result <> 0 Then
+  DL.AddComment "--- Check master keys"
+  DL.SendSequence " Check master keys"
+  result = DL.WaitForSequence("Master Session Response", 1, 10000)
+  DL.Pause 1000
+End If
+'============================================================
+If result <> 0 Then
+  DL.AddComment "--- Select master key"
+  DL.SendSequence " Select master key"
+  result = DL.WaitForSequence("Master Session Response", 1, 10000)
+  DL.Pause 1000
+End If
+'============================================================
+If result <> 0 Then
+  DL.AddComment "--- Master Session Pin Entry"
+  DL.SendSequence " Master Session Pin Entry"
+  resultIgnore = DL.WaitForSequence("Master Session Response", 1, 10000)
+End If
+DL.Pause 32000
+
+'============================================================
+If result <> 0 Then
+  DL.AddComment "--- Return Master key"
+  DL.SendSequence " Return Master key"
+  result = DL.WaitForSequence("Master Session Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.AddComment "--- DUKPT PIN Entry with no DUKPT"
+  DL.SendSequence " DUKPT PIN Entry with no DUKPT"
+  result = DL.WaitForSequence("DUKPT Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.AddComment "--- Read Valid Key Mask"
+  DL.SendSequence " Read Valid Key Mask"
+  result = DL.WaitForSequence("Master Session Response", 1, 10000)
+End If
+
+End If 'end of proj
+'=======================================================================
+' run proj secure_mode (80-xx)
+'=======================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("SECM001-LP")
+
+If result <> 0 Then
+  DL.AddComment "--- Delete Key"
+  DL.SendSequence " Delete Key"
+  result = DL.WaitForSequence("Load Key Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.Pause 500
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Set Unecrypted KLK"
+  DL.SendSequence " Set Unecrypted KLK"
+  result = DL.WaitForSequence("Secure Mode Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.Pause 500
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Set Unecrypted KLK 2"
+  DL.SendSequence " Set Unecrypted KLK 2"
+  result = DL.WaitForSequence("Secure Mode Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.Pause 500
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Ecrypted KLK"
+  DL.SendSequence " Ecrypted KLK"
+  result = DL.WaitForSequence("Secure Mode Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.Pause 500
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Master Session Index 9"
+  DL.SendSequence " Master Session Index 9"
+  result = DL.WaitForSequence("Secure Mode Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.Pause 500
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Load Duk"
+  DL.SendSequence " Load Duk"
+  result = DL.WaitForSequence("Load Duk Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.Pause 500
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Load secure session key"
+  DL.SendSequence " Load secure session key"
+  result = DL.WaitForSequence("Secure Mode Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.Pause 500
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Start secure session"
+  DL.SendSequence " Start secure session"
+  result = DL.WaitForSequence("Secure Mode Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Beep:"
+  DL.SendSequence " Beep:"
+  result = DL.WaitForSequence("Beep Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "---Display welcome in center (encrypted)"
+  DL.SendSequence " Display welcome in center (encrypted)"
+  result = DL.WaitForSequence("Display Welcome", 1, 10000)
+End If
+'============================================================
+
+'If result <> 0 Then
+'   prompt2 = prompt2 & "Place ViVOwallet W001 card on reader After pressing ok. When ready click on OK"
+'   result = MsgBox(prompt2, VBOKOnly, "Advanced PassThrough")
+'End If
+'============================================================
+'If result <> 0 Then
+'  DL.AddComment "---Activate Transaction (Encrypted)"
+'  DL.SendSequence " Activate Transaction (Encrypted)"
+'  result = DL.WaitForSequence("Transaction Response", 1, 10000)
+'End If
+'============================================================
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "---Terminate secure session"
+  DL.SendSequence " Terminate secure session"
+  result = DL.WaitForSequence("Secure Mode Response", 1, 10000)
+End If
+'============================================================
+
+'If result <> 0 Then
+'  DL.ResetReceiveCounter
+'  DL.AddComment "--- Load secure session key"
+'  DL.SendSequence " Load secure session key"
+'  result = DL.WaitForSequence("Secure Mode Response", 1, 10000)
+'End If
+'============================================================
+'If result <> 0 Then
+'  DL.ResetReceiveCounter
+'  DL.AddComment "--- Start secure session"
+'  DL.SendSequence " Start secure session"
+'  result = DL.WaitForSequence("Secure Mode Response", 1, 10000)
+'End If
+'============================================================
+'If result <> 0 Then
+'  DL.ResetReceiveCounter
+'  DL.AddComment "---Terminate secure session"
+'  DL.SendSequence " Terminate secure session"
+'  result = DL.WaitForSequence("Secure Mode Response", 1, 10000)
+'End If
+'============================================================
+
+End If 'end of proj
+'=======================================================================
+' run proj active transaction (02-01 )
+'=======================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("SAT001-LP")
+
+If result <> 0 Then
+  DL.AddComment "--- Delete Key"
+  DL.SendSequence " Delete Key"
+  result = DL.WaitForSequence("Load Key Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.Pause 500
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Set Unecrypted KLK"
+  DL.SendSequence " Set Unecrypted KLK"
+  result = DL.WaitForSequence("Secure Mode Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.Pause 500
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Set Unecrypted KLK 2"
+  DL.SendSequence " Set Unecrypted KLK 2"
+  result = DL.WaitForSequence("Secure Mode Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.Pause 500
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Ecrypted KLK"
+  DL.SendSequence " Ecrypted KLK"
+  result = DL.WaitForSequence("Secure Mode Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.Pause 500
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Master Session Index 9"
+  DL.SendSequence " Master Session Index 9"
+  result = DL.WaitForSequence("Secure Mode Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.Pause 500
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Load Duk"
+  DL.SendSequence " Load Duk"
+  result = DL.WaitForSequence("Load Duk Response", 1, 10000)
+End If
+'============================================================
+'If result <> 0 Then
+'   prompt2 = prompt2 & "Place Wallet card W001 on reader before pressing ok. When ready click on OK"
+'   result = MsgBox(prompt2, VBOKOnly, "Advanced Activate Transaction")
+'End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- Activate Transaction (02-01)"
+  DL.SendSequence " Activate Transaction (02-01)"
+  resultIgnore = DL.WaitForSequence("Wallet Response", 1, 10000)
+End If
+DL.Pause 3000
+'------------------------------------------------------------
+End If 'end of proj
+'=======================================================================
+' run proj active transaction (02-20,02-11,02-15,02-05 )
+'=======================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("SAT019-LP")
+'========================================================
+' set BC off
+'========================================================
+If result <> 0 Then
+  DL.AddComment "--- Disable Backwards Compatibility"
+  DL.SendSequence " Disable Backwards Compatibility"
+  resultIgnore = DL.WaitForSequence("set backwards compatibility resp", 1, 10000)
+End If
+
+'========================================================
+' cmd 02-20
+'========================================================
+If result <> 0 Then
+  DL.AddComment "--- UI EVENT CLEAR"
+  DL.SendSequence " UI EVENT CLEAR"
+  resultIgnore = DL.WaitForSequence("83 Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- Enhanced Activate Transaction Command (02-20)"
+  DL.SendSequence " Enhanced Activate Transaction Command (02-20)"
+  resultIgnore = DL.WaitForSequence("Activate 02 Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 500
+  DL.AddComment "--- Get Input Event"
+  DL.SendSequence " Get Input Event"
+  resultIgnore = DL.WaitForSequence("Input Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- Get Transaction Result (03-00)"
+  DL.SendSequence " Get Transaction Result (03-00)"
+  resultIgnore = DL.WaitForSequence("Get Transaction Response", 1, 10000)
+End If
+'==============================================================
+' cmd 02-11
+'==============================================================
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- UI EVENT CLEAR"
+  DL.SendSequence " UI EVENT CLEAR"
+  resultIgnore = DL.WaitForSequence("83 Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- Activate Transaction Event (02-11)"
+  DL.SendSequence " Activate Transaction Event (02-11)"
+  resultIgnore = DL.WaitForSequence("Activate 02 Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 500
+  DL.AddComment "--- Get Input Event"
+  DL.SendSequence " Get Input Event"
+  resultIgnore = DL.WaitForSequence("Input Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- Get Transaction Result (03-00)"
+  DL.SendSequence " Get Transaction Result (03-00)"
+  resultIgnore = DL.WaitForSequence("Get Transaction Response", 1, 10000)
+End If
+'=====================================================
+' cmd 02-15
+'=====================================================
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- UI EVENT CLEAR"
+  DL.SendSequence " UI EVENT CLEAR"
+  resultIgnore = DL.WaitForSequence("83 Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 500
+  DL.AddComment "--- Activate Transaction Event with Data Encryption (02-15) Track 1"
+  DL.SendSequence " Activate Transaction Event with Data Encryption (02-15) Track 1"
+  resultIgnore = DL.WaitForSequence("Activate 02 Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 500
+  DL.AddComment "--- Get Input Event"
+  DL.SendSequence " Get Input Event"
+  resultIgnore = DL.WaitForSequence("Input Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 500
+  DL.AddComment "--- Get Transaction Result (03-00)"
+  DL.SendSequence " Get Transaction Result (03-00)"
+  resultIgnore = DL.WaitForSequence("Track 1 Encrypt", 1, 10000)
+End If
+'=======================================================
+' cmd 02-05
+'=======================================================
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- UI EVENT CLEAR"
+  DL.SendSequence " UI EVENT CLEAR"
+  resultIgnore = DL.WaitForSequence("83 Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "---Activate Transaction Data Encryption (02-05) Track 1 "
+  DL.SendSequence " Activate Transaction Data Encryption (02-05) Track 1 "
+  resultIgnore = DL.WaitForSequence("Track 1 Encryption 2c 05 Response", 1, 10000)
+End If
+
+DL.Pause 1000
+
+'========================================================
+' set BC off
+'========================================================
+If result <> 0 Then
+  DL.AddComment "--- Enable Backwards Compatibility"
+  DL.SendSequence " Enable Backwards Compatibility"
+  resultIgnore = DL.WaitForSequence("set backwards compatibility resp", 1, 10000)
+End If
+
+DL.Pause 2000
+
+End If 'end of proj
+'=======================================================================
+' run proj set-get params (03-02,03-04,03-05,03-06,03-07)
+' (04-00,04-02,04-03,04-04,04-05,04-09,09-20
+'=======================================================================
+result = 1
+runProj = doNotRun 'duplicated 
+If runProj <> 0 Then
+  StartProj("PARAM-01-LP")
+
+'============================================================
+If result <> 0 Then
+  DL.AddComment "--- GET ALL AIDS Success"
+  DL.SendSequence "Get all AIDs"
+  result = DL.WaitForSequence("Response Get All Groups", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.Pause 400
+  DL.AddComment "--- AMEX AID"
+  DL.SendSequence "Amex AID"
+  result = DL.WaitForSequence("Response Data", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+DL.Pause 300
+  DL.AddComment "--- Default set Parameters"
+  DL.SendSequence " Default set Parameters"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+DL.Pause 300
+  DL.AddComment "--- Get Default Parameters"
+  DL.SendSequence " Get Default Parameters"
+  result = DL.WaitForSequence("Get Parameter Default Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.AddComment "--- Delete Group ID Failed as expected"
+  DL.SendSequence "Delete Group ID 0"
+  result = DL.WaitForSequence("Response Delete Group ID 0", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.AddComment "--- Create User AID Failed as Expected"
+  DL.SendSequence "Create User AID in Non-Exising Group"
+  result = DL.WaitForSequence("Create User AID in Non-Exising Group Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.AddComment "--- Create Group Successful"
+  DL.SendSequence "Create Group 2"
+  result = DL.WaitForSequence("Create group 2 response", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- Check Successful"
+  DL.SendSequence "check group 2"
+  result = DL.WaitForSequence("check group 2 response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.AddComment "--- Create AID 1 Successful"
+  DL.SendSequence "Create AID 1"
+  result = DL.WaitForSequence("Create AID Response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+DL.Pause 1000
+  DL.AddComment "--- Delete AID 1"
+  DL.SendSequence "Delete AID 1"
+  result = DL.WaitForSequence("Delete AID Response", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- get all groups"
+  DL.SendSequence "get all groups"
+  result = DL.WaitForSequence("get all group resp", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- Set Default Param"
+  DL.SendSequence "Set Default Param"
+  result = DL.WaitForSequence("Create AID Response", 1, 10000)
+End If
+DL.Pause 2000
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- AR Get Module Version"
+  DL.SendSequence "AR Get Module Version"
+  result = DL.WaitForSequence("AR Get Module Version Resp", 1, 10000)
+End If
+
+End If 'end of proj
+'=======================================================================
+' run proj pass through (2c-01,2c-02,0a-02,0b-01,0b-02, 28-01)
+' (18-01)
+'=======================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("PassThroughTest-LP")
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Enable Pass Through"
+  DL.SendSequence "Enable Pass Through"
+  result = DL.WaitForSequence("Pass-Through - START and STOP (OK)", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Enable Antenna"
+  DL.SendSequence "Enable Antenna"
+  result = DL.WaitForSequence("Antenna Disabled (OK)", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Disable Antenna"
+  DL.SendSequence "Disable Antenna"
+  result = DL.WaitForSequence("Antenna Disabled (OK)", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Control LED"
+  DL.SendSequence "Control LED"
+  result = DL.WaitForSequence("Control LED OK", 1, 10000)
+End If
+DL.Pause 2000
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Control Buzzer Short"
+  DL.SendSequence "Control Buzzer Short"
+  result = DL.WaitForSequence("Control Buzzer OK", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Control Buzzer Long"
+  DL.SendSequence "Control Buzzer Long"
+  result = DL.WaitForSequence("Control Buzzer OK", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Poll for Token (10 Seconds)"
+  DL.SendSequence "Poll for Token (10 Seconds)"
+  resultIgnore = DL.WaitForSequence("Poll for Token (10 Seconds) (OK)", 1, 12000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Pass-Through - STOP"
+  DL.SendSequence "Pass-Through - STOP"
+  result = DL.WaitForSequence("Pass-Through - START and STOP (OK)", 1, 10000)
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Ping reader"
+  DL.SendSequence "Ping reader"
+  result = DL.WaitForSequence("Ping resp", 1, 10000)
+End If
+
+End If 'end of proj
+'=======================================================================
+' run proj display image and slides (83-0e,83-20,83-21)
+'=======================================================================
+result = 1
+runProj = doNotRun
+If runProj <> 0 Then
+  StartProj("C:\vivotech\regress\regression\regress_test\test_tree\Event_Queue\EVQ024\EVQ024")
+
+'--Show Images ----------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Clear Display"
+  DL.SendSequence " Clear Display"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Start Custom Display Mode"
+  DL.SendSequence " Start Custom Display Mode"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Display Duck"
+  DL.SendSequence "Display Duck"
+  result = DL.WaitForSequence("Display Image", 1, 3000)
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get Input Event "
+  DL.SendSequence "Get Input Event"
+  result = DL.WaitForSequence("Touch Duck", 1, 32000)
+'------------------------------------------------------------
+DL.Pause 2000
+
+End If 'end of proj
+'=======================================================================
+' run proj display slides (83-20,83-21)
+'=======================================================================
+result = 1
+runProj = doNotRun
+If runProj <> 0 Then
+  StartProj("C:\vivotech\regress\regression\regress_test\test_tree\Event_Queue\EVQ020\EVQ020")
+'--Show Slides ----------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Clear Display"
+  DL.SendSequence " Clear Display"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Start Custom Display Mode"
+  DL.SendSequence " Start Custom Display Mode"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Slide Show Start"
+  DL.SendSequence "Slide Show Start"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+  DL.Pause 5000
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.Pause 15000
+  DL.AddComment "--- Slide Show Stop"
+  DL.SendSequence "Slide Show Stop"
+  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.Pause 3000
+  DL.AddComment "--- Get Input Event "
+  DL.SendSequence "Get Input Event"
+  result = DL.WaitForSequence("Stop Slide Show Event", 1, 32000)
+  DL.Pause 2000
+'------------------------------------------------------------
+'  DL.ResetReceiveCounter
+'  DL.AddComment "--- Clear Display"
+'  DL.SendSequence "Clear Display"
+'  result = DL.WaitForSequence("Stop/Start Response", 1, 3000)
+'  verdict(result)
+'------------------------------------------------------------
+
+End If 'end of proj
+
+'================================================================
+' run test proj mifare card (cmd 2c-06, 2c-07, 2c-08, 2c-0a)
+' use Mifare test card 308-001 or 002
+'================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("PUR001-LP")
+
+	DL.AddComment vbCrLf & "--- Start PT Mode" 
+	DL.SendSequence "Start PT Mode"
+	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.AddComment vbCrLf & "--- Turn On Antenna"
+	DL.SendSequence "Turn On Antenna"
+	result = DL.WaitForSequence ("Turn On Antenna (OK)", 1, 5000)
+
+	DL.AddComment vbCrLf & "--- Poll for Token" 
+	DL.SendSequence "Poll for Token"
+	resultIgnore = DL.WaitForSequence ("Poll for Token (OK)", 1, 12000)
+	
+	DL.AddComment vbCrLf & "--- Authenticate Block 10h = 16d" 
+	DL.SendSequence "Authenticate Block 10h = 16d"
+	resultIgnore = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+      DL.ResetReceiveCounter
+
+	DL.AddComment vbCrLf & "--- Initialize Blocks" 
+	DL.SendSequence "Initialize Blocks"
+	resultIgnore = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.AddComment vbCrLf & "--- Read 3 Initialized Blocks" 
+	DL.SendSequence "Read 3 Initialized Blocks"
+	resultIgnore = DL.WaitForSequence ("Read Initialized Blocks (OK)", 1, 5000)
+	DL.ResetReceiveCounter "Read Initialized Blocks (OK)"
+	
+
+	DL.AddComment vbCrLf & "========== TEST1 =============================================="	& vbCrLf
+	DL.AddComment vbCrLf & "--- Decrement Block *Original - minus 1 @ block 16 without BACKUP - Define 1 send 1"
+	DL.SendSequence "Decrement Block *Original - minus 1 @ block 16 without BACKUP - Define 1 send 1"
+	resultIgnore = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+	'PrintMyResult(result)
+	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.AddComment vbCrLf & "--- Increment Block *Original - plus 1 @ block 16 without BACKUP - Define 1 send 1"
+	DL.SendSequence "Increment Block *Original - plus 1 @ block 16 without BACKUP - Define 1 send 1"
+	resultIgnore = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+	'PrintMyResult(result)
+	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.AddComment vbCrLf & "--- Read Blocks 3 again"
+	DL.SendSequence "Read 3 Blocks again"
+	resultIgnore = DL.WaitForSequence ("Read Initialized Blocks (OK)", 1, 5000)
+	'PrintMyResult(result)
+
+	DL.AddComment vbCrLf & "--- Stop PT Mode" 
+	DL.SendSequence "Stop PT Mode"
+	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
+	DL.ResetReceiveCounter "PT Command (OK)"
+
+
+End If 'end of proj
+'================================================================
+' run test proj PCD exchange (cmd 2c-10)
+' use payPass A test card
+'================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("APCD001-LP")
+
+If result <> 0 Then
+  DL.AddComment "--- EMV:2C - Start PT Mode"
+  DL.SendSequence " EMV:2C - Start PT Mode"
+  result = DL.WaitForSequence("PassT Cmds Response", 1, 10000)
+End If
+'============================================================
+'If result <> 0 Then
+'   prompt2 = prompt2 & "Place PayPass Type A Card. When ready click on OK"
+'   result = MsgBox(prompt2, VBOKOnly, "Advanced Activate Transaction")
+'End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- PCD Single Cmd Xchg 8XXX - WUPA"
+  DL.SendSequence " PCD Single Cmd Xchg 8XXX - WUPA"
+  resultIgnore = DL.WaitForSequence("WUPA Response", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- EMV:2C - Stop Passthru"
+  DL.SendSequence " EMV:2C - Stop Passthru"
+  result = DL.WaitForSequence("PassT Cmds Response", 1, 10000)
+End If
+'============================================================
+
+End If 'end of proj
+'================================================================
+' run test proj pass through (cmd 2c-11, 2c-13)
+'================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("SPT001-LP")
+
+If result <> 0 Then
+  DL.AddComment "---Start Passthrough Mode"
+  DL.SendSequence " Start Passthrough Mode"
+  result = DL.WaitForSequence("Version 2 Protocol: Response (Status=OK)", 1, 10000)
+End If
+'============================================================
+'If result <> 0 Then
+'   prompt2 = prompt2 & "Insert Contact Visa Test Card. When ready click on OK"
+'   result = MsgBox(prompt2, VBOKOnly, "Advanced PassThrough")
+'End If
+
+'------------------------------------------------------------
+'If result <> 0 Then
+'  DL.ResetReceiveCounter
+'  DL.AddComment "--- Enhanced PT - Poll for Token - ICC (Tout=32s)"
+'  DL.SendSequence " Enhanced PT - Poll for Token - ICC (Tout=32s)"
+'  resultIgnore = DL.WaitForSequence("Version 2 Protocol: Response (Status=OK)", 1, 12000)
+'End If
+
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Exchange APDU with ICC (Select PSE)"
+  DL.SendSequence " Exchange APDU with ICC (Select PSE)"
+  resultIgnore = DL.WaitForSequence("Version 2 Protocol: Response (Status=OK)", 1, 12000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Exchange APDU with ICC (Select Visa)"
+  DL.SendSequence " Exchange APDU with ICC (Select Visa)"
+  resultIgnore = DL.WaitForSequence("Version 2 Protocol: Response (Status=OK)", 1, 12000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.Pause 500
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Enhanced PT - Deactivate - ICC"
+  DL.SendSequence " Enhanced PT - Deactivate - ICC"
+  resultIgnore = DL.WaitForSequence("Version 2 Protocol: Response (Status=OK)", 1, 12000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Stop Passthrough Mode"
+  DL.SendSequence " Stop Passthrough Mode"
+  result = DL.WaitForSequence("Version 2 Protocol: Response (Status=OK)", 1, 10000)
+End If
+'------------------------------------------------------------
+
+End If 'end of proj
+'================================================================
+' run test proj pass through (cmd 2c-11, 2c-12)
+'================================================================
+result = 1
+runProj = runIt
+If runProj <> 0 Then
+  StartProj("SPT004-LP")
+If result <> 0 Then
+  DL.AddComment "---Start Passthrough Mode"
+  DL.SendSequence " Start Passthrough Mode"
+  result = DL.WaitForSequence("Version 2 Protocol: Response (Status=OK)", 1, 10000)
+End If
+'============================================================
+'If result <> 0 Then
+'   prompt2 = prompt2 & "Insert Contact card Visa Test Card. When ready click on OK"
+'   result = MsgBox(prompt2, VBOKOnly, "Advanced PassThrough")
+'End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Enhanced PT - Poll for Token - ICC (Tout=32s)"
+  DL.SendSequence " Enhanced PT - Poll for Token - ICC (Tout=32s)"
+  resultIgnore = DL.WaitForSequence("Version 2 Protocol: Response (Status=OK)", 1, 33000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Enhanced PT - Get ATR - ICC"
+  DL.SendSequence " Enhanced PT - Get ATR - ICC"
+  resultIgnore = DL.WaitForSequence("Version 2 Protocol: Response (Status=OK)", 1, 5000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Enhanced PT - Deactivate - ICC"
+  DL.SendSequence " Enhanced PT - Deactivate - ICC"
+  resultIgnore = DL.WaitForSequence("Version 2 Protocol: Response (Status=OK)", 1, 5000)
+End If
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Stop Passthrough Mode"
+  DL.SendSequence " Stop Passthrough Mode"
+  result = DL.WaitForSequence("Version 2 Protocol: Response (Status=OK)", 1, 10000)
+End If
+
+End If 'end of proj
+'================================================================
+' run test proj get memory (cmd 82-04)
+'================================================================
+result = 1
+runProj = doNotRun
+If runProj <> 0 Then
+  StartProj("TESTING01")
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get Memory"
+  DL.SendSequence " Get Memory"
+  resultIgnore = DL.WaitForSequence("Get Mem Resp", 1, 3000)
+ 
+End If
+
+End If 'end of proj
+
+Loop While loopForever <> 0
+
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+

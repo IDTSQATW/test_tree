@@ -1,0 +1,6 @@
+Docklight Log File (HEX) - Started 2/3/2009 17:18:06.14 
+
+2/3/2009 17:18:07.64 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+
+Docklight Log File (HEX) - Stopped 2/3/2009 17:18:10.97 
+

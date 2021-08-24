@@ -1,0 +1,245 @@
+DL_SCRIPTVERSION
+1
+27182
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "FV001" ' !!!!! EDIT THIS !!!!!
+' Negative test
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description	
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+	
+  'Display Test Steps 	
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()	 
+  Prompting(1) = result
+
+  'Set Docklight COM Port	
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()	 
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()	 
+  POSBaudRate(1) = result
+	
+Loop
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+result = 1
+countf = 0
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON " Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+'-------------------------------------------------------------
+' TEST BEGINS
+'-------------------------------------------------------------
+sub count()
+    countf = countf + 1
+    dl.addcomment vbcrlf
+    dl.addcomment "** FAIL **"
+end sub
+
+'-------------------------------------------------------------------------------------
+
+sub P1_2900_1()
+DL.ResetReceiveCounter
+DL.AddComment "--- GET F/W Ver. P1 (0 data length but has 1 byte data, INVALID)"
+DL.SendSequence "GETFirmwareVersionP1 (unnecessary data)"
+result = DL.WaitForSequence("p1-06", 1, 1000)
+if result = 0 then
+   count()
+end if
+end sub
+
+'-------------------------------------------------------------------------------------
+
+sub P1_2900_2()
+DL.ResetReceiveCounter
+dl.addcomment vbcrlf
+DL.AddComment "--- GET F/W Ver. P1 (data length <> 0, INVALID)"
+DL.SendSequence "GETFirmwareVersionP1 (unsupported data)"
+result = DL.WaitForSequence("p1-06", 1, 1000)
+if result = 0 then
+   count()
+end if
+end sub
+
+'-------------------------------------------------------------------------------------
+
+sub P2_2900_1()
+DL.ResetReceiveCounter
+dl.addcomment vbcrlf
+DL.AddComment "--- GET F/W Ver. P2 (0 data length but has 1 byte data, INVALID)"
+DL.SendSequence "GETFirmwareVersionP2 (unnecessary data)"
+result = DL.WaitForSequence("p2-04", 1, 1000)
+if result = 0 then
+   count()
+end if
+end sub
+
+'-------------------------------------------------------------------------------------
+
+sub P2_2900_2()
+DL.ResetReceiveCounter
+dl.addcomment vbcrlf
+DL.AddComment "--- GET F/W Ver. P2 (data length <> 0, INVALID)"
+DL.SendSequence "GETFirmwareVersionP2 (unsupported data)"
+result = DL.WaitForSequence("p2-05", 1, 1000)
+if result = 0 then
+   count()
+end if
+end sub
+
+'======================================================================================
+
+result=Msgbox ("If reader support Protocol 1 command", VBYESNO)
+
+IF result = VBYES Then 
+P1_2900_1()
+P1_2900_2()
+P2_2900_1()
+P2_2900_2()
+End If
+
+
+IF result = VBNO Then 
+P2_2900_1()
+P2_2900_2()
+End If
+
+
+
+if countf <> 0 then
+   result = 0
+else
+   result = 1
+end if
+
+DL.AddComment vbCrLf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+
+PrintMyResult(result)
+
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+	MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+	MasterVerdict = "FAILED"
+End If
+
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If 0 Then
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+

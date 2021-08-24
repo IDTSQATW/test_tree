@@ -1,0 +1,12 @@
+Docklight Log File (HEX) - Started 2018/8/15 11:13:02.670 
+ TEST CASE: EDTT09-1
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+
+
+Docklight Log File (HEX) - Stopped 2018/8/15 11:13:02.976 
+

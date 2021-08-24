@@ -1,0 +1,117 @@
+DL_SCRIPTVERSION
+1
+53583
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+'------------------------------------------------------------
+DL.OpenProject "PT_LED_Stress.ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+
+result = 1
+
+'------------------------------------------------------------
+'Configure prompting
+'------------------------------------------------------------
+FileInput.OpenFile "C:\vivotech\regress\regression\regress_test\test_tree\Regress.Config"
+Dim Prompting(1)
+
+Do Until FileInput.EndOfFile
+  result2 = FileInput.GetLine() 'by pass variable name
+  result2 = FileInput.GetLine()
+  Prompting(0) = result2
+  result2 = FileInput.GetLine() 'by pass variable name
+  result2 = FileInput.GetLine()	 
+  Prompting(1) = result2
+Loop
+
+'============================================================
+'If result <> 0 Then
+'  DL.AddComment "--- Profile.1"
+'  DL.ResetReceiveCounter "EMV.Response"
+'  DL.SendSequence "Profile.1"
+'  result = DL.WaitForSequence("EMV.Response", 1, '10000)
+'End If
+DL.Pause 5000
+'------------------------------------------------------------
+'Prompt of test being run
+'------------------------------------------------------------
+If Prompting(0) = "ON" Then
+  MyInput = MsgBox("You will now run test PT03700." &Chr(13) & "Objective: ???", VBOKOnly, "Test: PT03700")
+End If
+'End If
+'------------------------------------------------------------
+For i = 0 to 100
+If result <> 0 Then
+  DL.AddComment "--- LED Control - All LEDs ON"
+  DL.SendSequence "LED Control - All LEDs ON"
+  result = DL.WaitForSequence("LED Control - All LEDs ON/OFF (SUCCESS)", 1, 10000)
+End If
+DL.Pause 150
+If result <> 0 Then
+  DL.AddComment "--- LED Control - All LEDs OFF"
+  DL.SendSequence "LED Control - All LEDs OFF"
+  result = DL.WaitForSequence("LED Control - All LEDs ON/OFF (SUCCESS)", 1, 10000)
+End If
+DL.Pause 150
+If result <> 0 Then
+  DL.AddComment "--- LED Control - LED 0 ON"
+  DL.SendSequence "LED Control - LED 0 ON"
+  result = DL.WaitForSequence("LED Control - All LEDs ON/OFF (SUCCESS)", 1, 10000)
+End If
+DL.Pause 150
+If result <> 0 Then
+  DL.AddComment "--- LED Control - LED 0 OFF"
+  DL.SendSequence "LED Control - LED 0 OFF"
+  result = DL.WaitForSequence("LED Control - All LEDs ON/OFF (SUCCESS)", 1, 10000)
+End If
+DL.Pause 150
+If result <> 0 Then
+  DL.AddComment "--- LED Control - LED 1 ON"
+  DL.SendSequence "LED Control - LED 1 ON"
+  result = DL.WaitForSequence("LED Control - All LEDs ON/OFF (SUCCESS)", 1, 10000)
+End If
+DL.Pause 150
+If result <> 0 Then
+  DL.AddComment "--- LED Control - LED 1 OFF"
+  DL.SendSequence "LED Control - LED 1 OFF"
+  result = DL.WaitForSequence("LED Control - All LEDs ON/OFF (SUCCESS)", 1, 10000)
+End If
+DL.Pause 150
+If result <> 0 Then
+  DL.AddComment "--- LED Control - LED 2 ON"
+  DL.SendSequence "LED Control - LED 2 ON"
+  result = DL.WaitForSequence("LED Control - All LEDs ON/OFF (SUCCESS)", 1, 10000)
+End If
+DL.Pause 150
+If result <> 0 Then
+  DL.AddComment "--- LED Control - LED 2 OFF"
+  DL.SendSequence "LED Control - LED 2 OFF"
+  result = DL.WaitForSequence("LED Control - All LEDs ON/OFF (SUCCESS)", 1, 10000)
+End If
+Next
+
+
+'------------------------------------------------------------
+
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If

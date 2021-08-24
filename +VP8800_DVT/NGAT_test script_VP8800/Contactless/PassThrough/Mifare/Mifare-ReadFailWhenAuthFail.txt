@@ -1,0 +1,53 @@
+
+PT stop
+CMD:2C 01 00 
+EXR:2C 01 
+
+----- PT_Start commands -----
+CMD:2C 01 01
+EXR:2C 01 00 00 00
+
+Antenna enable
+CMD:28 01 01
+EXR:28 01 00 00 00
+
+Poll for token
+DLG:Please present S50 card and not move
+CMD:2C 02 0A 00
+EXR:2C 02 00 00 05 03 
+
+ ----- Authenticate with INVALID default Key A - Block 4 -----
+CMD:2C 06 04 01 11 22 33 44 55 66
+EXR:2C 06 0A 00 04 00 04 00 0E
+
+ ----- MiFare Read 1 Block - Start at Block 4 -----
+CMD:2C 07 31 04
+EXR:2C 07 0A 00 04 00 04 00 0E
+
+ ----- Authenticate with INVALID default Key A - Block 32 -----
+CMD:2C 06 20 01 11 22 33 44 55 66
+EXR:2C 06 0A 00 04 00 04 00 0E
+
+ ----- MiFare Read 1 Block - Start at Block 5 -----
+CMD:2C 07 31 05
+EXR:2C 07 0A 00 04 00 04 00 0E
+
+ ----- Authenticate with VALID default Key A - Block 13 -----
+CMD:2C 06 0D 01 FF FF FF FF FF FF 
+EXR:2C 06 00 00 00
+
+ ----- MiFare Read 1 Block - Start at Block 5 -----
+CMD:2C 07 31 05
+EXR:2C 07 00 00 10 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55
+
+ ----- MiFare Read 1 Block - Start at Block 32 -----
+CMD:2C 07 31 20
+EXR:2C 07 00 00 10 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32
+
+ ----- MiFare Read 1 Block - Start at Block 48 -----
+CMD:2C 07 31 30
+EXR:2C 07 00 00 10 48 48 48 48 48 48 48 48 48 48 48 48 48 48 48 48
+
+PT stop
+CMD:2C 01 00
+EXR:2C 01 00 00 00

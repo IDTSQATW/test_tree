@@ -1,0 +1,39 @@
+DL_SCRIPTVERSION
+1
+48149
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+'------------------------------------------------------------
+DL.OpenProject "TI001.ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"', false, true
+
+Dim prompt
+Dim confirm
+
+'//BUG:  Reader doesn't TimeOut w/in 200 ms
+'------------------------------------------------------------
+'DL.AddComment "#1: Truncated Send"
+'DL.SendSequence "Error.Truncated"
+'result = DL.WaitForSequence("Error.Timeout", 1, 200)
+'------------------------------------------------------------
+'// Substitute CRC Error
+DL.AddComment "#1: Send CRC Error"
+DL.SendSequence "Error.CRC"
+result = DL.WaitForSequence("Error.CRC", 1, 200)
+
+
+' CHECK RESULTS:
+'------------------------------------------------------------
+If result = 0 then
+   DL.AddComment Chr(13) & "Result = FAILED"
+Else
+   DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+
+' SCRIPT FINISH
+'------------------------------------------------------------
+DL.StopLogging

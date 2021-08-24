@@ -1,0 +1,259 @@
+DL_SCRIPTVERSION
+1
+38437
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "ST100" ' !!!!! EDIT THIS !!!!!
+' Objective: SmartTap 2.1, issue verification -- cancel at cmd, reader return timeout RX.
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+   'Display Test Case Number and Description     
+   result = FileInput.GetLine() 'by pass variable name
+   result = FileInput.GetLine()
+   Prompting(0) = result
+      
+   'Display Test Steps   
+   result = FileInput.GetLine() 'by pass variable name
+   result = FileInput.GetLine()      
+   Prompting(1) = result
+
+   'Set Docklight COM Port     
+   result = FileInput.GetLine() 'by pass variable name
+   result = FileInput.GetLine()      
+   COM_Port(1) = result
+
+   'Set Reader Baud Rate
+   result = FileInput.GetLine() 'by pass variable name
+   result = FileInput.GetLine()      
+   POSBaudRate(1) = result
+
+   'Set Reader Type
+   result = FileInput.GetLine() 'by pass variable name
+   result = FileInput.GetLine()      
+   readerType = result
+
+   'Set Reader Model
+   result = FileInput.GetLine() 'by pass variable name
+   result = FileInput.GetLine()      
+   readerModel = result
+
+   'Set Reader FW version
+   result = FileInput.GetLine() 'by pass variable name
+   result = FileInput.GetLine()      
+   fwVersion = result
+
+   'Set Reader FW build
+   result = FileInput.GetLine() 'by pass variable name
+   result = FileInput.GetLine()      
+   fwBuild = result
+
+   'Set Reader General Flag
+   result = FileInput.GetLine() 'by pass variable name
+   result = FileInput.GetLine()      
+   fwGF = result
+Loop
+
+Sub StepPrompt(PromptString)
+    DL.AddComment PromptString
+    If Prompting(1) = "ON" Then
+       MsgBox PromptString, VBOKOnly, "Test Step"
+    Else
+    End If
+End Sub
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+countf = 0
+vivotech = 0
+idtech = 0
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+End If
+
+Sub PrintMyResult(ResultX)
+    If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+       MasterResult = 1
+       DL.AddComment "Result = PASSED"
+    Else
+       MasterResult = 0
+       DL.AddComment "Result = FAILED"
+    End If
+End Sub
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+         DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+         MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+if readerType = "GR" or readerType = "NEO1" then
+If result <> 0 Then
+   dl.resetreceivecounter
+   DL.AddComment "--- 04-F0"
+   DL.SendSequence "04-F0"
+   result = DL.WaitForSequence("04-00 resp 00", 1, 15000)
+   dl.pause 15000
+End If
+end if
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Poll on demand"
+   DL.SendSequence "poll on demand"
+   result = DL.WaitForSequence("01-01 resp 00", 1, 3000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Burst mode off"
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then DL.SendSequence "burst mode off"
+   if readerType = "NEO2" then DL.SendSequence "burst mode off (NEO2)"
+   result = DL.WaitForSequence("04-00 resp 00", 1, 3000)
+End If
+
+for k = 1 to 2
+    if result <> 0 then
+       if k = 1 then cmd = "02-01 w/ FFEE08"
+       if k = 2 then cmd = "02-40 w/ FFEE08"
+
+       dl.resetreceivecounter
+       dl.addcomment vbcrlf
+       DL.AddComment "--- cmd " & cmd
+       DL.SendSequence cmd
+       dl.pause 500
+       DL.SendSequence "05-01"
+       r1 = DL.WaitForSequence("05 00", 1, 3000)
+       r2 = DL.WaitForSequence("02 08", 1, 7000)
+       if r1 = 0 or r2 = 1 then result = 0
+       dl.pause 500
+    end if
+next
+
+DL.AddComment vbCrLf
+'============================================================
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
+
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'DL.pause 1000
+
+'If result = 0 then
+'   DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'   DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+
+'If Prompting(0) = "ON" Then
+'   If result = 0 then
+'      MsgBox "Result = FAILED", VBOKOnly, "Result"
+'   Else 
+'      MsgBox "Result = PASSED", VBOKOnly, "Result"
+'   End If
+'End If
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+'If MasterResult = 1 Then
+'   MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'       MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+   FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+       FileOutput.WriteLine "1|PASS|OK"
+End If
+FileOutput.CloseFile
+
+Sub DL_OnSend()
+    ' For all Send Sequences with minimum 3 bytes length (one byte user data,
+    ' two bytes CRC, perform the following manipulation:
+    ' - Calculate a 16 bit crc value on the characters 1 .. (DL.OnSend_Size() - 2)
+    ' - Write the low byte to character no. DL.OnSend_GetSize()-1
+    ' - Write the high byte to character no. DL.OnSend_GetSize()
+    ' Example:
+    ' Send Sequence name: MyCommand
+    ' Send Sequence in HEX representation: 02 04 00 00 00 01 00 00
+    ' --> Data transmitted by Docklight:   02 04 00 00 00 01 31 F9
+    '     (with "31" as the low byte CRC, "F9" as the high byte)
+
+    ' Check if there is at least one byte of user data
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub

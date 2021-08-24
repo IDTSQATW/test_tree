@@ -1,0 +1,36 @@
+Docklight Log File (HEX) - Started 2017/12/11 14:40:41.167 
+ TEST CASE: CDTP002
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Enable Pass Through
+
+2017/12/11 14:40:42.330 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+2017/12/11 14:40:42.358 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START and STOP (OK)
+ Enter OK and then tap a type 2 card (e.g. VISA V001 or MC payPass M001).
+ 
+
+--- Poll for Token (10 Seconds)
+
+2017/12/11 14:40:47.948 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51 
+2017/12/11 14:40:51.783 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 05 02 CF 17 1A 28 B8 18  
+
+--- Pass-Through - STOP
+
+2017/12/11 14:40:51.821 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38 
+2017/12/11 14:40:51.848 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START and STOP (OK)
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2017/12/11 14:40:52.982 
+

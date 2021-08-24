@@ -1,0 +1,29 @@
+Docklight Log File (HEX) - Started 2021/8/5 15:41:18.956 
+ TEST CASE: CR051-3
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+
+ --- Get Data Encryption (C7-37)
+
+2021/8/5 15:41:20.077 [TX] - 56 69 56 4F 74 65 63 68 32 00 C7 37 00 00 5B C6 
+2021/8/5 15:41:20.105 [RX] - 56 69 56 4F 74 65 63 68 32 00 C7 00 00 01 03 9C  
+
+ --- 60-10 Contact Start Transaction (support FallBack)
+
+2021/8/5 15:41:20.118 [TX] - 56 69 56 4F 74 65 63 68 32 00 60 10 00 23 01 00 78 00 78 9C 01 00 5F 57 01 00 9F 02 06 00 00 00 00 02 00 9F 03 06 00 00 00 00 00 00 5F 2A 02 08 40 F0 8F 
+2021/8/5 15:41:20.118 [RX] - 1C 56 69 56 4F 74 65 63 68 32 00 60 63 00 00 FF 0E  
+Waiting for 1 min (timeout)...
+56 69 56 4F 74 65 63 68 32 00 60 08 00 07 E2 DF EE 25 02 30 13 7D E6  
+
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2021/8/5 15:42:35.915 
+

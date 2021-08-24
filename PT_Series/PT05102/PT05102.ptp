@@ -1,0 +1,86 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Poll for Token - Poll for Token when PT mode disabled
+56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51
+0
+5
+
+SEND
+1
+Pass-Through Mode - (STOP)
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38
+0
+5
+
+SEND
+2
+Pass-Through Mode - (START)
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19
+0
+5
+
+RECEIVE
+0
+Poll for Token - Poll for Token (TIMEOUT)
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 01 00 7B 8C
+-1
+1
+COMMENT Poll for Token - Poll for Token (TIMEOUT)
+1
+1
+0
+1
+
+RECEIVE
+1
+Pass-Through Mode - (STOP) (OK)
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B
+-1
+1
+COMMENT Pass-Through Mode - (STOP)  (OK)
+1
+1
+0
+1
+
+RECEIVE
+2
+Pass-Through Mode - (START) (OK)
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B
+-1
+1
+COMMENT Pass-Through Mode - (START) (OK)
+1
+1
+0
+1
+
+RECEIVE
+3
+Poll for Token from card response received (FAILED)
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 05 03 4A D0 51 40 EC CB
+-1
+0
+COMMENT Poll for Token from card response received (FAILED)
+1
+1
+0
+1
+

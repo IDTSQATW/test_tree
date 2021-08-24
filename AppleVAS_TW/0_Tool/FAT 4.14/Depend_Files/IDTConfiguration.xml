@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bootload configuration ver0.01-->
+ <IDT_DEVICES_SETTING>
+  <EnableLog enableLog = "0"/>
+
+  <AUGUSTAS vid_pid = "0acd,3920"/>
+  <AUGUSTA vid_pid = "0acd,3820"/>
+  <Intuit_III vid_pid = "0acd,3610"/>
+  <MiniSmartII vid_pid = "0acd,3410"/>
+  <UniPayII vid_pid = "0acd,2910"/> 
+ </IDT_DEVICES_SETTING>

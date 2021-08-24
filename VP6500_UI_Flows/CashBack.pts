@@ -1,0 +1,86 @@
+DL_SCRIPTVERSION
+1
+48011
+
+DL.AddComment "Hello World"
+
+Dim resultX
+
+DL.SendSequence "Text Prompt - Cash Back?"
+result = DL.WaitForSequence("Prompt Printed", 1, 8000)
+DL.ResetReceiveCounter "Prompt Printed"
+DL.SendSequence "Yes Button"
+result = DL.WaitForSequence("Prompt Printed", 1, 8000)
+DL.ResetReceiveCounter "Prompt Printed"
+DL.SendSequence "No Button"
+result = DL.WaitForSequence("Prompt Printed", 1, 8000)
+DL.ResetReceiveCounter "Prompt Printed"
+DL.SendSequence "Read Yes Button"
+result = DL.WaitForSequence("Yes Button Pressed", 1, 8000)
+'DL.ResetReceiveCounter "Prompt Printed"
+
+DL.SendSequence "Text Prompt - Cash Back?"
+DL.AddComment "I AM HERE 1"
+result = DL.WaitForSequence("Prompt Printed", 1, 8000)
+DL.AddComment "I AM HERE 2"
+DL.ResetReceiveCounter "Prompt Printed"
+DL.ResetReceiveCounter "Entered Keys"
+DL.AddComment "I AM HERE 3"
+DL.SendSequence "Read Key ECHO"
+DL.AddComment "I AM HERE 4"
+result = DL.WaitForSequence("Entered Keys", 1, 20000)
+DL.AddComment "I AM HERE 5"
+
+Sub DL_OnReceive()
+'DL.AddComment "I AM IN! OnReceive"
+	If DL.OnReceive_GetName() = "$20 Entered" Then
+		resultX = 20
+	ElseIf DL.OnReceive_GetName() = "$40 Entered" Then
+		resultX = 40
+	ElseIf DL.OnReceive_GetName() = "$60 Entered" Then
+		resultX = 60
+	ElseIf DL.OnReceive_GetName() = "$80 Entered" Then
+		resultX = 80
+	ElseIf DL.OnReceive_GetName() = "$100 Entered" Then
+		resultX = 100
+	ElseIf DL.OnReceive_GetName() = "$120 Entered" Then
+		resultX = 120
+	ElseIf DL.OnReceive_GetName() = "$140 Entered" Then
+		resultX = 140
+	ElseIf DL.OnReceive_GetName() = "$160 Entered" Then
+		resultX = 160
+	ElseIf DL.OnReceive_GetName() = "$180 Entered" Then
+		resultX = 180
+	ElseIf DL.OnReceive_GetName() = "Prompt Printed" Then
+		
+	End If
+'DL.AddComment "Leaving__OnReceive"	
+' DL.AddComment "You entered the CASH BACK amount of " & resultX & "."
+End Sub
+DL.AddComment "XYZ --- You entered the CASH BACK amount of " & resultX & "."
+
+DL.SendSequence "Text Prompt - Processing..."
+
+'DL.AddComment " " & result20
+'DL.AddComment "Result20 is " & result20
+'DL.AddComment "Result40 is " & result40
+'DL.AddComment "Result60 is " & result60
+'DL.AddComment "Result80 is " & result80
+'DL.AddComment "Result100 is " & result100
+'DL.AddComment "Result120 is " & result120
+'DL.AddComment "Result140 is " & result140
+'DL.AddComment "Result160 is " & result160
+'DL.AddComment "Result180 is " & result180
+'DL.AddComment "Result200 is " & result200
+
+'result60 = DL.WaitForSequence("$60 Entered", 1, 10)
+'result80 = DL.WaitForSequence("$80 Entered", 1, 10)
+'result100 = DL.WaitForSequence("$100 Entered", 1, 10)
+'result120 = DL.WaitForSequence("$120 Entered", 1, 10)
+
+
+
+'DL.ResetReceiveCounter "Prompt Printed"
+'DL.SendSequence "Text Prompt - Processing..."
+'result = DL.WaitForSequence("Prompt Printed", 1, 8000)
+'DL.ResetReceiveCounter "Prompt Printed"

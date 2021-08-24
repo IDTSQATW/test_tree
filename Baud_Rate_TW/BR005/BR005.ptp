@@ -1,0 +1,81 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+Set Baud Rate - 9600
+56 69 56 4F 74 65 63 68 32 00 30 01 00 01 01 68 92
+0
+5
+
+SEND
+1
+Set Baud Rate - 115200
+56 69 56 4F 74 65 63 68 32 00 30 01 00 01 05 EC D2
+0
+5
+
+SEND
+2
+Ping
+56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD
+0
+5
+
+RECEIVE
+0
+Baud Rate Accepted
+56 69 56 4F 74 65 63 68 32 00 30 00 00 00 ?? ??
+-1
+1
+COMMENT Baud Rate accepted
+1
+1
+0
+1
+
+RECEIVE
+1
+Incorrect Parameter
+56 69 56 4F 74 65 63 68 32 00 30 06 00 00 ?? ??
+-1
+1
+COMMENT Parameter Not Supported
+1
+1
+0
+1
+
+RECEIVE
+2
+Ping Successful
+56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83
+-1
+1
+COMMENT Ping Successful
+1
+1
+0
+1
+

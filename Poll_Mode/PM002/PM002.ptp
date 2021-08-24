@@ -1,0 +1,67 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Poll On Demand
+56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34
+0
+5
+
+SEND
+1
+Activate Transaction
+56 69 56 4F 74 65 63 68 32 00 02 01 00 0A 20 9F 02 06 00 00 00 00 03 33 77 91
+0
+5
+
+RECEIVE
+0
+Good Response
+56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+ViVOwallet good Response
+56 69 56 4F 74 65 63 68 32 00 02 00 ##
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+CL card Response
+56 69 56 4F 74 65 63 68 32 00 02 ?? ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

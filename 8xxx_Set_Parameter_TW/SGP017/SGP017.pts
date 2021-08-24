@@ -1,0 +1,506 @@
+DL_SCRIPTVERSION
+1
+21043
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "SGP017" ' !!!!! EDIT THIS !!!!!
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  genFlag = result
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+
+'Verify TimezonePlue
+TimeZonePlus()
+
+'Verify TimezoneMinus
+TimeZoneMinus()
+
+'Verify TimezonePlus with daylight saving
+TimeZonePlusDST()
+
+'Verify TimezoneMinus with daylight saving
+TimeZoneMinusDST()
+
+'------------------------------------------------------------
+Sub TimeZonePlus()
+
+For i = 1 to 15
+
+if i = 1 then j = "23:59"
+if i = 2 then j = "23:00"
+if i = 3 then j = "22:00"
+if i = 4 then j = "21:00"
+if i = 5 then j = "20:00"
+if i = 6 then j = "19:00"
+if i = 7 then j = "18:00"
+if i = 8 then j = "17:00"
+if i = 9 then j = "16:00"
+if i = 10 then j = "15:00"
+if i = 11 then j = "14:00"
+if i = 12 then j = "13:00"
+if i = 13 then j = "12:00"
+if i = 14 then j = "11:00"
+if i = 15 then j = "12:15"
+
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment vbcrlf & vbcrlf & "--- 04-00 -- Set Date & Time = 99-12-31_" & j
+   DL.SendSequence "04-00 -- Set Date & Time = 99-12-31_" & j
+   result = DL.WaitForSequence("04-00 OK", 1, 10000)
+End If
+DL.Pause 200
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment vbcrlf & vbcrlf & "--- 03 02 _Get Configuration"
+   DL.SendSequence "03 02 _Get Configuration"
+   result = DL.WaitForSequence("1999-12-31 " & j, 1, 10000)   
+End If
+DL.Pause 200
+'------------------------------------------------------------
+If result <> 0 Then
+   If i = 15 then   
+      DL.AddComment vbcrlf & vbcrlf & "--- 04-00 Set Time zone = + 12 45 00" 
+      DL.SendSequence "04-00 Set Time zone = + 12 45 00"
+      result = DL.WaitForSequence("04-00 OK", 1, 10000)  
+   ElseIf i < 10 then
+      DL.AddComment vbcrlf & vbcrlf & "--- 04-00 Set Time zone = + 0" & i & " 00 00" 
+      DL.SendSequence "04-00 Set Time zone = + 0" & i & " 00 00" 
+      result = DL.WaitForSequence("04-00 OK", 1, 10000)   
+   Else 
+      DL.AddComment vbcrlf & vbcrlf & "--- 04-00 Set Time zone = + " & i & " 00 00" 
+      DL.SendSequence "04-00 Set Time zone = + " & i & " 00 00" 
+      result = DL.WaitForSequence("04-00 OK", 1, 10000)   
+   End If
+End If
+
+DL.Pause 200
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment vbcrlf & vbcrlf & "--- 03 02 _Get Configuration"
+   DL.SendSequence "03 02 _Get Configuration"
+
+   if i = 1 then 
+            result = DL.WaitForSequence("2000-01-01 00:59", 1, 10000)   
+   else
+            result = DL.WaitForSequence("2000-01-01 01:00", 1, 10000)         
+   End if
+End If
+DL.Pause 200
+DL.AddComment vbcrlf & vbcrlf & "///////////////////////////////////////////////////////////////////"
+
+Next
+
+End Sub
+
+'------------------------------------------------------------
+Sub TimeZoneMinus()
+
+For k = 1 to 12
+
+if k = 1 then t = "00:30"
+if k = 2 then t = "01:00"
+if k = 3 then t = "02:00"
+if k = 4 then t = "03:00"
+if k = 5 then t = "04:00"
+if k = 6 then t = "05:00"
+if k = 7 then t = "06:00"
+if k = 8 then t = "07:00"
+if k = 9 then t = "08:00"
+if k = 10 then t = "09:00"
+if k = 11 then t = "10:00"
+if k = 12 then t = "11:00"
+
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment vbcrlf & vbcrlf & "--- 04-00 -- Set Date & Time = 00-01-01_" & t
+   DL.SendSequence "04-00 -- Set Date & Time = 00-01-01_" & t
+   result = DL.WaitForSequence("04-00 OK", 1, 10000)
+End If
+DL.Pause 200
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment vbcrlf & vbcrlf & "--- 03 02 _Get Configuration"
+   DL.SendSequence "03 02 _Get Configuration"
+   result = DL.WaitForSequence("2000-01-01 " & t, 1, 10000)   
+End If
+DL.Pause 200
+'------------------------------------------------------------
+If result <> 0 Then
+   If k < 10 then
+      DL.AddComment vbcrlf & vbcrlf & "--- 04-00 Set Time zone = - 0" & k & " 00 00" 
+      DL.SendSequence "04-00 Set Time zone = - 0" & k & " 00 00" 
+      result = DL.WaitForSequence("04-00 OK", 1, 10000)   
+   Else 
+      DL.AddComment vbcrlf & vbcrlf & "--- 04-00 Set Time zone = - " & k & " 00 00" 
+      DL.SendSequence "04-00 Set Time zone = - " & k & " 00 00" 
+      result = DL.WaitForSequence("04-00 OK", 1, 10000)   
+   End If
+End If
+DL.Pause 200
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment vbcrlf & vbcrlf & "--- 03 02 _Get Configuration"
+   DL.SendSequence "03 02 _Get Configuration"
+   if k = 1 then 
+            result = DL.WaitForSequence("1999-12-31 23:30", 1, 10000)   
+   else
+            result = DL.WaitForSequence("1999-12-31 23:00", 1, 10000)         
+   End if
+End If
+DL.Pause 200
+DL.AddComment vbcrlf & vbcrlf & "///////////////////////////////////////////////////////////////////"
+
+Next
+
+End Sub
+
+
+'------------------------------------------------------------
+Sub TimeZonePlusDST()
+
+For i = 0 to 14
+
+if i = 0 then j = "23:59"
+if i = 1 then j = "23:00"
+if i = 2 then j = "22:00"
+if i = 3 then j = "21:00"
+if i = 4 then j = "20:00"
+if i = 5 then j = "19:00"
+if i = 6 then j = "18:00"
+if i = 7 then j = "17:00"
+if i = 8 then j = "16:00"
+if i = 9 then j = "15:00"
+if i = 10 then j = "14:00"
+if i = 11 then j = "13:00"
+if i = 12 then j = "12:00"
+if i = 13 then j = "11:00"
+if i = 14 then j = "12:15"
+
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment vbcrlf & vbcrlf & "--- 04-00 -- Set Date & Time = 99-12-31_" & j
+   DL.SendSequence "04-00 -- Set Date & Time = 99-12-31_" & j
+   result = DL.WaitForSequence("04-00 OK", 1, 10000)
+End If
+DL.Pause 200
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment vbcrlf & vbcrlf & "--- 03 02 _Get Configuration"
+   DL.SendSequence "03 02 _Get Configuration"
+   result = DL.WaitForSequence("1999-12-31 " & j, 1, 10000)   
+End If
+DL.Pause 200
+'------------------------------------------------------------
+If result <> 0 Then
+   If i = 15 then   
+      DL.AddComment vbcrlf & vbcrlf & "--- 04-00 Set Time zone = + 12 45 00"
+      DL.SendSequence "04-00 Set Time zone = + 12 45 01"
+      result = DL.WaitForSequence("04-00 OK", 1, 10000)  
+   ElseIf i < 10 then
+      DL.AddComment vbcrlf & vbcrlf & "--- 04-00 Set Time zone = + 0" & i & " 00 01 w/ daylight saving time" 
+      DL.SendSequence "04-00 Set Time zone = + 0" & i & " 00 01" 
+      result = DL.WaitForSequence("04-00 OK", 1, 10000)   
+   Else 
+      DL.AddComment vbcrlf & vbcrlf & "--- 04-00 Set Time zone = + " & i & " 00 01 w/ daylight saving time" 
+      DL.SendSequence "04-00 Set Time zone = + " & i & " 00 01" 
+      result = DL.WaitForSequence("04-00 OK", 1, 10000)   
+   End If
+End If
+
+DL.Pause 200
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment vbcrlf & vbcrlf & "--- 03 02 _Get Configuration"
+   DL.SendSequence "03 02 _Get Configuration"
+
+   if i = 1 then 
+            result = DL.WaitForSequence("2000-01-01 00:59", 1, 10000)   
+   else
+            result = DL.WaitForSequence("2000-01-01 01:00", 1, 10000)         
+   End if
+End If
+DL.Pause 200
+DL.AddComment vbcrlf & vbcrlf & "///////////////////////////////////////////////////////////////////"
+
+Next
+
+End Sub
+
+'------------------------------------------------------------
+Sub TimeZoneMinusDST()
+
+For k = 2 to 12
+
+if k = 2 then t = "00:30"
+if k = 3 then t = "01:00"
+if k = 4 then t = "02:00"
+if k = 5 then t = "03:00"
+if k = 6 then t = "04:00"
+if k = 7 then t = "05:00"
+if k = 8 then t = "06:00"
+if k = 9 then t = "07:00"
+if k = 10 then t = "08:00"
+if k = 11 then t = "09:00"
+if k = 12 then t = "10:00"
+
+
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment vbcrlf & vbcrlf & "--- 04-00 -- Set Date & Time = 00-01-01_" & t
+   DL.SendSequence "04-00 -- Set Date & Time = 00-01-01_" & t
+   result = DL.WaitForSequence("04-00 OK", 1, 10000)
+End If
+DL.Pause 200
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment vbcrlf & vbcrlf & "--- 03 02 _Get Configuration"
+   DL.SendSequence "03 02 _Get Configuration"
+   result = DL.WaitForSequence("2000-01-01 " & t, 1, 10000)   
+End If
+DL.Pause 200
+'------------------------------------------------------------
+If result <> 0 Then
+   If k < 10 then
+      DL.AddComment vbcrlf & vbcrlf & "--- 04-00 Set Time zone = - 0" & k & " 00 01 w/ daylight saving time" 
+      DL.SendSequence "04-00 Set Time zone = - 0" & k & " 00 01" 
+      result = DL.WaitForSequence("04-00 OK", 1, 10000)   
+   Else 
+      DL.AddComment vbcrlf & vbcrlf & "--- 04-00 Set Time zone = - " & k & " 00 01 w/ daylight saving time" 
+      DL.SendSequence "04-00 Set Time zone = - " & k & " 00 01" 
+      result = DL.WaitForSequence("04-00 OK", 1, 10000)   
+   End If
+End If
+DL.Pause 200
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment vbcrlf & vbcrlf & "--- 03 02 _Get Configuration"
+   DL.SendSequence "03 02 _Get Configuration"
+   if k = 1 then 
+            result = DL.WaitForSequence("1999-12-31 23:30", 1, 10000)   
+   else
+            result = DL.WaitForSequence("1999-12-31 23:00", 1, 10000)         
+   End if
+End If
+DL.Pause 200
+DL.AddComment vbcrlf & vbcrlf & "///////////////////////////////////////////////////////////////////"
+
+Next
+
+End Sub
+
+'------------------------------------------------------------
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If 0 Then
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub

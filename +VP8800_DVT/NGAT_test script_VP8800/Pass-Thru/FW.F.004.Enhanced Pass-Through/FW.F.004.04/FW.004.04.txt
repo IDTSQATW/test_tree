@@ -1,0 +1,24 @@
+测试不同的Beep Indicator.
+
+设置包括:
+Poll Time out: 10s
+
+Poll for Contact: On
+Poll for Contactless: On
+
+Deactivate contact: Off
+Update LEDs: Off
+Poll for Card: Off
+RF Antenna: On
+
+Contact Interface to Use: Contact
+
+Beep: [variable]
+
+LED3:Off
+LED2:Off
+LED1:Off
+LED0:Off
+
+Display String 1: null
+Display String 2: null

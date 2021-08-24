@@ -1,0 +1,46 @@
+TID:---Pass-Through Mode, Stop
+CMD:2C 01 00
+EXR:2C 01
+
+TID:--- Start PT Mode
+CMD:2C 01 01
+EXR:2C 01 00 00 00
+
+TID:--- Turn On Antenna
+CMD:28 01 01
+EXR:28 01 00 00 00
+
+TID:--- Poll for Card
+DLG:Please present S70 card and not move
+CMD:2C 02 0A 00
+EXR:2C 02 00 00 05 03
+
+TID:--- Authenticate Block 10h = 16d
+CMD:2C 06 10 01 FF FF FF FF FF FF
+EXR:2C 06 00 00 00
+
+TID:--- Initialize Blocks 16 to 18
+CMD:2C 08 33 10 87 19 00 00 78 E6 FF FF 87 19 00 00 00 FF 00 FF B7 1A 00 00 48 E5 FF FF B7 1A 00 00 00 FF 00 FF 88 19 00 00 77 E6 FF FF 88 19 00 00 00 FF 00 FF
+EXR:2C 08 00 00 00
+
+TID:--- Read 3 Initialized Blocks
+CMD:2C 07 33 10
+EXR:2C 07 00 00 30 87 19 00 00 78 E6 FF FF 87 19 00 00 00 FF 00 FF B7 1A 00 00 48 E5 FF FF B7 1A 00 00 00 FF 00 FF 88 19 00 00 77 E6 FF FF 88 19 00 00 00 FF 00 FF
+
+TID:--- Decrement Block *Original - minus 1 @ block 16 without BACKUP - Define 2 send 1
+CMD:2C 0A 32 10 04 01 00 00 00
+EXR:2C 0A 05 00 04 00 00 00 03
+
+TID:--- Increment Block *Original - plus 1 @ block 16 without BACKUP - Define 2 send 1
+CMD:2C 0A B2 10 04 01 00 00 00
+EXR:2C 0A 05 00 04 00 00 00 03
+
+TID:--- Read Blocks 16 to 18 again
+CMD:2C 07 33 10
+EXR:2C 07 00 00 30 87 19 00 00 78 E6 FF FF 87 19 00 00 00 FF 00 FF B7 1A 00 00 48 E5 FF FF B7 1A 00 00 00 FF 00 FF 88 19 00 00 77 E6 FF FF 88 19 00 00 00 FF 00 FF
+
+TID:---Pass-Through Mode, Stop
+CMD:2C 01 00
+EXR:2C 01 00 00 00
+
+

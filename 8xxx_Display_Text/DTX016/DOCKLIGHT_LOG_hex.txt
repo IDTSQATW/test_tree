@@ -1,0 +1,61 @@
+Docklight Log File (HEX) - Started 10/10/2016 18:25:07.706 
+ TEST CASE: DTX016
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+
+10/10/2016 18:25:09.394 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 0D 00 00 52 60 
+10/10/2016 18:25:09.428 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Display CUSTOM MODE OK
+ List Directory OK
+ resultName = Display CUSTOM MODE OK
+ resultName = List Directory OK
+
+10/10/2016 18:25:10.039 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 08 00 00 A2 8B 
+10/10/2016 18:25:10.046 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Display CUSTOM MODE OK
+ List Directory OK
+ resultName = Display CUSTOM MODE OK
+ resultName = List Directory OK
+ --- Wordwrap 1
+
+10/10/2016 18:25:10.718 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 03 00 24 30 30 00 30 30 00 31 00 34 00 30 00 41 42 43 45 44 46 47 68 69 6A 6B 6C 6D 6E 6F 70 20 31 32 33 34 35 36 00 3B 68 
+10/10/2016 18:25:10.738 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 04 00 C1 07 40 CA E4  Display Control OK
+ resultName = Display Control OK
+ 56 69 56 4F 74 65 63 68 32 00 83 00 00 04 00 C1 07 40 CA E4
+ Control ID = 00 C1 07 40
+ Debugger: ControlID = 00 C1 07 40
+
+10/10/2016 18:25:12.003 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 16 00 11 00 C1 07 40 48 65 6C 6C 6F 20 57 6F 72 6C 64 21 00 65 4C 
+10/10/2016 18:25:12.018 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Display CUSTOM MODE OK
+ List Directory OK
+ resultName = Display CUSTOM MODE OK
+ resultName = List Directory OK
+ Debugger: ControlID = 00 C1 07 40
+
+10/10/2016 18:25:13.283 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 16 00 10 00 C1 07 40 21 40 23 24 25 20 5E 26 2A 28 29 00 3E EB 
+10/10/2016 18:25:13.297 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Display CUSTOM MODE OK
+ List Directory OK
+ resultName = Display CUSTOM MODE OK
+ resultName = List Directory OK
+ --- Disable Custom Display Mode
+
+10/10/2016 18:25:22.313 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 09 00 00 92 BC 
+10/10/2016 18:25:22.343 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Display CUSTOM MODE OK
+ List Directory OK
+ 
+
+ resultName = Display CUSTOM MODE OK
+ resultName = List Directory OK
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 10/10/2016 18:25:23.666 
+

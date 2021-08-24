@@ -1,0 +1,73 @@
+TID:Create directory "subfolder" under "folder" [/folder/subfolder/](before directory "folder" created)
+CMD:83 25 66 6f 6c 64 65 72 2f 73 75 62 66 6f 6c 64 65 72 00
+EXR:83 25 05
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+TID:Create directory "folder"[/folder/]
+CMD:83 25 66 6f 6c 64 65 72 00
+EXR:83 25 00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+TID:Create directory "subfolder" under "folder" [/folder/subfolder/] (after directory "folder" created)
+CMD:83 25 66 6f 6c 64 65 72 2f 73 75 62 66 6f 6c 64 65 72 00
+EXR:83 25 00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+TID:Transfer a testfile to /folder/subfolder [/folder/subfolder/file]
+CMD:83 24 66 6f 6c 64 65 72 2f 73 75 62 66 6f 6c 64 65 72 2f 66 69 6c 65 00 31 00 33 00 61
+EXR:83 24 00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+TID:Try to delete directory "folder/subfolder"[/folder/subfolder] before empty it
+CMD:83 26 66 6f 6c 64 65 72 2f 73 75 62 66 6f 6c 64 65 72 00
+EXR:83 26 05
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+TID:Delete the file transferred before [/folder/subfolder/file]
+CMD:83 1F 66 6f 6c 64 65 72 2f 73 75 62 66 6f 6c 64 65 72 2f 66 69 6c 65 00
+EXR:83 1F 00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+TID:Try to delete directory "folder"[/folder/] before empty it
+CMD:83 26 66 6f 6c 64 65 72 00
+EXR:83 26 05
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+TID:Delete directory "folder/subfolder"[/folder/subfolder] (after empty it)
+CMD:83 26 66 6f 6c 64 65 72 2f 73 75 62 66 6f 6c 64 65 72 00
+EXR:83 26 00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+TID:Delete directory "folder"[/folder/] (after empty it)
+CMD:83 26 66 6f 6c 64 65 72 00
+EXR:83 26 00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+

@@ -1,0 +1,88 @@
+Objective: to verify auto output, cmd 01-0B = KB (Apple VAS card)
+
+--------------------------------------------------------------------------------
+>>> 04-09 reset to default
+CMD: 04 09
+EXR: 04 00
+
+>>> Burst mode OFF
+CMD: 04 00 FF F7 01 00
+EXR: 04 00
+
+>>> 01-0D - Auto output = for good & bad reads
+CMD: 01 0D 02
+EXR: 01 00
+
+>>> 04-11 load the Nando pass
+CMD: 04 11 01 01 3F A5 AA BE C7 27 53 35 18 F9 64 06 33 BC DA 51 F2 F0 19 D9 F5 37 67 54 BF 21 3F A3 47 05 B1 7D 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+EXR: 04 00
+
+>>> C7-66 Nando private key
+CMD: C7 66 2D D3 C1 81 63 D8 32 7B F8 BB 95 63 AB E2 53 FE 2F FC 35 15 39 F0 5B 85 FB 68 3D C1 A6 10 53 DE
+EXR: C7 00
+
+>>> 04-00 w/ tag DFED3F = 02 (Decrypt VAS data via private key)
+CMD: 04 00 DF ED 3F 01 02
+EXR: 04 00
+
+--------------------
+>>> 04-00 w/ tag FFEE06 (VAS only)
+CMD: 04 00 FF EE 06 18 9F 22 02 01 00 9F 26 04 00 00 00 02 9F 2B 05 01 00 00 00 00 DF 01 01 01
+EXR: 04 00
+
+>>> 01-0C - Data output =  Simplified output mode
+CMD: 01 0C 01
+EXR: 01 00
+
+>>> Auto output mode
+SWIPEKB: Click OK --> Tap Apple w/ VAS card (Nando's Card)
+EXR: 18329208041969
+
+--------------------
+>>> 01-0C - Data output =  Tags only
+CMD: 01 0C 02
+EXR: 01 00
+
+>>> Auto output mode
+SWIPEKB: Click OK --> Tap Apple w/ VAS card (Nando's Card)
+EXR: DF ED 5F 01 57 
+EXR: FF EE 06
+EXR: 9A 03
+EXR: 9F 21 03
+EXR: 9F 25 
+EXR: 9F 2A 00 
+EXR: 9F 27 0E 31 38 33 32 39 32 30 38 30 34 31 39 36 39
+EXR: DF ED 60 01 02
+EXR: 9F 39 01 07 FF EE 01 04 DF 30 01 00 DF EE 26 01
+
+>>> 004-00 w/ tag FFEE06 (VAS OR Pay)
+CMD: 04 00 FF EE 06 18 9F 22 02 01 00 9F 26 04 00 00 00 00 9F 2B 05 01 00 00 00 00 DF 01 01 01
+EXR: 04 00
+
+>>> Auto output mode
+SWIPEKB: Click OK --> Tap Apple w/ VAS card (Nando's Card)
+EXR: DF ED 5F 01 57 
+EXR: FF EE 06
+EXR: 9A 03
+EXR: 9F 21 03
+EXR: 9F 25 
+EXR: 9F 2A 00 
+EXR: 9F 27 0E 31 38 33 32 39 32 30 38 30 34 31 39 36 39
+EXR: DF ED 60 01 02
+EXR: 9F 39 01 07 FF EE 01 04 DF 30 01 00 DF EE 26 01
+
+>>> 04-00 w/ tag FFEE06 (VAS AND Pay)
+CMD: 04 00 FF EE 06 18 9F 22 02 01 00 9F 26 04 00 00 00 01 9F 2B 05 01 00 00 00 00 DF 01 01 01
+EXR: 04 00
+
+>>> Auto output mode
+SWIPEKB: Click OK --> Tap Apple w/ VAS card (Nando's Card)
+EXR: DF ED 5F 01 57 
+EXR: FF EE 06
+EXR: 9A 03
+EXR: 9F 21 03
+EXR: 9F 25 
+EXR: 9F 2A 00 
+EXR: 9F 27 0E 31 38 33 32 39 32 30 38 30 34 31 39 36 39
+EXR: DF ED 60 01 02
+EXR: 9F 39 01 07 FF EE 01 04 DF 30 01 00 DF EE 26 01

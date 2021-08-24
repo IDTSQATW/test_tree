@@ -1,0 +1,48 @@
+Docklight Log File (HEX) - Started 1/4/2017 15:53:16.421 
+ TEST CASE: DIR005
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Create Directory 'apple' (83-25)
+
+1/4/2017 15:53:17.727 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 25 00 06 61 70 70 6C 65 00 11 7E 
+1/4/2017 15:53:17.735 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ --- File Download - part 1 - apple/applefile.x:30bytes
+
+1/4/2017 15:53:17.817 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 24 00 21 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 33 30 00 32 00 61 61 61 61 61 61 61 61 61 62 5F 41 
+1/4/2017 15:53:17.825 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ --- File Download - part 2 - apple/applefile.x:30bytes
+
+1/4/2017 15:53:17.864 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 24 00 21 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 33 30 00 30 00 63 63 63 63 63 63 63 63 63 64 72 FA 
+1/4/2017 15:53:17.871 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ --- File Download - part 3 - apple/applefile.x:30bytes
+
+1/4/2017 15:53:17.894 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 24 00 21 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 33 30 00 31 00 65 65 65 65 65 65 65 65 65 66 67 AE 
+1/4/2017 15:53:17.906 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ --- Delete Directory - apple
+
+1/4/2017 15:53:17.916 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 26 00 06 61 70 70 6C 65 00 55 53 
+1/4/2017 15:53:17.923 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 04 00 00 00 27 27 52  --- Delete File - applefile.x in ROOT/apple
+
+1/4/2017 15:53:17.936 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 1F 00 12 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 C0 48 
+1/4/2017 15:53:17.944 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ --- Delete Directory - apple
+
+1/4/2017 15:53:17.955 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 26 00 06 61 70 70 6C 65 00 55 53 
+1/4/2017 15:53:17.963 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 1/4/2017 15:53:19.211 
+

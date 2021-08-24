@@ -1,0 +1,57 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+config buttons -- 01 01
+56 69 56 4F 74 65 63 68 32 00 F0 F4 00 03 01 01 10 E7 FB
+0
+5
+
+SEND
+1
+USA Tech F6 (Disable attraction LEDs)
+F6 F6 F6
+0
+5
+
+SEND
+2
+USA Tech F7 (Enable attraction LEDs)
+F7 F7 F7
+0
+5
+
+SEND
+3
+USA Tech F9 (Clear display)
+F9 F9 F9
+0
+5
+
+RECEIVE
+0
+config button ok resp
+56 69 56 4F 74 65 63 68 32 00 F0 00 00 00 FB AA
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

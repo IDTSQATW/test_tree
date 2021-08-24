@@ -1,0 +1,245 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM2
+COM2
+115200
+2
+35
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+Enable Revocation List (DF26=1)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 26 01 01 72 5B
+0
+5
+
+SEND
+1
+Enable Revocation List (DF26=1) (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 0F 01 01 00 00
+0
+5
+
+SEND
+2
+Delete All Entries from EMV Revocation List (84-06)
+56 69 56 4F 74 65 63 68 32 00 84 06 00 00 8E C1
+0
+5
+
+SEND
+3
+Get EMV Revocation Log Status (84-03)
+56 69 56 4F 74 65 63 68 32 00 84 03 00 00 7E 2A
+0
+5
+
+SEND
+4
+Get EMV Revocation List (84-07)
+56 69 56 4F 74 65 63 68 32 00 84 07 00 04 40 80 00 00 EA 81
+0
+5
+
+SEND
+5
+Add Entry to EMV Revocation List (84-04) - TEST
+56 69 56 4F 74 65 63 68 32 00 84 04 00 09 A0 00 00 99 99 E1 01 43 94 0E 05
+0
+5
+
+SEND
+6
+Add Entry to EMV Revocation List (84-04) - VISA
+56 69 56 4F 74 65 63 68 32 00 84 04 00 09 A0 00 00 00 03 50 01 44 55 F3 34
+0
+5
+
+SEND
+7
+Add Entry to EMV Revocation List (84-04) - MC
+56 69 56 4F 74 65 63 68 32 00 84 04 00 09 A0 00 00 00 04 FE 09 23 55 17 20
+0
+5
+
+SEND
+8
+Delete Entry from EMV Revocation List (84-05) VISA
+56 69 56 4F 74 65 63 68 32 00 84 05 00 06 A0 00 00 00 03 50 07 74
+0
+5
+
+SEND
+9
+Delete Entry from EMV Revocation List (84-05) MC
+56 69 56 4F 74 65 63 68 32 00 84 05 00 06 A0 00 00 00 04 FE B4 B9
+0
+5
+
+SEND
+10
+Delete Entry from EMV Revocation List (84-05) TEST
+56 69 56 4F 74 65 63 68 32 00 84 05 00 06 A0 00 00 99 99 E1 75 D2
+0
+5
+
+RECEIVE
+0
+set cfg (04-xx)generic positive resp
+56 69 56 4F 74 65 63 68 32 00 04 00 00 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+Add or Del Entry of EMV R or E List resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 00 73 2E
+-1
+1
+COMMENT PASS !!!
+0
+1
+0
+0
+
+RECEIVE
+2
+Get R or E list with no record resp for k3vdi
+56 69 56 4F 74 65 63 68 32 00 84 00 00 0C 00 00 00 00 00 00 00 00 00 00 00 09 E7 F1
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
+Get R or E list with no record resp for k3vdi (NEO2)
+56 69 56 4F 74 65 63 68 32 00 84 60 00 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+4
+Get R log status with 1 record resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 0C 00 00 00 00 00 00 00 01 00 00 00 09 4D A0
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+5
+Get R list with record TEST resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 15 00 00 00 01 00 00 00 00 00 00 00 09 A0 00 00 99 99 E1 01 43 94 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+6
+Get R log status with 2 record resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 0C 00 00 00 00 00 00 00 02 00 00 00 09 A3 72
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+7
+Get R list with record TEST and VISA resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 1E 00 00 00 02 00 00 00 00 00 00 00 09 A0 00 00 99 99 E1 01 43 94 A0 00 00 00 03 50 01 44 55 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+8
+Get R log status with 3 records resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 0C 00 00 00 00 00 00 00 03 00 00 00 09 09 23
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+9
+Get R list with record TESTand VISA and MC resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 27 00 00 00 03 00 00 00 00 00 00 00 09 A0 00 00 99 99 E1 01 43 94 A0 00 00 00 03 50 01 44 55 A0 00 00 00 04 FE 09 23 55 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+10
+Get R list with record TEST and MC resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 1E 00 00 00 02 00 00 00 00 00 00 00 09 A0 00 00 99 99 E1 01 43 94 A0 00 00 00 04 FE 09 23 55 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+11
+Get R log status with no record resp
+56 69 56 4F 74 65 63 68 32 00 84 00 00 0C 00 00 00 00 00 00 00 00 00 00 00 09 E7 F1
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

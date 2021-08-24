@@ -1,0 +1,625 @@
+TID:Stop Custom Display(1)
+CMD:83 09
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Clear Display, Clear Event Queue(1)
+CMD:83 0D
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+PROTOCOL:VIV
+CMD:83 0C
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+TID:Get Input Event(Activate Keypad)(1)
+CMD:83 06 00
+E_CODE:0A
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Display Valid Text(please enter zip code)(1)
+CMD:83 03 30 00 30 00 00 00 31 00 31 00 32 00 70 6c 65 61 73 65 20 65 6e 74 65 72 20 7a 69 70 20 63 6f 64 65 00
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Create Input Field (Zip Code)(1)
+CMD:83 1C 30 00 32 30 00 30 00 30 00 31 00 31 00 30 31 00 30 30 30 30 30 30 46 46 00 30 30 46 46 46 46 46 46 00 30 30 46 46 30 30 30 30 00 00 25 35 69 00
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+
+TID:Input Check(1-1) 
+DLG:Press the key on keypad, numbers can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Input Check(1-2) 
+DLG:Press the key on keypad, non-numeric letters can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Input Check(1-3) 
+DLG:Press any function keys on keypad, function keys can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Stop Custom Display(2)
+CMD:83 09
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Clear Display, Clear Event Queue(2)
+CMD:83 0D
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+PROTOCOL:VIV
+CMD:83 0C
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Get Input Event(Activate Keypad)(2)
+CMD:83 06 00
+E_CODE:0A
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+
+TID:Display valid Text(PLEASE ENTER ZIP CODE)(2)
+CMD:83 03 30 00 30 00 00 00 31 00 31 00 32 00 50 4c 45 41 53 45 20 45 4e 54 45 52 20 5a 49 50 20 43 4f 44 45 00
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Create Input Field (Zip Code)(2)
+CMD:83 1C 30 00 32 30 00 30 00 30 00 31 00 31 00 30 31 00 30 30 30 30 30 30 46 46 00 30 30 46 46 46 46 46 46 00 30 30 46 46 30 30 30 30 00 00 25 35 69 00
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+
+TID:Input Check(2-1) 
+DLG:Press the key on keypad, numbers can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Input Check(2-2) 
+DLG:Press the key on keypad, non-numeric letters can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Input Check(2-3) 
+DLG:Press any function keys on keypad, function keys can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Stop Custom Display(3)
+CMD:83 09
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Clear Display, Clear Event Queue(3)
+CMD:83 0D
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+PROTOCOL:VIV
+CMD:83 0C
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Get Input Event(Activate Keypad)(3)
+CMD:83 06 00
+E_CODE:0A
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+
+TID:Display invalid Text(PLEASE ENTER ZIP CODE )(3)
+CMD:83 03 30 00 30 00 00 00 31 00 31 00 32 00 50 4c 45 41 53 45 20 45 4e 54 45 52 20 5a 49 50 20 43 4f 44 45 20 00
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Create Input Field (Zip Code)(3)
+CMD:83 1C 30 00 32 30 00 30 00 30 00 31 00 31 00 30 31 00 30 30 30 30 30 30 46 46 00 30 30 46 46 46 46 46 46 00 30 30 46 46 30 30 30 30 00 00 25 35 69 00
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+TID:Input Check(3-1) 
+DLG:Press the key on keypad, numbers can be input? 
+EXR:No
+TIMEOUT:10000
+
+TID:Input Check(3-2) 
+DLG:Press the key on keypad, non-numeric letters can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Input Check(3-3) 
+DLG:Press any function keys on keypad, function keys can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Stop Custom Display(4)
+CMD:83 09
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Clear Display, Clear Event Queue(4)
+CMD:83 0D
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+PROTOCOL:VIV
+CMD:83 0C
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Get Input Event(Activate Keypad)(4)
+CMD:83 06 00
+E_CODE:0A
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+
+TID:Display valid Text(PLEASE ENTER ZIP CODE)(4)
+CMD:83 03 30 00 30 00 00 00 31 00 31 00 32 00 50 4c 45 41 53 45 20 45 4e 54 45 52 20 5a 49 50 20 43 4f 44 45 00
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Display invalid Text(Invalid Text) on invalid position(4)
+CMD:83 03 30 00 30 00 00 00 31 00 31 00 32 00 49 6e 76 61 6c 69 64 20 54 65 78 74 00
+E_CODE:05
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Create Input Field (Zip Code)(4)
+CMD:83 1C 30 00 32 30 00 30 00 30 00 31 00 31 00 30 31 00 30 30 30 30 30 30 46 46 00 30 30 46 46 46 46 46 46 00 30 30 46 46 30 30 30 30 00 00 25 35 69 00
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+TID:Input Check(4-1) 
+DLG:Press the key on keypad, numbers can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Input Check(4-2) 
+DLG:Press the key on keypad, non-numeric letters can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Input Check(4-3) 
+DLG:Press any function keys on keypad, function keys can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Stop Custom Display(5)
+CMD:83 09
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Clear Display, Clear Event Queue(5)
+CMD:83 0D
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+PROTOCOL:VIV
+CMD:83 0C
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Get Input Event(Activate Keypad)(5)
+CMD:83 06 00
+E_CODE:0A
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+
+TID:Display invalid Text(Invalid Text)(5)
+CMD:83 03 30 00 30 00 00 00 31 00 31 00 32 00 49 6e 76 61 6c 69 64 20 54 65 78 74 00
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Display valid Text(PLEASE ENTER ZIP CODE)(5)
+CMD:83 03 30 00 30 00 00 00 31 00 31 00 32 00 50 4c 45 41 53 45 20 45 4e 54 45 52 20 5a 49 50 20 43 4f 44 45 00
+E_CODE:05
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Create Input Field (Zip Code)(5)
+CMD:83 1C 30 00 32 30 00 30 00 30 00 31 00 31 00 30 31 00 30 30 30 30 30 30 46 46 00 30 30 46 46 46 46 46 46 00 30 30 46 46 30 30 30 30 00 00 25 35 69 00
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Input Check(5-1) 
+DLG:Press the key on keypad, numbers can be input? 
+EXR:No
+TIMEOUT:10000
+
+TID:Input Check(5-2) 
+DLG:Press the key on keypad, non-numeric letters can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Input Check(5-3) 
+DLG:Press any function keys on keypad, function keys can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Stop Custom Display(6)
+CMD:83 09
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Clear Display, Clear Event Queue(6)
+CMD:83 0D
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+PROTOCOL:VIV
+CMD:83 0C
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Get Input Event(Activate Keypad)(6)
+CMD:83 06 00
+E_CODE:0A
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+
+TID:Display Valid Text(please enter zip code)(6)
+CMD:83 03 30 00 30 00 00 00 31 00 31 00 32 00 70 6c 65 61 73 65 20 65 6e 74 65 72 20 7a 69 70 20 63 6f 64 65 00
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Change Text to Invalid Text(Invalid Text)(6)
+CMD:83 16 ?? ?? ?? ?? 49 6e 76 61 6c 69 64 20 54 65 78 74 00
+E_CODE:0A
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+
+TID:Create Input Field (Zip Code)(6)
+CMD:83 1C 30 00 32 30 00 30 00 30 00 31 00 31 00 30 31 00 30 30 30 30 30 30 46 46 00 30 30 46 46 46 46 46 46 00 30 30 46 46 30 30 30 30 00 00 25 35 69 00
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+TID:Input Check(6-1) 
+DLG:Press the key on keypad, numbers can be input? 
+EXR:No
+TIMEOUT:10000
+
+TID:Input Check(6-2) 
+DLG:Press the key on keypad, non-numeric letters can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Input Check(6-3) 
+DLG:Press any function keys on keypad, function keys can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Stop Custom Display(7)
+CMD:83 09
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Clear Display, Clear Event Queue(7)
+CMD:83 0D
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+PROTOCOL:VIV
+CMD:83 0C
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Get Input Event(Activate Keypad)(7)
+CMD:83 06 00
+E_CODE:0A
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+
+TID:Display invalid Text(Invalid Text)(7)
+CMD:83 03 30 00 30 00 00 00 31 00 31 00 32 00 49 6e 76 61 6c 69 64 20 54 65 78 74 00
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Change Text to valid Text(please enter zip code)(7)
+CMD:83 16 ?? ?? ?? ?? 70 6c 65 61 73 65 20 65 6e 74 65 72 20 7a 69 70 20 63 6f 64 65 00
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+
+TID:Create Input Field (Zip Code)(7)
+CMD:83 1C 30 00 32 30 00 30 00 30 00 31 00 31 00 30 31 00 30 30 30 30 30 30 46 46 00 30 30 46 46 46 46 46 46 00 30 30 46 46 30 30 30 30 00 00 25 35 69 00
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+TID:Input Check(7-1) 
+DLG:Press the key on keypad, numbers can be input? 
+EXR:No
+TIMEOUT:10000
+
+TID:Input Check(7-2) 
+DLG:Press the key on keypad, non-numeric letters can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Input Check(7-3) 
+DLG:Press any function keys on keypad, function keys can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Stop Custom Display(8)
+CMD:83 09
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Clear Display, Clear Event Queue(8)
+CMD:83 0D
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+PROTOCOL:VIV
+CMD:83 0C
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Get Input Event(Activate Keypad)(8)
+CMD:83 06 00
+E_CODE:0A
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+
+TID:Display Valid Text(please enter phone number)(8)
+CMD:83 03 30 00 30 00 00 00 31 00 31 00 32 00 70 6c 65 61 73 65 20 65 6e 74 65 72 20 70 68 6f 6e 65 20 6e 75 6d 62 65 72 00
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Create Input Field (Phone number)(8)
+CMD:83 1C 30 00 32 30 00 30 00 30 00 31 00 31 00 30 31 00 30 30 30 30 30 30 46 46 00 30 30 46 46 46 46 46 46 00 30 30 46 46 30 30 30 30 00 00 28 25 33 69 29 25 33 69 2D 25 34 69 00
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+TID:Input Check(8-1) 
+DLG:Press the key on keypad, numbers can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Input Check(8-2) 
+DLG:Press the key on keypad, non-numeric letters can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Input Check(8-3) 
+DLG:Press any function keys on keypad, function keys can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Stop Custom Display(9)
+CMD:83 09
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Clear Display, Clear Event Queue(9)
+CMD:83 0D
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+PROTOCOL:VIV
+CMD:83 0C
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Get Input Event(Activate Keypad)(9)
+CMD:83 06 00
+E_CODE:0A
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+
+TID:Display Valid Text(please enter social security number)(9)
+CMD:83 03 30 00 30 00 00 00 31 00 31 00 32 00 70 6c 65 61 73 65 20 65 6e 74 65 72 20 73 6f 63 69 61 6c 20 73 65 63 75 72 69 74 79 20 6e 75 6d 62 65 72 00
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Create Input Field (SSN Masked)(9)
+CMD:83 1C 30 00 32 30 00 30 00 30 00 31 00 31 00 30 31 00 30 30 30 30 30 30 46 46 00 30 30 46 46 46 46 46 46 00 30 30 46 46 30 30 30 30 00 00 25 33 2A 2D 25 32 2A 2D 25 34 69 00
+E_CODE:00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+TID:Input Check(9-1) 
+DLG:Press the key on keypad, numbers can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Input Check(9-2) 
+DLG:Press the key on keypad, non-numeric letters can be input?
+EXR:Yes
+TIMEOUT:10000
+
+TID:Input Check(9-3) 
+DLG:Press any function keys on keypad, function keys can be input?
+EXR:Yes
+TIMEOUT:10000

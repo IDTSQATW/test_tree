@@ -1,0 +1,7 @@
+TID:Activate Transaction(MSR)
+MSG:Swipe card.
+EXR:02
+TIMEOUT:1000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV

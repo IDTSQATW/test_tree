@@ -1,0 +1,40 @@
+Docklight Log File (HEX) - Started 2015/3/13 13:44:26.582 
+ TEST CASE: USAT016
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Auto poll
+
+2015/3/13 13:44:29.484 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 F6 24 
+2015/3/13 13:44:29.684 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  
+
+ --- USA Tech: Disable Blue LEDs >> Enable Blue LEDs >> Clear LCD display >> Beep once
+
+2015/3/13 13:44:29.715 [TX] - F6 F6 F6 
+2015/3/13 13:44:31.718 [TX] - F7 F7 F7 
+2015/3/13 13:44:32.728 [TX] - F9 F9 F9 
+2015/3/13 13:44:34.738 [TX] - FE FE FE  
+
+ --- USA Tech: LCD line 1 msg control (Please tap card )
+
+2015/3/13 13:44:36.226 [TX] - 80 50 6C 65 61 73 65 20 74 61 70 20 63 61 72 64 20 F8 
+2015/3/13 13:44:37.295 [RX] - 40 1B 41 02 52 46 49 44 2D 36 32 37 39 32 35 37 37 34 39 31 33 32 33 34 33 3D 31 30 31 32 38 31 33 30 30 37 32 31 30 34 33 35 30 30 30 30 03 00 0D  
+
+ --- Poll on demand
+
+2015/3/13 13:44:37.860 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34 
+2015/3/13 13:44:37.966 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2015/3/13 13:44:41.522 
+

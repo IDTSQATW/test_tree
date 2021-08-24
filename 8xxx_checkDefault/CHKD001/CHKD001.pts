@@ -1,0 +1,841 @@
+DL_SCRIPTVERSION
+1
+29829
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "CHKD001" ' !!!!! EDIT THIS !!!!!
+' This test case is intended to verify the IDG protocol visiable factory default settings for 8xxx
+' with the following versions
+' AR 2.1.0
+' AR 2.1.1
+' AR 2.2 TBD
+'
+' There are three areas are verified
+' 1. Common default parameters
+' 2. Default AIDs configured
+' 3. Default groups configured
+'
+' The test will not stop in the middle if an error is detected.
+' At the end of this test, number of errors will be given.
+' By searching the word "missing" in the log file, you will find out where and what the error is.
+'  
+
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+DebuggerOption = 1
+Dim ControlID
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+      
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON " Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+
+Sub DL_OnSend()
+    ' For all Send Sequences with minimum 3 bytes length (one byte user data,
+    ' two bytes CRC, perform the following manipulation:
+    ' - Calculate a 16 bit crc value on the characters 1 .. (DL.OnSend_Size() - 2)
+    ' - Write the low byte to character no. DL.OnSend_GetSize()-1
+    ' - Write the high byte to character no. DL.OnSend_GetSize()
+    ' Example:
+    ' Send Sequence name: MyCommand
+    ' Send Sequence in HEX representation: 02 04 00 00 00 01 00 00
+    ' --> Data transmitted by Docklight:   02 04 00 00 00 01 31 F9
+    '     (with "31" as the low byte CRC, "F9" as the high byte)
+
+    ' Check if there is at least one byte of user data
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+    End If
+End Sub
+
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+YES = 6
+NO = 7
+errorCounter = 0
+
+'------------------------------------------------------------
+MyInput = MsgBox ("Have you had a fresh VP8xxx AR2.1.x reader ready? We are about to verify the factory default settings.", VBYesNo, "Test Step")
+
+If MyInput = NO Then
+
+     DL.AddComment "Test aborted. PLease make a fresh VP8xxx AR2.1.x reader and restart this test."
+     errorCounter = 1 
+
+ElseIf MyInput = YES Then
+
+'-----------------------------------------------------------------------------
+' check common params
+'-----------------------------------------------------------------------------
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Get param byte count", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Get param byte count is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag 5F2A resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag 5F2A is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag 5F36 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag 5F36 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag 9C resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter 9C 5F2A is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag 9F02 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag 9F02 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag 9F03 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag 9F03 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag 9F09 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag 9F09 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag 9F15 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag 9F15 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag 9F1A resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag 9F1A is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag 9F1B resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag 9F1B is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag 9F33 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag 9F33 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag 9F35 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag 9F35 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag 9F40 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag 9F40 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag 9F4E resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag 9F4E is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag 9F66 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag 9F66 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag 9F6D resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag 9F6D is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag 9F7C resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag 9F7C is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag DF28 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag DF28 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag DF29 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag DF29 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag DF45 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag DF45 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag DF59 (8xxx) resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag DF59 (8xxx) is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag DF63 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag DF63 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag DF64 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag DF64 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag DF65 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag DF65 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag DF66 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag DF66 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag FFF0 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag FFF0 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag FFF1 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag FFF1 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag FFF2 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag FFF2 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag FFF3 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag FFF3 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag FFF4 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag FFF4 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag FFF5 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag FFF5 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag FFF7 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag FFF7 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag FFF8 resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag FFF8 is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag FFFA resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag FFFA is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag FFFB resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag FFFB is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag FFFC resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag FFFC is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag FFFD resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag FFFD is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag FFFE resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag FFFE is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get Params (03-02)"
+  	DL.SendSequence "Get Params (03-02)"
+  	result = DL.WaitForSequence ("Tag FFFF resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Parameter Tag FFFF is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+
+'-----------------------------------------------------------------------------
+' check AID params
+'-----------------------------------------------------------------------------
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get all AIDs (03-05)"
+  	DL.SendSequence "Get all AIDs (03-05)"
+  	result = DL.WaitForSequence ("get all AIDs default byte count", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "get all AIDs default byte count is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get all AIDs (03-05)"
+  	DL.SendSequence "Get all AIDs (03-05)"
+  	result = DL.WaitForSequence ("Mc AID (CL) resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Mc AID (CL) resp is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get all AIDs (03-05)"
+  	DL.SendSequence "Get all AIDs (03-05)"
+  	result = DL.WaitForSequence ("Star AID (CL) resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Star AID (CL) resp is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get all AIDs (03-05)"
+  	DL.SendSequence "Get all AIDs (03-05)"
+  	result = DL.WaitForSequence ("Maestro AID (CL) resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Maestro AID (CL) resp is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get all AIDs (03-05)"
+  	DL.SendSequence "Get all AIDs (03-05)"
+  	result = DL.WaitForSequence ("Visa AID (CL) resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Visa AID (CL) resp is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get all AIDs (03-05)"
+  	DL.SendSequence "Get all AIDs (03-05)"
+  	result = DL.WaitForSequence ("Electron AID (CL) resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Electron AID (CL) resp is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get all AIDs (03-05)"
+  	DL.SendSequence "Get all AIDs (03-05)"
+  	result = DL.WaitForSequence ("Vintr AID (CL) resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Vintr AID (CL) resp is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get all AIDs (03-05)"
+  	DL.SendSequence "Get all AIDs (03-05)"
+  	result = DL.WaitForSequence ("Vplus AID (CL) resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Vplus AID (CL) resp is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get all AIDs (03-05)"
+  	DL.SendSequence "Get all AIDs (03-05)"
+  	result = DL.WaitForSequence ("Speed AID (CL) resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Speed AID (CL) resp is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get all AIDs (03-05)"
+  	DL.SendSequence "Get all AIDs (03-05)"
+  	result = DL.WaitForSequence ("Disc AID (CL) resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Disc AID (CL) resp is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get all AIDs (03-05)"
+  	DL.SendSequence "Get all AIDs (03-05)"
+  	result = DL.WaitForSequence ("Amex AID (CL) resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Amex AID (CL) resp is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get all AIDs (03-05)"
+  	DL.SendSequence "Get all AIDs (03-05)"
+  	result = DL.WaitForSequence ("Desfire AID (CL) resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Desfire AID (CL) resp is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get all AIDs (03-05)"
+  	DL.SendSequence "Get all AIDs (03-05)"
+  	result = DL.WaitForSequence ("Mc (CT EMV) resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Mc (CT EMV) resp is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get all AIDs (03-05)"
+  	DL.SendSequence "Get all AIDs (03-05)"
+  	result = DL.WaitForSequence ("Visa (CT EMV) resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Visa (CT EMV) resp is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get all AIDs (03-05)"
+  	DL.SendSequence "Get all AIDs (03-05)"
+  	result = DL.WaitForSequence ("Gmad (CL) resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "Gmad (CL) resp is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+'-----------------------------------------------------------------------------
+' check group params
+'-----------------------------------------------------------------------------
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get all Groups (03-07)"
+  	DL.SendSequence "Get all Groups (03-07)"
+  	result = DL.WaitForSequence ("get all group default byte count", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "get all group default byte count is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get all Groups (03-07)"
+  	DL.SendSequence "Get all Groups (03-07)"
+  	result = DL.WaitForSequence ("default group 0 (CL) resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "default group 0 (CL) resp is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+  	DL.ResetReceiveCounter
+  	DL.AddComment "--- Get all Groups (03-07)"
+  	DL.SendSequence "Get all Groups (03-07)"
+  	result = DL.WaitForSequence ("default group 8 (CT) resp", 1,3000)
+      If result = 0 Then
+        DL.AddComment vbCrLf & "default group 8 (CT) resp is missing match." & cbCrLf
+        errorCounter = errorCounter + 1
+        result = 1 
+      End If
+
+End If
+
+If errorCounter <> 0 Then
+   DL.AddComment vbCrLf & vbCrLf & "Found " & errorCounter & " errors in testing. Please check the log file for details."
+   result = 0
+End If
+
+
+
+'------------------------------------------------------------
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+
+

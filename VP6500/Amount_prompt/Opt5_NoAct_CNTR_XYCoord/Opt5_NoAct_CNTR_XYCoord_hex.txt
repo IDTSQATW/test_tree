@@ -1,0 +1,9 @@
+Docklight Log File (HEX) - Started 10/2/2008 10:49:52.85 
+ --- Display center of screen with XY Coord
+
+10/2/2008 10:49:52.88 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 04 00 15 31 30 30 00 31 30 30 00 31 00 31 00 34 00 80 00 31 2E 30 30 00 BD 15 
+10/2/2008 10:49:53.15 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped 10/2/2008 10:49:58.01 
+

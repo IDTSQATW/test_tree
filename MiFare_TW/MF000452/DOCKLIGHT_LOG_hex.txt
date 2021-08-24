@@ -1,0 +1,56 @@
+Docklight Log File (HEX) - Started 2019/4/19 12:07:09.868 
+ TEST CASE: MF000452
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+
+2019/4/19 12:07:12.418 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+2019/4/19 12:07:12.446 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  PT command (OK)
+ Result = PASSED
+
+2019/4/19 12:07:12.462 [TX] - 56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 94 1F 
+2019/4/19 12:07:12.490 [RX] - 56 69 56 4F 74 65 63 68 32 00 28 00 00 00 D6 6A  Antenna Enable (OK)
+ Result = PASSED
+
+2019/4/19 12:07:12.508 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 00 B1 E4 
+2019/4/19 12:07:12.625 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 05  Poll for Token (OK)
+
+2019/4/19 12:07:12.633 [RX] - 03 F0  Result = PASSED
+ ----- Read 1 Block and start at Block 63 (Block 63 is read --- Block 63 is a Trailer Block, but not skipped because this is a single read and not multiple block read). -----
+
+2019/4/19 12:07:12.642 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 3F 8C 60 
+2019/4/19 12:07:12.642 [RX] - 46 34 59 C8 EF 56 69 56 4F 74 65 63 68 32 00 2C 00 00 10 00 00 00 00 00 00 FF 07 80 BC FF FF FF FF FF FF 64 4A  MiFare Read next 1 Block - Start at Block 63 (OK)
+ Result = PASSED
+
+2019/4/19 12:07:12.713 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+2019/4/19 12:07:12.741 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  PT command (OK)
+ Result = PASSED
+
+2019/4/19 12:07:12.758 [TX] - 56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 94 1F 
+2019/4/19 12:07:12.786 [RX] - 56 69 56 4F 74 65 63 68 32 00 28 00 00 00 D6 6A  Antenna Enable (OK)
+ Result = PASSED
+
+2019/4/19 12:07:12.803 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 00 B1 E4 
+2019/4/19 12:07:12.919 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 05  Poll for Token (OK)
+
+2019/4/19 12:07:12.928 [RX] - 03 F0  Result = PASSED
+ ----- Read 1 Block and start at Block 35 (Block 35 is read --- Block 35 is a Trailer Block, but not skipped because this is a single read and not multiple block read). -----
+46 34 59 C8 EF 
+2019/4/19 12:07:12.944 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 23 5F DD 
+2019/4/19 12:07:12.983 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 10 00 00 00 00 00 00 FF 07 80 69 FF FF FF FF FF FF 5C 83  MiFare Read next 1 Block - Start at Block 35 (OK)
+ Result = PASSED
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2019/4/19 12:07:15.635 
+

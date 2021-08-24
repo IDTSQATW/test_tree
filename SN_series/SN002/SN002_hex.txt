@@ -1,0 +1,30 @@
+Docklight Log File (HEX) - Started 10/27/2009 18:07:23.62 
+ TEST CASE: SN002
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 19200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Set Serial Number
+
+10/27/2009 18:07:25.42 [TX] - 56 69 56 4F 74 65 63 68 32 00 12 02 00 0E 30 31 32 33 34 35 36 37 38 39 20 70 2F 4E C5 BF 
+10/27/2009 18:07:25.46 [RX] - 56 69 56 4F 74 65 63 68 32 00 12 0B 00 00 62 D9  Command Rejected
+ Serial Number already set.
+
+ This is a GR reader. Unit is already populated with SN #. Cannot write SN # to reader. Please clear SN # by reflashing FW or use other method and rerun test script.
+
+ Result = FAILED
+ 
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 10/27/2009 18:07:30.70 
+

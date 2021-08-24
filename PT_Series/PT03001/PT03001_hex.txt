@@ -1,0 +1,10 @@
+Docklight Log File (HEX) - Started 11/3/2008 14:48:40.79 
+ --- Buzzer Control - Invalid Buzzer Control (1Ah) and invalid data field range (05h)
+
+11/3/2008 14:48:40.82 [TX] - 56 69 56 4F 74 65 63 68 32 00 0B 1A 00 01 05 37 45 
+11/3/2008 14:48:40.83 [RX] - 56 69 56 4F 74 65 63 68 32 00 0B 03 00 00 23 A8  Buzzer Control - Invalid Buzzer Control command captured (SUCCESS)
+ Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped 11/3/2008 14:48:44.79 
+

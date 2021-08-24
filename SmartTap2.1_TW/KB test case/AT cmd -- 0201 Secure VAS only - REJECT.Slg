@@ -1,0 +1,42 @@
+
+11:44:59: 
+>>[Stop Scripts]>>
+
+
+11:45:00: >>[Do Scripts]>>
+
+/// AT cmd -- 02-01 (w/ SmartTap tag, Get VAS Only Mode), case 0.1 + 0.2 
+>>[Stop Scripts]>>
+
+CMD:
+OUT: NULL
+
+11:45:01: 
+>>[Stop Scripts]>>
+
+
+11:45:01: 
+>>[Stop Scripts]>>
+
+
+11:45:01: 
+>>[Stop Scripts]>>
+
+
+11:45:01: 
+>>[Stop Scripts]>>
+
+
+11:45:01: 
+>>[Stop Scripts]>>
+
+
+11:45:02: 
+>>[Stop Scripts]>>
+
+
+11:45:07: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\SmartTap2.1_TW\KB test case\AT cmd -- 0201 Secure VAS only - REJECT.txt
+Items: 3
+Load Case Succeed!
+

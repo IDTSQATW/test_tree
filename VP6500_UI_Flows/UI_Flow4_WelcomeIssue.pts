@@ -1,0 +1,111 @@
+DL_SCRIPTVERSION
+1
+5097
+
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+'------------------------------------------------------------
+
+'------------------------------------------------------------
+'Configure prompting
+'------------------------------------------------------------
+FileInput.OpenFile "C:\vivotech\regress\regression\regress_test\test_tree\Regress.Config"
+Dim Prompting(1)
+Dim resultX
+
+Do Until FileInput.EndOfFile
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()	 
+  Prompting(1) = result
+Loop
+
+'------------------------------------------------------------
+'Definitions and Initializations
+'------------------------------------------------------------
+DL.OpenProject "UI_Flow4_WelcomeIssue.ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+
+
+Dim prompt
+Dim confirm
+
+result = 1
+
+Dim Row(1)
+Dim Button(2)
+Dim ButtonExpect(1)
+
+Row(0) = 4
+
+Button(0) = 1
+Button(1) = 2
+
+ButtonExpect(0) = "DONE"
+ButtonExpect(1) = "CREDIT"
+
+ReadButtonTO = 20
+ReadButtonEnable = 1
+
+
+'------------------------------------------------------------
+' Display amount at 239,159 - $1.00
+'------------------------------------------------------------
+For IterationsX = 1 to 999999999999
+DL.AddComment "------------- Iteration " & IterationsX & " -------------"
+'DL.SendSequence "Tap Card - Text"
+'DL.Pause 1500
+DL.SendSequence "Activate Transaction"
+DL.AddComment "I AM HERE 4"
+result = DL.WaitForSequence("activate transaction response", 1, 8200)
+DL.AddComment "Result = " & result
+DL.ResetReceiveCounter "activate transaction response"
+DL.ResetReceiveCounter "Entered Keys"
+DL.ResetReceiveCounter "Prompt Printed"
+'DL.SendSequence "Amount - Text"
+'DL.Pause 1000
+'DL.SendSequence "Activate Transaction"
+'result = DL.WaitForSequence("activate transaction response", 1, 8200)
+'DL.Pause 15000
+
+If result = 0 Then
+	DL.SendSequence "Amount - Text"
+      result1 = DL.WaitForSequence("Prompt Printed", 1, 8200)
+	DL.SendSequence "Activate Transaction"
+	DL.AddComment "I AM HERE 12345!!!!!"
+	result = DL.WaitForSequence("activate transaction response", 1, 8200)
+	DL.ResetReceiveCounter "activate transaction response"
+ElseIf result = 0 Then
+	DL.SendSequence "Amount - Text"
+	DL.Pause 500
+	DL.SendSequence "Activate Transaction"
+	DL.AddComment "I AM HERE 67890!!!!!"
+	result = DL.WaitForSequence("activate transaction response", 1, 8200)
+	DL.ResetReceiveCounter "activate transaction response"
+End If
+
+DL.ResetReceiveCounter "activate transaction response"
+DL.AddComment "I AM HERE 5"
+
+Next
+
+'------------------------------------------------------------
+'Steps to execute
+'------------------------------------------------------------
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+
+

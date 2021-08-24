@@ -1,0 +1,602 @@
+DL_SCRIPTVERSION
+1
+7583
+
+'------------------------------------------------------------
+' This script is to verify if reader overheat in RF save mode
+' (w/ 1/3 of RF power duty cycle)
+' - Chk Security event log
+' - Chk Master Key presence
+'------------------------------------------------------------
+Test_ID = "Vend3"
+errLimit = 100
+startSAMSlot = 1
+endSAMSlot = 3
+loopInSec = 60
+
+
+Script_Version = "AR HW DVT-Power Save Mode Ver 0.01"
+Date_Time = "D" & Year(Now) & "." & Month(Now)  & "." & Day(Now) & "_T" & Hour(Now) & "." & Minute(Now) &  "." & Second(Now)
+DL.ClearCommWindows
+DL.StartLogging Date_Time & "_" & Test_ID & "_DOCKLIGHT_LOG" ,False, "H"
+', false, true
+'DL.AddComment Date_Time
+DL.OpenProject "arHwDvt.ptp"
+DL.StartCommunication
+DL.AddComment vbCrLf & Script_Version & vbCrLf & "Test: " & Test_ID & vbCrLf
+DL.AddComment vbCrLf & "Test Setup: errLimit=" & errLimit & "; startSAMSlot=" & startSAMSlot & "; endSAMSlot=" & endSAMSlot & "; loopInSec=" & loopInSec &vbCrLf 
+
+Dim prompt
+Dim confirm
+count = 0
+DukCountFail = 0
+DukCountPass = 0
+Dim Count
+
+errCounter = 0
+overallCount = 0
+oddEvenFlg = 0
+loopInterval = loopInSec * 1000
+result = 1
+
+
+Sub chkErr ()
+  If result = 0 Then
+     errCounter = errCounter + 1
+     DL.AddComment vbCrLf & " *** Error in response. " & errCounter & " error(s) found at this point in iteration " & overallCount & vbCrLf
+     result = 1
+  End If
+  DL.Pause 1000
+End Sub
+
+If 0 Then
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Erase Key"
+  DL.SendSequence " Erase Key"
+  result = DL.WaitForSequence("Erase Key", 1, 10000)
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Load Key 1"
+  DL.SendSequence " Load Key 1"
+  result = DL.WaitForSequence("Load Key 2", 1, 10000)
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Load Key 2"
+  DL.SendSequence " Load Key 2"
+  result = DL.WaitForSequence("Load Key 2", 1, 10000)
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Load Key 3"
+  DL.SendSequence " Load Key 3"
+  result = DL.WaitForSequence("Load Key 2", 1, 10000)
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Load Key 4"
+  DL.SendSequence " Load Key 4"
+  result = DL.WaitForSequence("Load Key 2", 1, 10000)
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Load Key 5"
+  DL.SendSequence " Load Key 5"
+  result = DL.WaitForSequence("Load Key 1", 1, 10000)
+End If
+End If
+
+'=========================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- PT off."
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38", "H"
+  DL.Pause 1000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- set BC off"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 59 01 00 6A BF", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Ping..."
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get fw ver."
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 29 00 00 00 DE A0", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- get processor type"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 09 02 00 00 F0 F9", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- get processor id"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 12 03 00 00 78 CB", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- get serial number"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 12 01 00 00 18 A5", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- set param default"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 04 09 00 00 87 30", "H"
+  DL.Pause 8000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- set BC off"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 59 01 00 6A BF", "H"
+  DL.Pause 2000
+
+'  DL.ResetReceiveCounter
+'  DL.AddComment vbCrLf & "--- set BC on"
+'  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 59 01 01 4B AF", "H"
+'  DL.Pause 2000
+
+'  DL.ResetReceiveCounter
+'  DL.AddComment vbCrLf & "--- set auto poll"
+'  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 F6 24", "H"
+'  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- set burst auto"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 02 FB 0E", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- disable blue led"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 F0 F6 00 00 58 AA", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- Set security log cfg (default + enable key event log)"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 82 07 00 02 01 09 EB BE", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- Get security log cfg"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 82 07 00 01 00 6D CF", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete Key"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 83 00 00 00 03 22", "H"
+  DL.Pause 2000
+  
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Set Unecrypted KLK"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 80 00 00 65 30 43 46 35 35 34 43 32 46 30 45 45 41 41 30 30 38 38 4B 30 54 44 30 30 4E 30 30 30 30 30 30 38 30 32 41 38 34 46 44 44 36 33 39 31 35 44 43 41 45 42 46 38 37 37 35 34 33 32 32 44 32 36 37 42 41 33 34 34 31 38 33 41 42 39 41 32 35 36 37 39 30 32 33 34 39 38 37 31 32 30 32 33 34 30 30 30 30 30 30 30 30 C2 98", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Set Unecrypted KLK 2"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 80 00 00 65 31 35 43 44 42 38 31 32 46 30 45 45 41 41 30 30 38 38 4B 30 54 44 30 30 4E 30 30 30 30 30 30 38 30 39 32 36 39 41 34 33 36 39 42 36 43 37 45 33 42 35 36 37 32 39 38 33 41 36 36 32 46 36 31 30 33 32 35 37 32 39 32 33 36 33 37 38 33 30 33 33 36 32 33 41 39 39 37 31 32 36 32 33 34 30 30 30 30 30 30 30 30 AA E9", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Ecrypted KLK"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 80 01 00 58 41 30 30 38 38 4B 30 54 44 30 30 4E 30 30 30 30 42 39 34 38 46 37 42 33 34 43 41 44 37 32 36 42 41 37 37 43 39 43 34 41 38 30 37 37 39 42 42 38 36 42 42 43 33 37 34 30 31 31 42 42 45 33 39 45 30 36 46 34 46 36 41 37 44 44 36 46 37 32 30 45 37 31 33 44 45 39 34 41 A0 6B", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Master Session Index 0"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 80 03 00 59 00 41 30 30 38 38 4B 30 54 44 30 30 4E 30 30 30 30 38 45 33 43 43 38 36 45 38 39 33 35 37 34 43 30 44 31 38 36 30 44 34 36 43 39 39 35 35 45 43 33 31 37 43 30 33 32 30 46 35 32 42 38 30 46 37 35 38 35 46 32 37 45 37 31 46 36 41 36 33 44 42 39 43 45 44 46 31 37 30 32 C8 61", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Master Session Index 9"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 80 03 00 59 09 41 30 30 38 38 4B 30 54 44 30 30 4E 30 30 30 30 38 45 33 43 43 38 36 45 38 39 33 35 37 34 43 30 44 31 38 36 30 44 34 36 43 39 39 35 35 45 43 33 31 37 43 30 33 32 30 46 35 32 42 38 30 46 37 35 38 35 46 32 37 45 37 31 46 36 41 36 33 44 42 39 43 45 44 46 31 37 30 32 C7 D9", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- Get security log  (max. 50 records)"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 82 05 00 01 32 14 34", "H"
+  DL.Pause 2000
+  DL.AddComment vbCrLf & "Start looping ..." & vbCrLf
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- set BC on"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 59 01 01 4B AF", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- set auto poll"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 F6 24", "H"
+  DL.Pause 2000
+
+  prompt2 = "Initialization is done. Please click OK to continue."
+  result = MsgBox(prompt2, VBOKOnly, "DVT in power save mode")
+
+Do
+'----------------- Contacless Portion ---------------------
+If 0 Then
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Dukpt Pin"
+  DL.SendSequence " Dukpt Pin"
+  result = DL.WaitForSequence("Duk Time out", 1, 15000)
+	If result <> 0 Then
+		DukCountPass = DukCountPass + 1
+  		DL.AddComment "----- Duk Pass #" & DukCountPass & " -----"
+	ElseIf result <> 1 Then
+		DukCountFail = DukCountFail + 1
+		result = 1
+  		DL.AddComment "----- Duk Fail #" & DukCountFail & " -----"
+	End If
+
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Check Master"
+  DL.SendSequence " Check Master"
+  result = DL.WaitForSequence("Load Key 2", 1, 30000)
+End If
+End If
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- Please tap or swip card ---" & vbCrLf  
+  result = DL.WaitForSequence("vivoWallet test card resp in burst mode", 1, 90000)
+  chkErr()
+
+If oddEvenFlg = 0 Then
+
+      DL.ResetReceiveCounter
+      DL.AddComment "--- 1 beep and led 3 on"
+      DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 01 03 01 55 21", "H"
+      DL.Pause 500
+
+      DL.ResetReceiveCounter
+      DL.AddComment "--- mag led on"
+      DL.SendSequence " mag led on"
+      result = DL.WaitForSequence("generic resp", 1, 3000)
+      chkErr()
+
+      DL.ResetReceiveCounter
+      DL.AddComment "--- blue led circle"
+      DL.SendSequence " blue led circle"
+      result = DL.WaitForSequence("generic resp", 1, 3000)
+      chkErr()
+Else
+
+      DL.ResetReceiveCounter
+      DL.AddComment "--- 1 beep and led 3 off"
+      DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 01 03 00 74 31", "H"
+      DL.Pause 500
+
+      DL.ResetReceiveCounter
+      DL.AddComment "--- mag led off"
+      DL.SendSequence " mag led off"
+      result = DL.WaitForSequence("generic resp", 1, 3000)
+      chkErr()
+
+      DL.ResetReceiveCounter
+      DL.AddComment "--- disable blue leds"
+      DL.SendSequence " disable blue leds"
+      result = DL.WaitForSequence("generic resp", 1, 3000)
+      chkErr()
+End If 
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Check Master key presence"
+  DL.SendSequence " Check Master key presence"
+  result = DL.WaitForSequence("generic resp", 1, 5000)
+  chkErr()
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Check Master slot 9"
+  DL.SendSequence " Check Master slot 9"
+  result = DL.WaitForSequence("chk master key resp", 1, 5000)
+  chkErr()
+End If
+
+If 0 Then ' sccess CL
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Ping Reader"
+  DL.SendSequence " Ping Reader"
+  result = DL.WaitForSequence("Ping Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Start PT"
+  DL.SendSequence " Start PT"
+  result = DL.WaitForSequence("PT Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Turn Antenna On"
+  DL.SendSequence " Turn Antenna On"
+  result = DL.WaitForSequence("Turn On Antenna", 1, 10000)
+  chkErr()
+End If
+
+If result <> 0 Then
+  DL.Pause 1000
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Poll For Token"
+  DL.SendSequence " Poll For Token"
+  result = DL.WaitForSequence("PT Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Mifare Auth"
+  DL.SendSequence " Mifare Auth"
+  result = DL.WaitForSequence("PT Response", 1, 1000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Read 0"
+  DL.SendSequence " Read 0"
+  result = DL.WaitForSequence("PT Response", 1, 1000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Read 1"
+  DL.SendSequence " Read 1"
+  result = DL.WaitForSequence("PT Response", 1, 1000)
+  chkErr()
+End If
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Read 2"
+  DL.SendSequence " Read 2"
+  result = DL.WaitForSequence("PT Response", 1, 1000)
+  chkErr()
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Read 3"
+  DL.SendSequence " Read 3"
+  result = DL.WaitForSequence("PT Response", 1, 1000)
+  chkErr()
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Flash LED"
+  DL.SendSequence " Flash LED"
+  result = DL.WaitForSequence("Flash LED Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Beep Buzzer"
+  DL.SendSequence " Beep Buzzer"
+  result = DL.WaitForSequence("Buzzer Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Turn Off LED"
+  DL.SendSequence " Turn Off LED"
+  result = DL.WaitForSequence("Flash LED Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Turn Antenna Off"
+  DL.SendSequence " Turn Antenna Off"
+  result = DL.WaitForSequence("Antenna Ctrl resp", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Stop PT"
+  DL.SendSequence " Stop PT"
+  result = DL.WaitForSequence("PT Response", 1, 10000)
+  chkErr()
+End If
+End If ' end if acess CL
+
+'---------------------- Contact Portion -------------------
+If 0 Then ' access CT
+DL.Pause 10000
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Start PT"
+  DL.SendSequence " Start PT"
+  result = DL.WaitForSequence("PT Response", 1, 10000)
+  chkErr()
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Enhanced PT ICC"
+  DL.SendSequence " Enhanced PT ICC"
+  result = DL.WaitForSequence("PT Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get ATR"
+  DL.SendSequence " Get ATR"
+  result = DL.WaitForSequence("PT Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- ICC Select PPSE"
+  DL.SendSequence " ICC Select PPSE"
+  result = DL.WaitForSequence("PT Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- ICC Select AID"
+  DL.SendSequence " ICC Select AID"
+  result = DL.WaitForSequence("PT Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Deactivate ICC"
+  DL.SendSequence " Deactivate ICC"
+  result = DL.WaitForSequence("PT Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Flash LED"
+  DL.SendSequence " Flash LED"
+  result = DL.WaitForSequence("Flash LED Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Beep Buzzer"
+  DL.SendSequence " Beep Buzzer"
+  result = DL.WaitForSequence("Buzzer Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Turn Off LED"
+  DL.SendSequence " Turn Off LED"
+  result = DL.WaitForSequence("Flash LED Response", 1, 10000)
+  chkErr()
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Stop PT"
+  DL.SendSequence " Stop PT"
+  result = DL.WaitForSequence("PT Response", 1, 10000)
+  chkErr()
+End If
+
+DL.Pause 1000
+'If result <> 0 Then
+'  DL.ResetReceiveCounter
+'  DL.AddComment "--- Display Text 1"
+'  DL.SendSequence " Display Text 1"
+'  result = DL.WaitForSequence("Display Text Response", 1, 10000)
+'End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Display Text 2"
+  DL.SendSequence " Display Text 2"
+  result = DL.WaitForSequence("Display Text Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Display Text 3"
+  DL.SendSequence " Display Text 3"
+  result = DL.WaitForSequence("Display Text Response", 1, 10000)
+  chkErr()
+End If
+End If ' end if access CT
+
+If 0 Then ' access SAMs
+For I = startSAMSlot To endSAMSlot
+DL.Pause 10000
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Start PT"
+  DL.SendSequence " Start PT"
+  result = DL.WaitForSequence("PT Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Poll For Token SAM" & I
+  DL.SendSequence " Poll For Token SAM" & I
+  result = DL.WaitForSequence("PT Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Select SAM" & I
+  DL.SendSequence " Select SAM" & I
+  result = DL.WaitForSequence("PT Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete SAM" & I
+  DL.SendSequence " Delete SAM" & I
+  result = DL.WaitForSequence("PT Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Select KEY Sam" & I
+  DL.SendSequence " Select KEY Sam" &I
+  result = DL.WaitForSequence("PT Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Deactivate SAM" & I
+  DL.SendSequence " Deactivate SAM" & I
+  result = DL.WaitForSequence("PT Response", 1, 10000)
+  chkErr()
+End If
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Stop PT"
+  DL.SendSequence " Stop PT"
+  result = DL.WaitForSequence("PT Response", 1, 10000)
+  chkErr()
+End If
+Next
+End If 'end if access SAMs
+
+If oddEvenFlg <> 0 Then
+   oddEvenFlg = 0
+Else
+   oddEvenFlg = 1
+End If
+overallCount = overallCount + 1
+DL.AddComment vbCrLf & "--- Iteration " & overallCount & ", Error(s):" & errCounter & " -----" & vbCrLf
+
+If 0 Then
+If errCounter < errLimit Then
+ DL.AddComment "Please wait " & loopInSec & " seconds for next iteration." & vbCrLf
+ tickCount = 0
+
+ Do 
+   DL.Pause 5000
+   tickCount = tickCount + 5
+   DL.AddComment tickCount & " "
+ Loop While tickCount < loopInSec
+
+ DL.AddComment vbCrLf & vbCrLf
+End If
+End If
+
+Loop While errCounter < errLimit
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- Get security log  (max. 50 records)"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 82 05 00 01 32 14 34", "H"
+  DL.Pause 6000
+
+'  DL.ResetReceiveCounter
+'  DL.AddComment vbCrLf & "--- Set security log cfg (to default)"
+'  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 82 07 00 02 01 01 E3 3F", "H"
+'  DL.Pause 6000
+DL.AddComment vbCrLf & "--- Test is terminated at iteration " & overallCount & " due to number of error(s) exceeds error limit!" & errLimt & " -----" & vbCrLf
+
+
+'============================================================
+
+'DL.pause 1000
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+

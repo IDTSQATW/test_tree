@@ -1,0 +1,59 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+Init LCD (F9 F9 F9)
+F9 F9 F9
+0
+5
+
+SEND
+1
+Enable reader (F7 F7 F7)
+F7 F7 F7
+0
+5
+
+SEND
+2
+Enable yellow LED (FB FB FB)
+FB FB FB
+0
+5
+
+SEND
+3
+Disable yellow LED (FA FA FA)
+FA FA FA
+0
+5
+
+SEND
+4
+04-F0
+56 69 56 4F 74 65 63 68 32 00 04 F0 00 00 44 4D
+0
+5
+

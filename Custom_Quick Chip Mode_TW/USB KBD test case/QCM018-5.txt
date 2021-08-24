@@ -1,0 +1,127 @@
+Objective: Encryption ON mode, AppleVAS test w/ ApplePay bank card.
+
+--------------------
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+========================================
+========================================
+--------------------
+>>> Load DUKPT data key & enable MSR/ MSD & EMV data encryption
+1. Erase All Key (83-00)
+CMD: 83 00
+EXR: 83 00
+
+2. Load Plaintext Key - command 1 (80-00)
+CMD: 80 00 30 45 43 36 30 46 33 35 31 34 37 45 43 41 30 30 38 38 4B 30 54 44 30 30 4E 30 30 30 30 30 30 38 30 39 43 30 37 41 39 39 31 44 43 38 30 33 34 45 43 31 32 45 31 36 39 43 30 44 35 34 35 35 44 45 41 32 39 34 35 31 34 32 34 37 38 30 38 30 35 36 38 32 33 34 39 38 37 31 32 30 32 33 34 30 30 30 30 30 30 30 30
+EXR: 80 00
+
+3. Load Plaintext Key - command 2  (80-00)
+CMD: 80 00 31 34 43 45 32 35 35 35 31 34 37 45 43 41 30 30 38 38 4B 30 54 44 30 30 4E 30 30 30 30 30 30 38 30 46 35 30 36 46 36 41 33 44 34 30 38 39 39 45 30 35 35 42 42 35 42 39 45 33 41 44 44 36 30 30 42 38 38 35 33 32 37 37 39 32 32 34 36 30 39 32 36 32 33 41 39 39 37 31 32 36 32 33 34 30 30 30 30 30 30 30 30
+EXR: 80 00
+
+4. Load Encrypted KPK (80-01)
+CMD: 80 01 41 30 30 38 38 4B 30 54 44 30 30 4E 30 30 30 30 43 44 32 46 43 43 36 44 37 39 32 44 33 42 32 34 46 30 38 33 37 42 30 33 32 44 30 38 36 38 46 45 43 39 46 44 44 43 39 43 32 36 33 31 31 35 46 30 44 43 43 34 42 44 42 35 37 43 36 30 33 43 34 32 46 34 41 35 30 34 34 39
+EXR: 80 00
+
+5. Enter DUKPT Key (81-00)
+CMD: 81 00 05 41 30 31 31 32 44 30 54 45 30 30 4E 30 31 30 30 4B 53 31 38 36 32 39 39 34 39 30 31 32 43 30 30 30 34 36 30 30 30 30 31 39 34 34 38 36 43 33 31 36 38 43 41 31 46 42 34 41 38 30 39 45 36 33 39 46 46 39 43 33 42 37 32 36 45 32 34 37 43 35 39 30 42 32 32 38 43 35 44 32 32 36 35 30 46 36 36 39 37 45 38 34 37 41 32 46 38 41 32 37 33 39 33
+EXR: 81 00
+
+6. C7-36 -- 03
+CMD: C7 36 03
+EXR: C7 00 00 00
+
+7. Set encryption type as AES
+CMD: C7 32 01
+EXR: C7 00 00 00
+
+--------------------
+>>> Set AppleVAS tags (VAS OR Pay)
+CMD: 04 00 DF ED 23 02 01 00 DF ED 24 04 00 00 00 00 DF ED 25 05 01 00 00 00 00 DF ED 26 01 01
+EXR: 04 00 00 00
+
+SWIPEKB: click OK -> tap ApplePay -- AMEX card. (Press button "Quick Chip" to Decryption first then Press button "OK". Note: Key Encryption Type = AES)
+EXR: DF EE 12 0A
+EXR: DFEF5F
+EXR: FF EE 13
+EXR: DFEF60
+EXR: FF EE 14
+EXR: DFEF5D
+EXR: 57
+EXR: 9F 39
+EXR: FF EE 01
+EXR: DF 30 01 00
+EXR: DF EE 26
+EXR: DF EF 4C
+EXR: DF EF 4D
+
+--------------------
+>>> Set AppleVAS tags (VAS AND Pay)
+CMD: 04 00 DF ED 23 02 01 00 DF ED 24 04 00 00 00 01 DF ED 25 05 01 00 00 00 00 DF ED 26 01 01
+EXR: 04 00 00 00
+
+SWIPEKB: click OK -> tap ApplePay -- AMEX card. (Press button "Quick Chip" to Decryption first then Press button "OK". Note: Key Encryption Type = AES)
+EXR: DF EE 12 0A
+EXR: DFEF5F
+EXR: FF EE 13
+EXR: DFEF60
+EXR: FF EE 14
+EXR: DFEF5D
+EXR: 57
+EXR: 9F 39
+EXR: FF EE 01
+EXR: DF 30 01 00
+EXR: DF EE 26
+EXR: DF EF 4C
+EXR: DF EF 4D
+
+--------------------
+>>> Set AppleVAS tags (Pay Only)
+CMD: 04 00 DF ED 23 02 01 00 DF ED 24 04 00 00 00 03 DF ED 25 05 01 00 00 00 00 DF ED 26 01 01
+EXR: 04 00 00 00
+
+SWIPEKB: click OK -> tap ApplePay -- AMEX card. (Press button "Quick Chip" to Decryption first then Press button "OK". Note: Key Encryption Type = AES)
+EXR: DF EE 12 0A
+EXR: DFEF5F
+EXR: FF EE 13
+EXR: DFEF60
+EXR: FF EE 14
+EXR: DFEF5D
+EXR: 57
+EXR: 9F 39
+EXR: FF EE 01
+EXR: DF 30 01 00
+EXR: DF EE 26
+EXR: DF EF 4C
+EXR: DF EF 4D
+
+--------------------
+>>> Quick Chip mode = 04
+CMD: 01 01 04
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+>>> Set AppleVAS tags (VAS OR Pay)
+CMD: 04 00 DF ED 23 02 01 00 DF ED 24 04 00 00 00 00 DF ED 25 05 01 00 00 00 00 DF ED 26 01 01
+EXR: 04 00 00 00
+
+SWIPEKB: click OK -> tap ApplePay -- AMEX card. (Press button "Quick Chip" to Decryption first then Press button "OK". Note: Key Encryption Type = AES)
+EXR: DF EE 12 0A
+EXR: DFEF5F
+EXR: FF EE 13
+EXR: DFEF60
+EXR: FF EE 14
+EXR: DFEF5D
+EXR: 57
+EXR: 9F 39
+EXR: FF EE 01
+EXR: DF 30 01 00
+EXR: DF EE 26
+EXR: DF EF 4C
+EXR: DF EF 4D
+
+--------------------
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00

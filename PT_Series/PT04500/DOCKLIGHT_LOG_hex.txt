@@ -1,0 +1,10 @@
+Docklight Log File (HEX) - Started  
+ --- Pass-Through Mode - Invalid mode value (out of range) 
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 03 3D 5B 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 05 00 00 F7 6B  Pass-Through Mode - Invalid mode value (out of range) (OK)
+ Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

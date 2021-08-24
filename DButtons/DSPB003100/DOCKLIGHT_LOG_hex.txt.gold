@@ -1,0 +1,25 @@
+Docklight Log File (HEX) - Started  
+ TEST CASE: DSPB003100
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 16 32 33 39 00 31 35 39 00 00 00 31 00 34 00 33 00 79 65 73 00 0D 00 A2 20 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 04 00 00 00 03 43 B4  INVALID COORD Button Display
+ Result = PASSED
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

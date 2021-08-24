@@ -1,0 +1,43 @@
+Docklight Log File (HEX) - Started 2015/9/4 10:25:20.690 
+ TEST CASE: EVQ023
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Clear Event Queue
+
+2015/9/4 10:25:22.496 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 0C 00 00 62 57 
+2015/9/4 10:25:22.535 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  resultName = Stop/Start Response
+ 
+
+ --- Activate Transaction Event
+
+2015/9/4 10:25:22.574 [TX] - 56 69 56 4F 74 65 63 68 32 00 02 0A 00 21 00 0A 47 00 00 01 9F 02 06 00 00 00 00 00 01 5F 2A 02 08 40 9A 03 12 01 02 9F 1A 02 08 40 9C 01 00 2C 32 
+2015/9/4 10:25:22.684 [RX] - 56 69 56 4F 74 65 63 68 32 00 02 00 00 00 89 8F  resultName = Activate Response
+ 
+
+ --- Get Transaction Result
+
+2015/9/4 10:25:32.729 [TX] - 56 69 56 4F 74 65 63 68 32 00 03 00 00 00 3B FF 
+2015/9/4 10:25:32.760 [RX] - 56 69 56 4F 74 65 63 68 32 00 03 08 00 00 56 9A  resultName = Get Transaction Result Time Out
+ 
+
+ --- Get Input Event 
+
+2015/9/4 10:25:32.786 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 06 00 01 1E 77 E0 
+2015/9/4 10:25:32.823 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 11 00 03 00 06 00 00 00 00 00 00 00 00 00 00 00 00 08 95 67  resultName = Get Input Event Time Out Response
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2015/9/4 10:25:34.015 
+

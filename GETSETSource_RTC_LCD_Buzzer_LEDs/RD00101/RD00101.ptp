@@ -1,0 +1,60 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Get Source
+56 69 56 4F 74 65 63 68 32 00 01 05 00 00 A3 F9
+0
+5
+
+RECEIVE
+0
+VP8xxx - Get Source reject acknowledged (OK)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 00 7C 33
+-1
+1
+COMMENT VP8xxx - Get Source reject acknowledged (OK)
+1
+1
+0
+1
+
+RECEIVE
+1
+GR - Get Source success (OK)
+56 69 56 4F 74 65 63 68 32 00 01 00 00 02 ?? ?? ?? ??
+-1
+1
+COMMENT 
+1
+1
+0
+1
+
+RECEIVE
+2
+AR- Get Source success (OK)
+56 69 56 4F 74 65 63 68 32 00 01 00 00 02 ?? ?? ?? ??
+-1
+1
+COMMENT 
+1
+1
+0
+1
+

@@ -1,0 +1,28 @@
+Docklight Log File (HEX) - Started 2019/1/29 14:36:18.521 
+ TEST CASE: MV004
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Get All reader Variables
+
+2019/1/29 14:36:19.787 [TX] - 56 69 56 4F 74 65 63 68 32 00 09 00 00 00 90 97 
+2019/1/29 14:36:19.813 [RX] - 56 69 56 4F 74 65 63 68 32 00 09 02 00 00 F9 F0  
+
+ Result = FAILED
+ 
+
+ ---------- END OF TEST ----------
+
+ 
+
+ ///// NOTICE ///////////////////////////////////////////////////////////
+
+1) Please check ASCII screen, make sure reader return correct data that meet spec!!
+2) cmd 09-00 will return the same result as cmd 09-20
+
+
+Docklight Log File (HEX) - Stopped 2019/1/29 14:36:25.409 
+

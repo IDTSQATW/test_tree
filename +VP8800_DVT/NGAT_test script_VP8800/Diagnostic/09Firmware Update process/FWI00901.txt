@@ -1,0 +1,7 @@
+1. 启动VLoader-Pisces.exe
+2. 点击Get Version. 显示版本号
+3. 点击Download Bootloader. 选择Bootloader文件.
+4. 点击Download Image. 选择Firmware文件.
+5. 点击Continue Boot后可继续启动
+6. 点击Get Version后可显示新版本号
+7. 在Download Bootloader或Download Image下载过程中,断开设备再连后重新操作仍可完成升级

@@ -1,0 +1,24 @@
+Docklight Log File (HEX) - Started 2016/6/3 15:06:43.771 
+ TEST CASE: MV020
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Get FW ver (29-00)
+
+2016/6/3 15:06:45.099 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 00 DE A0 
+2016/6/3 15:06:45.154 [RX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 0D 4E 45  Passed  
+
+4F 20 76 31 2E 30 31 2E  Result = PASSED
+30 32 30 7E AF  ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2016/6/3 15:06:46.320 
+

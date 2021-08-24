@@ -1,0 +1,136 @@
+VERSION
+9
+
+COMMSETTINGS
+0
+COM1
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+----Transaction Flags----
+2C 11
+0
+5
+CHECKSUM 
+
+SEND
+1
+Transaction Flags(Contact)
+02
+0
+5
+CHECKSUM 
+
+SEND
+2
+Transaction Flags(Contactless)
+01
+0
+5
+CHECKSUM 
+
+SEND
+3
+Transaction Flags(Both)
+03
+0
+5
+CHECKSUM 
+
+SEND
+4
+----Single Shot Commands(RF Antenna On)----
+2C 11
+0
+5
+CHECKSUM 
+
+SEND
+5
+Single Shot Commands(Deactivate contact)
+11
+0
+5
+CHECKSUM 
+
+SEND
+6
+Single Shot Commands(Update LED)
+09
+0
+5
+CHECKSUM 
+
+SEND
+7
+Single Shot Commands(Poll for Card)
+05
+0
+5
+CHECKSUM 
+
+SEND
+8
+----Single Shot Commands(RF Antenna Off)----
+2C 11
+0
+5
+CHECKSUM 
+
+SEND
+9
+Single Shot Commands(Deactivate contact)
+10
+0
+5
+CHECKSUM 
+
+SEND
+10
+Single Shot Commands(Update LED)
+08
+0
+5
+CHECKSUM 
+
+SEND
+11
+Single Shot Commands(Poll for Card)
+04
+0
+5
+CHECKSUM 
+
+SEND
+12
+
+56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 05 02 00 05 00 20 01 00 00 00 FE C0
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+13
+Get ATR
+56 69 56 4F 70 61 79 56 33 00 2C 12 00 01 20 99 89
+0
+5
+CHECKSUM 
+

@@ -1,0 +1,36 @@
+Docklight Log File (HEX) - Started 11/7/2016 17:38:51.078 
+ TEST CASE: SC001-02
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Welcome (Reset to Initial State)
+
+11/7/2016 17:38:56.945 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 01 00 00 33 15 
+11/7/2016 17:38:56.985 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00  Pass 00 00 22 03  Result = PASSED
+ --- Capture and verify signature (PNG)
+
+11/7/2016 17:38:57.041 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 02 00 02 28 02 09 D5  Result = PASSED
+ Result = PASSED
+ --- Welcome (Reset to Initial State)
+
+11/7/2016 17:39:04.828 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 01 00 00 33 15 
+11/7/2016 17:39:04.888 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 0A 00 04 00 03 00 06 C0 A8 56 69 56 4F 74 65 63 68 32 00 83 00  Pass 00 00 22 03  Result = PASSED
+ --- Welcome (Reset to Initial State)
+
+11/7/2016 17:39:10.505 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 01 00 00 33 15 
+11/7/2016 17:39:10.550 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00  Pass 00 00 22 03  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 11/7/2016 17:39:13.769 
+

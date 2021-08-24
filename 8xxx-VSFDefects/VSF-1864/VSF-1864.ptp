@@ -1,0 +1,435 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM4
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+---  Buzzer & LED ---
+
+0
+5
+
+SEND
+1
+One beep with LED All On
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 01 FF 01 F9 77
+0
+5
+
+SEND
+2
+Double beep with All LED Off
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 02 FF 00 88 3E
+0
+5
+
+SEND
+3
+Four short beep with LED 3 On
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 04 03 01 A5 CA
+0
+5
+
+SEND
+4
+One long beep (800ms) with LED All On
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 08 FF 01 00 00
+0
+5
+
+SEND
+5
+--- get memory ---
+
+0
+5
+
+SEND
+6
+Get memory
+56 69 56 4F 74 65 63 68 32 00 82 04 00 00 77 88
+0
+5
+
+SEND
+7
+--- PING PONG ---
+
+0
+5
+
+SEND
+8
+PING-PONG
+50 49 4E 47
+0
+5
+
+SEND
+9
+Three short beep with LED 1 On
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 03 01 01 57 29
+0
+5
+
+SEND
+10
+Ping
+56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD
+0
+5
+
+SEND
+11
+bootup notification
+56 69 56 4F 74 65 63 68 32 00 14 01 00 01 01 B3 CD
+0
+5
+
+SEND
+12
+--- get module versions ---
+
+0
+5
+
+SEND
+13
+Get AR Module Versions
+56 69 56 4F 74 65 63 68 32 00 09 20 00 00 56 11
+0
+5
+
+SEND
+14
+Get GR reader variables
+56 69 56 4F 74 65 63 68 32 00 09 00 00 00 90 97
+0
+5
+
+SEND
+15
+Get firmware version
+56 69 56 4F 74 65 63 68 32 00 29 00 00 00 DE A0
+0
+5
+
+SEND
+16
+Get serial number (12-01)
+56 69 56 4F 74 65 63 68 32 00 12 01 00 00 18 A5
+0
+5
+
+SEND
+17
+Set serial number (12-02)
+56 69 56 4F 74 65 63 68 32 00 12 02 00 0F 11 22 33 44 55 66 77 88 99 AA BB CC DD EE FF 00 00
+0
+5
+
+SEND
+18
+--- misc ---
+56 69 56 4F 74 65 63 68 32 00 83 01 00 00 33 15
+0
+5
+
+SEND
+19
+Cancel Transactions (05-01)
+56 69 56 4F 74 65 63 68 32 00 05 01 00 00 92 EF
+0
+5
+
+SEND
+20
+Reset to Initial State (83-01)
+56 69 56 4F 74 65 63 68 32 00 83 01 00 00 33 15
+0
+5
+
+SEND
+21
+Check Master Key Present (80-02)
+56 69 56 4F 74 65 63 68 32 00 80 02 00 00 BF D7
+0
+5
+
+SEND
+22
+Set Param to Default (04-09)
+56 69 56 4F 74 65 63 68 32 00 04 09 00 00 87 30
+0
+5
+
+SEND
+23
+Get Params (03-02)
+56 69 56 4F 74 65 63 68 32 00 03 02 00 00 5B 91
+0
+5
+
+SEND
+24
+Get all AIDs (03-05)
+56 69 56 4F 74 65 63 68 32 00 03 05 00 00 CB 14
+0
+5
+
+SEND
+25
+Get all Groups (03-07)
+56 69 56 4F 74 65 63 68 32 00 03 07 00 00 AB 7A
+0
+5
+
+SEND
+26
+Set Params (04-00) on FFFC
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF FC 01 01 00 00
+0
+5
+
+SEND
+27
+--- backwards compatibility ---
+
+0
+5
+
+SEND
+28
+Enable Backwards Compatibility
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 59 01 01 4B AF
+0
+5
+
+SEND
+29
+Disable Backwards Compatibility
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 59 01 00 6A BF
+0
+5
+
+SEND
+30
+Activate Transaction
+56 69 56 4F 74 65 63 68 32 00 02 01 00 0F 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 01 34
+0
+5
+
+SEND
+31
+Auto Poll
+56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 F6 24
+0
+5
+
+SEND
+32
+Poll on Demand
+56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34
+0
+5
+
+SEND
+33
+Burst On
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 01 98 3E
+0
+5
+
+SEND
+34
+Burst Off
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 00 B9 2E
+0
+5
+
+SEND
+35
+Burst Auto
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 02 98 3E
+0
+5
+
+SEND
+36
+Burst Auto
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 02 98 3E
+0
+5
+
+SEND
+37
+Create group 1 for vivoComm test
+56 69 56 4F 74 65 63 68 32 00 04 03 00 18 FF E4 01 01 5F 2A 02 09 01 9F 1A 02 01 58 9F 33 03 00 00 A8 FF FB 01 00 53 9F
+0
+5
+
+SEND
+38
+Creat AID for vivoComm
+56 69 56 4F 74 65 63 68 32 00 04 02 00 14 FF E4 01 01 9F 06 09 A0 00 00 02 99 56 43 32 01 FF E2 01 14 83 57
+0
+5
+
+SEND
+39
+Write 16 byte to vivoComm card
+56 69 56 4F 74 65 63 68 32 00 02 08 00 27 00 0F 00 00 9F 02 06 00 00 00 00 00 01 9C 01 00 FF EE 01 13 DF 56 10 00 11 22 33 44 55 66 77 88 99 AA BB CC DD EE FF C3 BD
+0
+5
+
+SEND
+40
+Get vivoComm data
+56 69 56 4F 74 65 63 68 32 00 02 08 00 10 00 0F 00 00 9F 02 06 00 00 00 00 00 01 9C 01 00 3E 7E
+0
+5
+
+SEND
+41
+bootup notification on
+56 69 56 4F 74 65 63 68 32 00 14 01 00 01 01 DA 13
+0
+5
+
+SEND
+42
+bootup notification off
+56 69 56 4F 74 65 63 68 32 00 14 01 00 01 00 FB 03
+0
+5
+
+SEND
+43
+display keep watching...
+56 69 56 4F 74 65 63 68 32 00 83 03 00 1C 30 00 30 00 31 00 31 00 35 00 4B 65 65 70 20 77 61 74 63 68 69 6E 67 20 2E 2E 2E 00 16 7A
+0
+5
+
+SEND
+44
+display sleeping ...
+56 69 56 4F 74 65 63 68 32 00 83 03 00 17 30 00 30 00 31 00 31 00 35 00 53 6C 65 65 70 69 6E 67 20 2E 2E 2E 00 DB 30
+0
+5
+
+SEND
+45
+Get Input Event (TM30sec)
+56 69 56 4F 74 65 63 68 32 00 83 06 00 01 1E 88 13
+0
+5
+
+RECEIVE
+0
+buzzLed Resp
+56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53
+-1
+1
+COMMENT Passed
+0
+1
+0
+0
+
+RECEIVE
+1
+Get Mem Resp
+56 69 56 4F 74 65 63 68 32 00 82 00 00 2F 54 6F 74 61 6C 20 6D 65 6D 3D ?? ?? ?? ?? ?? ?? ?? 75 73 65 64 20 6D 65 6D 3D ?? ?? ?? ?? ?? ?? 66 72 65 65 20 6D 65 6D 3D ?? ?? ?? ?? ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+PONG Resp
+50 4F 4E 47
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
+get module version Resp
+56 69 56 4F 74 65 63 68 32 00 09 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+4
+Ping Resp
+56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+5
+Cancel Transaction Resp
+56 69 56 4F 74 65 63 68 32 00 05 00 00 00 D8 A2
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+6
+Check Master Key Present Resp
+56 69 56 4F 74 65 63 68 32 00 80 00 ?? ?? ##
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+7
+set backwards compatibility resp
+56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

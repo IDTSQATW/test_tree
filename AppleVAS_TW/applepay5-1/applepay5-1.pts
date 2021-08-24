@@ -1,0 +1,684 @@
+DL_SCRIPTVERSION
+1
+63302
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "applepay5-1" ' !!!!! EDIT THIS !!!!!
+' Objective: 
+' Merchant 4 = pass.com.apple.wallet.dev_Panera, test Panera Bread & android card 1
+' Merchant 4 = pass.com.apple.wallet.panera w/URL, test Panera Bread & android card 1
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  genFlag = result
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+End Sub
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+countf = 0
+
+DL.Pause 500
+DL.SendSequence "","56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34","H"
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set Merchant 1 - Blank "
+   DL.SendSequence "Set Merchant 1 - Blank"
+   result = DL.WaitForSequence("Set Merchant blank response" , 1, 10000)
+End If
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set Merchant 2 - Blank "
+   DL.SendSequence " Set Merchant 2 - Blank "
+   result = DL.WaitForSequence("Set Merchant blank response", 1, 10000)
+End If
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set Merchant 3 - Blank"
+   DL.SendSequence " Set Merchant 3 - Blank"
+   result = DL.WaitForSequence("Set Merchant blank response", 1, 10000)
+End If
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set Merchant 4 - Blank "
+   DL.SendSequence " Set Merchant 4 - Blank "
+   result = DL.WaitForSequence("Set Merchant blank response", 1, 10000)
+End If
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set Merchant 5 - Blank "
+   DL.SendSequence " Set Merchant 5 - Blank "
+   result = DL.WaitForSequence("Set Merchant blank response", 1, 10000)
+End If
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set Merchant 6 - Blank "
+   DL.SendSequence " Set Merchant 6 - Blank "
+   result = DL.WaitForSequence("Set Merchant blank response", 1, 10000)
+End If
+
+DL.ClearCommWindows
+
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set Merchant 4 - pass.com.apple.wallet.dev_Panera "
+   DL.SendSequence " Set Merchant 4 - pass.com.apple.wallet.dev_Panera "
+   result = DL.WaitForSequence("Set Merchant blank response", 1, 10000)
+End If
+
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Get Merchant 4  "
+   DL.SendSequence " Get Merchant 4  "
+   result = DL.WaitForSequence("Get Merchant 4 response", 1, 10000)
+End If
+'============================================================
+
+
+
+
+
+
+
+
+
+
+'============================================================
+'============================================================
+'Panera Bread card
+'============================================================
+'============================================================
+If result <> 0 Then
+DL.ClearCommWindows
+   DL.AddComment "============================================================Panera Bread card" & vbcrlf
+   DL.Pause 4000
+   prompt71 = prompt71 & "place iphone and choose Panera Bread card after press ok."
+   result = MsgBox(prompt71, VBOKOnly, "Apple pay")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- ACT - VAS Only "
+   if readerType <> "NEO2" then
+      DL.SendSequence "ACT - VAS Only", i, "D"
+   else
+      DL.SendSequence "ACT - VAS Only (NEO2)", i, "D"
+   end if
+   if readerType <> "NEO2" then
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+   else
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 10000)
+   end if
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   DL.Pause 4000
+   prompt72 = prompt72 & "place iphone and choose Panera Bread card after press ok."
+   result = MsgBox(prompt72, VBOKOnly, "Apple pay")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- ACT - VAS OR Pay "
+   if readerType <> "NEO2" then
+      DL.SendSequence "ACT - VAS OR Pay", i, "D"
+   else
+      DL.SendSequence "ACT - VAS OR Pay (NEO2)", i, "D"
+   end if
+   if readerType <> "NEO2" then
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+   else
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 10000)
+   end if
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   DL.Pause 4000
+   prompt73 = prompt73 & "place iphone and choose Panera Bread card after press ok."
+   result = MsgBox(prompt73, VBOKOnly, "Apple pay")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- ACT - VAS AND Pay "
+   if readerType <> "NEO2" then
+      DL.SendSequence "ACT - VAS AND Pay", i, "D"
+   else
+      DL.SendSequence "ACT - VAS AND Pay (NEO2)", i, "D"
+   end if
+   if readerType <> "NEO2" then
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+   else
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 10000)
+   end if
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   DL.Pause 4000
+   prompt74 = prompt74 & "place iphone and choose Panera Bread card after press ok."
+   result = MsgBox(prompt74, VBOKOnly, "Apple pay")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- ACT - Pay Only "
+   if readerType <> "NEO2" then
+      DL.SendSequence "ACT - Pay Only", i, "D"
+   else
+      DL.SendSequence "ACT - Pay Only (NEO2)", i, "D"
+   end if
+   if readerType <> "NEO2" then
+      result = DL.WaitForSequence("request payment response" , 1, 10000)
+   else
+      result = DL.WaitForSequence("request payment response (NEO2)" , 1, 10000)
+   end if
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   DL.Pause 4000
+   prompt15 = prompt15 & "place iphone and choose Panera Bread card after press ok."
+   result = MsgBox(prompt15, VBOKOnly, "Apple pay")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- ACT - VAS URL Only Protocol "
+   if readerType <> "NEO2" then
+      DL.SendSequence "ACT - VAS URL Only Protocol", i, "D"
+   else
+      DL.SendSequence "ACT - VAS URL Only Protocol (NEO2)", i, "D"
+   end if
+   if readerType <> "NEO2" then
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS URL response" , 1, 10000)
+   else
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS URL response (NEO2)" , 1, 10000)
+   end if
+      if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   DL.Pause 4000
+   prompt17 = prompt17 & "place iphone and choose Panera Bread card after press ok."
+   result = MsgBox(prompt17, VBOKOnly, "Apple pay")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- ACT - VAS OR Pay - Beeps & Silent CommErr "
+   if readerType <> "NEO2" then
+      DL.SendSequence "ACT - VAS OR Pay - Beeps & Silent CommErr", i, "D"
+   else
+      DL.SendSequence "ACT - VAS OR Pay - Beeps & Silent CommErr (NEO2)", i, "D"
+   end if
+   if readerType <> "NEO2" then
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+   else
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 10000)
+   end if   
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   DL.Pause 4000
+   prompt18 = prompt18 & "place iphone and choose Panera Bread card after press ok."
+   result = MsgBox(prompt18, VBOKOnly, "Apple pay")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- ACT - VAS AND Pay - Beeps & Silent CommErr "
+   if readerType <> "NEO2" then
+      DL.SendSequence "ACT - VAS AND Pay - Beeps & Silent CommErr", i, "D"
+   else
+      DL.SendSequence "ACT - VAS AND Pay - Beeps & Silent CommErr (NEO2)", i, "D"
+   end if
+   if readerType <> "NEO2" then
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+   else
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 10000)
+   end if   
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+
+
+
+
+
+
+
+
+
+
+
+'============================================================
+'============================================================
+DL.ClearCommWindows
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set Merchant 4 - pass.com.apple.wallet.panera w/URL "
+   DL.SendSequence " Set Merchant 4 - pass.com.apple.wallet.panera w/URL "
+   result = DL.WaitForSequence("Set Merchant blank response", 1, 10000)
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Get Merchant 4  "
+   DL.SendSequence " Get Merchant 4  "
+   result = DL.WaitForSequence("Get Merchant 4 response again", 1, 10000)
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+
+
+
+
+
+
+
+
+
+
+'============================================================
+'============================================================
+'Panera Bread card
+'============================================================
+'============================================================
+DL.ClearCommWindows
+   DL.AddComment "============================================================Panera Bread card" & vbcrlf
+   DL.Pause 4000
+   prompt61 = prompt61 & "place iphone and choose Panera Bread card after press ok."
+   result = MsgBox(prompt61, VBOKOnly, "Apple pay")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- ACT - VAS Only "
+   if readerType <> "NEO2" then
+      DL.SendSequence "ACT - VAS Only", i, "D"
+   else
+      DL.SendSequence "ACT - VAS Only (NEO2)", i, "D"
+   end if
+   if readerType <> "NEO2" then
+      result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+   else
+      result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 10000)
+   end if   
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   DL.Pause 4000
+   prompt62 = prompt62 & "place iphone and choose Panera Bread card after press ok."
+   result = MsgBox(prompt62, VBOKOnly, "Apple pay")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- ACT - VAS OR Pay "
+   if readerType <> "NEO2" then
+      DL.SendSequence "ACT - VAS OR Pay", i, "D"
+   else
+      DL.SendSequence "ACT - VAS OR Pay (NEO2)", i, "D"
+   end if
+   if readerType <> "NEO2" then
+      result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+   else
+      result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 10000)
+   end if   
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   DL.Pause 4000
+   prompt63 = prompt63 & "place iphone and choose Panera Bread card after press ok."
+   result = MsgBox(prompt63, VBOKOnly, "Apple pay")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- ACT - VAS AND Pay "
+   if readerType <> "NEO2" then
+      DL.SendSequence "ACT - VAS AND Pay", i, "D"
+   else
+      DL.SendSequence "ACT - VAS AND Pay (NEO2)", i, "D"
+   end if
+   if readerType <> "NEO2" then
+      result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+   else
+      result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 10000)
+   end if   
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   DL.Pause 4000
+   prompt64 = prompt64 & "place iphone and choose Panera Bread card after press ok."
+   result = MsgBox(prompt64, VBOKOnly, "Apple pay")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- ACT - Pay Only "
+   if readerType <> "NEO2" then
+      DL.SendSequence "ACT - Pay Only", i, "D"
+   else
+      DL.SendSequence "ACT - Pay Only (NEO2)", i, "D"
+   end if
+   if readerType <> "NEO2" then
+      result = DL.WaitForSequence("request payment response" , 1, 10000)
+   else
+      result = DL.WaitForSequence("request payment response (NEO2)" , 1, 10000)
+   end if   
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   DL.Pause 4000
+   prompt75 = prompt75 & "place iphone and choose Panera Bread card after press ok."
+   result = MsgBox(prompt75, VBOKOnly, "Apple pay")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- ACT - VAS URL Only Protocol "
+   if readerType <> "NEO2" then
+      DL.SendSequence "ACT - VAS URL Only Protocol", i, "D"
+   else
+      DL.SendSequence "ACT - VAS URL Only Protocol (NEO2)", i, "D"
+   end if
+   if readerType <> "NEO2" then
+      result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS URL response" , 1, 10000)
+   else
+      result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS URL response (NEO2)" , 1, 10000)
+   end if      
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   DL.Pause 4000
+   prompt77 = prompt77 & "place iphone and choose Panera Bread card after press ok."
+   result = MsgBox(prompt77, VBOKOnly, "Apple pay")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- ACT - VAS OR Pay - Beeps & Silent CommErr "
+   if readerType <> "NEO2" then
+      DL.SendSequence "ACT - VAS OR Pay - Beeps & Silent CommErr", i, "D"
+   else
+      DL.SendSequence "ACT - VAS OR Pay - Beeps & Silent CommErr (NEO2)", i, "D"
+   end if
+   if readerType <> "NEO2" then
+      result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+   else
+      result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 10000)
+   end if   
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   DL.Pause 4000
+   prompt78 = prompt78 & "place iphone and choose Panera Bread card after press ok."
+   result = MsgBox(prompt78, VBOKOnly, "Apple pay")
+
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- ACT - VAS AND Pay - Beeps & Silent CommErr "
+   if readerType <> "NEO2" then
+      DL.SendSequence "ACT - VAS AND Pay - Beeps & Silent CommErr", i, "D"
+   else
+      DL.SendSequence "ACT - VAS AND Pay - Beeps & Silent CommErr (NEO2)", i, "D"
+   end if
+   if readerType <> "NEO2" then
+      result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+   else
+      result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 10000)
+   end if
+   if result = 0 then 
+      countf = countf + 1
+      DL.AddComment vbcrlf & "** FAIL **"
+   end if
+'============================================================
+   if countf <> 0 then
+      result = 0
+   else
+      result = 1
+   end if
+End If
+'============================================================
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If 0 Then
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+DL.pause 1000
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub
+

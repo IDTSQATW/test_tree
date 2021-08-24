@@ -1,0 +1,125 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Enable Pass Through
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19
+0
+5
+
+SEND
+1
+Pass-Through - STOP
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38
+0
+5
+
+SEND
+2
+Buzzer Control - Long Beep; 200 ms (00h)
+56 69 56 4F 74 65 63 68 32 00 0B 02 00 01 00 F9 84
+0
+5
+
+SEND
+3
+Buzzer Control - Long Beep; 400 ms (01h)
+56 69 56 4F 74 65 63 68 32 00 0B 02 00 01 01 E9 A5
+0
+5
+
+SEND
+4
+Buzzer Control - Long Beep; 600 ms (02h)
+56 69 56 4F 74 65 63 68 32 00 0B 02 00 01 02 D9 C6
+0
+5
+
+SEND
+5
+Buzzer Control - Long Beep; 800 ms (03h)
+56 69 56 4F 74 65 63 68 32 00 0B 02 00 01 03 C9 E7
+0
+5
+
+SEND
+6
+Buzzer Control - Long Beep ; Invalid range  (05h)
+56 69 56 4F 74 65 63 68 32 00 0B 02 00 01 05 A9 21
+0
+5
+
+SEND
+7
+Buzzer Control - Short Beep ; 1 Beep (01h)
+56 69 56 4F 74 65 63 68 32 00 0B 01 00 01 01 72 79
+0
+5
+
+SEND
+8
+Buzzer Control - Short Beep ; 2 Beep (02h)
+56 69 56 4F 74 65 63 68 32 00 0B 01 00 01 02 42 1A
+0
+5
+
+SEND
+9
+Buzzer Control - Short Beep ; 3 Beep (03h)
+56 69 56 4F 74 65 63 68 32 00 0B 01 00 01 03 52 3B
+0
+5
+
+SEND
+10
+Buzzer Control - Short Beep ; 4 Beep (04h)
+56 69 56 4F 74 65 63 68 32 00 0B 01 00 01 04 22 DC
+0
+5
+
+SEND
+11
+Buzzer Control - Short Beep ; Invalid range  (05h)
+56 69 56 4F 74 65 63 68 32 00 0B 01 00 01 05 32 FD
+0
+5
+
+RECEIVE
+0
+Pass-Through - START and STOP (OK)
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B
+-1
+1
+COMMENT Pass-Through - START and STOP (OK)
+1
+1
+0
+1
+
+RECEIVE
+1
+Buzzer command Status (OK)
+56 69 56 4F 74 65 63 68 32 00 0B 00 00 00 7A F8
+-1
+1
+COMMENT Buzzer command Status (OK)
+1
+1
+0
+1
+

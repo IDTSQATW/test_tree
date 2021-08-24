@@ -1,0 +1,29 @@
+Objective: check Pass-through mode can work under Quick Chip Mode.
+ 
+--------------------
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+>>> Set CT terminal data = 5C (enable MSR fallback to CT function)
+CMD: 60 06 08 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 DFEF62 01 01
+EXR: 60 00 00 00
+
+--------------------
+>>> PassThrough = START
+CMD: 2C 01 01
+EXR: 2C 00 00 00
+
+SWIPEKB: Click OK --> Swipe Discover card (or any card that service code is 2 or 6)
+MESSAGECK: LEDs did NOT have any change after swiped card 
+
+>>> PassThrough STOP
+CMD: 2C 01 00
+EXR: 2C 00 00 00
+
+MESSAGECK: LEDs did NOT have any change 
+
+--------------------
+>>> Set CT terminal data = 5C
+CMD: 60 06 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00
+EXR: 60 00 00 00

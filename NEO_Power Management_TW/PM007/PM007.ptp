@@ -1,0 +1,191 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+## PM007 (Run/ LLS -> Power OFF -> Run)
+
+0
+5
+
+SEND
+1
+18-01 Ping
+56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD
+0
+5
+
+SEND
+2
+F0-00 Set PMC Status (05 idle/ 14 sleep)
+56 69 56 4F 74 65 63 68 32 00 F0 00 00 02 05 14 BB 18
+0
+5
+
+SEND
+3
+F0-01 Get PMC Status
+56 69 56 4F 74 65 63 68 32 00 F0 01 00 00 9A CC
+0
+5
+
+SEND
+4
+   1. Run > Power OFF > 18-01
+
+0
+5
+
+SEND
+5
+        F0-0F Shut Off the Power
+56 69 56 4F 74 65 63 68 32 00 F0 0F 00 00 9B D7
+0
+5
+
+SEND
+6
+        18-01 Ping
+56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD
+0
+5
+
+SEND
+7
+   2. LLS > Power OFF > 18-01
+
+0
+5
+
+SEND
+8
+        F0-0F Shut Off the Power
+56 69 56 4F 74 65 63 68 32 00 F0 0F 00 00 9B D7
+0
+5
+
+SEND
+9
+        18-01 Ping
+56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD
+0
+5
+
+SEND
+10
+   3. Run > Power OFF > USB plug-in > 18-01
+
+0
+5
+
+SEND
+11
+        F0-0F Shut Off the Power
+56 69 56 4F 74 65 63 68 32 00 F0 0F 00 00 9B D7
+0
+5
+
+SEND
+12
+        USB plug-in
+
+0
+5
+
+SEND
+13
+        18-01 Ping
+56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD
+0
+5
+
+SEND
+14
+   4. LLS > Power OFF > USB plug-in > 18-01
+
+0
+5
+
+SEND
+15
+        F0-0F Shut Off the Power
+56 69 56 4F 74 65 63 68 32 00 F0 0F 00 00 9B D7
+0
+5
+
+SEND
+16
+        USB plug-in
+
+0
+5
+
+SEND
+17
+        18-01 Ping
+56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD
+0
+5
+
+RECEIVE
+0
+
+56 69 56 4F 74 65 63 68 32 00 ?? 00 ?? ??
+-1
+1
+COMMENT OK
+0
+1
+0
+0
+
+RECEIVE
+1
+F0 00
+56 69 56 4F 74 65 63 68 32 00 F0 00 00 00 FB AA
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+18 00
+56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
+F0-01 ok resp
+56 69 56 4F 74 65 63 68 32 00 F0 00 00 02 05 14 18 BB
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

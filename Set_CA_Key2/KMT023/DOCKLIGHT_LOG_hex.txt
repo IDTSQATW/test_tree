@@ -1,0 +1,23 @@
+Docklight Log File (HEX) - Started 2018/9/3 16:27:28.487 
+ TEST CASE: KMT023
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ Get Visa Hash
+
+2018/9/3 16:27:30.052 [TX] - 56 69 56 4F 74 65 63 68 32 00 D0 02 00 06 A0 00 00 00 03 01 C1 C4 
+2018/9/3 16:27:30.069 [RX] - 56 69 56 4F 74 65 63 68 32 00 D0 00 00 16 01 01 D3 4A 6A 77 60 11 C7 E7 CE 3A EC 5F 03 AD 2F 8C FC 55 03 CC D1 98  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2018/9/3 16:27:31.165 
+

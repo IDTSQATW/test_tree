@@ -1,0 +1,31 @@
+Docklight Log File (HEX) - Started 2016/10/19 17:11:11.806 
+ TEST CASE: EGN12
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+
+ --- Erase Account + Admin DUKPT keys
+
+2016/10/19 17:11:12.960 [TX] - 56 69 56 4F 74 65 63 68 32 00 C7 35 00 01 00 D3 3C 
+2016/10/19 17:11:13.090 [RX] - 56 69 56 4F 74 65 63 68 32 00 C7 00 00 00 86 6E  
+
+ --- Loading Admin DUKPT Key
+ 
+
+ >> 1. Get Status
+
+2016/10/19 17:11:13.425 [TX] - 02 46 46 2F 78 4D 42 41 75 38 3D 0D 0A 03 6D  
+---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 2016/10/19 17:11:15.811 
+

@@ -1,0 +1,638 @@
+DL_SCRIPTVERSION
+1
+54764
+
+SlideShowTimeOut = 1000
+Call_Tap_SMS1 = 0
+WaitingForInput = 0
+Initialize
+'===========================================================
+'   Port Settings
+'==========================================================
+Dim COM_Port
+IP_Address = "192.168.50.162" '*****Sulak change this to your local IP address*****
+COM_Port = "COM5"
+Dim ControlID
+
+'===========================================================
+'   START DEMO
+'===========================================================
+For i = 1 to 10000
+DL.SendSequence "Starting Demo..."
+'DL.SendSequence "Clear display"
+For j = 1 to 200
+DL.AddComment j
+Next
+SlideShowTimeOut = 1000
+Call_Tap_SMS1 = 0
+WaitingForInput = 0
+GrabID = 0
+'DL.SetChannelSettings(COM_Port & ":" & "115200" & ",NONE,8,1")
+DL.StartCommunication
+
+'##### Variable initializations #####
+
+SlideShowTimeOut = 2500
+Call_Tap_SMS1 = 0
+WaitingForInput = 0
+SEND_TAP_CARD_DATA = 0
+Timeout1 = 0
+
+DL.ResetReceiveCounter "CARD: Joe Generic"
+DL.ResetReceiveCounter "CARD: Jane Smith"
+DL.ResetReceiveCounter "CARD: Mohammad Khan"
+DL.ResetReceiveCounter "CARD: JIB 1"
+
+JG_Card_Tap_Counter = 0
+JS_Card_Tap_Counter = 0 
+MK_Card_Tap_Counter = 0
+JIB1_Card_Tap_Counter = 0
+
+'Initialize
+DEMO
+'DL.SendSequence "Clear display"
+'LineItem
+'SigCap
+'PIN_Entry
+'Confirm_Amount
+Next
+
+'===========================================================
+'   Initialize
+'===========================================================
+Sub Initialize()
+DL.SendSequence "Start non-secure display mode"
+DL.Pause Timeout1
+DL.SendSequence "Event queue clear"
+DL.Pause Timeout1
+DL.SendSequence "Cancel Command"
+DL.Pause Timeout1
+'DL.SendSequence "Clear display"
+DL.Pause Timeout1
+End Sub
+
+'===========================================================
+'   DEMO MAIN
+'===========================================================
+
+Sub DEMO()
+
+DL.SendSequence "FG BLACK - BG SNOW"
+Slideshow
+Tap_SMS1
+
+DL.AddComment vbCrLf & "Waiting for input..."
+While WaitingForInput = 0	
+Wend
+'Initialize
+If WaitingForInput = 1 Then
+	DL.AddComment vbCrLf & "Input ACKNOWLEDGED!!!"
+	'DL.SendSequence "FG BLACK - BG SNOW"
+	DL.SendSequence "Custom Act Trans"
+	'Tap_SMS3
+	WaitingForInput = 0
+End If
+'DL.SendSequence "FG SNOW - BG RED3"
+
+DL.AddComment vbCrLf & "Waiting for Card..."
+While WaitingForInput = 0
+Wend
+If WaitingForInput = 1 Then
+	DL.AddComment vbCrLf & "Card ACKNOWLEDGED!!!"
+	'DL.SendSequence "Clear display"
+	'DL.Pause 1000
+	Tap_SMS3
+	'DL.AddComment "IN HERE~!!!!"
+	'DL.Pause 3500
+	Tap_SMS4
+	'DL.SendSequence "Clear display"
+	'DL.SendSequence "Clear display"
+	'DL.SendSequence "Display please confirm total"
+	'DL.SendSequence "Clear display"
+	'DL.SendSequence "Clear display"
+	'DL.Pause 6000
+	'Tap_SMS3
+	'DL.Pause 1500
+	WaitingForInput = 0
+End If
+For i = 1 to 100
+DL.AddComment "OUT HERE~!!!!"
+Next
+'DL.SendSequence "Clear display"
+'DL.SendSequence "Clear display"
+
+'Tap_SMS3
+'Tap_SMS3
+'DL.Pause 5000
+DL.Pause 600
+DL.SendSequence "Clear display"
+DL.SendSequence "Clear display"
+Initialize
+LineItem
+'DL.SendSequence "FG BLACK - BG SNOW"
+DL.Pause 600
+'DL.SendSequence "FG BLACK - BG SNOW"
+Confirm_Amount
+'DL.SendSequence "FG BLACK - BG SNOW"
+SigCap
+PIN_Entry
+Thank_You
+DL.SendSequence "Start non-secure display mode"
+DL.SendSequence "Please wait - Restarting Demo..."
+For x = 1 to 200
+DL.AddComment "Restarting DEMO..."
+Next
+
+End Sub
+
+'===========================================================
+'   Slideshow
+'===========================================================
+
+Sub Slideshow()
+
+For i = 1 to 1
+DL.AddComment "------ Iteration #" & i & " ------"
+DL.AddComment "------ Iteration #" & i & " ------"
+DL.AddComment "------ Iteration #" & i & " ------"
+
+DL.SendSequence "Start non-secure display mode"
+DL.Pause SlideShowTimeOut
+DL.SendSequence "Display vivotech gradient"
+DL.Pause SlideShowTimeOut
+DL.SendSequence "Display welcome"
+DL.Pause SlideShowTimeOut
+DL.SendSequence "Display Not a Cardmember"
+DL.Pause SlideShowTimeOut
+DL.SendSequence "Display cosmetics"
+DL.Pause SlideShowTimeOut
+DL.SendSequence "Display woman"
+DL.Pause SlideShowTimeOut
+Next
+End Sub
+
+
+'===========================================================
+'   Tap_SMS1
+'===========================================================
+Sub Tap_SMS1
+
+DL.SendSequence "Start non-secure display mode"
+DL.Pause Timeout1
+DL.SendSequence "Event queue clear"
+DL.Pause Timeout1
+DL.SendSequence "Cancel Command"
+DL.Pause Timeout1
+'DL.SendSequence "Clear display"
+DL.Pause Timeout1
+DL.SendSequence "Display tap card"
+DL.Pause Timeout1
+DL.SendSequence "Display red ok button - Tap Card"
+DL.Pause Timeout1
+DL.SendSequence "Get event"
+DL.Pause Timeout1
+
+End Sub
+
+'===========================================================
+'   Tap_SMS3
+'===========================================================
+Sub Tap_SMS3()
+'DL.SendSequence "Clear display"
+'DL.SendSequence "Clear display"
+'For i = 1 to 8
+DL.SendSequence "Display thank you"
+'Next
+DL.Pause 2000
+End Sub
+
+'===========================================================
+'   Tap_SMS4
+'===========================================================
+
+Sub Tap_SMS4()
+
+'DL.ResetReceiveCounter "CARD: Joe Generic"
+'DL.ResetReceiveCounter "CARD: Jane Smith"
+'DL.ResetReceiveCounter "CARD: Mohammad Khan"
+
+If SEND_TAP_CARD_DATA = 1 Then
+
+	For i = 1 to 50
+	DL.AddComment vbCrLf & "============= YOU ARE HERE ================"
+	Next
+	DL.AddComment "CARD: JG = " & JG_Card_Tap_Counter
+	DL.AddComment "CARD: JS = " & JS_Card_Tap_Counter
+	DL.AddComment "CARD: MK = " & MK_Card_Tap_Counter
+	DL.AddComment "CARD: JIB1 = " & JIB1_Card_Tap_Counter
+
+	'JS_Card_Tap_Counter = DL.GetReceiveCounter("CARD: Jane Smith")
+	'DL.AddComment "CARD: Jane Smith = " & JS_Card_Tap_Counter
+	
+	'MK_Card_Tap_Counter = DL.GetReceiveCounter("CARD: Mohammad Khan")
+	'DL.AddComment "CARD: Mohammad Khan = " & MK_Card_Tap_Counter
+
+	'JG_Card_Tap_Counter = DL.GetReceiveCounter("CARD: Joe Generic")
+	'DL.AddComment "CARD: Joe Generic = " & JG_Card_Tap_Counter
+	
+
+	'DL.Pause 2000
+	
+	DL.StopCommunication
+	DL.SetChannelSettings(IP_Address & ":9080")
+	DL.StartCommunication
+	'DL.Pause 3000
+	DL.AddComment "IP SETTING CHANGED"
+
+	'DL.StopCommunication
+	'DL.SetChannelSettings(COM_Port & ":" & "115200" & ",NONE,8,1")
+	'DL.StartCommunication
+
+
+	If JS_Card_Tap_Counter = 1 Then
+	DL.SendSequence "SEND JS DATA"
+	DL.AddComment vbCrLf & "SENT JS DATA"
+
+	ElseIf MK_Card_Tap_Counter = 1 Then
+	DL.SendSequence "SEND MK DATA"
+	DL.AddComment vbCrLf & "SENT MK DATA"
+
+	ElseIf JIB1_Card_Tap_Counter = 1 Then
+	DL.SendSequence "SEND JIB 1 DATA"
+	DL.AddComment vbCrLf & "SENT JIB 1 DATA"
+
+	ElseIf JG_Card_Tap_Counter = 1 Then
+	DL.SendSequence "SEND JG DATA"
+	DL.AddComment vbCrLf & "SENT JG DATA"
+
+	End If	
+
+End If
+
+DL.StopCommunication
+DL.SetChannelSettings(COM_Port & ":" & "115200" & ",NONE,8,1")
+DL.StartCommunication
+
+	SEND_TAP_CARD_DATA = 0
+	JG_Card_Tap_Counter = 0
+	JS_Card_Tap_Counter = 0 
+	MK_Card_Tap_Counter = 0
+	JIB1_Card_Tap_Counter = 0
+
+
+End Sub
+
+'===========================================================
+'   Confirm_Amount
+'===========================================================
+Sub Confirm_Amount()
+
+DL.SendSequence "Start non-secure display mode"
+DL.Pause Timeout1
+DL.AddComment "h1"
+DL.SendSequence "Event queue clear"
+DL.Pause Timeout1
+DL.AddComment "h2"
+DL.SendSequence "Cancel Command"
+DL.Pause Timeout1
+DL.AddComment "h3"
+DL.SendSequence "Clear display"
+DL.Pause Timeout1
+DL.AddComment "h4"
+DL.SendSequence "Display please confirm total"
+DL.Pause Timeout1
+DL.SendSequence "Display green yes button"
+DL.Pause Timeout1
+DL.SendSequence "Display red no button"
+DL.Pause Timeout1
+DL.SendSequence "Get Event"
+
+DL.AddComment vbCrLf & "Waiting for input..."
+While WaitingForInput = 0
+Wend
+If WaitingForInput = 1 Then
+	DL.AddComment vbCrLf & "Input ACKNOWLEDGED!!!"
+	WaitingForInput = 0
+End If
+
+End Sub
+
+
+'===========================================================
+'   LineItem
+'===========================================================
+Sub LineItem()
+DL.SendSequence "FG BLACK- BG RED"
+Initialize
+DL.SendSequence "Clear display"
+DL.SendSequence "FG BLACK - BG SNOW"
+DL.Pause 500
+GrabID = 1
+DL.SendSequence "Line Item"
+DL.Pause 1000
+DL.SendSequence "Item 1", ControlID, "H"
+DL.Pause 1000
+DL.SendSequence "Item 2", ControlID, "H"
+DL.Pause 1000
+DL.SendSequence "Item 3", ControlID, "H"
+DL.SendSequence "FG YELLOW - BG RED"
+DL.SendSequence "Total"
+DL.SendSequence "$913.22"
+DL.SendSequence "Display green ok button - Line Item"
+DL.SendSequence "Event queue clear"
+DL.SendSequence "Get event"
+DL.AddComment vbCrLf & "Waiting for input 1..."
+While WaitingForInput = 0
+Wend
+DL.AddComment vbCrLf & "Input received 1..."
+If WaitingForInput = 1 Then
+	DL.AddComment vbCrLf & "Input ACKNOWLEDGED!!!"
+	WaitingForInput = 0
+End If
+DL.SendSequence "FG BLACK - BG SNOW"
+'DL.SendSequence "Clear display"
+End Sub
+
+'===========================================================
+'   SigCap
+'===========================================================
+Sub SigCap()
+
+DL.SendSequence "Start non-secure display mode"
+DL.Pause Timeout1
+DL.SendSequence "Event queue clear"
+DL.Pause Timeout1
+DL.SendSequence "Cancel Command"
+DL.Pause Timeout1
+DL.SendSequence "Clear display"
+DL.Pause Timeout1
+DL.SendSequence "Display signature"
+DL.Pause Timeout1
+DL.SendSequence "Display green done button signature"
+DL.Pause Timeout1
+DL.SendSequence "Display yellow clear button signature"
+DL.Pause Timeout1
+DL.SendSequence "Start sig capture"
+DL.Pause Timeout1
+DL.SendSequence "Get event"
+DL.Pause Timeout1
+
+DL.AddComment vbCrLf & "Waiting for input..."
+While WaitingForInput = 0
+Wend
+If WaitingForInput = 1 Then
+	DL.AddComment vbCrLf & "Input ACKNOWLEDGED!!!"
+	'DL.SendSequence "Clear sig capture"
+	WaitingForInput = 0
+End If
+
+End Sub
+
+'===========================================================
+'   PIN_Entry
+'===========================================================
+Sub PIN_Entry()
+DL.SendSequence "Stop non-secure display mode"
+'DL.Pause Timeout1
+'DL.SendSequence "Event queue clear"
+'DL.Pause Timeout1
+'DL.SendSequence "Cancel Command"
+'DL.Pause Timeout1
+'DL.SendSequence "Clear display"
+'DL.Pause Timeout1
+DL.SendSequence "Master Session PIN"
+
+DL.AddComment vbCrLf & "Waiting for input..."
+While WaitingForInput = 0
+Wend
+If WaitingForInput = 1 Then
+	DL.AddComment vbCrLf & "Input ACKNOWLEDGED!!!"
+	'DL.SendSequence "Clear sig capture"
+	WaitingForInput = 0
+End If
+
+
+End Sub
+
+'===========================================================
+'   Thank_You
+'===========================================================
+Sub Thank_You()
+
+DL.SendSequence "Display thank you for shopping"
+DL.Pause 2500	
+'DL.SendSequence "Display vivotech gradient"
+
+End Sub
+
+'===========================================================
+'   Tap_SMS2
+'===========================================================
+
+
+Sub Tap_SMS2()
+
+'DL.SendSequence "Start non-secure display mode"
+
+
+DL.ResetReceiveCounter "CARD: Joe Generic"
+DL.ResetReceiveCounter "CARD: Jane Smith"
+DL.ResetReceiveCounter "CARD: Mohammad Khan"
+DL.ResetReceiveCounter "CARD: JIB 1"
+'DL.ResetReceiveCounter "Card Tap Read"
+
+result = 0
+'DL.SendSequence "Activate Transaction"
+'result = DL.WaitForSequence("Card Tap Read", 1, 20000)
+'DL.SendSequence "Text:SPACEs"
+'DL.SendSequence "BMP: SMS Thank You"
+
+'DL.Pause 3000
+If result = 0 Then
+	DL.AddComment "TIMED OUT!!!"
+	DL.SendSequence "Cancel Command"
+	DL.SendSequence "Clear Display"
+	Exit Sub
+ElseIf result = 1 Then
+	DL.AddComment "--- CARD WAS TAPPED ---"
+End If
+
+If SEND_TAP_CARD_DATA = 1 Then
+		
+	JS_Card_Tap_Counter = DL.GetReceiveCounter("CARD: Jane Smith")
+	DL.AddComment "CARD: Jane Smith = " & JS_Card_Tap_Counter
+	
+	MK_Card_Tap_Counter = DL.GetReceiveCounter("CARD: Mohammad Khan")
+	DL.AddComment "CARD: Mohammad Khan = " & MK_Card_Tap_Counter
+
+	JG_Card_Tap_Counter = DL.GetReceiveCounter("CARD: Joe Generic")
+	DL.AddComment "CARD: Joe Generic = " & JG_Card_Tap_Counter
+	
+	
+	DL.StopCommunication
+	DL.SetChannelSettings(IP_Address & ":9080")
+	DL.StartCommunication
+	
+	'DL.StopCommunication
+	'DL.SetChannelSettings(COM_Port & ":" & "115200" & ",NONE,8,1")
+	'DL.StartCommunication
+
+	If JS_Card_Tap_Counter = 1 Then
+	DL.SendSequence "SEND JS DATA"
+
+	ElseIf MK_Card_Tap_Counter = 1 Then
+	DL.SendSequence "SEND MK DATA"
+
+	ElseIf JG_Card_Tap_Counter = 1 Then
+	DL.SendSequence "SEND JG DATA"
+	End If	
+
+End If
+
+'DL.ResetReceiveCounter "Card Tap Read"
+'DL.ResetReceiveCounter "REDOK Button Pressed"
+'DL.ResetReceiveCounter "OK button pressed"
+
+DL.StopCommunication
+DL.SetChannelSettings(COM_Port & ":" & "115200" & ",NONE,8,1")
+DL.StartCommunication
+
+'DL.SendSequence "Tap SMS Confirmation"
+'DL.SendSequence "BMP: SMS Thank You"
+'DL.SendSequence "Clear Display"
+'DL.Pause 3000
+'DL.SendSequence "Set BACKGROUND to Macy's"
+'DL.SendSequence "Clear Display"
+'DL.SendSequence "Clear Display"
+'DL.SendSequence "Text:SPACEs"
+
+SEND_TAP_CARD_DATA = 0
+End Sub
+
+Do
+    DL.Pause 1 ' (the pause reduces CPU load while idle)
+Loop
+
+Sub DL_OnReceive()
+resultName = DL.OnReceive_GetName()
+DL.AddComment "resultName = " & resultName
+
+Select Case resultName
+	Case "Yes button pressed"
+		Global = 1
+		DL.AddComment "Here111"
+		'ActTrans
+	Case "No button pressed"
+		Global = 0
+		DL.AddComment "Here222"
+		'ActTrans
+	Case "Button pressed - red ok button"
+		'DL.SendSequence "Custom Act Trans"
+		WaitingForInput = 1
+	Case "Button pressed - yellow clear button"
+		DL.SendSequence "Clear sig capture"
+		DL.SendSequence "Get event"
+	Case "Button pressed - green done button"
+		'DL.SendSequence "PIN_Entry"
+		WaitingForInput = 1
+	Case "Button pressed - yes button pressed"
+		WaitingForInput = 1
+	Case "Button pressed - no button pressed"
+		WaitingForInput = 1
+	Case "Button pressed - green ok button"
+		'DL.SendSequence "FG BLACK - BG SNOW"
+		'DL.SendSequence "Clear display"
+		WaitingForInput = 1
+	Case "Master Session PIN Received"
+		WaitingForInput = 1
+	Case "CARD: Mohammad Khan"
+		DL.SendSequence "Clear display"
+		Tap_SMS4
+		MK_Card_Tap_Counter = 1
+		SEND_TAP_CARD_DATA = 1
+		WaitingForInput = 1
+	Case "CARD: Joe Generic"
+		DL.SendSequence "Clear display"
+		'Tap_SMS4
+		JG_Card_Tap_Counter = 1
+		SEND_TAP_CARD_DATA = 1
+		WaitingForInput = 1
+	Case "CARD: Jane Smith"
+		DL.SendSequence "Clear display"
+		'Tap_SMS4
+		JS_Card_Tap_Counter = 1
+		SEND_TAP_CARD_DATA = 1
+		WaitingForInput = 1
+	Case "CARD: JIB 1"
+		DL.SendSequence "Clear display"
+		'Tap_SMS4
+		JIB1_Card_Tap_Counter = 1
+		SEND_TAP_CARD_DATA = 1
+		WaitingForInput = 1
+	Case "ID Response Received"
+	If GrabID = 1 Then
+   	'If DL.OnReceive_GetName() = "ID Response Received" Then
+   	'If DL.OnReceive_GetName() = "P*** received" Then
+      ' Send the Test command
+	result = DL.OnReceive_GetData("H")	' get the result as string of Hex-values
+	DL.AddComment result	
+	
+	' one possible solution to get single characters
+	MyArray = Split(result , " ", -1, 1)
+
+	For i = 0 to UBound(MyArray)
+   		DL.AddComment "i = " & i & "Array - " & (MyArray(i))
+	Next
+	ControlID = MyArray(14) & " " & MyArray(15) & " " & MyArray(16) & " " & MyArray(17)
+	DL.AddComment "Control ID = " & ControlID
+	'DL.Pause 5000
+	'''''DL.SendSequence "Change Text: Hello World!!!", ControlID, "H"
+   	'End If
+	End If
+
+End Select
+
+End Sub
+
+
+
+
+' ModbusCrcScript.pts
+' Automatically calculating a two-byte CRC value for Send Sequences.
+' Date: 2006-09-15
+' Author: Heggelbacher
+' This example makes use of the DL.CalcChecksum() function available
+' in Docklight Scripting V1.7. It has been cross-checked against the
+' CRC reference algorithm listed in the MODBUS specification
+' "MODBUS over serial line specification and implementation guide V1.0"
+' (see www.modbus.org) 
+
+DL.StartCommunication
+' Endless loop until stopped by user
+Do
+    DL.Pause 1 ' (the pause reduces CPU load while idle)
+Loop
+
+Sub DL_OnSend()
+    ' For all Send Sequences with minimum 3 bytes length (one byte user data,
+    ' two bytes CRC, perform the following manipulation:
+    ' - Calculate a 16 bit crc value on the characters 1 .. (DL.OnSend_Size() - 2)
+    ' - Write the low byte to character no. DL.OnSend_GetSize()-1
+    ' - Write the high byte to character no. DL.OnSend_GetSize()
+    ' Example:
+    ' Send Sequence name: MyCommand
+    ' Send Sequence in HEX representation: 02 04 00 00 00 01 00 00
+    ' --> Data transmitted by Docklight:   02 04 00 00 00 01 31 F9
+    '     (with "31" as the low byte CRC, "F9" as the high byte)
+
+    ' Check if there is at least one byte of user data
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub
+
+

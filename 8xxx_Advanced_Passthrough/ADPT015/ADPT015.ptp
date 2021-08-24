@@ -1,0 +1,99 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM28
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+PassThrough Start
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19
+0
+5
+
+SEND
+1
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED 3 Off
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 07 19 00 01 03 00 00 00 79 B0
+0
+5
+
+SEND
+2
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED 3 On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 07 19 00 01 03 01 00 00 4E 80
+0
+5
+
+SEND
+3
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED 2 Off
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 07 19 00 01 02 00 00 00 04 0F
+0
+5
+
+SEND
+4
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED 2 On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 07 19 00 01 02 01 00 00 34 38
+0
+5
+
+SEND
+5
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED 1 Off
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 07 19 00 01 01 00 00 00 D8 94
+0
+5
+
+SEND
+6
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED 1 On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 07 19 00 01 01 01 00 00 E8 A3
+0
+5
+
+SEND
+7
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, All LED Off
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 07 19 00 01 FF 00 00 00 CF A9
+0
+5
+
+SEND
+8
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, All LED On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 07 19 00 01 FF 01 00 00 FF 9E
+0
+5
+
+SEND
+9
+PassThrough Stop
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38
+0
+5
+
+RECEIVE
+0
+Positive Response
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

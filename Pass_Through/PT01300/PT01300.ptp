@@ -1,0 +1,48 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Antenna Control - Disable RF Antenna
+56 69 56 4F 74 65 63 68 32 00 28 01 00 01 00 84 3E
+0
+5
+
+RECEIVE
+0
+Antenna Control - Disable RF Antenna (SUCCESS)
+56 69 56 4F 74 65 63 68 32 00 28 00 00 00 D6 6A
+-1
+1
+COMMENT Antenna Control - Disable RF Antenna (SUCCESS)
+1
+1
+0
+1
+
+RECEIVE
+1
+Poll for Token (10 seconds and 20ms)
+56 69 56 4F 74 65 63 68 32 00 2C 00 00
+-1
+1
+COMMENT Poll for Token (10 seconds and 20ms)
+1
+1
+0
+1
+

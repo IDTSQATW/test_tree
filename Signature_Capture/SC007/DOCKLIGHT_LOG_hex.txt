@@ -1,0 +1,29 @@
+Docklight Log File (HEX) - Started 11/9/2016 12:34:59.706 
+ TEST CASE: SC007
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Signature capture 1
+
+11/9/2016 12:35:04.643 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 02 00 02 1E 02 3A 7A  Result = FAILED
+ --- Welcome
+
+11/9/2016 12:35:15.696 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 01 00 00 33 15 
+11/9/2016 12:35:15.758 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 0A 00 04 00 03 00 06 C0 A8 56 69 56 4F 74 65 63 68 32 00 83 00  Passed 00 00 22 03  Result = PASSED
+ Result = PASSED
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 11/9/2016 12:35:20.209 
+

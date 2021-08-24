@@ -1,0 +1,36 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Get FW ver (29-00)
+56 69 56 4F 74 65 63 68 32 00 29 00 00 00 DE A0
+0
+5
+
+RECEIVE
+0
+Positive Response
+56 69 56 4F 74 65 63 68 32 00 29 00 ?? ?? ## ## ## ## ## ## ?? ??
+-1
+1
+COMMENT Passed
+0
+1
+0
+0
+

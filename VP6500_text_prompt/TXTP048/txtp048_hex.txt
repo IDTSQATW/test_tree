@@ -1,0 +1,24 @@
+Docklight Log File (HEX) - Started 5/25/2010 10:21:45.46 
+ TEST CASE: txtp048
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM5 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- offline Font 4
+
+5/25/2010 10:21:46.91 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 03 00 15 31 31 39 00 37 39 00 31 00 34 00 33 00 6F 66 66 6C 69 6E 65 00 19 3A 
+5/25/2010 10:21:46.92 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 04 00 00 00 07 03 30  
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 5/25/2010 10:21:58.16 
+

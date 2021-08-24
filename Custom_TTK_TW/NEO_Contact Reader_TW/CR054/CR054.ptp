@@ -1,0 +1,145 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM90
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+60-16 Contact Set ICS Identification (01)
+56 69 56 4F 74 65 63 68 32 00 60 16 00 01 01 D0 CD
+0
+5
+
+SEND
+1
+60-16 Contact Set ICS Identification (02 = Default)
+56 69 56 4F 74 65 63 68 32 00 60 16 00 01 02 B3 FD
+0
+5
+
+SEND
+2
+60-16 Contact Set ICS Identification (03)
+56 69 56 4F 74 65 63 68 32 00 60 16 00 01 03 92 ED
+0
+5
+
+SEND
+3
+60-16 Contact Set ICS Identification (04)
+56 69 56 4F 74 65 63 68 32 00 60 16 00 01 04 75 9D
+0
+5
+
+SEND
+4
+60-16 Contact Set ICS Identification (05)
+56 69 56 4F 74 65 63 68 32 00 60 16 00 01 05 54 8D
+0
+5
+
+SEND
+5
+60-15 Contact Get ICS Identification
+56 69 56 4F 74 65 63 68 32 00 60 15 00 00 A6 95
+0
+5
+
+SEND
+6
+60-04 Contact Retrieve Terminal Data
+56 69 56 4F 74 65 63 68 32 00 60 04 00 00 F5 E1
+0
+5
+
+RECEIVE
+0
+60-15 resp 01
+56 69 56 4F 74 65 63 68 32 00 60 00 00 01 01 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+60-15 resp 02
+56 69 56 4F 74 65 63 68 32 00 60 00 00 01 02 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+60-15 resp 03
+56 69 56 4F 74 65 63 68 32 00 60 00 00 01 03 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
+60-15 resp 04
+56 69 56 4F 74 65 63 68 32 00 60 00 00 01 04 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+4
+60-15 resp 05
+56 69 56 4F 74 65 63 68 32 00 60 00 00 01 05 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+5
+60-16 resp ok
+56 69 56 4F 74 65 63 68 32 00 60 00 00 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

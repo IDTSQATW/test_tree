@@ -1,0 +1,81 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+9f 6d
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 9F 6D 02 00 00 B4 D7
+0
+5
+
+SEND
+1
+Get EMV Parameters
+56 69 56 4F 74 65 63 68 32 00 03 02 00 00 5B 91
+0
+5
+
+SEND
+2
+9f 6d Default
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 9F 6D 02 00 01 95 C7
+0
+5
+
+SEND
+3
+Get Default EMV Parameters
+56 69 56 4F 74 65 63 68 32 00 03 02 00 00 5B 91
+0
+5
+
+RECEIVE
+0
+Set Parameter Response
+56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
+-1
+1
+COMMENT Set Parameter Successful
+0
+1
+0
+0
+
+RECEIVE
+1
+Get Parameters Response
+9F 6D 02 00 00
+-1
+1
+COMMENT Get EMV Parameters Passed
+0
+1
+0
+0
+
+RECEIVE
+2
+Default Response
+9F 6D 02 00 01
+-1
+1
+COMMENT Default Parameters set
+0
+1
+0
+0
+

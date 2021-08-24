@@ -1,0 +1,196 @@
+DL_SCRIPTVERSION
+1
+13960
+
+DL.StartLogging "C:\Documents and Settings\qatest\My Documents\Logs\DOCKLIGHT_LOG_ButtonAutoPress" & Month(Now) & "-" & Day(Now) & "-" & Year(Now) & "_" & Hour(Now) & "h" & Minute(Now) & "m" & Second(Now) & "s",False, "H"
+
+Dim ControlID
+Dim No_ControlID
+Dim ButtonString(50)
+Dim ButtonID(50)
+Dim ButtonID_HitCounter(50)
+Dim Timeout_Counter
+'Dim HitCount(50)
+
+Timeout_Counter = 0
+j = 1
+
+For i = 1 to 50
+	ButtonID_HitCounter(i) = 0
+Next
+
+DL.SendSequence "Clear Display"
+DL.SendSequence "Cancel Command"
+DL.SendSequence "Clear Event Queue"
+DL.WaitForSequence "Success Response"
+For column = 1 to 7
+	'DL.Pause 500
+	For row = 1 to 7
+		ButtonString(j) = column & "," & row & " - No button"
+		DL.SendSequence ButtonString(j)
+		DL.Pause 500
+		ButtonID(j) = ControlID
+		DL.AddComment ButtonString(j) & " --- " & "ID = " & ButtonID(j)
+		'DL.Pause 10000
+		j = j + 1
+				
+	Next
+Next
+'DL.Pause 5000
+For x = 1 to 50
+	DL.AddComment ButtonString(x) & " --- " & "ID = " & ButtonID(x)
+Next
+
+For z = 1 to 100000000
+	DL.SendSequence "Read Event"
+	DL.WaitForSequence "83 Response"
+	DL.ResetReceiveCounter "83 Response"
+	'DL.AddComment "Timeout_Counter = " & Timeout_Counter
+Next
+
+
+Sub DL_OnReceive()
+
+resultName = DL.OnReceive_GetName()
+DL.AddComment "resultName = " & resultName
+result = DL.OnReceive_GetData("H")	' get the result as string of Hex-values
+	DL.AddComment result	
+Select Case resultName
+	Case "ID Response Received"
+	' one possible solution to get single characters
+	MyArray = Split(result , " ", -1, 1)
+
+	For i = 0 to UBound(MyArray)
+   		'DL.AddComment "i = " & i & "Array - " & (MyArray(i))
+	Next
+	ControlID = MyArray(14) & " " & MyArray(15) & " " & MyArray(16) & " " & MyArray(17)
+	DL.AddComment "Control ID = " & ControlID
+	'DL.Pause 5000
+	'''''DL.SendSequence "Change Text: Hello World!!!", ControlID, "H"
+	
+	Case "No Button Pressed"
+	
+	MyArray2 = Split(result , " ", -1, 1)
+
+	For i = 0 to UBound(MyArray2)
+   		'DL.AddComment "i = " & i & "Array - " & (MyArray2(i))
+	Next
+	No_ControlID = MyArray2(18) & " " & MyArray2(19) & " " & MyArray2(20) & " " & MyArray2(21)
+	DL.AddComment "No_Control ID = " & No_ControlID
+	'For x = 1 to 100
+	'			DL.AddComment "No_Control ID = " & No_ControlID
+	'Next
+
+	For i = 1 to 50
+		If No_ControlID = ButtonID(i) Then
+			'For x = 1 to 100
+			'	DL.AddComment "ButtonID(i) = " & ButtonID(i)
+			'Next
+			ButtonID_HitCounter(i) = ButtonID_HitCounter(i) + 1
+			'For x = 1 to 100
+			'	DL.AddComment "In HERE!!!!!"
+			'Next
+		End If
+	Next
+	
+	For i = 1 to 50
+		DL.AddComment ButtonString(i) & " --- " & "ID = " & ButtonID(i) & " --- Hit Count = " & ButtonID_HitCounter(i) 
+	Next
+	
+	DL.AddComment vbCrLf
+
+	'================= MATRIX FORMAT 1 ================= 
+	DL.AddComment "================= MATRIX FORMAT 1 ================= "
+	For x = 1 to 7
+		NextButton = x
+		If NextButton < 10 Then
+			DL.AddComment "[ " & NextButton & " - " & ButtonID_HitCounter(NextButton) & "]",False,False
+		Else
+			DL.AddComment "[" & NextButton & " - " & ButtonID_HitCounter(NextButton) & "]",False,False
+		End If
+
+		For y = 1 to 6
+			NextButton = NextButton + 7
+			If NextButton < 10 Then
+				DL.AddComment "[ " & NextButton & " - " & ButtonID_HitCounter(NextButton) & "]",False,False
+			Else
+				DL.AddComment "[" & NextButton & " - " & ButtonID_HitCounter(NextButton) & "]",False,False
+			End If
+		Next
+		DL.AddComment vbCrLf
+	Next
+	DL.AddComment "Timeout_Counter = " & Timeout_Counter & vbCrLf
+
+	'================= MATRIX FORMAT 2 ================= 
+	DL.AddComment "================= MATRIX FORMAT 2 ================= "
+	For x = 1 to 7
+		NextButton = x
+		If ButtonID_HitCounter(NextButton) = 0 Then
+			DL.AddComment "[  ] ",False,False
+		ElseIf ButtonID_HitCounter(NextButton) < 10 Then
+			DL.AddComment "[ " & ButtonID_HitCounter(NextButton) & "] ",False,False
+		Else
+			DL.AddComment "[" & ButtonID_HitCounter(NextButton) & "] ",False,False
+		End If
+
+		For y = 1 to 6
+			NextButton = NextButton + 7
+			If ButtonID_HitCounter(NextButton) = 0 Then
+				DL.AddComment "[  ] ",False,False
+			ElseIf ButtonID_HitCounter(NextButton) < 10 Then
+				DL.AddComment "[ " & ButtonID_HitCounter(NextButton) & "] ",False,False
+			Else
+				DL.AddComment "[" & ButtonID_HitCounter(NextButton) & "] ",False,False
+			End If
+		Next
+		DL.AddComment vbCrLf
+	Next
+	DL.AddComment "Timeout_Counter = " & Timeout_Counter & vbCrLf
+
+	DL.ResetReceiveCounter "No Button Pressed"
+	
+	Case "Command 83 Timeout"
+		Timeout_Counter = Timeout_Counter + 1
+End Select
+
+End Sub
+
+' ModbusCrcScript.pts
+' Automatically calculating a two-byte CRC value for Send Sequences.
+' Date: 2006-09-15
+' Author: Heggelbacher
+' This example makes use of the DL.CalcChecksum() function available
+' in Docklight Scripting V1.7. It has been cross-checked against the
+' CRC reference algorithm listed in the MODBUS specification
+' "MODBUS over serial line specification and implementation guide V1.0"
+' (see www.modbus.org) 
+
+DL.StartCommunication
+' Endless loop until stopped by user
+Do
+    DL.Pause 1 ' (the pause reduces CPU load while idle)
+Loop
+
+Sub DL_OnSend()
+    ' For all Send Sequences with minimum 3 bytes length (one byte user data,
+    ' two bytes CRC, perform the following manipulation:
+    ' - Calculate a 16 bit crc value on the characters 1 .. (DL.OnSend_Size() - 2)
+    ' - Write the low byte to character no. DL.OnSend_GetSize()-1
+    ' - Write the high byte to character no. DL.OnSend_GetSize()
+    ' Example:
+    ' Send Sequence name: MyCommand
+    ' Send Sequence in HEX representation: 02 04 00 00 00 01 00 00
+    ' --> Data transmitted by Docklight:   02 04 00 00 00 01 31 F9
+    '     (with "31" as the low byte CRC, "F9" as the high byte)
+
+    ' Check if there is at least one byte of user data
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub
+
+

@@ -1,0 +1,39 @@
+;**********************************************************************************************************
+;Script Name: 	Terminal Data
+;Descript: 	This script is used to configurate terminal data of IDTECH Standard EMV L2 Configuration 1C
+;Version:  	v2.0
+;Note:		IDTECH Stardward EMVL2 kernel
+;Modify Date:	2015/7/22
+;History:
+;1.1 According to test plan 4.3, Set 9F1E=Terminal;9F16=000000000000000;
+;1.2 Delete DF22
+;1.3 Remove DF28,DF25
+;**********************************************************************************************************
+;command 1
+SET_TERMINAL_DATA 			; SET_TERMINAL_DATA
+18 00                                   ; TAG LENGTH
+5F 36 01 02
+9F 1A 02 08 40                          ; Terminal County Code
+9F 35 01 14                             ; Terminal Type
+9F 33 03 20 20 00  			; Terminal Capability
+9F 40 05 80 00 00 00 01  		; Additonal Terminal Capability
+9F 1E 08 54 65 72 6D 69 6E 61 6C  	; IFD Serial Number
+9F 15 02 12 34                          ; Merchant Category Code
+9F 16 0F 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30;Merchant Identifier
+9F 1C 08 38 37 36 35 34 33 32 31        ; Terminal Identification
+9F 4E 22 31 30 37 32 31 20 57 61 6C 6B 65 72 20 53 74 2E 20 43 79 70 72 65 73 73 2C 20 43 41 20 2C 55 53 41 2E; //Location
+DF 10 08 65 6E 66 72 65 73 7A 68	; Language
+DF 11 01 00                             ; Transaction Log support
+DF 26 01 00                             ; Terminal Supports CRL
+DF 27 01 00                             ; Exception File support
+DF EE 15 01 01				; Terminal Support ASI
+DF EE 16 01 00                          ; Terminal Encrypt Mode: 00=DUKPT 01=MK/SK  
+DF EE 17 01 07                          ; Terminal Entry Mode for ICC 
+DF EE 18 01 FF                          ; Terminal Encrypt Mode for MSR    ; Authorization Response Code  
+DF EE 1E 08 50 00 00 00 D4 64 00 00     ; Contact Terminal Configuration 
+DF EE 1F 01 80                          ; Issuer Script Limit
+DF EE 1B 08 30 30 30 31 35 31 30 30		; ARC
+DF EE 20 01 3C                          ; ICC Power on detect waiting time
+DF EE 21 01 0A                          ; ICC L1 waiting time
+DF EE 22 03 32 3C 3C                   ; Driver time. byte 1 -> Menu. byte 2 -> Get PIN. byte 3 -> MSR
+END

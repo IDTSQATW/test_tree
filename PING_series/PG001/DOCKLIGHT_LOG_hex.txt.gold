@@ -1,0 +1,23 @@
+Docklight Log File (HEX) - Started  
+ TEST CASE: PG001
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- PING
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD  
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped  
+

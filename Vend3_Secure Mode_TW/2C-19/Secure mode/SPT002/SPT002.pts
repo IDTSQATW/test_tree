@@ -1,0 +1,390 @@
+DL_SCRIPTVERSION
+1
+10366
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "SPT002" ' !!!!! EDIT THIS !!!!!
+' Objective: verify cmd 2C-19 can work if Insert SAM card in Slot 1
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+      
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON " Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+sub loadkey()
+    dl.resetreceivecounter
+    dl.addcomment vbcrlf
+    dl.addcomment "Loading DUKPT key..."
+    dl.sendsequence "Erase All Keys"
+    result = dl.waitforsequence("erase key ok", 1, 2000)
+    dl.pause 500
+    if result <> 0 then
+       dl.resetreceivecounter
+       dl.sendsequence "Load Plaintext KPK Component (the 1st)"
+       result = dl.waitforsequence("load kpk ok", 1, 2000)
+       dl.pause 500
+       if result <> 0 then
+          dl.resetreceivecounter
+          dl.sendsequence "Load Plaintext KPK Component (the last)"
+          result = dl.waitforsequence("load kpk ok", 1, 2000)
+          dl.pause 500
+          if result <> 0 then
+             dl.resetreceivecounter
+             dl.sendsequence "Load KPK"
+             result = dl.waitforsequence("load kpk ok", 1, 2000)
+             dl.pause 500
+             if result <> 0 then
+                dl.resetreceivecounter
+                dl.sendsequence "Load DUKPT key (key index 5)"
+                result = dl.waitforsequence("dukpt ok", 1, 2000)
+                dl.pause 41000
+                if result <> 0 then
+                   'dl.resetreceivecounter
+                   'dl.sendsequence "Select DUKPT Data Encryption Key (key slot 5)"
+                   'result = dl.waitforsequence("dukpt ok", 1, 2000)
+                   'dl.pause 500
+                   'if result = 0 then
+                   '   dl.addcomment vbcrlf & "Select DUKPT Data Encryption Key (key slot 5): FAIL!"
+                   'else 
+                      dl.addcomment vbcrlf & "OK!"
+                   'end if
+                else
+                   dl.addcomment vbcrlf & "Load DUKPT key (key index 5): FAIL!"
+                end if
+             else
+                dl.addcomment vbcrlf & "Load KPK: FAIL!"
+             end if
+          else
+             dl.addcomment vbcrlf & "Load Plaintext KPK Component (the last): FAIL!"
+          end if
+       else
+          dl.addcomment vbcrlf & "Load Plaintext KPK Component (the 1st): FAIL!"
+       end if 
+    else
+       dl.addcomment vbcrlf & "Erase All Keys: FAIL!"
+    end if    
+end sub
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+result = 1
+
+DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
+DL.Pause 3000
+
+loadkey()
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Start Passthrough Mode"
+   DL.SendSequence " Start Passthrough Mode"
+   result = DL.WaitForSequence("Version 2 Protocol: Response (Status=OK)", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+   prompt2 = prompt2 & "Insert SAM card in Slot 1. When ready click on OK"
+   result = MsgBox(prompt2, VBOKOnly, "Advanced PassThrough")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Enhanced PT - Poll for Token - SAM1 (Tout=5s)"
+   DL.SendSequence " Enhanced PT - Poll for Token - SAM1 (Tout=5s)"
+   result = DL.WaitForSequence("Version 2 Protocol: Response (Status=OK)", 1, 10000)
+End If
+'------------------------------------------------------------
+'If result <> 0 Then
+'   DL.ResetReceiveCounter
+'   dl.addcomment vbcrlf
+'   DL.AddComment "--- Exchange APDU with SAM1 (Select SAM)"
+'   DL.SendSequence "2c-13 Exchange APDU with SAM1 (Select SAM)"
+'   result = DL.WaitForSequence("Version 2 Protocol: Response (Status=OK)", 1, 10000)
+'   dl.pause 500
+'End If
+'If result <> 0 Then
+'   DL.ResetReceiveCounter
+'   dl.addcomment vbcrlf
+'   DL.AddComment "--- Exchange APDU with SAM1 (Delete All Keys)"
+'   DL.SendSequence "2c-13 Exchange APDU with SAM1 (Delete All Keys)"
+'   result = DL.WaitForSequence("Version 2 Protocol: Response (Status=OK)", 1, 10000)
+'End If
+'If result <> 0 Then
+'   DL.ResetReceiveCounter
+'   dl.addcomment vbcrlf
+'   DL.AddComment "--- Exchange APDU with SAM1 (SelectKey&VerifyIssuerPk)"
+'   DL.SendSequence "2c-13 Exchange APDU with SAM1 (SelectKey&VerifyIssuerPk)"
+'   result = DL.WaitForSequence("Version 2 Protocol: Response (Status=OK)", 1, 10000)
+'End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 2c-19 sam1, 61 cmd type (select sam)"
+   DL.SendSequence "2c-19 sam1, 61 cmd type (select sam)"
+   result = DL.WaitForSequence("2c-19 61 select sam resp", 1, 10000)
+   dl.pause 500
+End If
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 2c-19 sam1, 61 cmd type (delete all keys)"
+   DL.SendSequence "2c-19 sam1, 61 cmd type (delete all keys)"
+   result = DL.WaitForSequence("2c-19 61 delete key resp", 1, 10000)
+End If
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 2c-19 sam1, 61 cmd type (select key & verify issuer pk)"
+   DL.SendSequence "2c-19 sam1, 61 cmd type (select key & verify issuer pk)"
+   result = DL.WaitForSequence("2c-19 61 select n verify", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 2c-19 sam1, 63 cmd type (select sam)"
+   DL.SendSequence "2c-19 sam1, 63 cmd type (select sam)"
+   result = DL.WaitForSequence("2c-19 63 select sam resp", 1, 10000)
+   dl.pause 500
+End If
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 2c-19 sam1, 63 cmd type (delete all keys)"
+   DL.SendSequence "2c-19 sam1, 63 cmd type (delete all keys)"
+   result = DL.WaitForSequence("2c-19 61 delete key resp", 1, 10000)
+End If
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 2c-19 sam1, 63 cmd type (select key & verify issuer pk)"
+   DL.SendSequence "2c-19 sam1, 63 cmd type (select key & verify issuer pk)"
+   result = DL.WaitForSequence("2c-19 61 select n verify", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Enhanced PT - Deactivate - SAM1"
+   DL.SendSequence " Enhanced PT - Deactivate - SAM1"
+   result = DL.WaitForSequence("Version 2 Protocol: Response (Status=OK)", 1, 10000)
+else
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Enhanced PT - Deactivate - SAM1"
+   DL.SendSequence " Enhanced PT - Deactivate - SAM1"
+   resultignore = DL.WaitForSequence("Version 2 Protocol: Response (Status=OK)", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Stop Passthrough Mode"
+   DL.SendSequence " Stop Passthrough Mode"
+   result = DL.WaitForSequence("Version 2 Protocol: Response (Status=OK)", 1, 10000)
+End If
+
+DL.AddComment vbCrLf
+DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
+DL.Pause 3000
+
+DL.AddComment vbcrlf & "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
+
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'DL.pause 1000
+
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+'Sub DL_OnSend()
+    ' For all Send Sequences with minimum 3 bytes length (one byte user data,
+    ' two bytes CRC, perform the following manipulation:
+    ' - Calculate a 16 bit crc value on the characters 1 .. (DL.OnSend_Size() - 2)
+    ' - Write the low byte to character no. DL.OnSend_GetSize()-1
+    ' - Write the high byte to character no. DL.OnSend_GetSize()
+    ' Example:
+    ' Send Sequence name: MyCommand
+    ' Send Sequence in HEX representation: 02 04 00 00 00 01 00 00
+    ' --> Data transmitted by Docklight:   02 04 00 00 00 01 31 F9
+    '     (with "31" as the low byte CRC, "F9" as the high byte)
+
+    ' Check if there is at least one byte of user data
+'    usDataLen = DL.OnSend_GetSize() - 2
+'    If usDataLen > 0 Then
+'        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+'        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+'        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+'    End If
+'End Sub
+

@@ -1,0 +1,37 @@
+Objective: Verify tag DFEF7E
+
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+--------------------
+--------------------
+>>> Set CT terminal data = 5C (w/ DFEF7E = 5025)
+CMD: 60 06 08 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 DFEF7E 02 5025
+EXR: 60 00 00 00
+
+--------------------
+>>> Fallback to MSR transaction (default: can retry ICC card 3 times)
+SWIPEKB: Click OK -> Insert card (P/N: 80005206-002)
+EXR: DFEF6102F221
+MESSAGECK: After inserted card, LED 3 was turned ON (flash status)
+SWIPEKB: Click OK -> swipe any card
+EXR: DF EE 25 02 5025
+
+--------------------
+--------------------
+>>> Set CT terminal data = 5C (w/ DFEF7E = 0203)
+CMD: 60 06 08 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 DFEF7E 02 0203
+EXR: 60 00 00 00
+
+--------------------
+>>> Fallback to MSR transaction (default: can retry ICC card 3 times)
+SWIPEKB: Click OK -> Insert card (P/N: 80005206-002)
+EXR: DF EE 25 02 50 25
+MESSAGECK: After inserted card, LED 3 did NOT be turned ON
+
+--------------------
+--------------------
+>>> Set CT terminal data = 5C
+CMD: 60 06 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00
+EXR: 60 00 00 00

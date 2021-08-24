@@ -1,0 +1,45 @@
+Docklight Log File (HEX) - Started 11/9/2016 10:11:33.745 
+ TEST CASE: SC017
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Clear Display
+
+11/9/2016 10:11:38.434 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 0D 00 00 52 60 
+11/9/2016 10:11:38.444 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00  Passed 00 00 22 03  resultName = Signature Response
+ resultName = Welcome Response
+ --- Custom RAW 239x159
+
+11/9/2016 10:11:38.530 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 19 00 0E 30 00 30 00 32 33 39 00 31 35 39 00 03 03 04 94 
+11/9/2016 10:11:38.541 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00  Passed 00 04 01 78 8B F8 A4 18  resultName = Signature Response
+ resultName = Welcome Response
+ resultName = Display Control OK
+ 56 69 56 4F 74 65 63 68 32 00 83 00 00 04 01 78 8B F8 A4 18
+ Control ID = 01 78 8B F8
+ Debugger: ControlID = 01 78 8B F8
+ --- Get SigCap 83 1A
+
+11/9/2016 10:11:45.636 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 1A 00 04 01 78 8B F8 2D 60 
+11/9/2016 10:11:45.643 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00  Passed 00 10 33 00 1B 00 41 00 44 00 B7 00 49 00 FF FF FF FF 10 57  resultName = Signature Response
+ resultName = Welcome Response
+ --- Welcome
+
+11/9/2016 10:11:48.754 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 01 00 00 33 15 
+11/9/2016 10:11:48.797 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00  Passed 00 00 22 03  resultName = Signature Response
+ resultName = Welcome Response
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 11/9/2016 10:11:53.890 
+

@@ -1,0 +1,182 @@
+DL_SCRIPTVERSION
+1
+47057
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+'------------------------------------------------------------
+
+'------------------------------------------------------------
+'Configure prompting
+'------------------------------------------------------------
+FileInput.OpenFile "C:\vivotech\regress\regression\regress_test\test_tree\Regress.Config"
+Dim Prompting(1)
+
+Do Until FileInput.EndOfFile
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()	 
+  Prompting(1) = result
+Loop
+
+'------------------------------------------------------------
+'Definitions and Initializations
+'------------------------------------------------------------
+DL.OpenProject "PT01700.ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+
+result = 1
+
+'------------------------------------------------------------
+'Load Profile 1 EMV
+'------------------------------------------------------------
+'If result <> 0 Then
+'  DL.AddComment "--- Profile.1"
+'  DL.ResetReceiveCounter "EMV.Response"
+'  DL.SendSequence "Profile.1"
+'  result = DL.WaitForSequence("EMV.Response", 1, '10000)
+'End If
+
+'------------------------------------------------------------
+' Pass-Through STOP
+'------------------------------------------------------------
+DL.AddComment "--- Pass-Through - STOP"
+DL.SendSequence "Pass-Through - STOP"
+result = DL.WaitForSequence("Pass-Through - START or STOP (SUCCESS)", 1, 10000)
+DL.Pause 1500
+'------------------------------------------------------------
+' Pass-Through START
+'------------------------------------------------------------
+DL.AddComment "--- Pass-Through - START"
+DL.SendSequence "Pass-Through - START"
+result = DL.WaitForSequence("Pass-Through - START or STOP (SUCCESS)", 1, 10000)
+DL.Pause 1500
+
+'------------------------------------------------------------
+'Prompt of test being run
+'------------------------------------------------------------
+If Prompting(0) = "ON" Then
+MyInput = MsgBox("You will now run test PT01600." &Chr(13) & "Objective: Verify card does not respond fully when tapping card during enable-disable.", VBOKOnly, "Test: PT01600")
+End If
+
+'------------------------------------------------------------
+'Enable Antenna
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- Enable RF Antenna"
+  DL.SendSequence "Antenna Control - Enable RF Antenna"
+  result = DL.WaitForSequence("Antenna Control - Enable or Disable RF Antenna (SUCCESS)", 1, 10000)
+End If
+'------------------------------------------------------------
+'Steps to execute for Enable Antenna
+'------------------------------------------------------------
+DL.Pause 1500
+'------------------------------------------------------------
+MyInput = MsgBox("Press OK button, then tap card.", VBOKOnly, "Test: PT01700")
+'------------------------------------------------------------
+'StartTime = Timer
+If result <> 0 Then
+  DL.AddComment "--- Poll for Token (10 seconds and 20ms)"
+  DL.SendSequence "Poll for Token (10 seconds and 20ms)"
+  result = DL.WaitForSequence("Poll for Token (10 seconds and 20ms) (OK)", 1, 10000)
+End If
+
+'MsgBox "Pass or Failed? " & result, VBOKOnly, "Hi there"
+
+'DL.AddComment "Duration [milliseconds] = " & (Timer - StartTime) * 1000
+'------------------------------------------------------------
+'MyInput = InputBox("Did you hear the buzzer and/or LCD indicated that card was read (ie 'Processing...' message)?" &Chr(13) & "Enter 'yes' or 'no'", "Test: PT01500", "OK")
+
+MyInput = MsgBox("Did you hear the buzzer and/or LCD indicated that card was read (ie 'Processing...' message)?", VBYesNo, "Test: PT01500")
+
+If MyInput = 6  Then
+  result = 1
+End If
+
+If MyInput = 7 then 
+  result = 0
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'------------------------------------------------------------
+'Disable Antenna
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- Disable RF Antenna"
+  DL.SendSequence "Antenna Control - Disable RF Antenna"
+  result = DL.WaitForSequence("Antenna Control - Enable or Disable RF Antenna (SUCCESS)", 1, 10000)
+End If
+
+'------------------------------------------------------------
+'Steps to execute for Disable Antenna
+'------------------------------------------------------------
+DL.Pause 1500
+'------------------------------------------------------------
+MyInput = MsgBox("Press OK button, then tap card.", VBOKOnly, "Test: PT01700")
+'------------------------------------------------------------
+'StartTime = Timer
+If result <> 0 Then
+  DL.AddComment "--- Poll for Token (10 seconds and 20ms)"
+  DL.SendSequence "Poll for Token (10 seconds and 20ms)"
+  DL.ResetReceiveCounter "Poll for Token (10 seconds and 20ms) (OK)"
+  result = DL.WaitForSequence("Poll for Token (10 seconds and 20ms) (OK)", 1, 10000)
+End If
+
+If result = 0 Then
+  result = 1
+ElseIf result = 1 Then
+  result = 0
+End If
+
+MsgBox "Pass or Failed? " & result, VBOKOnly, "Hi there"
+
+'DL.AddComment "Duration [milliseconds] = " & (Timer - StartTime) * 1000
+'------------------------------------------------------------
+'MyInput = InputBox("Did you hear the buzzer and/or LCD indicated that card was read (ie 'Processing...' message)?" &Chr(13) & "Enter 'yes' or 'no'", "Test: PT01500", "OK")
+
+MyInput = MsgBox("Did you hear the buzzer and/or LCD indicated that card was read (ie 'Processing...' message)?", VBYesNo, "Test: PT01500")
+
+If MyInput = 7  Then
+  result = 1
+End If
+
+If MyInput = 6 then 
+  result = 0
+End If
+
+'MyInput = InputBox("result equal to " &Chr(13) & result, "Test: PT01500", "OK")
+
+'------------------------------------------------------------
+'Result verdict
+'------------------------------------------------------------
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+

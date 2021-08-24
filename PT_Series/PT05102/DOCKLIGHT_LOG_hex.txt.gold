@@ -1,0 +1,15 @@
+Docklight Log File (HEX) - Started  
+ --- Pass-Through Mode - (START)
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through Mode - (STOP)  (OK)
+ Pass-Through Mode - (START) (OK)
+ --- Poll for Token - Poll for Token when PT mode disabled
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 01 00 7B 8C  Poll for Token - Poll for Token (TIMEOUT)
+ Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

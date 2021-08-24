@@ -1,0 +1,212 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+Poll on Demand (01-01)
+56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34
+0
+5
+
+SEND
+1
+Set Param to Default (04-09)
+56 69 56 4F 74 65 63 68 32 00 04 09 00 00 87 30
+0
+5
+
+SEND
+2
+enable cash trans RR (FFF4)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 06 FF F4 03 00 0E 01 6C 43
+0
+5
+
+SEND
+3
+enable cash trans RR (FFF4) (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 07 DF EE 35 03 00 0E 01 00 00
+0
+5
+
+SEND
+4
+Get Params (03-02)
+56 69 56 4F 74 65 63 68 32 00 03 02 00 00 5B 91
+0
+5
+
+SEND
+5
+set cash trans RR params (04-0c)
+56 69 56 4F 74 65 63 68 32 00 04 0C 00 26 9F 66 04 80 00 40 01 FF F4 03 00 08 00 FF F1 06 00 00 00 01 00 01 FF F5 06 00 00 00 01 50 01 9F 1B 04 00 00 00 65 BC 53
+0
+5
+
+SEND
+6
+set cash trans RR params (04-0c) (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 0C 00 29 9F 66 04 80 00 40 01 DF EE 35 03 00 08 00 DF EE 34 06 00 00 00 01 00 01 DF 81 26 06 00 00 00 01 50 01 9F 1B 04 00 00 00 65 00 00
+0
+5
+
+SEND
+7
+get cash trans RR params (03-0c)
+56 69 56 4F 74 65 63 68 32 00 03 0C 00 00 5A 8A
+0
+5
+
+RECEIVE
+0
+generic 01-xx cmd resp
+56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+generic 04-xx cmd resp
+56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+get param (03-02) cmd resp
+56 69 56 4F 74 65 63 68 32 00 03 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
+default 9F66 (TTQ) resp
+9F 66 04 80 00 40 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+4
+default 9F66 (TTQ) resp (NEO2)
+9F 66 04 30 00 40 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+5
+default 9F1B (Terminal floor limit) resp
+9F 1B 04 00 00 17 70
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+6
+default FFF1 (terminal CL trans limit) resp
+FF F1 06 00 00 00 01 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+7
+default FFF1 (terminal CL trans limit) resp (NEO2)
+DF EE 34 06 00 00 00 01 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+8
+default FFF5 (CVM req'd limit) resp
+FF F5 06 00 00 00 00 80 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+9
+get cash trans RR params resp
+56 69 56 4F 74 65 63 68 32 00 03 00 00 26 9F 66 04 80 00 40 01 FF F4 03 00 08 00 FF F1 06 00 00 00 01 00 01 FF F5 06 00 00 00 01 50 01 9F 1B 04 00 00 00 65 77 A0
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+10
+get cash trans RR params resp (NEO2)
+56 69 56 4F 74 65 63 68 32 00 03 00 ?? ?? 9F 66 04 80 00 40 01 DF EE 35 03 00 08 00 DF EE 34 06 00 00 00 01 00 01 DF 81 26 06 00 00 00 01 50 01 9F 1B 04 00 00 00 65 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

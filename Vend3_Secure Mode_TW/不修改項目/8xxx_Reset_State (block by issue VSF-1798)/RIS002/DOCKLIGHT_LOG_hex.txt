@@ -1,0 +1,28 @@
+Docklight Log File (HEX) - Started 2015/6/16 14:15:49.193 
+ TEST CASE: RIS002
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Reset Initial State
+
+2015/6/16 14:15:50.497 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 01 00 00 33 15 
+2015/6/16 14:15:50.601 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  --- Activate Transaction (cmd 02-01)
+
+2015/6/16 14:15:52.639 [TX] - 56 69 56 4F 74 65 63 68 32 00 02 01 00 0F 14 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 A5 8B  --- Reset Initial State
+
+2015/6/16 14:15:58.569 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 01 00 00 33 15  
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 2015/6/16 14:16:06.517 
+

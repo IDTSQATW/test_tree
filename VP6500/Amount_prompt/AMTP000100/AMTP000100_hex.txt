@@ -1,0 +1,25 @@
+Docklight Log File (HEX) - Started 2/11/2009 19:19:45.39 
+ TEST CASE: AMTP000100
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Amount with Comma
+
+2/11/2009 19:19:47.00 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 04 00 12 30 00 30 00 31 00 31 00 35 00 80 00 31 2C 32 33 34 00 5D 38 
+2/11/2009 19:19:47.29 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Amount with Comma Response (OK)
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2/11/2009 19:19:52.51 
+

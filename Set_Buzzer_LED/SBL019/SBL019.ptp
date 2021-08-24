@@ -1,0 +1,36 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+One Beep and Flash at 500ms blink 0
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 01 00 02 65 44
+0
+5
+
+RECEIVE
+0
+Positive Response
+56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53
+-1
+1
+COMMENT Passed
+0
+1
+0
+0
+

@@ -1,0 +1,188 @@
+DL_SCRIPTVERSION
+1
+6644
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+'------------------------------------------------------------
+DL.OpenProject "EMVTest.ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+Dim Response(1024)
+
+startrec = 0
+reclen = -1
+datalen = 0
+tlvpos = 0
+tlvlen = 0
+status = 0
+tlv = 0
+
+'TLV Checks
+H9F66 = 0
+H9A03 = 0
+H9F1A = 0 
+H5F2A = 0
+HFFFB = 0
+H9F35 = 0
+
+DL.AddComment "--- EMV.TTQ"
+DL.SendSequence "EMV.TTQ"
+result = DL.WaitForSequence("EMV.Response", 1, 10000)
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment "--- EMV.Date"
+   DL.SendSequence "EMV.Date"
+   result = DL.WaitForSequence("EMV.Response", 2, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment "--- EMV.CountryCode"
+   DL.SendSequence "EMV.CountryCode"
+   result = DL.WaitForSequence("EMV.Response", 3, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment "--- EMV.CurrencyCode"
+   DL.SendSequence "EMV.CurrencyCode"
+   result = DL.WaitForSequence("EMV.Response", 4, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment "--- EMV.CurrencyCode.TerminalType"
+   DL.SendSequence "EMV.CurrencyCode.TerminalType"
+   result = DL.WaitForSequence("EMV.Response", 5, 10000)
+End If
+'------------------------------------------------------------
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment "--- Get EMV.GetConfiguration"
+   DL.AddComment Chr(13) & "Parsing..."
+   'Do Not Compare EMV Configuration
+   DL.StopLogging
+   DL.SendSequence "EMV.GetConfiguration"
+   result = DL.WaitForSequence("EMV.ConfigHeader", 1, 10000)
+   result = DL.WaitForSequence("EMV.ConfigResponse", 1, 10000)
+End If
+' Verify TLV Content:
+'------------------------------------------------------------
+If result <> 0 Then
+   result = 0
+   result = result + DL.GetReceiveCounter( "TLV1.TTQ" ) 
+   result = result + DL.GetReceiveCounter( "TLV2.Date" ) 
+   result = result + DL.GetReceiveCounter( "TLV3.CountryCode" ) 
+   result = result + DL.GetReceiveCounter( "TLV4.Currency" ) 
+   result = result + DL.GetReceiveCounter( "TLV5.French" ) 
+   result = result + DL.GetReceiveCounter( "TLV6.TType" ) 
+   DL.AddComment Chr(13) & "TLV Count: " & result 
+   If result <> 6 Then 
+      result = 0
+   End If
+End If
+'------------------------------------------------------------
+DL.StartLogging "DOCKLIGHT_LOG", True, "H" 'Append
+'------------------------------------------------------------
+' CHECK TLV Presence:
+'------------------------------------------------------------
+If H9F66 = 0 Or H9A03 = 0 Or H9F1A = 0 Or H5F2A = 0 Or HFFFB = 0 Or H9F35 = 0 Then
+  result = 0
+  DL.AddComment Chr(13) & "!Missing TLVs!"
+End If
+'------------------------------------------------------------
+DL.AddComment Chr(13) & "--- EMV.English"
+DL.SendSequence "EMV.English"
+DL.WaitForSequence "EMV.Response", 6, 10000
+'------------------------------------------------------------
+If result = 0 then
+   DL.AddComment Chr(13) & "Result = FAILED"
+Else
+   DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+DL.StopLogging
+
+' SCRIPT FINISH
+'------------------------------------------------------------
+DL.StopLogging
+
+Sub DL_OnReceive() 
+    If DL.OnReceive_GetName() = "EMV.ConfigHeader" Then 
+      startrec =  1  '1 = Enable Recording
+    End If
+    If (startrec <> 0) Then
+      If DL.OnReceive_GetName() = "EMV.ConfigResponse" Then 
+        'READ 1 Byte [??]
+        reclen = reclen + 1
+        byteread = DL.OnReceive_Peek( 1 )
+        Response(reclen) =  byteread
+        'DL.AddComment "Pos = " & reclen & " HEX: " & HEX(Response(reclen))
+        Select Case reclen  
+          Case 0  
+            tlvpos = 0
+            tlvlen = 0
+          Case 1  
+            status = byteread  
+          Case 2       
+            datalen = byteread  
+          Case 3  
+            datalen = datalen * 256 + byteread  
+            DL.AddComment Chr(13) & " *"
+          Case Else    
+            tlvpos = tlvpos + 1
+            If tlvpos = 2 Then
+              Select Case Response(reclen-1)
+                Case 156 '0x9C
+                  tlvlen = byteread
+                  DL.AddComment HEX(Response(reclen-1))&"{"&tlvlen&"}"
+                Case 154 '0x9A
+                  tlvlen = byteread
+                  DL.AddComment HEX(Response(reclen-1))&"{"&tlvlen&"}"
+                Case Else
+              End Select
+            ElseIf tlvpos = 3 And tlvlen = 0 Then
+              tlvlen = byteread
+              DL.AddComment HEX(Response(reclen-2)) & " " & HEX(Response(reclen-1))&"{"& tlvlen & "}"
+            ElseIf tlvlen > 0 Then
+              tlvlen = tlvlen - 1
+              DL.AddComment HEX(byteread) & " "
+              If tlvlen = 0 Then 
+                'Check TLV Presence
+                tlv = Response(reclen-tlvpos+1) * 256 + Response(reclen-tlvpos+2)
+                Select Case tlv
+                  Case 40806 '0x9F66
+                    H9F66 = 1
+                    DL.AddComment "/" & HEX(tlv) & "/"
+                  Case 39427 '0x9A03
+                    H9A03 = 1
+                    DL.AddComment "/" & HEX(tlv) & "/"
+                  Case 40730 '0x9F1A
+                    H9F1A = 1 
+                    DL.AddComment "/" & HEX(tlv) & "/"
+                  Case 24362 '0x5F2A
+                    H5F2A = 1
+                    DL.AddComment "/" & HEX(tlv) & "/"
+                  Case 65531 '0xFFFB
+                    HFFFB = 1
+                    DL.AddComment "/" & HEX(tlv) & "/"
+                  Case 40757 '0x9F35
+                    H9F35 = 1
+                    DL.AddComment "/" & HEX(tlv) & "/"
+                End Select
+                'Reset TLV
+                DL.AddComment " *" & Chr(13)
+                tlvpos = 0
+                If reclen >= datalen + 3 Then  'Reset Recording
+                  startrec = 0
+                  reclen = 0
+                End If
+              End If
+            End If
+        End Select  
+      End If
+    End If 
+End Sub 

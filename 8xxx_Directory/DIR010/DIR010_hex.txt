@@ -1,0 +1,45 @@
+Docklight Log File (HEX) - Started 2/10/2016 13:59:57.744 
+ TEST CASE: DIR010
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Create Directory 'apple' (83-25)
+
+2/10/2016 13:59:59.097 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 25 00 06 61 70 70 6C 65 00 11 7E 
+2/10/2016 13:59:59.145 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ --- File Download - part 1 - apple/applefile.x:30bytes
+
+2/10/2016 13:59:59.181 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 24 00 21 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 33 30 00 32 00 61 61 61 61 61 61 61 61 61 62 5F 41 
+2/10/2016 13:59:59.255 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ --- File Download - part 2 - apple/applefile.x:30bytes
+
+2/10/2016 13:59:59.286 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 24 00 21 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 33 30 00 30 00 63 63 63 63 63 63 63 63 63 64 72 FA 
+2/10/2016 13:59:59.365 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ --- File Download - part 3 - apple/applefile.x:30bytes
+
+2/10/2016 13:59:59.397 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 24 00 21 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 33 30 00 31 00 65 65 65 65 65 65 65 65 65 66 67 AE 
+2/10/2016 13:59:59.581 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ --- Delete File - applefile.x in ROOT/apple
+
+2/10/2016 13:59:59.621 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 1F 00 12 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 C0 48 
+2/10/2016 13:59:59.685 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ --- Delete Directory - apple
+
+2/10/2016 13:59:59.722 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 26 00 06 61 70 70 6C 65 00 55 53 
+2/10/2016 13:59:59.765 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2/10/2016 14:00:01.016 
+

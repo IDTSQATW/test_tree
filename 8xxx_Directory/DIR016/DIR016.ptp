@@ -1,0 +1,330 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+------------- Delete File 83 1f ---------------
+
+0
+5
+
+SEND
+1
+Delete File - filename0123456789abcdefghijklmnopq.x in ROOT
+56 69 56 4F 74 65 63 68 32 00 83 1F 00 26 66 69 6C 65 6E 61 6D 65 30 31 32 33 34 35 36 37 38 39 61 62 63 64 65 66 67 68 69 6A 6B 6C 6D 6E 6F 70 71 2E 78 00 E0 63
+0
+5
+
+SEND
+2
+Delete File - tst_file.x in ROOT
+56 69 56 4F 74 65 63 68 32 00 83 1F 00 0B 74 73 74 5F 66 69 6C 65 2E 78 00 75 CC
+0
+5
+
+SEND
+3
+Delete File - testfile.x in ROOT
+56 69 56 4F 74 65 63 68 32 00 83 1F 00 0B 74 65 73 74 66 69 6C 65 2E 78 00 75 CC
+0
+5
+
+SEND
+4
+Delete File - applefile.x in ROOT/apple
+56 69 56 4F 74 65 63 68 32 00 83 1F 00 12 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 C0 48
+0
+5
+
+SEND
+5
+-------------- List Directory 83 22 -----------------
+
+0
+5
+
+SEND
+6
+List Directory (83-22) - Recursive
+56 69 56 4F 74 65 63 68 32 00 83 22 00 04 31 30 00 00 9D 9B
+0
+5
+
+SEND
+7
+---------------------- Get Drive Space 83 23 ----------------
+
+0
+5
+
+SEND
+8
+Check Free Space on Drive (83-23)
+56 69 56 4F 74 65 63 68 32 00 83 23 00 00 95 FD
+0
+5
+
+SEND
+9
+------------- Transfer File 83 24 -------------
+
+0
+5
+
+SEND
+10
+File Download - part 1 - filename0123456789abcdefghijklmnopq.x:20bytes
+56 69 56 4F 74 65 63 68 32 00 83 24 00 35 66 69 6C 65 6E 61 6D 65 30 31 32 33 34 35 36 37 38 39 61 62 63 64 65 66 67 68 69 6A 6B 6C 6D 6E 6F 70 71 2E 78 00 32 30 00 32 00 61 61 61 61 61 61 61 61 61 62 1E 6D
+0
+5
+
+SEND
+11
+File Download - part 2 - filename0123456789abcdefghijklmnopq.x:20bytes
+56 69 56 4F 74 65 63 68 32 00 83 24 00 35 66 69 6C 65 6E 61 6D 65 30 31 32 33 34 35 36 37 38 39 61 62 63 64 65 66 67 68 69 6A 6B 6C 6D 6E 6F 70 71 2E 78 00 32 30 00 31 00 63 63 63 63 63 63 63 63 63 64 46 D5
+0
+5
+
+SEND
+12
+File Download - part 1 - testfile.x:20bytes
+56 69 56 4F 74 65 63 68 32 00 83 24 00 1A 74 65 73 74 66 69 6C 65 2E 78 00 32 30 00 32 00 61 61 61 61 61 61 61 61 61 62 32 B3
+0
+5
+
+SEND
+13
+File Download - part 2 - testfile.x:20bytes
+56 69 56 4F 74 65 63 68 32 00 83 24 00 1A 74 65 73 74 66 69 6C 65 2E 78 00 32 30 00 31 00 63 63 63 63 63 63 63 63 63 64 6A 0B
+0
+5
+
+SEND
+14
+File Download - part 1 - apple/applefile.x:30bytes
+56 69 56 4F 74 65 63 68 32 00 83 24 00 21 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 33 30 00 32 00 61 61 61 61 61 61 61 61 61 62 5F 41
+0
+5
+
+SEND
+15
+File Download - part 2 - apple/applefile.x:30bytes
+56 69 56 4F 74 65 63 68 32 00 83 24 00 21 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 33 30 00 30 00 63 63 63 63 63 63 63 63 63 64 72 FA
+0
+5
+
+SEND
+16
+File Download - part 3 - apple/applefile.x:30bytes
+56 69 56 4F 74 65 63 68 32 00 83 24 00 21 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 33 30 00 31 00 65 65 65 65 65 65 65 65 65 66 67 AE
+0
+5
+
+SEND
+17
+ ----------------- Create Directory 83 25 --------------
+
+0
+5
+
+SEND
+18
+Create Directory 'apple' (83-25)
+56 69 56 4F 74 65 63 68 32 00 83 25 00 06 61 70 70 6C 65 00 11 7E
+0
+5
+
+SEND
+19
+------------ Delete Directory 83 26 ------------
+
+0
+5
+
+SEND
+20
+Delete Directory - apple
+56 69 56 4F 74 65 63 68 32 00 83 26 00 06 61 70 70 6C 65 00 55 53
+0
+5
+
+SEND
+21
+-------------------- Delete Others -------------------
+
+0
+5
+
+SEND
+22
+delete penobscot
+56 69 56 4F 74 65 63 68 32 00 83 1F 00 0E 70 65 6E 6F 62 73 63 6F 74 2E 62 6D 70 00 E6 B1
+0
+5
+
+SEND
+23
+Delete field
+56 69 56 4F 74 65 63 68 32 00 83 1F 00 0A 66 69 65 6C 64 2E 62 6D 70 00 42 C2
+0
+5
+
+SEND
+24
+delete smallsuperstition
+56 69 56 4F 74 65 63 68 32 00 83 1F 00 16 73 6D 61 6C 6C 73 75 70 65 72 73 74 69 74 69 6F 6E 2E 62 6D 70 00 93 A2
+0
+5
+
+SEND
+25
+delete storm2.bmp
+56 69 56 4F 74 65 63 68 32 00 83 1F 00 0B 73 74 6F 72 6D 32 2E 62 6D 70 00 B5 49
+0
+5
+
+SEND
+26
+Delete duckf.bmp
+56 69 56 4F 74 65 63 68 32 00 83 1F 00 0A 64 75 63 6B 66 2E 62 6D 70 00 E9 E8
+0
+5
+
+SEND
+27
+Delete duckf.png
+56 69 56 4F 74 65 63 68 32 00 83 1F 00 0A 64 75 63 6B 66 2E 70 6E 67 00 92 DD
+0
+5
+
+SEND
+28
+Delete Guitar Center
+56 69 56 4F 74 65 63 68 32 00 83 1F 00 11 47 75 69 74 61 72 43 65 6E 74 65 72 2E 62 6D 70 00 00 00
+0
+5
+
+SEND
+29
+Delete Field PNG
+56 69 56 4F 74 65 63 68 32 00 83 1F 00 0A 66 69 65 6C 64 2E 70 6E 67 00 00 00
+0
+5
+
+SEND
+30
+Delete File x
+56 69 56 4F 74 65 63 68 32 00 83 1F 00 0B 34 30 30 30 66 69 6C 65 2E 78 00 00 00
+0
+5
+
+RECEIVE
+0
+FREE SPACE OK
+56 69 56 4F 74 65 63 68 32 00 83 00 00 0E
+-1
+1
+COMMENT FREE SPACE OK
+1
+1
+0
+1
+
+RECEIVE
+1
+List Directory OK
+56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03
+-1
+1
+COMMENT List Directory OK
+1
+1
+0
+1
+
+RECEIVE
+2
+testfile.x uploaded OK
+56 69 56 4F 74 65 63 68 32 00 83 00 00 0E 74 65 73 74 66 69 6C 65 2E 78 3A 32 30 00 90 D9
+-1
+1
+COMMENT testfile.x uploaded OK
+1
+1
+0
+1
+
+RECEIVE
+3
+.\apple directory created OK
+56 69 56 4F 74 65 63 68 32 00 83 00 00 15 61 70 70 6C 65 2F 2C 74 65 73 74 66 69 6C 65 2E 78 3A 32 30 00 0E 1A
+-1
+1
+COMMENT .\apple directory created OK
+1
+1
+0
+1
+
+RECEIVE
+4
+applefile.x uploaded OK
+56 69 56 4F 74 65 63 68 32 00 83 00 00 2A 61 70 70 6C 65 2F 2C 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 3A 33 30 2C 74 65 73 74 66 69 6C 65 2E 78 3A 32 30 00 CC 36
+-1
+1
+COMMENT applefile.x uploaded OK
+1
+1
+0
+1
+
+RECEIVE
+5
+Error Response
+56 69 56 4F 74 65 63 68 32 00 83 05 00 04 ##
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+6
+List Directory with Data
+56 69 56 4F 74 65 63 68 32 00 83 00 00 2A 61 70 70 6C 65 2F 2C 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 3A 33 30 2C 74 65 73 74 66 69 6C 65 2E 78 3A 32 30 00 CC 36
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+7
+List Directory Error
+56 69 56 4F 74 65 63 68 32 00 83 0A 00 04 ##
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

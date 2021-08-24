@@ -1,0 +1,22 @@
+Docklight Log File (HEX) - Started 2015/9/10 11:58:34.211 
+ TEST CASE: ADPT100
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+
+ 1) Erase All Keys
+
+2015/9/10 11:58:35.716 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 03 22 
+2015/9/10 11:58:35.762 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  
+
+ --- PassThrough Start
+
+2015/9/10 11:58:36.299 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+2015/9/10 11:58:36.339 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 0C 00 00 69 FA 
+
+Docklight Log File (HEX) - Stopped 2015/9/10 11:58:37.892 
+

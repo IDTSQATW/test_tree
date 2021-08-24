@@ -1,0 +1,127 @@
+Docklight Log File (HEX) - Started 2021/2/19 14:32:22.752 
+ TEST CASE: FWF00403
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+
+
+Try to Stop Pass-Through Mode
+2021/2/19 14:32:23.892 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 01 00 01 00 80 2D 
+2021/2/19 14:32:23.900 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 01 0C 00 00 6B D0 
+
+Start Pass-Through Mode
+2021/2/19 14:32:24.398 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 01 00 01 01 A1 3D 
+2021/2/19 14:32:24.406 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 01 00 00 00 1E B1 
+
+Part1: verify deactivate single shot command has no effect before contact interface activated.
+Enhanced Pass-Through, Deactivate Contact, Contact, Poll for Card Off
+2021/2/19 14:32:24.922 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 11 00 20 01 00 00 00 AE 9D 
+2021/2/19 14:32:24.933 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 0A 00 04 00 05 00 0A 7D 74 
+
+Enhanced Pass-Through, Deactivate Contact, SAM1, Poll for Card Off
+2021/2/19 14:32:25.533 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 11 00 21 01 00 00 00 FF 37 
+2021/2/19 14:32:25.545 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 0A 00 04 00 05 00 0A 7D 74 
+
+Enhanced Pass-Through, Deactivate Contact, SAM2, Poll for Card Off
+2021/2/19 14:32:26.059 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 11 00 22 01 00 00 00 2D D9 
+2021/2/19 14:32:26.071 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 0A 00 04 00 05 00 0A 7D 74 
+
+Enhanced Pass-Through, Deactivate Contact, SAM3, Poll for Card Off
+2021/2/19 14:32:26.589 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 11 00 23 01 00 00 00 7C 73 
+2021/2/19 14:32:26.600 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 0A 00 04 00 05 00 0A 7D 74 
+
+Enhanced Pass-Through, Deactivate Contact, SAM4, Poll for Card Off
+2021/2/19 14:32:27.120 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 11 00 24 01 00 00 00 A8 14 
+2021/2/19 14:32:27.132 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 0A 00 04 00 05 00 0A 7D 74 
+
+Part 2: verify deactivate single shot command is effective after contact interface activated.
+
+Enhanced Pass-Through, Activate Contact, Contact, Poll for Card On
+2021/2/19 14:32:34.560 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 05 00 20 01 00 00 00 13 6B 
+2021/2/19 14:32:36.204 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 00 01 20 51 F6 
+
+Enhanced Pass-Through, Deactivate Contact, Contact, Poll for Card Off
+2021/2/19 14:32:43.053 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 11 00 20 01 00 00 00 AE 9D 
+2021/2/19 14:32:43.067 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 00 00 05 16 
+
+Part 3: verify deactivate single shot command is not available after contact interface activated then deactivated before.
+Enhanced Pass-Through, Deactivate Contact, Contact, Poll for Card Off
+2021/2/19 14:32:49.695 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 11 00 20 01 00 00 00 AE 9D 
+2021/2/19 14:32:49.707 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 0A 00 04 00 05 00 0A 7D 74 
+
+Part 4: verify that only one interface can be activated at a time.
+
+Enhanced Pass-Through, Activate Contact, Contact, Poll for Card On
+2021/2/19 14:32:54.661 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 05 00 20 01 00 00 00 13 6B 
+2021/2/19 14:32:56.412 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 00 01 20 51 F6 
+
+Enhanced Pass-Through, Activate Contact, SAM1, Poll for Card On
+2021/2/19 14:33:22.752 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 05 00 21 01 00 00 00 42 C1 
+2021/2/19 14:33:22.766 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 0A 00 04 00 05 00 0A 7D 74 
+
+Enhanced Pass-Through, Activate Contact, SAM2, Poll for Card On
+2021/2/19 14:33:23.286 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 05 00 22 01 00 00 00 90 2F 
+2021/2/19 14:33:23.300 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 0A 00 04 00 05 00 0A 7D 74 
+
+Enhanced Pass-Through, Activate Contact, SAM3, Poll for Card On
+2021/2/19 14:33:23.822 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 05 00 23 01 00 00 00 C1 85 
+2021/2/19 14:33:23.836 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 0A 00 04 00 05 00 0A 7D 74 
+
+Enhanced Pass-Through, Activate Contact, SAM4, Poll for Card On
+2021/2/19 14:33:24.354 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 05 00 24 01 00 00 00 15 E2 
+2021/2/19 14:33:24.368 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 0A 00 04 00 05 00 0A 7D 74 
+
+Enhanced Pass-Through, Deactivate Contact, Contact, Poll for Card Off
+2021/2/19 14:33:33.569 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 11 00 20 01 00 00 00 AE 9D 
+2021/2/19 14:33:33.582 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 00 00 05 16 
+
+Enhanced Pass-Through, Activate Contact, SAM1, Poll for Card On
+2021/2/19 14:33:45.682 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 05 00 21 01 00 00 00 42 C1 
+2021/2/19 14:33:45.776 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 00 01 21 41 D7 
+
+Enhanced Pass-Through, Deactivate Contact, SAM1, Poll for Card Off
+2021/2/19 14:33:50.007 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 11 00 21 01 00 00 00 FF 37 
+2021/2/19 14:33:50.021 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 00 00 05 16 
+
+Enhanced Pass-Through, Activate Contact, SAM2, Poll for Card On
+2021/2/19 14:34:13.453 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 05 00 22 01 00 00 00 90 2F 
+2021/2/19 14:34:13.550 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 00 01 22 71 B4 
+
+Enhanced Pass-Through, Deactivate Contact, SAM2, Poll for Card Off
+2021/2/19 14:34:17.996 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 11 00 22 01 00 00 00 2D D9 
+2021/2/19 14:34:18.013 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 00 00 05 16 
+
+Enhanced Pass-Through, Activate Contact, SAM3, Poll for Card On
+2021/2/19 14:34:21.466 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 05 00 23 01 00 00 00 C1 85 
+2021/2/19 14:34:21.555 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 00 01 23 61 95 
+
+Enhanced Pass-Through, Deactivate Contact, SAM3, Poll for Card Off
+2021/2/19 14:34:24.064 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 11 00 23 01 00 00 00 7C 73 
+2021/2/19 14:34:24.075 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 00 00 05 16 
+
+Enhanced Pass-Through, Activate Contact, SAM4, Poll for Card On
+2021/2/19 14:34:24.590 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 05 00 24 01 00 00 00 15 E2 
+2021/2/19 14:34:24.602 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 0A 00 04 00 00 00 0C F6 42 
+
+Enhanced Pass-Through, Deactivate Contact, SAM4, Poll for Card Off
+2021/2/19 14:34:25.124 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 11 00 24 01 00 00 00 A8 14 
+2021/2/19 14:34:25.135 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 0A 00 04 00 05 00 0A 7D 74 
+
+Try to Stop Pass-Through Mode
+2021/2/19 14:34:36.305 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 01 00 01 00 80 2D 
+2021/2/19 14:34:36.315 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 01 00 00 00 1E B1  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2021/2/19 14:34:37.947 
+

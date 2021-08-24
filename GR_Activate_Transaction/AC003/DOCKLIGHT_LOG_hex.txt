@@ -1,0 +1,28 @@
+Docklight Log File (HEX) - Started 2017/5/18 14:34:44.734 
+ TEST CASE: AC003
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Poll on Demand
+
+2017/5/18 14:34:45.986 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34 
+2017/5/18 14:34:46.013 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  --- Activate Transaction
+
+2017/5/18 14:34:46.036 [TX] - 56 69 56 4F 74 65 63 68 32 00 02 01 00 15 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20 30 12  --- Cancel Transaction
+
+2017/5/18 14:34:46.059 [TX] - 56 69 56 4F 74 65 63 68 32 00 05 01 00 00 92 EF 
+2017/5/18 14:34:46.380 [RX] - 56 69 56 4F 74 65 63 68 32 00 05 00 00 00 D8 A2  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2017/5/18 14:34:47.531 
+

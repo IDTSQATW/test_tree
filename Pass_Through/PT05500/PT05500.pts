@@ -1,0 +1,212 @@
+DL_SCRIPTVERSION
+1
+16655
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "PT05500" ' !!!!! EDIT THIS !!!!!
+
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description	
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+	
+  'Display Test Steps 	
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()	 
+  Prompting(1) = result
+
+  'Set Docklight COM Port	
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()	 
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()	 
+  POSBaudRate(1) = result
+	
+Loop
+
+Sub StepPrompt(PromptString)
+	DL.AddComment PromptString
+	If Prompting(1) = "ON" Then
+		MsgBox PromptString, VBOKOnly, "Test Step"
+	Else
+	End If
+	
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 1
+
+Sub PrintMyResult(ResultX)
+
+	If ResultX = 0 Then
+		MasterResult = 0
+		DL.AddComment "Result = FAILED"
+	ElseIf ResultX = 1 Then
+		DL.AddComment "Result = PASSED"
+	End If
+
+End Sub
+
+Function ReverseResult(ResultParam)
+	If ResultParam = 1 Then
+		result = 0
+	ElseIf ResultParam = 0 Then
+		result = 1
+	End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+	DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+	MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+
+
+'------------------------------------------------------------
+'Prompt of test being run
+'------------------------------------------------------------
+If Prompting(0) = "ON" Then
+  MyInput = MsgBox("You will now run test PT05208." &Chr(13) & "Objective: Read Serial Number of PICC from card. ", VBOKOnly, "Test: PT05208")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- Pass-Through Mode - (START)"
+  DL.SendSequence "Pass-Through Mode - (START)"
+  result = DL.WaitForSequence("Pass-Through Mode - (START) (OK)", 1, 10000)
+End If
+DL.Pause 1500
+PrintMyResult(result)
+
+DL.ResetReceiveCounter "Poll for Token - Card Read (OK)"
+
+If result <> 0 Then
+  DL.AddComment "--- Poll for Token - Card Read (OK)"
+  StepPrompt("Press OK, then tap a card.")
+  DL.SendSequence "Poll For Token"
+  result = DL.WaitForSequence("Poll for Token - Card Read (OK)", 1, 20000)
+End If
+
+DL.Pause 1500
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+If result <> 0 Then
+  DL.AddComment "--- PCD and PICC parameters response (OK)"
+  'StepPrompt("Press OK, then tap a card.")
+  DL.SendSequence "Get PCD and PICC Parameters"
+  result = DL.WaitForSequence("PCD and PICC parameters response (OK)", 1, 20000)
+End If
+
+DL.Pause 1500
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+	MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+	MasterVerdict = "FAILED"
+End If
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'------------------------------------------------------------
+' WRITE FINAL VERDICT FILE(!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 

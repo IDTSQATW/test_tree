@@ -1,0 +1,68 @@
+
+10:52:39: If Issue ?
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\SmartTap2.1_TW\ST605_KB\11111.txt
+Running Info>>
+[Issue Count: 2]
+[Wrong Items]
+>>>Error item ( 29 ).
+>>> Auto output mode
+
+>>>Error item ( 38 ).
+>>> Auto output mode
+
+
+10:52:39: >>[Do Scripts]>>
+
+Objective: to verify auto output, cmd 01-0B = KB (VAS card)
+--------------------------------------------------------------------------------
+>>> 04-09 reset to default
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 09 00 00 30 87 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 
+ASCII: Otech2   
+>>> Burst mode OFF
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 00 2E B9 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 
+ASCII: Otech2   
+>>> 01-0D - Auto output = for good & bad reads
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 0D 00 01 02 4B 86 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 
+ASCII: Otech2   
+>>> C7-65 set private key
+CMD: 56 69 56 4F 74 65 63 68 32 00 C7 65 00 24 00 00 00 01 82 6D 17 E5 07 67 B1 65 B0 E4 D9 E3 32 F8 D1 D1 E2 02 24 28 4F B4 DA F1 E5 0A 03 24 6E 70 79 7D B8 71 
+OUT: 56 69 56 4F 74 65 63 68 32 00 C7 00 00 00 86 
+ASCII: Otech2 Ç 
+>>> 04-00 w/ tag DFED3F = 02 (Decrypt VAS data via private key)
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF ED 3F 01 02 8F 63 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 
+ASCII: Otech2   
+--------------------
+>>> 01-0C - Data output =  Simplified output mode
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 0C 00 01 01 0D 51 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 
+ASCII: Otech2   
+>>> Case 0.1 - Get VAS Only
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 03 00 3E FF E4 01 8E DF EE 3B 04 00 BC 61 4E DF EE 3C 00 DF EE 3D 00 DF EF 25 00 DF ED 01 00 DF ED 02 05 00 00 00 00 01 DF ED 03 01 00 DF ED 04 01 01 DF ED 05 01 01 DF ED 06 01 00 DF ED 07 01 00 8C 02 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 
+ASCII: Otech2   
+>>> 04-00 Terminal Mode = Get VAS Only
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 0A DF EF 1A 01 02 DF ED 28 01 00 08 84 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 
+ASCII: Otech2   
+>>> Auto output mode
+SWIPEKB: Click OK --> Tap Android phone (Merchant APP: case 0.1)
+KB Unit Swipe Card:
+333234323334323334
+Error! >>>> Expect OUT:EXR: 324234234
+>>> Case 0.3 - Secure Get VAS Only
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 03 00 3E FF E4 01 8E DF EE 3B 04 00 BC 61 4E DF EE 3C 00 DF EE 3D 00 DF EF 25 00 DF ED 01 00 DF ED 02 05 00 00 00 00 01 DF ED 03 01 00 DF ED 04 01 01 DF ED 05 01 01 DF ED 06 01 00 DF ED 07 01 00 8C 02 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 
+ASCII: Otech2   
+>>> 04-00 Terminal Mode = Secure Get VAS Only
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 0A DF EF 1A 01 0A DF ED 28 01 00 05 C6 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 
+ASCII: Otech2   
+>>> Auto output mode
+SWIPEKB: Click OK --> Tap Android phone (Merchant APP: case 0.3)
+KB Unit Swipe Card:
+333234323334323334
+Error! >>>> Expect OUT:EXR: 324234234

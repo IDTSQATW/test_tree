@@ -1,0 +1,30 @@
+Docklight Log File (HEX) - Started 2018/9/6 08:53:11.786 
+ TEST CASE: USAT014
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+
+ --- Init LCD (F9 F9 F9)
+
+2018/9/6 08:53:12.996 [TX] - F9 F9 F9  
+
+ --- Enable reader (F7 F7 F7)
+
+2018/9/6 08:53:13.500 [TX] - F7 F7 F7  
+
+ --- Enable yellow LED (FB FB FB)
+
+2018/9/6 08:53:14.006 [TX] - FB FB FB 
+2018/9/6 08:53:32.419 [RX] - 41 41 41 40 1B 41 02 43 41 52 44 2D 36 35 31 30 30 30 30 30 30 30 30 30 30 31 32 35 3D 31 37 31 32 32 30 31 31 30 30 30 30 39 35 30 30 30 30 30 30 03 08 0D  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+
+
+Docklight Log File (HEX) - Stopped 2018/9/6 08:53:50.040 
+

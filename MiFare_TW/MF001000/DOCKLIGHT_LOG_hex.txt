@@ -1,0 +1,64 @@
+Docklight Log File (HEX) - Started 2019/4/19 11:57:49.317 
+ TEST CASE: MF001000
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ ----- PT_Start commands -----
+
+2019/4/19 11:57:51.683 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+2019/4/19 11:57:51.711 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  PT command (OK)
+ Result = PASSED
+
+2019/4/19 11:57:51.725 [TX] - 56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 94 1F 
+2019/4/19 11:57:51.753 [RX] - 56 69 56 4F 74 65 63 68 32 00 28 00 00 00 D6 6A  Antenna Enable (OK)
+ Result = PASSED
+
+2019/4/19 11:57:51.767 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 00 B1 E4 
+2019/4/19 11:57:51.884 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 05  Poll for Token (OK)
+
+2019/4/19 11:57:51.893 [RX] - 03 F0  Result = PASSED
+ Result = PASSED
+ ----- Authenticate with VALID default Key A - Block 4 -----
+
+2019/4/19 11:57:51.901 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 04 01 FF FF FF FF FF FF 03 76 
+2019/4/19 11:57:51.902 [RX] - 46 34 59 C8 EF 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  PT command (OK)
+ Result = PASSED
+ ----- MiFare Read 1 Block - Start at Block 5 -----
+
+2019/4/19 11:57:51.951 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 05 1B 79 
+2019/4/19 11:57:51.990 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 10 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 72 9B  MiFare Read 1 Block - Start at Block 5 (OK-1)
+ Result = PASSED
+ ----- MiFare Write 1 Block - Start at Block 5 -----
+
+2019/4/19 11:57:52.022 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 08 00 12 31 05 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 FC 35 
+2019/4/19 11:57:52.082 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  PT command (OK)
+ Result = PASSED
+ ----- MiFare Read 1 Block - Start at Block 5 -----
+
+2019/4/19 11:57:52.099 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 05 1B 79 
+2019/4/19 11:57:52.138 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 10 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 D2 D6  MiFare Read 1 Block - Start at Block 5 (OK-2)
+ Result = PASSED
+ ----- MiFare Write 1 Block - Start at Block 5 (P2) -----
+
+2019/4/19 11:57:52.173 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 08 00 12 31 05 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 5C 78 
+2019/4/19 11:57:52.233 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  PT command (OK)
+ Result = PASSED
+
+2019/4/19 11:57:52.255 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 05 1B 79 
+2019/4/19 11:57:52.295 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 10 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 72 9B  MiFare Read 1 Block - Start at Block 5 (OK-1)
+ Result = PASSED
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2019/4/19 11:57:54.940 
+

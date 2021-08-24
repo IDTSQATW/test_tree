@@ -1,0 +1,30 @@
+DL_SCRIPTVERSION
+1
+11312
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+'------------------------------------------------------------
+DL.OpenProject "FV001.ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"', false, true
+DL.AddComment "#1: GETFirmwareVersion"
+DL.ResetReceiveCounter "Status Code = '00'"
+DL.SendSequence "GETFirmwareVersion"
+result = DL.WaitForSequence("Status Code = '00'", 1, 200)
+DL.pause(200)
+
+
+' CHECK RESULTS:
+'------------------------------------------------------------
+If result = 0 then
+   DL.AddComment Chr(13) & "Result = FAILED"
+Else
+   DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+
+' SCRIPT FINISH
+'------------------------------------------------------------
+DL.StopLogging

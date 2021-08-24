@@ -1,0 +1,8 @@
+Transfer image to reader first before running script
+
+1. Open CMD
+2. add download.exe utility in same folder as images
+3. C:\Users\Duc\OneDrive - ID Tech\VP8800 DVT Materials\VP8800_DVT\NGAT_test script_VP8800\UI\17Image\Images>download 100x100.png 100x100.png 1
+4. Run script: FWA01701A_TW_Jay_20200422.txt
+
+Images should show on LCD

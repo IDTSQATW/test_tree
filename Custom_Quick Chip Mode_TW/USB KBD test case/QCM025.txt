@@ -1,0 +1,58 @@
+Objective: check Pass-through mode can work (cmd 2C-12) under Quick Chip Mode.
+
+=================================
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+>>> PassThrough = START
+CMD: 2C 01 01
+EXR: 2C 00 00 00
+MESSAGE: Insert card (EMV T=0) --> Click OK
+
+>>> cmd 2C-12 Get ATR (ICC)
+CMD: 2C 12 20
+EXR: 2C 00
+EXR: 90 00
+
+>>> 2C-18 Contact Power Off (ICC)
+CMD: 2C 18 20
+EXR: 2C 00
+MESSAGE: Remove card --> Click OK
+
+>>> PassThrough STOP
+CMD: 2C 01 00
+EXR: 2C 00 00 00
+
+=================================
+>>> Quick Chip mode = 04
+CMD: 01 01 04
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+>>> PassThrough = START
+CMD: 2C 01 01
+EXR: 2C 00 00 00
+MESSAGE: Insert card (EMV T=0) --> Click OK
+
+>>> cmd 2C-12 Get ATR (ICC)
+CMD: 2C 12 20
+EXR: 2C 00
+EXR: 90 00
+
+>>> 2C-18 Contact Power Off (ICC)
+CMD: 2C 18 20
+EXR: 2C 00
+MESSAGE: Remove card --> Click OK
+
+>>> PassThrough STOP
+CMD: 2C 01 00
+EXR: 2C 00 00 00
+
+>>> CT transaction
+SWIPEKB: click OK, then insert T=0 card. (NOTE: No CT card data output/ Beep twice)
+MESSAGECK: No CT card data output/ Beep twice
+
+=================================
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00

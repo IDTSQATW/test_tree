@@ -1,0 +1,9 @@
+Docklight Log File (HEX) - Started  
+ --- fail Font 2
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 83 03 00 0F 30 00 30 00 31 00 32 00 31 00 66 61 69 6C 00 41 88 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

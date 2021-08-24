@@ -1,0 +1,9 @@
+Docklight Log File (HEX) - Started  
+ --- Vend Disable Blue VL007
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 F0 F6 00 00 58 AA 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 F0 02 00 00 95 CA  Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

@@ -1,0 +1,50 @@
+Objective: set tag DFEF6F (output delay time) w/ data 30~36
+
+>>> Tag DFEF6F = 30 (default, 1200 us)
+CMD: 04 00 DF EF 6F 01 30
+EXR: 04 00 00 00
+SWIPEKB: click OK, then swipe IDT test card. (output delay time = 1200 us)
+MESSAGECK: data output speed correctly
+
+>>> Tag DFEF6F = 31 (2000 us)
+CMD: 04 00 DF EF 6F 01 31
+EXR: 04 00 00 00
+SWIPEKB: click OK, then swipe IDT test card. (output delay time = 2000 us)
+MESSAGECK: data output speed correctly
+
+>>> Tag DFEF6F = 32 (5000 us)
+CMD: 04 00 DF EF 6F 01 32
+EXR: 04 00 00 00
+SWIPEKB: click OK, then swipe IDT test card. (output delay time = 5000 us)
+MESSAGECK: data output speed correctly
+
+>>> Tag DFEF6F = 33 (10000 us)
+CMD: 04 00 DF EF 6F 01 33
+EXR: 04 00 00 00
+SWIPEKB: click OK, then swipe IDT test card. (output delay time = 10000 us)
+MESSAGECK: data output speed correctly
+
+>>> Tag DFEF6F = 34 (20000 us)
+CMD: 04 00 DF EF 6F 01 34
+EXR: 04 00 00 00
+SWIPEKB: click OK, then swipe IDT test card. (output delay time = 20000 us)
+MESSAGECK: data output speed correctly
+
+>>> Tag DFEF6F = 35 (50000 us)
+CMD: 04 00 DF EF 6F 01 35
+EXR: 04 00 00 00
+SWIPEKB: click OK, then swipe IDT test card. (output delay time = 50000 us)
+MESSAGECK: data output speed correctly
+
+>>> Tag DFEF6F = 36 (0 us)
+CMD: 04 00 DF EF 6F 01 36
+EXR: 04 00 00 00
+SWIPEKB: click OK, then swipe IDT test card. (output delay time = 0 us) Note: some PC may be unsuitable for this setting.
+MESSAGECK: data output speed correctly
+
+--------------------
+>>> Tag DFEF6F = 30 (default, 1200 us)
+CMD: 04 00 DF EF 6F 01 30
+EXR: 04 00 00 00
+SWIPEKB: click OK, then swipe IDT test card. (output delay time = 1200 us)
+MESSAGECK: data output speed correctly

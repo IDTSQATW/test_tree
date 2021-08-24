@@ -1,0 +1,17 @@
+Docklight Log File (HEX) - Started 2016/5/10 14:32:20.296 
+ TEST CASE: LO002_2
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+
+
+Docklight Log File (HEX) - Stopped 2016/5/10 14:32:23.171 
+

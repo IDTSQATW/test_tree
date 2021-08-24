@@ -1,0 +1,312 @@
+;**********************************************************************************************************
+;Script Name: 	App Data
+;Descript: 	This script is used to inject CAKeys which iccSolution contact Level2 tools use.
+;Version:  	v2.0
+;Note:		UniPay II version 0.99.025 or above.
+;Modify Date:	2015/7/17
+;**********************************************************************************************************
+
+
+;command 1
+SET_APPLICATION_DATA			; SET_TERMINAL_DATA
+07 00                                     ; TAG LENGTH
+A0 00 00 00 03 10 10                    ; VISA AID
+0E 00                                   ; TLV Length
+9F 01 06 56 49 53 41 30 30		; Acquier ID
+5F 57 01 00                             ; Account Type
+5F 2A 02 08 40				; Transaction Currency 
+9F 09 02 00 96  			; Application Version Number
+5F 36 01 02  		                ; Transaction Currency Exponent
+9F 1B 04 00 00 3A 98                    ; Terminal Floor Limit
+DF 25 03 9F 37 04                       ; DDOL
+DF EE 15 01 01         			; ASI
+DF 13 05 00 00 00 00 00          	; TAC Default
+DF 14 05 00 00 00 00 00          	; TAC Denial
+DF 15 05 00 00 00 00 00          	; TAC Online
+DF 18 01 00          			; Target Percentage to be Used for Random Selection(0~0x63)
+DF 17 04 00 00 27 10			; Threshold Value for Biased Random Selection
+DF 19 01 00 				; Maximum Target  Percentage to be  used for  Biased ;Random Selection(0~0x63)
+END
+;command 2
+SET_APPLICATION_DATA			; SET_TERMINAL_DATA
+07 00                                     ; TAG LENGTH
+A0 00 00 00 99 90 90                    ; Non-EMV AID
+0D 00                                   ; TLV Length
+5F 57 01 00                             ; Account Type
+5F 2A 02 08 40				; Transaction Currency
+9F 09 02 00 09  			; Application Version Number
+5F 36 01 02  		                ; Transaction Currency Exponent
+9F 1B 04 00 00 3A 98                    ; Terminal Floor Limit
+DF 25 03 9F 37 04                       ; DDOL
+DF EE 15 01 01         			; ASI
+DF 13 05 00 00 00 00 00          	; TAC Default
+DF 14 05 00 00 00 00 00          	; TAC Denial
+DF 15 05 00 00 00 00 00          	; TAC Online
+DF 18 01 00          			; Target Percentage to be Used for Random Selection(0~0x63)
+DF 17 04 00 00 27 10			; Threshold Value for Biased Random Selection
+DF 19 01 00 				; Maximum Target  Percentage to be  used for  Biased ;Random Selection(0~0x63)
+END
+
+
+;command 3
+SET_APPLICATION_DATA			; SET_TERMINAL_DATA
+06 00                                    ; TAG LENGTH
+A0 00 00 99 99 01                       ; Test
+0D 00                                   ; TLV Length
+5F 57 01 00                             ; Account Type
+5F 2A 02 08 40				; Transaction Currency
+9F 09 02 99 99  			; Application Version Number
+5F 36 01 02  		                ; Transaction Currency Exponent
+9F 1B 04 00 00 3A 98                    ; Terminal Floor Limit
+DF 25 03 9F 37 04                       ; DDOL
+DF EE 15 01 01         			; ASI
+DF 13 05 00 00 00 00 00          	; TAC Default
+DF 14 05 00 00 00 00 00          	; TAC Denial
+DF 15 05 00 00 00 00 00          	; TAC Online
+DF 18 01 00          			; Target Percentage to be Used for Random Selection(0~0x63)
+DF 17 04 00 00 27 10			; Threshold Value for Biased Random Selection
+DF 19 01 00 				; Maximum Target  Percentage to be  used for  Biased ;Random Selection(0~0x63)
+END
+
+;command 4
+SET_APPLICATION_DATA			; SET_TERMINAL_DATA
+08 00                                    ; TAG LENGTH
+A0 00 00 00 03 10 10 03                 ; ANO3
+0D 00                                   ; TLV Length
+5F 57 01 00                             ; Account Type
+5F 2A 02 08 40				; Transaction Currency
+9F 09 02 00 96  			; Application Version Number
+5F 36 01 02  		                ; Transaction Currency Exponent
+9F 1B 04 00 00 3A 98                    ; Terminal Floor Limit
+DF 25 03 9F 37 04                       ; DDOL
+DF EE 15 01 01         			; ASI
+DF 13 05 00 00 00 00 00          	; TAC Default
+DF 14 05 00 00 00 00 00          	; TAC Denial
+DF 15 05 00 00 00 00 00          	; TAC Online
+DF 18 01 00          			; Target Percentage to be Used for Random Selection(0~0x63)
+DF 17 04 00 00 27 10			; Threshold Value for Biased Random Selection
+DF 19 01 00 				; Maximum Target  Percentage to be  used for  Biased ;Random Selection(0~0x63)
+END
+
+;command 5
+SET_APPLICATION_DATA			; SET_TERMINAL_DATA
+08 00                                     ; TAG LENGTH
+A0 00 00 00 03 10 10 04                 ; ANO4
+0D 00                                   ; TLV Length
+5F 57 01 00                             ; Account Type
+5F 2A 02 08 40				; Transaction Currency
+9F 09 02 00 96  			; Application Version Number
+5F 36 01 02  		                ; Transaction Currency Exponent
+9F 1B 04 00 00 3A 98                    ; Terminal Floor Limit
+DF 25 03 9F 37 04                       ; DDOL
+DF EE 15 01 01         			; ASI
+DF 13 05 00 00 00 00 00          	; TAC Default
+DF 14 05 00 00 00 00 00          	; TAC Denial
+DF 15 05 00 00 00 00 00          	; TAC Online
+DF 18 01 00          			; Target Percentage to be Used for Random Selection(0~0x63)
+DF 17 04 00 00 27 10			; Threshold Value for Biased Random Selection
+DF 19 01 00 				; Maximum Target  Percentage to be  used for  Biased ;Random Selection(0~0x63)
+END
+
+;command 6
+SET_APPLICATION_DATA			; SET_TERMINAL_DATA
+08 00                                     ; TAG LENGTH
+A0 00 00 00 03 10 10 05                 ; ANO5
+0D 00                                   ; TLV Length
+5F 57 01 00                             ; Account Type
+5F 2A 02 08 40				; Transaction Currency
+9F 09 02 00 96  			; Application Version Number
+5F 36 01 02  		                ; Transaction Currency Exponent
+9F 1B 04 00 00 3A 98                    ; Terminal Floor Limit
+DF 25 03 9F 37 04                       ; DDOL
+DF EE 15 01 01         			; ASI
+DF 13 05 00 00 00 00 00          	; TAC Default
+DF 14 05 00 00 00 00 00          	; TAC Denial
+DF 15 05 00 00 00 00 00          	; TAC Online
+DF 18 01 00          			; Target Percentage to be Used for Random Selection(0~0x63)
+DF 17 04 00 00 27 10			; Threshold Value for Biased Random Selection
+DF 19 01 00 				; Maximum Target  Percentage to be  used for  Biased ;Random Selection(0~0x63)
+END
+
+;command 7
+SET_APPLICATION_DATA			; SET_TERMINAL_DATA
+08 00                                    ; TAG LENGTH
+A0 00 00 00 03 10 10 06                 ; ANO6
+0D 00                                   ; TLV Length
+5F 57 01 00                             ; Account Type
+5F 2A 02 08 40				; Transaction Currency
+9F 09 02 00 96  			; Application Version Number
+5F 36 01 02  		                ; Transaction Currency Exponent
+9F 1B 04 00 00 3A 98                    ; Terminal Floor Limit
+DF 25 03 9F 37 04                       ; DDOL
+DF EE 15 01 01         			; ASI
+DF 13 05 00 00 00 00 00          	; TAC Default
+DF 14 05 00 00 00 00 00          	; TAC Denial
+DF 15 05 00 00 00 00 00          	; TAC Online
+DF 18 01 00          			; Target Percentage to be Used for Random Selection(0~0x63)
+DF 17 04 00 00 27 10			; Threshold Value for Biased Random Selection
+DF 19 01 00 				; Maximum Target  Percentage to be  used for  Biased ;Random Selection(0~0x63)
+END
+
+;command 8
+SET_APPLICATION_DATA			; SET_TERMINAL_DATA
+08 00                                     ; TAG LENGTH
+A0 00 00 00 03 10 10 07                 ; ANO6
+0D 00                                   ; TLV Length
+5F 57 01 00                             ; Account Type
+5F 2A 02 08 40				; Transaction Currency
+9F 09 02 00 96  			; Application Version Number
+5F 36 01 02  		                ; Transaction Currency Exponent
+9F 1B 04 00 00 3A 98                    ; Terminal Floor Limit
+DF 25 03 9F 37 04                       ; DDOL
+DF EE 15 01 00         			; ASI
+DF 13 05 00 00 00 00 00          	; TAC Default
+DF 14 05 00 00 00 00 00          	; TAC Denial
+DF 15 05 00 00 00 00 00          	; TAC Online
+DF 18 01 00          			; Target Percentage to be Used for Random Selection(0~0x63)
+DF 17 04 00 00 27 10			; Threshold Value for Biased Random Selection
+DF 19 01 00 				; Maximum Target  Percentage to be  used for  Biased ;Random Selection(0~0x63)
+END
+
+;command 9
+SET_APPLICATION_DATA			; SET_TERMINAL_DATA
+07 00                                     ; TAG LENGTH
+A0 00 00 00 04 10 10                    ; Mastercard AID
+0D 00                                   ; TLV Length
+5F 57 01 00                             ; Account Type
+5F 2A 02 08 40				; Transaction Currency
+9F 09 02 00 02  			; Application Version Number
+5F 36 01 02  		                ; Transaction Currency Exponent
+9F 1B 04 00 00 3A 98                    ; Terminal Floor Limit
+DF 25 03 9F 37 04                       ; DDOL
+DF EE 15 01 01         			; ASI
+DF 13 05 00 00 00 00 00          	; TAC Default
+DF 14 05 00 00 00 00 00          	; TAC Denial
+DF 15 05 00 00 00 00 00          	; TAC Online
+DF 18 01 00          			; Target Percentage to be Used for Random Selection(0~0x63)
+DF 17 04 00 00 27 10			; Threshold Value for Biased Random Selection
+DF 19 01 00 				; Maximum Target  Percentage to be  used for  Biased ;Random Selection(0~0x63)
+END
+
+
+;command 10
+SET_APPLICATION_DATA			; SET_TERMINAL_DATA
+07 00                                     ; TAG LENGTH
+A0 00 00 00 65 10 10                    ; JCB AID
+0D 00                                   ; TLV Length
+5F 57 01 00                             ; Account Type
+5F 2A 02 08 40				; Transaction Currency
+9F 09 02 02 00  			; Application Version Number
+5F 36 01 02  		                ; Transaction Currency Exponent
+9F 1B 04 00 00 3A 98                    ; Terminal Floor Limit
+DF 25 03 9F 37 04                       ; DDOL
+DF EE 15 01 01         			; ASI
+DF 13 05 00 00 00 00 00          	; TAC Default
+DF 14 05 00 00 00 00 00          	; TAC Denial
+DF 15 05 00 00 00 00 00          	; TAC Online
+DF 18 01 00          			; Target Percentage to be Used for Random Selection(0~0x63)
+DF 17 04 00 00 27 10			; Threshold Value for Biased Random Selection
+DF 19 01 00 				; Maximum Target  Percentage to be  used for  Biased ;Random Selection(0~0x63)
+END
+
+
+;command 11
+SET_APPLICATION_DATA			; SET_TERMINAL_DATA
+08 00                                     ; TAG LENGTH
+A0 00 00 00 25 01 05 01                 ; AMEX AID
+0D 00                                   ; TLV Length
+5F 57 01 00                             ; Account Type
+5F 2A 02 08 40				; Transaction Currency
+9F 09 02 00 01  			; Application Version Number
+5F 36 01 02  		                ; Transaction Currency Exponent
+9F 1B 04 00 00 3A 98                    ; Terminal Floor Limit
+DF 25 03 9F 37 04                       ; DDOL
+DF EE 15 01 01         			; ASI
+DF 13 05 00 00 00 00 00          	; TAC Default
+DF 14 05 00 00 00 00 00          	; TAC Denial
+DF 15 05 00 00 00 00 00          	; TAC Online
+DF 18 01 00          			; Target Percentage to be Used for Random Selection(0~0x63)
+DF 17 04 00 00 27 10			; Threshold Value for Biased Random Selection
+DF 19 01 00 				; Maximum Target  Percentage to be  used for  Biased ;Random Selection(0~0x63)
+END
+
+;command 12
+SET_APPLICATION_DATA			; SET_TERMINAL_DATA
+07 00                                     ; TAG LENGTH
+A0 00 00 01 52 30 10                    ; Discover AID
+0D 00                                   ; TLV Length
+5F 57 01 00                             ; Account Type
+5F 2A 02 08 40				; Transaction Currency
+9F 09 02 00 01  			; Application Version Number
+5F 36 01 02  		                ; Transaction Currency Exponent
+9F 1B 04 00 00 3A 98                    ; Terminal Floor Limit
+DF 25 03 9F 37 04                       ; DDOL
+DF EE 15 01 01         			; ASI
+DF 13 05 00 00 00 00 00          	; TAC Default
+DF 14 05 00 00 00 00 00          	; TAC Denial
+DF 15 05 00 00 00 00 00          	; TAC Online
+DF 18 01 00          			; Target Percentage to be Used for Random Selection(0~0x63)
+DF 17 04 00 00 27 10			; Threshold Value for Biased Random Selection
+DF 19 01 00 				; Maximum Target  Percentage to be  used for  Biased ;Random Selection(0~0x63)
+END
+
+;command 13
+SET_APPLICATION_DATA			; SET_TERMINAL_DATA
+08 00                                     ; TAG LENGTH
+A0 00 00 03 33 01 01 02                 ; CUP AID
+0D 00                                   ; TLV Length
+5F 57 01 00                             ; Account Type
+5F 2A 02 08 40				; Transaction Currency
+9F 09 02 00 30  			; Application Version Number
+5F 36 01 02  		                ; Transaction Currency Exponent
+9F 1B 04 00 00 3A 98                    ; Terminal Floor Limit
+DF 25 03 9F 37 04                       ; DDOL
+DF EE 15 01 01         			; ASI
+DF 13 05 00 00 00 00 00          	; TAC Default
+DF 14 05 00 00 00 00 00          	; TAC Denial
+DF 15 05 00 00 00 00 00          	; TAC Online
+DF 18 01 00          			; Target Percentage to be Used for Random Selection(0~0x63)
+DF 17 04 00 00 27 10			; Threshold Value for Biased Random Selection
+DF 19 01 00 				; Maximum Target  Percentage to be  used for  Biased ;Random Selection(0~0x63)
+END
+
+;command 14
+SET_APPLICATION_DATA			; SET_TERMINAL_DATA
+05 00                                     ; TAG LENGTH
+A1 22 33 44 55                 		; ANOD
+0D 00                                   ; TLV Length
+5F 57 01 00                             ; Account Type
+5F 2A 02 08 40				; Transaction Currency
+9F 09 02 12 34 				; Application Version Number
+5F 36 01 02  		                ; Transaction Currency Exponent
+9F 1B 04 00 00 3A 98                    ; Terminal Floor Limit
+DF 25 03 9F 37 04                       ; DDOL
+DF EE 15 01 01         			; ASI
+DF 13 05 00 00 00 00 00          	; TAC Default
+DF 14 05 00 00 00 00 00          	; TAC Denial
+DF 15 05 00 00 00 00 00          	; TAC Online
+DF 18 01 00          			; Target Percentage to be Used for Random Selection(0~0x63)
+DF 17 04 00 00 27 10			; Threshold Value for Biased Random Selection
+DF 19 01 00 				; Maximum Target  Percentage to be  used for  Biased ;Random Selection(0~0x63)
+END
+
+
+;command 15
+SET_APPLICATION_DATA			; SET_TERMINAL_DATA
+10 00                                     ; TAG LENGTH
+A0 00 00 00 03 10 10 01 02 03 04 05 06 07 08 09; ANOE
+0D 00                                   ; TLV Length
+5F 57 01 00                             ; Account Type
+5F 2A 02 08 40				; Transaction Currency
+9F 09 02 00 96  			; Application Version Number
+5F 36 01 02  		                ; Transaction Currency Exponent
+9F 1B 04 00 00 3A 98                    ; Terminal Floor Limit
+DF 25 03 9F 37 04                       ; DDOL
+DF EE 15 01 01         			; ASI
+DF 13 05 00 00 00 00 00          	; TAC Default
+DF 14 05 00 00 00 00 00          	; TAC Denial
+DF 15 05 00 00 00 00 00          	; TAC Online
+DF 18 01 00          			; Target Percentage to be Used for Random Selection(0~0x63)
+DF 17 04 00 00 27 10			; Threshold Value for Biased Random Selection
+DF 19 01 00 				; Maximum Target  Percentage to be  used for  Biased ;Random Selection(0~0x63)
+END

@@ -1,0 +1,28 @@
+Docklight Log File (ASCII) - Started 2019/1/29 14:33:30.538 
+ TEST CASE: MV002
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Get Main Firmware Version *** USAT_SRED
+
+2019/1/29 14:33:31.843 [TX] - ViVOtech2<NUL><HT>	<ETX><NUL><NUL>??
+2019/1/29 14:33:31.868 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL> ?b<GS> 
+VP6300 USAT-S FW v1.00.S Testim 
+
+ Result = PASSED
+ 
+
+ ---------- END OF TEST ----------
+
+ 
+
+ ///// NOTICE ///////////////////////////////////////////////////////////
+
+Please check ASCII screen, make sure reader return correct data that meet spec!!
+
+
+Docklight Log File (ASCII) - Stopped 2019/1/29 14:33:33.012 
+

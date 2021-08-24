@@ -1,0 +1,68 @@
+Release Note - ViVOPay 8XXX series SDK / Version 2.0.5 
+======================================================
+Release Date: 11/11/2009
+
+ Content:
+
+ 1. Download Instructions
+ 2. Required Environment(s)
+ 3. Deployment Instructions
+ 4. New Features on this Release 
+ 5. Features NOT Included on this Release
+ 6. New Bug- Fixes On this Release
+ 7. Known Issues in this Release
+ 8. Product Documents
+ 9. Special Notes
+
+1. Download Instructions:
+   ---------------------------
+			    				
+ 
+    Ftp server: ftp://ftp.zone24x7.us/ViVOtech SDK for ViVOpay 8xxx/2.0.5
+                The credentials are:
+                           Username: vivotech
+                           Password: #vivt8356#
+
+	Applications/Documents related to this release
+	----------------------------------------------						   
+		ftp://ftp.zone24x7.us/ViVOtech SDK for ViVOpay 8xxx/2.0.5/DOC
+		ftp://ftp.zone24x7.us/ViVOtech SDK for ViVOpay 8xxx/2.0.5/SDK
+		ftp://ftp.zone24x7.us/ViVOtech SDK for ViVOpay 8xxx/2.0.5/Test Application
+
+
+2. Required Environment(s):
+    -----------------------------
+	Build environment on windows:
+		- Operating  system Microsoft Windows XP (SP2).
+
+3. Binary Deployment Instructions:
+    -----------------------------
+	- To use VC++ Test Application: Copy the content of /Test Application/Application Used For Test/ folder to any location of the PC 
+	and execute VP8800 SDK Test application.exe.
+	
+4. Features on this Release:
+    ---------------------------------
+
+
+5. Features NOT Included on this Release:
+    ---------------------------------------------
+
+	
+6. New Bug- Fixes On this Release:
+   ------------------------------------
+	1.	Fix the issue with sending Set FG/BG Color command (83-0A) for VP8600 device.
+
+7. Known Issues in this Release:
+    ----------------------------------
+
+	
+8. Product Documents:
+    -----------------------
+	- Release Note (Zone24x7) ViVOPay 8XXX series SDK V2.0.5.txt (This file)
+
+
+9. Special Notes
+   -------------
+
+	1. SDK does not check CRC of the device responses in boot loader mode commands. Since device device is returning invalid CRC for some boot loader commands.
+	2. The firmware update functionality does not check VP-AR Ready message in USB HID mode.

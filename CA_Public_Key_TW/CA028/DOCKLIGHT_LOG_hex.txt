@@ -1,0 +1,36 @@
+Docklight Log File (HEX) - Started 2019/4/11 14:50:57.835 
+ TEST CASE: CA028
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Create Group > 15 (Kiosk limitation)
+
+2019/4/11 14:50:59.098 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 03 00 1E DF EE 2D 01 10 5F 2A 02 08 40 9F 1A 02 08 40 9F 35 01 22 9F 1C 08 33 30 30 31 32 33 35 38 C8 C6 
+2019/4/11 14:50:59.165 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  
+
+ --- Create Group > 20 (Vendi limitation)
+
+2019/4/11 14:50:59.186 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 03 00 1E DF EE 2D 01 15 5F 2A 02 08 40 9F 1A 02 08 40 9F 35 01 22 9F 1C 08 33 30 30 31 32 33 35 38 6F FB 
+2019/4/11 14:50:59.252 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  
+
+ --- Create AID 4 bytes (with group 2 bytes)
+
+2019/4/11 14:50:59.277 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 02 00 12 DF EE 2D 02 01 00 9F 06 04 00 00 00 30 DF EE 4C 01 02 8A BD 
+2019/4/11 14:50:59.323 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 05 00 00 45 E6  
+
+ FAIL item: 0
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2019/4/11 14:50:59.449 
+

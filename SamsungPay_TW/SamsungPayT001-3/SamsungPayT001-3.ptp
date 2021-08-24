@@ -1,0 +1,493 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+Ping (18-01)
+56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD
+0
+.5
+
+SEND
+1
+Get firmware version  Protocol 2 (29-00) 
+56 69 56 4F 74 65 63 68 32 00 29 00 00 00 DE A0
+0
+5
+
+SEND
+2
+Set Param to Default (04-09)
+56 69 56 4F 74 65 63 68 32 00 04 09 00 00 87 30
+0
+5
+
+SEND
+3
+Get Params (03-02)
+56 69 56 4F 74 65 63 68 32 00 03 02 00 00 5B 91
+0
+5
+
+SEND
+4
+Clean the flash  (04-F0)
+56 69 56 4F 74 65 63 68 32 00 04 F0 00 00 44 4D
+0
+5
+
+SEND
+5
+*****Set account DUKPT encryption type *****
+
+0
+5
+
+SEND
+6
+0-use TDES to encrypt (C7-32)
+56 69 56 4F 74 65 63 68 32 00 C7 32 00 01 00 6D FE
+0
+5
+
+SEND
+7
+1-use AES to encrypt (C7-32)
+56 69 56 4F 74 65 63 68 32 00 C7 32 00 01 01 7D DF
+0
+5
+
+SEND
+8
+Get account DUKPT encryption type (C7-33)
+56 69 56 4F 74 65 63 68 32 00 C7 33 00 00 1A 9B
+0
+5
+
+SEND
+9
+***** Erase All Key  *****
+
+0
+5
+
+SEND
+10
+Erase All Key (83-00)
+56 69 56 4F 74 65 63 68 32 00 83 00 00 00 03 22
+0
+5
+
+SEND
+11
+***** Load DUKPT Key *****
+
+0
+5
+
+SEND
+12
+Load Plaintext Key - command 1 (80-00)
+56 69 56 4F 74 65 63 68 32 00 80 00 00 65 30 45 43 36 30 46 33 35 31 34 37 45 43 41 30 30 38 38 4B 30 54 44 30 30 4E 30 30 30 30 30 30 38 30 39 43 30 37 41 39 39 31 44 43 38 30 33 34 45 43 31 32 45 31 36 39 43 30 44 35 34 35 35 44 45 41 32 39 34 35 31 34 32 34 37 38 30 38 30 35 36 38 32 33 34 39 38 37 31 32 30 32 33 34 30 30 30 30 30 30 30 30 12 43
+0
+5
+
+SEND
+13
+Load Plaintext Key - command 2  (80-00)
+56 69 56 4F 74 65 63 68 32 00 80 00 00 65 31 34 43 45 32 35 35 35 31 34 37 45 43 41 30 30 38 38 4B 30 54 44 30 30 4E 30 30 30 30 30 30 38 30 46 35 30 36 46 36 41 33 44 34 30 38 39 39 45 30 35 35 42 42 35 42 39 45 33 41 44 44 36 30 30 42 38 38 35 33 32 37 37 39 32 32 34 36 30 39 32 36 32 33 41 39 39 37 31 32 36 32 33 34 30 30 30 30 30 30 30 30 35 7F
+0
+5
+
+SEND
+14
+Load Encrypted KPK (80-01)
+56 69 56 4F 74 65 63 68 32 00 80 01 00 58 41 30 30 38 38 4B 30 54 44 30 30 4E 30 30 30 30 43 44 32 46 43 43 36 44 37 39 32 44 33 42 32 34 46 30 38 33 37 42 30 33 32 44 30 38 36 38 46 45 43 39 46 44 44 43 39 43 32 36 33 31 31 35 46 30 44 43 43 34 42 44 42 35 37 43 36 30 33 43 34 32 46 34 41 35 30 34 34 39 97 D5
+0
+5
+
+SEND
+15
+Enter DUKPT Key (81-00)
+56 69 56 4F 74 65 63 68 32 00 81 00 00 71 05 41 30 31 31 32 44 30 54 45 30 30 4E 30 31 30 30 4B 53 31 38 36 32 39 39 34 39 30 31 32 43 30 30 30 34 36 30 30 30 30 31 39 34 34 38 36 43 33 31 36 38 43 41 31 46 42 34 41 38 30 39 45 36 33 39 46 46 39 43 33 42 37 32 36 45 32 34 37 43 35 39 30 42 32 32 38 43 35 44 32 32 36 35 30 46 36 36 39 37 45 38 34 37 41 32 46 38 41 32 37 33 39 33 47 AE
+0
+5
+
+SEND
+16
+***** Data Encryption Enable or Disable *****
+
+0
+5
+
+SEND
+17
+Enable Data Encryption  (C7-36) - 01
+56 69 56 4F 74 65 63 68 32 00 C7 36 00 01 01 B7 2E
+0
+5
+
+SEND
+18
+Enable Data Encryption  (C7-36) - 02
+56 69 56 4F 74 65 63 68 32 00 C7 36 00 01 02 4D 87
+0
+5
+
+SEND
+19
+Enable Data Encryption  (C7-36) - 03
+56 69 56 4F 74 65 63 68 32 00 C7 36 00 01 03 6C 97
+0
+5
+
+SEND
+20
+Dis-able Data Encryption (C7-36)
+56 69 56 4F 74 65 63 68 32 00 C7 36 00 01 00 A7 0F
+0
+5
+
+SEND
+21
+Get Data Encryption (C7-37)
+56 69 56 4F 74 65 63 68 32 00 C7 37 00 00 C6 5B
+0
+5
+
+SEND
+22
+***** Activate transaction *****
+
+0
+5
+
+SEND
+23
+Poll on Demand (01-01)
+56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34
+0
+5
+
+SEND
+24
+Burst Off (04-00)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 00 B9 2E
+0
+5
+
+SEND
+25
+Burst Off (04-00) (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 7E 01 00 00 00
+0
+5
+
+SEND
+26
+Activate Transaction (02-01) - 9F02
+56 69 56 4F 74 65 63 68 32 00 02 01 00 0A 0A 9F 02 06 00 00 00 00 10 00 AB 6C
+0
+5
+
+SEND
+27
+Activate Transaction (02-40) - 9F02
+56 69 56 4F 74 65 63 68 32 00 02 40 00 0A 0A 9F 02 06 00 00 00 00 10 00 18 73
+0
+5
+
+SEND
+28
+***** Get Transaction Result *****
+
+0
+5
+
+SEND
+29
+Auto Poll (01-01)
+56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 F6 24
+0
+5
+
+SEND
+30
+03-40 Get Transaction Result
+56 69 56 4F 74 65 63 68 32 00 03 40 00 00 96 E2
+0
+5
+
+RECEIVE
+0
+Erase all key successfully
+56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03
+-1
+1
+COMMENT pass
+0
+0
+0
+0
+
+RECEIVE
+1
+Set MSR Secure Parameters
+56 69 56 4F 74 65 63 68 32 00 C7 00 00 00 86 6E
+-1
+1
+COMMENT pass
+0
+0
+0
+0
+
+RECEIVE
+2
+Get MSR Secure Parameters
+56 69 56 4F 74 65 63 68 32 00 C7 00 00 05 DF DE 04 01 08 ?? ??
+-1
+1
+COMMENT pass
+0
+0
+0
+0
+
+RECEIVE
+3
+Set Encrypted Output Data Parameter (Default) successfully
+56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
+-1
+1
+COMMENT pass
+0
+0
+0
+0
+
+RECEIVE
+4
+Set encryption type successfully
+56 69 56 4F 74 65 63 68 32 00 C7 00 00 00 86 6E
+-1
+1
+COMMENT pass
+0
+0
+0
+0
+
+RECEIVE
+5
+Check encryption - TDES
+56 69 56 4F 74 65 63 68 32 00 C7 00 00 01 00 AC 7F
+-1
+1
+COMMENT pass
+0
+0
+0
+0
+
+RECEIVE
+6
+Check encryption - AES
+56 69 56 4F 74 65 63 68 32 00 C7 00 00 01 01 BC 5E
+-1
+1
+COMMENT pass
+0
+0
+0
+0
+
+RECEIVE
+7
+Load Plaintext Key successfully
+56 69 56 4F 74 65 63 68 32 00 80 00 00 00 B9 DF
+-1
+1
+COMMENT pass
+0
+0
+0
+0
+
+RECEIVE
+8
+Load DUKPT Key successfully
+56 69 56 4F 74 65 63 68 32 00 81 00 00 00 CF 6B
+-1
+1
+COMMENT pass
+0
+0
+0
+0
+
+RECEIVE
+9
+Data Encryption enable
+56 69 56 4F 74 65 63 68 32 00 C7 00 00 00 86 6E
+-1
+1
+COMMENT pass
+0
+0
+0
+0
+
+RECEIVE
+10
+Data Encryption - 01
+56 69 56 4F 74 65 63 68 32 00 C7 00 00 01 01 BC 5E
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+11
+Data Encryption - 02
+56 69 56 4F 74 65 63 68 32 00 C7 00 00 01 02 8C 3D
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+12
+Data Encryption - 03
+56 69 56 4F 74 65 63 68 32 00 C7 00 00 01 03 9C 1C
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+13
+Poll mode response
+56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53
+-1
+1
+COMMENT pass
+0
+0
+0
+0
+
+RECEIVE
+14
+Burst mode response
+56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
+-1
+1
+COMMENT pass
+0
+0
+0
+0
+
+RECEIVE
+15
+-----Activate transaction response_TDES
+
+-1
+1
+COMMENT Discover MagStripe card - pass
+0
+1
+0
+0
+
+RECEIVE
+16
+Activate transaction response - Samsungpay
+56 69 56 4F 74 65 63 68 32 00 02 23 ?? ?? ?? FF EE 12 0A 62 99 49 01 2C 00 04 60 00 01
+-1
+1
+COMMENT 
+0
+0
+0
+0
+
+RECEIVE
+17
+Activate transaction response - Samsungpay (NEO2)
+56 69 56 4F 74 65 63 68 32 00 02 23 ?? ?? ?? DF EE 12 0A
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+18
+-----get transaction result response_TDES
+
+-1
+1
+COMMENT 
+0
+0
+0
+0
+
+RECEIVE
+19
+get transaction result response - Samsungpay
+56 69 56 4F 74 65 63 68 32 00 03 23 ?? ?? ?? FF EE 12 0A 62 99 49 01 2C 00 04 60 00 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+20
+get transaction result response - Samsungpay (NEO2)
+56 69 56 4F 74 65 63 68 32 00 03 23 ?? ?? ?? DF EE 12 0A
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

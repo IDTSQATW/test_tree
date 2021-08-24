@@ -1,0 +1,68 @@
+DL_SCRIPTVERSION
+1
+48178
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+'------------------------------------------------------------
+DL.OpenProject "SL002_5"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+
+Dim prompt
+Dim confirm
+
+DL.AddComment "<<: Demand Polling"
+'------------------------------------------------------------
+DL.SendSequence "Set Polling on Demand"
+result = DL.WaitForSequence("MESSAGE RESPONSE", 1, 3000)
+
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment Chr(13) & "#1: ALL LED ON"
+   DL.SendSequence "LED ALL ON"
+   result = DL.WaitForSequence("MESSAGE RESPONSE", 2, 3000)
+End If
+If result <> 0 Then
+   prompt = "Verify ALL LEDs are ON" &Chr(13) 
+   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment Chr(13) & "#2:ALL LED OFF"
+   DL.SendSequence "LED ALL OFF"
+   result = DL.WaitForSequence("MESSAGE RESPONSE", 3, 3000)
+End If
+If result <> 0 Then
+   prompt = "Verify All LEDs are OFF" &Chr(13) 
+   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+   DL.AddComment Chr(13) & "#3:ALL LED FLASH"
+   DL.SendSequence "LED ALL FLASH"
+   result = DL.WaitForSequence("MESSAGE RESPONSE", 4, 3000)
+End If
+If result <> 0 Then
+   prompt = "All LEDs are FLASHING" &Chr(13) 
+   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+End If
+
+' CHECK RESULTS:
+'------------------------------------------------------------
+If result = 0 then
+   DL.AddComment Chr(13) & "Test = FAILED"
+Else
+   DL.AddComment Chr(13) & "Test = PASSED"
+End If
+
+
+' SCRIPT FINISH
+'------------------------------------------------------------
+DL.StopLogging

@@ -1,0 +1,18 @@
+Docklight Log File (HEX) - Started 2021/1/15 09:24:19.908 
+ TEST CASE: PM004-1
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM90 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+Round >> 1
+ 
+
+ --- Poll On Demand
+
+2021/1/15 09:24:21.571 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34 
+
+Docklight Log File (HEX) - Stopped 2021/1/15 09:24:22.923 
+

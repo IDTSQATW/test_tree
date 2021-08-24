@@ -1,0 +1,446 @@
+DL_SCRIPTVERSION
+1
+17030
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "SGP201" ' !!!!! EDIT THIS !!!!!
+' This test case is to load an sample mchip3 configuration (PPS_Mchip1) and verify if the parameters are set as expected.
+'
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+      
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON " Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX = 1 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+
+
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Set param to Default"
+  DL.SendSequence " Set param to Default"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 15000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- set POD"
+  DL.SendSequence " set POD"
+  result = DL.WaitForSequence("Set poll mode resp", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- set param (04-00)"
+  DL.SendSequence " set param (04-00)"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- del cfg AIDs"
+  DL.SendSequence " del cfg AIDs"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- set cfg grp0"
+  DL.SendSequence " set cfg grp0"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- set cfg grp1 (MC payment)"
+  DL.SendSequence " set cfg grp1 (MC payment)"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- set cfg grp2 (MC cash)"
+  DL.SendSequence " set cfg grp2 (MC cash)"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- set cfg grp3 (MC cashback)"
+  DL.SendSequence " set cfg grp3 (MC cashback)"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- set cfg grp4 (MC refund)"
+  DL.SendSequence " set cfg grp4 (MC refund)"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- set cfg grp5 (maestro payment)"
+  DL.SendSequence " set cfg grp5 (maestro payment)"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- set cfg grp6 (maestro cash)"
+  DL.SendSequence " set cfg grp6 (maestro cash)"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- set cfg grp7 (maestro cashback)"
+  DL.SendSequence " set cfg grp7 (maestro cashback)"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- set cfg grp8 (maestro refund)"
+  DL.SendSequence " set cfg grp8 (maestro refund)"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- set cfg grp9 (MC test payment)"
+  DL.SendSequence " set cfg grp9 (MC test payment)"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- set cfg grrp10 (MC test cash)"
+  DL.SendSequence " set cfg grrp10 (MC test cash)"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- set cfg grp11 (MC test cashback)"
+  DL.SendSequence " set cfg grp11 (MC test cashback)"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- set cfg grp12 (MC test refund)"
+  DL.SendSequence " set cfg grp12 (MC test refund)"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- set MC AID on grp1"
+  DL.SendSequence " set MC AID on grp1"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- set maestro AID on grp5"
+  DL.SendSequence " set maestro AID on grp5"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- set MC test AID on grp9"
+  DL.SendSequence " set MC test AID on grp9"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get cfg MC AID"
+  DL.SendSequence " get cfg MC AID"
+  result = DL.WaitForSequence("get cfg MC AID resp", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get cfg maestro AID"
+  DL.SendSequence " get cfg maestro AID"
+  result = DL.WaitForSequence("get cfg maestro AID resp", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get cfg MC test AID"
+  DL.SendSequence " get cfg MC test AID"
+  result = DL.WaitForSequence("get cfg MC test AID resp", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get cfg grp1"
+  DL.SendSequence " get cfg grp1"
+  result = DL.WaitForSequence("get cfg grp1 resp", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get cfg grp2"
+  DL.SendSequence " get cfg grp2"
+  result = DL.WaitForSequence("get cfg grp2 resp", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get cfg grp3"
+  DL.SendSequence " get cfg grp3"
+  result = DL.WaitForSequence("get cfg grp3 resp", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get cfg grp4"
+  DL.SendSequence " get cfg grp4"
+  result = DL.WaitForSequence("get cfg grp4 resp", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get cfg grp5"
+  DL.SendSequence " get cfg grp5"
+  result = DL.WaitForSequence("get cfg grp5 resp", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get cfg grp6"
+  DL.SendSequence " get cfg grp6"
+  result = DL.WaitForSequence("get cfg grp6 resp", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get cfg grp7"
+  DL.SendSequence " get cfg grp7"
+  result = DL.WaitForSequence("get cfg grp7 resp", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get cfg grp8"
+  DL.SendSequence " get cfg grp8"
+  result = DL.WaitForSequence("get cfg grp8 resp", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get cfg grp9"
+  DL.SendSequence " get cfg grp9"
+  result = DL.WaitForSequence("get cfg grp9 resp", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get cfg grp10"
+  DL.SendSequence " get cfg grp10"
+  result = DL.WaitForSequence("get cfg grp10 resp", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get cfg grp11"
+  DL.SendSequence " get cfg grp11"
+  result = DL.WaitForSequence("get cfg grp11 resp", 1, 10000)
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get cfg grp12"
+  DL.SendSequence " get cfg grp12"
+  result = DL.WaitForSequence("get cfg grp12 resp", 1, 10000)
+End If
+
+
+'------------------------------------------------------------
+
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If 0 Then
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+
+

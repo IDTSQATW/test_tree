@@ -1,0 +1,10 @@
+Docklight Log File (HEX) - Started  
+ --- Buzzer Control - Invalid Buzzer Control sub-command (03h)
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 0B 03 00 01 01 9F 11 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 0B 03 00 00 23 A8  Buzzer Control - Invalid Buzzer Control command captured (SUCCESS)
+ Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

@@ -1,0 +1,12 @@
+Docklight Log File (HEX) - Started 2020/10/27 10:46:55.654 
+ TEST CASE: GTR007
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+
+
+Docklight Log File (HEX) - Stopped 2020/10/27 10:46:55.896 
+

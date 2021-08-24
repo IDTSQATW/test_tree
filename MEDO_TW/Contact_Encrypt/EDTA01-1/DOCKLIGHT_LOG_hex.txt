@@ -1,0 +1,28 @@
+Docklight Log File (HEX) - Started 2020/10/26 11:25:46.945 
+ TEST CASE: EDTA01-1
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM90 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+
+ --- Data Encryption: Enable
+
+2020/10/26 11:25:48.284 [TX] - 56 69 56 4F 74 65 63 68 32 00 C7 36 00 01 03 6C 97  
+
+ ==============
+ FAIL items: 3
+ ==============
+ 
+---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 2020/10/26 11:25:50.420 
+

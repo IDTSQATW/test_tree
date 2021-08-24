@@ -1,0 +1,412 @@
+DL_SCRIPTVERSION
+1
+1855
+
+For i = 1 to 100000
+result1 = 0
+result2 = 0
+result3 = 0
+DL.ResetReceiveCounter "Command 83 - '00' OK response"
+DL.ResetReceiveCounter "Card Tapped"
+DL.ResetReceiveCounter "PIN Entered"
+DL.ResetReceiveCounter "Left Softkey PRESSED"
+DL.ResetReceiveCounter "Middle Softkey PRESSED"
+DL.ResetReceiveCounter "Right Softkey PRESSED"
+DL.SendSequence "Clear Event Queue"
+DL.SendSequence "Cancel Command"
+Main2
+Next
+
+Sub Main2()
+DL.SendSequence "Cancel Command"
+'DL.SendSequence "Clear Event Queue"
+DL.SendSequence "clear screen"
+DL.SendSequence "Enter Custom Mode"
+DL.SendSequence "Starting Demo..."
+DL.Pause 2500
+DL.SendSequence "clear screen"
+DL.SendSequence "Clear Event Queue"
+DL.Pause 500
+DL.SendSequence "Select Account"
+DL.SendSequence "CRED DEBIT EBT"
+DL.SendSequence "Clear Event Queue"
+DL.SendSequence "Event Read Request"
+DL.Pause 800
+DL.ResetReceiveCounter "Command 83 - '00' OK response"
+DL.Pause 800
+DL.WaitForSequence "Command 83 - '00' OK response"
+
+DL.AddComment " I AM HERE 1 "
+result1 = DL.GetReceiveCounter ("Left Softkey PRESSED")
+DL.AddComment "Left = " & result1
+result2 = DL.GetReceiveCounter ("Middle Softkey PRESSED")
+DL.AddComment "Middle = " & result2
+result3 = DL.GetReceiveCounter ("Right Softkey PRESSED")
+DL.AddComment "Right = " & result3
+DL.SendSequence "Clear Event Queue"
+
+DL.AddComment " I AM HERE 2 "
+FunctionKeyPressed = 0
+While FunctionKeyPressed = 0
+If result1 = 1 Then
+DL.AddComment "CRED Button was PRESSED..."
+FunctionKeyPressed = 1
+DL.AddComment " I AM HERE 3 "
+ElseIf result2 = 1 Then
+DL.AddComment "DEBIT Button was PRESSED..."
+FunctionKeyPressed = 1
+DL.AddComment " I AM HERE 4 "
+ElseIf result3 = 1 Then
+DL.AddComment "EBT Button was PRESSED..."
+FunctionKeyPressed = 1
+DL.AddComment " I AM HERE 5 "
+End If
+Wend
+
+If result1 = 1 Then
+DL.SendSequence "Old Activate Trans"
+DL.WaitForSequence "Card Tapped"
+DL.Pause 3500
+'DL.SendSequence "Cancel Command"
+DL.SendSequence "clear screen"
+DL.SendSequence "Enter Custom Mode"
+DL.SendSequence "Processing..."
+DL.Pause 2500
+DL.SendSequence "clear screen"
+DL.SendSequence "Approved"
+DL.Pause 2500
+DL.SendSequence "clear screen"
+DL.SendSequence "Please sign paper receipt."
+DL.Pause 2500
+DL.SendSequence "clear screen"
+DL.SendSequence "Thank you for shopping with us"
+DL.Pause 2500
+
+ElseIf result2 = 1 Then
+DL.SendSequence "Old Activate Trans"
+DL.WaitForSequence "Card Tapped"
+DL.Pause 3500
+'DL.SendSequence "Cancel Command"
+DL.SendSequence "clear screen"
+DL.SendSequence "Exit Custom Display Mode"
+DL.Pause 500
+DL.SendSequence "PIN Entry"
+DL.WaitForSequence "PIN Entered"
+DL.SendSequence "clear screen"
+DL.SendSequence "Enter Custom Mode"
+DL.SendSequence "Processing..."
+DL.Pause 2500
+DL.SendSequence "clear screen"
+DL.SendSequence "Approved"
+DL.Pause 2500
+DL.SendSequence "clear screen"
+DL.SendSequence "Thank you for shopping with us"
+DL.Pause 2500
+
+ElseIf result3 = 1 Then
+DL.SendSequence "Old Activate Trans"
+DL.WaitForSequence "Card Tapped"
+DL.Pause 3500
+'DL.SendSequence "Cancel Command"
+DL.SendSequence "clear screen"
+DL.SendSequence "Enter Custom Mode"
+DL.SendSequence "Processing..."
+DL.Pause 2500
+DL.SendSequence "clear screen"
+DL.SendSequence "Approved"
+DL.Pause 2500
+DL.SendSequence "clear screen"
+DL.SendSequence "Thank you for shopping with us"
+DL.Pause 2500
+End If
+
+DL.AddComment " I AM HERE 6 "
+DL.SendSequence "clear screen"
+DL.SendSequence "Restarting Demo..."
+DL.WaitForSequence "Command 83 - '00' OK response"
+DL.AddComment " I AM HERE 7 "
+DL.AddComment 2500
+
+End Sub
+
+Sub Main()
+DL.SendSequence "clear screen"
+DL.WaitForSequence "Command 83 - '00' OK response"
+DL.ResetReceiveCounter "Command 83 - '00' OK response"
+DL.AddComment "Done 1"
+DL.SendSequence "Exit Custom Display Mode"
+DL.WaitForSequence "Command 83 - '00' OK response"
+DL.ResetReceiveCounter "Command 83 - '00' OK response"
+DL.AddComment "Done 2"
+DL.SendSequence "Enter Custom Mode"
+DL.WaitForSequence "Command 83 - '00' OK response"
+DL.ResetReceiveCounter "Command 83 - '00' OK response"
+DL.AddComment "Done 3"
+End Sub
+
+'Call Statements
+Dim ResultsArray(17)
+Dim resultLCD(6)
+'RunTests
+
+
+
+Sub RunTests()
+'Dim ResultsArray(17)
+resultLCD(0) = VerifyLCDContent("Select Account","CRED DEBIT EBT")
+myResult = VP8100_Test("Select Account","CRED DEBIT EBT","CRED","Left Softkey PRESSED")
+Verdict(myResult)
+ResultsArray(0) = myResult
+myResult = VP8100_Test("Select Account","CRED DEBIT EBT","DEBIT","Middle Softkey PRESSED")
+Verdict(myResult)
+ResultsArray(1) = myResult
+myResult = VP8100_Test("Select Account","CRED DEBIT EBT","EBT","Right Softkey PRESSED")
+Verdict(myResult)
+ResultsArray(2) = myResult
+
+ResetCounters
+resultLCD(1) = VerifyLCDContent("Cash back?","Yes No")
+myResult = VP8100_Test("Cash back?","Yes No","Yes","Left Softkey PRESSED")
+Verdict(myResult)
+ResultsArray(3) = myResult
+myResult = VP8100_Test("Cash back?","Yes No","No","Right Softkey PRESSED")
+Verdict(myResult)
+ResultsArray(4) = myResult
+
+ResetCounters
+resultLCD(2) = VerifyLCDContent("Cash back Amount","$20   $40    $60")
+myResult = VP8100_Test("Cash back Amount","$20   $40    $60","$20","Left Softkey PRESSED")
+Verdict(myResult)
+ResultsArray(5) = myResult
+myResult = VP8100_Test("Cash back Amount","$20   $40    $60","$40","Middle Softkey PRESSED")
+Verdict(myResult)
+ResultsArray(6) = myResult
+myResult = VP8100_Test("Cash back Amount","$20   $40    $60","$60","Right Softkey PRESSED")
+Verdict(myResult)
+ResultsArray(7) = myResult
+
+ResetCounters
+resultLCD(3) = VerifyLCDContent("Cash back Amount","$20   $40  Other")
+myResult = VP8100_Test("Cash back Amount","$20   $40  Other","$20","Left Softkey PRESSED")
+Verdict(myResult)
+ResultsArray(8) = myResult
+myResult = VP8100_Test("Cash back Amount","$20   $40  Other","$40","Middle Softkey PRESSED")
+Verdict(myResult)
+ResultsArray(9) = myResult
+myResult = VP8100_Test("Cash back Amount","$20   $40  Other","Other","Right Softkey PRESSED")
+Verdict(myResult)
+ResultsArray(10) = myResult
+
+ResetCounters
+resultLCD(4) = VerifyLCDContent("Tip Amount","15%   18%    20%")
+myResult = VP8100_Test("Tip Amount","15%   18%    20%","15%","Left Softkey PRESSED")
+Verdict(myResult)
+ResultsArray(11) = myResult
+myResult = VP8100_Test("Tip Amount","15%   18%    20%","18%","Middle Softkey PRESSED")
+Verdict(myResult)
+ResultsArray(12) = myResult
+myResult = VP8100_Test("Tip Amount","15%   18%    20%","20%","Right Softkey PRESSED")
+Verdict(myResult)
+ResultsArray(13) = myResult
+
+ResetCounters
+resultLCD(5) = VerifyLCDContent("Tip Amount","15%   18%  Other")
+myResult = VP8100_Test("Tip Amount","15%   18%  Other","15%","Left Softkey PRESSED")
+Verdict(myResult)
+ResultsArray(14) = myResult
+myResult = VP8100_Test("Tip Amount","15%   18%  Other","18%","Middle Softkey PRESSED")
+Verdict(myResult)
+ResultsArray(15) = myResult
+myResult = VP8100_Test("Tip Amount","15%   18%  Other","Other","Right Softkey PRESSED")
+Verdict(myResult)
+ResultsArray(16) = myResult
+
+DL.AddComment "###############################################"
+pResults = PrintLCDResults("Select Account","CRED DEBIT EBT",0)
+pResults = PrintResults("Select Account", "CRED DEBIT EBT", "CRED", 0,0)
+pResults = PrintResults("Select Account", "CRED DEBIT EBT", "DEBIT", 1,0)
+pResults = PrintResults("Select Account", "CRED DEBIT EBT", "EBT", 2,0)
+DL.AddComment "###############################################"
+pResults = PrintLCDResults("Cash back?", "Yes No",1)
+pResults = PrintResults("Cash back?", "Yes No", "Yes", 3,0)
+pResults = PrintResults("Cash back?", "Yes No", "No", 4,0)
+DL.AddComment "###############################################"
+pResults = PrintLCDResults("Cash back Amount", "$20   $40    $60",2)
+pResults = PrintResults("Cash back Amount", "$20   $40    $60", "$20", 5,0)
+pResults = PrintResults("Cash back Amount", "$20   $40    $60", "$40", 6,0)
+pResults = PrintResults("Cash back Amount", "$20   $40    $60", "$60", 7,0)
+DL.AddComment "###############################################"
+pResults = PrintLCDResults("Cash back?", "Yes No",3)
+pResults = PrintResults("Cash back Amount", "$20   $40  Other", "$20", 8,0)
+pResults = PrintResults("Cash back Amount", "$20   $40  Other", "$40", 9,0)
+pResults = PrintResults("Cash back Amount", "$20   $40  Other", "Other", 10,0)
+DL.AddComment "###############################################"
+pResults = PrintLCDResults("Tip Amount", "15%   18%    20%",4)
+pResults = PrintResults("Tip Amount", "15%   18%    20%", "15%", 11, 0)
+pResults = PrintResults("Tip Amount", "15%   18%    20%", "18%", 12, 0)
+pResults = PrintResults("Tip Amount", "15%   18%    20%", "20%", 13, 0)
+DL.AddComment "###############################################"
+pResults = PrintLCDResults("Tip Amount", "15%   18%  Other",5)
+pResults = PrintResults("Tip Amount", "15%   18%  Other", "15%", 14, 0)
+pResults = PrintResults("Tip Amount", "15%   18%  Other", "18%", 15, 0)
+pResults = PrintResults("Tip Amount", "15%   18%  Other", "Other", 16, 0)
+DL.AddComment "###############################################"
+
+End Sub
+
+Function VerifyLCDContent(Line1, Line2)
+
+DL.SendSequence "clear screen"
+WaitAndReset("Command 83 - '00' OK response")
+'DL.AddComment "Done 1"
+DL.SendSequence "Exit Custom Display Mode"
+WaitAndReset("Command 83 - '00' OK response")
+'DL.AddComment "Done 2"
+DL.SendSequence "Enter Custom Mode"
+WaitAndReset("Command 83 - '00' OK response")
+'DL.AddComment "Done 3"
+DL.SendSequence Line1
+DL.SendSequence Line2 
+
+result = MsgBox ("Do you see the following on the LCD?" & vbCrLf & vbCrLf & Line1 & vbCrLf & Line2, VBYesNo, "Verification Step")
+DL.AddComment "result232 = " & VerifyLCDContent
+
+If result = 6 Then
+VerifyLCDContent = 1
+ElseIf result = 7 Then
+VerifyLCDContent = 0
+End If
+
+End Function
+
+Function PrintResults(Line1, Line2, Option1, ArrayNum, PrintTestTitle)
+
+'resultLCD(0) = VerifyLCDContent("Select Account","CRED DEBIT EBT")
+
+If PrintTestTitle = 1 Then
+DL.AddComment Line1 
+DL.AddComment Line2
+End If
+
+If ResultsArray(ArrayNum) = 1 Then
+Result = "PASS"
+ElseIf ResultsArray(ArrayNum) = 0 Then
+Result = "FAIL"
+End If
+
+DL.AddComment Result & " (" & ArrayNum & ") - " & Option1
+
+End Function
+
+Function PrintLCDResults(Line1, Line2,ArrayNum)
+
+DL.AddComment Line1 
+DL.AddComment Line2
+DL.AddComment "-----------------------------------------------"
+
+If resultLCD(ArrayNum) = 1 Then
+Result = "PASS"
+ElseIf resultLCD(ArrayNum) = 0 Then
+Result = "FAIL"
+End If
+
+DL.AddComment Result & " (" & ArrayNum & ") - " & "Content displayed on LCD"
+
+End Function
+
+Function ResetCounters()
+DL.ResetReceiveCounter "Left Softkey PRESSED"
+DL.ResetReceiveCounter "Middle Softkey PRESSED"
+DL.ResetReceiveCounter "Right Softkey PRESSED"
+End Function
+
+
+Function Verdict(theResult)
+'If theResult = 1 Then
+'MsgBox "PASS", VBOKOnly, "Verdict"
+'ElseIf theResult = 0 Then
+'MsgBox "FAIL", VBOKOnly, "Verdict"
+'End If
+End Function
+
+Function VP8100_Test(Line1, Line2, KeyToPress, KeyPressed)
+DL.SendSequence "clear screen"
+WaitAndReset("Command 83 - '00' OK response")
+'DL.AddComment "Done 1"
+DL.SendSequence "Exit Custom Display Mode"
+WaitAndReset("Command 83 - '00' OK response")
+'DL.AddComment "Done 2"
+DL.SendSequence "Enter Custom Mode"
+WaitAndReset("Command 83 - '00' OK response")
+'DL.AddComment "Done 3"
+DL.SendSequence Line1
+DL.SendSequence Line2 
+DL.SendSequence "Clear Event Queue"
+MsgBox "Press the OK button, then press the " & KeyToPress & " softkey on the VP8100 in the next 3 seconds.", VBOKOnly, "Test Step"
+'DL.AddComment "RESULT = " & result
+DL.SendSequence "Event Read Request"
+VP8100_Test = DL.WaitForSequence (KeyPressed, 1, 5000)
+'DL.SendSequence "Cancel Command"
+End Function
+
+'Sub Test1(x)
+'result = x + 2
+'DL.AddComment "result = " & result
+'End Sub
+'Test1(4)
+'DL.AddComment "result = " & result
+
+
+Function Test2(x)
+Test2 = x + 2
+DL.AddComment "Test2 = " & Test2
+End Function
+'myResult = Test2(6)
+'DL.AddComment "Test2 = " & myResult
+
+Function WaitAndReset(x)
+DL.WaitForSequence x
+DL.ResetReceiveCounter x
+End Function
+
+'WaitAndReset("Command 83 - '00' OK response")
+'DL.AddComment "Test2 = " & myResult
+
+
+' ModbusCrcScript.pts
+' Automatically calculating a two-byte CRC value for Send Sequences.
+' Date: 2006-09-15
+' Author: Heggelbacher
+' This example makes use of the DL.CalcChecksum() function available
+' in Docklight Scripting V1.7. It has been cross-checked against the
+' CRC reference algorithm listed in the MODBUS specification
+' "MODBUS over serial line specification and implementation guide V1.0"
+' (see www.modbus.org) 
+
+DL.StartCommunication
+' Endless loop until stopped by user
+Do
+    DL.Pause 1 ' (the pause reduces CPU load while idle)
+Loop
+
+Sub DL_OnSend()
+    ' For all Send Sequences with minimum 3 bytes length (one byte user data,
+    ' two bytes CRC, perform the following manipulation:
+    ' - Calculate a 16 bit crc value on the characters 1 .. (DL.OnSend_Size() - 2)
+    ' - Write the low byte to character no. DL.OnSend_GetSize()-1
+    ' - Write the high byte to character no. DL.OnSend_GetSize()
+    ' Example:
+    ' Send Sequence name: MyCommand
+    ' Send Sequence in HEX representation: 02 04 00 00 00 01 00 00
+    ' --> Data transmitted by Docklight:   02 04 00 00 00 01 31 F9
+    '     (with "31" as the low byte CRC, "F9" as the high byte)
+
+    ' Check if there is at least one byte of user data
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub

@@ -1,0 +1,12 @@
+Docklight Log File (HEX) - Started 2019/1/18 15:07:16.276 
+ TEST CASE: VALIDG101
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM15 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+
+
+Docklight Log File (HEX) - Stopped 2019/1/18 15:07:17.333 
+

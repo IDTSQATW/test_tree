@@ -1,0 +1,41 @@
+Docklight Log File (HEX) - Started 10/11/2016 15:52:10.157 
+ TEST CASE: SBC001
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Clear Display
+
+10/11/2016 15:52:25.627 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 0D 00 00 52 60 
+10/11/2016 15:52:25.660 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  resultName = Stop/Start Response
+ --- Black/White
+
+10/11/2016 15:52:25.673 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 0A 00 08 00 00 00 00 00 FA FA FA 42 91 
+10/11/2016 15:52:25.678 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  resultName = Stop/Start Response
+ --- Please Use Other VISA Card
+
+10/11/2016 15:52:25.696 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 03 00 23 00 00 31 00 34 00 35 00 50 6C 65 61 73 65 20 75 73 65 20 6F 74 68 65 72 20 56 49 53 41 20 43 61 72 64 00 DE AA 
+10/11/2016 15:52:25.722 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 04 00 5D F7 40 D4 7D  resultName = Test Response
+ --- Black/White
+
+10/11/2016 15:52:31.662 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 0A 00 08 00 00 00 00 00 FA FA FA 42 91 
+10/11/2016 15:52:31.669 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  resultName = Stop/Start Response
+ --- Clear Display
+
+10/11/2016 15:52:34.732 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 0D 00 00 52 60 
+10/11/2016 15:52:34.772 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  resultName = Stop/Start Response
+ 
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 10/11/2016 15:52:36.076 
+

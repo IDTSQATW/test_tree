@@ -1,0 +1,110 @@
+DL.AddComment "Hello World"
+
+DL.SendSequence "Text Prompt - Cash Back?"
+result = DL.WaitForSequence("Prompt Printed", 1, 8000)
+DL.ResetReceiveCounter "Prompt Printed"
+DL.SendSequence "Yes Button"
+result = DL.WaitForSequence("Prompt Printed", 1, 8000)
+DL.ResetReceiveCounter "Prompt Printed"
+DL.SendSequence "No Button"
+result = DL.WaitForSequence("Prompt Printed", 1, 8000)
+DL.ResetReceiveCounter "Prompt Printed"
+DL.SendSequence "Read Yes Button"
+result = DL.WaitForSequence("Yes Button Pressed", 1, 8000)
+'DL.ResetReceiveCounter "Prompt Printed"
+
+DL.SendSequence "Text Prompt - Cash Back?"
+result = DL.WaitForSequence("Prompt Printed", 1, 8000)
+DL.ResetReceiveCounter "Prompt Printed"
+DL.SendSequence "Read Key ECHO"
+
+
+Sub DL_OnReceive()
+	If DL.OnReceive_GetName() = "$20 Entered" Then
+		resultX = 20
+	Else If DL.OnReceive_GetName() = "$40 Entered" Then
+		resultX = 40
+	Else If DL.OnReceive_GetName() = "$60 Entered" Then
+		resultX = 60
+	Else If DL.OnReceive_GetName() = "$80 Entered" Then
+		resultX = 80
+	Else If DL.OnReceive_GetName() = "$100 Entered" Then
+		resultX = 100
+	Else If DL.OnReceive_GetName() = "$120 Entered" Then
+		resultX = 120
+	Else If DL.OnReceive_GetName() = "$140 Entered" Then
+		resultX = 140
+	Else If DL.OnReceive_GetName() = "$160 Entered" Then
+		resultX = 160
+	Else If DL.OnReceive_GetName() = "$180 Entered" Then
+		resultX = 180
+	End If
+DL.AddComment "You entered the CASH BACK amount of " & resultX & "."
+End Sub
+
+result20 = DL.WaitForSequence("$20 Entered", 1, 5000)
+result40 = DL.WaitForSequence("$40 Entered", 1, 5)
+result60 = DL.WaitForSequence("$60 Entered", 1, 5)
+result80 = DL.WaitForSequence("$80 Entered", 1, 5)
+result100 = DL.WaitForSequence("$100 Entered", 1, 5)
+result120 = DL.WaitForSequence("$120 Entered", 1, 5)
+result140 = DL.WaitForSequence("$140 Entered", 1, 5)
+result160 = DL.WaitForSequence("$160 Entered", 1, 5)
+result180 = DL.WaitForSequence("$180 Entered", 1, 5)
+result200 = DL.WaitForSequence("$200 Entered", 1, 5)
+
+If result20 = 1 Then
+resultX = 20
+ElseIf result40 = 1 Then
+resultX = 40
+ElseIf result60 = 1 Then
+resultX = 60
+ElseIf result80 = 1 Then
+resultX = 80
+ElseIf result100 = 1 Then
+resultX = 100
+ElseIf result120 = 1 Then
+resultX = 120
+ElseIf result140 = 1 Then
+resultX = 140
+ElseIf result160 = 1 Then
+resultX = 160
+ElseIf result180 = 1 Then
+resultX = 180
+ElseIf result200 = 1 Then
+resultX = 200
+Else
+resultX = 999
+End If
+
+If resultX = 999 Then
+DL.AddComment "No valid amount was entered!!!"
+Else
+DL.AddComment "You entered the CASH BACK amount of " & resultX & "."
+End If
+
+DL.SendSequence "Text Prompt - Processing..."
+
+'DL.AddComment " " & result20
+'DL.AddComment "Result20 is " & result20
+'DL.AddComment "Result40 is " & result40
+'DL.AddComment "Result60 is " & result60
+'DL.AddComment "Result80 is " & result80
+'DL.AddComment "Result100 is " & result100
+'DL.AddComment "Result120 is " & result120
+'DL.AddComment "Result140 is " & result140
+'DL.AddComment "Result160 is " & result160
+'DL.AddComment "Result180 is " & result180
+'DL.AddComment "Result200 is " & result200
+
+'result60 = DL.WaitForSequence("$60 Entered", 1, 10)
+'result80 = DL.WaitForSequence("$80 Entered", 1, 10)
+'result100 = DL.WaitForSequence("$100 Entered", 1, 10)
+'result120 = DL.WaitForSequence("$120 Entered", 1, 10)
+
+
+
+'DL.ResetReceiveCounter "Prompt Printed"
+'DL.SendSequence "Text Prompt - Processing..."
+'result = DL.WaitForSequence("Prompt Printed", 1, 8000)
+'DL.ResetReceiveCounter "Prompt Printed"

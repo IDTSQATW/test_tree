@@ -1,0 +1,62 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Antenna Control - Sending invalid control byte data
+56 69 56 4F 74 65 63 68 32 00 28 01 00 01 05 D4 9B
+0
+5
+
+SEND
+1
+Pass-Through - START
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19
+0
+5
+
+SEND
+2
+Pass-Through - STOP
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38
+0
+5
+
+RECEIVE
+0
+Antenna Control - Incorrect Parameter 05h returned (SUCCESS)
+56 69 56 4F 74 65 63 68 32 00 28 05 00 00 3D 9A
+-1
+1
+COMMENT 
+1
+1
+0
+1
+
+RECEIVE
+1
+Pass-Through - START or STOP (SUCCESS)
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B
+-1
+1
+COMMENT 
+1
+1
+0
+1
+

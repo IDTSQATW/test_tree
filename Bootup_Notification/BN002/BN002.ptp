@@ -1,0 +1,95 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+35
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Bootup Notification On
+56 69 56 4F 74 65 63 68 32 00 14 01 00 01 01 DA 13
+0
+5
+
+SEND
+1
+Boot up Notification Off
+56 69 56 4F 74 65 63 68 32 00 14 01 00 01 00 FB 03
+0
+5
+
+SEND
+2
+Boot up Notification 02 Off
+56 69 56 4F 74 65 63 68 32 00 14 01 00 01 02 B9 23
+0
+5
+
+SEND
+3
+Boot up Notification FF Off
+56 69 56 4F 74 65 63 68 32 00 14 01 00 01 FF 0B 1D
+0
+5
+
+SEND
+4
+Boot Up Notification Invalid Length
+56 69 56 4F 74 65 63 68 32 00 14 01 00 02 FF 58 48
+0
+5
+
+SEND
+5
+Boot Up Notification Invalid Sub Command
+56 69 56 4F 74 65 63 68 32 00 14 02 00 01 FF D7 86
+0
+5
+
+RECEIVE
+0
+Boot Response
+56 69 56 4F 74 65 63 68 32 00 14 00 00 00 B5 B1
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+Invalid Subcommand
+56 69 56 4F 74 65 63 68 32 00 14 03 00 00 EC E1
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+Reboot Respone
+56 69 56 4F 74 65 63 68 32 00 14 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

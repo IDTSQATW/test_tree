@@ -1,0 +1,22 @@
+Objective: Encryption OFF, MSR/ CT/ CL transaction are failed under Quick Chip Mode.
+
+--------------------
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 01 00 00 00
+
+--------------------
+>>> MSR transaction
+SWIPEKB: click OK, then swipe card w/ abnormal method (transaction is failed).
+MESSAGECK: NO any output data
+
+--------------------
+>>> CT transaction
+SWIPEKB: click OK, then insert card (P/N: 80005206-002).
+EXR: DF EE 25 02 50 25
+
+--------------------
+>>> CL transaction
+SWIPEKB: click OK, then tap T=0 card.
+EXR: FFEE1F04
+MESSAGECK: hear beep twice

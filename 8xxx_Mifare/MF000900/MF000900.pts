@@ -1,0 +1,290 @@
+DL_SCRIPTVERSION
+1
+54920
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "MF000900" ' !!!!! EDIT THIS !!!!!
+
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description	
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+	
+  'Display Test Steps 	
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()	 
+  Prompting(1) = result
+
+  'Set Docklight COM Port	
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()	 
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()	 
+  POSBaudRate(1) = result
+	
+Loop
+
+Sub StepPrompt(PromptString)
+	DL.AddComment PromptString
+	If Prompting(1) = "ON" Then
+		MsgBox PromptString, VBOKOnly, "Test Step"
+	Else
+	End If
+	
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON " Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+
+Function ReverseResult(ResultParam)
+	If ResultParam = 1 Then
+		result = 0
+	ElseIf ResultParam = 0 Then
+		result = 1
+	End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+	DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+	MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+
+
+'Start_Test
+MyInput = MsgBox("Did you run populate BLOCK script?", VBYesNo, "Test Step")
+
+If MyInput = 6 Then
+	Start_Test
+ElseIf MyInput = 7 Then
+	MsgBox "Sorry you cannot run this test until you run the populate BLOCK script", VBOKOnly, "Test Msg"
+
+End If
+
+
+Sub Start_Test()
+
+PT_Start
+
+DL.AddComment "----- Authenticate with VALID default Key A - Block 4 -----"
+DL.SendSequence "Authenticate with VALID default Key A - Block 4"
+result = DL.WaitForSequence("PT command (OK)", 1, 10000)
+PrintMyResult(result)
+DL.ResetReceiveCounter "PT command (OK)"
+
+'DL.AddComment "----- Authenticate with INVALID default Key A - Block 4 -----"
+'DL.SendSequence "Authenticate with invalid default Key A - Block 4"
+'result = DL.WaitForSequence("MiFare Read Error Expected - (OK)", 1, 10000)
+'PrintMyResult(result)
+'DL.ResetReceiveCounter "MiFare Read Error Expected - (OK)"
+'DL.ResetReceiveCounter "PT command (OK)"
+
+DL.AddComment "----- MiFare Read 1 Block - Start at Block 4 -----"
+DL.SendSequence "MiFare Read 1 Block - Start at Block 4"
+result = DL.WaitForSequence("MiFare Read 1 Block - Start at Block 4 (OK)", 1, 10000)
+PrintMyResult(result)
+DL.ResetReceiveCounter "MiFare Read 1 Block - Start at Block 4 (OK)"
+
+End Sub
+
+Sub PT_Start()
+DL.AddComment "----- PT_Start commands -----"
+DL.ResetReceiveCounter "PT command (OK)"
+DL.ResetReceiveCounter "Antenna Enable (OK)"
+DL.ResetReceiveCounter "Poll for Token (OK)"
+DL.ResetReceiveCounter "MiFare Read Error Expected - (OK)"
+
+DL.SendSequence "PT Start"
+result = DL.WaitForSequence("PT command (OK)", 1, 10000)
+DL.ResetReceiveCounter "PT command (OK)"
+PrintMyResult(result)
+
+DL.SendSequence "Antenna Enable"
+result = DL.WaitForSequence("Antenna Enable (OK)", 1, 10000)
+PrintMyResult(result)
+
+DL.SendSequence "Poll for Token (10 sec)"
+result = DL.WaitForSequence("Poll for Token (OK)", 1, 10000)
+PrintMyResult(result)
+
+'DL.SendSequence "MiFare Read 1 Block - Start at Block 0"
+'result = DL.WaitForSequence("MiFare Read next 3 Block 59", 1, 10000)
+PrintMyResult(result)
+
+End Sub
+
+DL.SendSequence "PT Stop"
+result = DL.WaitForSequence("Pass Through Stop", 1, 10000)
+'MsgBox "Result = " & result, VBOKOnly, "msg"
+PrintMyResult(result)
+DL.Pause 2000
+
+
+'Do
+'    DL.Pause 1 ' (the pause reduces CPU load while idle)
+'Loop
+
+'===============================================
+'Pass Through CRC Calculation
+'===============================================
+Sub DL_OnSend()
+    ' For all Send Sequences with minimum 3 bytes length (one byte user data,
+    ' two bytes CRC, perform the following manipulation:
+    ' - Calculate a 16 bit crc value on the characters 1 .. (DL.OnSend_Size() - 2)
+    ' - Write the low byte to character no. DL.OnSend_GetSize()-1
+    ' - Write the high byte to character no. DL.OnSend_GetSize()
+    ' Example:
+    ' Send Sequence name: MyCommand
+    ' Send Sequence in HEX representation: 02 04 00 00 00 01 00 00
+    ' --> Data transmitted by Docklight:   02 04 00 00 00 01 31 F9
+    '     (with "31" as the low byte CRC, "F9" as the high byte)
+
+    ' Check if there is at least one byte of user data
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Left(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Right(crcStr, 2)) ' high byte
+    End If
+End Sub
+
+
+
+DL.Pause 1500
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+	MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+	MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+
+'------------------------------------------------------------
+' WRITE FINAL VERDICT FILE(!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile

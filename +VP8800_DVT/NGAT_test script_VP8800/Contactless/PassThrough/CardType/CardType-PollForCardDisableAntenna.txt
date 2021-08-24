@@ -1,0 +1,45 @@
+Stop Pass-through
+CMD:2C 01 00
+EXR:56 69 56 4F 70 61 79 56 33 00 2C 01 
+
+Start Pass-through
+CMD:2C 01 01
+EXR:56 69 56 4F 70 61 79 56 33 00 2C 01 00 00 00
+
+Disable RF Antenna
+CMD:28 01 00
+EXR:56 69 56 4F 70 61 79 56 33 00 28 01 00 00 00
+
+Poll for card -type1
+DLG:Please present TYPE 1 card
+CMD:2C 02 0A 00
+EXR:56 69 56 4F 70 61 79 56 33 00 2C 02 00 00 ?? 01
+TIMEOUT:10000
+
+Poll for card -type2
+DLG:Please present TYPE 2 card
+CMD:2C 02 0A 00
+EXR:56 69 56 4F 70 61 79 56 33 00 2C 02 00 00 ?? 02 
+TIMEOUT:10000
+
+Poll for card -type3
+DLG:Please present TYPE 3 card
+CMD:2C 02 0A 00
+EXR:56 69 56 4F 70 61 79 56 33 00 2C 02 00 00 ?? 03
+TIMEOUT:10000
+
+Poll for card -type4
+DLG:Please present TYPE 4 card
+CMD:2C 02 0A 00
+EXR:56 69 56 4F 70 61 79 56 33 00 2C 02 00 00 ?? 04
+TIMEOUT:10000
+
+Poll for card -type7
+DLG:Please present TYPE 7 card
+CMD:2C 02 0A 00
+EXR:56 69 56 4F 70 61 79 56 33 00 2C 02 00 00 ?? 07 
+TIMEOUT:10000
+
+Stop Pass-through
+CMD:2C 01 00
+EXR:56 69 56 4F 70 61 79 56 33 00 2C 01 00 00 00

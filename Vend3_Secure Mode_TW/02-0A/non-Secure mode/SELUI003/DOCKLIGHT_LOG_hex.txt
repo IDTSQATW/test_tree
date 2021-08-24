@@ -1,0 +1,29 @@
+Docklight Log File (HEX) - Started 2015/9/22 11:17:16.572 
+ TEST CASE: SELUI003
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Enable all vivoPay UI (default)
+
+2015/9/22 11:17:17.896 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 05 00 02 05 05 E0 ED 
+2015/9/22 11:17:17.941 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  
+ 
+--- 02-0A (DUKPT key)
+
+
+2015/9/22 11:17:25.463 [TX] - 56 69 56 4F 74 65 63 68 32 00 02 0A 00 1A 00 0A 47 00 00 00 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20 99 08 
+2015/9/22 11:17:25.526 [RX] - 56 69 56 4F 74 65 63 68 32 00 02 03 00 00 D0 DF  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2015/9/22 11:17:39.397 
+

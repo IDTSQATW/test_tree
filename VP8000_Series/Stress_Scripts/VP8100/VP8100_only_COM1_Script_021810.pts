@@ -1,0 +1,321 @@
+DL_SCRIPTVERSION
+1
+4208
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+'------------------------------------------------------------
+
+DL.StartCommunication
+DL.ClearCommWindows 
+
+DL.AddComment "Date and Time: " & Month(Now) & "-" & Day(Now) & "-" & Year(Now) & "_" & Hour(Now) & "h" & Minute(Now) & "m" & Second(Now) & "s"
+DL.AddComment "Logfile name: " & "DOCKLIGHT_LOG_" & Month(Now) & "-" & Day(Now) & "-" & Year(Now) & "_" & Hour(Now) & "h" & Minute(Now) & "m" & Second(Now) & "s" & ".txt"
+DL.StartLogging "DOCKLIGHT_LOG_" & Month(Now) & "-" & Day(Now) & "-" & Year(Now) & "_" & Hour(Now) & "h" & Minute(Now) & "m" & Second(Now) & "s",False, "H"
+
+'------------------------------------------------------------
+' STEP Description
+'------------------------------------------------------------
+
+'Main
+'------------------------------------------------------------
+' VARIABLE DEFINITIONS and INITIALIZATIONS
+'------------------------------------------------------------
+'Sub Main()
+Dim EndDateAndTimestamp
+Dim EndTime
+Dim TotalSeconds
+Dim ActualMinutes
+Dim LeftoverSeconds
+Dim ActualHours
+Dim LeftoverMinutes
+Dim ActualDays
+Dim LeftoverHours
+Dim StartDateAndTimestamp
+Dim StartTime
+Dim TEST_RUN_TIMER
+Dim Mode_Used
+Dim Time_to_STOP_Test
+Dim TEST_RUNS_TO_PERFORM
+Dim Cumulative_Verdict
+Dim StepPASS(15)
+Dim StepFAIL(15)
+Dim i
+Dim Time_To_Display_REPORT
+Time_To_Display_REPORT = 0
+
+Dim Num_of_Tests
+Num_of_Tests = 15
+Dim StepDescription(15)
+
+StepDescription(1) = "Step 1 : Get FW Version"
+StepDescription(2) = "Step 2 : Enable Custom Display Mode"
+StepDescription(3) = "Step 3 : Display Text - Apples and Oranges"
+StepDescription(4) = "Step 4 : Clear Display"
+StepDescription(5) = "Step 5 : Display Amount - $55.66"
+StepDescription(6) = "Step 6 : Display Amount - $77.88"
+StepDescription(7) = "Step 7 : Get Input Event - 10 sec timeout"
+StepDescription(8) = "Step 8 : Activate Transaction w/o amount - 10 sec"
+StepDescription(9) = "Step 9 : Clear Display"
+StepDescription(10) = "Step 10 : Disable Custom Display Mode"
+StepDescription(11) = "Step 11 : Input Field Formatting"
+StepDescription(12) = "Step 12 : Signature Capture - 10 sec"
+StepDescription(13) = "Step 13: Dukpt Pin Entry - 10 sec"
+StepDescription(14) = "Step 14: Get Configuration"
+StepDescription(15) = "Step 15: Clear Event Queue"
+
+StartDateAndTimestamp = Now
+StartTime = Timer
+DL.AddComment "StartTime ---- " & StartTime
+
+' Initializations of above variables
+TotalSeconds = 2000000000
+ActualMinutes = 2000000000
+LeftoverSeconds = 2000000000
+ActualHours = 2000000000
+LeftoverMinutes = 2000000000
+ActualDays = 2000000000
+LeftoverHours = 2000000000
+TEST_RUN_TIMER = 2000000000
+Time_to_STOP_Test = 2000000000
+TEST_RUNS_TO_PERFORM = 2000000000
+i = 2000000000
+
+'**************************************************************
+'* TEST TIME and TEST ITERATION VARIABLES (TO BE SET BY USER) *
+'**************************************************************
+
+TEST_RUNS_TO_PERFORM = 13750 'Max value is 2,147,483,647. It takes 63 seconds per run.
+
+'Use 1 to ENABLE and 0 to DISABLE. If DISABLED, test will use TEST_RUNS_TO_PERFORM instead and Time_to_STOP_Test will be ignored.
+TEST_RUN_TIMER = 0  
+
+'When should test stop? This variable is in seconds.
+'Hint: 1day = 86400 sec, 2days = 172800, 3days = 259200, 5days = 432000, 7days = 674800, 30days(1month) = 2592000
+Time_to_STOP_Test =  86400
+
+
+'------------------------------------------------------------
+' Steps Execution
+'------------------------------------------------------------
+StartTest
+'End Sub
+
+Sub StartTest()
+
+Cumulative_Verdict = "PASSED"
+
+'************ INITIALIZE STEP VERDICT ARRAY ****
+For i = 0 to Num_of_Tests
+	StepPASS(i) = 0
+	StepFAIL(i) = 0
+Next
+
+'************ START TIME INFO ******************
+'StartDateAndTimestamp = Now
+'StartTime = Timer
+DL.AddComment "StartDateAndTimestamp = " & StartDateAndTimestamp
+
+'************ SEND COMMANDS ********************
+DL.AddComment vbCrLf
+DL.AddComment "##########################################################"
+DL.AddComment "#                      START TEST                        #"
+DL.AddComment "##########################################################"
+DL.AddComment vbCrLf
+
+For iterations = 1 to TEST_RUNS_TO_PERFORM
+
+
+If Time_To_Display_REPORT <= 9 Then
+
+	Time_To_Display_REPORT = Time_To_Display_REPORT + 1
+
+Else
+	Time_To_Display_REPORT = 0
+	
+End If
+
+'TotalTime = Timer - StartTime
+
+'**************************************************
+'* Check if TEST_RUN_TIMER is enabled or disabled
+'**************************************************
+'If TEST_RUN_TIMER = 1 Then
+
+'	If TotalTime > Time_to_STOP_Test Then
+'		Exit For
+'	End If
+
+'End If
+
+
+DL.AddComment "@@@@@@@@@@@@@@@@@@@@ ITERATION " & iterations & " (OF " & TEST_RUNS_TO_PERFORM & ") BEGIN @@@@@@@@@@@@@@@@@@@@"
+DL.AddComment vbCrLf
+
+	For i = 1 to Num_of_Tests
+		DL.ResetReceiveCounter "Response Received"
+		DL.ResetReceiveCounter "GET FW VER (OK)"
+		DL.ResetReceiveCounter "TO Response Received"
+		
+		If i = 1 Then 
+		DL.AddComment "---------- " & StepDescription(i) & " BEGIN ----------"
+		DL.SendSequence "Step " & i
+		'DL.Pause 3000
+		result = DL.WaitForSequence ("GET FW VER (OK)", 1, 20000)
+		
+		If result = 1 Then
+			DL.AddComment vbCrLf & vbCrLf & "*** RESULT: PASS"
+			StepPASS(i) = StepPASS(i) + 1
+		Else
+			DL.AddComment vbCrLf & vbCrLf & "*** RESULT: FAIL"
+			StepFAIL(i) = StepFAIL(i) + 1
+		End If
+
+		DL.AddComment "---------- " & StepDescription(i) & " END ----------"
+		DL.AddComment vbCrLf
+		DL.ResetReceiveCounter "GET FW VER (OK)"
+		DL.ResetReceiveCounter "Response Received"
+DL.Pause 500
+		Else
+		
+		DL.AddComment "---------- " & StepDescription(i) & " BEGIN ----------"
+		DL.SendSequence "Step " & i
+		'If i = 7 Then
+		'	result = DL.WaitForSequence ("TO Response Received", 1, 18000)
+		'ElseIf i = 8 Then			
+		'	result = DL.WaitForSequence ("TO Response Received", 1, 18000)
+		'Else
+			result = DL.WaitForSequence ("Response Received", 1, 18000)
+		'End If
+		
+		If result = 1 Then
+			DL.AddComment vbCrLf & vbCrLf & "*** RESULT: PASS"
+			StepPASS(i) = StepPASS(i) + 1
+		Else
+			DL.AddComment vbCrLf & vbCrLf & "*** RESULT: FAIL"
+			StepFAIL(i) = StepFAIL(i) + 1
+		End If
+
+		DL.AddComment "---------- " & StepDescription(i) & " END ----------"
+		DL.AddComment vbCrLf
+		DL.ResetReceiveCounter "Response Received"
+DL.Pause 500
+		End If
+	Next
+
+' Skipping Step 31 for Rebooting device
+' Issue with Windows not detecting USB on reader reboot
+
+'	DL.AddComment "---------- Step 31 BEGIN ----------"
+'		DL.SendSequence "Step 30"
+'		result = DL.WaitForSequence ("Response Received", 1, 13000)
+'		DL.AddComment "---------- Step 31 END ----------"
+'		DL.ResetReceiveCounter "Response Received"
+'	DL.Pause 50000	
+
+DL.AddComment "@@@@@@@@@@@@@@@@@@@@ ITERATION " & iterations & " (OF " & TEST_RUNS_TO_PERFORM & ") END @@@@@@@@@@@@@@@@@@@@"
+
+TimeLapseInfo
+TestMode
+
+If Time_To_Display_REPORT = 10 Then
+	Test_Results
+End If
+
+DL.AddComment vbCrLf & vbCrLf & vbCrLf
+
+
+Next
+
+DL.AddComment vbCrLf
+DL.AddComment "##########################################################"
+DL.AddComment "#                      END OF TEST                       #"
+DL.AddComment "##########################################################"
+DL.AddComment vbCrLf
+
+
+Test_Results
+
+End Sub
+
+Sub Test_Results()
+
+DL.AddComment vbCrLf
+DL.AddComment "##########################################################"
+DL.AddComment "#                      REPORTING                         #"
+DL.AddComment "##########################################################"
+DL.AddComment vbCrLf
+
+TimeLapseInfo
+
+TestMode
+
+'************ END OF TEST RESULTS ******************
+DL.AddComment "*********** TEST RESULTS **************************"
+
+For i = 1 to Num_of_Tests
+	DL.AddComment "---------------------------------------------------"
+	DL.AddComment "-- " & StepDescription(i)
+	DL.AddComment "----- # of RUNS PASSED: " & StepPASS(i) 
+	DL.AddComment "----- # of RUNS FAILED: " & StepFAIL(i)
+	If StepFAIL(i) = 0 Then
+		DL.AddComment "-- MASTER RESULT: PASSED"
+	Else
+		DL.AddComment "-- MASTER RESULT:                !! FAILED !!"
+		Cumulative_Verdict = "FAILED"
+	End If 
+	DL.AddComment "---------------------------------------------------"
+Next
+
+DL.AddComment "########################################################################"
+DL.AddComment "- STRESS TEST CUMULATIVE VERDICT: !!!!! " & Cumulative_Verdict & " !!!!!"
+DL.AddComment "########################################################################"
+End Sub
+
+Sub TimeLapseInfo()
+'************ END OF TEST TIME INFO******************
+
+EndDateAndTimestamp = Now
+'EndTime = Timer
+'TotalSeconds = EndTime - StartTime
+
+'ActualMinutes = TotalSeconds \ 60
+'LeftoverSeconds = TotalSeconds Mod 60
+
+'ActualHours = ActualMinutes \ 60
+'LeftoverMinutes = ActualMinutes Mod 60
+
+'ActualDays = ActualHours \ 24
+'LeftoverHours = ActualHours Mod 24
+
+DL.AddComment "********** TIME LAPSE INFO **********"
+'DL.AddComment ActualDays & " Days, " & LeftoverHours & " Hours, " & LeftoverMinutes & " Minutes, " & LeftoverSeconds & " Seconds"
+'DL.AddComment "TotalSeconds : " & TotalSeconds & " seconds"
+DL.AddComment "Start Timestamp: " & StartDateAndTimestamp
+DL.AddComment "End Timestamp  : " & EndDateAndTimestamp
+DL.AddComment "*************************************"
+
+End Sub
+
+Sub TestMode()
+If TEST_RUN_TIMER = 1 Then
+	Mode_Used = "TEST_RUN_TIMER was ENABLED. Script will STOP after Time_to_STOP_Test(" & Time_to_STOP_Test & " seconds)."
+ElseIf TEST_RUN_TIMER = 0 Then
+	Mode_Used = "TEST_RUN_TIMER was DISABLED. Script will STOP once it reaches TEST_RUNS_TO_PERFORM(" & TEST_RUNS_TO_PERFORM & ")."
+End If
+
+DL.AddComment vbCrLf
+DL.AddComment "********** TEST MODE USED **************************************************************************************"
+DL.AddComment Mode_Used      
+DL.AddComment "****************************************************************************************************************"
+DL.AddComment vbCrLf
+End Sub
+
+
+
+
+
+
+
+
+

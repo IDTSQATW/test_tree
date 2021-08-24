@@ -1,0 +1,9 @@
+Docklight Log File (HEX) - Started  
+ --- No Tone or LEDs
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 00 FF 00 E8 50 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

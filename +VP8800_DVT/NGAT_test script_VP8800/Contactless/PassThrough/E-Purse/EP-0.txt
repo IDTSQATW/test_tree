@@ -1,0 +1,11 @@
+Pass-Through start
+CMD:2C 01 01
+EXR:2C 01
+
+---Pass-Through Mode, Stop 
+CMD:2C 01 00
+EXR:2C 01 00
+
+--- Decrement Block *Original - minus 1 @ block 16 without BACKUP - Define 1 send 1
+CMD:2C 0A 31 10 04 01 00 00 00
+EXR:2C 0A 0C

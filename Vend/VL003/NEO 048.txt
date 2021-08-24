@@ -1,0 +1,26 @@
+Docklight Log File (HEX) - Started 2016/2/1 13:41:57.234 
+ TEST CASE: VL003
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+
+2016/2/1 13:41:59.636 [TX] - 56 69 56 4F 74 65 63 68 32 00 F0 FA 00 00 39 DF  
+User selected 'Yes'
+
+
+2016/2/1 13:41:59.661 [RX] - 56 69 56 4F 74 65 63 68 32 00 F0 00 00 00 FB AA  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2016/2/1 13:42:04.445 
+

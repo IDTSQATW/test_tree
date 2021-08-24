@@ -1,0 +1,23 @@
+Docklight Log File (HEX) - Started 2021/8/12 14:33:06.964 
+ TEST CASE: BTS005
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Data Encrypt disable
+
+2021/8/12 14:33:09.723 [TX] - 56 69 56 4F 74 65 63 68 32 00 C7 36 00 01 00 0F A7 
+2021/8/12 14:33:09.753 [RX] - 56 69 56 4F 74 65 63 68 32 00 C7 06 00 00 34 CE  
+
+** Please set data encryption off first... (C7-36 = 00)
+ 
+
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+
+
+Docklight Log File (HEX) - Stopped 2021/8/12 14:33:11.825 
+

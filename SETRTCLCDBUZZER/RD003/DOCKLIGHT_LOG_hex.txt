@@ -1,0 +1,22 @@
+Docklight Log File (HEX) - Started  
+ <<: Demand Polling
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  =Reader Confirmed
+ #1: LED2 ON
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 00 02 01 54 25 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  =Reader Confirmed
+ #2: LED2 OFF
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 00 02 00 75 35 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  =Reader Confirmed
+ #3: LED2 FLASH
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 00 02 02 37 15 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  =Reader Confirmed
+ Test = FAILED
+
+
+Docklight Log File (HEX) - Stopped  
+

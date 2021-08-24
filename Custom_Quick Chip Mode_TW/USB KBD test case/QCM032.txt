@@ -1,0 +1,174 @@
+Objective: to verify tags DFEF7A/ DFEF7B.
+
+=========================================
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 01 00 00 00
+=========================================
+>>> 04-00 w/ DFEF7A = 00
+CMD: 04 00 DF EF 7A 01 00
+EXR: 04 00 00 00
+
+>>> ApplePay
+SWIPEKB: Click OK --> Tap iPhone (ApplePay).
+MESSAGECK: Reader did NOT return tag DFEF7B
+
+>>> AndroidPay
+SWIPEKB: Click OK --> Tap Android phone (AndroidPay).
+MESSAGECK: Reader did NOT return tag DFEF7B
+
+--------------------
+>>> 04-00 w/ DFEF7A = 01
+CMD: 04 00 DF EF 7A 01 01
+EXR: 04 00 00 00
+
+>>> ApplePay
+SWIPEKB: Click OK --> Tap iPhone (ApplePay).
+EXR: DF EF 7B 01 01
+
+>>> AndroidPay
+SWIPEKB: Click OK --> Tap Android phone (AndroidPay).
+EXR: DF EF 7B 01 02
+
+>>> Quick Chip mode = 04
+CMD: 01 01 04
+EXR: 01 00 00 00
+
+>>> ApplePay
+SWIPEKB: Click OK --> Tap iPhone (ApplePay).
+EXR: DF EF 7B 01 01
+
+>>> AndroidPay
+SWIPEKB: Click OK --> Tap Android phone (AndroidPay).
+EXR: DF EF 7B 01 02
+
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 01 00 00 00
+
+=========================================
+>>> Set Merchant (4) as Panera.
+CMD: 04 11 04 01 06 41 3B 95 7A 52 59 98 3B 60 8C FC 89 CF B1 DA B9 0C E7 05 AD 8E FF 78 E9 DE 12 2C CF 8D 2C BF 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+EXR: 04 00 00 00
+
+CMD: 03 11 04
+EXR: 03 00 00 63 04 01 06 41 3B 95 7A 52 59 98 3B 60 8C FC 89 CF B1 DA B9 0C E7 05 AD 8E FF 78 E9 DE 12 2C CF 8D 2C BF 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+>>> Set AppleVAS tags (VAS Only)
+CMD: 04 00 DF ED 23 02 01 00 DF ED 24 04 00 00 00 02 DF ED 25 05 01 00 00 00 00 DF ED 26 01 01
+EXR: 04 00 00 00
+
+--------------------
+>>> 04-00 w/ DFEF7A = 00
+CMD: 04 00 DF EF 7A 01 00
+EXR: 04 00 00 00
+
+>>> AppleVAS
+SWIPEKB: Click OK --> Tap iPhone (AppleVAS -- Panera Bread card).
+EXR: FF EE 06
+EXR: 9A 03
+EXR: 9F 21 03
+EXR: 9F 25 20 06 41 3B 95 7A 52 59 98 3B 60 8C FC 89 CF B1 DA B9 0C E7 05 AD 8E FF 78 E9 DE 12 2C CF 8D 2C BF 
+EXR: 9F 2A 00
+EXR: 9F 27 41
+EXR: 9F 39 01 07
+EXR: FF EE 01
+EXR: DF 30 01 00
+EXR: DF EE 26 01 01
+MESSAGECK: Reader did NOT return tag DFEF7B
+
+--------------------
+>>> 04-00 w/ DFEF7A = 01
+CMD: 04 00 DF EF 7A 01 01
+EXR: 04 00 00 00
+
+>>> AppleVAS
+SWIPEKB: Click OK --> Tap iPhone (AppleVAS -- Panera Bread card).
+EXR: FF EE 06
+EXR: 9A 03
+EXR: 9F 21 03
+EXR: 9F 25 20 06 41 3B 95 7A 52 59 98 3B 60 8C FC 89 CF B1 DA B9 0C E7 05 AD 8E FF 78 E9 DE 12 2C CF 8D 2C BF 
+EXR: 9F 2A 00
+EXR: 9F 27 41
+EXR: 9F 39 01 07
+EXR: FF EE 01
+EXR: DF 30 01 00
+EXR: DF EE 26 01 01
+EXR: DF EF 7B 01 01
+
+>>> Quick Chip mode = 04
+CMD: 01 01 04
+EXR: 01 00 00 00
+
+>>> AppleVAS
+SWIPEKB: Click OK --> Tap iPhone (AppleVAS -- Panera Bread card).
+EXR: FF EE 06
+EXR: 9A 03
+EXR: 9F 21 03
+EXR: 9F 25 20 06 41 3B 95 7A 52 59 98 3B 60 8C FC 89 CF B1 DA B9 0C E7 05 AD 8E FF 78 E9 DE 12 2C CF 8D 2C BF 
+EXR: 9F 2A 00
+EXR: 9F 27 41
+EXR: 9F 39 01 07
+EXR: FF EE 01
+EXR: DF 30 01 00
+EXR: DF EE 26 01 01
+EXR: DF EF 7B 01 01
+
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 01 00 00 00
+
+=========================================
+>>> Set SmartTap config (case 0.1)
+CMD: 04 03 FF E4 01 8E DF EE 3B 04 00 BC 61 4E DF EE 3C 00 DF EE 3D 00 DF EF 25 00 DF ED 01 00 DF ED 02 05 00 00 00 00 01 DF ED 03 01 00 DF ED 04 01 01 DF ED 05 01 01 DF ED 06 01 00 DF ED 07 01 00
+EXR: 04 00 00 00
+CMD: 04 00 DFEF1A 01 02 DFED28 01 00
+EXR: 04 00 00 00
+
+--------------------
+>>> 04-00 w/ DFEF7A = 00
+CMD: 04 00 DF EF 7A 01 00
+EXR: 04 00 00 00
+
+>>> SmartTap
+SWIPEKB: click OK --> Tap phone (Merchant APP: case 0.1).
+EXR: FF EE 08
+EXR: 94 03 2F 61 73 76 94 01 06 69 04 02 71 79 79 71 54 03 1F 63 75 73 94 03 06 63 69 64 04 12 34 56 78 90 19 01 03 03 54 63 70 6C 00
+EXR: 54 03 02 63 75 74 04 7B 54 03 27 61 73 76 94 01 05 69 05 01 F7 97 98 54 02 19 6C 79 94 03 09 6F 69 64 04
+EXR: 54 01 06 6E 05 F3 24 23 42 34 
+EXR: 9F 39 01 07 FF EE 01 04 DF 30 01 00
+EXR: DF EE 26 01 01
+MESSAGECK: Reader did NOT return tag DFEF7B
+
+--------------------
+>>> 04-00 w/ DFEF7A = 01
+CMD: 04 00 DF EF 7A 01 01
+EXR: 04 00 00 00
+
+>>> SmartTap
+SWIPEKB: click OK --> Tap phone (Merchant APP: case 0.1).
+EXR: FF EE 08
+EXR: 94 03 2F 61 73 76 94 01 06 69 04 02 71 79 79 71 54 03 1F 63 75 73 94 03 06 63 69 64 04 12 34 56 78 90 19 01 03 03 54 63 70 6C 00
+EXR: 54 03 02 63 75 74 04 7B 54 03 27 61 73 76 94 01 05 69 05 01 F7 97 98 54 02 19 6C 79 94 03 09 6F 69 64 04
+EXR: 54 01 06 6E 05 F3 24 23 42 34 
+EXR: 9F 39 01 07 FF EE 01 04 DF 30 01 00
+EXR: DF EE 26 01 01
+EXR: DF EF 7B 01 02
+
+>>> Quick Chip mode = 04
+CMD: 01 01 04
+EXR: 01 00 00 00
+
+>>> SmartTap
+SWIPEKB: click OK --> Tap phone (Merchant APP: case 0.1).
+EXR: FF EE 08
+EXR: 94 03 2F 61 73 76 94 01 06 69 04 02 71 79 79 71 54 03 1F 63 75 73 94 03 06 63 69 64 04 12 34 56 78 90 19 01 03 03 54 63 70 6C 00
+EXR: 54 03 02 63 75 74 04 7B 54 03 27 61 73 76 94 01 05 69 05 01 F7 97 98 54 02 19 6C 79 94 03 09 6F 69 64 04
+EXR: 54 01 06 6E 05 F3 24 23 42 34 
+EXR: 9F 39 01 07 FF EE 01 04 DF 30 01 00
+EXR: DF EE 26 01 01
+EXR: DF EF 7B 01 02
+
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 01 00 00 00

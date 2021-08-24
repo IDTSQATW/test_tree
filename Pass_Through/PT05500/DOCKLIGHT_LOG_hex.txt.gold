@@ -1,0 +1,44 @@
+Docklight Log File (HEX) - Started  
+ TEST CASE: PT05500
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Pass-Through Mode - (START)
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00  Poll for Token - Card Read (OK)
+
+ [RX] - 00 1C 9B  Pass-Through Mode - (STOP)  (OK)
+ Pass-Through Mode - (START) (OK)
+ Result = PASSED
+ --- Poll for Token - Card Read (OK)
+ Press OK, then tap a card.
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00  Poll for Token - Card Read (OK)
+
+ [RX] - 05 03 CA EE 51 40 EF 57  
+
+ Result = PASSED
+ --- PCD and PICC parameters response (OK)
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 05 00 00 F7 6B 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00  Poll for Token - Card Read (OK)
+
+ [RX] - 0F 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 31 FF  PCD and PICC parameters response (OK)
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

@@ -1,0 +1,8 @@
+Docklight Log File (HEX) - Started 2020/4/10 14:39:35.855 
+ TEST CASE: Type7_CEPAS
+
+ --- Set POS COM PORT Settings
+
+
+Docklight Log File (HEX) - Stopped 2020/4/10 14:39:35.957 
+

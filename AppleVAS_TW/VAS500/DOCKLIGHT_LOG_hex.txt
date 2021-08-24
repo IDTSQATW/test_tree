@@ -1,0 +1,14 @@
+Docklight Log File (HEX) - Started 2020/6/10 14:17:43.747 
+ TEST CASE: VAS500
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM90 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- 04-09 reset to default
+
+2020/6/10 14:17:44.983 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 09 00 00 87 30 
+
+Docklight Log File (HEX) - Stopped 2020/6/10 14:17:45.626 
+

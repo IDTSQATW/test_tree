@@ -1,0 +1,9 @@
+Docklight Log File (HEX) - Started 10/1/2008 18:07:59.61 
+ --- Display center of screen Inval Amt
+
+10/1/2008 18:07:59.62 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 04 00 12 00 00 31 00 32 00 35 00 80 00 61 62 63 2E 31 32 33 00 CE F2 
+10/1/2008 18:07:59.89 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 0A 00 04 00 01 00 08 4F 06  Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped 10/1/2008 18:08:31.27 
+

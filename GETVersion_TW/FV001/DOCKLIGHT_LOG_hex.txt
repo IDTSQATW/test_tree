@@ -1,0 +1,40 @@
+Docklight Log File (HEX) - Started 2018/12/3 16:06:53.562 
+ TEST CASE: FV001
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM90 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- GET F/W Ver. P1 (0 data length but has 1 byte data, INVALID)
+
+2018/12/3 16:06:54.872 [TX] - 56 69 56 4F 74 65 63 68 00 43 29 00 00 00 11 64 F4  
+
+ ** FAIL **
+ 
+
+ --- GET F/W Ver. P1 (data length <> 0, INVALID)
+ 
+
+ ** FAIL **
+ 
+
+ --- GET F/W Ver. P2 (0 data length but has 1 byte data, INVALID)
+ 
+
+ ** FAIL **
+ 
+
+ --- GET F/W Ver. P2 (data length <> 0, INVALID)
+ 
+
+ ** FAIL **
+ 
+
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+
+
+Docklight Log File (HEX) - Stopped 2018/12/3 16:07:05.424 
+

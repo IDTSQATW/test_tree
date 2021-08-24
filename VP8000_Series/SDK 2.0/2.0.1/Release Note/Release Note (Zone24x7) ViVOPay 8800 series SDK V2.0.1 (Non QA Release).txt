@@ -1,0 +1,71 @@
+Release Note - ViVOPay 8000 series SDK / Version 2.0.1 (Non QA Release)
+=================================================================
+Release Date: 10/30/2009
+
+ Content:
+
+ 1. Download Instructions
+ 2. Required Environment(s)
+ 3. Deployment Instructions
+ 4. New Features on this Release 
+ 5. Features NOT Included on this Release
+ 6. New Bug- Fixes On this Release
+ 7. Known Issues in this Release
+ 8. Product Documents
+ 9. Special Notes
+
+1. Download Instructions:
+   ---------------------------
+			    				
+ 
+    Ftp server: ftp://ftp.zone24x7.us/ViVOtech SDK for ViVOpay 8xxx/2.0.1
+                The credentials are:
+                           Username: vivotech
+                           Password: #vivt8356#
+
+	Applications/Documents related to this release
+	----------------------------------------------						   
+		ftp://ftp.zone24x7.us/ViVOtech SDK for ViVOpay 8xxx/2.0.1/Release Note
+		ftp://ftp.zone24x7.us/ViVOtech SDK for ViVOpay 8xxx/2.0.1/SDK
+		ftp://ftp.zone24x7.us/ViVOtech SDK for ViVOpay 8xxx/2.0.1/Test Application
+
+
+2. Required Environment(s):
+    -----------------------------
+	Build environment on windows:
+		- Operating  system Microsoft Windows XP (SP2).
+
+3. Binary Deployment Instructions:
+    -----------------------------
+	- To use VC++ Test Application: copy the content of /Test Application/Application Used For Test/ folder to any location of the PC 
+	and execute VP8800 SDK Test application.exe.
+	
+4. Features on this Release:
+    ---------------------------------
+	1.	This VPSDK supports both VP86xx and VP88xx device categories which having firmware versions HG0 and HG1 respectively.
+
+5. Features NOT Included on this Release:
+    ---------------------------------------------
+	1.	This release will not contain the Bootloader Mode discussed under issue# 10 in "VPSDK_Issue_List_103009.xls".
+		Bootloader Mode will be available on a fully QA release V2.0.2 on a later date.
+	
+6. New Bug- Fixes On this Release:
+   ------------------------------------
+	1.  This release includes all the issue fixes which detailed described in "VPSDK_Issue_List_103009.xls".
+
+7. Known Issues in this Release:
+    ----------------------------------
+	- Please refer following documents resides at /Release Note/
+	1. "SDK Related Issue List 1.1.xlsx"
+	2. "VPSDK_Issue_List_103009.xls"
+	3. "VPSDK Firmware Issue List as of 10_26.xlsx"
+	
+8. Product Documents:
+    -----------------------
+	- Release Note (Zone24x7) ViVOPay 8800 series SDK V2.0.1 (Non QA Release).txt (This file)
+
+
+9. Special Notes
+   -------------
+
+

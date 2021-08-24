@@ -1,0 +1,15 @@
+Docklight Log File (HEX) - Started 8/16/2010 15:44:40.13 
+ TEST CASE: PIN001
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Key 0
+
+8/16/2010 15:44:43.57 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 06 00 03 1E 30 00 3F F6 
+8/16/2010 15:44:43.58 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 00 C9 F3 
+
+Docklight Log File (HEX) - Stopped 8/16/2010 15:45:04.66 
+

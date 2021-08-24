@@ -1,0 +1,118 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Ping
+56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD
+0
+5
+
+SEND
+1
+Ping (CRC upside-down)
+56 69 56 4F 74 65 63 68 32 00 18 01 00 00 CD B3
+0
+5
+
+SEND
+2
+Ping (CRC wrong)
+56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 B3
+0
+5
+
+SEND
+3
+Pass Through -- ON
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19
+0
+5
+
+SEND
+4
+Pass Through -- OFF
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38
+0
+5
+
+SEND
+5
+Pass Through -- ON (CRC upside-down)
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 19 1D
+0
+5
+
+SEND
+6
+Pass Through -- OFF (CRC upside-down)
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 38 0D
+0
+5
+
+SEND
+7
+Pass Through -- ON (CRC wrong)
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 1D
+0
+5
+
+SEND
+8
+Get config
+56 69 56 4F 74 65 63 68 32 00 03 02 00 00 5B 91
+0
+5
+
+SEND
+9
+Get config (CRC upside-down)
+56 69 56 4F 74 65 63 68 32 00 03 02 00 00 91 5B
+0
+5
+
+SEND
+10
+Get config (CRC wrong)
+56 69 56 4F 74 65 63 68 32 00 03 02 00 00 5B 5B
+0
+5
+
+RECEIVE
+0
+OK resp
+56 69 56 4F 74 65 63 68 32 00 ?? 00 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+04 resp
+56 69 56 4F 74 65 63 68 32 00 ?? 04 00 00 ?? ??
+-1
+1
+COMMENT status code = 04
+0
+1
+0
+0
+

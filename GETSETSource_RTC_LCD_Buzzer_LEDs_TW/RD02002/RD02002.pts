@@ -1,0 +1,295 @@
+DL_SCRIPTVERSION
+1
+27185
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "RD02002" ' !!!!! EDIT THIS !!!!!
+'+++
+' This test case is to verify the async event messages for LED1 on w/ 3 short beeps via settiing from 01-02 cmd
+'---
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  genFlag = result
+Loop
+
+Sub StepPrompt(PromptString)
+	DL.AddComment PromptString
+	If Prompting(1) = "ON" Then
+		MsgBox PromptString, VBOKOnly, "Test Step"
+	Else
+	End If
+	
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+Sub CheckResult(CheckSpot)
+	If result = 0 Then
+		errCnt = errCnt + 1
+		DL.AddComment vbCrLf & "*** Error found at the spot of " & CheckSpot & " *** " & vbCrLf
+		result = 1
+	End If 
+End Sub
+
+Function ReverseResult(ResultParam)
+	If ResultParam <> 0 Then
+		result = 0
+	Else
+		result = 1
+	End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+	DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+	MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+result = 1
+
+MyInput = MsgBox ("Are you testing VP8xxx reader?", VBYesNo, "Test Step")
+
+'MsgBox "MyInput is " & MyInput, VBOKOnly, "Test Step"
+
+If MyInput = 6 Then
+
+	DL.AddComment vbCrLf & "User selected 'Yes'" & vbCrLf
+      DL.SendSequence "Set Source - Power LED_None - All Internal"
+	result = DL.WaitForSequence("VP8xxx - Get Source reject acknowledged (OK)", 1, 5000)
+	DL.ResetReceiveCounter "VP8xxx - Get Source reject acknowledged (OK)"
+PrintMyResult(result)
+
+ElseIf MyInput = 7 Then
+	DL.AddComment vbCrLf & "User selected 'No'" & vbCrLf
+
+ 	If result <> 0 Then
+         	DL.ResetReceiveCounter
+		DL.AddComment vbCrLf & "Set Params (04-00) on FFF8 to 00 (UI: VivoTech)" & vbCrLf
+      	
+   if readerType = "GR" or readerType = "NEO1" then DL.SendSequence "Set Params (04-00) on FFF8 to 00 (UI: VivoTech)"
+   if readerType = "NEO2" then DL.SendSequence "Set Params (04-00) on FFF8 to 00 (UI: VivoTech) (NEO2)"
+		result = DL.WaitForSequence("Generic 04-xx positive resp", 1, 5000)
+	End If
+
+ 	If result <> 0 Then
+         	DL.ResetReceiveCounter
+		DL.AddComment vbCrLf & "Set Source - RTC Internal and All external" & vbCrLf
+      	DL.SendSequence "Set Source - RTC Internal and All external"
+		result = DL.WaitForSequence("GR - Set Source success (OK)", 1, 5000)
+	End If
+
+ 	If result <> 0 Then
+         	DL.ResetReceiveCounter
+		DL.AddComment vbCrLf & "Three beeps with LED 1 Off (01-02)" & vbCrLf
+      	DL.SendSequence "Three beeps with LED 1 Off (01-02)"
+		DL.Pause 3000
+	End If
+
+ 	If result <> 0 Then
+         	DL.ResetReceiveCounter
+		DL.AddComment vbCrLf & "Three beeps with LED 1 On (01-02)" & vbCrLf
+      	DL.SendSequence "Three beeps with LED 1 On (01-02)"
+		result = DL.WaitForSequence("Asyn msg for three short beeps", 1, 5000)
+		'CheckResult("checking double short beeps")
+	End If
+
+ 	If result <> 0 Then
+		result = DL.WaitForSequence("Asyn msg for LED 1 On", 1, 5000)
+		'CheckResult("checking LED1")
+	End If
+
+ 	If result <> 0 Then
+         	DL.ResetReceiveCounter
+		DL.AddComment vbCrLf & "Set Source - RTC_Internal - All Internal" & vbCrLf
+      	DL.SendSequence "Set Source - RTC_Internal - All Internal"
+		resultIgnore = DL.WaitForSequence("GR - Set Source success (OK)", 1, 5000)
+	End If
+
+End If
+
+
+DL.Pause 1500
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If 0 Then
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+	MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+	MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+
+'------------------------------------------------------------
+' WRITE FINAL VERDICT FILE(!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub

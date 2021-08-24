@@ -1,0 +1,50 @@
+Docklight Log File (HEX) - Started  
+ TEST CASE: PT05600
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Pass-Through Mode - (START)
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00  High Level PT command for Mifare - Key A - Block 01 RESPONSE (OK)
+
+ [RX] - 00  Poll for Token - Card Read (OK)
+
+ [RX] - 00 1C 9B  Pass-Through Mode - (STOP)  (OK)
+ Pass-Through Mode - (START) (OK)
+ Result = PASSED
+ --- Poll for Token - Card Read (OK)
+ Press OK, then tap a card.
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00  High Level PT command for Mifare - Key A - Block 01 RESPONSE (OK)
+
+ [RX] - 00  Poll for Token - Card Read (OK)
+
+ [RX] - 05 03 A4 18 CE 7D AA 06  
+
+ Result = PASSED
+ --- High Level PT command for Mifare - Key A - Block 01 RESPONSE (OK)
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 01 01 FF FF FF FF FF FF 4B C8 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00  High Level PT command for Mifare - Key A - Block 01 RESPONSE (OK)
+
+ [RX] - 00  Poll for Token - Card Read (OK)
+
+ [RX] - 00 1C 9B  Pass-Through Mode - (STOP)  (OK)
+ Pass-Through Mode - (START) (OK)
+ 
+
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

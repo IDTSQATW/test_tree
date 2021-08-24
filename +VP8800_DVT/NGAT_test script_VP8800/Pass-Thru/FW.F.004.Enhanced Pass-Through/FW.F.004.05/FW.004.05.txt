@@ -1,0 +1,24 @@
+测试不同的LED.
+
+设置包括:
+Poll Time out: 10s
+
+Poll for Contact: On
+Poll for Contactless: On
+
+Deactivate contact: Off
+Update LEDs: [variable]
+Poll for Card: Off
+RF Antenna: On
+
+Contact Interface to Use: Contact
+
+Beep: Single beep
+
+LED3:[variable]
+LED2:[variable]
+LED1:[variable]
+LED0:[variable]
+
+Display String 1: null
+Display String 2: null

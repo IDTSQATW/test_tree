@@ -1,0 +1,38 @@
+000000 FindHIDDevices
+000010 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+000020 FindHIDDevices: SetupDiEnumDeviceInterfaces success
+000020 FindHIDDevices: found hid device @ \\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+000080 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+000080 FindHIDDevices: SetupDiEnumDeviceInterfaces success
+000090 FindHIDDevices: found hid device @ \\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+000090 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+000090 FindHIDDevices: SetupDiEnumDeviceInterfaces success
+000100 FindHIDDevices: found hid device @ \\?\hid#vid_1d5f&pid_1004&mi_01#7&8cc1a73&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+000100 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+000110 FindHIDDevices: SetupDiEnumDeviceInterfaces failed
+000120 FilterHIDVivoDevices
+000120 FilterHIDVivoDevices: check if [\\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}] is vivopay device
+000120 FilterHIDVivoDevices: no vivopay device found @ [\\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}]
+000130 FilterHIDVivoDevices: check if [\\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}] is vivopay device
+000140 FilterHIDVivoDevices: no vivopay device found @ [\\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}]
+000140 FilterHIDVivoDevices: check if [\\?\hid#vid_1d5f&pid_1004&mi_01#7&8cc1a73&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}] is vivopay device
+000150 FilterHIDVivoDevices:found vivopay device @ [\\?\hid#vid_1d5f&pid_1004&mi_01#7&8cc1a73&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}]
+948274 FindHIDDevices
+948284 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+948284 FindHIDDevices: SetupDiEnumDeviceInterfaces success
+948284 FindHIDDevices: found hid device @ \\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+948294 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+948294 FindHIDDevices: SetupDiEnumDeviceInterfaces success
+948304 FindHIDDevices: found hid device @ \\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+948314 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+948314 FindHIDDevices: SetupDiEnumDeviceInterfaces success
+948324 FindHIDDevices: found hid device @ \\?\hid#vid_1d5f&pid_1004&mi_01#7&8cc1a73&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+948324 FindHIDDevices: calling SetupDiEnumDeviceInterfaces
+948334 FindHIDDevices: SetupDiEnumDeviceInterfaces failed
+948334 FilterHIDVivoDevices
+948344 FilterHIDVivoDevices: check if [\\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}] is vivopay device
+948394 FilterHIDVivoDevices: no vivopay device found @ [\\?\hid#vid_045e&pid_0040#7&185fab44&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}]
+948394 FilterHIDVivoDevices: check if [\\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}] is vivopay device
+948404 FilterHIDVivoDevices: no vivopay device found @ [\\?\hid#vid_046d&pid_c501#7&216e0ef0&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}]
+948414 FilterHIDVivoDevices: check if [\\?\hid#vid_1d5f&pid_1004&mi_01#7&8cc1a73&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}] is vivopay device
+948414 FilterHIDVivoDevices:found vivopay device @ [\\?\hid#vid_1d5f&pid_1004&mi_01#7&8cc1a73&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}]

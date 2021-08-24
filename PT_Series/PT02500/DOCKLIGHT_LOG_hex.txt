@@ -1,0 +1,10 @@
+Docklight Log File (HEX) - Started  
+ --- Buzzer Control - Long Beep - Invalid range (05h)
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 0B 02 00 01 05 A9 21 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 0B 00 00 00 7A F8  Command accepted (FAILED)
+ Result = FAILED
+
+
+Docklight Log File (HEX) - Stopped  
+

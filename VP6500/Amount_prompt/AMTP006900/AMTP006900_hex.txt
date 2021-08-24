@@ -1,0 +1,29 @@
+Docklight Log File (HEX) - Started 2/11/2009 12:57:49.67 
+ TEST CASE: AMTP006900
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+
+2/11/2009 12:57:51.08 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 02 00 02 01 01 14 59 
+2/11/2009 12:57:53.17 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 08 00 04 00 00 00 0A 38 97  Screen cleared
+ Result = PASSED
+ --- Display center of screen with XY Coord
+
+2/11/2009 12:57:53.19 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 04 00 15 31 30 30 00 31 30 30 00 31 00 31 00 30 00 80 00 31 2E 30 30 00 52 89 
+2/11/2009 12:57:53.45 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Display center of screen with XY Coord - OK
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2/11/2009 12:58:01.65 
+

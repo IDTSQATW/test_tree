@@ -1,0 +1,38 @@
+Docklight Log File (HEX) - Started 2017/6/14 11:42:06.861 
+ TEST CASE: MF000451
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+
+2017/6/14 11:42:12.209 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+2017/6/14 11:42:12.237 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  PT command (OK)
+ Result = PASSED
+
+2017/6/14 11:42:12.254 [TX] - 56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 94 1F 
+2017/6/14 11:42:12.281 [RX] - 56 69 56 4F 74 65 63 68 32 00 28 00 00 00 D6 6A  Antenna Enable (OK)
+ Result = PASSED
+
+2017/6/14 11:42:12.299 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 00 B1 E4 
+2017/6/14 11:42:12.458 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 05  Poll for Token (OK)
+
+2017/6/14 11:42:12.466 [RX] - 03 D3  Result = PASSED
+AC 5A E3 2D 39  ----- Read 2 Block and start at Block 63 (No blocks are read because there is nothing beyond Block 63). -----
+
+2017/6/14 11:42:12.486 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 72 3F D4 FF 
+2017/6/14 11:42:12.540 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 0A 00 00 DB 5A  MiFare Read Error Expected - (OK)
+ Result = PASSED
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2017/6/14 11:42:15.173 
+

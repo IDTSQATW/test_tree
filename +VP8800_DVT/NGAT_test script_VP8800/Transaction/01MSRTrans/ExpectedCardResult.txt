@@ -1,0 +1,61 @@
+Use PISCESMSR.py to check manually
+
+
+1-track bank(T1) card:
+Type:80
+T1 output masked data and encrypted data
+
+1-track bank(T2) card
+Type:80
+T2 output masked data and encrypted data
+
+1-track bank(T3,Bank format) card
+Type:80
+T3 output encrypted data only (no masked/clear data)
+
+
+2-track(T1,T2) bank card
+Type:80
+T1,T2 output masked data and encrypted data
+
+
+2-track(T2,T3) bank card
+Type:80
+T2 output masked data and encrypted data, T3 output encrypted data only (no masked/clear data)
+
+
+2-track(T1,T3) bank card
+Type:80
+T1 output masked data and encrypted data, T3 output encrypted data only (no masked/clear data)
+
+
+3-track (4909) bank card
+T1,T2 output masked data and encrypted data, T3 output encrypted data only (no masked/clear data)
+
+
+Chinese bank card
+Type:80
+Encrypted
+
+
+AAMVA bank card
+Type:81
+Not encrypted
+
+Other non-ISO card(custom format)
+Type:83
+Not encrypted
+
+All tracks in same BPC cards(different data)
+Type:83
+Not encrypted, all tracks output separately
+
+
+All tracks in same data cards(loopPay simulation)
+Type:80
+All tracks are converted to 1 track, according to the format, to be single T1 or T2
+
+
+All tracks in same data cards(custom format)
+Type:83
+Not encrypted

@@ -1,0 +1,49 @@
+Objective: under Quick Chip mode, change to poll on demand mode, transaction cmd can work. (02-01, 02-40, 60-10~12, 60-16)
+
+--------------------
+>>> Set CT ICS Identification = 2C.
+CMD: 60 16 02
+EXR: 60 00 00 00
+
+>>> Set CT terminal data = 2C.
+CMD: 60 06 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 DC 20 D0 C4 1E 16 00
+EXR: 60 00 00 00
+
+--------------------
+>>> CL card preparation.
+MESSAGE: Place CL card on reader --> Click OK.
+>>> cmd 02-01
+CMD: 02 01 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+EXR: 56 69 56 4F 74 65 63 68 32 00 02
+>>> CL card preparation.
+MESSAGE: Remove card.
+
+>>> CL card preparation.
+MESSAGE: Place CL card on reader --> Click OK.
+>>> cmd 02-40
+CMD: 02 40 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+EXR: 56 69 56 4F 74 65 63 68 32 00 02
+>>> CL card preparation.
+MESSAGE: Remove card.
+
+--------------------
+>>> CT card preparation.
+>>> cmd 60-10
+CMD: 60 10 01 00 78 00 78 9C 01 00 5F 57 01 00 9F 02 06 00 00 00 00 02 00 9F 03 06 00 00 00 00 00 00 5F 2A 02 08 40
+EXR: 56 69 56 4F 74 65 63 68 32 00 60 63 00 00 FF 0E
+
+CMD: 05 01
+EXR: 05 00 00 00
+
+>>> cmd 60-13
+CMD: 60 13 9F 27 82 9F 36
+EXR: 60 05
+
+--------------------
+>>> cmd 03-00
+CMD: 03 00
+EXR: 03 00
+
+>>> cmd 03-40
+CMD: 03 40
+EXR: 03 00

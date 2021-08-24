@@ -1,0 +1,24 @@
+Docklight Log File (HEX) - Started 2015/9/11 09:19:08.283 
+ TEST CASE: DRW005
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Raw Data Time OUT
+
+2015/9/11 09:19:11.258 [TX] - 56 69 56 4F 74 65 63 68 32 00 02 0A 00 29 00 04 47 00 00 00 9F 02 06 00 00 00 00 00 01 9C 01 00 FF EE 01 13 DF 56 10 00 11 22 33 44 55 66 77 88 99 AA BB CC DD EE FF F4 0F 
+2015/9/11 09:19:15.159 [RX] - 56 69 56 4F 74 65 63 68 32 00 02 08 00 00 20 2E  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2015/9/11 09:19:16.307 
+

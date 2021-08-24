@@ -1,0 +1,114 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+Done/Swipe Buttons 00 01
+56 69 56 4F 74 65 63 68 32 00 F0 F4 00 03 00 01 10 D7 CC
+0
+5
+
+SEND
+1
+Get Configuration
+56 69 56 4F 74 65 63 68 32 00 F0 F5 00 00 08 F3
+0
+5
+
+SEND
+2
+language eng
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF FB 01 00 D8 5B
+0
+5
+
+SEND
+3
+language eng (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 38 01 00 00 00
+0
+5
+
+SEND
+4
+language eng + fra
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF FB 01 05 7D 0B
+0
+5
+
+SEND
+5
+language eng + fra (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 38 01 05 00 00
+0
+5
+
+RECEIVE
+0
+Positive Response
+56 69 56 4F 74 65 63 68 32 00 F0 00 00 00 FB AA
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+Swipe button
+56 69 56 4F 74 65 63 68 32 00 F0 00 00 03 00 01 10 5B CA 02 03 4B 0E
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+Error Response
+56 69 56 4F 74 65 63 68 32 00 F0 02 00 00 95 CA
+-1
+1
+COMMENT "02" Error message should display for non-vend unit 
+0
+1
+0
+0
+
+RECEIVE
+3
+lang ok resp
+56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

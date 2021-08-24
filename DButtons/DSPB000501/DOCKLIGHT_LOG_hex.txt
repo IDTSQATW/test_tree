@@ -1,0 +1,25 @@
+Docklight Log File (HEX) - Started 3/3/2009 09:52:37.71 
+ TEST CASE: DSPB000501
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM4 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+
+3/3/2009 09:52:39.21 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 15 30 00 31 35 39 00 00 00 31 00 31 00 33 00 44 4F 4E 45 00 0D 00 31 82 
+3/3/2009 09:52:39.39 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 04 00 00 00 03 43 B4  INVALID COORD Button - OK
+ Result = PASSED
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 3/3/2009 09:52:41.98 
+

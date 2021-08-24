@@ -1,0 +1,9 @@
+Docklight Log File (HEX) - Started  
+ --- Out of Range Text Option Placement
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 83 03 00 12 30 00 30 00 31 00 32 00 36 00 77 65 6C 63 6F 6D 65 00 1F BB 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 04 00 03 00 07 5A 60  Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

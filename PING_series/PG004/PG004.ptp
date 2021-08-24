@@ -1,0 +1,104 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+PING
+56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD
+0
+5
+
+SEND
+1
+Invalid parameter
+56 69 56 4F 74 65 63 68 32 00 18 01 00 01 92 DD
+0
+5
+
+SEND
+2
+Invalid Parameter and Length
+56 69 56 4F 74 65 63 68 32 00 18 01 00 01 01 F1 98
+0
+5
+
+SEND
+3
+Invalid Length
+56 69 56 4F 74 65 63 68 32 00 18 01 00 01 00 D0 88
+0
+5
+
+SEND
+4
+Long ping 
+56 69 56 4F 74 65 63 68 32 00 18 01 00 10 00 11 22 33 44 55 66 77 88 99 AA BB CC DD EE FF CA D5
+0
+5
+
+SEND
+5
+Long ping 1st part
+56 69 56 4F 74 65 63 68 32 00 18 01 00 10 00 11 22 33 44 55
+0
+5
+
+SEND
+6
+Long ping 2nd part
+66 77 88 99 AA BB CC DD EE FF CA D5
+0
+5
+
+SEND
+7
+Long ping 1st part 01
+56 69 56 4F 74 65 63 68 32 00 18
+0
+5
+
+SEND
+8
+Long ping 2nd part 01
+01 00 10 00 11 22 33 44 55 66 77 88 99 AA BB CC DD EE FF CA D5
+0
+5
+
+RECEIVE
+0
+Ping, Status Code = '00'
+56 69 56 4F 74 65 63 68 32 00 18 00 00 00 ?? ??
+-1
+1
+COMMENT Status Code = '00'
+1
+1
+0
+1
+
+RECEIVE
+1
+Ping, Status Code = '05'
+56 69 56 4F 74 65 63 68 32 00 18 05 00 00 ?? ??
+-1
+1
+COMMENT Status Code = '00'
+1
+1
+0
+1
+

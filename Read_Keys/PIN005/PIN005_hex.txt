@@ -1,0 +1,24 @@
+Docklight Log File (HEX) - Started 6/22/2009 15:12:47.65 
+ TEST CASE: PIN005
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 19200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Key 4
+
+6/22/2009 15:12:50.21 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 06 00 03 1E 34 00 FB 3A 
+6/22/2009 15:12:51.19 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 02 34 00 F7 D6  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 6/22/2009 15:12:52.36 
+

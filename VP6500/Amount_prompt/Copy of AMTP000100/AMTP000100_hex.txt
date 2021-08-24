@@ -1,0 +1,10 @@
+Docklight Log File (HEX) - Started 10/21/2008 17:46:43.42 
+ --- Amount with Comma
+
+10/21/2008 17:46:46.39 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 04 00 12 30 00 30 00 31 00 31 00 35 00 80 00 31 2C 32 33 34 00 5D 38 
+10/21/2008 17:46:46.68 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Amount with Comma Response (OK)
+ Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped 10/21/2008 17:46:52.51 
+

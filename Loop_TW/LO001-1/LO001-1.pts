@@ -1,0 +1,514 @@
+DL_SCRIPTVERSION
+1
+35987
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "LO001-1" ' !!!!! EDIT THIS !!!!!
+' Objective: to stress cmd 04-00/ 04-02/ 04-03
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result      
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+End Sub
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+c = 0
+countf = 0
+
+do until result = 0 or c > 1000
+   c = c + 1
+   DL.ClearCommWindows
+   dl.addcomment vbcrlf & vbcrlf & "Cycle: " & c
+   
+   for i = 1 to 2   
+       If result <> 0 Then
+          dl.resetreceivecounter
+          dl.addcomment vbcrlf
+          DL.AddComment "--- 04-00-" & i
+          DL.SendSequence "04-00-" & i
+          result = DL.WaitForSequence("04 00", 1, 5000)
+          dl.pause 400
+       End If
+
+       If result <> 0 Then
+          dl.resetreceivecounter
+          dl.addcomment vbcrlf
+          DL.AddComment "--- 03-02"
+          DL.SendSequence "03-02"
+          dl.pause 3000
+          result = DL.WaitForSequence("DF65-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("DF66-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("DF68-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("DF6A-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("DF75-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("DF7C-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("DF7D-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("DF7F-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("FFF3-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("FFF7-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("FFF9-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("FFFA-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("FFFB-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("DF891B-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F15-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F16-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F1C-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F40-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F4E-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F7C-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("FFF2-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("FFF8-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F53-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F58-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F59-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F5D-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F5E-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F5F-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("DF26-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("DF2A-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("DF2B-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("DF2C-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("DF51-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("DF64-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("97-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9C-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("5F2A-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("5F36-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F01-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F02-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F03-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F09-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F1A-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F1B-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F1C-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F33-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F35-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F66-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F6D-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("DF28-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("DF29-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("FFF1-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("FFF4-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("FFF5-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("FFFC-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("FFFD-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("FFFE-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("FFFF-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("FFF0-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F5A-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("FFEE1D-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F41-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("DF891C-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("FFEE20-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("DFEF25-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9A-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("9F21-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+
+          if countf <> 0 then 
+             result = 0
+          else
+             dl.addcomment vbcrlf & "PASS!"
+          end if
+          DL.ClearCommWindows
+       End If
+       '------------------------------------------------------------
+       If result <> 0 Then
+          dl.resetreceivecounter
+          dl.addcomment vbcrlf
+          DL.AddComment "--- 04-02-" & i
+          DL.SendSequence "04-02-" & i
+          result = DL.WaitForSequence("04 00", 1, 5000)
+          dl.pause 400
+       End If
+
+       If result <> 0 Then
+          dl.resetreceivecounter
+          dl.addcomment vbcrlf
+          DL.AddComment "--- 03-04"
+          DL.SendSequence "03-04"
+          dl.pause 2000
+          result = DL.WaitForSequence("2 FFE4", 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("2 9F06", 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("2 DF7C-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("2 FFE0-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("2 FFE1-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("2 FFE2-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("2 FFE3-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("2 FFE5-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("2 FFE6-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("2 FFE8-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("2 FFE9-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("2 FFE1-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+
+          if countf <> 0 then 
+             result = 0
+          else
+             dl.addcomment vbcrlf & "PASS!"
+          end if
+          DL.ClearCommWindows
+       End If
+       '------------------------------------------------------------
+       If result <> 0 Then
+          dl.resetreceivecounter
+          dl.addcomment vbcrlf
+          DL.AddComment "--- 04-03-" & i
+          DL.SendSequence "04-03-" & i
+          result = DL.WaitForSequence("04 00", 1, 5000)
+          dl.pause 400
+       End If
+
+       If result <> 0 Then
+          dl.resetreceivecounter
+          dl.addcomment vbcrlf
+          DL.AddComment "--- 03-06"
+          DL.SendSequence "03-06"
+          dl.pause 2000
+          result = DL.WaitForSequence("3 9F58-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 9F59-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 9F5D-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 9F5E-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 9F5F-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 DF26-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 DF2A-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 DF2B-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 DF2C-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 DF51-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 DF64-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 97-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 9C-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 5F2A-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 5F36-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 9F01-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 9F02-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 9F03-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 9F09-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 9F1A-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 9F1B-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 9F1C-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 9F33-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 9F35-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 9F66-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 9F6D-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 DF28-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 DF29-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 FFF1-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 FFF4-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 FFF5-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 FFFC-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 FFFD-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 FFFE-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 FFFF-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 FFF0-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 9F5A-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 FFEE1D-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 9F41-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 DF891C-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+          result = DL.WaitForSequence("3 FFEE20-" & i, 1, 2000)
+          if result = 0 then countf = countf + 1
+
+          if countf <> 0 then 
+             result = 0
+          else
+             dl.addcomment vbcrlf & "PASS!"
+          end if
+          DL.ClearCommWindows
+       End If
+   next
+loop
+'------------------------------------------------------------
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'DL.pause 1000
+
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 

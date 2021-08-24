@@ -1,0 +1,36 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Amount with Multiple Commas and Decimals
+56 69 56 4F 74 65 63 68 32 00 83 04 00 24 30 00 30 00 31 00 31 00 35 00 80 00 31 32 33 2C 34 35 36 2C 37 38 39 2E 31 32 33 2E 34 35 36 2E 37 38 39 00 BC 1C
+0
+5
+
+RECEIVE
+0
+Amount with Multiple Commas and Decimals Response (OK)
+56 69 56 4F 74 65 63 68 32 00 83 00 ##
+-1
+1
+COMMENT Amount with Multiple Commas and Decimals Response (OK)
+1
+1
+0
+1
+

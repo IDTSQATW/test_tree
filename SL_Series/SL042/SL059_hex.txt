@@ -1,0 +1,23 @@
+Docklight Log File (HEX) - Started 10/6/2010 12:27:37.27 
+ TEST CASE: SL059
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 19200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Index 16
+
+10/6/2010 12:27:38.75 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 16 01 00 01 9B 03 
+10/6/2010 12:27:38.77 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 06 00 00 A0 F3  
+
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 10/6/2010 12:27:40.77 
+

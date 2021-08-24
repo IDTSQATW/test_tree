@@ -1,0 +1,26 @@
+Docklight Log File (HEX) - Started 9/8/2010 16:37:26.247 
+ TEST CASE: AMTP000300
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Amount with Comma and Decimal
+
+9/8/2010 16:37:28.072 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 04 00 1B 30 00 30 00 31 00 31 00 35 00 80 00 31 32 33 2C 34 35 36 2C 37 38 39 2E 30 30 00 CC 2F 
+9/8/2010 16:37:28.137 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00  Amount with Amount with Comma and Decimal Response (OK)
+
+9/8/2010 16:37:28.138 [RX] - 00 04 00 11 46 C8 81 0D  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 9/8/2010 16:37:38.821 
+

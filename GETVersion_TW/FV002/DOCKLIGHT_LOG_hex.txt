@@ -1,0 +1,20 @@
+Docklight Log File (HEX) - Started 2016/9/2 13:27:34.256 
+ TEST CASE: FV002
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Get UID of MCU (29-17)
+
+2016/9/2 13:27:35.792 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 17 00 00 2D 66 
+2016/9/2 13:27:35.848 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 29 00 00 10 00 00 31 00 71 6D 2E 72 73 34 45 4E 2E 00 15 30 D6 0F  
+
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2016/9/2 13:27:37.369 
+

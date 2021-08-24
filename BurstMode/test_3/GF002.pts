@@ -1,0 +1,166 @@
+DL_SCRIPTVERSION
+1
+6380
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+'------------------------------------------------------------
+DL.OpenProject "GFTD.ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+Dim Response(1024)
+Dim trackNpos(2)
+Dim trackNend(2)
+
+Dim SampleMsg(10)
+SampleMsg(1) = "Card A (#1.1)"
+SampleMsg(2) = "Card A (#1.2)"
+SampleMsg(3) = "Card A (#1.3)"
+SampleMsg(4) = "Card B (#2.1)"
+SampleMsg(5) = "Card B (#2.2)"
+SampleMsg(6) = "Card B (#2.2)"
+SampleMsg(7) = "Card A (#3.1)"
+SampleMsg(8) = "Card B (#3.2)"
+SampleMsg(9) = "Card A (#3.3)"
+SampleMsg(10) = "Card B (#3.4)"
+SampleN = 1
+
+enablerec = 0
+startrec = 0
+reclen = -1
+ctype = 0
+datalen = 0
+trackpos = 0
+trackN = 0
+status = 0
+result = 1
+
+'============================================================
+If result <> 0 Then
+  DL.AddComment "--- Profile.1"
+  DL.ResetReceiveCounter "EMV.Response"
+  DL.SendSequence "Profile.1"
+  result = DL.WaitForSequence("EMV.Response", 1, 10000)
+End If
+If result <> 0 Then
+  DL.AddComment "--- AutoPoll"
+  DL.ResetReceiveCounter "Confirm"
+  DL.SendSequence "Auto Polling"
+  result = DL.WaitForSequence("Confirm", 1, 10000)
+End If
+'------------------------------------------------------------
+For SampleN = 1 To 10
+DL.AddComment Chr(13) & "----------------" 
+DL.AddComment "Card Sample: " &SampleMsg(SampleN)
+'============================================================
+If result <> 0 Then
+  prompt = "Enter <Y> After Confirmation Beep" &Chr(13) &Chr(13)
+  prompt = prompt & "Present " & SampleMsg(SampleN) &Chr(13) 
+  prompt = prompt & Chr(13) &Chr(13) & "Note: If creating GOLD, Verify Card Data & Null"
+  confirm = InputBox(prompt, "<Enter> to continue...", "Y")  
+  result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- GFTD"
+  DL.ResetReceiveCounter "GFTD.Resp"
+  DL.SendSequence "GFTD"
+  result = DL.WaitForSequence("GFTD.Resp", 1, 10000)
+  DL.Pause 1000
+End If
+'------------------------------------------------------------
+Next 'SampleN
+'------------------------------------------------------------
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+' SCRIPT FINISH
+'------------------------------------------------------------
+DL.StopLogging
+'============================================================
+'============================================================
+Sub DL_OnReceive() 
+    If DL.OnReceive_GetName() = "Track.Header" Then 
+	If enablerec = 1 Then
+        DL.AddComment Chr(13)
+        startrec =  1  
+      End If
+    End If
+    If (startrec <> 0) Then
+      If DL.OnReceive_GetName() = "Track.Response" Then 
+        'READ 1 Byte [??]
+        reclen = reclen + 1
+        byteread = DL.OnReceive_Peek( 1 )
+        Response(reclen) =  byteread
+        'DL.AddComment "Pos = " & reclen & " HEX: " & HEX(Response(reclen))
+        Select Case reclen  
+          Case 0  
+            trackpos = 0
+            trackN = 0
+            trackNpos(1) = 0
+            trackNpos(2) = 0
+            ctype = byteread
+            'DL.AddComment "{Card Type:" & HEX(ctype) & "} "
+          Case Else    
+            trackpos = trackpos + 1
+            'Locate Tracks:
+            Select Case byteread
+              Case &h25 'Chr(%)
+                trackN = 1
+                trackNpos(1) = reclen + 1
+                'DL.AddComment "{Track1 Start:" & trackNpos(1) & "} "
+              Case &h3B 'Chr(;)
+                trackN = 2
+                trackNpos(2) = reclen + 1
+                'DL.AddComment "{Track2 Start:" & trackNpos(2) & "} "
+              Case &h3F 'Chr(?)
+                trackNend(trackN) = reclen - 1
+                'DL.AddComment "{Track" & trackN & " End:" & trackNend(trackN) & "} "
+                If trackN > 1 Then
+                  startrec = 0
+                  reclen = -1
+                End If
+            End Select
+        End Select  
+      End If
+    End If 
+End Sub 
+
+'============================================================
+Sub EnableRecording()
+    enablerec = 1   
+    DL.Pause 1000
+End Sub
+
+'============================================================
+Sub DisableRecording()
+    enablerec = 0   
+    DL.Pause 1000
+End Sub
+
+'============================================================
+Sub ClearRecording()
+    For trackpos = 1 To 1024
+      Response(trackpos) = 0
+    Next
+    ctype = 0    
+End Sub
+
+'============================================================
+Sub LogTrack(N)
+    While startrec = 1
+    Wend
+    temp = ""
+    For trackpos = trackNpos(N) To trackNend(N)
+      temp = temp + Chr(Response(trackpos))
+    Next
+    DL.AddComment Chr(13) & "Track" & N & " (" & temp & ")"
+End Sub

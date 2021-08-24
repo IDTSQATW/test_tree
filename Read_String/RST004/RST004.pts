@@ -1,0 +1,41 @@
+DL_SCRIPTVERSION
+1
+27703
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+'------------------------------------------------------------
+DL.OpenProject "RST004.ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+
+result = 1
+
+'------------------------------------------------------------
+If result <> 0 Then
+   Title = prompt & "Press Key 1470 -> Back -> Enter on Keypad.  Hit enter or click on OK when ready"
+   confirm = InputBox(Title)  
+   'result = (confirm = "y" Or confirm = "Y")
+End If
+
+
+'============================================================
+If result <> 0 Then
+  DL.AddComment "--- Key 1470 -> Back"
+  DL.SendSequence " PIN Pad capture 1470 back, enter"
+  result = DL.WaitForSequence("Key Response", 1, 30000)
+End If
+
+'------------------------------------------------------------
+DL.pause 1000
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+

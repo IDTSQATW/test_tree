@@ -1,0 +1,15 @@
+﻿<Project>
+	<Name>FWA017.idt</Name>
+	<TxtScripts>
+		<File>FWA017-Transfer.txt</File>
+		<File>FWA01701A.txt</File>
+		<File>FWA01701B.txt</File>
+		<File>FWA01702A.txt</File>
+		<File>FWA01702B.txt</File>
+		<File>FWA01703.txt</File>
+		<File>FWA017-Clean.txt</File>
+	</TxtScripts>
+	<PyScripts>
+		<File>FWA017-Transfer.py</File>
+	</PyScripts>
+</Project>

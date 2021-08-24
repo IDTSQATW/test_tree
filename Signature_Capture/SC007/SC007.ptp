@@ -1,0 +1,67 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+half height capture and verify (PNG)
+56 69 56 4F 74 65 63 68 32 00 83 02 00 02 1E 02 3A 7A
+0
+5
+
+SEND
+1
+Welcome
+56 69 56 4F 74 65 63 68 32 00 83 01 00 00 33 15
+0
+5
+
+RECEIVE
+0
+Signature Response
+56 69 56 4F 74 65 63 68 32 00 83 00 ##
+-1
+1
+COMMENT Passed
+0
+1
+0
+0
+
+RECEIVE
+1
+Welcome Response
+56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+8100 Error Response
+56 69 56 4F 74 65 63 68 32 00 83 0C 00 04 00 03 00 14 53 FE
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

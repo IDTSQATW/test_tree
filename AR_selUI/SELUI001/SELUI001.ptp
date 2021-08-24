@@ -1,0 +1,114 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM19
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Get Source
+56 69 56 4F 74 65 63 68 32 00 01 05 00 00 A3 F9
+0
+5
+
+SEND
+1
+enable all  vivoPay UI (default)
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 05 05 E0 ED
+0
+5
+
+SEND
+2
+disable buzzer only
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 04 05 D1 DE
+0
+5
+
+SEND
+3
+disable LCD only
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 01 05 24 21
+0
+5
+
+SEND
+4
+disable LED only
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 05 04 C1 FD
+0
+5
+
+SEND
+5
+disable CL logo only
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 05 01 64 AD
+0
+5
+
+SEND
+6
+act transaction
+56 69 56 4F 74 65 63 68 32 00 02 01 00 15 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20 30 12
+0
+5
+
+RECEIVE
+0
+VP8xxx - Get Source reject acknowledged (OK)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 00 7C 33
+-1
+1
+COMMENT VP8xxx - Get Source reject acknowledged (OK)
+1
+1
+0
+1
+
+RECEIVE
+1
+Set Source success (OK)
+56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53
+-1
+1
+COMMENT 
+1
+1
+0
+1
+
+RECEIVE
+2
+Get Source success (OK)
+56 69 56 4F 74 65 63 68 32 00 01 00 00 02 ?? ?? ?? ??
+-1
+1
+COMMENT 
+1
+1
+0
+1
+
+RECEIVE
+3
+act trans resp
+56 69 56 4F 74 65 63 68 32 00 02 ?? ?? ?? ?? ?? ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

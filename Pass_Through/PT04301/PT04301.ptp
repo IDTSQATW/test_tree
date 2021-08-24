@@ -1,0 +1,67 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM7
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Pass-Through Mode - Disable (STOP) 
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38
+0
+5
+
+SEND
+1
+Pass-Through - START
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19
+0
+5
+
+RECEIVE
+0
+Pass-Through Mode - Disable (STOP) (OK)
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B
+-1
+1
+COMMENT 
+1
+1
+0
+1
+
+RECEIVE
+1
+Pass-Through - START (OK)
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B
+-1
+1
+COMMENT 
+1
+1
+0
+1
+
+RECEIVE
+2
+Poll for Token - Card read (NOK)
+56 69 56 4F 74 65 63 68 32 00 2C 00 00
+-1
+1
+COMMENT 
+1
+1
+0
+1
+

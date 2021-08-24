@@ -1,0 +1,33 @@
+Docklight Log File (HEX) - Started 2/9/2009 15:38:06.33 
+ TEST CASE: PT05114
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Pass-Through Mode - (START)
+
+2/9/2009 15:38:07.73 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+2/9/2009 15:38:08.05 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00  Card Read accepted (OK)
+
+2/9/2009 15:38:08.05 [RX] - 00 1C 9B  Pass-Through Mode - (STOP)  (OK)
+ Pass-Through Mode - (START) (OK)
+ Result = PASSED
+ --- Poll for Token - Poll For Token Invalid timeout 00 01 FF
+
+2/9/2009 15:38:09.58 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 00 01 FF B9 FA 
+2/9/2009 15:38:09.86 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 04 00 00 C0 5B  Invalid Timeout Range acknowledged (OK)
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2/9/2009 15:38:12.50 
+

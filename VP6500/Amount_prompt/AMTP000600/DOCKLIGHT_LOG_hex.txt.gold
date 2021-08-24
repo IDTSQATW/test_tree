@@ -1,0 +1,25 @@
+Docklight Log File (HEX) - Started  
+ TEST CASE: AMTP000600
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Display amount at 0,0 - $1.00 - Font 2
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 83 04 00 11 30 00 30 00 31 00 32 00 33 00 80 00 31 2E 30 30 00 7B 70 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Display amount at 0,0 - $1.00 - Font 2 - OK
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

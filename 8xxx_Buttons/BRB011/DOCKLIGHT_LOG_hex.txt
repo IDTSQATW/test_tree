@@ -1,0 +1,32 @@
+Docklight Log File (HEX) - Started 11/2/2016 18:11:02.159 
+ TEST CASE: BRB011
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Clear display
+
+11/2/2016 18:11:03.832 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 0D 00 00 52 60 
+11/2/2016 18:11:03.842 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Pass  --- Custom mode
+
+11/2/2016 18:11:03.876 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 08 00 00 A2 8B 
+11/2/2016 18:11:03.882 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Pass  --- Radio button wrong Length
+
+11/2/2016 18:11:03.922 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 12 00 1D 33 30 00 33 30 00 48 73 69 65 6E 00 42 72 79 63 65 00 31 00 31 38 00 00 00 00 00 00 1D 3C  --- Reset Initial State
+
+11/2/2016 18:11:06.972 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 01 00 00 33 15 
+11/2/2016 18:11:07.013 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Pass  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 11/2/2016 18:11:08.269 
+

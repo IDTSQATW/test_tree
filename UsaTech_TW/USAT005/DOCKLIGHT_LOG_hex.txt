@@ -1,0 +1,8 @@
+Docklight Log File (HEX) - Started 2021/8/13 15:35:34.950 
+ TEST CASE: USAT005
+
+ --- Set POS COM PORT Settings
+
+
+Docklight Log File (HEX) - Stopped 2021/8/13 15:35:35.033 
+

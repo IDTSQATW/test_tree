@@ -1,0 +1,48 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Buzzer Control - Invalid Buzzer Control sub-command (00h)
+56 69 56 4F 74 65 63 68 32 00 0B 00 00 01 01 04 CD
+0
+5
+
+RECEIVE
+0
+Buzzer Control - Invalid Buzzer Control command captured (SUCCESS)
+56 69 56 4F 74 65 63 68 32 00 0B 03 00 00 23 A8
+-1
+1
+COMMENT Buzzer Control - Invalid Buzzer Control command captured (SUCCESS)
+1
+1
+0
+1
+
+RECEIVE
+1
+Invalid CRC
+56 69 56 4F 74 65 63 68 32 00 0B 04 ##
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

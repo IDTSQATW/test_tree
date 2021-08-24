@@ -1,0 +1,26 @@
+Docklight Log File (HEX) - Started 1/24/2013 14:06:54.378 
+ TEST CASE: SD010
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 19200 baud...
+ Set POS COM PORT - COMPLETE
+
+ <<: Demand Polling
+
+1/24/2013 14:06:56.106 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 F6 24 
+1/24/2013 14:06:56.209 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  Valid Response for Non VP8600 products  #STORE LCD MESSAGE
+
+1/24/2013 14:06:56.247 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 03 00 1D 01 18 00 00 00 25 50 63 63 63 63 25 46 30 57 65 6C 63 6F 6D 65 20 74 6F 20 46 4F 4F 44 12 80 
+1/24/2013 14:06:56.443 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  Valid Response for Non VP8600 products  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 1/24/2013 14:07:05.043 
+

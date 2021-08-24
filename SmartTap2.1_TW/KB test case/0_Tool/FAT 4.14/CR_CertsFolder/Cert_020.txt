@@ -1,0 +1,60 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            12:34:56:78:90:00:00:00:00:00
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=US, ST=CA, L=CY, O=ID TECH, OU=SUB/title=(part no.)-010, CN=IDT CRD SUB CA/emailAddress=www.idtechproducts.com
+        Validity
+            Not Before: Apr 15 00:29:51 2015 GMT
+            Not After : Apr 14 00:29:51 2041 GMT
+        Subject: C=US, ST=CA, L=CY, O=ID TECH, OU=IDTCA/title=(part no.)-020, CN=IDT CRD IDTCA CA/emailAddress=www.idtechproducts.com
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:cd:2b:c4:19:da:a8:de:d0:d2:04:ac:53:7e:68:
+                    b5:97:9c:f6:ef:b6:24:ec:1e:8b:d3:22:3d:56:f9:
+                    dd:c9:7c:81:99:aa:5b:b9:7e:25:8b:ff:0e:67:fc:
+                    1b:42:56:ca:7a:c3:4a:d7:cd:d2:82:b2:16:11:c6:
+                    12:dd:7b:c5:37:a5:1d:ba:f5:67:dc:21:38:09:86:
+                    31:86:ea:50:09:00:e9:ff:86:f1:33:45:8a:4a:cc:
+                    1c:c5:37:01:0c:da:c6:9c:d4:78:e6:66:f7:0e:68:
+                    ba:e2:c9:03:a2:57:89:42:64:cf:3e:3f:44:1f:6e:
+                    e2:1d:b9:95:77:67:44:8e:8b:6d:e3:0a:24:6c:8b:
+                    f0:6a:43:bf:b4:9c:4e:75:e3:08:27:50:7e:8b:3e:
+                    9c:e1:c0:73:e3:68:e7:79:ad:41:15:4f:3a:84:83:
+                    e2:2d:4d:12:c0:fc:de:96:5f:61:56:7f:40:16:27:
+                    d6:a2:74:2c:aa:27:40:42:cc:65:22:3a:54:16:36:
+                    ad:91:b0:21:a9:c8:fd:b8:51:65:df:f3:02:f9:bb:
+                    c0:f9:24:a1:76:bc:e1:bb:68:33:92:e5:8d:e2:99:
+                    aa:41:46:a2:4f:d3:fa:03:30:93:91:8d:ea:77:77:
+                    9c:7f:e0:6e:c7:0b:90:ce:aa:74:72:43:13:c4:88:
+                    52:89
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+            X509v3 Key Usage: critical
+                Digital Signature, Certificate Sign, CRL Sign
+            X509v3 Subject Key Identifier: 
+                B2:FA:F5:69:F8:2D:69:97:9E:1F:0D:37:14:04:B4:DD:A3:9C:C0:BB:2A:06:CA:87:9C:9F:45:7E:2A:3C:12:DA
+            X509v3 Authority Key Identifier: 
+                keyid:83:B1:27:E7:D4:6F:3A:19:F6:A5:8C:01:8D:6B:14:61:9A:7F:03:EB:EC:86:7C:C2:61:B5:CA:10:F6:37:FC:83
+
+    Signature Algorithm: sha256WithRSAEncryption
+         47:1f:77:59:39:c8:87:2a:01:79:66:60:f3:54:a7:17:28:e3:
+         bc:76:80:d6:56:d9:24:0f:73:d8:76:a0:14:7e:18:99:f6:2b:
+         63:75:36:aa:bd:48:c2:64:b8:8c:fe:3e:57:7c:90:d1:29:47:
+         14:67:68:47:c3:6b:eb:56:47:1c:62:01:42:0f:bd:0c:5a:82:
+         39:ff:56:c8:8c:59:69:fb:c3:7a:98:31:e6:10:34:3a:96:9f:
+         38:cb:5a:16:9d:66:63:5f:82:ae:9e:60:2e:f3:cb:af:84:8b:
+         24:99:8b:3d:0d:85:61:42:6d:90:91:32:e1:b5:d5:d1:30:62:
+         52:39:b9:0e:b1:b6:90:46:c7:a2:5e:0d:8a:98:27:f6:7d:6c:
+         84:d1:a0:27:5d:f8:4f:9e:8f:20:f1:7f:01:80:fb:d0:46:66:
+         bb:4b:c4:f6:c4:ce:eb:20:31:94:86:dc:3e:ef:06:c4:10:47:
+         19:c9:4e:74:45:f1:4d:c1:d8:8d:3a:71:8c:7e:90:e3:fd:cf:
+         33:c2:b6:f2:e8:f7:c4:8a:ad:3c:e2:3b:d4:49:89:c6:ab:be:
+         30:42:5b:89:14:dd:d3:97:f5:db:f8:62:54:ae:c7:ee:cb:f4:
+         31:9a:e9:1f:23:82:b8:34:cf:e4:b4:82:08:fb:4d:fc:9c:c9:
+         eb:30:35:d2

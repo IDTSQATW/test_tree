@@ -1,0 +1,41 @@
+Docklight Log File (HEX) - Started 1/4/2017 16:31:44.000 
+ TEST CASE: DIR011
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ ---File Download - part 1 - testfile.x:20bytes
+
+1/4/2017 16:31:45.381 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 24 00 1A 74 65 73 74 66 69 6C 65 2E 78 00 32 30 00 32 00 61 61 61 61 61 61 61 61 61 62 32 B3 
+1/4/2017 16:31:45.389 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ --- File Download - part 2 - testfile.x:20bytes
+
+1/4/2017 16:31:45.458 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 24 00 1A 74 65 73 74 66 69 6C 65 2E 78 00 32 30 00 31 00 63 63 63 63 63 63 63 63 63 64 6A 0B 
+1/4/2017 16:31:45.469 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ ---File Download - part 1 - testfile.x:20bytes
+
+1/4/2017 16:31:45.532 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 24 00 1A 74 65 73 74 66 69 6C 65 2E 78 00 32 30 00 32 00 61 61 61 61 61 61 61 61 61 62 32 B3 
+1/4/2017 16:31:45.540 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ --- File Download - part 2 - testfile.x:20bytes
+
+1/4/2017 16:31:45.592 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 24 00 1A 74 65 73 74 66 69 6C 65 2E 78 00 32 30 00 31 00 63 63 63 63 63 63 63 63 63 64 6A 0B 
+1/4/2017 16:31:45.601 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ --- Delete File - testfile.x in ROOT
+
+1/4/2017 16:31:45.656 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 1F 00 0B 74 65 73 74 66 69 6C 65 2E 78 00 75 CC 
+1/4/2017 16:31:45.663 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  List Directory OK
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 1/4/2017 16:31:46.894 
+

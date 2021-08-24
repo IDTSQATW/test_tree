@@ -1,0 +1,795 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+Pass-Through, Start
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19
+0
+5
+
+SEND
+1
+PT Atenna Control, Enable 
+56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 94 1F
+0
+5
+
+SEND
+2
+PT Poll for Token 
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 FF 22 0C 1B
+0
+5
+
+SEND
+3
+Pass-Through Mode, Stop 
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38
+0
+5
+
+SEND
+4
+PT Atenna Control, Disable 
+56 69 56 4F 74 65 63 68 32 00 28 01 00 01 00 84 3E
+0
+5
+
+SEND
+5
+  
+
+0
+5
+
+SEND
+6
+MiFare Auth Sector 0, Block 1
+56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 01 01 FF FF FF FF FF FF 4B C8
+0
+5
+
+SEND
+7
+MiFare  - Read Sector 0, Blocks 1 & 2
+56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 72 01 03 62
+0
+5
+
+SEND
+8
+MiFare Auth Sector 4, Block 16
+56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 10 01 FF FF FF FF FF FF 31 AF
+0
+5
+
+SEND
+9
+MiFare  - Read Sector 4, Blocks 16 to 18
+56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 73 10 00 00
+0
+5
+
+SEND
+10
+MiFare Write Sector 0 Block 2 ('00 . . . 00')
+56 69 56 4F 74 65 63 68 32 00 2C 08 00 12 71 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 D5 76
+0
+5
+
+SEND
+11
+MiFare Write Sector 0 Block 2 ('11 . . . 11')
+56 69 56 4F 74 65 63 68 32 00 2C 08 00 12 71 02 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 85 70
+0
+5
+
+SEND
+12
+ 
+
+0
+5
+
+SEND
+13
+MiFare 4k - Auth Sector 15, Block 60
+56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 3C 01 FF FF FF FF FF FF 5B 70
+0
+5
+
+SEND
+14
+MiFare 4k - Read Sector 15, Blocks 60 to 63
+56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 74 3C 4E 3A
+0
+5
+
+SEND
+15
+MiFare 4k - Read Sector 15, Max Blocks
+56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 7F 3C 92 C0
+0
+5
+
+SEND
+16
+ 
+
+0
+5
+
+SEND
+17
+MiFare 4k - Auth Sector 16, Block 64
+56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 40 01 FF FF FF FF FF FF FA CB
+0
+5
+
+SEND
+18
+MiFare 4k - Auth Sector 31, Block 124
+56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 7C 01 FF FF FF FF FF FF AD A0
+0
+5
+
+SEND
+19
+MirFare 4k -  Read Sector 38, 15 blocks 
+56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 3F 00 D3 68
+0
+5
+
+SEND
+20
+Block 242
+56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 F2 81 84
+0
+5
+
+SEND
+21
+-----------------------------------
+
+0
+5
+
+SEND
+22
+Mifare Classic (CT = '03') Read Block 01
+56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 01 5B FD
+0
+5
+
+SEND
+23
+Mifare Ultralight (CT = '04') Read Blcok 01
+56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 41 01 53 A4
+0
+5
+
+SEND
+24
+Tag1 Static Get All Data
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 01 11 17 00
+0
+5
+
+SEND
+25
+Tag1 Static Read a byte 01
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 12 01 7E F4
+0
+5
+
+SEND
+26
+Tag1 Static Read a byte 02
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 12 02 4E 97
+0
+5
+
+SEND
+27
+Tag1 Static Read a byte 0A
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 12 0A CF 9F
+0
+5
+
+SEND
+28
+Tag1 Static Read a byte 09
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 12 09 FF FC
+0
+5
+
+SEND
+29
+Tag1 Static Write a byte
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 03 13 09 F2 6C 29
+0
+5
+
+SEND
+30
+Tag1 Static Write a byte NE
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 03 14 0A FF 6D 47
+0
+5
+
+SEND
+31
+Tag1 Dynamic Read a segment
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 15 12 C5 31
+0
+5
+
+SEND
+32
+Tag1 Dynamic Read 8 bytes
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 16 01 B2 30
+0
+5
+
+SEND
+33
+Tag1 Dynamic Write 8 bytes
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 0A 17 01 00 01 02 03 04 05 06 07 86 0E
+0
+5
+
+SEND
+34
+Tag1 Dynamic Write 8 bytes NE
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 0A 18 01 00 01 02 03 04 05 06 07 D0 BF
+0
+5
+
+SEND
+35
+Tag2 Read Data(16 bytes)
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 21 09 AF 3A
+0
+5
+
+SEND
+36
+Tag2 Write Data(4 bytes)
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 06 22 09 11 32 33 35 C3 3C
+0
+5
+
+SEND
+37
+Tag2 Select sect
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 23 09 C9 58
+0
+5
+
+SEND
+38
+Tag3 Read Data
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 07 41 01 09 00 01 80 08 F8 E5
+0
+5
+
+SEND
+39
+Tag3 Write Data
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 17 42 01 09 00 01 80 08 31 32 33 34 35 36 37 38 31 32 33 34 35 36 37 38 D7 31
+0
+5
+
+SEND
+40
+Tag4 Command
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 06 81 81 33 44 55 66 B7 9D
+0
+5
+
+SEND
+41
+Pass-Through Mode Start/Stop (2C-01)0 = Stop Pass-Through
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38
+0
+5
+
+SEND
+42
+Poll tag 2
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 FF 22 0C 1B
+0
+5
+
+SEND
+43
+Poll tag 3
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 FF 22 0C 1B
+0
+5
+
+SEND
+44
+Poll tag 4
+56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 FF 22 0C 1B
+0
+5
+
+RECEIVE
+0
+Pass-Through, Start
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+PT Atenna, Enable
+56 69 56 4F 74 65 63 68 32 00 28 00 00 00 D6 6A
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+PT Poll for Token
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 07 0A 11 48 C2 F1 56 01 2E B7
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
+Mifare Read Success
+56 69 56 4F 74 65 63 68 32 00 2C 00 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+4
+MiFare Auth Sector 1
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+5
+Mifare Read Block 0-F
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 F0 F0 E2 F4 B7 51 28 04 00 00 00 00 00 21 05 13 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 6D 58
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+6
+MiFare Write Accepted
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+7
+Pass Through Stop
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+8
+Activate Transaction 
+56 69 56 4F 74 65 63 68 32 00 02 00 ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+9
+Tag1 Static Get All Data res
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 7A 11 48 C2 F1 56 01 00 02 25 00 00 01 02 03 04 05 06 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 55 55 AA AA 11 48 06 00 01 60 00 00 00 00 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+10
+Tag1 Static Get All Data res-TW
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 7A ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+11
+Tag1 Static Read a byte 01 res
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 02 01 F1
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+12
+Tag1 Static Read a byte 01 res-TW
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 02 01 ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+13
+Tag1 Static Read a byte 02 res
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 02 02
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+14
+Tag1 Static Read a byte 02 res-TW
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 02 02
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+15
+Tag1 Static Read a byte 0A Res
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 02 0A
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+16
+Tag1 Static Read a byte 0A Res-TW
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 02 0A
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+17
+Tag1 Static Read a byte 09 res
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 02 09
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+18
+Tag1 Static Read a byte 09 res-TW
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 02 09
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+19
+Tag1 Static Write a byte res
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 02 09
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+20
+Tag1 Static Write a byte NE res
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 02 0A
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+21
+Tag1 Dynamic Read a segment res
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 81 12 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+22
+Tag1 Dynamic Write 8 bytes res
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 09 01 00 01 02 03 04 05 06 07
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+23
+Tag1 Dynamic Write 8 bytes NE res
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 09 01 00 01 02 03 04 05 06 07
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+24
+Tag1 Dynamic Read 8 bytes res
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 09 01 00 F2 FF 03 04 05 06 07
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+25
+Tag2 Read Data(16 bytes) res
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 10 11 32 33 35 00 00 00 00 00 00 00 00 00 00 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+26
+Tag2 Write Data(4 bytes) res
+56 69 56 4F 74 65 63 68 32 00 2C 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+27
+Tag2 Select sect res
+56 69 56 4F 74 65 63 68 32 00 2C 0A 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+28
+Tag3 Read Data res
+56 69 56 4F 74 65 63 68 32 00 2C 00 ?? ?? 00 00 01 31 32 33 34 35 36 37 38 31 32 33 34 35
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+29
+Tag3 Write Data res
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+30
+Tag4 Command res
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 01 1C
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+31
+Poll tag 1 res
+56 69 56 4F 74 65 63 68 32 00 2C 00 ?? ?? 0A
+-1
+1
+COMMENT 0A = NFC Tag 1
+0
+1
+0
+0
+
+RECEIVE
+32
+Poll tag 2 res
+56 69 56 4F 74 65 63 68 32 00 2C 00 ?? ?? 0B
+-1
+1
+COMMENT 0B = NFC Tag 2
+0
+1
+0
+0
+
+RECEIVE
+33
+Poll tag 2 res (NEO2)
+56 69 56 4F 74 65 63 68 32 00 2C 00 ?? ?? 04
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+34
+Poll tag 3 res
+56 69 56 4F 74 65 63 68 32 00 2C 00 ?? ?? 0C
+-1
+1
+COMMENT 0C = NFC Tag 3
+0
+1
+0
+0
+
+RECEIVE
+35
+Poll tag 3 res (NEO2)
+56 69 56 4F 74 65 63 68 32 00 2C 00 ?? ?? 08
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+36
+Poll tag 4 res
+56 69 56 4F 74 65 63 68 32 00 2C 00 ?? ?? 0D
+-1
+1
+COMMENT 0D = NFC Tag 4
+0
+1
+0
+0
+
+RECEIVE
+37
+Poll tag 4 res (NEO2)
+56 69 56 4F 74 65 63 68 32 00 2C 00 ?? ?? 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

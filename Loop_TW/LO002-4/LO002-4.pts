@@ -1,0 +1,360 @@
+DL_SCRIPTVERSION
+1
+44217
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "LO002-4" ' !!!!! EDIT THIS !!!!!
+' Objective: stress test; Pass-Though mode ON and OFF switch test.Activate transaction by command 02-01 and tap/ swipe/ insert test card on PT-OFF mode. Read/Write NFC Tag2 test card on PT-ON mode.
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result      
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+End Sub
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+sub atformsr()
+    dl.pause 500
+    If result <> 0 Then
+       dl.resetreceivecounter
+       dl.addcomment vbcrlf
+       DL.AddComment "--- 2C-01 PT 0FF"
+       DL.SendSequence "2C-01 PT 0FF"
+    End If
+    dl.pause 500
+    If result <> 0 Then
+       dl.addcomment vbcrlf
+       DL.AddComment "--- 02-40 Activate Transaction Command"
+       DL.SendSequence "        02-40"
+          result = DL.WaitForSequence("02 00", 1, 30000)
+    End If
+end sub
+
+sub atforcl()
+    dl.pause 500
+    If result <> 0 Then
+       dl.resetreceivecounter
+       dl.addcomment vbcrlf
+       DL.AddComment "--- 2C-01 PT 0FF"
+       DL.SendSequence "2C-01 PT 0FF"
+    dl.pause 500
+    End If
+    If result <> 0 Then
+       dl.addcomment vbcrlf
+       DL.AddComment "--- 02-40 Activate Transaction Command"
+       DL.SendSequence "        02-40"
+           result = DL.WaitForSequence("02 23", 1, 30000)
+     End If
+end sub
+
+sub atforicc()
+    dl.pause 500
+    if result <> 0 then
+       dl.resetreceivecounter
+       dl.addcomment vbcrlf
+       DL.AddComment "--- 2C-01 PT 0FF"
+       DL.SendSequence "2C-01 PT 0FF"
+    End If
+    dl.pause 500
+    If result <> 0 Then
+       dl.addcomment vbcrlf
+       DL.AddComment "--- 60-10 Contact Start Transaction"
+       DL.SendSequence "        60-10"
+       result = DL.WaitForSequence("60-xx 63 status", 1, 10000)
+       dl.pause 3000
+       if result <> 0 then
+          msgbox "Click OK, insert card (EMV Test Card, T=0)", vbokonly
+          result = DL.WaitForSequence("60-10 00 10", 1, 30000)
+       end if  
+    end if
+
+    if result <> 0 then
+       dl.resetreceivecounter
+       dl.addcomment vbcrlf
+       DL.AddComment "--- 60-11 Contact Authenticate Transaction"
+       DL.SendSequence "        60-11"
+       result = DL.WaitForSequence("60-xx 63 status", 1, 10000)
+       dl.pause 3000
+       if result <> 0 then
+          result = DL.WaitForSequence("60-11 00 04", 1, 30000)
+       end if  
+    end if
+
+    if result <> 0 then
+       dl.resetreceivecounter
+       dl.addcomment vbcrlf
+       DL.AddComment "--- 60-12 Contact Apply Host Response"
+       DL.SendSequence "        60-12"
+          result = DL.WaitForSequence("60-xx 63 status", 1, 10000)
+       dl.pause 3000
+       if result <> 0 then
+          result = DL.WaitForSequence("60-12 00 02", 1, 20000)
+       end if   
+       msgbox "Remove card, click OK", vbokonly
+    end if
+end sub
+
+sub readNFCtag2()
+    dl.pause 500
+    If result <> 0 Then
+       dl.resetreceivecounter
+       dl.addcomment vbcrlf
+       DL.AddComment "--- 2C-01 PT ON"
+       DL.SendSequence "2C-01 PT ON"
+          result = DL.WaitForSequence("PT command (OK)", 1, 20000)
+    End If
+    dl.pause 500
+    If result <> 0 Then
+       prompt2 = prompt2 & "Please Tap Mifare Ultralight card. When ready click  on OK"
+       result = MsgBox(prompt2, VBOKOnly, "Advanced PassThrough")
+    End If
+    dl.pause 500
+    If result <> 0 Then
+       dl.addcomment vbcrlf
+       DL.AddComment "--- 2C-40 Poll a tag"
+       DL.SendSequence "2C-40 Poll a tag"
+          result = DL.WaitForSequence("nfc tag 2 card type", 1, 30000)
+    End If
+    dl.pause 500
+    If result <> 0 Then
+       dl.addcomment vbcrlf
+       DL.AddComment "--- 2C-40 Tag2 Write Data(4 bytes)"
+       DL.SendSequence "2C-40 Tag2 Write Data(4 bytes)"
+          result = DL.WaitForSequence("PT command (OK)", 1, 30000)
+    End If
+    dl.pause 500
+    If result <> 0 Then
+       dl.addcomment vbcrlf
+       DL.AddComment "--- 2C-40 Tag2 Read Data(16 bytes)"
+       DL.SendSequence "2C-40 Tag2 Read Data(16 bytes)"
+          result = DL.WaitForSequence("read 9 addr", 1, 30000)
+    End If
+end sub
+
+
+sub removecard()
+   If result <> 0 Then
+      prompt2 = prompt2 & "Please remove card. When ready click  on OK"
+      result = MsgBox(prompt2, VBOKOnly, "Advanced PassThrough")
+   End If
+end sub
+
+'------------------------------------------------------------
+if result <> 0 then
+   readercheck = inputbox("Choose the function to run stress test (50 cycles):" & vbcrlf & vbcrlf & "1  ---  CL" & vbcrlf & "2  ---  MSR" & vbcrlf & "3  ---  CT" & vbcrlf & vbcrlf & "4  ---  STOP", "Reader function choice")
+
+   do until result = 0 or readercheck = "4" or readercheck = ""
+
+      if readercheck = "1" then dl.addcomment vbcrlf & vbcrlf & "** 1=CL **"
+      if readercheck = "2" then dl.addcomment vbcrlf & vbcrlf & "** 2=MSR **"
+      if readercheck = "3" then dl.addcomment vbcrlf & vbcrlf & "** 3=CT **"
+      
+      for i = 1 to 50
+          dl.addcomment vbcrlf & vbcrlf & "Cycle: " & i
+          if readercheck = "1" then
+             atforcl()
+             removecard()
+             readNFCtag2()
+             removecard()
+          elseif readercheck = "2" then
+                 atformsr()
+                 removecard()             
+                 readNFCtag2()
+                 removecard()
+          elseif readercheck = "3" then
+                 atforicc()
+                 removecard()             
+                 readNFCtag2()
+                 removecard()
+          end if
+
+          if result = 0 then 
+             i = 51
+          else
+             DL.ClearCommWindows
+          end if
+      next
+
+      if result <> 0 then
+         readercheck = inputbox("Choose the function to run stress test (50 cycles):" & vbcrlf & vbcrlf & "1  ---  CL" & vbcrlf & "2  ---  MSR" & vbcrlf & "3  ---  CT" & vbcrlf & vbcrlf & "4  ---  STOP", "Reader function choice")
+      end if
+   loop
+end if
+'------------------------------------------------------------
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'DL.pause 1000
+
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 

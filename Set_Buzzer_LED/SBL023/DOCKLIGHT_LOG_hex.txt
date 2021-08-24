@@ -1,0 +1,23 @@
+Docklight Log File (HEX) - Started  
+ TEST CASE: SBL023
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 19200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- One Beep and Flash at 500ms blink All
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 01 FF 02 9A 47 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  Passed  
+
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

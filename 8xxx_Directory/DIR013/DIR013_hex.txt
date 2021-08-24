@@ -1,0 +1,24 @@
+Docklight Log File (HEX) - Started 2/10/2016 14:00:13.599 
+ TEST CASE: DIR013
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Delete File - testfile.x in ROOT
+
+2/10/2016 14:00:14.927 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 1F 00 0B 74 65 73 74 66 69 6C 65 2E 78 00 75 CC 
+2/10/2016 14:00:14.986 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 04 00 00 00 02 53 95  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2/10/2016 14:00:16.261 
+

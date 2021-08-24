@@ -1,0 +1,49 @@
+DL_SCRIPTVERSION
+1
+62752
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+'------------------------------------------------------------
+DL.OpenProject "PT05100.ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+
+result = 1
+
+'============================================================
+If result <> 0 Then
+  DL.AddComment "--- Pass-Through - START"
+  DL.SendSequence "Pass-Through - START"
+  result = DL.WaitForSequence("RESPONSE", 1, 10000)
+End If
+If result <> 0 Then
+  DL.AddComment "--- Antenna Control - Enable RF Antenna"
+  DL.SendSequence "Antenna Control - Enable RF Antenna"
+  result = DL.WaitForSequence("RESPONSE", 1, 10000)
+End If
+If result <> 0 Then
+  DL.AddComment "--- Poll for Token (10 seconds and 20ms)"
+  DL.SendSequence "Poll for Token (10 seconds and 20ms)"
+  result = DL.WaitForSequence("RESPONSE", 1, 10000)
+End If
+'------------------------------------------------------------
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter "Transaction Response"
+  DL.SendSequence "Activate Transaction"
+  result = DL.WaitForSequence("Transaction Response", 1, 20000)
+End If
+'------------------------------------------------------------
+DL.pause 1000
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+

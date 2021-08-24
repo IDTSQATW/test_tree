@@ -1,0 +1,256 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM4
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Enable Pass Through
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19
+0
+5
+
+SEND
+1
+Pass-Through - STOP
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38
+0
+5
+
+SEND
+2
+Pass-Through - STOP flip CRC
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 38 0D
+0
+5
+
+SEND
+3
+Enable Antenna
+56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 94 1F
+0
+5
+
+SEND
+4
+Enable Antenna flip CRC
+56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 1F 94
+0
+5
+
+SEND
+5
+Disable Antenna
+56 69 56 4F 74 65 63 68 32 00 28 01 00 01 00 84 3E
+0
+5
+
+SEND
+6
+Poll for Token (10 Seconds)
+56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51
+0
+5
+
+SEND
+7
+High Level Halt cmd (2c-09) Type B
+56 69 56 4F 74 65 63 68 32 00 2C 09 00 01 02 A8 B9
+0
+5
+
+SEND
+8
+High Level Halt cmd (2c-09) Type A
+56 69 56 4F 74 65 63 68 32 00 2C 09 00 01 01 A8 B9
+0
+5
+
+SEND
+9
+Poll for Token (10 Seconds) flip CRC 
+56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 51 E3
+0
+5
+
+SEND
+10
+Control LED
+56 69 56 4F 74 65 63 68 32 00 0A 02 00 02 03 01 A3 B4
+0
+5
+
+SEND
+11
+Control LED flip CRC
+56 69 56 4F 74 65 63 68 32 00 0A 02 00 02 03 01 B4 A3
+0
+5
+
+SEND
+12
+Control Buzzer Short 
+56 69 56 4F 74 65 63 68 32 00 0B 01 00 01 02 1A 42
+0
+5
+
+SEND
+13
+Control Buzzer Short flip CRC
+56 69 56 4F 74 65 63 68 32 00 0B 01 00 01 02 42 1A
+0
+5
+
+SEND
+14
+Control Buzzer Long
+56 69 56 4F 74 65 63 68 32 00 0B 02 00 01 02 C6 D9
+0
+5
+
+SEND
+15
+Control Buzzer Long flip CRC
+56 69 56 4F 74 65 63 68 32 00 0B 02 00 01 02 D9 C6
+0
+5
+
+SEND
+16
+Ping reader
+56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD
+0
+5
+
+RECEIVE
+0
+Pass-Through - START and STOP (OK)
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B
+-1
+1
+COMMENT Pass-Through - START and STOP (OK)
+1
+1
+0
+1
+
+RECEIVE
+1
+Antenna Disabled (OK)
+56 69 56 4F 74 65 63 68 32 00 28 00 00 00 D6 6A
+-1
+1
+COMMENT Antenna Disabled (OK)
+1
+1
+0
+1
+
+RECEIVE
+2
+Poll for Token (10 Seconds) (OK)
+56 69 56 4F 74 65 63 68 32 00 2C 00 00
+-1
+1
+COMMENT Poll for Token (10 Seconds) (OK)
+1
+1
+0
+1
+
+RECEIVE
+3
+Poll for Token resp (card type 7 OK)
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 ?? 07 ?? ??
+-1
+1
+COMMENT Poll for Token (10 Seconds) (OK)
+1
+1
+0
+1
+
+RECEIVE
+4
+Poll for Token resp (card type 3 OK)
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 ?? 03 ?? ??
+-1
+1
+COMMENT Poll for Token (10 Seconds) (OK)
+1
+1
+0
+1
+
+RECEIVE
+5
+Poll for Token resp (card type 2 OK)
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 ?? 02 ?? ??
+-1
+1
+COMMENT Poll for Token (10 Seconds) (OK)
+1
+1
+0
+1
+
+RECEIVE
+6
+Poll for Token resp (card type 1 OK)
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 ?? 03 ?? ??
+-1
+1
+COMMENT Poll for Token (10 Seconds) (OK)
+1
+1
+0
+1
+
+RECEIVE
+7
+Control LED OK
+56 69 56 4F 74 65 63 68 32 00 0A 00 00 00 0C 4C
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+8
+Control Buzzer OK
+56 69 56 4F 74 65 63 68 32 00 0B 00 00 00 7A F8
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+9
+Ping resp
+56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

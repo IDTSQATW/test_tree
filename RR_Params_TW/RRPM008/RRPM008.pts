@@ -1,0 +1,318 @@
+DL_SCRIPTVERSION
+1
+47224
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "RRPM008" ' !!!!! EDIT THIS !!!!!
+'+++
+' This test case is to verify Set VISA DRL reader risk params (Index 2) do not affect the default params
+' when DRL RR is enabled
+'---
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  genFlag = result
+Loop
+
+Sub StepPrompt(PromptString)
+	DL.AddComment PromptString
+	'If Prompting(1) = "ON" Then
+		MsgBox PromptString, VBOKOnly, "Test Step"
+	'Else
+	'End If
+	
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+Function ReverseResult(ResultParam)
+	If ResultParam = 1 Then
+		result = 0
+	ElseIf ResultParam = 0 Then
+		result = 1
+	End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+	DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+	MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+
+
+'------------------------------------------------------------
+'Prompt of test being run
+'------------------------------------------------------------
+If Prompting(0) = "ON" Then
+  MyInput = MsgBox("You will now run test PT05109." &Chr(13) & "Objective: Poll For Token 210 sec 300ms", VBOKOnly, "Test: PT05110")
+End If
+'------------------------------------------------------------
+
+ If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Poll on Demand (01-01)"
+  DL.SendSequence "Poll on Demand (01-01)"
+  result = DL.WaitForSequence("generic 01-xx cmd resp", 1, 5000)
+ End If
+
+ If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Set Param to Default (04-09)"
+  DL.SendSequence "Set Param to Default (04-09)"
+  result = DL.WaitForSequence("generic 04-xx cmd resp", 1, 15000)
+ End If
+
+ If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- enable DRL RR  (FFF4)"
+  DL.SendSequence "enable DRL RR  (FFF4)"
+  result = DL.WaitForSequence("generic 04-xx cmd resp", 1, 5000)
+ End If
+
+ If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get Params (03-02)"
+  DL.SendSequence "Get Params (03-02)"
+  result = DL.WaitForSequence("get param (03-02) cmd resp", 1, 6000)
+  dl.pause 1000
+ End If
+
+ If result <> 0 Then
+   result = DL.WaitForSequence("default 9F66 (TTQ) resp", 1, 1000)
+ End If
+
+ If result <> 0 Then
+  result = DL.WaitForSequence("default 9F1B (Terminal floor limit) resp", 1, 1000)
+ End If
+
+ If result <> 0 Then
+   result = DL.WaitForSequence("default FFF1 (terminal CL trans limit) resp", 1, 1000)
+ End If
+
+ If result <> 0 Then
+    result = DL.WaitForSequence("default FFF5 (CVM req'd limit) resp", 1, 1000)
+ End If
+
+ If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- set DRL RR params (04-0e) index 2"
+  DL.SendSequence "set DRL RR params (04-0e) index 2"
+  result = DL.WaitForSequence("generic 04-xx cmd resp", 1, 6000)
+ End If
+
+ If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get DRL RR params (03-0e) Index2"
+  DL.SendSequence "get DRL RR params (03-0e) Index2"
+  result = DL.WaitForSequence("get DRL RR params (03-0e) Index2 resp", 1, 6000)
+ End If
+
+ DL.Pause 3000
+ 
+ If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get Params (03-02)"
+  DL.SendSequence "Get Params (03-02)"
+  result = DL.WaitForSequence("get param (03-02) cmd resp", 1, 6000)
+  dl.pause 1000
+ End If
+
+ If result <> 0 Then
+   result = DL.WaitForSequence("default 9F66 (TTQ) resp", 1, 1000)
+ End If
+
+ If result <> 0 Then
+  result = DL.WaitForSequence("default 9F1B (Terminal floor limit) resp", 1, 1000)
+ End If
+
+ If result <> 0 Then
+   result = DL.WaitForSequence("default FFF1 (terminal CL trans limit) resp", 1, 1000)
+ End If
+
+ If result <> 0 Then
+    result = DL.WaitForSequence("default FFF5 (CVM req'd limit) resp", 1, 1000)
+ End If
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If 0 Then
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+	MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+	MasterVerdict = "FAILED"
+End If
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+
+'------------------------------------------------------------
+' WRITE FINAL VERDICT FILE(!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub

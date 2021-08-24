@@ -1,0 +1,208 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM4
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+------------- Delete File 83 1f ---------------
+
+0
+5
+
+SEND
+1
+Delete File - testfile.x in ROOT
+56 69 56 4F 74 65 63 68 32 00 83 1F 00 0B 74 65 73 74 66 69 6C 65 2E 78 00 75 CC
+0
+5
+
+SEND
+2
+Delete File - applefile.x in ROOT/apple
+56 69 56 4F 74 65 63 68 32 00 83 1F 00 12 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 C0 48
+0
+5
+
+SEND
+3
+-------------- List Directory 83 22 -----------------
+
+0
+5
+
+SEND
+4
+List Directory (83-22) - Recursive
+56 69 56 4F 74 65 63 68 32 00 83 22 00 04 31 30 00 00 9D 9B
+0
+5
+
+SEND
+5
+---------------------- Get Drive Space 83 23 ----------------
+
+0
+5
+
+SEND
+6
+Check Free Space on Drive (83-23)
+56 69 56 4F 74 65 63 68 32 00 83 23 00 00 95 FD
+0
+5
+
+SEND
+7
+------------- Transfer File 83 24 -------------
+
+0
+5
+
+SEND
+8
+File Download - part 1 - testfile.x:20bytes
+56 69 56 4F 74 65 63 68 32 00 83 24 00 1A 74 65 73 74 66 69 6C 65 2E 78 00 32 30 00 30 00 61 61 61 61 61 61 61 61 61 62 D8 B5
+0
+5
+
+SEND
+9
+File Download - part 2 - testfile.x:20bytes
+56 69 56 4F 74 65 63 68 32 00 83 24 00 1A 74 65 73 74 66 69 6C 65 2E 78 00 32 30 00 31 00 63 63 63 63 63 63 63 63 63 64 6A 0B
+0
+5
+
+SEND
+10
+File Download - part 1 - apple/applefile.x:30bytes
+56 69 56 4F 74 65 63 68 32 00 83 24 00 21 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 33 30 00 30 00 61 61 61 61 61 61 61 61 61 62 B5 47
+0
+5
+
+SEND
+11
+File Download - part 2 - apple/applefile.x:30bytes
+56 69 56 4F 74 65 63 68 32 00 83 24 00 21 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 33 30 00 30 00 63 63 63 63 63 63 63 63 63 64 72 FA
+0
+5
+
+SEND
+12
+File Download - part 3 - apple/applefile.x:30bytes
+56 69 56 4F 74 65 63 68 32 00 83 24 00 21 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 00 33 30 00 31 00 65 65 65 65 65 65 65 65 65 66 67 AE
+0
+5
+
+SEND
+13
+ ----------------- Create Directory 83 25 --------------
+
+0
+5
+
+SEND
+14
+Create Directory 'apple' (83-25)
+56 69 56 4F 74 65 63 68 32 00 83 25 00 06 61 70 70 6C 65 00 11 7E
+0
+5
+
+SEND
+15
+------------ Delete Directory 83 26 ------------
+
+0
+5
+
+SEND
+16
+Delete Directory - apple
+56 69 56 4F 74 65 63 68 32 00 83 26 00 06 61 70 70 6C 65 00 55 53
+0
+5
+
+RECEIVE
+0
+FREE SPACE OK
+56 69 56 4F 74 65 63 68 32 00 83 00 00 0E
+-1
+1
+COMMENT FREE SPACE OK
+1
+1
+0
+1
+
+RECEIVE
+1
+List Directory OK
+56 69 56 4F 74 65 63 68 32 00 83 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+testfile.x uploaded OK
+56 69 56 4F 74 65 63 68 32 00 83 00 00 0E 74 65 73 74 66 69 6C 65 2E 78 3A 32 30 00 90 D9
+-1
+1
+COMMENT testfile.x uploaded OK
+1
+1
+0
+1
+
+RECEIVE
+3
+.\apple directory created OK
+56 69 56 4F 74 65 63 68 32 00 83 00 00 15 61 70 70 6C 65 2F 2C 74 65 73 74 66 69 6C 65 2E 78 3A 32 30 00 0E 1A
+-1
+1
+COMMENT .\apple directory created OK
+1
+1
+0
+1
+
+RECEIVE
+4
+applefile.x uploaded OK
+56 69 56 4F 74 65 63 68 32 00 83 00 00 2A 61 70 70 6C 65 2F 2C 61 70 70 6C 65 2F 61 70 70 6C 65 66 69 6C 65 2E 78 3A 33 30 2C 74 65 73 74 66 69 6C 65 2E 78 3A 32 30 00 CC 36
+-1
+1
+COMMENT applefile.x uploaded OK
+1
+1
+0
+1
+
+RECEIVE
+5
+Error Response
+56 69 56 4F 74 65 63 68 32 00 83 05 00 04 ##
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

@@ -1,0 +1,43 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Buzzer Control - Invalid Buzzer Control sub-command (1Ah)
+56 69 56 4F 74 65 63 68 32 00 0B 1A 00 01 01 77 C1
+0
+5
+
+SEND
+1
+Invalid Short Buzzer parameter '00'
+56 69 56 4F 74 65 63 68 32 00 0B 01 00 01 00 62 58
+0
+5
+
+RECEIVE
+0
+Buzzer Control - Invalid Short Buzzer parameter '00' acknowledged (OK)
+56 69 56 4F 74 65 63 68 32 00 0B 05
+-1
+1
+COMMENT Buzzer Control - Invalid Short Buzzer parameter '00' acknowledged (OK)
+1
+1
+0
+1
+

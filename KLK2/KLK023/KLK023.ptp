@@ -1,0 +1,36 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Continue Bootup For Bootloader with no KLK
+56 69 56 4F 74 65 63 68 32 00 77 06 00 00 1F C5
+0
+5
+
+RECEIVE
+0
+No KLK Response
+56 69 56 4F 74 65 63 68 32 00 77 03 00 00 2E EF
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

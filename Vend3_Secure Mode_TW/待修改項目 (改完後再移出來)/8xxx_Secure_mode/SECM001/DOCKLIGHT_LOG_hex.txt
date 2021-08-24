@@ -1,0 +1,12 @@
+Docklight Log File (HEX) - Started 2015/6/16 14:15:24.663 
+ TEST CASE: SECM001
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+
+
+Docklight Log File (HEX) - Stopped 2015/6/16 14:15:25.307 
+

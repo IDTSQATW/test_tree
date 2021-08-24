@@ -1,0 +1,18 @@
+Docklight Log File (HEX) - Started 11/14/2008 13:58:24.05 
+ --- Pass-Through - STOP
+
+11/14/2008 13:58:24.08 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38 
+11/14/2008 13:58:24.25 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START or STOP (SUCCESS)
+ --- Pass-Through - START
+
+11/14/2008 13:58:25.82 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+11/14/2008 13:58:26.25 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START or STOP (SUCCESS)
+ --- Antenna Control - Sending invalid control byte data
+
+11/14/2008 13:58:28.61 [TX] - 56 69 56 4F 74 65 63 68 32 00 28 01 00 01 05 D4 9B 
+11/14/2008 13:58:29.25 [RX] - 56 69 56 4F 74 65 63 68 32 00 28 05 00 00 3D 9A  Antenna Control - Incorrect Parameter 05h returned (SUCCESS)
+ Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped 11/14/2008 13:58:31.44 
+

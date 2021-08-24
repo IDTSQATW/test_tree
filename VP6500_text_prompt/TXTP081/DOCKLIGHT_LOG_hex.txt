@@ -1,0 +1,24 @@
+Docklight Log File (HEX) - Started  
+ TEST CASE: txtp081
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM5 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Vivotech, inc. Font 1
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 83 03 00 19 30 00 30 00 31 00 31 00 30 00 76 69 76 6F 74 65 63 68 2C 20 69 6E 63 2E 00 5E 30 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 04 00 03 00 07 5A 60  
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped  
+

@@ -1,0 +1,24 @@
+Docklight Log File (HEX) - Started 10/29/2013 15:12:27.171 
+ TEST CASE: DTX001-01
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM4 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+This test case is for 8800 only (Skipped)
+
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 10/29/2013 15:13:06.388 
+

@@ -1,0 +1,22 @@
+Docklight Log File (HEX) - Started 2018/1/16 14:57:11.148 
+ TEST CASE: EGN18-4
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM90 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+It is not for testing USA Tech functions.
+
+ 
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 2018/1/16 14:57:14.024 
+

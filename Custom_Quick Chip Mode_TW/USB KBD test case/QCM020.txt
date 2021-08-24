@@ -1,0 +1,50 @@
+Objective: (Enc OFF) CL transaction for ApplePay/ AndroidPay
+
+======================================
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 01 00 00 00
+
+--------------------
+>>> CL transaction
+SWIPEKB: click OK, then tap mobile phone (ApplePay -- AMEX card)
+EXR: FF EE 13
+EXR: FF EE 14
+EXR: 57
+EXR: 9F 39 01 91
+EXR: FF EE 01
+EXR: DF 30 01 00
+EXR: DF EE 26 01 11
+EXR: DF EF 4C 06
+EXR: DF EF 4D
+
+>>> CL transaction
+SWIPEKB: click OK, then tap mobile phone (AndroidPay)
+EXR: FF EE 01
+EXR: DF 30 01 00
+EXR: DF EE 26
+EXR: DF EF 4C 06
+EXR: DF EF 4D 
+
+======================================
+>>> Quick Chip mode = 04
+CMD: 01 01 04
+EXR: 01 00 00 00
+
+--------------------
+>>> CL transaction
+SWIPEKB: click OK, then tap mobile phone (ApplePay -- AMEX card)
+EXR: FF EE 13
+EXR: FF EE 14
+EXR: 57
+EXR: 9F 39 01 91
+EXR: FF EE 01
+EXR: DF 30 01 00
+EXR: DF EE 26 01 11
+EXR: DF EF 4C 06
+EXR: DF EF 4D
+
+======================================
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 01 00 00 00

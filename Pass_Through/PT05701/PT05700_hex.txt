@@ -1,0 +1,45 @@
+Docklight Log File (HEX) - Started 2/10/2009 10:51:43.11 
+ TEST CASE: PT05700
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Pass-Through Mode - (START)
+
+2/10/2009 10:51:44.56 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+2/10/2009 10:51:44.88 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00  Mifare Read Block - Count 01 - Block 01 RESPONSE (OK)
+
+2/10/2009 10:51:44.88 [RX] - 00  Poll for Token - Card Read (OK)
+
+2/10/2009 10:51:44.88 [RX] - 00 1C 9B  Pass-Through Mode - (STOP)  (OK)
+ Pass-Through Mode - (START) (OK)
+ Result = PASSED
+ --- Poll for Token - Card Read (OK)
+ Press OK, then tap a card.
+
+2/10/2009 10:51:47.34 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51 
+2/10/2009 10:51:48.44 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00  Mifare Read Block - Count 01 - Block 01 RESPONSE (OK)
+
+2/10/2009 10:51:48.44 [RX] - 00  Poll for Token - Card Read (OK)
+
+2/10/2009 10:51:48.44 [RX] - 05 03 CA EE 51 40 EF 57  
+
+ Result = PASSED
+ --- Mifare Read Block - Count 01 - Block 01 RESPONSE
+
+2/10/2009 10:51:50.00 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 01 5B FD 
+2/10/2009 10:51:50.30 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 0A 00 00 DB 5A  
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 2/10/2009 10:52:13.82 
+

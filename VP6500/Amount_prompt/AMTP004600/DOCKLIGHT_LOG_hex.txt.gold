@@ -1,0 +1,25 @@
+Docklight Log File (HEX) - Started  
+ TEST CASE: AMTP004600
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Display center of screen Inval Amt
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 83 04 00 12 00 00 31 00 32 00 35 00 80 00 61 62 63 2E 31 32 33 00 CE F2 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 04 00 01 00 08 C5 EF  Display center of screen Inval Amt - OK
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

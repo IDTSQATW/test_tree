@@ -1,0 +1,31 @@
+Docklight Log File (HEX) - Started 12/6/2011 16:46:35.550 
+ TEST CASE: PT05200
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM3 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Pass-Through Mode - (START)
+
+12/6/2011 16:46:37.271 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+12/6/2011 16:46:37.274 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through Mode - (STOP)  (OK)
+ Pass-Through Mode - (START) (OK)
+ Result = PASSED
+ --- Poll for Token - Poll For Token Invalid timeout 00 01 FF
+ Press OK, then DO NOT tap a card -OR- tap a card that you know WILL NOT be recognized AT ALL.
+
+12/6/2011 16:46:46.054 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51 
+12/6/2011 16:46:56.069 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 08 00 04 00 00 00 0A 67 BC  
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 12/6/2011 16:47:08.828 
+

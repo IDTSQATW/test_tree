@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+    <settings type="Usbhid" vid="0ACD" pid="3520"/>
+    <settings type="Usbhid" vid="0ACD" pid="3130"/>
+    <settings type="Usbhid" vid="0ACD" pid="3510"/>
+    <settings type="Usbhid" vid="0ACD" pid="3530"/>
+    <settings type="Usbhid" vid="0ACD" pid="3540"/>
+    <settings type="Usbhid" vid="0ACD" pid="3140"/>
+</config>

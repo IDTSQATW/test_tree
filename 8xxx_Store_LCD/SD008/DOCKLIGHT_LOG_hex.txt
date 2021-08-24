@@ -1,0 +1,27 @@
+Docklight Log File (HEX) - Started  
+ TEST CASE: SD008
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 19200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Store LCD SD008.3
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 03 00 1B 00 16 00 00 00 25 50 63 63 63 63 25 46 33 57 65 6C 25 50 30 30 30 30 63 6F 6D 65 28 C2 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 03 00 00 4B 03  Error Response as Expected  --- Store LCD SD008.4
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 03 00 15 00 10 00 00 00 25 50 63 63 63 63 25 46 33 57 65 6C 63 6F 6D 65 7E 68 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 03 00 00 4B 03  Error Response as Expected  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

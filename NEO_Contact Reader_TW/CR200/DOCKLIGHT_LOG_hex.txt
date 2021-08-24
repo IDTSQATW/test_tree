@@ -1,0 +1,12 @@
+Docklight Log File (HEX) - Started 2021/3/24 11:46:40.697 
+ TEST CASE: CR200
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM90 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+
+
+Docklight Log File (HEX) - Stopped 2021/3/24 11:46:40.995 
+

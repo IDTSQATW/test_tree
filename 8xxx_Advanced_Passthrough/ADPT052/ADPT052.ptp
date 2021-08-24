@@ -1,0 +1,596 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+-----------------------------------Basic Passthrough Commands----------------------------
+
+0
+5
+
+SEND
+1
+Pass-Through Mode, Start  Note: CRC LSB/MSB Manual Coding
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19
+0
+5
+
+SEND
+2
+PT Atenna Control, Enable Note: CRC LSB/MSB Manual Coding
+56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 94 1F
+0
+5
+
+SEND
+3
+PT Atenna Control, Disable Note: CRC LSB/MSB Manual Coding
+56 69 56 4F 74 65 63 68 32 00 28 01 00 01 00 84 3E
+0
+5
+
+SEND
+4
+Pass-Through Mode, Stop Note: CRC LSB/MSB Manual Coding
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38
+0
+5
+
+SEND
+5
+PT Poll for Token Note: CRC LSB/MSB Manual Coding
+56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 00 B1 E4
+0
+5
+
+SEND
+6
+------------------------------------------Beep----------------------------------------------
+00
+0
+5
+
+SEND
+7
+NCR Pass Through - Antenna On, Poll Token Off, No Beep, LED 0 On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 00 00 01 7E 58
+0
+5
+
+SEND
+8
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED 0 On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 01 00 01 49 68
+0
+5
+
+SEND
+9
+NCR Pass Through - Antenna On, Poll Token Off, 2 Beep, LED 0 On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 02 00 01 10 38
+0
+5
+
+SEND
+10
+NCR Pass Through - Antenna On, Poll Token Off, 3 Beep, LED 0 On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 03 00 01 27 08
+0
+5
+
+SEND
+11
+NCR Pass Through - Antenna On, Poll Token Off, 4 Beep, LED 0 On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 04 00 01 A2 98
+0
+5
+
+SEND
+12
+NCR Pass Through - Antenna On, Poll Token Off, 5 Beep, LED 0 On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 05 00 01 95 A8
+0
+5
+
+SEND
+13
+NCR Pass Through - Antenna On, Poll Token Off, 6 Beep, LED 0 On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 06 00 01 CC F8
+0
+5
+
+SEND
+14
+NCR Pass Through - Antenna On, Poll Token Off, 7 Beep, LED 0 On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 07 00 01 FB C8
+0
+5
+
+SEND
+15
+NCR Pass Through - Antenna On, Poll Token Off, 8 Beep, LED 0 On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 08 00 01 D7 F9
+0
+5
+
+SEND
+16
+-------------------------------------------LED-------------------------------------
+
+0
+5
+
+SEND
+17
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED 0 On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 01 00 01 49 68
+0
+5
+
+SEND
+18
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED 1 On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 01 01 01 7A 59
+0
+5
+
+SEND
+19
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED 2 On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 01 02 01 2F 0A
+0
+5
+
+SEND
+20
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED 3 On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 01 03 01 1C 3B
+0
+5
+
+SEND
+21
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED Out Of Range
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 01 04 01 85 AC
+0
+5
+
+SEND
+22
+---------------------------------------LED OFF-----------------------------------------
+
+0
+5
+
+SEND
+23
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED 0 Off
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 01 00 00 59 49
+0
+5
+
+SEND
+24
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED 1 Off
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 01 01 00 6A 78
+0
+5
+
+SEND
+25
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED 2 Off
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 01 02 00 3F 2B
+0
+5
+
+SEND
+26
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED 3 Off
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 01 03 00 0C 1A
+0
+5
+
+SEND
+27
+---------------------------------------LED Blink-----------------------------------------
+
+0
+5
+
+SEND
+28
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED 0 Blink
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 01 00 02 79 0B
+0
+5
+
+SEND
+29
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED 1 Blink
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 01 01 02 4A 3A
+0
+5
+
+SEND
+30
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED 2 Blink
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 01 02 02 1F 69
+0
+5
+
+SEND
+31
+NCR Pass Through - Antenna On, Poll Token Off, 1 Beep, LED 3 Blink
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 00 01 03 02 2C 58
+0
+5
+
+SEND
+32
+-----------------------------------Single Shot Options-----------------------------------
+
+0
+5
+
+SEND
+33
+NCR Pass Through - Antenna On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 01 00 01 00 01 4F 1F
+0
+5
+
+SEND
+34
+NCR Pass Through - Antenna Off
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 02 00 01 00 01 A1 CD
+0
+5
+
+SEND
+35
+NCR Pass Through - Antenna On, Poll Token On, 1 Beep, LED 0 On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 1D 00 01 00 01 C0 6E
+0
+5
+
+SEND
+36
+NCR Pass Through - Antenna On And Off Mutually Eclusive Test
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 03 00 01 00 01 0B 9C
+0
+5
+
+SEND
+37
+NCR Pass Through - Poll For Token, Antenna On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 05 00 01 00 01 C6 19
+0
+5
+
+SEND
+38
+NCR Pass Through - Poll For Token, Antenna Off
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 06 00 01 00 01 28 CB
+0
+5
+
+SEND
+39
+NCR Pass Through - Poll For Token, Antenna Off and On
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 07 00 01 00 01 82 9A
+0
+5
+
+SEND
+40
+NCR Pass Through - Use LED Only
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 08 00 01 00 01 E7 63
+0
+5
+
+SEND
+41
+NCR Pass Through - Antenna On, Use LED
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 09 00 01 00 01 4D 32
+0
+5
+
+SEND
+42
+NCR Pass Through - Antenna off, Use LED
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 0A 00 01 00 01 A3 E0
+0
+5
+
+SEND
+43
+NCR Pass Through - Antenna Off and On, Use LED
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 0B 00 01 00 01 09 B1
+0
+5
+
+SEND
+44
+NCR Pass Through - Poll Token, Use LED
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 0C 00 01 00 01 6E 65
+0
+5
+
+SEND
+45
+NCR Pass Through - Antenna On, Poll Token, Use LED
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 0D 00 01 00 01 C4 34
+0
+5
+
+SEND
+46
+NCR Pass Through - Antenna Off, Poll Token, Use LED
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 0E 00 01 00 01 2A E6
+0
+5
+
+SEND
+47
+NCR Pass Through - Antenna On And Off, Poll Token, Use LED
+56 69 56 4F 74 65 63 68 32 00 2C 0F 00 05 0F 00 01 00 01 8F DA
+0
+5
+
+SEND
+48
+-----------------------------------LCD Index------------------------------------------
+
+0
+5
+
+SEND
+49
+NCR Pass Through - LCD Index 1
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 01 01 00 01 3F DC
+0
+5
+
+SEND
+50
+NCR Pass Through - LCD Index 2
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 02 01 00 01 A4 00
+0
+5
+
+SEND
+51
+NCR Pass Through - LCD Index 3
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 03 01 00 01 D2 B4
+0
+5
+
+SEND
+52
+NCR Pass Through - LCD Index 4
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 04 01 00 01 83 99
+0
+5
+
+SEND
+53
+NCR Pass Through - LCD Index 5
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 05 01 00 01 F5 2D
+0
+5
+
+SEND
+54
+NCR Pass Through - LCD Index 6
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 06 01 00 01 6E F1
+0
+5
+
+SEND
+55
+NCR Pass Through - LCD Index 7
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 07 01 00 01 18 45
+0
+5
+
+SEND
+56
+NCR Pass Through - LCD Index 8
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 08 01 00 01 CC AB
+0
+5
+
+SEND
+57
+NCR Pass Through - LCD Index 9
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 09 01 00 01 BA 1F
+0
+5
+
+SEND
+58
+NCR Pass Through - LCD Index 0A
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 0A 01 00 01 21 C3
+0
+5
+
+SEND
+59
+NCR Pass Through - LCD Index OB
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 05 19 0B 01 00 01 57 77
+0
+5
+
+SEND
+60
+----------------------------------80 mask Amount----------------------------------------------
+
+0
+5
+
+SEND
+61
+NCR Pass Through - Amount 0.02
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 0E 19 86 01 00 01 00 00 24 00 30 2E 30 32 00 60 54
+0
+5
+
+SEND
+62
+NCR Pass Through - Amount 1999.55
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 11 19 86 01 00 01 00 00 24 00 31 39 39 39 2E 35 35 00 26 85
+0
+5
+
+SEND
+63
+NCR Pass Through - 86 command Amount 0.02
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 10 19 86 01 00 00 00 00 31 31 48 45 4C 4C 4F 20 57 2C D2
+0
+5
+
+SEND
+64
+----------------------------- Advanced Passthrough FE -------------------------------
+
+0
+5
+
+SEND
+65
+NCR Pass Through - FE Hell
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 0C 19 FE 01 00 01 00 00 48 45 4C 4C 00 6A F0
+0
+5
+
+SEND
+66
+NCR Pass Through - FE Hello World Null Terminated with Formating
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 17 19 FE 01 00 01 00 00 25 50 63 63 63 63 25 46 32 48 45 4C 4C 4F 57 00 69 2E
+0
+5
+
+SEND
+67
+NCR Pass Through - 7 Char FE Hello World Null Terminated Formatting
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 18 19 FE 01 00 01 00 00 25 50 63 63 63 63 25 46 32 48 45 4C 4C 4F 57 4F 00 0B B2
+0
+5
+
+SEND
+68
+NCR Pass Through - FE Hello World Null Terminated formatted
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 1C 19 FE 01 00 01 00 00 25 50 63 63 63 63 25 46 32 48 45 4C 4C 4F 20 57 4F 52 4C 44 00 B2 9E
+0
+5
+
+SEND
+69
+NCR With out Formating and wrapped
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 1E 01 FE 00 00 00 00 00 57 65 6C 63 6F 6D 65 20 54 68 69 73 20 69 73 20 61 20 54 45 53 54 00 2F 7D
+0
+5
+
+SEND
+70
+FE New Line
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 1E 01 FE 00 00 00 00 00 25 50 63 63 63 63 25 46 30 57 65 6C 63 6F 6D 65 0A 24 31 2E 30 30 00 65 4A
+0
+5
+
+SEND
+71
+FE Multiple Formats
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 22 01 FE 00 00 00 00 00 25 50 63 63 31 35 25 46 30 53 4F 4C 44 45 0A 25 50 63 63 33 35 24 31 2E 30 30 00 C2 E6
+0
+5
+
+SEND
+72
+-------------------------------Test Version No Need to Run------------------------------------------------
+00
+0
+5
+
+SEND
+73
+NCR Pass Through - 46 Command "100"
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 0A 19 46 01 00 02 00 00 31 30 30 E4 D4
+0
+5
+
+SEND
+74
+NCR Pass Through - 47 Command Amount 0.02
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 0E 19 47 01 00 02 00 00 24 00 30 2E 30 32 00 00 00
+0
+5
+
+SEND
+75
+-------------------------------------------junk ---------------------------
+
+0
+5
+
+SEND
+76
+STORE LCD MESSAGE - Index 08 "HELLO WORLD" Centered
+56 69 56 4F 74 65 63 68 32 00 01 03 00 19 08 14 00 00 00 25 50 63 63 63 63 25 46 32 48 45 4C 4C 4F 20 57 4F 52 4C 44 00 00
+0
+5
+
+SEND
+77
+STORE LCD MESSAGE - Index 09 "HELLO WORLD" 2 Lines
+56 69 56 4F 74 65 63 68 32 00 01 03 00 1F 09 1A 00 00 00 25 50 63 63 31 35 25 46 32 48 45 4C 4C 4F 0A 25 50 63 63 33 35 57 4F 52 4C 44 00 00
+0
+5
+
+SEND
+78
+STORE LCD MESSAGE - Index 0A "HELLO WORLD" Not Centered
+56 69 56 4F 74 65 63 68 32 00 01 03 00 19 0A 14 00 00 00 25 50 30 30 30 30 25 46 32 48 45 4C 4C 4F 20 57 4F 52 4C 44 00 00
+0
+5
+
+SEND
+79
+SET LCD MESSAGE - Index x
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 ?? 00 00 00 00 00
+0
+5
+
+SEND
+80
+New
+56 69 56 4F 74 65 63 68 32 00 2C 0B 00 07 05 00 01 00 01 00 00 00 00
+0
+5
+
+RECEIVE
+0
+Pass Through Response
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B
+-1
+1
+COMMENT Pass
+0
+1
+0
+0
+

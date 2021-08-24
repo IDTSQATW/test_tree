@@ -1,0 +1,745 @@
+DL_SCRIPTVERSION
+1
+50476
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "swipeCardsTestPodSync-01" ' !!!!! EDIT THIS !!!!!
+'This test script is to characterize card read behaviors (e.g w/ various speeds, various cards)  
+'------------------------------------------------------------
+
+If 1 Then ' defaul settings used for robot 
+cfgDuration = 10			'Duration between swipes (in sec)
+cfgNumberOfIterations = 20 	'Change swipe speed at x number of iterations
+cfgNumberOfSpeedSteps = 26	'Run x number of different speeds
+cfgSelCard = 2			'Select test card. 1=qCard, 2=IDT STD card 
+Else
+cfgDuration = 10			'Duration between swipes (in sec)
+cfgNumberOfIterations = 1 	'Change swipe speed at x number of iterations
+cfgNumberOfSpeedSteps = 10	'Run x number of different speeds
+cfgSelCard = 2			'Select test card. 1=qCard, 2=IDT STD card
+End If
+
+'------------------------------------------------------------
+Date_Time = "D" & Year(Now) & "." & Month(Now)  & "." & Day(Now) & "_T" & Hour(Now) & "." & Minute(Now) &  "." & Second(Now)
+
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile "Loop.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result 
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+'   
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG_" & DATE_TIME ,False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'-------------------------------------------------------------
+' sub for card present token
+'-------------------------------------------------------------
+Sub sendToken (token_ID)
+FileOutput.CreateFile "DLtoken.tkn", False, True
+FileOutput.WriteLine token_ID
+FileOutput.CloseFile
+End Sub
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 1
+
+Sub PrintMyResult(ResultX)
+
+      If ResultX = 0 Then
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      ElseIf ResultX = 1 Then
+            DL.AddComment "Result = PASSED"
+      End If
+
+End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+'-------------------------------------------------------------
+doIt = 0
+msrFlg = 1
+actDuration = (cfgDuration + 2) * 1000
+tmoVal = actDuration
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'-----------------------------------------------------------
+result = 1
+ACounter = 1
+pCounter = 1
+errCounter = 0
+noRespErrCounter = 0
+track1ErrCounter = 0
+track2ErrCounter = 0
+track3ErrCounter = 0
+speed_step = 1
+
+  DL.AddComment "Test script swipeCardsTestPodSync-01 Ver0.0.3"
+
+  DL.AddComment "Present card every " & cfgDuration & " seconds as configured."
+  'DL.AddComment "Timeout is set at " &  tmoVal  & " miliseconds."
+  DL.AddComment "Swipe speed changes every " & cfgNumberOfIterations & " iterations as configured."
+  DL.AddComment "Number of speed steps (changes) is " & cfgNumberOfSpeedSteps & " as configured."
+Select Case cfgSelCard
+  Case 1
+  DL.AddComment "qCard is selected for this test ..." & vbCrLf
+  Case 2
+  DL.AddComment "IDT Std card is selected for this test ..." & vbCrLf
+End Select
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get fw ver."
+  DL.SendSequence "get fw ver."
+  resultIgnore = DL.WaitForSequence ("generic resp", 1, 10000)
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- get processor type"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 09 02 00 00 F0 F9", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- get processor id"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 12 03 00 00 78 CB", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- get serial number"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 12 01 00 00 18 A5", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.SendSequence "set param default"
+  resultIgnore = DL.WaitForSequence ("generic resp", 1, 10000)
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.SendSequence "BC Disable"
+  resultIgnore = DL.WaitForSequence ("generic resp", 1, 6000)
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.SendSequence "Burst Auto"
+  resultIgnore = DL.WaitForSequence ("generic resp", 1, 6000)
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- Set track threshold values (4ch)"
+  DL.SendSequence "Set track threshold values (4ch)"
+  resultIgnore = DL.WaitForSequence ("generic resp", 1, 6000)
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- get track threshold values"
+  DL.SendSequence "Get track threshold values"
+  resultIgnore = DL.WaitForSequence ("generic resp", 1, 6000)
+  DL.Pause 2000
+
+  DL.AddComment vbCrLf & "Please start to present card ..." & vbCrLf
+  prompt2 = "Please click Ok and start to present/swipe card."
+  result = MsgBox(prompt2, VBOKOnly, "Present Card")
+
+If 0 Then
+  If msrFlg Then
+    result = DL.WaitForSequence("burst payload MSR + data ", 1, 9999999)
+  Else 
+    result = DL.WaitForSequence("burst payload CL&MSR + data ", 1, 9999999)
+  End If
+End If
+  DL.ResetReceiveCounter
+  DL.Pause 1000
+  DL.AddComment vbCrLf & "Test loop started ..." & vbCrLf
+  DL.AddComment "------ Swipe speed is at step " & speed_step & " ------" & vbCrLf
+
+If doIt Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Terminate secure session"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 80 0B 00 00 2E 49", "H"
+  DL.Pause 2000
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Reset to Initial State"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 83 01 00 00 33 15", "H"
+  DL.Pause 2000
+
+'  DL.ResetReceiveCounter
+'  DL.AddComment "--- Set BC On Intitially"
+'  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 59 01 01 4B AF", "H"
+'  DL.Pause 1000
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Set BC Off Intitially"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 59 01 00 6A BF", "H"
+  DL.Pause 1500
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Delete Key"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 83 00 00 00 03 22", "H"
+  DL.Pause 2000
+  
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Set Unecrypted KLK"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 80 00 00 65 30 43 46 35 35 34 43 32 46 30 45 45 41 41 30 30 38 38 4B 30 54 44 30 30 4E 30 30 30 30 30 30 38 30 32 41 38 34 46 44 44 36 33 39 31 35 44 43 41 45 42 46 38 37 37 35 34 33 32 32 44 32 36 37 42 41 33 34 34 31 38 33 41 42 39 41 32 35 36 37 39 30 32 33 34 39 38 37 31 32 30 32 33 34 30 30 30 30 30 30 30 30 C2 98", "H"
+  DL.Pause 1000
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Set Unecrypted KLK 2"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 80 00 00 65 31 35 43 44 42 38 31 32 46 30 45 45 41 41 30 30 38 38 4B 30 54 44 30 30 4E 30 30 30 30 30 30 38 30 39 32 36 39 41 34 33 36 39 42 36 43 37 45 33 42 35 36 37 32 39 38 33 41 36 36 32 46 36 31 30 33 32 35 37 32 39 32 33 36 33 37 38 33 30 33 33 36 32 33 41 39 39 37 31 32 36 32 33 34 30 30 30 30 30 30 30 30 AA E9", "H"
+  DL.Pause 1000
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Ecrypted KLK"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 80 01 00 58 41 30 30 38 38 4B 30 54 44 30 30 4E 30 30 30 30 42 39 34 38 46 37 42 33 34 43 41 44 37 32 36 42 41 37 37 43 39 43 34 41 38 30 37 37 39 42 42 38 36 42 42 43 33 37 34 30 31 31 42 42 45 33 39 45 30 36 46 34 46 36 41 37 44 44 36 46 37 32 30 45 37 31 33 44 45 39 34 41 A0 6B", "H"
+  DL.Pause 1000
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Master Session Index 0"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 80 03 00 59 00 41 30 30 38 38 4B 30 54 44 30 30 4E 30 30 30 30 38 45 33 43 43 38 36 45 38 39 33 35 37 34 43 30 44 31 38 36 30 44 34 36 43 39 39 35 35 45 43 33 31 37 43 30 33 32 30 46 35 32 42 38 30 46 37 35 38 35 46 32 37 45 37 31 46 36 41 36 33 44 42 39 43 45 44 46 31 37 30 32 C8 61", "H"
+  DL.Pause 1000
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Master Session Index 9"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 80 03 00 59 09 41 30 30 38 38 4B 30 54 44 30 30 4E 30 30 30 30 38 45 33 43 43 38 36 45 38 39 33 35 37 34 43 30 44 31 38 36 30 44 34 36 43 39 39 35 35 45 43 33 31 37 43 30 33 32 30 46 35 32 42 38 30 46 37 35 38 35 46 32 37 45 37 31 46 36 41 36 33 44 42 39 43 45 44 46 31 37 30 32 C7 D9", "H"
+  DL.Pause 1000
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Load Dukpt"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 81 00 00 70 41 30 31 31 32 50 30 54 45 30 30 4E 30 31 30 30 4B 53 31 38 46 46 46 46 39 38 37 36 35 34 33 32 31 30 45 30 30 30 30 30 37 43 45 37 34 45 39 30 30 35 33 43 41 38 45 45 42 43 33 37 42 35 37 30 36 38 31 45 35 42 32 37 36 31 34 38 43 33 45 37 34 34 41 42 43 44 36 44 34 43 35 33 36 43 37 46 34 46 36 37 44 37 46 32 44 44 38 45 30 34 37 30 C5 3F", "H"
+  DL.Pause 1000
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Load secure session key"
+  DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 80 0C 00 58 41 30 30 38 38 44 30 54 45 30 30 4E 30 30 30 30 33 31 31 32 43 46 38 45 39 45 44 45 45 32 41 38 32 34 38 32 34 34 38 38 38 30 37 34 41 39 46 39 35 34 33 36 39 45 46 34 44 33 45 37 33 46 37 37 36 34 41 35 32 30 33 30 45 45 44 44 41 37 31 31 35 41 41 46 46 42 46 34 56 91", "H"
+  DL.Pause 1000
+End If
+
+Do
+
+  DL.ResetReceiveCounter
+  DL.SendSequence "Activate Transaction (TMO 10)"
+ 
+Select Case speed_step
+	Case 1
+          DL.AddComment "Swipe at speed 3ips" 
+          sendToken("3") ' 3ips
+      Case 2
+          DL.AddComment "Swipe at speed 4ips"  
+          sendToken("4") ' 4ips
+	Case 3 
+          DL.AddComment "Swipe at speed 5ips" 
+          sendToken("5") ' 5ips
+      Case 4 
+          DL.AddComment "Swipe at speed 6ips" 
+          sendToken("6") ' 6ips
+	Case 5 
+          DL.AddComment "Swipe at speed 7ips" 
+          sendToken("7") ' 7ips
+      Case 6 
+          DL.AddComment "Swipe at speed 8ips" 
+          sendToken("8") ' 8ips
+	Case 7 
+          DL.AddComment "Swipe at speed 9ips" 
+          sendToken("9") ' 9ips
+      Case 8 
+          DL.AddComment "Swipe at speed 10ips" 
+          sendToken("a") ' 10ips
+	Case 9 
+          DL.AddComment "Swipe at speed 12ips" 
+          sendToken("b") ' 12ips
+      Case 10 
+          DL.AddComment "Swipe at speed 14ips" 
+          sendToken("c") ' 14ips
+	Case 11 
+          DL.AddComment "Swipe at speed 16ips" 
+          sendToken("d") ' 16ips
+      Case 12 
+          DL.AddComment "Swipe at speed 18ips" 
+          sendToken("e") ' 18ips
+	Case 13 
+          DL.AddComment "Swipe at speed 20ips" 
+          sendToken("f") ' 20ips
+      Case 14 
+          DL.AddComment "Swipe at speed 25ips" 
+          sendToken("g") ' 25ips
+	Case 15 
+          DL.AddComment "Swipe at speed 30ips" 
+          sendToken("h") ' 30ips
+      Case 16 
+          DL.AddComment "Swipe at speed 35ips" 
+          sendToken("i") ' 35ips
+	Case 17 
+          DL.AddComment "Swipe at speed 40ips" 
+          sendToken("j") ' 40ips
+      Case 18 
+          DL.AddComment "Swipe at speed 45ips" 
+          sendToken("k") ' 45ips
+      Case 19 
+          DL.AddComment "Swipe at speed 50ips" 
+          sendToken("l") ' 50ips
+      Case 20 
+          DL.AddComment "Swipe at speed 55ips" 
+          sendToken("m") ' 55ips
+      Case 21 
+          DL.AddComment "Swipe at speed 60ips" 
+          sendToken("n") ' 60ips
+      Case 22 
+          DL.AddComment "Swipe at speed 65ips" 
+          sendToken("o") ' 65ips
+      Case 23 
+          DL.AddComment "Swipe at speed 67ips" 
+          sendToken("p") ' 67ips
+      Case 24 
+          DL.AddComment "Swipe at speed 70ips" 
+          sendToken("q") ' 70ips
+      Case 25 
+          DL.AddComment "Swipe at speed 72ips" 
+          sendToken("r") ' 72ips
+      Case 26 
+          DL.AddComment "Swipe at speed 75ips" 
+          sendToken("s") ' 75ips
+End Select
+
+  If msrFlg Then
+    result = DL.WaitForSequence("Tag MSR resp ", 1, tmoVal)
+  Else 
+    result = DL.WaitForSequence("Act Tran Resp ", 1, tmoVal)
+  End If
+
+  If result <> 0 Then
+    DL.AddComment "Card data was received at iteration " & pCounter
+Select Case cfgSelCard
+	Case 1 ' qCards
+    result = DL.WaitForSequence("qCard track1 POD", 1, 100)
+    If result = 0 Then
+       DL.AddComment "Missing Track1 data at iteration " & pCounter
+       track1ErrCounter = track1ErrCounter + 1
+       errCounter = errCounter + 1
+    End If 
+    result = DL.WaitForSequence("qCard track2 POD", 1, 100)
+    If result = 0 Then
+       DL.AddComment "Missing Track2 data at iteration " & pCounter
+       track2ErrCounter = track2ErrCounter + 1
+       errCounter = errCounter + 1
+    End If
+    result = DL.WaitForSequence("qCard track3 POD ", 1, 100)
+    If result = 0 Then
+       DL.AddComment "Missing Track3 data at iteration " & pCounter
+       track3ErrCounter = track3ErrCounter + 1
+       errCounter = errCounter + 1
+    End If
+
+	Case 2 ' ITD Std cards
+    result = DL.WaitForSequence("IDT Std Tk1 POD", 1, 100)
+    If result = 0 Then
+       DL.AddComment "Missing Track1 data at iteration " & pCounter
+       track1ErrCounter = track1ErrCounter + 1
+       errCounter = errCounter + 1
+    End If 
+    result = DL.WaitForSequence("IDT Std Tk2 POD", 1, 100)
+    If result = 0 Then
+       DL.AddComment "Missing Track2 data at iteration " & pCounter
+       track2ErrCounter = track2ErrCounter + 1
+       errCounter = errCounter + 1
+    End If
+    result = DL.WaitForSequence("IDT Std Tk3 POD", 1, 100)
+    If result = 0 Then
+       DL.AddComment "Missing Track3 data at iteration " & pCounter
+       track3ErrCounter = track3ErrCounter + 1
+       errCounter = errCounter + 1
+    End If
+End Select
+    DL.ResetReceiveCounter
+    DL.Pause cfgDuration * 1000
+
+  Else
+    DL.AddComment "Card data was not received at iteration " & pCounter
+    noRespErrCounter = noRespErrCounter + 1
+    errCounter = errCounter + 1
+  End If
+
+DL.pause 1000
+
+DL.AddComment vbCrLf & "Total number of errors: " & errCounter & " at iteration " & pCounter & " in speed step " & speed_step
+DL.AddComment "No_response=" & noRespErrCounter & "  Missing_Track1=" & track1ErrCounter & "  Missing_Track2=" & track2ErrCounter & "  Missing_Track3=" & track3ErrCounter & vbCrLf
+'DL.AddComment vbCrLf & "pCounter = " & pCounter & vbCrLf
+
+If pCounter = cfgNumberOfIterations Then
+   pCounter = 0
+   errCounter = 0
+   noRespErrCounter = 0
+   track1ErrCounter = 0
+   track2ErrCounter = 0
+   track3ErrCounter = 0
+
+ If 0 Then
+   DL.ResetReceiveCounter
+   DL.SendSequence "BC Disable"
+   resultIgnore = DL.WaitForSequence ("generic resp", 1, 6000)
+   DL.Pause 2000
+
+   DL.AddComment vbCrLf & "Test is paused at iteration " & ACounter & "." & vbCrlF
+   prompt2 = "Time to take a break ... PLease click Ok to continute"
+   result = MsgBox(prompt2, VBOKOnly, "Present card")
+
+   DL.ResetReceiveCounter
+   DL.SendSequence "BC Enable"
+   resultIgnore = DL.WaitForSequence ("generic resp", 1, 6000)
+   DL.Pause 2000
+
+   DL.AddComment vbCrLf & "Pause is over. Test is resumed." & vbCrLf
+ End If
+
+ If 1 Then
+  speed_step = speed_step + 1
+  if  speed_step < (cfgNumberOfSpeedSteps + 1) Then
+    DL.AddComment vbCrLf & "------ Swipe speed is changed to step " & speed_step & " ------" & vbCrLf
+  End If 
+ End If
+  
+End If
+
+ACounter = ACounter + 1
+pCounter = pCounter + 1
+'DL.AddComment 2000 
+
+If doIt Then
+'============================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- White/Red"
+  DL.SendSequence "White/Red"
+  result = DL.WaitForSequence("generic resp", 1, 3000)
+'============================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Welcome to Target text"
+  DL.SendSequence "Welcome to Target text"
+  result = DL.WaitForSequence("generic resp", 1, 3000)
+  DL.Pause 3000
+'============================================================
+'  DL.ResetReceiveCounter
+'  DL.AddComment "--- Clear Display"
+'  DL.SendSequence "Clear Display"
+'  result = DL.WaitForSequence("Clear Display Resp", 1, 3000)
+'============================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Clear Even Queue"
+  DL.SendSequence "Clear Even Queue"
+  result = DL.WaitForSequence("Display CUSTOM MODE OK", 1, 3000)
+'============================================================ 
+ DL.ResetReceiveCounter
+  DL.AddComment "--- Enable Custom Display Mode"
+  DL.SendSequence "Enable Custom Display Mode"
+  result = DL.WaitForSequence("Display CUSTOM MODE OK", 1, 3000)
+'-------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- slides show Target"
+  DL.SendSequence "slides show Target"
+  result = DL.WaitForSequence("Display CUSTOM MODE OK", 1, 3000)
+  DL.Pause 15000
+'-------------------------------------------------------------
+  DL.ResetReceiveCounter
+  DL.AddComment "--- stop slides show"
+  DL.SendSequence "stop slides show"
+  result = DL.WaitForSequence("Display CUSTOM MODE OK", 1, 3000)
+'============================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Clear Display"
+  DL.SendSequence "Clear Display"
+  result = DL.WaitForSequence("Clear Display Resp", 1, 3000)
+'============================================================
+
+  
+For I = 1 To 6
+
+  ' DL.Pause 1000
+  
+  DL.ResetReceiveCounter
+  DL.AddComment "--- buzz w/ led 3 on "
+  DL.SendSequence "buzz w/ led 3 on "
+  result = DL.WaitForSequence("generic resp", 1, 3000)
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- num item " & I
+  DL.SendSequence "num item " & I
+  result = DL.WaitForSequence("Display Control OK", 1, 3000)
+ 
+  DL.ResetReceiveCounter
+  DL.AddComment "--- dsc item " & I
+  DL.SendSequence "dsc item " & I
+  result = DL.WaitForSequence("Display Control OK", 1, 3000)
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- amt item " & I
+  DL.SendSequence "amt item " & I
+  result = DL.WaitForSequence("Display Control OK", 1, 3000)
+
+  DL.Pause 200
+  DL.ResetReceiveCounter
+  DL.AddComment "--- no buzz w/ led 3 off "
+  DL.SendSequence "no buzz w/ led 3 off "
+  result = DL.WaitForSequence("generic resp", 1, 3000)
+Next
+
+'---------------------------------------------------------------
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- subtotal text "
+  DL.SendSequence "subtotal text "
+  result = DL.WaitForSequence("Display Control OK", 1, 3000)
+
+  DL.ResetReceiveCounter
+  DL.AddComment "--- subtotal amt "
+  DL.SendSequence "subtotal amt  "
+  result = DL.WaitForSequence("Display Control OK", 1, 3000)
+
+  DL.Pause 3000
+
+'============================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Clear Even Queue "
+  DL.SendSequence "Clear Even Queue "
+  result = DL.WaitForSequence("generic resp", 1, 10000)
+'============================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Select payment text"
+  DL.SendSequence "Select payment text"
+  result = DL.WaitForSequence("generic resp", 1, 3000)
+'============================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Select target card text"
+  DL.SendSequence "Select target card text"
+  result = DL.WaitForSequence("generic resp", 1, 3000)
+'============================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- big Credit Button T "
+  DL.SendSequence "big Credit Button T"
+  result = DL.WaitForSequence("generic resp", 1, 3000)
+'============================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- big Debit Button T"
+  DL.SendSequence "big Debit Button T"
+  result = DL.WaitForSequence("generic resp", 1, 3000)
+'============================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Target card Button"
+  DL.SendSequence "Target card Button"
+  result = DL.WaitForSequence("generic resp", 1, 3000)
+'============================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get Input Event "
+  DL.SendSequence "Get Input Event "
+  result = DL.WaitForSequence("generic resp", 1, 11000)
+  DL.Pause 1000
+'============================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Please Swipe Card "
+  DL.SendSequence "Please Swipe Card "
+  result = DL.WaitForSequence("generic resp", 1, 3000)
+'============================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Activate Transaction Event (02-11) "
+  DL.SendSequence "Activate Transaction Event (02-11) "
+  result = DL.WaitForSequence("generic resp", 1, 3000)
+'============================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get Input Event "
+  DL.SendSequence "Get Input Event "
+  result = DL.WaitForSequence("generic resp", 1, 11000)
+  DL.Pause 1000
+'============================================================ 
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get Transaction Result (03-00)"
+  DL.SendSequence "Get Transaction Result (03-00) "
+  result = DL.WaitForSequence("generic resp", 1, 3000)
+  DL.Pause 1000
+'============================================================ 
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Disable Custom Display Mode "
+  DL.SendSequence "Disable Custom Display Mode "
+  result = DL.WaitForSequence("generic resp", 1, 3000)
+  DL.Pause 1000
+'============================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- get dukpt pin "
+  DL.SendSequence "get dukpt pin "
+  result = DL.WaitForSequence("generic resp", 1, 31000)
+  DL.Pause 1000
+'============================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- signature capture "
+  DL.SendSequence "signature capture "
+  result = DL.WaitForSequence("generic resp", 1, 48000)
+  ' DL.Pause 1000
+'============================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Enable Custom Display Mode "
+  DL.SendSequence "Enable Custom Display Mode "
+  result = DL.WaitForSequence("generic resp", 1, 3000)
+  DL.Pause 1000
+'============================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Thanks for shopping at Target text "
+  DL.SendSequence "Thanks for shopping at Target text "
+  result = DL.WaitForSequence("generic resp", 1, 3000)
+  DL.Pause 2000
+'============================================================
+  DL.ResetReceiveCounter
+  DL.AddComment "--- display tagetLady png "
+  DL.SendSequence "display tagetLady png "
+  result = DL.WaitForSequence("generic resp", 1, 3000)
+  DL.Pause 3000
+
+'=============================================================
+     DL.AddComment "get free mem size"
+     DL.ResetReceiveCounter
+     DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 82 04 00 00 77 88", "H"
+     result = DL.WaitForSequence("Get Mem Resp", 1, 15000)
+'--------------------------------------------------------------
+End If
+
+Loop While speed_step < (cfgNumberOfSpeedSteps + 1)
+
+
+DL.AddComment vbCrLf & "End of test loop" & vbCrLf
+
+DL.AddComment vbCrLf
+'PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+
+If 0 Then
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+End If ' If 0

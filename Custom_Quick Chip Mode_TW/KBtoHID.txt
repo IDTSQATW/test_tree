@@ -1,0 +1,10 @@
+Objective: Under Quick Chip mode, set reader to Poll on demand mode (USB/ KBD to USB/ HID)
+
+--------------------
+>>> Change to Poll On Demand
+CMD: 01 01 01
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+--------------------
+>>> Check USB connection type
+MESSAGECK: 1) Check USB connection type = HID; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again

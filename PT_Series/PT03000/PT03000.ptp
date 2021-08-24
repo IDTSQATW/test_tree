@@ -1,0 +1,36 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Buzzer Control - Short Beep - Invalid range (05h)
+56 69 56 4F 74 65 63 68 32 00 0B 01 00 01 05 32 FD
+0
+5
+
+RECEIVE
+0
+Buzzer Control - Short or Long Beep OK (SUCCESS)
+56 69 56 4F 74 65 63 68 32 00 0B 05 00 00 91 08
+-1
+1
+COMMENT Buzzer Control - Short or Long Beep OK (SUCCESS)
+1
+1
+0
+1
+

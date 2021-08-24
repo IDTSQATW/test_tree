@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+    <settings type="com" com="6" baud="19200" parity="N" stop="1" data="8"/>
+ 	<settings type="Usbhid" vid="1D5F" pid="1004"/>
+</config>

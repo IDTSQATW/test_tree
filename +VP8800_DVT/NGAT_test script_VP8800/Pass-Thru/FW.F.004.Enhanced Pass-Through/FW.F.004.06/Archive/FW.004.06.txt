@@ -1,0 +1,24 @@
+≤‚ ‘Display String.
+
+…Ë÷√∞¸¿®:
+Poll Time out: 0s
+
+Poll for Contact: On
+Poll for Contactless: On
+
+Deactivate contact: Off
+Update LEDs: Off
+Poll for Card: Off
+RF Antenna: On
+
+Contact Interface to Use: Contact
+
+Beep: Single beep
+
+LED3:0
+LED2:0
+LED1:0
+LED0:0
+
+Display String 1: null
+Display String 2: null

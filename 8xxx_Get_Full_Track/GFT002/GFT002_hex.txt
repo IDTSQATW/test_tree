@@ -1,0 +1,30 @@
+Docklight Log File (HEX) - Started 7/30/2009 14:24:13.20 
+ TEST CASE: GFT002
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 19200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Auto Poll
+
+7/30/2009 14:24:14.69 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 F6 24 
+7/30/2009 14:24:15.44 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  --- Flush Track Data
+
+7/30/2009 14:24:17.55 [TX] - 56 69 56 4F 74 65 63 68 00 43 17 02 00 00 7B 1B 
+7/30/2009 14:24:17.83 [RX] - 56 69 56 4F 74 65 63 68 00 41 17 00 00 00 31 98  --- Get Full Track
+
+7/30/2009 14:24:17.89 [TX] - 56 69 56 4F 74 65 63 68 00 43 17 CD 00 00 BD 11  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+
+7/30/2009 14:24:18.17 [RX] - 56 69 56 4F 74 65 63 68 00 41 17 00 00 00 31 98  Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 7/30/2009 14:24:19.09 
+

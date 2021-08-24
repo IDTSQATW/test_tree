@@ -1,0 +1,9 @@
+Docklight Log File (HEX) - Started  
+ --- transaction completed Font 1
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 83 03 00 20 30 00 30 00 31 00 31 00 35 00 74 72 61 6E 73 61 63 74 69 6F 6E 20 63 6F 6D 70 6C 65 74 65 64 00 CB 1F 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

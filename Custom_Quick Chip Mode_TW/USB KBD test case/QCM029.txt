@@ -1,0 +1,52 @@
+Objective: to verify Tag DFEF6E (Carriage Return)
+
+===========================================
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 01 00 00 00
+
+--------------------
+CMD: 04 00 DF EF 6E 01 0D
+EXR: 04 00
+
+--------------------
+>>> MSR transaction
+MESSAGE: Open PC "NotePad" -> tap any CL card 3 times -> notice the cursor position
+MESSAGECK: the cursor will be moved to the beginning of next line (CR) per tap
+
+--------------------
+CMD: 04 00 DF EF 6E 02 0D 0A
+EXR: 04 00
+
+--------------------
+>>> MSR transaction
+MESSAGE: Open PC "NotePad" -> tap any CL card 3 times -> notice the cursor position
+MESSAGECK: the cursor will be skipped a new line and was moved to the beginning of the next line (CR + LF) per tap
+
+===========================================
+>>> Quick Chip mode = 04
+CMD: 01 01 04
+EXR: 01 00 00 00
+
+--------------------
+CMD: 04 00 DF EF 6E 01 0D
+EXR: 04 00
+
+--------------------
+>>> MSR transaction
+MESSAGE: Open PC "NotePad" -> tap any CL card 3 times -> notice the cursor position
+MESSAGECK: the cursor will be moved to the beginning of next line (CR) per tap
+
+--------------------
+CMD: 04 00 DF EF 6E 02 0D 0A
+EXR: 04 00
+
+--------------------
+>>> MSR transaction
+MESSAGE: Open PC "NotePad" -> tap any CL card 3 times -> notice the cursor position
+MESSAGECK: the cursor will be skipped a new line and was moved to the beginning of the next line (CR + LF) per tap
+
+===========================================
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 01 00 00 00

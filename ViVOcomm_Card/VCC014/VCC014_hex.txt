@@ -1,0 +1,30 @@
+Docklight Log File (HEX) - Started 9/28/2011 15:01:00.192 
+ TEST CASE: VCC014
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM7 @ 19200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Burst Mode Off
+
+9/28/2011 15:01:02.439 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 00 B9 2E 
+9/28/2011 15:01:02.534 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  --- Auto Poll
+
+9/28/2011 15:01:02.972 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 F6 24 
+9/28/2011 15:01:03.078 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  --- Get Full Track Data
+
+9/28/2011 15:01:15.111 [TX] - 56 69 56 4F 74 65 63 68 00 43 17 CD 00 00 BD 11 
+9/28/2011 15:01:15.140 [RX] - 56 69 56 4F 74 65 63 68 00 41 17 00 00 00 31 98  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 9/28/2011 15:01:16.509 
+

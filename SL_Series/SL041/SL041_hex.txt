@@ -1,0 +1,24 @@
+Docklight Log File (HEX) - Started 11/30/2010 10:37:34.20 
+ TEST CASE: SL041
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM5 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- French Language
+
+11/30/2010 10:37:35.67 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF FB 01 03 BB 6B 
+11/30/2010 10:37:36.09 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 05 00 00 45 E6  
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 11/30/2010 10:37:46.79 
+

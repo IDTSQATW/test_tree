@@ -1,0 +1,88 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+GETFirmwareVersionP1 (unnecessary data)
+56 69 56 4F 74 65 63 68 00 43 29 00 00 00 11 64 F4
+0
+5
+
+SEND
+1
+GETFirmwareVersionP1 (unsupported data)
+56 69 56 4F 74 65 63 68 00 43 29 00 00 01 11 55 C7
+0
+5
+
+SEND
+2
+GETFirmwareVersionP2 (unnecessary data)
+56 69 56 4F 74 65 63 68 32 00 29 00 00 00 11 FA 69
+0
+5
+
+SEND
+3
+GETFirmwareVersionP2 (unsupported data)
+56 69 56 4F 74 65 63 68 32 00 29 00 00 01 11 CB 5A
+0
+5
+
+RECEIVE
+0
+p1-06
+56 69 56 4F 74 65 63 68 00 4E 29 06 00 00 68 72
+-1
+1
+COMMENT 06 status = CRC Error
+1
+1
+0
+1
+
+RECEIVE
+1
+p2-04
+56 69 56 4F 74 65 63 68 32 00 29 04 00 00 7C 1E
+-1
+1
+COMMENT 04 status = CRC Error
+0
+1
+0
+0
+
+RECEIVE
+2
+p2-05
+56 69 56 4F 74 65 63 68 32 00 29 05 00 00 4B 2E
+-1
+1
+COMMENT 05 status = Incorrect Parameter
+0
+1
+0
+0
+

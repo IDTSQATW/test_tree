@@ -1,0 +1,24 @@
+测试不同的Contact Interface to Use.
+
+设置包括:
+Poll Time out: 10s
+
+Poll for Contact: On
+Poll for Contactless: On
+
+Deactivate contact: [variable]
+Update LEDs: Off
+Poll for Card: On
+RF Antenna: On
+
+Contact Interface to Use: [variable]
+
+Beep: Single Beep(01h)
+
+LED3:Off
+LED2:Off
+LED1:Off
+LED0:Off
+
+Display String 1: null
+Display String 2: null

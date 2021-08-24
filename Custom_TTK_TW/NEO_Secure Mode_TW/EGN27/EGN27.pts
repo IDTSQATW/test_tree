@@ -1,0 +1,601 @@
+DL_SCRIPTVERSION
+1
+39208
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "EGN27" ' !!!!! EDIT THIS !!!!!
+' Objective: to verify new cmd 04-0A in spec NEO rev 79. 
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+      
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+dim r(5)
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+countf = 0
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON " Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+sub countfail()
+    for i = 0 to 5
+        if r(i) = 0 then
+           countf = countf + 1
+        end if
+    next
+end sub
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+sub erase()
+If result <> 0 Then
+   dl.pause 1000
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 04-0A Set Configuration Defaults and Keep Encrypt Key Command"
+   DL.SendSequence "04-0A Set Configuration Defaults and Keep Encrypt Key Command"
+   result = DL.WaitForSequence("04-xx ok resp", 1, 2000)
+End If
+dl.pause 8000
+end sub
+
+sub loadadmindatakey()
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Erase All Key (83-00)"
+   DL.SendSequence "Erase All Key (83-00)"
+   result = DL.WaitForSequence("83-00 ok resp", 1, 2000)
+   dl.pause 300
+
+   if result <> 0 then
+      dl.resetreceivecounter
+      dl.addcomment vbcrlf
+      if t = "T" then
+         DL.AddComment "--- 0-use TDES to encrypt (C7-32)"
+         DL.SendSequence "0-use TDES to encrypt (C7-32)"
+         result = DL.WaitForSequence("C7-xx ok resp", 1, 2000)    
+      elseif t = "A" then
+         DL.AddComment "--- 1-use AES to encrypt (C7-32)"
+         DL.SendSequence "1-use AES to encrypt (C7-32)"
+         result = DL.WaitForSequence("C7-xx ok resp", 1, 2000)      
+      end if  
+      dl.pause 300
+      if result <> 0 then
+         dl.resetreceivecounter
+         dl.addcomment vbcrlf
+         DL.AddComment "--- Load KPK"
+         DL.SendSequence "Load Plaintext Key - command 1 (80-00)"
+         result = DL.WaitForSequence("80-xx ok resp", 1, 2000)
+         dl.pause 300 
+         if result <> 0 then
+            dl.resetreceivecounter
+            DL.SendSequence "Load Plaintext Key - command 2  (80-00)"
+            result = DL.WaitForSequence("80-xx ok resp", 1, 2000)
+            dl.pause 300 
+            if result <> 0 then
+               dl.resetreceivecounter
+               DL.SendSequence "Load Encrypted KPK (80-01)"
+               result = DL.WaitForSequence("80-xx ok resp", 1, 2000)
+               dl.pause 300 
+               if result <> 0 then
+                  dl.resetreceivecounter
+                  dl.addcomment vbcrlf
+                  DL.AddComment "--- Load DUKPT key"
+                  DL.SendSequence "Enter DUKPT Key (81-00)"
+                  result = DL.WaitForSequence("81-xx ok resp", 1, 2000)
+                  dl.pause 300
+               end if 
+            end if
+         end if
+      end if
+   end if 
+
+   If result <> 0 Then
+      dl.resetreceivecounter
+      dl.addcomment vbcrlf
+      DL.AddComment "--- Loading Admin DUKPT Key"
+      DL.SendSequence "Vivopay Load Admin Key"
+      result = DL.WaitForSequence("81 00", 1, 2000)
+      dl.pause 300
+   end if
+end if
+end sub
+'============================================================
+If result <> 0 Then
+   dl.resetreceivecounter
+   DL.AddComment "--- 04-F0"
+   DL.SendSequence "04-F0"
+   result = DL.WaitForSequence("04-xx ok resp", 1, 1500)
+   dl.pause 8000
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 12-02 Set Serial Number"
+   DL.SendSequence "12-02 Set Serial Number"
+   result1 = DL.WaitForSequence("12 0B", 1, 1500)
+   result2 = DL.WaitForSequence("12 00", 1, 1500)
+   if result1 = 1 or result2 = 1 then
+      result = 1
+   else
+      result = 0
+   end if
+End If
+'============================================================
+'------------------------------------------------------------TDES/ disable
+DL.ClearCommWindows
+t = "T"
+loadadmindatakey()
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Dis-able Data Encryption (C7-36)"
+   DL.SendSequence "Dis-able Data Encryption (C7-36)"
+   result = DL.WaitForSequence("C7-xx ok resp", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 04-00 9F66 = A0 80 00 00"
+   DL.SendSequence "04-00 9F66 = A0 80 00 00"
+   result = DL.WaitForSequence("04-xx ok resp", 1, 5000)
+End If
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 04-00 5F36 = 00"
+   DL.SendSequence "04-00 5F36 = 00"
+   result = DL.WaitForSequence("04-xx ok resp", 1, 5000)
+End If
+'------------------------------------------------------------
+erase()
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Check DUKPT Key  Type (81-02)"
+   DL.SendSequence "Check DUKPT Key  Type (81-02)"
+   result = DL.WaitForSequence("81-02 01 data", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Get account DUKPT encryption type (C7-33)"
+   DL.SendSequence "Get account DUKPT encryption type (C7-33)"
+   result = DL.WaitForSequence("c7-33 tdes", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Get Data Encryption (C7-37)"
+   DL.SendSequence "Get Data Encryption (C7-37)"
+   result = DL.WaitForSequence("c7-37 disable", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 12-01 Get Serial Number"
+   DL.SendSequence "12-01 Get Serial Number"
+   result = DL.WaitForSequence("12-01 ok resp", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 03-02 Get Params"
+   DL.SendSequence "03-02 Get Params"
+   dl.pause 1000
+   result1 = DL.WaitForSequence("03-02 ok resp", 1, 1000)
+   result2 = DL.WaitForSequence("Tag 5F36", 1, 1000)
+   result3 = DL.WaitForSequence("Tag 9F66", 1, 1000)
+   if result1 = 0 or result2 = 0 or result3 = 0 then
+      result = 0
+   else
+      result = 1
+   end if
+End If
+'------------------------------------------------------------AES/ disable
+DL.ClearCommWindows
+t = "A"
+loadadmindatakey()
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Dis-able Data Encryption (C7-36)"
+   DL.SendSequence "Dis-able Data Encryption (C7-36)"
+   result = DL.WaitForSequence("C7-xx ok resp", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 04-00 9F66 = A0 80 00 00"
+   DL.SendSequence "04-00 9F66 = A0 80 00 00"
+   result = DL.WaitForSequence("04-xx ok resp", 1, 5000)
+End If
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 04-00 5F36 = 00"
+   DL.SendSequence "04-00 5F36 = 00"
+   result = DL.WaitForSequence("04-xx ok resp", 1, 5000)
+End If
+'------------------------------------------------------------
+erase()
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Check DUKPT Key  Type (81-02)"
+   DL.SendSequence "Check DUKPT Key  Type (81-02)"
+   result = DL.WaitForSequence("81-02 01 data", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Get account DUKPT encryption type (C7-33)"
+   DL.SendSequence "Get account DUKPT encryption type (C7-33)"
+   result = DL.WaitForSequence("c7-33 aes", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Get Data Encryption (C7-37)"
+   DL.SendSequence "Get Data Encryption (C7-37)"
+   result = DL.WaitForSequence("c7-37 disable", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 12-01 Get Serial Number"
+   DL.SendSequence "12-01 Get Serial Number"
+   result = DL.WaitForSequence("12-01 ok resp", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 03-02 Get Params"
+   DL.SendSequence "03-02 Get Params"
+   dl.pause 1000
+   result1 = DL.WaitForSequence("03-02 ok resp", 1, 1000)
+   result2 = DL.WaitForSequence("Tag 5F36", 1, 1000)
+   result3 = DL.WaitForSequence("Tag 9F66", 1, 1000)
+   if result1 = 0 or result2 = 0 or result3 = 0 then
+      result = 0
+   else
+      result = 1
+   end if
+End If
+'------------------------------------------------------------TDES/ enable
+DL.ClearCommWindows
+t = "T"
+loadadmindatakey()
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Enable Data Encryption  (C7-36)"
+   DL.SendSequence "Enable Data Encryption  (C7-36)"
+   result = DL.WaitForSequence("C7-xx ok resp", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 04-00 9F66 = A0 80 00 00"
+   DL.SendSequence "04-00 9F66 = A0 80 00 00"
+   result = DL.WaitForSequence("04-xx ok resp", 1, 5000)
+End If
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 04-00 5F36 = 00"
+   DL.SendSequence "04-00 5F36 = 00"
+   result = DL.WaitForSequence("04-xx ok resp", 1, 5000)
+End If
+'------------------------------------------------------------
+erase()
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Check DUKPT Key  Type (81-02)"
+   DL.SendSequence "Check DUKPT Key  Type (81-02)"
+   result = DL.WaitForSequence("81-02 01 data", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Get account DUKPT encryption type (C7-33)"
+   DL.SendSequence "Get account DUKPT encryption type (C7-33)"
+   result = DL.WaitForSequence("c7-33 tdes", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Get Data Encryption (C7-37)"
+   DL.SendSequence "Get Data Encryption (C7-37)"
+   result = DL.WaitForSequence("c7-37 enable", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 12-01 Get Serial Number"
+   DL.SendSequence "12-01 Get Serial Number"
+   result = DL.WaitForSequence("12-01 ok resp", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 03-02 Get Params"
+   DL.SendSequence "03-02 Get Params"
+   dl.pause 1000
+   result1 = DL.WaitForSequence("03-02 ok resp", 1, 1000)
+   result2 = DL.WaitForSequence("Tag 5F36", 1, 1000)
+   result3 = DL.WaitForSequence("Tag 9F66", 1, 1000)
+   if result1 = 0 or result2 = 0 or result3 = 0 then
+      result = 0
+   else
+      result = 1
+   end if
+End If
+'------------------------------------------------------------AES/ enable
+DL.ClearCommWindows
+t = "A"
+loadadmindatakey()
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Enable Data Encryption  (C7-36)"
+   DL.SendSequence "Enable Data Encryption  (C7-36)"
+   result = DL.WaitForSequence("C7-xx ok resp", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 04-00 9F66 = A0 80 00 00"
+   DL.SendSequence "04-00 9F66 = A0 80 00 00"
+   result = DL.WaitForSequence("04-xx ok resp", 1, 5000)
+End If
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 04-00 5F36 = 00"
+   DL.SendSequence "04-00 5F36 = 00"
+   result = DL.WaitForSequence("04-xx ok resp", 1, 5000)
+End If
+'------------------------------------------------------------
+erase()
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Check DUKPT Key  Type (81-02)"
+   DL.SendSequence "Check DUKPT Key  Type (81-02)"
+   result = DL.WaitForSequence("81-02 01 data", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Get account DUKPT encryption type (C7-33)"
+   DL.SendSequence "Get account DUKPT encryption type (C7-33)"
+   result = DL.WaitForSequence("c7-33 aes", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Get Data Encryption (C7-37)"
+   DL.SendSequence "Get Data Encryption (C7-37)"
+   result = DL.WaitForSequence("c7-37 enable", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 12-01 Get Serial Number"
+   DL.SendSequence "12-01 Get Serial Number"
+   result = DL.WaitForSequence("12-01 ok resp", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 03-02 Get Params"
+   DL.SendSequence "03-02 Get Params"
+   dl.pause 1000
+   result1 = DL.WaitForSequence("03-02 ok resp", 1, 1000)
+   result2 = DL.WaitForSequence("Tag 5F36", 1, 1000)
+   result3 = DL.WaitForSequence("Tag 9F66", 1, 1000)
+   if result1 = 0 or result2 = 0 or result3 = 0 then
+      result = 0
+   else
+      result = 1
+   end if
+End If
+'------------------------------------------------------------
+DL.AddComment vbcrlf & "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'DL.pause 1000
+
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 

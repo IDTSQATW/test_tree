@@ -1,0 +1,25 @@
+Docklight Log File (HEX) - Started 10/30/2013 14:00:23.659 
+ TEST CASE: INP004
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM4 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Clear Display
+
+10/30/2013 14:00:25.416 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 0D 00 00 52 60  Debugger: ControlID
+
+10/30/2013 14:00:28.475 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 1D 00 04 20 20 20 20 0D 44  
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 10/30/2013 14:00:29.682 
+

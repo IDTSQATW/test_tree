@@ -1,0 +1,247 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Ping
+56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD
+0
+5
+
+SEND
+1
+Display paragraph 1
+56 69 56 4F 74 65 63 68 32 00 83 28 00 25 00 00 00 00 31 00 31 00 35 00 50 6C 65 61 73 65 20 5C 6E 20 5C 6E 45 6E 74 65 72 20 5A 49 50 20 43 6F 64 64 00 8A 1E
+0
+5
+
+SEND
+2
+Display paragraph with X,Y
+56 69 56 4F 74 65 63 68 32 00 83 28 00 16 30 30 00 30 00 00 00 00 00 31 00 31 00 33 00 50 6C 65 61 73 65 00 AA C1
+0
+5
+
+SEND
+3
+Display paragraph with X,Y fixed
+56 69 56 4F 74 65 63 68 32 00 83 28 00 13 30 00 30 00 00 00 31 00 31 00 35 00 50 6C 65 61 73 65 00 AA C1
+0
+5
+
+SEND
+4
+Display paragraph modified for line returns
+56 69 56 4F 74 65 63 68 32 00 83 28 00 26 00 00 00 00 31 00 31 00 35 00 50 6C 65 61 73 65 20 5C 6E 20 5C 6E 20 45 6E 74 65 72 20 5A 49 50 20 43 6F 64 65 00 8A 1E
+0
+5
+
+SEND
+5
+Messed up paragraph arrows
+56 69 56 4F 74 65 63 68 32 00 83 28 00 28 00 00 31 31 30 00 35 30 00 31 00 31 00 35 00 50 6C 65 61 73 65 20 5C 6E 20 45 6E 74 65 72 20 5A 49 50 20 43 6F 64 65 00 90 C9
+0
+5
+
+SEND
+6
+Messed up paragraph arrows
+56 69 56 4F 74 65 63 68 32 00 83 28 00 2E 00 00 31 31 30 00 35 30 00 31 00 31 00 35 00 50 6C 65 61 73 65 20 5C 6E 20 5C 6E 20 5C 6E 20 45 6E 74 65 72 20 5A 49 50 20 43 6F 64 65 00 1D 5A
+0
+5
+
+SEND
+7
+Clear display
+56 69 56 4F 74 65 63 68 32 00 83 0D 00 00 52 60
+0
+5
+
+SEND
+8
+Stop non-secure display mode
+56 69 56 4F 74 65 63 68 32 00 83 09 00 00 92 BC
+0
+5
+
+SEND
+9
+Messed up paragraph arrows (8850)
+56 69 56 4F 74 65 63 68 32 00 83 28 00 3C 00 00 31 31 30 00 31 31 30 00 31 00 31 00 35 00 50 6C 65 61 73 65 20 5C 6E 20 5C 6E 20 5C 6E 20 62 6F 6F 20 5C 6E 20 5C 6E 20 5C 6E 20 45 6E 74 65 72 20 5A 49 50 20 43 6F 64 65 00 1D 5A
+0
+5
+
+SEND
+10
+Start non-secure display mode
+56 69 56 4F 74 65 63 68 32 00 83 08 00 00 A2 8B
+0
+5
+
+SEND
+11
+--- contrast ---
+
+0
+5
+
+SEND
+12
+Get display contrast
+56 69 56 4F 74 65 63 68 32 00 83 2E 00 00 C4 BF
+0
+5
+
+SEND
+13
+Set display contrast min (3f)
+56 69 56 4F 74 65 63 68 32 00 83 2D 00 02 00 3F F5 D0
+0
+5
+
+SEND
+14
+Set display contrast (20)
+56 69 56 4F 74 65 63 68 32 00 83 2D 00 02 00 20 2B 33
+0
+5
+
+SEND
+15
+Set display contrast max (00)
+56 69 56 4F 74 65 63 68 32 00 83 2D 00 02 00 00 49 17
+0
+5
+
+SEND
+16
+Set display contrast w/ default value (28)
+56 69 56 4F 74 65 63 68 32 00 83 2D 00 02 00 28 23 B2
+0
+5
+
+SEND
+17
+--- backlight ---
+
+0
+5
+
+SEND
+18
+Set backlight ON
+56 69 56 4F 74 65 63 68 32 00 83 2F 00 04 00 00 00 01 4E FE
+0
+5
+
+SEND
+19
+Set backlight OFF
+56 69 56 4F 74 65 63 68 32 00 83 2F 00 04 00 00 00 00 6F EE
+0
+5
+
+SEND
+20
+Set backlight OFF 1 byte
+56 69 56 4F 74 65 63 68 32 00 83 2F 00 01 00 00 00
+0
+5
+
+SEND
+21
+--- temperature ---
+
+0
+5
+
+SEND
+22
+get temperature
+56 69 56 4F 74 65 63 68 32 00 79 00 00 00 E5 D5
+0
+5
+
+SEND
+23
+--- processor info ---
+
+0
+5
+
+SEND
+24
+Get processor ID (12-03)
+56 69 56 4F 74 65 63 68 32 00 12 03 00 00 78 CB
+0
+5
+
+SEND
+25
+Get processor type 09-02)
+56 69 56 4F 74 65 63 68 32 00 09 02 00 00 F0 F9
+0
+5
+
+RECEIVE
+0
+83-xx generial positive resp
+56 69 56 4F 74 65 63 68 32 00 83 00 00 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+Get processor ID resp
+56 69 56 4F 74 65 63 68 32 00 12 00 00 10 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+Get processor type resp (ZA9L0)
+56 69 56 4F 74 65 63 68 32 00 09 00 00 04 DF 61 01 48 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
+Get processor type resp (ZA9L1)
+56 69 56 4F 74 65 63 68 32 00 09 00 00 04 DF 61 01 4A ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

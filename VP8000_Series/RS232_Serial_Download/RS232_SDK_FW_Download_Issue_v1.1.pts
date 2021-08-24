@@ -1,0 +1,254 @@
+DL_SCRIPTVERSION
+1
+46798
+
+' This version auto-detect whether to start at Flash Menu ' or at the ZA Prompt before beginning bootloader process.
+' Version 1.1
+
+
+'NOECB_BL = "HG0_BL_1.0.1_NOECB.hex"
+'ECB_BL = "HG0_BL_1.0.1.hex"
+
+'NOECB_BL = ".\Bootloaders\BL_1.0.3_DEV\bl_noecb.hex"
+'ECB_BL = ".\Bootloaders\BL_1.0.3_DEV\bl_ecb.hex"
+
+NOECB_BL = "bl_noecb.hex"
+ECB_BL = "bl_ecb.hex"
+
+
+'FW_Image_File = "kernel_nfs.hex"
+Dim COM_Port(5)
+'Method1
+'Method2
+
+'COM_Port(1) = 
+'COM_Port(2) = 
+'COM_Port(3) =
+'COM_Port(4) =
+'COM_Port(5) =
+
+Main
+'Main2
+
+Sub Main2()
+
+'===Step 0
+For i = 1 to 250
+DL.SendSequence "m"
+DL.Pause 100
+result = DL.WaitForSequence("Menu",1,100)
+If  result = 1 Then
+	Exit For
+	result = 0
+End If
+Next
+DL.Pause 1000
+DL.AddComment "***** STEP 0 COMPLETE *****"
+
+'===Step 1
+DL.WaitForSequence "Restart System"
+DL.Pause 100
+DL.AddComment "***** STEP 1 COMPLETE *****"
+
+'===Step 2
+DL.SendSequence "d"
+DL.Pause 100
+DL.AddComment "***** STEP 2 COMPLETE *****"
+
+'===Step 3
+DL.WaitForSequence "Waiting for hex file"
+DL.Pause 100
+DL.AddComment "***** STEP 3 COMPLETE *****"
+
+'===Step 4
+DL.Pause 5000
+DL.UploadFile FW_Image_File
+DL.AddComment "***** STEP 4 COMPLETE *****"
+
+'===Step 5
+DL.WaitForSequence ".E"
+DL.Pause 100
+DL.AddComment "***** STEP 5 COMPLETE *****"
+
+'===Step 6
+DL.WaitForSequence "Hex load complete"
+DL.Pause 100
+DL.AddComment "***** STEP 6 COMPLETE *****"
+
+'===Step 7
+DL.WaitForSequence "Restart system"
+DL.Pause 100
+DL.AddComment "***** STEP 7 COMPLETE *****"
+
+'===Step 8
+DL.SendSequence "r"
+DL.Pause 100
+DL.AddComment "***** STEP 8 COMPLETE *****"
+
+'===Step 9
+DL.WaitForSequence "Press 'y' to confirm REBOOT"
+DL.Pause 100
+DL.AddComment "***** STEP 9 COMPLETE *****"
+
+'===Step 10
+DL.SendSequence "y"
+DL.Pause 100
+DL.AddComment "***** STEP 10 COMPLETE *****"
+
+'===Step 11
+DL.WaitForSequence "Rebooting"
+DL.Pause 100
+DL.AddComment "***** STEP 11 COMPLETE *****"
+
+'===Step 12
+DL.AddComment "DOWNLOAD COMPLETE"
+DL.AddComment "***** STEP 12 COMPLETE *****"
+
+End Sub
+
+Sub Main()
+For j = 1 to 20
+DL.AddComment "------------ RUN # " & j & " BEGIN ------------"
+DL.AddComment "------------ RUN # " & j & " BEGIN ------------"
+DL.AddComment "------------ RUN # " & j & " BEGIN ------------"
+'	ChangeCOM(COM_Port(i))
+'	DL.Pause 2000
+
+DL.ResetReceiveCounter "ZA Prompt"
+result = 0
+MsgBoxAnswer = MsgBox("Get your device ready to flash bootloader." & vbCrLf & "OK - To Continue , Cancel - To Abort", VBOKCancel, "Bootloader Auto-Detect Script v1.1")
+If MsgBoxAnswer = 1 Then
+	
+ElseIf MsgBoxAnswer = 2 Then
+	Exit For
+End If
+
+DL.Pause 1500
+DL.SendSequence "Return"
+
+result = DL.GetReceiveCounter("ZA Prompt")
+If result = 1 Then
+	DL.ResetReceiveCounter "ZA Prompt"
+	LoadBootloader2
+ElseIf result = 0 Then
+	LoadBootloader1	
+End If
+
+DL.AddComment "------------ RUN # " & j & " COMPLETE ------------"
+DL.AddComment "------------ RUN # " & j & " COMPLETE ------------"
+DL.AddComment "------------ RUN # " & j & " COMPLETE ------------"
+Next
+
+DL.AddComment "Bootloader Loading Session has ENDED!!!"
+
+End Sub
+
+Sub ChangeCOM(COM_Port)
+
+DL.StopCommunication
+DL.SetChannelSettings(COM_Port & ":" & "115200" & ",NONE,8,1")
+DL.StartCommunication
+
+End Sub
+
+Sub Method1()
+
+LoadBootloader1
+
+DL.ResetReceiveCounter "Flash Menu"
+result = 0
+i = 0
+For i = 1 to 500
+DL.SendSequence "m" 'Menu
+DL.Pause 60
+DL.AddComment i
+result = DL.GetReceiveCounter("Flash Menu")
+If  result = 1 Then
+	Exit For
+	result = 0
+End If
+Next
+
+DL.AddComment "Starting FW Download..."
+DL.Pause 5000
+DL.SendSequence "d" 'Download
+DL.Pause 5000
+DL.UploadFile FW_Image_File
+
+End Sub
+
+
+Sub LoadBootloader1()
+
+DL.ResetReceiveCounter "Flash Menu"
+DL.ResetReceiveCounter "Erase Complete"
+result = 0
+k = 0
+For k = 1 to 360
+DL.SendSequence "m" 'Menu
+DL.Pause 60
+DL.AddComment k
+result = DL.GetReceiveCounter("Flash Menu")
+If  result = 1 Then
+	Exit For
+	result = 0
+End If
+Next
+
+DL.SendSequence "e" 'Erase
+DL.Pause 2000
+DL.SendSequence "y" 'Yes
+DL.WaitForSequence "Erase Complete"
+DL.Pause 2000
+DL.SendSequence "r" 'Reset / Reboot
+DL.Pause 2000
+DL.SendSequence "y" 'Yes
+LoadBootloader2
+End Sub
+
+Sub LoadBootloader2()
+result = 0
+DL.ResetReceiveCounter "NO ECB load complete"
+DL.ResetReceiveCounter "Hex load complete"
+DL.ResetReceiveCounter "ZA Prompt"
+
+l = 0
+For l = 1 to 100
+DL.SendSequence "Return"
+'DL.WaitForSequence "ZA Prompt"
+DL.Pause 60
+DL.AddComment l
+result = DL.GetReceiveCounter("ZA Prompt")
+If  result = 1 Then
+	Exit For
+	result = 0
+End If
+Next
+
+DL.Pause 2000
+
+DL.UploadFile NOECB_BL
+DL.WaitForSequence "NO ECB load complete"
+DL.Pause 3500
+DL.SendSequence "m" 'Menu
+DL.Pause 2000
+DL.SendSequence "d" 'Download
+DL.Pause 2000
+DL.UploadFile ECB_BL
+
+DL.WaitForSequence "Hex load complete"
+DL.Pause 2000
+'DL.SendSequence "m" 'Menu
+DL.AddComment "Bootloader Loading COMPLETE..."
+
+End Sub
+
+
+Sub Method2()
+
+DL.Pause 15000
+DL.SendSequence "Download Application Image (77-04)"
+DL.Pause 3000
+DL.UploadFile "HG0 AR_1.0.1-C03.hex"
+
+End Sub

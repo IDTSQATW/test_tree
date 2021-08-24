@@ -1,0 +1,16 @@
+Docklight Log File (HEX) - Started 11/3/2008 14:51:16.98 
+ --- Pass-Through - START
+
+11/3/2008 14:51:18.46 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+11/3/2008 14:51:18.48 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through Mode - Disable (STOP) (OK)
+ Pass-Through - START (OK)
+ --- Pass-Through Mode - Disable (STOP)
+
+11/3/2008 14:51:18.53 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38 
+11/3/2008 14:51:18.54 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through Mode - Disable (STOP) (OK)
+ Pass-Through - START (OK)
+ Result = FAILED
+
+
+Docklight Log File (HEX) - Stopped 11/3/2008 14:51:25.81 
+

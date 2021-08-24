@@ -1,0 +1,578 @@
+DL_SCRIPTVERSION
+1
+58947
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "applepay1" ' !!!!! EDIT THIS !!!!!
+'+++
+' Need revisit for the commom script errors
+'---
+
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+      
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject "C:\vivotech\regress\regression\regress_test\test_tree\applepay\applepay4\applepay4.ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON " Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+v2StsCode=255
+Sub DL_OnReceive()
+v2StsCode = DL.OnReceive_Peek(12,"H")
+DL.AddComment vbCrLf & "v2StsCode = " & v2StsCode &vbCrLf
+End Sub
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+
+DL.SendSequence "","56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34","H"
+  DL.Pause 500
+DL.SendSequence "","56 69 56 4F 74 65 63 68 32 00 04 00 00 05 FF F3 02 17 FF B9 2E", "H"
+
+'============================================================
+'============================================================
+'============================================================
+If result <> 0 Then
+  DL.Pause 500
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Set Merchant 1 - Blank "
+  DL.SendSequence " Set Merchant 1 - Blank "
+  result = DL.WaitForSequence("Set Merchant blank response", 1, 10000)
+End If
+'============================================================
+
+If result <> 0 Then
+  DL.Pause 500
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Set Merchant 2 - pass.com.apple.test1_Hello_My_Name_Is "
+  DL.SendSequence " Set Merchant 2 - pass.com.apple.test1_Hello_My_Name_Is "
+  result = DL.WaitForSequence("Set Merchant blank response", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.Pause 500
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get Merchant 1  "
+  DL.SendSequence " Get Merchant 1  "
+  result = DL.WaitForSequence("Get Merchant 1 blank response", 1, 10000)
+End If
+
+'============================================================
+If result <> 0 Then
+  DL.Pause 500
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Get Merchant 2  "
+  DL.SendSequence " Get Merchant 2  "
+  result = DL.WaitForSequence("Get Merchant 2 response", 1, 10000)
+End If
+
+'============================================================
+'Unencrypted Rewards card
+'============================================================
+'============================================================
+DL.Pause 4000
+
+If result <> 0 Then
+
+   prompt71 = prompt71 & "place iphone and choose Unencrypted Rewards card after press ok."
+   result = MsgBox(prompt71, VBOKOnly, "Apple pay")
+End If
+'============================================================
+If result <> 0 Then
+      DL.ResetReceiveCounter
+      DL.AddComment "--- ACT - VAS Only "
+	DL.SendSequence "ACT - VAS Only", i, "D"
+	result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+End If
+
+'============================================================
+DL.Pause 4000
+If result <> 0 Then
+
+   prompt72 = prompt72 & "place iphone and choose Unencrypted Rewards card after press ok."
+   result = MsgBox(prompt72, VBOKOnly, "Apple pay")
+End If
+'============================================================
+If result <> 0 Then
+      DL.AddComment "--- ACT - VAS OR Pay "
+	DL.SendSequence "ACT - VAS OR Pay", i, "D"
+	result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+End If
+'============================================================
+DL.Pause 4000
+If result <> 0 Then
+
+   prompt73 = prompt73 & "place iphone and choose Unencrypted Rewards card after press ok."
+   result = MsgBox(prompt73, VBOKOnly, "Apple pay")
+End If
+'============================================================
+If result <> 0 Then
+      DL.ResetReceiveCounter
+      DL.AddComment "--- ACT - VAS AND Pay "
+	DL.SendSequence "ACT - VAS AND Pay", i, "D"
+	result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+End If
+'============================================================
+DL.Pause 4000
+If result <> 0 Then
+   prompt74 = prompt74 & "place iphone and choose Unencrypted Rewards card after press ok."
+   result = MsgBox(prompt74, VBOKOnly, "Apple pay")
+End If
+'============================================================
+If result <> 0 Then
+      DL.ResetReceiveCounter
+      DL.AddComment "--- ACT - Pay Only "
+	DL.SendSequence "ACT - Pay Only", i, "D"
+	result = DL.WaitForSequence("request payment response" , 1, 10000)
+End If
+'============================================================
+
+DL.Pause 4000
+If result <> 0 Then
+   prompt15 = prompt15 & "place iphone and choose Unencrypted Rewards card after press ok."
+   result = MsgBox(prompt15, VBOKOnly, "Apple pay")
+End If
+'============================================================
+If result <> 0 Then
+      DL.ResetReceiveCounter
+      DL.AddComment "--- ACT - VAS URL Only Protocol "
+	DL.SendSequence "ACT - VAS URL Only Protocol", i, "D"
+	result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS URL response" , 1, 10000)
+End If
+'============================================================
+
+DL.Pause 4000
+If result <> 0 Then
+   prompt16 = prompt16 & "place iphone and choose Unencrypted Rewards card after press ok."
+   result = MsgBox(prompt16, VBOKOnly, "Apple pay")
+End If
+'============================================================
+If result <> 0 Then
+      DL.ResetReceiveCounter
+      DL.AddComment "--- ACT - VAS Only - Beeps & Silent CommErr "
+	DL.SendSequence "ACT - VAS Only - Beeps & Silent CommErr", i, "D"
+	result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+End If
+'============================================================
+
+DL.Pause 4000
+If result <> 0 Then
+   prompt17 = prompt17 & "place iphone and choose Unencrypted Rewards card after press ok."
+   result = MsgBox(prompt17, VBOKOnly, "Apple pay")
+End If
+'============================================================
+If result <> 0 Then
+      DL.ResetReceiveCounter
+      DL.AddComment "--- ACT - VAS OR Pay - Beeps & Silent CommErr "
+	DL.SendSequence "ACT - VAS OR Pay - Beeps & Silent CommErr", i, "D"
+	result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+End If
+'============================================================
+
+DL.Pause 4000
+If result <> 0 Then
+   prompt18 = prompt18 & "place iphone and choose Unencrypted Rewards card after press ok."
+   result = MsgBox(prompt18, VBOKOnly, "Apple pay")
+End If
+'============================================================
+If result <> 0 Then
+      DL.ResetReceiveCounter
+      DL.AddComment "--- ACT - VAS AND Pay - Beeps & Silent CommErr "
+	DL.SendSequence "ACT - VAS AND Pay - Beeps & Silent CommErr", i, "D"
+	result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+End If
+'============================================================
+DL.Pause 4000
+If result <> 0 Then
+   prompt19 = prompt19 & "place iphone and choose Unencrypted Rewards card after press ok."
+   result = MsgBox(prompt19, VBOKOnly, "Apple pay")
+End If
+'============================================================
+
+If result <> 0 Then
+      DL.ResetReceiveCounter
+      DL.AddComment "--- ACT - Pay Only -  Beeps & Silent CommErr"
+	DL.SendSequence "ACT - Pay Only -  Beeps & Silent CommErr", i, "D"
+	result = DL.WaitForSequence("request payment response" , 1, 10000)
+End If
+'============================================================
+DL.Pause 4000
+If result <> 0 Then
+   prompt20 = prompt20 & "place iphone and choose Unencrypted Rewards card after press ok."
+   result = MsgBox(prompt20, VBOKOnly, "Apple pay")
+End If
+'============================================================
+
+If result <> 0 Then
+      DL.ResetReceiveCounter
+      DL.AddComment "--- ACT - VAS Only URL Protocol -  Beeps & Silent CommErr"
+	DL.SendSequence "ACT - VAS Only URL Protocol -  Beeps & Silent CommErr", i, "D"
+	result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS URL response" , 1, 10000)
+End If
+'============================================================
+
+
+
+
+DL.Pause 400
+If result <> 0 Then
+   prompt60 = prompt60 & "place iphone and choose Unencrypted Rewards card after press ok."
+   result = MsgBox(prompt60, VBOKOnly, "Apple pay")
+End If
+'============================================================
+
+If result <> 0 Then
+      DL.ResetReceiveCounter
+      DL.AddComment "--- Act-Test7 Apple VAS Only, Beep + SmartTap PrePPSE read, NoPay, LOYALTY"
+	DL.SendSequence "Act-Test7 Apple VAS Only, Beep + SmartTap PrePPSE read, NoPay, LOYALTY", i, "D"
+	result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+End If
+'============================================================
+DL.Pause 400
+If result <> 0 Then
+   prompt61 = prompt61 & "place iphone and choose Unencrypted Rewards card after press ok."
+   result = MsgBox(prompt61, VBOKOnly, "Apple pay")
+End If
+'============================================================
+
+If result <> 0 Then
+      DL.ResetReceiveCounter
+      DL.AddComment "--- Act-Test8 Apple VAS Only + SmartTap PrePPSE read, Pay, OFFERS"
+	DL.SendSequence "Act-Test8 Apple VAS Only + SmartTap PrePPSE read, Pay, OFFERS", i, "D"
+	result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+End If
+'============================================================
+DL.Pause 400
+If result <> 0 Then
+   prompt62 = prompt62 & "place iphone and choose Unencrypted Rewards card after press ok."
+   result = MsgBox(prompt62, VBOKOnly, "Apple pay")
+End If
+'============================================================
+
+If result <> 0 Then
+      DL.ResetReceiveCounter
+      DL.AddComment "--- Act-Test9 Apple VAS or Pay + SmartTap PrePPSE read, NoPay, LOYALTY & OFFERS"
+	DL.SendSequence "Act-Test9 Apple VAS or Pay + SmartTap PrePPSE read, NoPay, LOYALTY & OFFERS", i, "D"
+	result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+End If
+'============================================================
+
+DL.Pause 400
+If result <> 0 Then
+   prompt63 = prompt63 & "place iphone and choose Unencrypted Rewards card after press ok."
+   result = MsgBox(prompt63, VBOKOnly, "Apple pay")
+End If
+'============================================================
+
+If result <> 0 Then
+      DL.ResetReceiveCounter
+      DL.AddComment "--- Act-Test10 Apple VAS & Pay + SmartTap PostPPSE read, Pay, LOYALTY & OFFERS"
+	DL.SendSequence "Act-Test10 Apple VAS & Pay + SmartTap PostPPSE read, Pay, LOYALTY & OFFERS", i, "D"
+	result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+End If
+'============================================================
+
+
+DL.Pause 400
+If result <> 0 Then
+   prompt64 = prompt64 & "place iphone and choose Unencrypted Rewards card after press ok."
+   result = MsgBox(prompt64, VBOKOnly, "Apple pay")
+End If
+'============================================================
+
+If result <> 0 Then
+      DL.ResetReceiveCounter
+      DL.AddComment "--- ACT 11- VAS Only URL Protocol + SmartTap PrePPSE read, Pay, LOYALTY & OFFERS"
+	DL.SendSequence "ACT 11- VAS Only URL Protocol + SmartTap PrePPSE read, Pay, LOYALTY & OFFERS", i, "D"
+	result = DL.WaitForSequence("ACT 11-response" , 1, 10000)
+End If
+'============================================================
+DL.ClearCommWindows 
+'Android Card1
+
+'============================================================
+
+DL.Pause 400
+If result <> 0 Then
+   prompt80 = prompt80 & "place Android Card1 after press ok."
+   result = MsgBox(prompt80, VBOKOnly, "Apple pay")
+End If
+'============================================================
+
+If result <> 0 Then
+      DL.ResetReceiveCounter
+      DL.AddComment "--- Act-Test7 Apple VAS Only, Beep + SmartTap PrePPSE read, NoPay, LOYALTY"
+	DL.SendSequence "Act-Test7 Apple VAS Only, Beep + SmartTap PrePPSE read, NoPay, LOYALTY", i, "D"
+	result = DL.WaitForSequence("Android Act-Test7  response" , 1, 10000)
+End If
+'============================================================
+DL.Pause 400
+If result <> 0 Then
+   prompt81 = prompt81 & "place Android Card1 after press ok."
+   result = MsgBox(prompt81, VBOKOnly, "Apple pay")
+End If
+'============================================================
+
+If result <> 0 Then
+      DL.ResetReceiveCounter
+      DL.AddComment "--- Act-Test8 Apple VAS Only + SmartTap PrePPSE read, Pay, OFFERS"
+	DL.SendSequence "Act-Test8 Apple VAS Only + SmartTap PrePPSE read, Pay, OFFERS", i, "D"
+	result = DL.WaitForSequence("Android Act-Test8  response" , 1, 10000)
+End If
+'============================================================
+DL.Pause 4000
+If result <> 0 Then
+   prompt82 = prompt82 & "place Android Card1 after press ok."
+   result = MsgBox(prompt82, VBOKOnly, "Apple pay")
+End If
+'============================================================
+
+If result <> 0 Then
+      DL.ResetReceiveCounter
+      DL.AddComment "--- Act-Test9 Apple VAS or Pay + SmartTap PrePPSE read, NoPay, LOYALTY & OFFERS"
+	DL.SendSequence "Act-Test9 Apple VAS or Pay + SmartTap PrePPSE read, NoPay, LOYALTY & OFFERS", i, "D"
+	result = DL.WaitForSequence("Android Act-Test9  response" , 1, 10000)
+End If
+'============================================================
+
+DL.Pause 400
+If result <> 0 Then
+   prompt83 = prompt83 & "place Android Card1 after press ok."
+   result = MsgBox(prompt83, VBOKOnly, "Apple pay")
+End If
+'============================================================
+
+If result <> 0 Then
+      DL.ResetReceiveCounter
+      DL.AddComment "--- Act-Test10 Apple VAS & Pay + SmartTap PostPPSE read, Pay, LOYALTY & OFFERS"
+	DL.SendSequence "Act-Test10 Apple VAS & Pay + SmartTap PostPPSE read, Pay, LOYALTY & OFFERS", i, "D"
+	result = DL.WaitForSequence("Android Act-Test10  response" , 1, 10000)
+End If
+'============================================================
+
+
+DL.Pause 400
+If result <> 0 Then
+   prompt84 = prompt84 & "place Android Card1 after press ok."
+   result = MsgBox(prompt84, VBOKOnly, "Apple pay")
+End If
+'============================================================
+
+If result <> 0 Then
+      DL.ResetReceiveCounter
+      DL.AddComment "--- ACT 11- VAS Only URL Protocol + SmartTap PrePPSE read, Pay, LOYALTY & OFFERS"
+	DL.SendSequence "ACT 11- VAS Only URL Protocol + SmartTap PrePPSE read, Pay, LOYALTY & OFFERS", i, "D"
+	result = DL.WaitForSequence("Android Act-Test11  response" , 1, 10000)
+End If
+'============================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'============================================================
+'============================================================
+
+
+'============================================================
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If 0 Then
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+DL.pause 1000
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+

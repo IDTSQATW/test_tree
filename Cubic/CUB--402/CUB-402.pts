@@ -1,0 +1,342 @@
+DL_SCRIPTVERSION
+1
+52759
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "CUB-402" ' !!!!! EDIT THIS !!!!!
+' Verify reader returns the TVLs requested by cubic FTP phase2 (Test w/ DISC test cards). 
+
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+      
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON " Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+catMessages = ""
+Sub checkResult(chkMsg)
+      If result = 0 Then
+	   catMessages = catMessages & chkMsg & "; "
+	   result = 1
+	End If
+End Sub
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+'============================================================
+MyInput = MsgBox ("Are you testing a Cubic reader?", VBYesNo, "Test Step")
+
+'------------------------------------------------------------
+If MyInput = 6 Then
+
+If 0 Then
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment "cfg mchip (FFFC=02) grp1"
+   DL.SendSequence "cfg mchip (FFFC=02) grp1"    
+   result = DL.WaitForSequence("Generic cfg + resp", 1, 5000)
+  End If
+
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment "cfg mc aid grp1 (payment)"
+   DL.SendSequence "cfg mc aid grp1 (payment)"    
+   result = DL.WaitForSequence("Generic cfg + resp", 1, 5000)
+  End If
+End If
+
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment "Set Cubic Options - DF6C ( All Disabled)"
+   DL.SendSequence "Set Cubic Options - DF6C ( All Disabled)"    
+   result = DL.WaitForSequence("Generic cfg + resp", 1, 5000)
+  End If
+
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment "Set Cubic Config - DF6D (Matching AIDs Table Clear)"
+   DL.SendSequence "Set Cubic Config - DF6D (Matching AIDs Table Clear)"    
+   result = DL.WaitForSequence("Generic cfg + resp", 1, 5000)
+  End If
+
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment "Set Cubic Config - DF6E (Fixed Fare Table Clear)"
+   DL.SendSequence "Set Cubic Config - DF6E (Fixed Fare Table Clear)"    
+   result = DL.WaitForSequence("Generic cfg + resp", 1, 5000)
+  End If
+
+  If result <> 0 Then
+   prompt2 = "Click on OK and then tap a DISC test card."
+   result = MsgBox(prompt2, VBOKOnly, "Advanced PassThrough")
+  End If
+
+  If result <> 0  Then
+   DL.ResetReceiveCounter
+   DL.AddComment "Activate Transaction w/ amt 3.33 Timeout 10 seconds"
+   DL.SendSequence "Activate Transaction w/ amt 3.33 Timeout 10 seconds"
+   result = DL.WaitForSequence("amt 3.33 resp", 1, 10000)
+   checkResult("9F02-3.33")
+
+   result = DL.WaitForSequence("Tag 95 Term", 1, 2000)
+   checkResult("Tag 95 Term")
+   result = DL.WaitForSequence("Tag 5F2A Term", 1, 2000)
+   checkResult("Tag 5F2A Term")
+   result = DL.WaitForSequence("Tag 8A Term", 1, 2000)
+   checkResult("Tag 8A Term")
+   result = DL.WaitForSequence("Tag 9A Term", 1, 2000)
+   checkResult("Tag 9A Term")
+   result = DL.WaitForSequence("Tag 9C Term", 1, 2000)
+   checkResult("Tag 9C Term")
+   result = DL.WaitForSequence("Tag 9F09 Term", 1, 2000)
+   checkResult("Tag 9F09 Term")
+   result = DL.WaitForSequence("Tag 9F1A Term", 1, 2000)
+   checkResult("Tag 9F1A Term")
+   result = DL.WaitForSequence("Tag 9F1C Term", 1, 2000)
+   checkResult("Tag 9F1C Term")
+   result = DL.WaitForSequence("Tag 9F21 Term", 1, 2000)
+   checkResult("Tag 9F21 Term")
+   result = DL.WaitForSequence("Tag 9F33 Term", 1, 2000)
+   checkResult("Tag 9F33 Term")
+   result = DL.WaitForSequence("Tag 9F34 Term", 1, 2000)
+   checkResult("Tag 9F34 Term")
+   result = DL.WaitForSequence("Tag 9F35 Term", 1, 2000)
+   checkResult("Tag 9F35 Term")
+   result = DL.WaitForSequence("Tag 9F37 Term", 1, 2000)
+   checkResult("Tag 9F37 Term")
+
+   result = DL.WaitForSequence("Tag 42 ICC", 1, 2000)
+   checkResult("Tag 42 ICC")
+   result = DL.WaitForSequence("Tag 57 ICC", 1, 2000)
+   checkResult("Tag 57 ICC")
+   result = DL.WaitForSequence("Tag 82 ICC", 1, 2000)
+   checkResult("Tag 82 ICC")
+   result = DL.WaitForSequence("Tag 5A ICC", 1, 2000)
+   checkResult("Tag 5A ICC")
+   result = DL.WaitForSequence("Tag 5F24 ICC", 1, 2000)
+   checkResult("Tag 5F24 ICC")
+   result = DL.WaitForSequence("Tag 5F28 ICC", 1, 2000)
+   checkResult("Tag 5F28 ICC")
+   result = DL.WaitForSequence("Tag 5F30 ICC", 1, 2000)
+   checkResult("Tag 5F30 ICC")
+   result = DL.WaitForSequence("Tag 5F34 ICC", 1, 2000)
+   checkResult("Tag 5F34 ICC")
+   result = DL.WaitForSequence("Tag 9F07 ICC", 1, 2000)
+   checkResult("Tag 9F07 ICC")
+   result = DL.WaitForSequence("Tag 9F10 ICC", 1, 2000)
+   checkResult("Tag 9F10 ICC")
+   result = DL.WaitForSequence("Tag 9F20 ICC", 1, 2000)
+   checkResult("Tag 9F20 ICC")
+   result = DL.WaitForSequence("Tag 9F26 ICC", 1, 2000)
+   checkResult("Tag 9F26 ICC")
+   result = DL.WaitForSequence("Tag 9F27 ICC", 1, 2000)
+   checkResult("Tag 9F27 ICC")
+   result = DL.WaitForSequence("Tag 9F36 ICC", 1, 2000)
+   checkResult("Tag 9F36 ICC")
+   result = DL.WaitForSequence("Tag 9F5A ICC", 1, 2000)
+   checkResult("Tag 9F5A ICC")
+
+   result = DL.WaitForSequence("Tag 9F6E Term w/Amex, ICC w/VISA-MC", 1, 2000)
+   checkResult("Tag 9F6E Term w/Amex, ICC w/VISA-MC")
+   result = DL.WaitForSequence("Tag 9F70 ICC w/ Amex", 1, 2000)
+   checkResult("Tag 9F70 ICC w/ Amex")
+   result = DL.WaitForSequence("Tag 9F7C Term w/ Visa-Mchip", 1, 2000)
+   checkResult("Tag 9F7C Term w/ Visa-Mchip")
+
+   result = DL.WaitForSequence("Tag BF63 ???", 1, 2000)
+   checkResult("Tag BF63 ???")
+
+  End If
+
+
+Else
+   DL.AddComment vbCrLf & "User selected 'No'. It is not a Vend3 type reader." & vbCrLf
+   result = 0
+End If
+
+
+DL.Pause 1500
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment vbCrLf & "Not done yet!!! The following is a list of cubic requested TLVs that are not returned:" & vbCrLf
+DL.AddComment vbCrLf & catMessages & vbCrLf
+DL.AddComment vbCrLf & "If the list is empty the test is done. Otherwise, please check each of them out for resolutions." & vbCrLf
+
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+
+

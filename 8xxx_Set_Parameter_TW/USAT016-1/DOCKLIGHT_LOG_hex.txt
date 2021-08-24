@@ -1,0 +1,5 @@
+Docklight Log File (HEX) - Started 2020/11/18 09:36:43.766 
+
+
+Docklight Log File (HEX) - Stopped 2020/11/18 09:36:43.860 
+

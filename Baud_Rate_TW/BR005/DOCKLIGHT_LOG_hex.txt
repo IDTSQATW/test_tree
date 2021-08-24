@@ -1,0 +1,46 @@
+Docklight Log File (HEX) - Started 2020/11/17 13:42:46.124 
+ TEST CASE: BR005
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Testing 115200 Baud
+
+2020/11/17 13:42:47.402 [TX] - 56 69 56 4F 74 65 63 68 32 00 30 01 00 01 05 EC D2 
+2020/11/17 13:42:47.434 [RX] - 56 69 56 4F 74 65 63 68 32 00 30 00 00 00 48 0E  Baud Rate accepted
+ 
+
+ --- Set Docklight COM PORT >> 115200
+ Set Docklight COM PORT/ baud rate - COMPLETE
+ 
+
+ --- Ping OPEN COM PORT
+
+2020/11/17 13:42:49.640 [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD 
+2020/11/17 13:42:49.643 [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Ping Successful
+ 
+
+ --- Power off/ on the reader...
+ 
+
+
+ --- Ping OPEN COM PORT
+
+2020/11/17 13:42:59.577 [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD 
+2020/11/17 13:42:59.581 [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Ping Successful
+ 
+
+ --- Set Reader back to Regress.Config baudrate of 9600
+
+2020/11/17 13:42:59.589 [TX] - 56 69 56 4F 74 65 63 68 32 00 30 01 00 01 01 68 92 
+2020/11/17 13:42:59.598 [RX] - 56 69 56 4F 74 65 63 68 32 00 30 00 00 00 48 0E  Baud Rate accepted
+ 
+---------- END OF TEST ----------
+
+ Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2020/11/17 13:43:00.683 
+

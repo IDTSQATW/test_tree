@@ -1,0 +1,9 @@
+Docklight Log File (HEX) - Started  
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START and STOP (OK)
+ Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

@@ -1,0 +1,451 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM2
+COM2
+115200
+2
+0
+4
+2
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Cubic - Set Poll Mode Normal
+56 69 56 4F 74 65 63 68 32 00 FF 01 00 01 00 00 00
+0
+5
+
+SEND
+1
+Cubic - Set Poll Mode Reduced
+56 69 56 4F 74 65 63 68 32 00 FF 01 00 01 01 00 00
+0
+5
+
+SEND
+2
+Cubic - Set L1 Parameters - Card Type A
+56 69 56 4F 74 65 63 68 32 00 FF 02 00 01 00 00 00
+0
+5
+
+SEND
+3
+Cubic - Set L1 Parameters - Card Type B
+56 69 56 4F 74 65 63 68 32 00 FF 02 00 01 01 00 00
+0
+5
+
+SEND
+4
+Get Transaction State (09 = Idle)
+56 69 56 4F 74 65 63 68 32 00 31 01 00 00 00 00
+0
+5
+
+SEND
+5
+Activate Transaction - Timeout 3 seconds
+56 69 56 4F 74 65 63 68 32 00 02 01 00 0A 03 9F 02 06 00 00 00 00 03 33 00 00
+0
+5
+
+SEND
+6
+Activate Transaction - Timeout 10 seconds
+56 69 56 4F 74 65 63 68 32 00 02 01 00 0A 0A 9F 02 06 00 00 00 00 03 33 BB 3C
+0
+5
+
+SEND
+7
+Activate Transaction w/ amt 3.33 Timeout 10 seconds
+56 69 56 4F 74 65 63 68 32 00 02 01 00 0A 0A 9F 02 06 00 00 00 00 03 33 BB 3C
+0
+5
+
+SEND
+8
+Activate Transaction w/ Amt 0.01, date 7/7/2007
+56 69 56 4F 74 65 63 68 32 00 02 01 00 15 0A 9F 02 06 00 00 00 00 00 01 9A 03 07 07 07 9F 21 03 12 00 00 D9 C3
+0
+5
+
+SEND
+9
+Activate Transaction w/ Amt 0.02, date 7/7/2007
+56 69 56 4F 74 65 63 68 32 00 02 01 00 15 0A 9F 02 06 00 00 00 00 00 02 9A 03 07 07 07 9F 21 03 12 00 00 46 C6
+0
+5
+
+SEND
+10
+Activate Transaction w/o Amt, date 7/7/2007
+56 69 56 4F 74 65 63 68 32 00 02 01 00 0C 0A 9A 03 07 07 07 9F 21 03 12 00 00 A3 12
+0
+5
+
+SEND
+11
+Cancel Transaction
+56 69 56 4F 74 65 63 68 32 00 05 01 00 00 00 00
+0
+5
+
+SEND
+12
+Set Poll Mode - Poll On Demand
+56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 00 00
+0
+5
+
+SEND
+13
+Set Poll Mode - Auto Poll
+56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 00 00
+0
+5
+
+SEND
+14
+Get Configuration
+56 69 56 4F 74 65 63 68 32 00 03 02 00 00 5B 91
+0
+5
+
+SEND
+15
+Config Group #1 w/SDA+CDA,TT=26 ... MChip 3
+56 69 56 4F 74 65 63 68 32 00 04 03 00 A3 FF E4 01 00 9C 01 00 5F 2A 02 08 40 9F 09 02 00 02 9F 1A 02 08 40 9F 1B 04 00 00 17 70 9F 33 03 00 08 A8 9F 35 01 26 9F 40 05 60 00 00 30 00 9F 66 04 80 00 00 00 FF F1 06 00 00 00 01 00 00 FF F4 03 01 00 01 FF F5 06 00 00 00 00 80 00 FF F8 01 03 FF FB 01 00 FF FC 01 00 FF FD 05 F8 50 AC F8 00 FF FE 05 F8 50 AC A0 00 FF FF 05 44 00 00 00 00 9F 15 02 00 00 DF 28 03 00 08 A0 DF 29 03 00 08 A0 DF 81 24 06 00 00 99 99 99 00 DF 81 25 06 00 00 88 88 88 00 DF 28 03 00 08 A8 DF 29 03 00 08 A8 00 00
+0
+5
+
+SEND
+16
+Set Configuration - UI Scheme = EMEA
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F8 01 03 EB 32
+0
+5
+
+SEND
+17
+Set Cubic Options - DF6C ( All Disabled)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 6C 01 00 3F 91
+0
+5
+
+SEND
+18
+Set Cubic Options - DF6C ( Zero Amount)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 6C 01 04 BB D1
+0
+5
+
+SEND
+19
+Set Cubic Options - DF6C (Timestamping)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 6C 01 01 1E 81
+0
+5
+
+SEND
+20
+Set Cubic Options - DF6C ( Zero Amount+Timestamping)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 6C 01 05 00 00
+0
+5
+
+SEND
+21
+Set Cubic Options - DF6C ( Zero Amount+List Checking+Timestamping)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 6C 01 07 00 00
+0
+5
+
+SEND
+22
+Set Cubic Options - DF6C ( List Checking+Timestamping+Mode3)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 6C 01 0B 00 00
+0
+5
+
+SEND
+23
+Set Cubic Options - DF6C ( List Checking+Mode3)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 6C 01 0A 00 00
+0
+5
+
+SEND
+24
+Set Cubic Options - DF6C ( List Checking+Timestamping+Mode3+ZeroCapability)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 6C 01 0F 00 00
+0
+5
+
+SEND
+25
+Set Cubic Options - DF6C ( List Checking+Timestamping)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 6C 01 03 00 00
+0
+5
+
+SEND
+26
+Set Cubic Options - DF6C ( Mode3 only)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 6C 01 08 37 10
+0
+5
+
+SEND
+27
+Set Cubic Config - DF6E (Fixed Fare Table Example)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 24 DF 6E 21 A0 00 00 00 04 00 00 00 00 01 00 A0 00 00 00 03 00 00 00 00 02 00 A0 00 00 03 24 00 00 00 00 03 00 92 36
+0
+5
+
+SEND
+28
+Set Cubic Config - DF6E (Fixed Fare Table Example + Amex Fob)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 2F DF 6E 2C A0 00 00 00 04 00 00 00 00 01 00 A0 00 00 00 03 00 00 00 00 02 00 A0 00 00 03 24 00 00 00 00 03 00 A0 00 00 00 25 00 00 00 00 04 00 21 25
+0
+5
+
+SEND
+29
+Set Cubic Config - DF6E (Fixed Fare Table Clear)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 5B DF 6E 58 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 19 0E
+0
+5
+
+SEND
+30
+Set Cubic Config - DF6E (Fixed Fare Table Fill with 0x55
+56 69 56 4F 74 65 63 68 32 00 04 00 00 5B DF 6E 58 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 00 00
+0
+5
+
+SEND
+31
+Set Cubic Config - DF6D (Matching AIDs Table Example)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 16 DF 6D 13 05 A0 00 00 00 04 06 A0 00 00 00 03 10 05 A0 00 00 03 24 00 00
+0
+5
+
+SEND
+32
+Set Cubic Config - DF6D (Matching AIDs Table Clear)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 8D DF 6D 82 00 88 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 26 38
+0
+5
+
+SEND
+33
+Set Cubic Config - DF6D (Matching AIDs Table Fill with 0x55)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 8D DF 6D 82 00 88 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 00 00
+0
+5
+
+SEND
+34
+Set Cubic Config - DF6D (Matching AIDs Table Cubic Card)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 1E DF 6D 1B 05 A0 00 00 00 04 06 A0 00 00 00 03 10 05 A0 00 00 03 24 07 A0 00 00 00 03 10 10 00 00
+0
+5
+
+SEND
+35
+Set Cubic Config - DF6D (Matching AIDs Incl Amex Fob)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 1F DF 6D 1C 05 A0 00 00 00 04 06 A0 00 00 00 03 10 05 A0 00 00 03 24 08 A0 00 00 00 25 01 07 01 00 00
+0
+5
+
+SEND
+36
+Set Cubic Config - DF6D (Matching AIDs Incl Amex Card)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 28 DF 6D 25 05 A0 00 00 00 04 06 A0 00 00 00 03 10 05 A0 00 00 03 24 08 A0 00 00 00 25 01 07 01 08 A0 00 00 00 25 01 05 02 00 00
+0
+5
+
+SEND
+37
+Set Cubic Config - DF6D (Matching AIDs Incl Amex Card)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 28 DF 6D 25 05 A0 00 00 00 04 06 A0 00 00 00 03 10 05 A0 00 00 03 24 08 A0 00 00 00 25 01 07 01 08 A0 00 00 00 25 01 05 02 00 00
+0
+5
+
+SEND
+38
+Set Cubic Config - DF6D (Matching AID DISC only)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 0B DF 6D 08 07 A0 00 00 03 24 10 10 99 A2
+0
+5
+
+SEND
+39
+CUB-188 test
+56 69 56 4F 74 65 63 68 32 00 02 01 00 15 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20 30 12
+0
+5
+
+SEND
+40
+PAL Push
+56 69 56 4F 74 65 63 68 32 00 04 0A 00 14 FF 01 11 00 07 A0 00 00 04 17 01 01 07 A0 00 00 00 04 10 10 64 4B
+0
+5
+
+SEND
+41
+Get Cash Risk Parameters
+56 69 56 4F 74 65 63 68 32 00 03 0C 00 00 00 00
+0
+5
+
+SEND
+42
+Get Cashboack Risk Parameters
+56 69 56 4F 74 65 63 68 32 00 03 0D 00 00 00 00
+0
+5
+
+SEND
+43
+Ping - Debug TTR
+56 69 56 4F 74 65 63 68 32 00 18 0A 00 00 00 00
+0
+5
+
+SEND
+44
+Ping - Debug Stack
+56 69 56 4F 74 65 63 68 32 00 18 18 00 00 00 00
+0
+5
+
+SEND
+45
+------ pre set for activate transactions -----
+
+0
+5
+
+SEND
+46
+cfg mstripe (FFFC=1) grp1
+56 69 56 4F 74 65 63 68 32 00 04 03 00 56 FF E4 01 01 FF FC 01 01 DF 81 1E 01 10 DF 81 2C 01 00 9F 7E 00 DF 81 24 06 00 00 00 03 00 00 DF 81 25 06 00 00 00 05 00 00 FF F5 06 00 00 00 00 10 00 9F 1A 02 00 56 9F 1C 00 9A 03 FF FF FF 5F 2A 02 09 78 5F 36 01 02 9F 21 03 FF FF FF FF F8 01 03 FF FB 01 00 E2 CE
+0
+5
+
+SEND
+47
+cfg mchip (FFFC=02) grp1
+56 69 56 4F 74 65 63 68 32 00 04 03 00 AD FF E4 01 01 5F 57 00 9F 01 00 DF 28 03 00 08 08 DF 29 03 00 60 08 FF F2 08 30 30 30 30 30 30 30 30 FF FC 01 02 DF 81 1E 01 10 DF 81 2C 01 00 DF 81 1C 02 00 00 9F 15 02 11 11 9F 16 00 9F 4E 00 9F 7E 00 9F 1B 04 00 00 27 10 DF 81 24 06 00 00 00 03 00 00 DF 81 25 06 00 00 00 05 00 00 FF F5 06 00 00 00 00 10 00 FF FD 05 00 00 00 00 00 FF FE 05 00 00 00 00 00 FF FF 05 00 00 00 00 00 9F 33 03 00 08 08 9F 1A 02 00 56 9F 1C 00 9F 35 01 22 9A 03 FF FF FF 5F 2A 02 09 78 5F 36 01 02 9F 21 03 FF FF FF FF F8 01 03 FF FB 01 00 32 41
+0
+5
+
+SEND
+48
+cfg mc aid grp1 (payment)
+56 69 56 4F 74 65 63 68 32 00 04 02 00 24 FF E4 01 01 9F 06 07 A0 00 00 00 04 10 10 FF E1 01 01 FF E5 01 10 FF E9 03 02 00 01 FF EA 01 02 FF E3 01 40 03 70
+0
+5
+
+SEND
+49
+set param default
+56 69 56 4F 74 65 63 68 32 00 04 09 00 00 87 30
+0
+5
+
+RECEIVE
+0
+Set Poll Mode Answer
+56 69 56 4F 74 65 63 68 32 00 FF 00 00 00
+2
+0
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+Get Transaction State Answer
+56 69 56 4F 74 65 63 68 32 00 31 00 00 01
+4
+0
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+Generic cfg + resp
+56 69 56 4F 74 65 63 68 32 00 04 00 00 00 ?? ??
+-1
+1
+COMMENT 
+0
+0
+0
+0
+
+RECEIVE
+3
+time stamping resp (chk DF6F tag name only)
+## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## DF 6F ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ?? ??
+-1
+1
+COMMENT 
+0
+0
+0
+0
+
+RECEIVE
+4
+time stamping resp
+## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## DF 6F ?? 01 ?? ?? ?? ?? 02 ?? ?? ?? ?? 03 ?? ?? ?? ?? 04 ?? ?? ?? ?? ## ## ## ## ## 05 ?? ?? ?? ?? 06 ?? ?? ?? ?? ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ?? ??
+-1
+1
+COMMENT 
+0
+0
+0
+0
+
+RECEIVE
+5
+amt 3.33 resp
+## ## ## ## ## ## ## ## ## ## ## ## 9F 02 06 00 00 00 00 03 33 ?? ?? ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+6
+amt 0.00 resp
+## ## ## ## ## ## ## ## ## ## ## ## 9F 02 06 00 00 00 00 00 00 ?? ?? ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

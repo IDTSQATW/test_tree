@@ -1,0 +1,48 @@
+TID:Clear Display and Stop Get Event
+CMD:83 0D
+EXR:83 0D 00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+TID:Clear Event Queue
+CMD:83 0C
+EXR:83 0C 00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+TID:Display Button(35 00 - Center button on screen, clear screen before displaying button, word wrap disabled.)
+CMD:83 05 30 00 30 00 30 00 30 00 31 00 31 00 35 00 54 45 53 54 20 42 54 4e 00 FF FF FF 00 00 00 00 00
+EXR:56 69 56 4F 70 61 79 56 33 00 83 05 00 00 04 ?? ?? ?? ?? ?? ??
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+TID:Start Get Input Event
+CMD:83 06 00
+EXR:83 06
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+TID:Set Property, Enable sensitivity
+CMD:83 0B ?? ?? ?? ?? 00 01
+EXR:83 0B 00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV
+
+
+TID:Set Property, Disable sensitivity
+CMD:83 0B ?? ?? ?? ?? 00 00
+EXR:83 0B 00
+TIMEOUT:2000
+INTERVAL:200
+LOOP:1
+PROTOCOL:VIV

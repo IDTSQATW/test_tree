@@ -1,0 +1,17 @@
+Mobile App Test Card example1:
+Payment Settings: Off
+Consumer ID: 001122334455667788
+Use merchant capabilities: On
+Modify GetSmartTapData response: Off
+Loyalty Cards1: 58685005868500 (loyalty ID), 7002000001 (loyalty code)
+Loyalty Cards2: 510203040506070809 (loyalty ID), 7002000002 (loyalty code)
+Offers1: 11223344556601 (offer ID), 90305124 (offer code)
+Offers2: 11223344556602 (offer ID), 90305125 (offer code)
+
+Mobile App Test Card example2: (test read large data)
+Payment Settings: On
+Consumer ID: 001122334455667788
+Use merchant capabilities: On
+Modify GetSmartTapData response: Off
+Loyalty Cards1~5: 5000000000000001~5 (loyalty ID), 7002000001~5 (loyalty code)
+Offers1~23: 1100000000000001~23 (offer ID), 90300001~23 (offer code)

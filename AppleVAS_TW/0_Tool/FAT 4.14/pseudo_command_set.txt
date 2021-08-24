@@ -1,0 +1,249 @@
+pseudo command set
+No.	Command.	Description.	Format
+1	CMD	Send Command 1	CMD: < non - encapsulation protocol command body (Hex) >
+2	RCM	Send Command 2	RCM: < encapsulation protocol command body (Hex) >
+3	EXR	Expect response	EXR: <Complete or partial expect response body >
+4	//	Shielding	// <Any data >
+5	DOEXE	Execute external program	DOEXE: < Script executable program detail name, under the current path >
+6	ViewAudioPrefix:On	Enable view Audio jack unit response prefix	ViewAudioPrefix:On
+7	ViewAudioPrefix:Off	Disable view Audio jack unit response prefix	ViewAudioPrefix:Off
+8	ViewCardData:On	Enable view detail MSR Card Swipe data	ViewCardData:On Enable view detail MSR Card Swipe data message dialog. 
+9	ViewCardData:Off	Disable view detail MSR Card Swipe data	ViewCardData:Off Disable view detail MSR Card Swipe data message dialog.
+10	KeyLifeTest	Special command for DUKPT Key life test	KeyLifeTest: <Key life test command>Key life check command:78 46 C8 <Key Name> <1 byte NC> <32 bytes Clear Data> response 06<32 bytes encrypted data><10 bytes KSN>
+11	DATATEST	Large length and random  command test	DATATEST: < Integer command max length >
+12	LOOP	Start loop	LOOP:< Integer loop times>
+13	LOOPEND	Loop end point	LOOPEND:
+14	SET_DATE_NOW	Set date time now 	SET_DATE_NOW: For china NGA PCI protocol command
+15	ACTIVE	Active device	ACTIVE:
+16	LOAD_PUBLIC_KEY	Load public key	LOAD_PUBLIC_KEY:
+17	LOAD_FIRMWARE_KEY	Load firmware key	LOAD_FIRMWARE_KEY:
+18	LOAD_NUMERIC_KEY	Load numeric key	LOAD_NUMERIC_KEY:
+19	LOAD_CHECKVALUE	Load check value	LOAD_CHECKVALUE:
+20	MESSAGE	Message box view	MESSAGE: < Any data >
+21	MESSAGECK	Artificial judgment	MESSAGECK: < Any message for confirm >
+22	PROCESS	Keep reading port or Sleep	PROCESS: < Integer wait time ( Seconds ) >
+23	SWIPE	Swipe MSR data and decrypt	SWIPE: < Card info Data, Card name or Card  feature >
+24 	AuthFixKey	Fix key authentication	AuthFixKey: <Unit original fix key>
+25	LoadFixKey	Inject new fix key	LoadFixKey: <Inject new fix key>
+26	ActAuthRplyL4	Security Level 4 authentication	ActAuthRplyL4: <Dukpt Key>
+27	DeActRplyL4	Security Level 4 De-act	DeActRplyL4: <Dukpt Key>
+28	SetSoftKSN	Set 8 bytes KSN data for Load X Key. Item 30~32.	SetSoftKSN: <8 Bytes hex string KSN>
+29	SetSoftKEY	Set 16 bytes Key data for Load X Key. Item 30~32.	SetSoftKEY: <16 Bytes hex string Key>
+30	LOAD_HSM_KEK	Load HSM Kek	LOAD_HSM_KEK:
+31	LOAD_TR31B_KEY	Load TR31B format Key.	LOAD_TR31B_KEY:
+32	LOAD_DUKPT_KEY	Load Sick 2.0 format DUKPT Key.	LOAD_DUKPT_KEY:
+33	ProSwitch	Modify software commands protocol 	0:NGA.1:ITP.2:None.3:ViVOpay1.4:ViVOpay2
+34	PINCOMMAND	Special defined for L100 get function key, get PIN, get numeric key, get amount	PINCOMMAND: <Get  PIN Command  Body>
+35	SET_DATE_NOW_MAC	For PCI device set date time command, which contain Mac data check?	SET_DATE_NOW_MAC:
+36	MACCMDL1:	Mac Length = 1 ,0x1E Command Pack	MACCMDL1: <Command Body>
+37	MACCMDL2:	Mac Length = 2 , 0x1E 0x00 Command Pack	MACCMDL2: <Command Body>
+38 	SWIPEBUFMODE:	Buffer mode card read.	SWIPEBUFMODE : < Card info Data, Card name or Card  feature >
+39	CRGETUID	Get PINPAD Unique identification number	CRGETUID:< CR gets PINPAD UID Command >
+40	GETNONCE	Gets Nonce	GETNONCE:< Gets Nonce Command >
+41	GETDUKPTKSN	Get DUKPT Key Current KSN	GETDUKPTKSN:< Get DUKPT Key Current KSN  Command>
+42	DMACCMDL100	DOMACSCU for L100 ¡­ Devices	DMACCMDL100:< DOMACSCU packed Command >
+43	SWIPEKB:	USB HIDKB£¬PS2 Reader Card Swipe.	SWIPEKB:<Card info>
+44	LOAD_NEWCHECKVALUE:	Load check value from *.fm	LOAD_NEWCHECKVALUE:
+45	LOAD_BOOTLOADCHECKVALUE:	Load boot load check value 1 and 2 from two Bootloader *.fm files (for new PCI Units)	LOAD_BOOTLOADCHECKVALUE:
+46	ACM£º	Asynchronous communication£¬ max for 10 seconds timeout.	ACM£º<Commandbody>
+47	SETUID:	Set host UID (exp Pro units)	SETUID: <8 bytes UID>
+48	MACMED:	MACed for Pro	MACMED: <Command body>
+49	MACMEDEMV:	MACed for Pro (Function ID as 2 bytes length command)	MACMEDEMV£º <Command body>
+50	ATCMED:	AT Command  for Pro	ATCMED: <Command body>
+51	ATFILE	Choose get AT *.pm from file select or use default path.	true: for file selection false: init path "CR_CertsFolder\\DMK.pem";
+52	KeyLifePro	Special command for SpectrumPro DUKPT Key life test	KeyLifePro : <Key life test command>	Key life check command example:7646AC0C00010008003031323334353637
+53	SWIPEPRO:	Spectrum Pro MSR read and Decryption	SWIPEPRO: <Card Message>
+54	MAC63PRO	Spectrum Pro  ICC 63 FID commands	MAC63PRO: <APDU + data Encryption  Key>
+55      	TTK_SELF_TEST:  Test Implement TTK¡¯s Self-Test function TTK_SELF_TEST:
+56      	LOAD_CERT:      Load Certificate File Command (72 46 12 LenL LenH <Cert Data) LOAD_CERT:
+57 	LOAD_TAMPERHEADCV: Load Empthy Tamper Head Check Value. LOAD_TAMPERHEADCV:
+58       	RSAKID:	Input RSA KID for Key injection (SREDKEY Kroger)  RSAKID:<0102030405060708>
+*******************************************************************************************************************
+59	KROGERROOTKEY: Load kroger rsa root key from keys2048.bin
+60	KROGERKTK: Load kroger rsa KTK key from PrivateKey2048.bin       (need set SetSoftAdminKEY before)
+61	KROGERDEK: Load RSA DEK from PrivateKey2048.bin KROGERDEK: <DEK index>,  KROGERDEK:1 load dek 1, KROGERDEK:2 load dek 2. (need set SetSoftAdminKEY before)
+62	SetSoftVALIDDEK: Enbale reader internal DEK index for decryption ,   SetSoftVALIDDEK: 1 use dek 1, SetSoftVALIDDEK: 2 use dek 2.
+63        	KROGERASEKEY: Erase KTK or DEK  KROGERASEKEY: <1 byte file index + 8 bytes KID> KID = 0 keys2048.bin, KID = 1 PrivateKey2048.bin, for KTK use 0, DEK use 1 (need set SetSoftAdminKEY before)
+*******************************************************************************************************************
+64 	KROGERCERTROOT: Load kroger rsa root certification from root_cert.der, root_key_private.pem
+65 	KROGERCERTKTK: Load kroger rsa ktk certification from mid_cert.der, mid_key_private.pem
+66	KROGERCERTDEK: Load kroger rsa dek 1 or dek 2 certification from  dek1_cert.der, dek1_key_private.pem,  dek2_cert.der, dek2_key_private.pem KROGERCERTDEK: <DEK index>, 1 load dek 1, 2 load dek 2.
+67	KROGERCERTERASE: Erase KTK or Dek, KROGERCERTERASE: <Key type>;  0: root (Disable), 1: KTK, 2: DEK1, 3: DEK2
+	CString CertKrogerRootKey();
+	CString CertKrogerKTK();
+	CString CertKrogerDEK1();
+    	CString CertKrogerDEK2();
+	CString EraseKrogerKey(int KeyType); 
+
+*******************************************************************************************************************
+
+Other wish: for hsm key loading 
+Load HSM KEK
+SetSoftKSN:629949012C000460
+SetSoftKEY:0123456789ABCDEFFEDCBA9876543210
+LOAD_HSM_KEK:
+PROCESS:2
+
+SetSoftKSN:FF01010400000280
+SetSoftKEY:558ADB22537C53F9AB6B8A4397C5E660
+Load Data Encryption Key 
+SetSoftKEYUSAGE:B1
+SetSoftKEYMODE:X
+SetSoftKEYSLOT:0
+SetSoftKEYTYPE:2
+SetSoftTR31ETYPE:TDES
+SetSoftDATAETYPE:AES
+SetIfFUTUREX:TRUE
+SetSoftKEYBLOBVER:2
+LOAD_TR31B_KEY:
+PROCESS:1
+
+SetSoftKSN:700149012C000460
+SetSoftKEY:0123456789ABCDEFFEDCBA9876543210
+Load Admin Encryption Key 
+SetSoftKEYUSAGE:B1
+SetSoftKEYMODE:X
+SetSoftKEYSLOT:0
+SetSoftKEYTYPE:4
+SetSoftTR31ETYPE:AES
+SetSoftDATAETYPE:TDES
+SetIfFUTUREX:FALSE
+LOAD_TR31B_KEY:
+PROCESS:1
+
+SetSoftKSN:800149012C000460
+SetSoftKEY:0123456789ABCDEFFEDCBA9876543210
+Load MAC Encryption Key 
+SetSoftKEYUSAGE:B1
+SetSoftKEYMODE:X
+SetSoftKEYSLOT:0
+SetSoftKEYTYPE:0
+SetSoftTR31ETYPE:TDES
+LOAD_TR31B_KEY:
+PROCESS:1
+
+SetSoftKSN:900149012C000460
+SetSoftKEY:0123456789ABCDEFFEDCBA9876543210
+Load PIN RKL Key 
+SetSoftKEYUSAGE:B1
+SetSoftKEYMODE:X
+SetSoftKEYSLOT:1000
+SetSoftKEYTYPE:0
+SetSoftTR31ETYPE:TDES
+LOAD_TR31B_KEY:
+PROCESS:1
+
+//////////////////////////////////////////////////////////////
+Other wish: Remote Key injection Above 4.12
+ProSwitch:1
+  0:NGA.1:ITP
+SetRKITR31Type:0  
+	0:TR31B 
+	1:TR31C
+SetRKIKeyManage:0 
+	case 0:" [DUKPT]";
+	case 1:" [Common]";
+	case 2:" [BDK]";
+SetRKIKeyType:1 
+	case 0:" [PIN]";
+	case 1:" [MSR]";
+	case 2:" [Paring PINPad]";
+	case 3:" [New Admin]";
+	case 4:" [ICC]";
+SetRKIKeyUsage:0 			
+	case 0:" [Data Encryption]";
+	case 1:" [Key Encryption]";
+	case 2:" [PIN Encryption]";
+SetRKIAlgorithm:1 	
+	case 0:" [DES]";
+	case 1:" [TDES]";
+	case 2:" [AES]";
+	case 3:" [None]";
+SetRKIUseMode:1	
+	case 0:" [Decrypt]";
+	case 1:" [Encrypt]";
+	case 2:" [Decrypt & Encrypt]";
+SetRKIEncType:0
+	case 0:" [TDES]";
+	case 1:" [TDES3]";
+SetRKIKeyIndex:0
+SetSoftAdminKEY:0123456789ABCDEFFEDCBA9876543210
+SetSoftKSN:600149012C000460
+SetSoftKEY:0123456789ABCDEFFEDCBA9876543210
+DO_RKI:
+
+
+Example
+
+//ITP RKI Load Data Key
+ProSwitch:1  
+SetRKITR31Type:0  
+SetRKIKeyManage:0 
+SetRKIKeyType:1 
+SetRKIKeyUsage:0 			
+SetRKIAlgorithm:1 	
+SetRKIUseMode:1	
+SetRKIEncType:0
+SetRKIKeyIndex:0
+SetSoftAdminKEY:0123456789ABCDEFFEDCBA9876543210
+SetSoftKSN:600149012C000460
+SetSoftKEY:0123456789ABCDEFFEDCBA9876543210
+DO_RKI:
+
+//NGA RKI Load Admin Key
+ProSwitch:0
+SetRKITR31Type:0  
+SetRKIKeyManage:0 
+SetRKIKeyType:3 
+SetRKIKeyUsage:1 			
+SetRKIAlgorithm:1 	
+SetRKIUseMode:2
+SetRKIEncType:0
+SetRKIKeyIndex:0
+SetSoftAdminKEY:0123456789ABCDEFFEDCBA9876543210
+SetSoftKSN:600149012C000460
+SetSoftKEY:0123456789ABCDEFFEDCBA9876543210
+DO_RKI:
+
+/////////////////////////////////////////////////////
+Kroger RSA Key management Above V4.13 
+Load Root Key
+RSAKID:0102030405060708
+KROGERROOTKEY:
+
+SetSoftAdminKEY:0123456789abcdeffedcba9876543210
+
+Load KTK
+RSAKID:0202030405060708
+KROGERKTK:
+
+Load DEK 1
+RSAKID:0302030405060708
+KROGERDEK:1
+
+Load DEK 2
+RSAKID:0402030405060708
+KROGERDEK:2
+
+ProSwitch:0
+SetSoftVALIDDEK:1
+CMD:7846C9030302030405060708
+ProSwitch:1
+
+Erase DEK 1
+KROGERASEKEY:10302030405060708
+
+Erase DEK 2
+KROGERASEKEY:10402030405060708
+
+Erase KTK
+KROGERASEKEY:00202030405060708
+
+Get Key Status
+ProSwitch:0
+CMD:784625
+CMD:7846C901
+ProSwitch:1
+
+///////////////////////////////////////////////////////////////////
+Kroger RSA Key management Above V4.13_3

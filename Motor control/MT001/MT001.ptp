@@ -1,0 +1,290 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+2c-01_Passthourgh ON
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19
+0
+5
+
+SEND
+1
+2c-70_Sanwa Card Entry command
+56 69 56 4F 74 65 63 68 32 00 2C 70 00 07 30 02 04 33 03 33 33 D7 93
+0
+5
+
+SEND
+2
+Insert Dual Head ID Tech Test Card
+
+0
+5
+
+SEND
+3
+2c-78_Sanwa Card Entry Reponse command
+56 69 56 4F 74 65 63 68 32 00 2C 78 00 01 33 0A BA
+0
+5
+
+SEND
+4
+2c-76_Get_MSR_State
+56 69 56 4F 74 65 63 68 32 00 2C 76 00 00 33 76
+0
+5
+
+SEND
+5
+2c-70_Sanwa Card Entry command
+56 69 56 4F 74 65 63 68 32 00 2C 70 00 07 30 02 04 33 03 33 33 D7 93
+0
+5
+
+SEND
+6
+2c-78_Sanwa Card Entry Reponse command
+56 69 56 4F 74 65 63 68 32 00 2C 78 00 01 33 0A BA
+0
+5
+
+SEND
+7
+2c-12 ICC Power ON
+56 69 56 4F 74 65 63 68 32 00 2C 12 00 01 20 21 A9
+0
+5
+
+SEND
+8
+2c-18 ICC Power Down
+56 69 56 4F 74 65 63 68 32 00 2C 18 00 01 20 8A C1
+0
+5
+
+SEND
+9
+2c-70_Sanwa Card Eject command(22mm)
+56 69 56 4F 74 65 63 68 32 00 2C 70 00 09 30 02 06 80 01 A0 03 80 80 0C CC
+0
+5
+
+SEND
+10
+Remove Card
+
+0
+5
+
+SEND
+11
+2c-01_Passthourgh OFF
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38
+0
+5
+
+SEND
+12
+Clean Card
+56 69 56 4F 74 65 63 68 32 00 60 1A 00 00 97 B9
+0
+5
+
+SEND
+13
+The card will run internally and then exit
+
+0
+5
+
+RECEIVE
+0
+PT OK
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+First Card Entry Card Process
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 0A 02 08 33 30 30 34 00 03 C5 58 78 1B
+-1
+1
+COMMENT First Entry Card Process
+0
+1
+0
+0
+
+RECEIVE
+2
+First Card Enrty (Card moving stop)
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 0A 02 08 33 31 30 30 06 03 19 6F 78 1B
+-1
+1
+COMMENT MSR Swiped
+0
+1
+0
+0
+
+RECEIVE
+3
+ISO Pass
+83 3F
+-1
+1
+COMMENT ISO Pass
+0
+1
+0
+0
+
+RECEIVE
+4
+JIS Pass
+83 0F
+-1
+1
+COMMENT JIS Pass
+0
+1
+0
+0
+
+RECEIVE
+5
+Second Card Entry Process
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 0A 02 08 33 31 30 33 06 03 40 3F 78 1B
+-1
+1
+COMMENT Second Entry Card Process
+0
+1
+0
+0
+
+RECEIVE
+6
+Second Card Enrty  (Card in icc slot)
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 0A 02 08 33 31 30 30 66 03 12 45 78 1B
+-1
+1
+COMMENT Second Enrty Card (Card in icc slot)
+0
+1
+0
+0
+
+RECEIVE
+7
+ICC ATR Pass
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 13 3B 5F 95 00 80 73 00 01 00 59 43 4C 5A C5 06 12 60 90 00 9E 7E
+-1
+1
+COMMENT ICC ATR Pass
+0
+1
+0
+0
+
+RECEIVE
+8
+Card Eject
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 0A 02 08 80 31 30 33 66 03 7E 59 78 1B
+-1
+1
+COMMENT Card Eject
+0
+1
+0
+0
+
+RECEIVE
+9
+Clean Card ok
+56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+10
+LCD msg_0D_Insert card
+56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 0D 1C
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+11
+LCD msg_1A_processing
+56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 1A 1C
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+12
+LCD msg_23_Welcome
+56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 23 1C
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+13
+LCD msg_44_Thank you
+56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 44 1C
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

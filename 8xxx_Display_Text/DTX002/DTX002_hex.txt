@@ -1,0 +1,25 @@
+Docklight Log File (HEX) - Started 2/20/2015 15:34:22.906 
+ TEST CASE: DTX002
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM9 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Change text to 'Hello World!!!'
+
+2/20/2015 15:34:24.261 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 16 00 11 20 20 20 20 48 65 6C 6C 6F 20 57 6F 72 6C 64 21 00 FD 49 
+2/20/2015 15:34:24.286 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 04 00 00 00 03 43 B4  Display Text REJECTED
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2/20/2015 15:34:34.851 
+

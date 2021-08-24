@@ -1,0 +1,55 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM90
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+Get Main Firmware Version 
+56 69 56 4F 74 65 63 68 32 00 09 03 00 00 C0 CE
+0
+5
+
+RECEIVE
+0
+Positive Response
+56 69 56 4F 74 65 63 68 32 00 09 00 ?? ?? DF 62 ??
+-1
+1
+COMMENT 
+1
+1
+0
+0
+
+RECEIVE
+1
+Positive Response (NEO2)
+56 69 56 4F 74 65 63 68 32 00 09 00 ?? ?? DF EE 62 ??
+-1
+1
+COMMENT 
+1
+1
+0
+0
+

@@ -1,0 +1,9 @@
+Docklight Log File (HEX) - Started  
+ --- Erase All Key
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 03 22 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

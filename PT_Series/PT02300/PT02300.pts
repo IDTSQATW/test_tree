@@ -1,0 +1,68 @@
+DL_SCRIPTVERSION
+1
+30265
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+'------------------------------------------------------------
+DL.OpenProject "PT02300.ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+
+result = 1
+
+'------------------------------------------------------------
+'Configure prompting
+'------------------------------------------------------------
+FileInput.OpenFile "C:\vivotech\regress\regression\regress_test\test_tree\Regress.Config"
+Dim Prompting(1)
+
+Do Until FileInput.EndOfFile
+  result2 = FileInput.GetLine() 'by pass variable name
+  result2 = FileInput.GetLine()
+  Prompting(0) = result2
+  result2 = FileInput.GetLine() 'by pass variable name
+  result2 = FileInput.GetLine()	 
+  Prompting(1) = result2
+Loop
+'============================================================
+'If result <> 0 Then
+'  DL.AddComment "--- Profile.1"
+'  DL.ResetReceiveCounter "EMV.Response"
+'  DL.SendSequence "Profile.1"
+'  result = DL.WaitForSequence("EMV.Response", 1, '10000)
+'End If
+'------------------------------------------------------------
+'Prompt of test being run
+'------------------------------------------------------------
+If Prompting(0) = "ON" Then
+  MyInput = MsgBox("You will now run test PT02300." &Chr(13) & "Objective: Verify that a long beep of 600 ms is played.", VBOKOnly, "Test: PT02300")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.AddComment "--- 1 Short Beep"
+  DL.SendSequence "Buzzer Control - Long Beep; 600 ms (02h)"
+  result = DL.WaitForSequence("Buzzer Control - Long Beep OK (SUCCESS)", 1, 10000)
+End If
+'------------------------------------------------------------
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If

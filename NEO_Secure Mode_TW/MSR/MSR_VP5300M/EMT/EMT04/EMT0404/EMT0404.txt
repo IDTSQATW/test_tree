@@ -1,0 +1,178 @@
+TID:Get Data Encryption Enable Flag (C7-37)
+CMD:C7 37
+EXR:C7 00 00 00
+
+TID:Encryption type -- TDES
+CMD:C7 33
+EXR:C7 00 00 01 00
+
+TID:Set MSR Secure Parameters (04)
+CMD:C7 38 DFEF04 01 04
+EXR:C7 00 00 00
+
+TID:Get MSR Secure Parameters
+CMD:C7 39 DFEF04
+EXR:C7 00 00 05 DFEF04 01 04
+
+TID:Burst mode Off
+CMD:04 00 DF EE 7E 01 00
+EXR:04 00 00 00
+
+TID:Poll on Demand
+CMD:01 01 01
+EXR:01 00 00 00
+
+TID:Auto Poll
+CMD:01 01 00
+EXR:01 00 00 00
+
+TID:Activate Transaction -- IDT
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe IDT card...
+EXR:
+TIMEOUT:120000
+INTERVAL:5000
+
+TID:Get Transaction Result -- IDT
+DLG:Swipe IDT card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+EXR:
+INTERVAL:5000
+
+TID:Activate Transaction -- Discover
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe Discover card...
+EXR:
+TIMEOUT:120000
+INTERVAL:5000
+
+TID:Get Transaction Result -- Discover
+DLG:Swipe Discover card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+EXR:
+INTERVAL:5000
+
+TID:Activate Transaction -- JIS 1
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe JIS 1 card...
+EXR:
+TIMEOUT:120000
+INTERVAL:5000
+
+
+TID:Get Transaction Result -- JIS 1
+DLG:Swipe JIS 1 card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+EXR:
+INTERVAL:5000
+
+TID:Activate Transaction -- JIS 2
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe JIS 2 card...
+EXR:
+TIMEOUT:120000
+INTERVAL:5000
+
+TID:Get Transaction Result -- JIS 2
+DLG:Swipe JIS 2 card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+EXR:
+INTERVAL:5000
+
+TID:Activate Transaction -- AAMVA
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe AAMVA card...
+EXR:
+TIMEOUT:120000
+INTERVAL:5000
+
+TID:Get Transaction Result -- AAMVA
+DLG:Swipe AAMVA card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+EXR:
+INTERVAL:5000
+
+TID:Activate Transaction -- Gift card
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe Gift card...
+EXR:
+TIMEOUT:120000
+INTERVAL:5000
+
+TID:Get Transaction Result -- Gift card
+DLG:Swipe Gift card card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+EXR:
+INTERVAL:5000
+
+TID:Activate Transaction -- PAN = 11
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe PAN = 11 card...
+EXR:
+TIMEOUT:120000
+INTERVAL:5000
+
+TID:Get Transaction Result -- PAN = 11
+DLG:Swipe PAN = 11 card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+EXR:
+INTERVAL:5000
+
+TID:Activate Transaction -- PAN = 12
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe PAN = 12 card...
+EXR:
+TIMEOUT:120000
+INTERVAL:5000
+
+TID:Get Transaction Result -- PAN = 12
+DLG:Swipe PAN = 12 card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+EXR:
+INTERVAL:5000
+
+TID:Activate Transaction -- PAN = 20
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe PAN = 20 card...
+EXR:
+TIMEOUT:120000
+INTERVAL:5000
+
+TID:Get Transaction Result -- PAN = 20
+DLG:Swipe PAN = 20 card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+EXR:
+INTERVAL:5000
+
+TID:Activate Transaction -- ISO4909 (3T)
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe ISO4909 (3T) card...
+EXR:
+TIMEOUT:120000
+INTERVAL:5000
+
+TID:Get Transaction Result -- ISO4909 (3T)
+DLG:Swipe ISO4909 (3T) card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+EXR:
+INTERVAL:5000

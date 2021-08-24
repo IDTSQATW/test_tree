@@ -1,0 +1,36 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Pass-Through Mode - Invalid mode value (out of range)
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 03 3D 5B
+0
+5
+
+RECEIVE
+0
+Pass-Through Mode - Invalid mode value (out of range) (OK)
+56 69 56 4F 74 65 63 68 32 00 2C 05 00 00 F7 6B
+-1
+1
+COMMENT Pass-Through Mode - Invalid mode value (out of range) (OK)
+1
+1
+0
+1
+

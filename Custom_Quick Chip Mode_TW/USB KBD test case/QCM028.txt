@@ -1,0 +1,30 @@
+Objective: ISSUE -- read CT card completed, read CL card (INTERAC), reader auto-reset.
+
+===========================================
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+--------------------
+>>> CT transaction
+SWIPEKB: Click OK --> Insert T=0 card.
+EXR: DF EE 25 02 02 03
+
+--------------------
+>>> CL transaction
+SWIPEKB: Click OK --> Tap INTERAC card.
+EXR: E1
+EXR: 5A085413339000001513
+EXR: 57115413339000001513D05122200123456789
+EXR: 9F390107
+EXR: FFEE01
+EXR: DF300100 
+EXR: DFEE260101
+EXR: DFEF4C06002400000000
+EXR: DFEF4D243B353431333333393030303030313531333D30353132323230303132333435363738393F
+
+LOOP: 4
+CMD: 1801
+EXR: 18000000
+LOOPEND:
+MESSAGECK: Reader did NOT be reset automatically

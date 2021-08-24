@@ -1,0 +1,25 @@
+Docklight Log File (HEX) - Started  
+ --- Pass-Through - STOP
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START or STOP (SUCCESS)
+ --- Pass-Through - START
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START or STOP (SUCCESS)
+ --- Enable RF Antenna
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 94 1F 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 28 00 00 00 D6 6A  Antenna Control - Enable or Disable RF Antenna (SUCCESS)
+ --- Disable RF Antenna
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 28 01 00 01 00 84 3E 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 28 00 00 00 D6 6A  Antenna Control - Enable or Disable RF Antenna (SUCCESS)
+ --- Poll for Token (10 seconds and 20ms)
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 01 00 7B 8C  Result = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

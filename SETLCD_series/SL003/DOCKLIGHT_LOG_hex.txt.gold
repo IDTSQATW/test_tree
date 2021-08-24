@@ -1,0 +1,32 @@
+Docklight Log File (HEX) - Started  
+ <<: Demand Polling
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  =Reader Confirmed
+ #1: LED0 ON
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 00 00 01 36 43 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  =Reader Confirmed
+ #2: Set Message 00.4BEEP.FLASH4
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 00 04 FF 02 C9 E7 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  =Reader Confirmed
+ #3: Set Message 04.LONGBEEP.ON4
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 04 08 FF 01 3A 68 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  =Reader Confirmed
+ #4: Set Message 0B
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 0B 00 FF 00 54 05 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  =Reader Confirmed
+ #5: LED0 ON
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 00 00 01 36 43 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  =Reader Confirmed
+ >>: Auto Polling
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 F6 24  Test = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

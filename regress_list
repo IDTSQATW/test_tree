@@ -1,0 +1,2319 @@
+# Regression List
+#=============================== AR Commands Only ==========================
+# Test		Family		Directory		Call
+#=========================================================================== 
+#USB Only
+BR006		ARBaud	Baud_Rate/BR006 		run_test.pl
+BR009		ARBaud	Baud_Rate/BR009			run_test.pl   
+#BR010		ARBaud	Baud_Rate/BR010			run_test.pl
+
+--------------------------------- AR Related ------------------------------- 
+
+PUR001          ARPUR          8xxx_Epurse/PUR001          run_test.pl
+PUR002          ARPUR          8xxx_Epurse/PUR002          run_test.pl
+PUR003          ARPUR          8xxx_Epurse/PUR003          run_test.pl
+PUR004          ARPUR          8xxx_Epurse/PUR004          run_test.pl
+PUR005          ARPUR          8xxx_Epurse/PUR005          run_test.pl
+PUR006          ARPUR          8xxx_Epurse/PUR006          run_test.pl
+PUR007          ARPUR          8xxx_Epurse/PUR007          run_test.pl
+PUR008          ARPUR          8xxx_Epurse/PUR008          run_test.pl
+PUR009          ARPUR          8xxx_Epurse/PUR009          run_test.pl
+PUR010          ARPUR          8xxx_Epurse/PUR010          run_test.pl
+PUR011          ARPUR          8xxx_Epurse/PUR011          run_test.pl
+PUR012          ARPUR          8xxx_Epurse/PUR012          run_test.pl
+PUR013          ARPUR          8xxx_Epurse/PUR013          run_test.pl
+PUR014          ARPUR          8xxx_Epurse/PUR014          run_test.pl
+
+MV018	     	ARInfo	      8xxx_Multi_Versioning/MV018	run_test.pl  
+MV019           ARInfo        8xxx_Multi_Versioning/MV019       run_test.pl
+MV020           ARInfo        8xxx_Multi_Versioning/MV020       run_test.pl
+
+AR_PROC001      ARProc		AR_PROC/AR_PROC001		run_test.pl 
+AR_PROC002      ARProc        	AR_PROC/AR_PROC002	    	run_test.pl 
+AR_PROC003      ARProc        	AR_PROC/AR_PROC003	    	run_test.pl
+
+AR_CAL001      ARCalib        	AR_Calib/AR_CAL001	    	run_test.pl
+
+ARCFG-210	ARCfg		AR_CFG/ARCFG-210		run_test.pl		
+
+AR_LCD001      ARLcd        	AR_LCD/AR_LCD001	    	run_test.pl 
+AR_LCD002      ARLcd        	AR_LCD/AR_LCD002	    	run_test.pl
+AR_LCD003      ARLcd        	AR_LCD/AR_LCD003	    	run_test.pl
+AR_LCD004      ARLcd        	AR_LCD/AR_LCD004	    	run_test.pl
+AR_LCD005      ARLcd        	AR_LCD/AR_LCD005	    	run_test.pl
+AR_LCD006      ARLcd        	AR_LCD/AR_LCD006	    	run_test.pl
+
+UICTL001      UIctl        	AR_UIctrl/UICTL001	    	run_test.pl
+UICTL002      UIctl        	AR_UIctrl/UICTL002	    	run_test.pl
+UICTL003      UIctl        	AR_UIctrl/UICTL003	    	run_test.pl
+UICTL004      UIctl        	AR_UIctrl/UICTL004	    	run_test.pl
+UICTL005      UIctl        	AR_UIctrl/UICTL005	    	run_test.pl
+UICTL006      UIctl        	AR_UIctrl/UICTL006	    	run_test.pl
+UICTL007      UIctl        	AR_UIctrl/UICTL007	    	run_test.pl
+UICTL008      UIctl        	AR_UIctrl/UICTL008	    	run_test.pl
+
+SELUI001	selUI		AR_selUI/SELUI001	run_test.pl
+SELUI002	selUI		AR_selUI/SELUI002	run_test.pl
+SELUI003	selUI		AR_selUI/SELUI003	run_test.pl
+SELUI004	selUI		AR_selUI/SELUI004	run_test.pl
+SELUI005	selUI		AR_selUI/SELUI005	run_test.pl
+SELUI006	selUI		AR_selUI/SELUI006	run_test.pl
+
+
+CKB001       ARCheckBox          8xxx_Check_Box/CKB001    run_test.pl 
+CKB002       ARCheckBox          8xxx_Check_Box/CKB002    run_test.pl
+CKB003       ARCheckBox          8xxx_Check_Box/CKB003    run_test.pl
+CKB004       ARCheckBox          8xxx_Check_Box/CKB004    run_test.pl
+CKB005       ARCheckBox          8xxx_Check_Box/CKB005    run_test.pl
+
+#-- &&& TLST is for EMV contact only
+#-- *Note: Please use ICC Solutions EMV Test Card -
+TLST001		TList0         Transaction_logList/TLST001	run_test.pl
+TLST002		TList0         Transaction_logList/TLST002	run_test.pl
+TLST003		TList0         Transaction_logList/TLST003	run_test.pl
+TLST004		TList0         Transaction_logList/TLST004	run_test.pl
+TLST005		TList          Transaction_logList/TLST005	run_test.pl
+TLST006		TList          Transaction_logList/TLST006	run_test.pl
+TLST007		TList          Transaction_logList/TLST007	run_test.pl
+TLST008		TList          Transaction_logList/TLST008	run_test.pl
+TLST008-1	TList          Transaction_logList/TLST008-1	run_test.pl
+TLST009		TList          Transaction_logList/TLST009	run_test.pl
+TLST010		TList          Transaction_logList/TLST010	run_test.pl
+TLST011		TList          Transaction_logList/TLST011	run_test.pl
+TLST012		TList          Transaction_logList/TLST012	run_test.pl
+TLST013		TList          Transaction_logList/TLST013	run_test.pl
+TLST014		TList          Transaction_logList/TLST014	run_test.pl
+TLST015		TList          Transaction_logList/TLST015	run_test.pl
+TLST016		TList          Transaction_logList/TLST016	run_test.pl
+TLST017		TList          Transaction_logList/TLST017	run_test.pl
+TLST018		TList          Transaction_logList/TLST018	run_test.pl
+TLST019		TList          Transaction_logList/TLST019	run_test.pl
+TLST020		TList          Transaction_logList/TLST020	run_test.pl
+TLST021		TList          Transaction_logList/TLST021	run_test.pl
+TLST022		TList          Transaction_logList/TLST022	run_test.pl
+TLST023		TList          Transaction_logList/TLST023	run_test.pl
+TLST024		TList          Transaction_logList/TLST024	run_test.pl
+TLST025		TList          Transaction_logList/TLST025	run_test.pl
+TLST026		TList          Transaction_logList/TLST026	run_test.pl
+TLST027		TList          Transaction_logList/TLST027	run_test.pl
+TLST028		TList          Transaction_logList/TLST028	run_test.pl
+TLST028-1	TList          Transaction_logList/TLST028-1	run_test.pl
+TLST029		TList          Transaction_logList/TLST029	run_test.pl
+TLST029-1	TList          Transaction_logList/TLST029-1	run_test.pl
+TLST030		TList          Transaction_logList/TLST030	run_test.pl
+TLST031		TList          Transaction_logList/TLST031	run_test.pl
+TLST032		TList          Transaction_logList/TLST032	run_test.pl
+TLST033		TList          Transaction_logList/TLST033	run_test.pl
+TLST034		TList          Transaction_logList/TLST034	run_test.pl
+TLST035		TList          Transaction_logList/TLST035	run_test.pl
+TLST036		TList          Transaction_logList/TLST036	run_test.pl
+TLST004-01      TList1         Transaction_logList/TLST004-01   run_test.pl
+TLST004-02      TList1         Transaction_logList/TLST004-02   run_test.pl
+
+ 
+#-- &&& RLST is for EMV contact only
+RLST001		RList          Revocation_logList/RLST001	run_test.pl  
+RLST002		RList          Revocation_logList/RLST002	run_test.pl
+RLST003		RList          Revocation_logList/RLST003	run_test.pl
+RLST004		RList          Revocation_logList/RLST004	run_test.pl
+RLST005		RList          Revocation_logList/RLST005	run_test.pl
+RLST006		RList          Revocation_logList/RLST006	run_test.pl
+
+RLST001-k3vdi	RList1         Revocation_logList/RLST001-k3vdi	run_test.pl  
+RLST002-k3vdi	RList1         Revocation_logList/RLST002-k3vdi	run_test.pl
+RLST003-k3vdi	RList1         Revocation_logList/RLST003-k3vdi	run_test.pl
+RLST004-k3vdi	RList1         Revocation_logList/RLST004-k3vdi	run_test.pl
+RLST005-k3vdi	RList1         Revocation_logList/RLST005-k3vdi	run_test.pl
+RLST006-k3vdi	RList1         Revocation_logList/RLST006-k3vdi	run_test.pl
+
+
+CRLST001	CRList         certRevocation_logList/CRLST001	run_test.pl
+CRLST002	CRList         certRevocation_logList/CRLST002	run_test.pl
+CRLST003	CRList         certRevocation_logList/CRLST003	run_test.pl
+CRLST101	CRList         certRevocation_logList/CRLST101	run_test.pl
+CRLST102	CRList         certRevocation_logList/CRLST102	run_test.pl
+CRLST103	CRList         certRevocation_logList/CRLST103	run_test.pl
+
+CRLST001-k3vdi	CRList1        certRevocation_logList/CRLST001-k3vdi	run_test.pl
+CRLST002-k3vdi	CRList1        certRevocation_logList/CRLST002-k3vdi	run_test.pl
+CRLST003-k3vdi	CRList1        certRevocation_logList/CRLST003-k3vdi	run_test.pl
+CRLST101-k3vdi	CRList1        certRevocation_logList/CRLST101-k3vdi	run_test.pl
+CRLST102-k3vdi	CRList1        certRevocation_logList/CRLST102-k3vdi	run_test.pl
+CRLST103-k3vdi	CRList1        certRevocation_logList/CRLST103-k3vdi	run_test.pl
+
+
+#-- &&& ELST is for EMV contact only
+ELST001		EList          Exception_logList/ELST001	run_test.pl 
+ELST002		EList          Exception_logList/ELST002	run_test.pl
+ELST003		EList          Exception_logList/ELST003	run_test.pl
+ELST004		EList          Exception_logList/ELST004	run_test.pl
+ELST005		EList          Exception_logList/ELST005	run_test.pl
+ELST006		EList          Exception_logList/ELST006	run_test.pl
+
+ELST001-k3vdi	EList1         Exception_logList/ELST001-k3vdi	run_test.pl 
+ELST002-k3vdi	EList1         Exception_logList/ELST002-k3vdi	run_test.pl
+ELST003-k3vdi	EList1         Exception_logList/ELST003-k3vdi	run_test.pl
+ELST004-k3vdi	EList1         Exception_logList/ELST004-k3vdi	run_test.pl
+ELST005-k3vdi	EList1         Exception_logList/ELST005-k3vdi	run_test.pl
+ELST006-k3vdi	EList1         Exception_logList/ELST006-k3vdi	run_test.pl
+
+
+#--- usaTech test cases are good for AR2.1.4 and up ---#
+USAT001		USAT           UsaTech/USAT001			run_test.pl
+USAT002		USAT           UsaTech/USAT002			run_test.pl
+USAT003		USAT           UsaTech/USAT003			run_test.pl
+USAT004		USAT           UsaTech/USAT004			run_test.pl
+USAT005		USAT           UsaTech/USAT005			run_test.pl
+USAT006		USAT           UsaTech/USAT006			run_test.pl
+USAT007		USAT           UsaTech/USAT007			run_test.pl
+USAT008		USAT           UsaTech/USAT008			run_test.pl
+USAT009		USAT           UsaTech/USAT009			run_test.pl
+# -- USAT010 to 014 are for cursor functions that are not presently supported in AR2.1.4
+#USAT010		USAT           UsaTech/USAT010			run_test.pl
+#USAT011		USAT           UsaTech/USAT011			run_test.pl
+#USAT012		USAT           UsaTech/USAT012			run_test.pl
+#USAT013		USAT           UsaTech/USAT013			run_test.pl
+#USAT014		USAT           UsaTech/USAT014			run_test.pl
+USAT015		USAT           UsaTech/USAT015			run_test.pl
+USAT016		USAT           UsaTech/USAT016			run_test.pl
+USAT017		USAT           UsaTech/USAT017			run_test.pl
+USAT018		USAT           UsaTech/USAT018			run_test.pl
+USAT019		USAT           UsaTech/USAT019			run_test.pl
+USAT020		USAT           UsaTech/USAT020			run_test.pl
+USAT021		USAT           UsaTech/USAT021			run_test.pl
+USAT022		USAT           UsaTech/USAT022			run_test.pl
+USAT023		USAT           UsaTech/USAT023			run_test.pl
+USAT024		USAT           UsaTech/USAT024			run_test.pl
+
+
+#--- The following test cases are Vend3 specific ---
+# V3-001 to v3-005 for V3 msg display
+# v3-006 for mad led
+# v3-007 for buzzer
+# v3-008 to v3-012 for v3 led
+# v3-013 to v3-022 for v3 buttons, which only function properly in auto poll mode by design
+# v3-023 to v3-029 for v3 display with 83-xx commands
+V3-001		Vend3		Vend3/V3-001			run_test.pl
+V3-002		Vend3		Vend3/V3-002			run_test.pl
+V3-003		Vend3		Vend3/V3-003			run_test.pl
+V3-004		Vend3		Vend3/V3-004			run_test.pl
+V3-005		Vend3		Vend3/V3-005			run_test.pl
+V3-006		Vend3		Vend3/V3-006			run_test.pl
+V3-007		Vend3		Vend3/V3-007			run_test.pl
+V3-008		Vend3		Vend3/V3-008			run_test.pl
+V3-009		Vend3		Vend3/V3-009			run_test.pl
+V3-010		Vend3		Vend3/V3-010			run_test.pl
+V3-011		Vend3		Vend3/V3-011			run_test.pl
+V3-012		Vend3		Vend3/V3-012			run_test.pl
+V3-013		Vend3B		Vend3/V3-013			run_test.pl
+V3-014		Vend3B		Vend3/V3-014			run_test.pl
+V3-015		Vend3B		Vend3/V3-015			run_test.pl
+V3-016		Vend3B		Vend3/V3-016			run_test.pl
+V3-017		Vend3B		Vend3/V3-017			run_test.pl
+V3-018		Vend3B		Vend3/V3-018			run_test.pl
+V3-019		Vend3B		Vend3/V3-019			run_test.pl
+V3-020		Vend3B		Vend3/V3-020			run_test.pl
+V3-021		Vend3B		Vend3/V3-021			run_test.pl
+V3-022		Vend3B		Vend3/V3-022			run_test.pl
+V3-023		Vend3		Vend3/V3-023			run_test.pl
+V3-024		Vend3		Vend3/V3-024			run_test.pl
+V3-025-LD	Vend3		Vend3/V3-025-LD			run_test.pl
+V3-025		Vend3		Vend3/V3-025			run_test.pl
+V3-026		Vend3		Vend3/V3-026			run_test.pl
+V3-027		Vend3		Vend3/V3-027			run_test.pl
+V3-028		Vend3		Vend3/V3-028			run_test.pl
+V3-029-LD	Vend3		Vend3/V3-029-LD			run_test.pl
+V3-029		Vend3		Vend3/V3-029			run_test.pl
+
+
+#--- The MACing test cases are good for AR2.1.3 and up ---#
+MAC-001		Mac		MACing/MAC-001			run_test.pl
+MAC-002		Mac		MACing/MAC-002			run_test.pl
+MAC-003		Mac		MACing/MAC-003			run_test.pl
+MAC-004		Mac		MACing/MAC-004			run_test.pl
+MAC-005		Mac		MACing/MAC-005			run_test.pl
+MAC-006		Mac		MACing/MAC-006			run_test.pl
+MAC-007		Mac		MACing/MAC-007			run_test.pl
+MAC-008		Mac		MACing/MAC-008			run_test.pl
+MAC-009		Mac		MACing/MAC-009			run_test.pl
+MAC-010		Mac		MACing/MAC-010			run_test.pl
+MAC-011		Mac		MACing/MAC-011			run_test.pl
+MAC-201		Mac		MACing/MAC-201			run_test.pl
+MAC-202		Mac		MACing/MAC-202			run_test.pl
+
+#--- International Language Support ---#
+ILS001		Ils		ILS/ILS001			run_test.pl
+ILS002		Ils		ILS/ILS002			run_test.pl
+ILS003		Ils		ILS/ILS003			run_test.pl
+ILS004		Ils		ILS/ILS004			run_test.pl
+ILS005		Ils		ILS/ILS005			run_test.pl
+ILS006		Ils		ILS/ILS006			run_test.pl
+ILS007		Ils		ILS/ILS007			run_test.pl
+ILS008		Ils		ILS/ILS008			run_test.pl
+ILS009		Ils		ILS/ILS009			run_test.pl
+
+
+
+#--- &&& ACxxx are good for AR 2.0.0 and above.
+#--- VivoWallet test card W001: AC006, 008
+#--- MC test card M001: AC007
+#--- Disc test card D001: AC009
+#--- Disc Test Card D002: AC010, AC011(swipe)
+
+
+AAC001 		ATransaction1  8xxx_Activate_Transaction/AC001	run_test.pl  
+AAC002 		ATransaction1  8xxx_Activate_Transaction/AC002	run_test.pl
+AAC003 		ATransaction1  8xxx_Activate_Transaction/AC003	run_test.pl
+AAC004 		ATransaction1  8xxx_Activate_Transaction/AC004	run_test.pl
+AAC005 		ATransaction1  8xxx_Activate_Transaction/AC005	run_test.pl
+AAC006 		ATransaction1  8xxx_Activate_Transaction/AC006	run_test.pl
+AAC007 		ATransaction1  8xxx_Activate_Transaction/AC007	run_test.pl
+AAC008 		ATransaction1  8xxx_Activate_Transaction/AC008	run_test.pl
+AAC009 		ATransaction1  8xxx_Activate_Transaction/AC009	run_test.pl
+AAC010 		ATransaction1  8xxx_Activate_Transaction/AC010	run_test.pl
+AAC011 		ATransaction1  8xxx_Activate_Transaction/AC011	run_test.pl
+AAC012 		ATransaction1  8xxx_Activate_Transaction/AC012	run_test.pl
+AAC013 		ATransaction1  8xxx_Activate_Transaction/AC013	run_test.pl
+AAC014 		ATransaction1  8xxx_Activate_Transaction/AC014	run_test.pl
+
+
+AGTR001         ARGetTran  8xxx_Get_Transaction/GTR001         run_test.pl
+AGTR002         ARGetTran  8xxx_Get_Transaction/GTR002         run_test.pl
+AGTR003         ARGetTran  8xxx_Get_Transaction/GTR003         run_test.pl
+AGTR004         ARGetTran  8xxx_Get_Transaction/GTR004         run_test.pl
+AGTR005         ARGetTran  8xxx_Get_Transaction/GTR005         run_test.pl
+AGTR006         ARGetTran  8xxx_Get_Transaction/GTR006         run_test.pl
+AGTR007         ARGetTran  8xxx_Get_Transaction/GTR007         run_test.pl
+AGTR008         ARGetTran  8xxx_Get_Transaction/GTR008         run_test.pl
+AGTR009         ARGetTran  8xxx_Get_Transaction/GTR009         run_test.pl
+AGTR010         ARGetTran  8xxx_Get_Transaction/GTR010         run_test.pl
+
+ABUM001          ARBurst  8xxx_Burst_Mode/BUM001               run_test.pl
+ABUM001_01       ARBurst  8xxx_Burst_Mode/BUM001_01            run_test.pl
+ABUM002          ARBurst  8xxx_Burst_Mode/BUM002               run_test.pl
+ABUM003          ARBurst  8xxx_Burst_Mode/BUM003               run_test.pl
+ABUM004          ARBurst  8xxx_Burst_Mode/BUM004               run_test.pl
+ABUM005          ARBurst  8xxx_Burst_Mode/BUM005               run_test.pl
+ABUM006          ARBurst  8xxx_Burst_Mode/BUM006               run_test.pl
+ABUM007          ARBurst  8xxx_Burst_Mode/BUM007               run_test.pl
+
+
+POS001           ARPOS  POS_Scenarios/PSS001          run_test.pl
+POS002           ARPOS  POS_Scenarios/PSS002          run_test.pl
+POS003           ARPOS  POS_Scenarios/PSS003          run_test.pl
+POS004           ARPOS  POS_Scenarios/PSS004          run_test.pl
+POS005           ARPOS  POS_Scenarios/PSS005          run_test.pl
+POS006           ARPOS  POS_Scenarios/PSS006          run_test.pl
+POS007           ARPOS  POS_Scenarios/PSS007          run_test.pl
+POS008           ARPOS  POS_Scenarios/PSS008          run_test.pl
+POS009           ARPOS  POS_Scenarios/PSS009          run_test.pl
+POS010           ARPOS  POS_Scenarios/PSS010          run_test.pl
+POS011           ARPOS  POS_Scenarios/PSS011          run_test.pl
+
+ 
+
+#		KMExxx AR are good for 2.0.0 and above                          
+KME001		ARFullAuto	8xxx_Set_CA_Key/KME001		run_test.pl
+KME002		ARFullAuto	8xxx_Set_CA_Key/KME002		run_test.pl
+KME003		ARFullAuto	8xxx_Set_CA_Key/KME003		run_test.pl
+KME004		ARFullAuto	8xxx_Set_CA_Key/KME004		run_test.pl
+KME005		ARFullAuto	8xxx_Set_CA_Key/KME005		run_test.pl
+KME006		ARFullAuto	8xxx_Set_CA_Key/KME006		run_test.pl
+KME007		ARFullAuto	8xxx_Set_CA_Key/KME007		run_test.pl
+KME008		ARFullAuto	8xxx_Set_CA_Key/KME008		run_test.pl
+KME009		ARFullAuto	8xxx_Set_CA_Key/KME009		run_test.pl
+KME010		ARFullAuto	8xxx_Set_CA_Key/KME010		run_test.pl
+KME011		ARFullAuto	8xxx_Set_CA_Key/KME011		run_test.pl
+KME012		ARFullAuto	8xxx_Set_CA_Key/KME012		run_test.pl
+KME013		ARFullAuto	8xxx_Set_CA_Key/KME013		run_test.pl
+KME015		ARFullAuto	8xxx_Set_CA_Key/KME015		run_test.pl
+KME016		ARFullAuto	8xxx_Set_CA_Key/KME016		run_test.pl
+KME017		ARFullAuto	8xxx_Set_CA_Key/KME017		run_test.pl
+KME018		ARFullAuto	8xxx_Set_CA_Key/KME018		run_test.pl
+KME019		ARFullAuto	8xxx_Set_CA_Key/KME019		run_test.pl
+KME020		ARFullAuto	8xxx_Set_CA_Key/KME020		run_test.pl
+KME021		ARFullAuto	8xxx_Set_CA_Key/KME021		run_test.pl
+KME022		ARFullAuto	8xxx_Set_CA_Key/KME022		run_test.pl
+KME023		ARFullAuto	8xxx_Set_CA_Key/KME023		run_test.pl
+KME024		ARFullAuto	8xxx_Set_CA_Key/KME024		run_test.pl
+KME025		ARFullAuto	8xxx_Set_CA_Key/KME025		run_test.pl
+KME026		ARFullAuto	8xxx_Set_CA_Key/KME026		run_test.pl
+KME027		ARFullAuto	8xxx_Set_CA_Key/KME027		run_test.pl
+KME028		ARFullAuto	8xxx_Set_CA_Key/KME028		run_test.pl
+KME029		ARFullAuto	8xxx_Set_CA_Key/KME029		run_test.pl
+KME030		ARFullAuto	8xxx_Set_CA_Key/KME030		run_test.pl
+KME031		ARFullAuto	8xxx_Set_CA_Key/KME031		run_test.pl
+KME032		ARFullAuto	8xxx_Set_CA_Key/KME032		run_test.pl
+KME033		ARFullAuto	8xxx_Set_CA_Key/KME033		run_test.pl
+KME034		ARFullAuto	8xxx_Set_CA_Key/KME034		run_test.pl
+KME035		ARFullAuto	8xxx_Set_CA_Key/KME035		run_test.pl
+KME035-01       ARFullAuto      8xxx_Set_CA_Key/KME035-01       run_test.pl
+KME035-02       ARFullAuto      8xxx_Set_CA_Key/KME035-02       run_test.pl
+KME035-03       ARFullAuto      8xxx_Set_CA_Key/KME035-03       run_test.pl
+KME035-04       ARFullAuto      8xxx_Set_CA_Key/KME035-04       run_test.pl
+KME036		ARFullAuto	8xxx_Set_CA_Key/KME036		run_test.pl
+KME037		ARFullAuto	8xxx_Set_CA_Key/KME037		run_test.pl
+KME038		ARFullAuto	8xxx_Set_CA_Key/KME038		run_test.pl
+KME039		ARFullAuto	8xxx_Set_CA_Key/KME039		run_test.pl
+KME040		ARFullAuto	8xxx_Set_CA_Key/KME040		run_test.pl
+KME041		ARFullAuto	8xxx_Set_CA_Key/KME041		run_test.pl
+KME042		ARFullAuto	8xxx_Set_CA_Key/KME042		run_test.pl
+KME043		ARFullAuto	8xxx_Set_CA_Key/KME043		run_test.pl
+#------ Append Dir at regress test group ARFullAuto temporarily
+
+
+DIR001		ARFullAutoDir	8xxx_Directory/DIR001		run_test.pl   
+DIR001-1	ARFullAutoDir	8xxx_Directory/DIR001-1		run_test.pl
+DIR002		ARFullAutoDir	8xxx_Directory/DIR002		run_test.pl
+DIR003		ARFullAutoDir	8xxx_Directory/DIR003		run_test.pl
+DIR004		ARFullAutoDir	8xxx_Directory/DIR004		run_test.pl
+DIR005		ARFullAutoDir	8xxx_Directory/DIR005		run_test.pl
+DIR006		ARFullAutoDir	8xxx_Directory/DIR006		run_test.pl
+DIR007		ARFullAutoDir	8xxx_Directory/DIR007		run_test.pl
+DIR008		ARFullAutoDir	8xxx_Directory/DIR008		run_test.pl
+DIR009		ARFullAutoDir	8xxx_Directory/DIR009		run_test.pl
+DIR010		ARFullAutoDir	8xxx_Directory/DIR010		run_test.pl
+DIR011		ARFullAutoDir	8xxx_Directory/DIR011		run_test.pl
+DIR012		ARFullAutoDir	8xxx_Directory/DIR012		run_test.pl
+DIR013		ARFullAutoDir	8xxx_Directory/DIR013		run_test.pl
+DIR014		ARFullAutoDir	8xxx_Directory/DIR014		run_test.pl
+DIR015		ARFullAutoDir	8xxx_Directory/DIR015		run_test.pl
+-- &&&
+
+
+
+
+KLK001 		ARKLK2  	KLK2/KLK001 			run_test.pl
+KLK002 		ARKLK2 		KLK2/KLK002			run_test.pl
+KLK003  	ARKLK2  	KLK2/KLK003    			run_test.pl
+KLK004    	ARKLK2  	KLK2/KLK004 			run_test.pl
+KLK005    	ARKLK2  	KLK2/KLK005  			run_test.pl
+KLK006     	ARKLK2  	KLK2/KLK006   			run_test.pl
+KLK007     	ARKLK2   	KLK2/KLK007  			run_test.pl
+KLK008   	ARKLK2   	KLK2/KLK008    			run_test.pl
+KLK009   	ARKLK2   	KLK2/KLK009    			run_test.pl
+KLK010      	ARKLK2   	KLK2/KLK010    			run_test.pl
+KLK011   	ARKLK2  	KLK2/KLK011   			run_test.pl
+KLK012      	ARKLK2   	KLK2/KLK012  			run_test.pl
+KLK013    	ARKLK2   	KLK2/KLK013   			run_test.pl
+KLK014      	ARKLK2   	KLK2/KLK014    			run_test.pl
+KLK015      	ARKLK2   	KLK2/KLK015  			run_test.pl
+KLK016     	ARKLK2   	KLK2/KLK016  			run_test.pl
+KLK017      	ARKLK2   	KLK2/KLK017    			run_test.pl
+KLK018      	ARKLK2   	KLK2/KLK018    			run_test.pl
+KLK019      	ARKLK2   	KLK2/KLK019   			run_test.pl
+KLK020      	ARKLK2   	KLK2/KLK020   			run_test.pl
+KLK021      	ARKLK2   	KLK2/KLK021   			run_test.pl
+KLK022     	ARKLK2  	KLK2/KLK022    			run_test.pl
+KLK023    	ARKLK2   	KLK2/KLK023   			run_test.pl
+KLK024    	ARKLK2  	KLK2/KLK024   			run_test.pl
+KLK025    	ARKLK2   	KLK2/KLK025  			run_test.pl
+KLK026      	ARKLK2   	KLK2/KLK026    			run_test.pl
+KLK027      	ARKLK2   	KLK2/KLK027   			run_test.pl
+KLK028      	ARKLK2   	KLK2/KLK028    			run_test.pl
+KLK029      	ARKLK2  	KLK2/KLK029   			run_test.pl
+KLK030      	ARKLK2		KLK2/KLK030    			run_test.pl
+KLK0301		ARKLK2		KLK2/KLK0301 			run_test.pl
+KLK0302     	ARKLK2  	KLK2/KLK0302  			run_test.pl
+KLK031		ARKLK2   	KLK2/KLK031 			run_test.pl
+KLK032          ARKLK2		KLK2/KLK032    			run_test.pl
+KLK033          ARKLK2   	KLK2/KLK033    			run_test.pl
+KLK034          ARKLK2   	KLK2/KLK034  			run_test.pl
+KLK035          ARKLK2   	KLK2/KLK035  			run_test.pl
+KLK036          ARKLK2 		KLK2/KLK036    			run_test.pl
+KLK037          ARKLK2  	KLK2/KLK037   			run_test.pl
+KLK038          ARKLK2  	KLK2/KLK038   			run_test.pl
+KLK039          ARKLK2  	KLK2/KLK039 			run_test.pl
+KLK040          ARKLK2   	KLK2/KLK040   			run_test.pl
+KLK041          ARKLK2  	KLK2/KLK041   			run_test.pl
+KLK042          ARKLK2 		KLK2/KLK042   			run_test.pl
+KLK043          ARKLK2  	KLK2/KLK043  			run_test.pl
+KLK044          ARKLK2   	KLK2/KLK044    			run_test.pl
+-- &&&
+
+
+DTX001-01       ARDTX           8xxx_Display_Text/DTX001-01     run_test.pl
+DTX001-02       ARDTX           8xxx_Display_Text/DTX001-02     run_test.pl
+DTX001-03       ARDTXv          8xxx_Display_Text/DTX001-03     run_test.pl
+DTX001          ARDTXv   	8xxx_Display_Text/DTX001   	run_test.pl
+DTX002          ARDTXv   	8xxx_Display_Text/DTX002   	run_test.pl
+DTX003          ARDTXv   	8xxx_Display_Text/DTX003   	run_test.pl
+DTX004          ARDTX   	8xxx_Display_Text/DTX004   	run_test.pl
+DTX005          ARDTXv   	8xxx_Display_Text/DTX005   	run_test.pl
+DTX006          ARDTXv   	8xxx_Display_Text/DTX006   	run_test.pl
+DTX007          ARDTXv   	8xxx_Display_Text/DTX007   	run_test.pl
+DTX008          ARDTX   	8xxx_Display_Text/DTX008   	run_test.pl
+DTX009          ARDTX   	8xxx_Display_Text/DTX009   	run_test.pl
+DTX010          ARDTX   	8xxx_Display_Text/DTX010   	run_test.pl
+DTX011          ARDTX   	8xxx_Display_Text/DTX011   	run_test.pl
+DTX012          ARDTX   	8xxx_Display_Text/DTX012   	run_test.pl
+DTX013          ARDTX   	8xxx_Display_Text/DTX013   	run_test.pl
+DTX014          ARDTX   	8xxx_Display_Text/DTX014   	run_test.pl
+DTX015          ARDTX   	8xxx_Display_Text/DTX015   	run_test.pl
+DTX015-01       ARDTXv   	8xxx_Display_Text/DTX015-01   	run_test.pl
+DTX015-02       ARDTXv   	8xxx_Display_Text/DTX015-02   	run_test.pl
+DTX016          ARDTX   	8xxx_Display_Text/DTX016   	run_test.pl
+-- added &&& DTX020,021,022,23
+DTX020          ARDTX1   	8xxx_Display_Text/DTX020   	run_test.pl
+DTX021          ARDTX1   	8xxx_Display_Text/DTX021   	run_test.pl
+DTX022          ARDTX1   	8xxx_Display_Text/DTX022   	run_test.pl
+DTX023          ARDTX1   	8xxx_Display_Text/DTX023   	run_test.pl
+-- &&&
+
+DPGH001         ARDPGH          8xxx_Display_Paragraph/DPGH001  run_test.pl
+DPGH002         ARDPGH          8xxx_Display_Paragraph/DPGH002  run_test.pl
+DPGH003         ARDPGH          8xxx_Display_Paragraph/DPGH003  run_test.pl
+DPGH004         ARDPGH          8xxx_Display_Paragraph/DPGH004  run_test.pl
+DPGH005         ARDPGH          8xxx_Display_Paragraph/DPGH005  run_test.pl
+DPGH006         ARDPGH          8xxx_Display_Paragraph/DPGH006  run_test.pl
+DPGH007         ARDPGH          8xxx_Display_Paragraph/DPGH007  run_test.pl
+DPGH008         ARDPGH          8xxx_Display_Paragraph/DPGH008  run_test.pl
+DPGH009         ARDPGH          8xxx_Display_Paragraph/DPGH009  run_test.pl
+DPGH010         ARDPGH          8xxx_Display_Paragraph/DPGH010  run_test.pl
+DPGH011         ARDPGH          8xxx_Display_Paragraph/DPGH011  run_test.pl
+DPGH012         ARDPGH          8xxx_Display_Paragraph/DPGH012  run_test.pl
+DPGH013         ARDPGH          8xxx_Display_Paragraph/DPGH013  run_test.pl
+DPGH014         ARDPGH          8xxx_Display_Paragraph/DPGH014  run_test.pl
+DPGH015         ARDPGH          8xxx_Display_Paragraph/DPGH015  run_test.pl
+DPGH016         ARDPGH          8xxx_Display_Paragraph/DPGH016  run_test.pl
+DPGH017         ARDPGH          8xxx_Display_Paragraph/DPGH017  run_test.pl
+DPGH018         ARDPGH          8xxx_Display_Paragraph/DPGH018  run_test.pl
+DPGH019         ARDPGH          8xxx_Display_Paragraph/DPGH019  run_test.pl
+DPGH020         ARDPGH          8xxx_Display_Paragraph/DPGH020  run_test.pl
+DPGH021         ARDPGH          8xxx_Display_Paragraph/DPGH021  run_test.pl
+DPGH022         ARDPGH          8xxx_Display_Paragraph/DPGH022  run_test.pl
+DPGH023         ARDPGH          8xxx_Display_Paragraph/DPGH023  run_test.pl
+DPGH024         ARDPGH          8xxx_Display_Paragraph/DPGH024  run_test.pl
+DPGH025         ARDPGH          8xxx_Display_Paragraph/DPGH025  run_test.pl
+
+
+DRF001          DRF             8xxx_Display_Refresh/DRF001     run_test.pl
+DRF002          DRF             8xxx_Display_Refresh/DRF002     run_test.pl
+DRF003          DRF             8xxx_Display_Refresh/DRF003     run_test.pl
+DRF004          DRF             8xxx_Display_Refresh/DRF004     run_test.pl
+DRF005          DRF             8xxx_Display_Refresh/DRF005     run_test.pl
+
+
+-- &&&
+SBC001		ARSBC		Set_Background_Color/SBC001  	run_test.pl
+SBC002		ARSBC		Set_Background_Color/SBC002  	run_test.pl
+SBC003		ARSBC		Set_Background_Color/SBC003  	run_test.pl
+SBC004		ARSBC		Set_Background_Color/SBC004  	run_test.pl
+SBC005		ARSBC		Set_Background_Color/SBC005  	run_test.pl
+-- &&&
+-- EVQ001 to 011: test key pad event
+EVQ001		AREVQ		Event_Queue/EVQ001 		run_test.pl
+EVQ002		AREVQ		Event_Queue/EVQ002 		run_test.pl
+EVQ003		AREVQ		Event_Queue/EVQ003 		run_test.pl
+EVQ004		AREVQ		Event_Queue/EVQ004 		run_test.pl
+EVQ005		AREVQ		Event_Queue/EVQ005 		run_test.pl
+EVQ006		AREVQ		Event_Queue/EVQ006 		run_test.pl
+EVQ007		AREVQ		Event_Queue/EVQ007 		run_test.pl
+EVQ008		AREVQ		Event_Queue/EVQ008 		run_test.pl
+EVQ009		AREVQ		Event_Queue/EVQ009 		run_test.pl
+EVQ010		AREVQ		Event_Queue/EVQ010 		run_test.pl
+EVQ011		AREVQ		Event_Queue/EVQ011 		run_test.pl
+-- EVQ012 to 013: test button event
+EVQ012		AREVQ		Event_Queue/EVQ012 		run_test.pl
+EVQ013 		AREVQ		Event_Queue/EVQ013 		run_test.pl
+-- EVQ014 to 015:test check box event
+EVQ014		AREVQ		Event_Queue/EVQ014 		run_test.pl
+EVQ015		AREVQ		Event_Queue/EVQ015 		run_test.pl
+-- EVQ016 to: 017 test list event
+EVQ016		AREVQ		Event_Queue/EVQ016 		run_test.pl
+EVQ017		AREVQ		Event_Queue/EVQ017 		run_test.pl
+-- EVQ018 to 019: test image event
+EVQ018		AREVQ		Event_Queue/EVQ018 		run_test.pl
+EVQ019		AREVQ		Event_Queue/EVQ019 		run_test.pl
+-- EVQ20: test slideshow event
+EVQ020		AREVQ		Event_Queue/EVQ020 		run_test.pl
+-- EVQ021: test radio buttun, Note: EVQ021 failed due to fw bugs on Radio buttuns
+EVQ021		AREVQ		Event_Queue/EVQ021 		run_test.pl
+-- EVQ022,023: test Activate Transaction events (cmd 02 11)
+EVQ022		AREVQ1v 	Event_Queue/EVQ022 		run_test.pl
+EVQ023		AREVQ1v		Event_Queue/EVQ023 		run_test.pl
+-- EVQ024: Test a single touch will not generate multiple events  
+EVQ024		AREVQ1		Event_Queue/EVQ024 		run_test.pl
+EVQ025		AREVQ1		Event_Queue/EVQ025 		run_test.pl
+
+
+LID001		ARLID		8xxx_Line_Item_Display/LID001		run_test.pl
+LID002		ARLID		8xxx_Line_Item_Display/LID002		run_test.pl
+LID003		ARLID		8xxx_Line_Item_Display/LID003		run_test.pl
+LID004		ARLID		8xxx_Line_Item_Display/LID004		run_test.pl
+LID005		ARLID		8xxx_Line_Item_Display/LID005		run_test.pl
+LID006		ARLID		8xxx_Line_Item_Display/LID006		run_test.pl
+LID007		ARLID		8xxx_Line_Item_Display/LID007		run_test.pl
+LID008		ARLID		8xxx_Line_Item_Display/LID008		run_test.pl
+LID009		ARLID		8xxx_Line_Item_Display/LID009		run_test.pl
+LID010		ARLID		8xxx_Line_Item_Display/LID010		run_test.pl
+LID011		ARLID		8xxx_Line_Item_Display/LID011		run_test.pl
+LID012		ARLID		8xxx_Line_Item_Display/LID012		run_test.pl
+LID013		ARLID		8xxx_Line_Item_Display/LID013		run_test.pl
+LID014		ARLID		8xxx_Line_Item_Display/LID014		run_test.pl
+LID015		ARLID		8xxx_Line_Item_Display/LID015		run_test.pl
+LID016		ARLID		8xxx_Line_Item_Display/LID016		run_test.pl
+LID017		ARLID		8xxx_Line_Item_Display/LID017		run_test.pl
+-- &&&
+
+
+INP001		ARINP		8xxx_Input_Field/INP001		run_test.pl
+INP002		ARINP		8xxx_Input_Field/INP002		run_test.pl
+INP003		ARINP		8xxx_Input_Field/INP003		run_test.pl
+INP004		ARINP		8xxx_Input_Field/INP004		run_test.pl
+INP005		ARINP		8xxx_Input_Field/INP005		run_test.pl
+INP006		ARINP		8xxx_Input_Field/INP006		run_test.pl
+INP007		ARINP		8xxx_Input_Field/INP007		run_test.pl
+INP008		ARINP		8xxx_Input_Field/INP008		run_test.pl
+INP009		ARINP		8xxx_Input_Field/INP009		run_test.pl
+INP010		ARINP		8xxx_Input_Field/INP010		run_test.pl
+INP011		ARINP		8xxx_Input_Field/INP011		run_test.pl
+-- &&&
+
+#----- SECM001 to 008 for AR2.1.2 or earlier	
+SECM001		ARSECM		8xxx_Secure_mode/SECM001	run_test.pl 
+SECM002		ARSECM		8xxx_Secure_mode/SECM002	run_test.pl
+#--- remove SECM003 from list. Per Hsien 6-6-11.  
+#SECM003	ARSECM		8xxx_Secure_mode/SECM003	run_test.pl
+SECM004		ARSECM		8xxx_Secure_mode/SECM004	run_test.pl
+SECM005		ARSECM		8xxx_Secure_mode/SECM005	run_test.pl
+SECM006		ARSECM		8xxx_Secure_mode/SECM006	run_test.pl
+SECM007		ARSECM		8xxx_Secure_mode/SECM007	run_test.pl
+SECM008		ARSECM		8xxx_Secure_mode/SECM008	run_test.pl
+
+#---- SECM010 to 019 for AR2.1.3 or later
+SECM010		ARSECM1		8xxx_Secure_mode/SECM010	run_test.pl
+SECM011		ARSECM1		8xxx_Secure_mode/SECM011	run_test.pl
+SECM012		ARSECM1		8xxx_Secure_mode/SECM012	run_test.pl
+SECM013		ARSECM1		8xxx_Secure_mode/SECM013	run_test.pl
+SECM014		ARSECM1		8xxx_Secure_mode/SECM014	run_test.pl
+SECM015		ARSECM1		8xxx_Secure_mode/SECM015	run_test.pl
+SECM016		ARSECM1		8xxx_Secure_mode/SECM016	run_test.pl
+SECM017		ARSECM1		8xxx_Secure_mode/SECM017	run_test.pl
+SECM018		ARSECM1		8xxx_Secure_mode/SECM018	run_test.pl
+SECM019		ARSECM1		8xxx_Secure_mode/SECM019	run_test.pl
+
+-- &&&
+
+
+RIS001 		ARRIS		8xxx_Reset_State/RIS001		run_test.pl  
+RIS002          ARRIS           8xxx_Reset_State/RIS002         run_test.pl
+RIS003          ARRIS           8xxx_Reset_State/RIS003         run_test.pl
+RIS004          ARRIS           8xxx_Reset_State/RIS004         run_test.pl
+RIS005          ARRIS           8xxx_Reset_State/RIS005         run_test.pl
+RIS006          ARRIS           8xxx_Reset_State/RIS006         run_test.pl
+RIS007          ARRIS           8xxx_Reset_State/RIS007         run_test.pl
+
+
+
+-- &&&  this group of tests requires: VISA contact card, SAM1,SAM2, and VP8xxxe (e.g. VP8100e/8600e)
+SPT001 		ARSPT		SAM_Passthrough/SPT001		run_test.pl
+SPT002 		ARSPT		SAM_Passthrough/SPT002		run_test.pl
+SPT003 		ARSPT		SAM_Passthrough/SPT003		run_test.pl
+SPT003-01 	ARSPT		SAM_Passthrough/SPT003-01	run_test.pl
+SPT004 		ARSPT		SAM_Passthrough/SPT004		run_test.pl
+SPT005 		ARSPT		SAM_Passthrough/SPT005		run_test.pl
+SPT006 		ARSPT		SAM_Passthrough/SPT006		run_test.pl
+SPT006-01 	ARSPT		SAM_Passthrough/SPT006-01	run_test.pl
+SPT007 		ARSPT		SAM_Passthrough/SPT007		run_test.pl
+SPT008 		ARSPT		SAM_Passthrough/SPT008		run_test.pl
+SPT009 		ARSPT		SAM_Passthrough/SPT009		run_test.pl
+SPT010 		ARSPT		SAM_Passthrough/SPT010		run_test.pl
+SPT011 		ARSPT		SAM_Passthrough/SPT011		run_test.pl
+SPT011-01 	ARSPT		SAM_Passthrough/SPT011-01	run_test.pl
+SPT012 		ARSPT		SAM_Passthrough/SPT012		run_test.pl
+SPT013 		ARSPT		SAM_Passthrough/SPT013		run_test.pl
+SPT014 		ARSPT		SAM_Passthrough/SPT014		run_test.pl
+SPT014-01	ARSPT		SAM_Passthrough/SPT014-01	run_test.pl
+SPT015 		ARSPT		SAM_Passthrough/SPT015		run_test.pl
+SPT016 		ARSPT		SAM_Passthrough/SPT016		run_test.pl
+SPT017 		ARSPT		SAM_Passthrough/SPT017		run_test.pl
+SPT018 		ARSPT		SAM_Passthrough/SPT018		run_test.pl
+SPT018-01	ARSPT		SAM_Passthrough/SPT018-01	run_test.pl
+SPT019 		ARSPT		SAM_Passthrough/SPT019		run_test.pl
+SPT020 		ARSPT		SAM_Passthrough/SPT020		run_test.pl
+SPT021 		ARSPT		SAM_Passthrough/SPT021		run_test.pl
+SPT021-01	ARSPT		SAM_Passthrough/SPT021-01	run_test.pl
+SPT022 		ARSPT		SAM_Passthrough/SPT022		run_test.pl
+SPT022-01	ARSPT		SAM_Passthrough/SPT022-01	run_test.pl
+SPT022-02	ARSPT		SAM_Passthrough/SPT022-02	run_test.pl
+#-- Note: SPT0023 failed due to 2c-0c. Is this command valid on AR?
+SPT023 		ARSPT		SAM_Passthrough/SPT023		run_test.pl
+-- &&&
+
+-- SAT001 to 013 test command 02-20
+SAT001 		ARSAT		8xxx_Special_Transactions/SAT001	run_test.pl
+SAT002 		ARSAT		8xxx_Special_Transactions/SAT002	run_test.pl
+SAT003 		ARSAT		8xxx_Special_Transactions/SAT003	run_test.pl
+SAT004 		ARSAT		8xxx_Special_Transactions/SAT004	run_test.pl
+SAT005 		ARSAT		8xxx_Special_Transactions/SAT005	run_test.pl
+SAT006 		ARSAT		8xxx_Special_Transactions/SAT006	run_test.pl
+SAT007 		ARSAT		8xxx_Special_Transactions/SAT007	run_test.pl
+SAT008 		ARSAT		8xxx_Special_Transactions/SAT008	run_test.pl
+SAT009 		ARSAT		8xxx_Special_Transactions/SAT009	run_test.pl
+SAT010 		ARSAT		8xxx_Special_Transactions/SAT010	run_test.pl
+SAT011 		ARSAT		8xxx_Special_Transactions/SAT011	run_test.pl
+SAT012 		ARSAT		8xxx_Special_Transactions/SAT012	run_test.pl
+SAT013 		ARSAT		8xxx_Special_Transactions/SAT013	run_test.pl
+#-- SAT014 test command 02-11
+SAT014 		ARSAT		8xxx_Special_Transactions/SAT014	run_test.pl
+#-- SAT015 to 018 test command 02-15
+SAT015 		ARSAT		8xxx_Special_Transactions/SAT015	run_test.pl
+SAT016 		ARSAT		8xxx_Special_Transactions/SAT016	run_test.pl
+SAT017 		ARSAT		8xxx_Special_Transactions/SAT017	run_test.pl
+#-- SAT018 failed. Hsien is to verify it.
+SAT018 		ARSAT		8xxx_Special_Transactions/SAT018	run_test.pl
+SAT018-01	ARSAT		8xxx_Special_Transactions/SAT018	run_test.pl
+SAT019 		ARSAT		8xxx_Special_Transactions/SAT019	run_test.pl
+#-- SAT020, 021 failed.
+SAT020 		ARSAT		8xxx_Special_Transactions/SAT020	run_test.pl
+SAT021 		ARSAT		8xxx_Special_Transactions/SAT021	run_test.pl
+#-- &&&
+SAT022          ARSAT           8xxx_Special_Transactions/SAT022        run_test.pl
+SAT023          ARSAT           8xxx_Special_Transactions/SAT023        run_test.pl
+SAT024          ARSAT           8xxx_Special_Transactions/SAT024        run_test.pl
+SAT025          ARSAT           8xxx_Special_Transactions/SAT025        run_test.pl
+SAT026          ARSAT           8xxx_Special_Transactions/SAT026        run_test.pl
+SAT027          ARSAT           8xxx_Special_Transactions/SAT027        run_test.pl
+SAT028          ARSAT           8xxx_Special_Transactions/SAT028        run_test.pl
+SAT029          ARSAT           8xxx_Special_Transactions/SAT029        run_test.pl
+SAT030          ARSAT           8xxx_Special_Transactions/SAT030        run_test.pl
+#*Note SAT022-SAT027 
+#*Note SAT027-SAT030 
+
+
+
+-- APC001 and 002 use MC payPass A card
+APCD001 	ARAPCD		8xxx_PCD/APCD001			run_test.pl  
+APCD002 	ARAPCD		8xxx_PCD/APCD002			run_test.pl
+-- APC003 to 005 use AMEX express pay card (type B)
+APCD003 	ARAPCD		8xxx_PCD/APCD003			run_test.pl
+APCD004 	ARAPCD		8xxx_PCD/APCD004			run_test.pl
+APCD005 	ARAPCD		8xxx_PCD/APCD005			run_test.pl
+-- &&&
+ 
+ 
+BRB001 		ARBRB		8xxx_Buttons/BRB001			run_test.pl
+BRB002 		ARBRB		8xxx_Buttons/BRB002			run_test.pl
+BRB003 		ARBRB		8xxx_Buttons/BRB003			run_test.pl
+BRB004 		ARBRB		8xxx_Buttons/BRB004			run_test.pl
+BRB005 		ARBRB		8xxx_Buttons/BRB005			run_test.pl
+BRB006 		ARBRB		8xxx_Buttons/BRB006			run_test.pl
+BRB007 		ARBRB		8xxx_Buttons/BRB007			run_test.pl
+BRB008 		ARBRB		8xxx_Buttons/BRB008			run_test.pl
+BRB009 		ARBRB		8xxx_Buttons/BRB009			run_test.pl
+BRB010 		ARBRB		8xxx_Buttons/BRB010			run_test.pl
+BRB011 		ARBRB		8xxx_Buttons/BRB011			run_test.pl
+BRB012 		ARBRB		8xxx_Buttons/BRB012			run_test.pl
+BRB013 		ARBRB		8xxx_Buttons/BRB013			run_test.pl
+BRB014 		ARBRB		8xxx_Buttons/BRB014			run_test.pl
+BRB015 		ARBRB		8xxx_Buttons/BRB015			run_test.pl
+BRB016 		ARBRB		8xxx_Buttons/BRB016			run_test.pl
+BRB017 		ARBRB		8xxx_Buttons/BRB017			run_test.pl
+BRB018 		ARBRB		8xxx_Buttons/BRB018			run_test.pl
+BRB019		ARBRB		8xxx_Buttons/BRB019			run_test.pl
+BRB020		ARBRB		8xxx_Buttons/BRB020			run_test.pl
+BRB021 		ARBRB		8xxx_Buttons/BRB021			run_test.pl
+BRB022		ARBRB		8xxx_Buttons/BRB022			run_test.pl
+BRB023 		ARBRB		8xxx_Buttons/BRB023			run_test.pl
+BRB024		ARBRB		8xxx_Buttons/BRB024			run_test.pl
+BRB025 		ARBRB		8xxx_Buttons/BRB025			run_test.pl
+BRB026          ARBRB           8xxx_Buttons/BRB026                     run_test.pl
+BRB027          ARBRB           8xxx_Buttons/BRB027                     run_test.pl
+BRB028          ARBRB           8xxx_Buttons/BRB028                     run_test.pl
+BRB029          ARBRB           8xxx_Buttons/BRB029                     run_test.pl
+BRB030          ARBRB           8xxx_Buttons/BRB030                     run_test.pl
+BRB031          ARBRB           8xxx_Buttons/BRB031                     run_test.pl
+
+-- &&& it consists of raw data and go tag test cases (so far it only test with cmd 02-01)
+-- Note: Use des00x Raw Data index16 if asking for des00x only in testing ---
+#-ALL PASS Excepted, DRW004- No response 
+ADRW001 		ARDES		8xxx_Desfire_Raw/DRW001			run_test.pl  
+ADRW002 		ARDES		8xxx_Desfire_Raw/DRW002			run_test.pl
+#-- DRW003 checks less msg data len
+ADRW003 		ARDES		8xxx_Desfire_Raw/DRW003			run_test.pl
+#-- DRW004 checks greater msg data len. No response should be expected behavior 
+ADRW004 		ARDES		8xxx_Desfire_Raw/DRW004			run_test.pl
+#-- DRW005 checks msg timeout
+ADRW005 		ARDES		8xxx_Desfire_Raw/DRW005			run_test.pl
+ADRW006 		ARDES		8xxx_Desfire_Raw/DRW006			run_test.pl 
+
+ADGT001 		ARDES		8xxx_Desfire_Raw/DGT001			run_test.pl
+ADGT002 		ARDES		8xxx_Desfire_Raw/DGT002			run_test.pl
+ADGT003 		ARDES		8xxx_Desfire_Raw/DGT003			run_test.pl
+ADGT004 		ARDES		8xxx_Desfire_Raw/DGT004			run_test.pl
+ADGT005 		ARDES		8xxx_Desfire_Raw/DGT005			run_test.pl
+ADGT006 		ARDES		8xxx_Desfire_Raw/DGT006			run_test.pl
+ADGT007 		ARDES		8xxx_Desfire_Raw/DGT007			run_test.pl
+-- &&& for testing with VIVOcomm card, need test key within FW
+
+AMF000100         ARMifare  8xxx_Mifare/MF000100                      run_test.pl  
+AMF000300         ARMifare  8xxx_Mifare/MF000300                      run_test.pl
+AMF000400         ARMifare  8xxx_Mifare/MF000400                      run_test.pl
+AMF000450         ARMifare  8xxx_Mifare/MF000450                      run_test.pl
+AMF000451         ARMifare  8xxx_Mifare/MF000451                      run_test.pl
+AMF000452         ARMifare  8xxx_Mifare/MF000452                      run_test.pl
+AMF000453         ARMifare  8xxx_Mifare/MF000453                      run_test.pl
+AMF000500         ARMifare  8xxx_Mifare/MF000500                      run_test.pl
+AMF000600         ARMifare  8xxx_Mifare/MF000600                      run_test.pl
+AMF000700         ARMifare  8xxx_Mifare/MF000700                      run_test.pl
+AMF000800         ARMifare  8xxx_Mifare/MF000800                      run_test.pl
+AMF000900         ARMifare  8xxx_Mifare/MF000900                      run_test.pl
+AMF001000         ARMifare  8xxx_Mifare/MF001000                      run_test.pl
+AMF001100         ARMifare  8xxx_Mifare/MF001100                      run_test.pl
+AMF001200         ARMifare  8xxx_Mifare/MF001200                      run_test.pl
+AMF001300         ARMifare  8xxx_Mifare/MF001300                      run_test.pl
+AMF001400         ARMifare  8xxx_Mifare/MF001400                      run_test.pl
+AMF001500         ARMifare  8xxx_Mifare/MF001500                      run_test.pl
+AMF001600         ARMifare  8xxx_Mifare/MF001600                      run_test.pl
+AMF001700         ARMifare  8xxx_Mifare/MF001700                      run_test.pl
+
+
+
+-NEED TEST KEYS FIRMWARE* Check With Hsien on these cases. 
+-- Note: There is a test case naming conflict on VCC001 to VCC009 when testing in group
+AVCC001 		ARVCC		8xxx_Desfire_Raw/VCC001			run_test.pl  
+AVCC002 		ARVCC		8xxx_Desfire_Raw/VCC002			run_test.pl
+AVCC003 		ARVCC		8xxx_Desfire_Raw/VCC003			run_test.pl
+AVCC004 		ARVCC		8xxx_Desfire_Raw/VCC004			run_test.pl
+AVCC005 		ARVCC		8xxx_Desfire_Raw/VCC005			run_test.pl
+AVCC006 		ARVCC		8xxx_Desfire_Raw/VCC006			run_test.pl
+AVCC007 		ARVCC		8xxx_Desfire_Raw/VCC007 		run_test.pl
+AVCC008 		ARVCC		8xxx_Desfire_Raw/VCC008			run_test.pl
+AVCC009 		ARVCC		8xxx_Desfire_Raw/VCC009			run_test.pl
+-- &&&
+
+SC001		ARSIGN		Signature_Capture/SC001			run_test.pl
+SC001-01	ARSIGN1		Signature_Capture/SC001-01		run_test.pl
+SC001-02	ARSIGN1		Signature_Capture/SC001-02		run_test.pl
+SC002		ARSIGN		Signature_Capture/SC002			run_test.pl
+SC003		ARSIGN		Signature_Capture/SC003			run_test.pl
+SC004		ARSIGN		Signature_Capture/SC004			run_test.pl
+SC005		ARSIGN		Signature_Capture/SC005			run_test.pl
+SC006		ARSIGN		Signature_Capture/SC006			run_test.pl
+SC007		ARSIGN		Signature_Capture/SC007			run_test.pl
+SC008		ARSIGN		Signature_Capture/SC008			run_test.pl
+SC009		ARSIGN		Signature_Capture/SC009			run_test.pl
+SC010		ARSIGN		Signature_Capture/SC010			run_test.pl
+SC011		ARSIGN		Signature_Capture/SC011			run_test.pl
+SC012		ARSIGN		Signature_Capture/SC012			run_test.pl
+SC013		ARSIGN		Signature_Capture/SC013			run_test.pl
+SC014		ARSIGN		Signature_Capture/SC014			run_test.pl
+-- Below are test cases for cmd 83-19 (Start Signature Capture). 
+SC015		ARSIGN		Signature_Capture/SC015			run_test.pl
+SC016		ARSIGN		Signature_Capture/SC016			run_test.pl
+SC017		ARSIGN		Signature_Capture/SC017			run_test.pl
+SC018		ARSIGN		Signature_Capture/SC018			run_test.pl
+SC019		ARSIGN		Signature_Capture/SC019			run_test.pl
+SC020		ARSIGN		Signature_Capture/SC020			run_test.pl
+SC021		ARSIGN		Signature_Capture/SC021			run_test.pl
+SC022		ARSIGN		Signature_Capture/SC022			run_test.pl
+SC023		ARSIGN		Signature_Capture/SC023			run_test.pl
+SC024		ARSIGN		Signature_Capture/SC024			run_test.pl
+SC025		ARSIGN		Signature_Capture/SC025			run_test.pl
+SC026		ARSIGN		Signature_Capture/SC026			run_test.pl
+SC027		ARSIGN		Signature_Capture/SC027			run_test.pl
+-- Note: 028,029,030 failed due to return status code 0a vs 05. Resolution is TBD.
+SC028		ARSIGN		Signature_Capture/SC028			run_test.pl
+SC029		ARSIGN		Signature_Capture/SC029			run_test.pl
+SC030		ARSIGN		Signature_Capture/SC030			run_test.pl
+SC031		ARSIGN		Signature_Capture/SC031			run_test.pl
+-- Note: SC032 is no longer needed since the binary flag value 0, 1, 2, and 3 are all valid (bit0,bit1)
+-- SC032	ARSIGN		Signature_Capture/SC032			run_test.pl
+
+#-- &&&
+msk001		ARMASTER		Master_Session/MSK001		run_test.pl 
+msk002		ARMASTER		Master_Session/MSK002		run_test.pl
+msk003		ARMASTER		Master_Session/MSK003		run_test.pl
+msk004		ARMASTER		Master_Session/MSK004		run_test.pl
+msk005		ARMASTER		Master_Session/MSK005		run_test.pl
+msk006		ARMASTER		Master_Session/MSK006		run_test.pl
+msk007		ARMASTER		Master_Session/MSK007		run_test.pl
+msk008		ARMASTER		Master_Session/MSK008		run_test.pl
+msk009		ARMASTER		Master_Session/MSK009		run_test.pl
+msk010		ARMASTER		Master_Session/MSK010		run_test.pl
+msk011		ARMASTER		Master_Session/MSK011		run_test.pl
+msk012		ARMASTER		Master_Session/MSK012		run_test.pl
+msk013		ARMASTER		Master_Session/MSK013		run_test.pl
+msk014		ARMASTER		Master_Session/MSK014		run_test.pl
+msk015		ARMASTER		Master_Session/MSK015		run_test.pl
+msk016		ARMASTER		Master_Session/MSK016		run_test.pl
+msk017		ARMASTER		Master_Session/MSK017		run_test.pl
+msk018		ARMASTER		Master_Session/MSK018		run_test.pl
+msk019		ARMASTER		Master_Session/MSK019		run_test.pl
+msk020		ARMASTER		Master_Session/MSK020		run_test.pl
+msk021		ARMASTER		Master_Session/MSK021		run_test.pl
+msk022		ARMASTER		Master_Session/MSK022		run_test.pl
+msk023		ARMASTER		Master_Session/MSK023		run_test.pl
+#-- &&&
+
+duk001		ARDUK		DUKPT/DUK001			run_test.pl
+duk002		ARDUK		DUKPT/DUK002			run_test.pl
+duk003		ARDUK		DUKPT/DUK003			run_test.pl
+duk004		ARDUK		DUKPT/DUK004			run_test.pl
+duk005		ARDUK		DUKPT/DUK005			run_test.pl
+duk006		ARDUK		DUKPT/DUK006			run_test.pl
+duk007		ARDUK		DUKPT/DUK007			run_test.pl
+duk008		ARDUK		DUKPT/DUK008			run_test.pl
+duk009		ARDUK		DUKPT/DUK009			run_test.pl
+duk010		ARDUK		DUKPT/DUK010			run_test.pl
+duk011		ARDUK		DUKPT/DUK011			run_test.pl
+duk012		ARDUK		DUKPT/DUK012			run_test.pl
+-- duk013: load dukpt 
+duk013		ARDUK		DUKPT/DUK013			run_test.pl
+duk014		ARDUK		DUKPT/DUK014			run_test.pl
+duk015		ARDUK		DUKPT/DUK015			run_test.pl
+duk016		ARDUK		DUKPT/DUK016			run_test.pl
+duk017		ARDUK		DUKPT/DUK017			run_test.pl
+-- duk018: dukpt pin entry sucessful test
+duk018		ARDUK		DUKPT/DUK018			run_test.pl
+duk018-01	ARDUK1		DUKPT/DUK018-01			run_test.pl
+duk018-02	ARDUK1		DUKPT/DUK018-02			run_test.pl
+duk018-03	ARDUK1		DUKPT/DUK018-03			run_test.pl
+duk018-04	ARDUK1		DUKPT/DUK018-04			run_test.pl
+duk019		ARDUK		DUKPT/DUK019			run_test.pl
+duk020		ARDUK		DUKPT/DUK020			run_test.pl
+duk021		ARDUK		DUKPT/DUK021			run_test.pl
+duk022		ARDUK		DUKPT/DUK022			run_test.pl
+
+AMT001		ARAMT2	        Amount_prompt/AMT001	        run_test.pl
+AMT001-01	ARAMT2		Amount_prompt/AMT001-01		run_test.pl
+AMT001-02	ARAMT2		Amount_prompt/AMT001-02		run_test.pl
+AMT001-03	ARAMT2		Amount_prompt/AMT001-03		run_test.pl
+AMT002		ARAMT2		Amount_prompt/AMT002		run_test.pl
+AMT003		ARAMT2		Amount_prompt/AMT003		run_test.pl
+AMT004		ARAMT2		Amount_prompt/AMT004		run_test.pl
+AMT005		ARAMT2		Amount_prompt/AMT005		run_test.pl
+AMT006		ARAMT2		Amount_prompt/AMT006		run_test.pl
+AMT007		ARAMT2		Amount_prompt/AMT007		run_test.pl
+AMT008		ARAMT2		Amount_prompt/AMT008		run_test.pl
+
+BL000100	ARBootLoader	Bootloader/BL000100		run_test.pl
+BL000101	ARBootLoader	Bootloader/BL000101		run_test.pl
+BL000200	ARBootLoader	Bootloader/BL000200		run_test.pl
+BL000300	ARBootLoader	Bootloader/BL000300		run_test.pl
+BL000301	ARBootLoader	Bootloader/BL000301		run_test.pl
+BL000302	ARBootLoader	Bootloader/BL000302		run_test.pl
+BL000400	ARBootLoader	Bootloader/BL000400		run_test.pl
+BL000500	ARBootLoader	Bootloader/BL000500		run_test.pl
+BL000501	ARBootLoader	Bootloader/BL000501		run_test.pl
+
+
+SGS001          ARSetSerial     8xxx_SetGet_Serial/SGS001       run_test.pl  
+
+*Run this group seperately
+VSF-1086        VSFDefects      8xxx-VSFDefects/VSF-1086        run_test.pl
+VSF-1112        VSFDefects      8xxx-VSFDefects/VSF-1112        run_test.pl
+VSF-1113        VSFDefects      8xxx-VSFDefects/VSF-1113        run_test.pl
+VSF-1308        VSFDefects      8xxx-VSFDefects/VSF-1308        run_test.pl
+VSF-1446        VSFDefects      8xxx-VSFDefects/VSF-1446        run_test.pl
+VSF-1514        VSFDefects      8xxx-VSFDefects/VSF-1514        run_test.pl
+VSF-1666        VSFDefects      8xxx-VSFDefects/VSF-1666        run_test.pl 
+VSF-1670        VSFDefects      8xxx-VSFDefects/VSF-1670        run_test.pl  
+VSF-1752        VSFDefects      8xxx-VSFDefects/VSF-1752        run_test.pl  
+VSF-1771        VSFDefects      8xxx-VSFDefects/VSF-1771        run_test.pl 
+VSF-1774        VSFDefects      8xxx-VSFDefects/VSF-1774        run_test.pl  
+VSF-1795        VSFDefects      8xxx-VSFDefects\VSF-1795	run_test.pl
+VSF-1853        VSFDefects      8xxx-VSFDefects/VSF-1853        run_test.pl  
+VSF-1864        VSFDefects      8xxx-VSFDefects\VSF-1864	run_test.pl 
+VSF-1881        VSFDefects      8xxx-VSFDefects\VSF-1881	run_test.pl
+VSF-1883        VSFDefects      8xxx-VSFDefects\VSF-1883	run_test.pl
+VSF-1895        VSFDefects      8xxx-VSFDefects\VSF-1895	run_test.pl 
+
+
+LDIMG001        ARLDIMG         8xxx_load_images/LDIMG001       run_test.pl
+LDIMG002        ARLDIMG         8xxx_load_images/LDIMG002       run_test.pl
+LDIMG003        ARLDIMG         8xxx_load_images/LDIMG003       run_test.pl
+LDIMG004        ARLDIMG         8xxx_load_images/LDIMG004       run_test.pl
+
+ULTR001         Ultra    	UltraLight/ULTR001              run_test.pl
+ULTR002         Ultra           UltraLight/ULTR002              run_test.pl
+ULTR003         Ultra           UltraLight/ULTR003              run_test.pl
+ULTR004         Ultra           UltraLight/ULTR004              run_test.pl
+
+SPP001          ARProp          8XXX_Set_Property/SPP001        run_test.pl
+SPP002          ARProp          8XXX_Set_Property/SPP002        run_test.pl
+SPP003          ARProp          8XXX_Set_Property/SPP003        run_test.pl
+SPP004          ARProp          8XXX_Set_Property/SPP004        run_test.pl                     
+                       
+CHKD001         ARCHKD          8xxx_checkDefault/CHKD001       run_test.pl
+CHKD002         ARCHKD          8xxx_checkDefault/CHKD002       run_test.pl
+
+VALIDA001       ARVALID         ARcmdValidation/VALIDA001       run_test.pl
+VALIDA002       ARVALID         ARcmdValidation/VALIDA002       run_test.pl
+
+# ----------------- Common Command Both AR & GR--------------------------
+PG001           Info        PING_series/PG001                 run_test.pl
+PG002           Info        PING_series/PG002                 run_test.pl
+PG003           Info        PING_series/PG003                 run_test.pl
+PG004           Info        PING_series/PG004                 run_test.pl
+PG005           Info        PING_series/PG005                 run_test.pl
+PG006           Info        PING_series/PG006                 run_test.pl
+
+# -----------------------------------------------------------------------
+
+Note: RTC001 to 003 are for IDG Protocol 1  
+and 004 to 006 are for Protocol 2
+RTC004 		RTC2    RTC/RTC004	run_test.pl
+RTC005 		RTC2	RTC/RTC005 	run_test.pl
+RTC006 		RTC2	RTC/RTC006 	run_test.pl
+
+#------------------------------------------------------------------------
+
+BR001		SfullAuton 	Baud_Rate/BR001			run_test.pl
+BR002		SfullAuton 	Baud_Rate/BR002			run_test.pl
+BR003		SfullAuton 	Baud_Rate/BR003			run_test.pl
+BR004		SfullAuton 	Baud_Rate/BR004			run_test.pl
+BR005		SfullAuton 	Baud_Rate/BR005			run_test.pl 
+BR008		SfullAuton	Baud_Rate/BR008		        run_test.pl
+
+# -- &&& works for GR and AR with some differences as noted below.
+CA001		FullAuto		CA_Public_Key/CA001	run_test.pl
+CA002		FullAuto		CA_Public_Key/CA002	run_test.pl
+-- Note: CA004 failes on AR due to get different status code compared with GR (07 vs 06)
+CA004		FullAuto		CA_Public_Key/CA004	run_test.pl
+CA005		FullAuto		CA_Public_Key/CA005	run_test.pl
+CA006		FullAuto		CA_Public_Key/CA006	run_test.pl
+CA007		FullAuto		CA_Public_Key/CA007	run_test.pl
+CA008		FullAuto		CA_Public_Key/CA008	run_test.pl
+-- Note: CA009 failes on AR due to get different status code compared with GR (05 vs 07)
+CA009		FullAuto		CA_Public_Key/CA009	run_test.pl
+CA010		FullAuto		CA_Public_Key/CA010	run_test.pl
+CA011		FullAuto		CA_Public_Key/CA011	run_test.pl
+CA011_1		FullAuto		CA_Public_Key/CA011_1	run_test.pl
+CA012		FullAuto		CA_Public_Key/CA012	run_test.pl
+CA013		FullAuto		CA_Public_Key/CA013	run_test.pl
+CA014		FullAuto		CA_Public_Key/CA014	run_test.pl
+CA016		FullAuto		CA_Public_Key/CA016	run_test.pl
+-- Note: CA017 fails on AR due to buffer is not overflowed (GR return status code 0Dh)
+-- Need further check the AID mngmnt diff btw AR and GR
+CA017		FullAuto		CA_Public_Key/CA017	run_test.pl
+CA018		FullAuto		CA_Public_Key/CA018	run_test.pl
+CA019		FullAuto		CA_Public_Key/CA019	run_test.pl
+CA020		FullAuto		CA_Public_Key/CA020	run_test.pl
+CA020_1		FullAuto		CA_Public_Key/CA020_1	run_test.pl
+CA021		FullAuto		CA_Public_Key/CA021	run_test.pl
+CA022		FullAuto		CA_Public_Key/CA022	run_test.pl
+CA023		FullAuto		CA_Public_Key/CA023	run_test.pl
+CA024		FullAuto		CA_Public_Key/CA024	run_test.pl
+-- Note: CA025/026/027 will fail on GR, they are used for AR
+CA025		FullAuto		CA_Public_Key/CA025	run_test.pl
+CA026		FullAuto		CA_Public_Key/CA026	run_test.pl
+CA027		FullAuto		CA_Public_Key/CA027	run_test.pl
+CA028		FullAuto		CA_Public_Key/CA028	run_test.pl
+CA029		FullAuto		CA_Public_Key/CA029	run_test.pl
+
+# -- verify card type only
+CDTP001		CardType		CardType/CDTP001	run_test.pl
+CDTP002		CardType		CardType/CDTP002	run_test.pl
+CDTP003		CardType		CardType/CDTP003	run_test.pl
+CDTP004		CardType		CardType/CDTP004	run_test.pl
+CDTP005		CardType		CardType/CDTP005	run_test.pl
+
+#-- &&& use VIVO W001 card for PassT test -----
+#--- PT00100: test cmd 2c-01, 28-01
+PT00100			PassT		Pass_Through/PT00100	run_test.pl
+#-- PT00200: test 0a-02 (LED)
+PT00200			PassT		Pass_Through/PT00200	run_test.pl
+#-- PT00300: test 0b-02 (Buzzer)
+PT00300			PassT		Pass_Through/PT00300	run_test.pl
+#-- PT00400: test 2c-02 (Buzzer)
+PT00400			PassT		Pass_Through/PT00400	run_test.pl
+PT00500			PassT		Pass_Through/PT00500	run_test.pl
+-- Note: PT00600 fails on AR due to 2c-02 returns diffternt status code compared to GR (0bh vs 0ch)
+PT00600			PassT		Pass_Through/PT00600	run_test.pl
+PT00800			PassT		Pass_Through/PT00800	run_test.pl
+PT01200			PassT		Pass_Through/PT01200	run_test.pl
+PT01300			PassT		Pass_Through/PT01300	run_test.pl
+PT01301			PassT		Pass_Through/PT01301	run_test.pl
+PT01400			PassT		Pass_Through/PT01400	run_test.pl
+PT01500			PassT		Pass_Through/PT01500	run_test.pl
+PT01501			PassT		Pass_Through/PT01501	run_test.pl
+PT01600			PassT		Pass_Through/PT01600	run_test.pl
+PT01700			PassT		Pass_Through/PT01700	run_test.pl
+PT01800			PassT		Pass_Through/PT01800	run_test.pl
+PT01900			PassT		Pass_Through/PT01900	run_test.pl
+PT02000			PassT		Pass_Through/PT02000	run_test.pl
+PT02100			PassT		Pass_Through/PT02100	run_test.pl
+PT02200			PassT		Pass_Through/PT02200	run_test.pl
+PT02300			PassT		Pass_Through/PT02300	run_test.pl
+PT02400			PassT		Pass_Through/PT02400	run_test.pl
+PT02500			PassT		Pass_Through/PT02500	run_test.pl
+PT02600			PassT		Pass_Through/PT02600	run_test.pl
+PT02700			PassT		Pass_Through/PT02700	run_test.pl
+PT02800			PassT		Pass_Through/PT02800	run_test.pl
+PT02900			PassT		Pass_Through/PT02900	run_test.pl
+PT03000			PassT		Pass_Through/PT03000	run_test.pl 
+PT03001			PassT		Pass_Through/PT03001	run_test.pl
+PT03002			PassT		Pass_Through/PT03002	run_test.pl
+PT03003			PassT		Pass_Through/PT03003	run_test.pl
+PT03004			PassT		Pass_Through/PT03004	run_test.pl
+PT03005			PassT		Pass_Through/PT03005	run_test.pl
+PT03100			PassT		Pass_Through/PT03100	run_test.pl
+PT03200			PassT		Pass_Through/PT03200	run_test.pl
+PT03300			PassT		Pass_Through/PT03300	run_test.pl
+PT03400			PassT		Pass_Through/PT03400	run_test.pl
+PT03500			PassT		Pass_Through/PT03500	run_test.pl
+PT03600			PassT		Pass_Through/PT03600	run_test.pl
+PT03700			PassT		Pass_Through/PT03700	run_test.pl
+PT03800			PassT		Pass_Through/PT03800	run_test.pl
+PT03900			PassT		Pass_Through/PT03900	run_test.pl
+PT04000			PassT		Pass_Through/PT04000	run_test.pl
+PT04001			PassT		Pass_Through/PT04001	run_test.pl
+PT04002			PassT		Pass_Through/PT04002	run_test.pl
+PT04100		        PassT		Pass_Through/PT04100	run_test.pl
+PT04200		        PassT		Pass_Through/PT04200	run_test.pl
+PT04300			PassT		Pass_Through/PT04300	run_test.pl
+#--- Above PT tests mostly do 0a-02, 0b-01, 0b-02 tests w/ a few 2c-01, 2c-02, and 28-01 tests  
+PT04301			PassT		Pass_Through/PT04301	run_test.pl
+PT04400			PassT		Pass_Through/PT04400	run_test.pl
+PT04401			PassT		Pass_Through/PT04401	run_test.pl
+PT04500			PassT		Pass_Through/PT04500	run_test.pl
+#-- Note: PT05000, 05101, fails due to return different status code compared to GR (0bh vs 0ch)
+PT05000			PassT		Pass_Through/PT05000	run_test.pl
+PT05100			PassT		Pass_Through/PT05100	run_test.pl
+PT05101			PassT		Pass_Through/PT05101	run_test.pl
+#-- Note: PT05102 fails due to return wrong status code (08h expected instead of 0ah)
+PT05102			PassT		Pass_Through/PT05102	run_test.pl
+PT05103			PassT		Pass_Through/PT05103	run_test.pl
+PT05104			PassT		Pass_Through/PT05104	run_test.pl
+PT05105			PassT		Pass_Through/PT05105	run_test.pl
+PT05106			PassT		Pass_Through/PT05106	run_test.pl
+PT05107			PassT		Pass_Through/PT05107	run_test.pl
+PT05108			PassT		Pass_Through/PT05108	run_test.pl
+PT05109			PassT		Pass_Through/PT05109	run_test.pl
+PT05110			PassT		Pass_Through/PT05110	run_test.pl
+PT05111			PassT		Pass_Through/PT05111	run_test.pl
+PT05112			PassT		Pass_Through/PT05112	run_test.pl
+PT05113			PassT		Pass_Through/PT05113	run_test.pl
+PT05114			PassT		Pass_Through/PT05114	run_test.pl
+
+# -- Refer to test group PassT1 for more pass through tests (On going)
+
+
+VL001        Vend        Vend/VL001                 		run_test.pl
+VL002        Vend        Vend/VL002                  		run_test.pl
+VL003        Vend        Vend/VL003                  		run_test.pl
+VL004        Vend        Vend/VL004                  		run_test.pl
+VL005        Vend        Vend/VL005                  		run_test.pl
+VL006        Vend        Vend/VL006                  		run_test.pl
+VL007        Vend        Vend/VL007                  		run_test.pl
+VL008        Vend        Vend/VL008                  		run_test.pl
+VL009        Vend        Vend/VL009                  		run_test.pl
+VL010        Vend        Vend/VL010                  		run_test.pl
+VL011        Vend        Vend/VL011                  		run_test.pl
+# -- VL012 to VL020 are not for Vend3
+VL012        Vend        Vend/VL012                  		run_test.pl
+VL013        Vend        Vend/VL013                  		run_test.pl
+VL014        Vend        Vend/VL014                  		run_test.pl
+VL015        Vend        Vend/VL015                  		run_test.pl
+VL016        Vend        Vend/VL016                  		run_test.pl
+VL017        Vend        Vend/VL017                  		run_test.pl
+VL018        Vend        Vend/VL018                  		run_test.pl
+VL019        Vend        Vend/VL019                  		run_test.pl
+VL020        Vend        Vend/VL020                  		run_test.pl
+VL021        Vend        Vend/VL021                  		run_test.pl
+
+-------
+SL001        SL_Series        SL_series/SL001                  run_test.pl
+#--SL002        SL_Series        SL_series/SL002                  run_test.pl
+#--SL003        SL_Series        SL_series/SL003                  run_test.pl
+SL004        SL_Series        SL_series/SL004                  run_test.pl
+SL005        SL_Series        SL_series/SL005                  run_test.pl
+#--SL006        SL_Series        SL_series/SL006                  run_test.pl
+SL007        SL_Series        SL_series/SL007                  run_test.pl
+SL008        SL_Series        SL_series/SL008                  run_test.pl
+#--SL009        SL_Series        SL_series/SL009                  run_test.pl
+SL010        SL_Series        SL_series/SL010                  run_test.pl
+SL011        SL_Series        SL_series/SL011                  run_test.pl
+#--SL012        SL_Series        SL_series/SL012                  run_test.pl
+SL013        SL_Series        SL_series/SL013                  run_test.pl
+SL014        SL_Series        SL_series/SL014                  run_test.pl
+#--SL015        SL_Series        SL_series/SL015                  run_test.pl
+#--SL016        SL_Series        SL_series/SL016                  run_test.pl
+SL017        SL_Series        SL_series/SL017                  run_test.pl
+SL018        SL_Series        SL_series/SL018                  run_test.pl
+SL019        SL_Series        SL_series/SL019                  run_test.pl
+#--SL020        SL_Series        SL_series/SL020                  run_test.pl
+#--SL021        SL_Series        SL_series/SL021                  run_test.pl
+SL022        SL_Series        SL_series/SL022                  run_test.pl
+SL023        SL_Series        SL_series/SL023                  run_test.pl
+#--SL024        SL_Series        SL_series/SL024                  run_test.pl
+SL025        SL_Series        SL_series/SL025                  run_test.pl
+SL026        SL_Series        SL_series/SL026                  run_test.pl
+#--SL027        SL_Series        SL_series/SL027                  run_test.pl
+SL028        SL_Series        SL_series/SL028                  run_test.pl
+SL029        SL_Series        SL_series/SL029                  run_test.pl
+#--SL030        SL_Series        SL_series/SL030                  run_test.pl
+SL031        SL_Series        SL_series/SL031                  run_test.pl
+SL032        SL_Series        SL_series/SL032                  run_test.pl
+#--SL033        SL_Series        SL_series/SL033                  run_test.pl
+#--SL034        SL_Series        SL_series/SL034                  run_test.pl
+SL035        SL_Series        SL_series/SL035                  run_test.pl
+SL036        SL_Series        SL_series/SL036                  run_test.pl
+#--SL037        SL_Series        SL_series/SL037                  run_test.pl
+-SL038-43 Moved to Gr Only Per Hsien 5-18-11
+-- &&&
+
+SGP001     Set_Parameter		8xxx_Set_Parameter/SGP001	 run_test.pl
+SGP002     Set_Parameter		8xxx_Set_Parameter/SGP002	 run_test.pl
+SGP003     Set_Parameter		8xxx_Set_Parameter/SGP003	 run_test.pl
+SGP004     Set_Parameter		8xxx_Set_Parameter/SGP004	 run_test.pl
+SGP005     Set_Parameter		8xxx_Set_Parameter/SGP005	 run_test.pl
+SGP006     Set_Parameter		8xxx_Set_Parameter/SGP006	 run_test.pl
+SGP007     Set_Parameter		8xxx_Set_Parameter/SGP007	 run_test.pl
+SGP008     Set_Parameter		8xxx_Set_Parameter/SGP008	 run_test.pl
+SGP009     Set_Parameter		8xxx_Set_Parameter/SGP009	 run_test.pl
+SGP010     Set_Parameter		8xxx_Set_Parameter/SGP010	 run_test.pl
+SGP011     Set_Parameter		8xxx_Set_Parameter/SGP011	 run_test.pl
+SGP012     Set_Parameter		8xxx_Set_Parameter/SGP012	 run_test.pl
+SGP013     Set_Parameter		8xxx_Set_Parameter/SGP013	 run_test.pl
+SGP014     Set_Parameter		8xxx_Set_Parameter/SGP014	 run_test.pl
+SGP015     Set_Parameter		8xxx_Set_Parameter/SGP015	 run_test.pl
+SGP016     Set_Parameter		8xxx_Set_Parameter/SGP016	 run_test.pl
+SGP017     Set_Parameter		8xxx_Set_Parameter/SGP017	 run_test.pl
+SGP017-01  Set_Parameter		8xxx_Set_Parameter/SGP017-01	 run_test.pl
+SGP017-02  Set_Parameter		8xxx_Set_Parameter/SGP017-02	 run_test.pl
+SGP017-03  Set_Parameter		8xxx_Set_Parameter/SGP017-03	 run_test.pl
+SGP017-04  Set_Parameter		8xxx_Set_Parameter/SGP017-04	 run_test.pl
+-- Note: SGP018 fails on AR due to AR does not support Burst mode Tag FFF7
+SGP018     Set_Parameter		8xxx_Set_Parameter/SGP018	 run_test.pl
+SGP019     Set_Parameter		8xxx_Set_Parameter/SGP019	 run_test.pl
+SGP020     Set_Parameter		8xxx_Set_Parameter/SGP020	 run_test.pl
+SGP021     Set_Parameter		8xxx_Set_Parameter/SGP021	 run_test.pl
+SGP022     Set_Parameter		8xxx_Set_Parameter/SGP022	 run_test.pl
+SGP023     Set_Parameter		8xxx_Set_Parameter/SGP023	 run_test.pl
+SGP024     Set_Parameter		8xxx_Set_Parameter/SGP024	 run_test.pl
+SGP025     Set_Parameter		8xxx_Set_Parameter/SGP025	 run_test.pl
+SGP026     Set_Parameter		8xxx_Set_Parameter/SGP026	 run_test.pl
+SGP027     Set_Parameter		8xxx_Set_Parameter/SGP027	 run_test.pl
+SGP028     Set_Parameter		8xxx_Set_Parameter/SGP028	 run_test.pl
+SGP029     Set_Parameter		8xxx_Set_Parameter/SGP029	 run_test.pl
+SGP030     Set_Parameter		8xxx_Set_Parameter/SGP030	 run_test.pl
+SGP031     Set_Parameter		8xxx_Set_Parameter/SGP031	 run_test.pl
+SGP032     Set_Parameter		8xxx_Set_Parameter/SGP032	 run_test.pl
+SGP033     Set_Parameter		8xxx_Set_Parameter/SGP033	 run_test.pl
+SGP034     Set_Parameter		8xxx_Set_Parameter/SGP034	 run_test.pl
+
+-- Note: SGP035 fails on AR due to tag 9F53 is not returned (Do not care per Dung) Good for GR
+-- SGP035  Set_Parameter		8xxx_Set_Parameter/SGP035	 run_test.pl
+-- Note: SGP036 fails on AR due to tag 9f6d value can not be changed by setting param (always 00 01)
+-- SGP036  Set_Parameter		8xxx_Set_Parameter/SGP036	 run_test.pl
+SGP037     Set_Parameter		8xxx_Set_Parameter/SGP037	 run_test.pl
+SGP038     Set_Parameter		8xxx_Set_Parameter/SGP038	 run_test.pl
+-- Note: SGP039 may fail on EB7 GR1.2.1 WestPac due to differnet config per Hsien
+-- Note: SGP039 fails on AR due to
+-- 1) AR does not support burst mode, see tag fff7; 
+-- 2) AR does not support other languages (English only), see tag fffb; 
+-- 3) AR doest not support VivoTech UI scheme, see tag fff8
+SGP039    Set_Parameter			8xxx_Set_Parameter/SGP039	 run_test.pl
+SGP040    Set_Parameter			8xxx_Set_Parameter/SGP040	 run_test.pl
+SGP041    Set_Parameter			8xxx_Set_Parameter/SGP041	 run_test.pl
+SGP041-01 Set_Parameter			8xxx_Set_Parameter/SGP041-01	 run_test.pl
+SGP041-02 Set_Parameter			8xxx_Set_Parameter/SGP041-02	 run_test.pl
+SGP041-03 Set_Parameter			8xxx_Set_Parameter/SGP041-03	 run_test.pl
+SGP041-04 Set_Parameter			8xxx_Set_Parameter/SGP041-04	 run_test.pl
+SGP041-05 Set_Parameter			8xxx_Set_Parameter/SGP041-05	 run_test.pl
+SGP042    Set_Parameter			8xxx_Set_Parameter/SGP042	 run_test.pl
+
+-- &&& (GR&AR)
+-- SBL001 - 009 test buzzers
+SBL001     Set_Buzzer_LED		Set_Buzzer_LED/SBL001	 run_test.pl
+SBL002     Set_Buzzer_LED		Set_Buzzer_LED/SBL002	 run_test.pl
+SBL003     Set_Buzzer_LED		Set_Buzzer_LED/SBL003	 run_test.pl
+SBL004     Set_Buzzer_LED		Set_Buzzer_LED/SBL004	 run_test.pl
+SBL005     Set_Buzzer_LED		Set_Buzzer_LED/SBL005	 run_test.pl
+SBL006     Set_Buzzer_LED		Set_Buzzer_LED/SBL006	 run_test.pl
+SBL007     Set_Buzzer_LED		Set_Buzzer_LED/SBL007	 run_test.pl
+SBL008     Set_Buzzer_LED		Set_Buzzer_LED/SBL008	 run_test.pl
+SBL009     Set_Buzzer_LED		Set_Buzzer_LED/SBL009	 run_test.pl
+-- SBL010 - 018 test LED and buzzer
+SBL010     Set_Buzzer_LED		Set_Buzzer_LED/SBL010	 run_test.pl
+SBL011     Set_Buzzer_LED		Set_Buzzer_LED/SBL011	 run_test.pl
+SBL012     Set_Buzzer_LED		Set_Buzzer_LED/SBL012	 run_test.pl
+SBL013     Set_Buzzer_LED		Set_Buzzer_LED/SBL013	 run_test.pl
+SBL014     Set_Buzzer_LED		Set_Buzzer_LED/SBL014	 run_test.pl
+SBL015     Set_Buzzer_LED		Set_Buzzer_LED/SBL015	 run_test.pl
+SBL016     Set_Buzzer_LED		Set_Buzzer_LED/SBL016	 run_test.pl
+SBL017     Set_Buzzer_LED		Set_Buzzer_LED/SBL017	 run_test.pl
+SBL018     Set_Buzzer_LED		Set_Buzzer_LED/SBL018	 run_test.pl
+-- SBL019 - 023 test LED blinking. Failed due to LED blinking is longer supported.
+#-- SBL019     Set_Buzzer_LED		Set_Buzzer_LED/SBL019	 run_test.pl
+#-- SBL020     Set_Buzzer_LED		Set_Buzzer_LED/SBL020	 run_test.pl
+#-- SBL021     Set_Buzzer_LED		Set_Buzzer_LED/SBL021	 run_test.pl
+#-- SBL022     Set_Buzzer_LED		Set_Buzzer_LED/SBL022	 run_test.pl
+#-- SBL023     Set_Buzzer_LED		Set_Buzzer_LED/SBL023	 run_test.pl
+#-----
+
+#--- Mifare 4K
+MIF001		Mifare4k		MiFare/MFF001	       	run_test.pl
+MIF002		Mifare4k		MiFare/MFF002	       	run_test.pl
+MF000100-4K	Mifare4k		Mifare/MF000100-4K	run_test.pl
+MF000300-4K	Mifare4k		Mifare/MF000300-4K	run_test.pl
+MF000400-4K	Mifare4k		Mifare/MF000400-4K	run_test.pl
+MF000401-4K	Mifare4k		Mifare/MF000401-4K	run_test.pl
+MF000402-4K	Mifare4k		Mifare/MF000402-4K	run_test.pl
+MF000403-4K	Mifare4k		Mifare/MF000403-4K	run_test.pl
+MF000404-4K	Mifare4k		Mifare/MF000404-4K	run_test.pl
+MF000405-4K	Mifare4k		Mifare/MF000405-4K	run_test.pl
+
+#-----
+MFPX001 MPFX			MFPlusX/MFPX001		run_test.pl
+MFPX101 MPFX			MFPlusX/MFPX101		run_test.pl
+
+
+#-ALL FAIL Except, PAL010, PAL011, PAL012, PAL013*	
+PAL001	PAL  PAL/PAL001		run_test.pl
+PAL002	PAL  PAL/PAL002		run_test.pl
+PAL003	PAL  PAL/PAL003		run_test.pl
+PAL004	PAL  PAL/PAL004		run_test.pl
+PAL005	PAL  PAL/PAL005		run_test.pl
+PAL006	PAL  PAL/PAL006		run_test.pl
+PAL007	PAL  PAL/PAL007		run_test.pl
+PAL008	PAL  PAL/PAL008		run_test.pl
+PAL009	PAL  PAL/PAL009		run_test.pl
+PAL010	PAL  PAL/PAL010		run_test.pl
+PAL011	PAL  PAL/PAL011		run_test.pl
+PAL012	PAL  PAL/PAL012		run_test.pl
+PAL013	PAL  PAL/PAL013		run_test.pl
+PAL014	PAL  PAL/PAL014		run_test.pl
+PAL016	PAL  PAL/PAL016		run_test.pl
+PAL017	PAL  PAL/PAL017		run_test.pl
+PAL018	PAL  PAL/PAL018		run_test.pl
+PAL019	PAL  PAL/PAL019		run_test.pl
+PAL020	PAL  PAL/PAL020		run_test.pl
+PAL021	PAL  PAL/PAL021		run_test.pl
+PAL022	PAL  PAL/PAL022		run_test.pl
+PAL023	PAL  PAL/PAL023		run_test.pl
+PAL024	PAL  PAL/PAL024		run_test.pl
+PAL025	PAL  PAL/PAL025		run_test.pl
+PAL026	PAL  PAL/PAL026		run_test.pl
+PAL027	PAL  PAL/PAL027		run_test.pl
+PAL028	PAL  PAL/PAL028		run_test.pl
+PAL029	PAL  PAL/PAL029		run_test.pl
+PAL030	PAL  PAL/PAL030		run_test.pl
+PAL031	PAL  PAL/PAL031		run_test.pl
+PAL032	PAL  PAL/PAL032		run_test.pl
+PAL033	PAL  PAL/PAL033		run_test.pl
+PAL034	PAL  PAL/PAL034		run_test.pl
+PAL035	PAL  PAL/PAL035		run_test.pl
+PAL036	PAL  PAL/PAL036		run_test.pl
+PAL037	PAL  PAL/PAL037		run_test.pl
+PAL038	PAL  PAL/PAL038		run_test.pl
+PAL039	PAL  PAL/PAL039		run_test.pl
+PAL040	PAL  PAL/PAL040		run_test.pl
+PAL041	PAL  PAL/PAL041		run_test.pl
+PAL042	PAL  PAL/PAL042		run_test.pl
+PAL043	PAL  PAL/PAL043		run_test.pl
+PAL044	PAL  PAL/PAL044		run_test.pl
+PAL045	PAL  PAL/PAL045		run_test.pl
+PAL046	PAL  PAL/PAL046		run_test.pl
+PAL047	PAL  PAL/PAL047		run_test.pl
+PAL048  PAL  PAL/PAL048		run_test.pl
+------
+
+
+Type7_CEPAS  Cepas  Type7_CEPAS/Type7_CEPAS   run_test.pl 
+Type7_CEPAS1 Cepas  Type7_CEPAS/Type7_CEPAS1  run_test.pl 
+Type7_CEPAS2 Cepas  Type7_CEPAS/Type7_CEPAS2  run_test.pl 
+Type7_CEPAS3 Cepas  Type7_CEPAS/Type7_CEPAS3  run_test.pl 
+Type7_CEPAS4 Cepas  Type7_CEPAS/Type7_CEPAS4  run_test.pl 
+Type7_CEPAS5 Cepas  Type7_CEPAS/Type7_CEPAS5  run_test.pl
+------- 
+
+
+EXP001		EXP	Decimal_Exp/EXP001  	run_test.pl
+EXP002		EXP	Decimal_Exp/EXP002  	run_test.pl
+EXP003		EXP	Decimal_Exp/EXP003  	run_test.pl
+EXP004		EXP	Decimal_Exp/EXP004  	run_test.pl
+EXP005		EXP	Decimal_Exp/EXP005  	run_test.pl
+EXP006		EXP	Decimal_Exp/EXP006  	run_test.pl
+EXP007		EXP	Decimal_Exp/EXP007  	run_test.pl
+------
+
+KEY001      Wallet     ViVOwallet/KEY001     run_test.pl
+KEY002      Wallet     ViVOwallet/KEY002     run_test.pl
+KEY003      Wallet     ViVOwallet/KEY003     run_test.pl
+KEY004      Wallet     ViVOwallet/KEY004     run_test.pl
+KEY005      Wallet     ViVOwallet/KEY005     run_test.pl
+KEY006      Wallet     ViVOwallet/KEY006     run_test.pl
+KEY007      Wallet     ViVOwallet/KEY007     run_test.pl
+
+
+MAG001 		MAG	MagStripe/MAG001	run_test.pl
+MAG011 		MAG	MagStripe/MAG011	run_test.pl
+MAG012 		MAG	MagStripe/MAG012	run_test.pl
+MAG013 		MAG	MagStripe/MAG013	run_test.pl
+
+# GMAD000 to GMAD042 run from ISO On
+GMD000      GMAD GMAD/GMD000      run_test.pl
+GMD001      GMAD GMAD/GMD001      run_test.pl
+GMD002      GMAD GMAD/GMD002      run_test.pl
+GMD003      GMAD GMAD/GMD003      run_test.pl
+GMD004      GMAD GMAD/GMD004      run_test.pl
+GMD005      GMAD GMAD/GMD005      run_test.pl
+GMD006      GMAD GMAD/GMD006      run_test.pl
+GMD007      GMAD GMAD/GMD007      run_test.pl
+GMD008      GMAD GMAD/GMD008      run_test.pl
+GMD009      GMAD GMAD/GMD009      run_test.pl
+GMD010      GMAD GMAD/GMD010      run_test.pl
+GMD011      GMAD GMAD/GMD011      run_test.pl
+GMD012      GMAD GMAD/GMD012      run_test.pl
+GMD013      GMAD GMAD/GMD013      run_test.pl
+GMD014      GMAD GMAD/GMD014      run_test.pl
+GMD015      GMAD GMAD/GMD015      run_test.pl
+GMD016      GMAD GMAD/GMD016      run_test.pl
+GMD017      GMAD GMAD/GMD017      run_test.pl
+GMD018      GMAD GMAD/GMD018      run_test.pl
+GMD019      GMAD GMAD/GMD019      run_test.pl
+GMD020      GMAD GMAD/GMD020      run_test.pl
+GMD021      GMAD GMAD/GMD021      run_test.pl
+GMD022      GMAD GMAD/GMD022      run_test.pl
+GMD023      GMAD GMAD/GMD023      run_test.pl
+GMD024      GMAD GMAD/GMD024      run_test.pl
+GMD025      GMAD GMAD/GMD025      run_test.pl
+GMD026      GMAD GMAD/GMD026      run_test.pl
+GMD027      GMAD GMAD/GMD027      run_test.pl
+GMD028      GMAD GMAD/GMD028      run_test.pl
+GMD029      GMAD GMAD/GMD029      run_test.pl
+GMD030      GMAD GMAD/GMD030      run_test.pl
+GMD031      GMAD GMAD/GMD031      run_test.pl
+GMD032      GMAD GMAD/GMD032      run_test.pl
+GMD033      GMAD GMAD/GMD033      run_test.pl
+GMD034      GMAD GMAD/GMD034      run_test.pl
+GMD035      GMAD GMAD/GMD035      run_test.pl
+GMD036      GMAD GMAD/GMD036      run_test.pl
+GMD037      GMAD GMAD/GMD037      run_test.pl
+GMD038      GMAD GMAD/GMD038      run_test.pl
+GMD039      GMAD GMAD/GMD039      run_test.pl
+GMD040      GMAD GMAD/GMD040      run_test.pl
+GMD041      GMAD GMAD/GMD041      run_test.pl
+GMD042      GMAD GMAD/GMD042      run_test.pl
+
+#GMAD001-1 to GMAD040-1 run from ISO Off
+GMD001-1      GMAD1 GMAD/GMD001-1      run_test.pl
+GMD002-1      GMAD1 GMAD/GMD002-1      run_test.pl
+GMD003-1      GMAD1 GMAD/GMD003-1      run_test.pl
+GMD004-1      GMAD1 GMAD/GMD004-1      run_test.pl
+GMD005-1      GMAD1 GMAD/GMD005-1      run_test.pl
+GMD006-1      GMAD1 GMAD/GMD006-1      run_test.pl
+GMD007-1      GMAD1 GMAD/GMD007-1      run_test.pl
+GMD008-1      GMAD1 GMAD/GMD008-1      run_test.pl
+GMD009-1      GMAD1 GMAD/GMD009-1      run_test.pl
+GMD010-1      GMAD1 GMAD/GMD010-1      run_test.pl
+GMD011-1      GMAD1 GMAD/GMD011-1      run_test.pl
+GMD012-1      GMAD1 GMAD/GMD012-1      run_test.pl
+GMD013-1      GMAD1 GMAD/GMD013-1      run_test.pl
+GMD014-1      GMAD1 GMAD/GMD014-1      run_test.pl
+GMD015-1      GMAD1 GMAD/GMD015-1      run_test.pl
+GMD016-1      GMAD1 GMAD/GMD016-1      run_test.pl
+GMD017-1      GMAD1 GMAD/GMD017-1      run_test.pl
+GMD018-1      GMAD1 GMAD/GMD018-1      run_test.pl
+GMD019-1      GMAD1 GMAD/GMD019-1      run_test.pl
+GMD020-1      GMAD1 GMAD/GMD020-1      run_test.pl
+GMD021-1      GMAD1 GMAD/GMD021-1      run_test.pl
+GMD022-1      GMAD1 GMAD/GMD022-1      run_test.pl
+GMD023-1      GMAD1 GMAD/GMD023-1      run_test.pl
+GMD024-1      GMAD1 GMAD/GMD024-1      run_test.pl
+GMD025-1      GMAD1 GMAD/GMD025-1      run_test.pl
+GMD026-1      GMAD1 GMAD/GMD026-1      run_test.pl
+GMD027-1      GMAD1 GMAD/GMD027-1      run_test.pl
+GMD028-1      GMAD1 GMAD/GMD028-1      run_test.pl
+GMD029-1      GMAD1 GMAD/GMD029-1      run_test.pl
+GMD030-1      GMAD1 GMAD/GMD030-1      run_test.pl
+GMD031-1      GMAD1 GMAD/GMD031-1      run_test.pl
+GMD032-1      GMAD1 GMAD/GMD032-1      run_test.pl
+GMD033-1      GMAD1 GMAD/GMD033-1      run_test.pl
+GMD034-1      GMAD1 GMAD/GMD034-1      run_test.pl
+GMD035-1      GMAD1 GMAD/GMD035-1      run_test.pl
+GMD036-1      GMAD1 GMAD/GMD036-1      run_test.pl
+GMD037-1      GMAD1 GMAD/GMD037-1      run_test.pl
+GMD038-1      GMAD1 GMAD/GMD038-1      run_test.pl
+GMD039-1      GMAD1 GMAD/GMD039-1      run_test.pl
+GMD040-1      GMAD1 GMAD/GMD040-1      run_test.pl
+
+--
+
+ADPT001	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT001	 run_test.pl
+ADPT002	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT002	 run_test.pl
+ADPT003	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT003	 run_test.pl
+ADPT004	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT004	 run_test.pl
+ADPT005	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT005	 run_test.pl
+ADPT006	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT006	 run_test.pl
+ADPT007	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT007	 run_test.pl
+ADPT008	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT008	 run_test.pl
+ADPT009	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT009	 run_test.pl
+ADPT010	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT010	 run_test.pl
+ADPT011	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT011	 run_test.pl
+ADPT012	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT012	 run_test.pl
+ADPT013	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT013	 run_test.pl
+ADPT014	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT014	 run_test.pl
+ADPT015	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT015	 run_test.pl
+ADPT016	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT016	 run_test.pl
+ADPT017	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT017	 run_test.pl
+ADPT018	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT018	 run_test.pl
+ADPT018-01   GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT018-01	 run_test.pl
+
+#---------------------------- no longer support LED blinking -------------------- 
+#- led blinking - ADPT019	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT019	 run_test.pl
+#- led blinking - ADPT020	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT020	 run_test.pl
+#- duplicated test case - ADPT021     GRAdvanced_Passthrough	        8xxx_Advanced_Passthrough/ADPT021	 run_test.pl
+#- led blinking - ADPT022	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT022	 run_test.pl
+#--------------------------------------------------------------------------------
+ADPT023	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT023	 run_test.pl
+ADPT024	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT024	 run_test.pl
+ADPT025	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT025	 run_test.pl
+ADPT026	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT026	 run_test.pl
+ADPT027	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT027	 run_test.pl
+ADPT028	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT028	 run_test.pl
+ADPT029	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT029	 run_test.pl
+ADPT030	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT030	 run_test.pl
+ADPT031	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT031	 run_test.pl
+ADPT032	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT032	 run_test.pl
+ADPT033	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT033	 run_test.pl
+ADPT034	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT034	 run_test.pl
+ADPT035	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT035	 run_test.pl
+ADPT036	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT036	 run_test.pl
+ADPT037	     GRAdvanced_Passthrough		8xxx_Advanced_Passthrough/ADPT037	 run_test.pl
+# +++
+# Note: ADPT038 to 057 are currently NA for AR
+# ---
+ADPT038	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT038	 run_test.pl
+ADPT039	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT039	 run_test.pl
+ADPT040	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT040	 run_test.pl
+ADPT041	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT041	 run_test.pl
+ADPT042	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT042	 run_test.pl
+ADPT043	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT043	 run_test.pl
+ADPT044	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT044	 run_test.pl
+ADPT045	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT045	 run_test.pl
+ADPT046	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT046	 run_test.pl
+ADPT047	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT047	 run_test.pl
+ADPT048	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT048	 run_test.pl
+ADPT049	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT049	 run_test.pl
+ADPT050	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT050	 run_test.pl
+ADPT051	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT051	 run_test.pl
+ADPT052	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT052	 run_test.pl
+ADPT053	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT053	 run_test.pl
+ADPT054	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT054	 run_test.pl
+ADPT055	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT055	 run_test.pl
+ADPT056	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT056	 run_test.pl
+ADPT057	     GRAdvanced_Passthrough1		8xxx_Advanced_Passthrough/ADPT056	 run_test.pl
+
+PM001        GRPoll_Mode                        Poll_Mode/PM001                          run_test.pl
+PM002        GRPoll_Mode                        Poll_Mode/PM002                          run_test.pl
+PM003        GRPoll_Mode                        Poll_Mode/PM003                          run_test.pl
+
+#ULTR001      Ultra                              UltraLight/ULTR001                       run_test.pl
+#ULTR002      Ultra                              UltraLight/ULTR002                       run_test.pl	          
+#ULTR003      Ultra                              UltraLight/ULTR003                       run_test.pl
+#ULTR004      Ultra                              UltraLight/ULTR004                       run_test.pl
+#ULTR005      Ultra                              UltraLight/ULTR005                       run_test.pl
+-------------------------------------- GR Related Commands ----------------------------------
+-- Note: RTC001 to 003 are for IDG Protocol 1 and 004 to 006 are for Protocol 2
+RTC001 		RTC	RTC/RTC001 	run_test.pl 
+RTC002 		RTC	RTC/RTC002 	run_test.pl
+RTC003 		RTC	RTC/RTC003 	run_test.pl
+
+SL038        GrSL_Series        SL_series/SL038                 run_test.pl
+SL039        GrSL_Series        SL_series/SL039                 run_test.pl
+SL040        GrSL_Series        SL_series/SL040                 run_test.pl
+SL041        GrSL_Series        SL_series/SL041                 run_test.pl
+SL042        GrSL_Series        SL_series/SL042                 run_test.pl
+SL043        GrSL_Series        SL_series/SL043                 run_test.pl
+
+FV001           GRFWVersion            GETVersion/FV001        run_test.pl
+FV002           GRFWVersion            GETVersion/FV002        run_test.pl
+FV003           GRFWVersion            GETVersion/FV003        run_test.pl
+
+
+AC001     ATransaction  GR_Activate_Transaction/AC001  run_test.pl
+AC002     ATransaction  GR_Activate_Transaction/AC002  run_test.pl
+AC003     ATransaction  GR_Activate_Transaction/AC003  run_test.pl
+AC004     ATransaction  GR_Activate_Transaction/AC004  run_test.pl
+AC005     ATransaction  GR_Activate_Transaction/AC005  run_test.pl
+AC006     ATransaction  GR_Activate_Transaction/AC006  run_test.pl
+AC007     ATransaction  GR_Activate_Transaction/AC007  run_test.pl
+AC008     ATransaction  GR_Activate_Transaction/AC008  run_test.pl
+AC009     ATransaction  GR_Activate_Transaction/AC009  run_test.pl
+AC010     ATransaction  GR_Activate_Transaction/AC010  run_test.pl
+AC011     ATransaction  GR_Activate_Transaction/AC011  run_test.pl
+AC012     ATransaction  GR_Activate_Transaction/AC012  run_test.pl
+AC013     ATransaction  GR_Activate_Transaction/AC013  run_test.pl
+AC014     ATransaction  GR_Activate_Transaction/AC014  run_test.pl
+AC015     ATransaction  GR_Activate_Transaction/AC015  run_test.pl
+AC016     ATransaction  GR_Activate_Transaction/AC016  run_test.pl
+AC017     ATransaction  GR_Activate_Transaction/AC017  run_test.pl
+AC018     ATransaction  GR_Activate_Transaction/AC018  run_test.pl
+AC019     ATransaction  GR_Activate_Transaction/AC019  run_test.pl
+AC020     ATransaction  GR_Activate_Transaction/AC020  run_test.pl
+AC021     ATransaction  GR_Activate_Transaction/AC021  run_test.pl
+AC022     ATransaction  GR_Activate_Transaction/AC022  run_test.pl
+AC023     ATransaction  GR_Activate_Transaction/AC023  run_test.pl
+AC024     ATransaction  GR_Activate_Transaction/AC024  run_test.pl
+AC025     ATransaction  GR_Activate_Transaction/AC025  run_test.pl
+AC026     ATransaction  GR_Activate_Transaction/AC026  run_test.pl
+AC027     ATransaction  GR_Activate_Transaction/AC027  run_test.pl
+AC028     ATransaction  GR_Activate_Transaction/AC028  run_test.pl
+AC029     ATransaction  GR_Activate_Transaction/AC029  run_test.pl
+AC030     ATransaction  GR_Activate_Transaction/AC030  run_test.pl
+AC031     ATransaction  GR_Activate_Transaction/AC031  run_test.pl
+AC032     ATransaction  GR_Activate_Transaction/AC032  run_test.pl
+AC033     ATransaction  GR_Activate_Transaction/AC033  run_test.pl
+AC034     ATransaction  GR_Activate_Transaction/AC034  run_test.pl
+AC035     ATransaction  GR_Activate_Transaction/AC035  run_test.pl
+AC036     ATransaction  GR_Activate_Transaction/AC036  run_test.pl
+AC037     ATransaction  GR_Activate_Transaction/AC037  run_test.pl
+AC038     ATransaction  GR_Activate_Transaction/AC038  run_test.pl
+AC039     ATransaction  GR_Activate_Transaction/AC039  run_test.pl
+AC040     ATransaction  GR_Activate_Transaction/AC040  run_test.pl
+
+GFT001    ATransaction  GR_Get_Full_Track/GFT001       run_test.pl
+GFT002    ATransaction  GR_Get_Full_Track/GFT002       run_test.pl
+GFT003    ATransaction  GR_Get_Full_Track/GFT003       run_test.pl
+GFT004    ATransaction  GR_Get_Full_Track/GFT004       run_test.pl
+GFT005    ATransaction  GR_Get_Full_Track/GFT005       run_test.pl
+GFT006    ATransaction  GR_Get_Full_Track/GFT006       run_test.pl
+GFT007    ATransaction  GR_Get_Full_Track/GFT007       run_test.pl
+GFT008    ATransaction  GR_Get_Full_Track/GFT008       run_test.pl
+GFT009    ATransaction  GR_Get_Full_Track/GFT009       run_test.pl
+GFT010    ATransaction  GR_Get_Full_Track/GFT010       run_test.pl
+GFT011    ATransaction  GR_Get_Full_Track/GFT011       run_test.pl
+GFT012    ATransaction  GR_Get_Full_Track/GFT012       run_test.pl
+GFT013    ATransaction  GR_Get_Full_Track/GFT013       run_test.pl
+GFT014    ATransaction  GR_Get_Full_Track/GFT014       run_test.pl
+GFT015    ATransaction  GR_Get_Full_Track/GFT015       run_test.pl
+GFT016    ATransaction  GR_Get_Full_Track/GFT016       run_test.pl
+
+GTR001    ATransaction1 GR_Get_Transaction/GTR001      run_test.pl
+GTR002    ATransaction1 GR_Get_Transaction/GTR002      run_test.pl
+GTR003    ATransaction1 GR_Get_Transaction/GTR003      run_test.pl
+GTR004    ATransaction1 GR_Get_Transaction/GTR004      run_test.pl
+GTR005    ATransaction1 GR_Get_Transaction/GTR005      run_test.pl
+GTR006    ATransaction1 GR_Get_Transaction/GTR006      run_test.pl
+GTR007    ATransaction1 GR_Get_Transaction/GTR007      run_test.pl
+GTR008    ATransaction1 GR_Get_Transaction/GTR008      run_test.pl
+GTR009    ATransaction1 GR_Get_Transaction/GTR009      run_test.pl
+GTR010    ATransaction1 GR_Get_Transaction/GTR010      run_test.pl
+GTR011    ATransaction1 GR_Get_Transaction/GTR011      run_test.pl
+
+DGT001  GRGoTag  Desfire_Gotag/DGT001  run_test.pl
+DGT002  GRGoTag  Desfire_Gotag/DGT002  run_test.pl
+DGT003  GRGoTag  Desfire_Gotag/DGT003  run_test.pl
+DGT004  GRGoTag  Desfire_Gotag/DGT004  run_test.pl
+DGT005  GRGoTag  Desfire_Gotag/DGT005  run_test.pl
+DGT006  GRGoTag  Desfire_Gotag/DGT006  run_test.pl
+DGT007  GRGoTag  Desfire_Gotag/DGT007  run_test.pl
+DGT008  GRGoTag  Desfire_Gotag/DGT008  run_test.pl
+DGT009  GRGoTag  Desfire_Gotag/DGT009  run_test.pl
+DGT010  GRGoTag  Desfire_Gotag/DGT010  run_test.pl
+DGT011  GRGoTag  Desfire_Gotag/DGT011  run_test.pl
+DGT012  GRGoTag  Desfire_Gotag/DGT012  run_test.pl
+DGT013  GRGoTag  Desfire_Gotag/DGT013  run_test.pl
+DGT014  GRGoTag  Desfire_Gotag/DGT014  run_test.pl
+DGT015  GRGoTag  Desfire_Gotag/DGT015  run_test.pl
+DGT016  GRGoTag  Desfire_Gotag/DGT016  run_test.pl
+DGT017  GRGoTag  Desfire_Gotag/DGT017  run_test.pl
+
+DRW001  GRRawData  Desfire_RW/DRW001  run_test.pl
+DRW002  GRRawData  Desfire_RW/DRW002  run_test.pl
+DRW003  GRRawData  Desfire_RW/DRW003  run_test.pl
+DRW004  GRRawData  Desfire_RW/DRW004  run_test.pl
+DRW005  GRRawData  Desfire_RW/DRW005  run_test.pl
+DRW006  GRRawData  Desfire_RW/DRW006  run_test.pl
+DRW007  GRRawData  Desfire_RW/DRW007  run_test.pl
+DRW008  GRRawData  Desfire_RW/DRW008  run_test.pl
+DRW009  GRRawData  Desfire_RW/DRW009  run_test.pl
+DRW010  GRRawData  Desfire_RW/DRW010  run_test.pl
+DRW011  GRRawData  Desfire_RW/DRW011  run_test.pl
+DRW012  GRRawData  Desfire_RW/DRW012  run_test.pl
+DRW013  GRRawData  Desfire_RW/DRW013  run_test.pl
+DRW014  GRRawData  Desfire_RW/DRW014  run_test.pl
+DRW015  GRRawData  Desfire_RW/DRW015  run_test.pl
+DRW016  GRRawData  Desfire_RW/DRW016  run_test.pl
+DRW017  GRRawData  Desfire_RW/DRW017  run_test.pl
+
+RD00101		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD00101	run_test.pl
+RD00201		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD00201	run_test.pl
+RD00301		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD00301	run_test.pl
+RD00401		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD00401	run_test.pl
+RD00500		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD00500	run_test.pl
+RD00600		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD00600	run_test.pl
+RD00700		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD00700	run_test.pl
+RD00800		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD00800	run_test.pl
+RD00900		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD00900	run_test.pl
+RD01000		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD01000	run_test.pl
+RD01000		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD01000	run_test.pl
+# --- added for async message events for LCD, LEDs, and Buzzers
+RD02000		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD02000	run_test.pl
+RD02001		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD02001	run_test.pl
+RD02002		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD02002	run_test.pl
+RD02003		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD02003	run_test.pl
+RD02004		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD02004	run_test.pl
+RD02005		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD02005	run_test.pl
+RD02006		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD02006	run_test.pl
+RD02007		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD02007	run_test.pl
+RD02008		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD02008	run_test.pl
+RD02009		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD02009	run_test.pl
+RD02010		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD02010	run_test.pl
+RD02011		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD02011	run_test.pl
+RD02012		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD02012	run_test.pl
+RD02013		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD02013	run_test.pl
+RD02014		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD02014	run_test.pl
+RD02015		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD02015	run_test.pl
+RD02016		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD02016	run_test.pl
+RD02017		SetGetRTCLCDBuzzLEDs	GETSETSource_RTC_LCD_Buzzer_LEDs/RD02017	run_test.pl
+
+
+SRC001		ARSRC			AR_SET_Source_LCD_Buzzer_LEDs/SRC001		run_test.pl
+SRC002		ARSRC			AR_SET_Source_LCD_Buzzer_LEDs/SRC002		run_test.pl
+SRC003		ARSRC			AR_SET_Source_LCD_Buzzer_LEDs/SRC003		run_test.pl
+SRC004		ARSRC			AR_SET_Source_LCD_Buzzer_LEDs/SRC004		run_test.pl
+SRC005		ARSRC			AR_SET_Source_LCD_Buzzer_LEDs/SRC005		run_test.pl
+SRC006		ARSRC			AR_SET_Source_LCD_Buzzer_LEDs/SRC006		run_test.pl
+SRC007		ARSRC			AR_SET_Source_LCD_Buzzer_LEDs/SRC007		run_test.pl
+
+
+
+BUM001		GRBurstMode  BurstMode/BUM001		run_test.pl
+BUM001_01	GRBurstMode  BurstMode/BUM001_01	run_test.pl
+BUM002		GRBurstMode  BurstMode/BUM002		run_test.pl
+BUM003		GRBurstMode  BurstMode/BUM003		run_test.pl
+BUM004		GRBurstMode  BurstMode/BUM004		run_test.pl
+BUM005		GRBurstMode  BurstMode/BUM005		run_test.pl
+BUM006		GRBurstMode  BurstMode/BUM006		run_test.pl
+BUM007		GRBurstMode  BurstMode/BUM007		run_test.pl
+BUM008		GRBurstMode  BurstMode/BUM008		run_test.pl
+BUM009		GRBurstMode  BurstMode/BUM009		run_test.pl
+BUM010		GRBurstMode  BurstMode/BUM010		run_test.pl
+BUM011		GRBurstMode  BurstMode/BUM011		run_test.pl
+BUM012		GRBurstMode  BurstMode/BUM012		run_test.pl
+BUM013		GRBurstMode  BurstMode/BUM013		run_test.pl
+BUM014		GRBurstMode  BurstMode/BUM014		run_test.pl
+BUM015		GRBurstMode  BurstMode/BUM015		run_test.pl
+BUM016		GRBurstMode  BurstMode/BUM016		run_test.pl
+BUM017		GRBurstMode  BurstMode/BUM017		run_test.pl
+BUM018		GRBurstMode  BurstMode/BUM018		run_test.pl
+BUM019		GRBurstMode  BurstMode/BUM019		run_test.pl
+BUM020		GRBurstMode  BurstMode/BUM020		run_test.pl
+BUM021		GRBurstMode  BurstMode/BUM021		run_test.pl
+BUM022		GRBurstMode  BurstMode/BUM022		run_test.pl
+BUM023		GRBurstMode  BurstMode/BUM023		run_test.pl
+BUM024		GRBurstMode  BurstMode/BUM024		run_test.pl
+
+ 
+EP000100 ePurse  ePurse/EP000100  run_test.pl 
+EP000200 ePurse  ePurse/EP000200  run_test.pl 
+EP000201 ePurse  ePurse/EP000201  run_test.pl 
+EP000202 ePurse  ePurse/EP000202  run_test.pl 
+EP000300 ePurse  ePurse/EP000300  run_test.pl 
+EP000301 ePurse  ePurse/EP000301  run_test.pl 
+EP000302 ePurse  ePurse/EP000302  run_test.pl 
+EP000400 ePurse  ePurse/EP000400  run_test.pl 
+EP000500 ePurse  ePurse/EP000500  run_test.pl 
+EP000600 ePurse  ePurse/EP000600  run_test.pl 
+EP000700 ePurse  ePurse/EP000700  run_test.pl 
+EP000701 ePurse  ePurse/EP000701  run_test.pl 
+
+MF000100	Mifare  MiFare/MF000100		run_test.pl
+MF000300	Mifare  MiFare/MF000300		run_test.pl
+MF000400	Mifare  MiFare/MF000400		run_test.pl
+MF000410	Mifare  MiFare/MF000410		run_test.pl
+MF000450	Mifare  MiFare/MF000450		run_test.pl
+MF000451	Mifare  MiFare/MF000451		run_test.pl
+MF000452	Mifare  MiFare/MF000452		run_test.pl
+MF000453	Mifare  MiFare/MF000453		run_test.pl
+MF000500	Mifare  MiFare/MF000500		run_test.pl
+MF000600	Mifare  MiFare/MF000600		run_test.pl
+MF000700	Mifare  MiFare/MF000700		run_test.pl
+MF000800	Mifare  MiFare/MF000800		run_test.pl
+MF000900	Mifare  MiFare/MF000900		run_test.pl
+MF001000	Mifare  MiFare/MF001000		run_test.pl
+MF001100	Mifare  MiFare/MF001100		run_test.pl
+MF001200	Mifare  MiFare/MF001200		run_test.pl
+MF001300	Mifare  MiFare/MF001300		run_test.pl
+MF001400	Mifare  MiFare/MF001400		run_test.pl
+MF001500	Mifare  MiFare/MF001500		run_test.pl
+MF010100	Mifare  MiFare/MF010100		run_test.pl
+MF010200_to_MF010400	Mifare  MiFare/MF010200_to_MF010400	run_test.pl
+MF010500	Mifare  MiFare/MF010500		run_test.pl
+MF010600	Mifare  MiFare/MF010600		run_test.pl
+MF010700	Mifare  MiFare/MF010700		run_test.pl
+MF010800	Mifare  MiFare/MF010800		run_test.pl
+MF010900	Mifare  MiFare/MF010900		run_test.pl
+
+-- Note: MVxxx test cases may only be used for nun main trunck AR builds, such as AR 1.1.0
+MV001	     FullAutoMV 	8xxx_Multi_Versioning/MV001	 run_test.pl
+MV002	     FullAutoMV		8xxx_Multi_Versioning/MV002	 run_test.pl
+MV003	     FullAutoMV		8xxx_Multi_Versioning/MV003	 run_test.pl
+MV004	     FullAutoMV		8xxx_Multi_Versioning/MV004	 run_test.pl
+MV005	     FullAutoMV		8xxx_Multi_Versioning/MV005	 run_test.pl
+MV006	     FullAutoMV		8xxx_Multi_Versioning/MV006	 run_test.pl
+MV007	     FullAutoMV		8xxx_Multi_Versioning/MV007	 run_test.pl
+MV008	     FullAutoMV		8xxx_Multi_Versioning/MV008	 run_test.pl
+MV009	     FullAutoMV		8xxx_Multi_Versioning/MV009	 run_test.pl
+MV010	     FullAutoMV		8xxx_Multi_Versioning/MV010	 run_test.pl
+MV011	     FullAutoMV		8xxx_Multi_Versioning/MV011	 run_test.pl
+MV012	     FullAutoMV		8xxx_Multi_Versioning/MV012	 run_test.pl
+MV013	     FullAutoMV		8xxx_Multi_Versioning/MV013	 run_test.pl
+MV014	     FullAutoMV		8xxx_Multi_Versioning/MV014	 run_test.pl
+#--- MV015 will fail on GR. It is used for AR 
+# MV015	     FullAutoMV		8xxx_Multi_Versioning/MV015	 run_test.pl
+MV016	     FullAutoMV		8xxx_Multi_Versioning/MV016	 run_test.pl
+MV017	     FullAutoMV		8xxx_Multi_Versioning/MV017	 run_test.pl
+
+UILM001		GRFullAuto	ILM_Upload_Image/UILM001	run_test.pl
+UILM002		GRFullAuto	ILM_Upload_Image/UILM002	run_test.pl
+UILM003		GRFullAuto	ILM_Upload_Image/UILM003	run_test.pl
+UILM004		GRFullAuto	ILM_Upload_Image/UILM004	run_test.pl
+UILM005		GRFullAuto	ILM_Upload_Image/UILM005	run_test.pl
+UILM006		GRFullAuto	ILM_Upload_Image/UILM006	run_test.pl
+UILM007		GRFullAuto	ILM_Upload_Image/UILM007	run_test.pl
+UILM008		GRFullAuto	ILM_Upload_Image/UILM008	run_test.pl
+VILM001		GRFullAuto	ILM_Get_Index/VILM001		run_test.pl
+VILM002		GRFullAuto	ILM_Get_Index/VILM002		run_test.pl
+VILM003		GRFullAuto	ILM_Get_Index/VILM003		run_test.pl
+VILM004		GRFullAuto	ILM_Get_Index/VILM004		run_test.pl
+VILM005		GRFullAuto	ILM_Get_Index/VILM005		run_test.pl
+VILM006		GRFullAuto	ILM_Get_Index/VILM006		run_test.pl
+VILM007		GRFullAuto	ILM_Get_Index/VILM007		run_test.pl
+VILM008		GRFullAuto	ILM_Get_Index/VILM008		run_test.pl
+SVILM001	GRFullAuto	ILM_Set_Language/SVILM001	run_test.pl
+SVILM002	GRFullAuto	ILM_Set_Language/SVILM002	run_test.pl
+SVILM003	GRFullAuto	ILM_Set_Language/SVILM003	run_test.pl
+SVILM004	GRFullAuto	ILM_Set_Language/SVILM004	run_test.pl
+SVILM005	GRFullAuto	ILM_Set_Language/SVILM005	run_test.pl
+SVILM006	GRFullAuto	ILM_Set_Language/SVILM006	run_test.pl
+SVILM007	GRFullAuto	ILM_Set_Language/SVILM007	run_test.pl
+GILM001		GRFullAuto	ILM_GET_Language_version/GILM001	run_test.pl
+GILM002		GRFullAuto	ILM_GET_Language_version/GILM002	run_test.pl
+GILM003		GRFullAuto	ILM_GET_Language_version/GILM003	run_test.pl
+GILM004		GRFullAuto	ILM_GET_Language_version/GILM004	run_test.pl
+GILM005		GRFullAuto	ILM_GET_Language_version/GILM005	run_test.pl
+GILM006		GRFullAuto	ILM_GET_Language_version/GILM006	run_test.pl
+SILM001		GRFullAuto	ILM_Select_Language/SILM001	run_test.pl
+SILM002		GRFullAuto	ILM_Select_Language/SILM002	run_test.pl
+SILM003		GRFullAuto	ILM_Select_Language/SILM003	run_test.pl
+SILM004		GRFullAuto	ILM_Select_Language/SILM004	run_test.pl
+------
+SAM001		GRFullAuto2	SAM_Chip/SAM001			run_test.pl
+SAM002		GRFullAuto2	SAM_Chip/SAM002			run_test.pl
+SAM003		GRFullAuto2	SAM_Chip/SAM003			run_test.pl
+SAM004		GRFullAuto2	SAM_Chip/SAM004			run_test.pl
+SAM005		GRFullAuto2	SAM_Chip/SAM005			run_test.pl
+SAM006		GRFullAuto2	SAM_Chip/SAM006			run_test.pl
+SAM008		GRFullAuto2	SAM_Chip/SAM008			run_test.pl
+SAM0011		GRFullAuto2	SAM_Chip/SAM011			run_test.pl
+SAM0012		GRFullAuto2	SAM_Chip/SAM012			run_test.pl
+SAM0013		GRFullAuto2	SAM_Chip/SAM013			run_test.pl
+SAM0014		GRFullAuto2	SAM_Chip/SAM014			run_test.pl
+SAM0015		GRFullAuto2	SAM_Chip/SAM015			run_test.pl
+SAM0016		GRFullAuto2	SAM_Chip/SAM016			run_test.pl
+SAM0017		GRFullAuto2	SAM_Chip/SAM017			run_test.pl
+------
+KMT001		GRFullAuto3	Set_CA_Key2/KMT001		run_test.pl
+KMT002		GRFullAuto3	Set_CA_Key2/KMT002		run_test.pl
+KMT003		GRFullAuto3	Set_CA_Key2/KMT003		run_test.pl
+KMT004		GRFullAuto3	Set_CA_Key2/KMT004		run_test.pl
+KMT005		GRFullAuto3	Set_CA_Key2/KMT005		run_test.pl
+KMT006		GRFullAuto3	Set_CA_Key2/KMT006		run_test.pl
+KMT007		GRFullAuto3	Set_CA_Key2/KMT007		run_test.pl
+KMT008		GRFullAuto3	Set_CA_Key2/KMT008		run_test.pl
+KMT009		GRFullAuto3	Set_CA_Key2/KMT009		run_test.pl
+KMT010		GRFullAuto3	Set_CA_Key2/KMT010		run_test.pl
+KMT011		GRFullAuto3	Set_CA_Key2/KMT011		run_test.pl
+KMT012		GRFullAuto3	Set_CA_Key2/KMT012		run_test.pl
+KMT013		GRFullAuto3	Set_CA_Key2/KMT013		run_test.pl
+KMT015		GRFullAuto3	Set_CA_Key2/KMT015		run_test.pl
+KMT016		GRFullAuto3	Set_CA_Key2/KMT016		run_test.pl
+KMT017		GRFullAuto3	Set_CA_Key2/KMT017		run_test.pl
+KMT018		GRFullAuto3	Set_CA_Key2/KMT018		run_test.pl
+KMT019		GRFullAuto3	Set_CA_Key2/KMT019		run_test.pl
+KMT020		GRFullAuto3	Set_CA_Key2/KMT020		run_test.pl
+KMT021		GRFullAuto3	Set_CA_Key2/KMT021		run_test.pl
+KMT022		GRFullAuto3	Set_CA_Key2/KMT022		run_test.pl
+KMT023		GRFullAuto3	Set_CA_Key2/KMT023		run_test.pl
+KMT024		GRFullAuto3	Set_CA_Key2/KMT024		run_test.pl
+KMT025		GRFullAuto3	Set_CA_Key2/KMT025		run_test.pl
+KMT026		GRFullAuto3	Set_CA_Key2/KMT026		run_test.pl
+
+------------------------Must Have Default Keys Installed ----------------------
+KH001		GRGetKey	Get_CA_Key/KH001		run_test.pl
+KH002		GRGetKey	Get_CA_Key/KH002		run_test.pl
+KH003		GRGetKey	Get_CA_Key/KH003		run_test.pl
+KH004		GRGetKey	Get_CA_Key/KH004		run_test.pl
+KH005		GRGetKey	Get_CA_Key/KH005		run_test.pl
+KH006		GRGetKey	Get_CA_Key/KH006		run_test.pl
+KH007		GRGetKey	Get_CA_Key/KH007		run_test.pl
+KH008		GRGetKey	Get_CA_Key/KH008		run_test.pl
+KH009		GRGetKey	Get_CA_Key/KH009		run_test.pl
+
+
+----- Verify GR Bootup notification message on the communication streams -----------
+BN001     GRBootup_Notification		Bootup_Notification/BN001	 run_test.pl
+BN002     GRBootup_Notification		Bootup_Notification/BN002	 run_test.pl
+BN003     GRBootup_Notification		Bootup_Notification/BN003	 run_test.pl
+BN004     GRBootup_Notification		Bootup_Notification/BN004	 run_test.pl
+BN005     GRBootup_Notification		Bootup_Notification/BN005	 run_test.pl
+
+SD001     GRStore_LCD		STORELCD_series/SD001	 run_test.pl
+SD002     GRStore_LCD		STORELCD_series/SD002	 run_test.pl
+SD003     GRStore_LCD		STORELCD_series/SD003	 run_test.pl
+SD004     GRStore_LCD		STORELCD_series/SD004	 run_test.pl
+SD005     GRStore_LCD		STORELCD_series/SD005	 run_test.pl
+SD006     GRStore_LCD		STORELCD_series/SD006	 run_test.pl
+SD007     GRStore_LCD		STORELCD_series/SD007	 run_test.pl
+SD008     GRStore_LCD		STORELCD_series/SD008	 run_test.pl
+SD009     GRStore_LCD		STORELCD_series/SD009	 run_test.pl
+SD010     GRStore_LCD		STORELCD_series/SD010	 run_test.pl
+SD011     GRStore_LCD		STORELCD_series/SD011	 run_test.pl
+
+---
+
+HVS001    SetGetHVS       HVS/HVS001                     run_test.pl
+
+
+-------------- Must have a fw build with a special key integrated -----------------------------------------
+-VCC001 		GRVivoComm  ViVOcomm_Card/VCC001  run_test.pl 
+-VCC002 		GRVivoComm  ViVOcomm_Card/VCC002  run_test.pl 
+-VCC003 		GRVivoComm  ViVOcomm_Card/VCC003  run_test.pl 
+-VCC004 		GRVivoComm  ViVOcomm_Card/VCC004  run_test.pl 
+-VCC005 		GRVivoComm  ViVOcomm_Card/VCC005  run_test.pl 
+-VCC006 		GRVivoComm  ViVOcomm_Card/VCC006  run_test.pl 
+-VCC007 		GRVivoComm  ViVOcomm_Card/VCC007  run_test.pl 
+-VCC008 		GRVivoComm  ViVOcomm_Card/VCC008  run_test.pl 
+-VCC009 		GRVivoComm  ViVOcomm_Card/VCC009  run_test.pl 
+-VCC010 		GRVivoComm  ViVOcomm_Card/VCC010  run_test.pl 
+-VCC011 		GRVivoComm  ViVOcomm_Card/VCC011  run_test.pl 
+-VCC012 		GRVivoComm  ViVOcomm_Card/VCC012  run_test.pl 
+-VCC013 		GRVivoComm  ViVOcomm_Card/VCC013  run_test.pl 
+-VCC014 		GRVivoComm  ViVOcomm_Card/VCC014  run_test.pl 
+-VCC015 		GRVivoComm  ViVOcomm_Card/VCC015  run_test.pl 
+-VCC016 		GRVivoComm  ViVOcomm_Card/VCC016  run_test.pl 
+-VCC017 		GRVivoComm  ViVOcomm_Card/VCC017  run_test.pl 
+-VCC018 		GRVivoComm  ViVOcomm_Card/VCC018  run_test.pl 
+-VCC019 		GRVivoComm  ViVOcomm_Card/VCC019  run_test.pl 
+--------------------------------------------------------------------------------------------------------------
+
+PCD001      GRPCD      PCD_Exchange/PCD001		run_test.pl 
+PCD002      GRPCD      PCD_Exchange/PCD002		run_test.pl   
+PCD003      GRPCD      PCD_Exchange/PCD003		run_test.pl
+PCD004      GRPCD      PCD_Exchange/PCD004		run_test.pl
+PCD005      GRPCD      PCD_Exchange/PCD005		run_test.pl
+PCD006      GRPCD      PCD_Exchange/PCD006		run_test.pl
+PCD007      GRPCD      PCD_Exchange/PCD007		run_test.pl
+PCD008      GRPCD      PCD_Exchange/PCD008		run_test.pl
+---------------------------------------------------------------------------------------------------------------
+ASW001                                   AutoSwitch         AutoSwitch/ASW001                run_test.pl
+ASW002                                   AutoSwitch         AutoSwitch/ASW002                run_test.pl
+ASW003                                   AutoSwitch         AutoSwitch/ASW003                run_test.pl
+ASW004                                   AutoSwitch         AutoSwitch/ASW004                run_test.pl
+ASW005                                   AutoSwitch         AutoSwitch/ASW005                run_test.pl
+ASW006                                   AutoSwitch         AutoSwitch/ASW006                run_test.pl
+ASW007                                   AutoSwitch         AutoSwitch/ASW007                run_test.pl
+ASW008                                   AutoSwitch         AutoSwitch/ASW008                run_test.pl
+ASW009                                   AutoSwitch         AutoSwitch/ASW009                run_test.pl
+ASW010                                   AutoSwitch         AutoSwitch/ASW010                run_test.pl
+ASW011                                   AutoSwitch         AutoSwitch/ASW011                run_test.pl
+ASW012                                   AutoSwitch         AutoSwitch/ASW012                run_test.pl
+ASW013                                   AutoSwitch         AutoSwitch/ASW013                run_test.pl
+ASW014                                   AutoSwitch         AutoSwitch/ASW014                run_test.pl
+ASW015                                   AutoSwitch         AutoSwitch/ASW015                run_test.pl
+ASW016                                   AutoSwitch         AutoSwitch/ASW016                run_test.pl
+ASW017                                   AutoSwitch         AutoSwitch/ASW017                run_test.pl
+ASW018                                   AutoSwitch         AutoSwitch/ASW018                run_test.pl
+
+------------------------------------------------------------------------------------------------------------------
+ICD001		ICD		CollisionDetect/ICD001		 run_test.pl
+ICD002		ICD		CollisionDetect/ICD002		 run_test.pl
+ICD003		ICD		CollisionDetect/ICD003		 run_test.pl
+ICD004		ICD		CollisionDetect/ICD004		 run_test.pl
+ICD005		ICD		CollisionDetect/ICD005		 run_test.pl
+ICD006		ICD		CollisionDetect/ICD006		 run_test.pl
+ICD007		ICD		CollisionDetect/ICD007		 run_test.pl
+ICD008		ICD		CollisionDetect/ICD008		 run_test.pl
+
+------------------------------------------------------------------------------------------------------------------
+RRPM001		RRPM		RR_Params/RRPM001		run_test.pl
+RRPM002		RRPM		RR_Params/RRPM002		run_test.pl
+RRPM003		RRPM		RR_Params/RRPM003		run_test.pl
+RRPM004		RRPM		RR_Params/RRPM004		run_test.pl
+RRPM005		RRPM		RR_Params/RRPM005		run_test.pl
+RRPM006		RRPM		RR_Params/RRPM006		run_test.pl
+RRPM007		RRPM		RR_Params/RRPM007		run_test.pl
+RRPM008		RRPM		RR_Params/RRPM008		run_test.pl
+RRPM009		RRPM		RR_Params/RRPM009		run_test.pl
+RRPM010		RRPM		RR_Params/RRPM010		run_test.pl
+RRPM011		RRPM		RR_Params/RRPM011		run_test.pl
+RRPM012		RRPM		RR_Params/RRPM012		run_test.pl
+
+------------------------------------------------------------------------------------------------------------------
+
+HVS001         setGetHVS       HVS/HVS001                 run_test.pl
+
+VALIDG001      GRcmdVal        GRcmdValidation/VALIDG001  run_test.pl
+
+GRDP001        GRChkDefault    GR_checkDefault/GRDP001    run_test.pl
+GRDP002        GRChkDefault    GR_checkDefault/GRDP002    run_test.pl
+GRDP101        GRChkDefault    GR_checkDefault/GRDP101    run_test.pl
+
+------------------------------ Rework Needed --- Not to deal with it for now ----------------------------
+PT05200			PassT1		Pass_Through/PT05200			run_test.pl
+PT05201			PassT1		Pass_Through/PT05201			run_test.pl
+PT05202			PassT1		Pass_Through/PT05202			run_test.pl
+PT05203			PassT1		Pass_Through/PT05203			run_test.pl
+PT05204			PassT1		Pass_Through/PT05204			run_test.pl
+PT05205			PassT1		Pass_Through/PT05205			run_test.pl
+PT05206			PassT1		Pass_Through/PT05206			run_test.pl
+PT05207			PassT1		Pass_Through/PT05207			run_test.pl
+PT05208			PassT1		Pass_Through/PT05208			run_test.pl
+PT05300			PassT1		Pass_Through/PT05300			run_test.pl
+PT05400			PassT1		Pass_Through/PT05400			run_test.pl
+PT05500			PassT1		Pass_Through/PT05500			run_test.pl
+PT05501			PassT1		Pass_Through/PT05501			run_test.pl
+PT05502			PassT1		Pass_Through/PT05502			run_test.pl
+PT05600			PassT1		Pass_Through/PT05600			run_test.pl
+PT05700			PassT1		Pass_Through/PT05700			run_test.pl
+PT05701			PassT1		Pass_Through/PT05701			run_test.pl
+PT05800			PassT1		Pass_Through/PT05800			run_test.pl
+PT05900			PassT1		Pass_Through/PT05900			run_test.pl
+
+UI_Flow1	UI_Flows	VP6500_UI_Flows/UI_Flow1	run_test.pl
+UI_Flow2	UI_Flows	VP6500_UI_Flows/UI_Flow2	run_test.pl
+UI_Flow3	UI_Flows	VP6500_UI_Flows/UI_Flow3	run_test.pl
+UI_Flow4	UI_Flows	VP6500_UI_Flows/UI_Flow4	run_test.pl
+UI_Flow5	UI_Flows	VP6500_UI_Flows/UI_Flow5	run_test.pl
+UI_Flow6	UI_Flows	VP6500_UI_Flows/UI_Flow6	run_test.pl
+UI_Flow7	UI_Flows	VP6500_UI_Flows/UI_Flow7	run_test.pl
+UI_Flow8	UI_Flows	VP6500_UI_Flows/UI_Flow8	run_test.pl
+UI_Flow9	UI_Flows	VP6500_UI_Flows/UI_Flow9	run_test.pl
+UI_Flow10	UI_Flows	VP6500_UI_Flows/UI_Flow10	run_test.pl
+
+RST001		AROldSTRING		Read_String/RST001	run_test.pl
+RST002		AROldSTRING		Read_String/RST002	run_test.pl
+RST003		AROldSTRING		Read_String/RST003	run_test.pl
+RST004		AROldSTRING		Read_String/RST004	run_test.pl
+RST005		AROldSTRING		Read_String/RST005	run_test.pl
+RST006		AROldSTRING		Read_String/RST006	run_test.pl
+RST007		AROldSTRING		Read_String/RST007	run_test.pl
+RST008		AROldSTRING		Read_String/RST008	run_test.pl
+RST009		AROldSTRING		Read_String/RST009	run_test.pl
+RST010		AROldSTRING		Read_String/RST010	run_test.pl
+RST011		AROldSTRING		Read_String/RST011	run_test.pl
+RST012		AROldSTRING		Read_String/RST012	run_test.pl
+PIN001		AROldKEY		Read_Keys/PIN001	run_test.pl
+PIN002		AROldKEY		Read_Keys/PIN002	run_test.pl
+PIN003		AROldKEY		Read_Keys/PIN003	run_test.pl
+PIN004		AROldKEY		Read_Keys/PIN004	run_test.pl
+PIN005		AROldKEY		Read_Keys/PIN005	run_test.pl
+PIN006		AROldKEY		Read_Keys/PIN006	run_test.pl
+PIN007		AROldKEY		Read_Keys/PIN007	run_test.pl
+PIN008		AROldKEY		Read_Keys/PIN008	run_test.pl
+PIN009		AROldKEY		Read_Keys/PIN009	run_test.pl
+PIN010		AROldKEY		Read_Keys/PIN010	run_test.pl
+PIN011		AROldKEY		Read_Keys/PIN011	run_test.pl
+PIN012		AROldKEY		Read_Keys/PIN012	run_test.pl
+PIN013		AROldKEY		Read_Keys/PIN013	run_test.pl
+PIN014		AROldKEY		Read_Keys/PIN014	run_test.pl
+PIN015		AROldKEY		Read_Keys/PIN015	run_test.pl
+PIN016		AROldKEY		Read_Keys/PIN016	run_test.pl
+PIN017		AROldKEY		Read_Keys/PIN017	run_test.pl
+PIN018		AROldKEY		Read_Keys/PIN018	run_test.pl
+PIN019		AROldKEY		Read_Keys/PIN019	run_test.pl
+
+txtp001		ARBigScreenText		VP6500_text_prompt/TXTP001	run_test.pl
+txtp002		ARBigScreenText		VP6500_text_prompt/TXTP002	run_test.pl
+txtp003		ARBigScreenText		VP6500_text_prompt/TXTP003	run_test.pl
+txtp004		ARBigScreenText		VP6500_text_prompt/TXTP004	run_test.pl
+txtp005		ARBigScreenText		VP6500_text_prompt/TXTP005	run_test.pl
+txtp006		ARBigScreenText		VP6500_text_prompt/TXTP006	run_test.pl
+txtp007		ARBigScreenText		VP6500_text_prompt/TXTP007	run_test.pl
+txtp008		ARBigScreenText		VP6500_text_prompt/TXTP008	run_test.pl
+txtp009		ARBigScreenText		VP6500_text_prompt/TXTP009	run_test.pl
+txtp010		ARBigScreenText		VP6500_text_prompt/TXTP010	run_test.pl
+txtp011		ARBigScreenText		VP6500_text_prompt/TXTP011	run_test.pl
+txtp012		ARBigScreenText		VP6500_text_prompt/TXTP012	run_test.pl
+txtp015		ARBigScreenText		VP6500_text_prompt/TXTP015	run_test.pl
+txtp016		ARBigScreenText		VP6500_text_prompt/TXTP016	run_test.pl
+txtp017		ARBigScreenText		VP6500_text_prompt/TXTP017	run_test.pl
+txtp018		ARBigScreenText		VP6500_text_prompt/TXTP018	run_test.pl
+txtp019		ARBigScreenText		VP6500_text_prompt/TXTP019	run_test.pl
+txtp020		ARBigScreenText		VP6500_text_prompt/TXTP020	run_test.pl
+txtp021		ARBigScreenText		VP6500_text_prompt/TXTP021	run_test.pl
+txtp022		ARBigScreenText		VP6500_text_prompt/TXTP022	run_test.pl
+txtp023		ARBigScreenText		VP6500_text_prompt/TXTP023	run_test.pl
+txtp024		ARBigScreenText		VP6500_text_prompt/TXTP024	run_test.pl
+txtp025		ARBigScreenText		VP6500_text_prompt/TXTP025	run_test.pl
+txtp026		ARBigScreenText		VP6500_text_prompt/TXTP026	run_test.pl
+txtp027		ARBigScreenText		VP6500_text_prompt/TXTP027	run_test.pl
+txtp028		ARBigScreenText		VP6500_text_prompt/TXTP028	run_test.pl
+txtp029		ARBigScreenText		VP6500_text_prompt/TXTP029	run_test.pl
+txtp030		ARBigScreenText		VP6500_text_prompt/TXTP030	run_test.pl
+txtp031		ARBigScreenText		VP6500_text_prompt/TXTP031	run_test.pl
+txtp034		ARBigScreenText		VP6500_text_prompt/TXTP034	run_test.pl
+txtp035		ARBigScreenText		VP6500_text_prompt/TXTP035	run_test.pl
+txtp036		ARBigScreenText		VP6500_text_prompt/TXTP036	run_test.pl
+txtp037		ARBigScreenText		VP6500_text_prompt/TXTP037	run_test.pl
+txtp038		ARBigScreenText		VP6500_text_prompt/TXTP038	run_test.pl
+txtp039		ARBigScreenText		VP6500_text_prompt/TXTP039	run_test.pl
+txtp040		ARBigScreenText		VP6500_text_prompt/TXTP040	run_test.pl
+txtp041		ARBigScreenText		VP6500_text_prompt/TXTP041	run_test.pl
+txtp042		ARBigScreenText		VP6500_text_prompt/TXTP042	run_test.pl
+txtp044		ARBigScreenText		VP6500_text_prompt/TXTP044	run_test.pl
+txtp046		ARBigScreenText		VP6500_text_prompt/TXTP046	run_test.pl
+txtp047		ARBigScreenText		VP6500_text_prompt/TXTP047	run_test.pl
+txtp048		ARBigScreenText		VP6500_text_prompt/TXTP048	run_test.pl
+txtp049		ARBigScreenText		VP6500_text_prompt/TXTP049	run_test.pl
+txtp050		ARBigScreenText		VP6500_text_prompt/TXTP050	run_test.pl
+txtp0501	ARBigScreenText		VP6500_text_prompt/TXTP050_1	run_test.pl
+txtp052		ARBigScreenText		VP6500_text_prompt/TXTP052	run_test.pl
+txtp0521	ARBigScreenText		VP6500_text_prompt/TXTP052_1	run_test.pl
+txtp053		ARBigScreenText		VP6500_text_prompt/TXTP053	run_test.pl
+txtp054		ARBigScreenText		VP6500_text_prompt/TXTP054	run_test.pl
+txtp055		ARBigScreenText		VP6500_text_prompt/TXTP055	run_test.pl
+txtp056		ARBigScreenText		VP6500_text_prompt/TXTP056	run_test.pl
+txtp057		ARBigScreenText		VP6500_text_prompt/TXTP057	run_test.pl
+txtp0571	ARBigScreenText		VP6500_text_prompt/TXTP057_1	run_test.pl
+txtp0572	ARBigScreenText		VP6500_text_prompt/TXTP057_2	run_test.pl
+txtp058		ARBigScreenText		VP6500_text_prompt/TXTP058	run_test.pl
+txtp059		ARBigScreenText		VP6500_text_prompt/TXTP059	run_test.pl
+txtp060		ARBigScreenText		VP6500_text_prompt/TXTP060	run_test.pl
+txtp061		ARBigScreenText		VP6500_text_prompt/TXTP061	run_test.pl
+txtp062		ARBigScreenText		VP6500_text_prompt/TXTP062	run_test.pl
+txtp063		ARBigScreenText		VP6500_text_prompt/TXTP063	run_test.pl
+txtp064		ARBigScreenText		VP6500_text_prompt/TXTP064	run_test.pl
+txtp065		ARBigScreenText		VP6500_text_prompt/TXTP065	run_test.pl
+txtp066		ARBigScreenText		VP6500_text_prompt/TXTP066	run_test.pl
+txtp067		ARBigScreenText		VP6500_text_prompt/TXTP067	run_test.pl
+txtp068		ARBigScreenText		VP6500_text_prompt/TXTP068	run_test.pl
+txtp069		ARBigScreenText		VP6500_text_prompt/TXTP069	run_test.pl
+txtp070		ARBigScreenText		VP6500_text_prompt/TXTP070	run_test.pl
+txtp071		ARBigScreenText		VP6500_text_prompt/TXTP071	run_test.pl
+txtp072		ARBigScreenText		VP6500_text_prompt/TXTP072	run_test.pl
+txtp073		ARBigScreenText		VP6500_text_prompt/TXTP073	run_test.pl
+txtp074		ARBigScreenText		VP6500_text_prompt/TXTP074	run_test.pl
+txtp075		ARBigScreenText		VP6500_text_prompt/TXTP075	run_test.pl
+txtp076		ARBigScreenText		VP6500_text_prompt/TXTP076	run_test.pl
+txtp077		ARBigScreenText		VP6500_text_prompt/TXTP077	run_test.pl
+txtp078		ARBigScreenText		VP6500_text_prompt/TXTP078	run_test.pl
+txtp079		ARBigScreenText		VP6500_text_prompt/TXTP079	run_test.pl
+txtp080		ARBigScreenText		VP6500_text_prompt/TXTP080	run_test.pl
+txtp081		ARBigScreenText		VP6500_text_prompt/TXTP081	run_test.pl
+txtp082		ARBigScreenText		VP6500_text_prompt/TXTP082	run_test.pl
+txtp083		ARBigScreenText		VP6500_text_prompt/TXTP083	run_test.pl
+txtp084		ARBigScreenText		VP6500_text_prompt/TXTP084	run_test.pl
+AMTP000100	ARBigScreenAMT		Amount_prompt/AMTP000100		run_test.pl
+AMTP000101	ARBigScreenAMT		Amount_prompt/AMTP000101		run_test.pl
+AMTP000200	ARBigScreenAMT		Amount_prompt/AMTP000200		run_test.pl
+AMTP000201	ARBigScreenAMT		Amount_prompt/AMTP000201		run_test.pl
+AMTP000300	ARBigScreenAMT		Amount_prompt/AMTP000300		run_test.pl
+AMTP000301	ARBigScreenAMT		Amount_prompt/AMTP000301		run_test.pl
+AMTP000500	ARBigScreenAMT		Amount_prompt/AMTP000500		run_test.pl
+AMTP000600	ARBigScreenAMT		Amount_prompt/AMTP000600		run_test.pl
+AMTP000700	ARBigScreenAMT		Amount_prompt/AMTP000700		run_test.pl
+AMTP000800	ARBigScreenAMT		Amount_prompt/AMTP000800		run_test.pl
+AMTP000900	ARBigScreenAMT		Amount_prompt/AMTP000900		run_test.pl
+AMTP001000	ARBigScreenAMT		Amount_prompt/AMTP001000		run_test.pl
+AMTP001100	ARBigScreenAMT		Amount_prompt/AMTP001100		run_test.pl
+AMTP001200	ARBigScreenAMT		Amount_prompt/AMTP001200		run_test.pl
+AMTP001300	ARBigScreenAMT		Amount_prompt/AMTP001300		run_test.pl
+AMTP001400	ARBigScreenAMT		Amount_prompt/AMTP001400		run_test.pl
+AMTP001500	ARBigScreenAMT		Amount_prompt/AMTP001500		run_test.pl
+AMTP001600	ARBigScreenAMT		Amount_prompt/AMTP001600		run_test.pl
+AMTP001700	ARBigScreenAMT		Amount_prompt/AMTP001700		run_test.pl
+AMTP001800	ARBigScreenAMT		Amount_prompt/AMTP001800		run_test.pl
+AMTP001900	ARBigScreenAMT		Amount_prompt/AMTP001900		run_test.pl
+AMTP002000	ARBigScreenAMT		Amount_prompt/AMTP002000		run_test.pl
+AMTP002100	ARBigScreenAMT		Amount_prompt/AMTP002100		run_test.pl
+AMTP002200	ARBigScreenAMT		Amount_prompt/AMTP002200		run_test.pl
+-- do not run for now
+AMTP002300	ARBigScreenAMTx		Amount_prompt/AMTP002300		run_test.pl
+AMTP002400	ARBigScreenAMTx		Amount_prompt/AMTP002400		run_test.pl
+AMTP002500	ARBigScreenAMTx		Amount_prompt/AMTP002500		run_test.pl
+AMTP002600	ARBigScreenAMTx		Amount_prompt/AMTP002600		run_test.pl
+AMTP002700	ARBigScreenAMTx		Amount_prompt/AMTP002700		run_test.pl
+AMTP002800	ARBigScreenAMTx		Amount_prompt/AMTP002800		run_test.pl
+AMTP002900	ARBigScreenAMTx		Amount_prompt/AMTP002900		run_test.pl
+AMTP002901	ARBigScreenAMTx		Amount_prompt/AMTP002901		run_test.pl
+AMTP003000	ARBigScreenAMTx		Amount_prompt/AMTP003000		run_test.pl
+AMTP003100	ARBigScreenAMTx		Amount_prompt/AMTP003100		run_test.pl
+AMTP003200	ARBigScreenAMTx		Amount_prompt/AMTP003200		run_test.pl
+AMTP003300	ARBigScreenAMTx		Amount_prompt/AMTP003300		run_test.pl
+AMTP003301	ARBigScreenAMTx		Amount_prompt/AMTP003301		run_test.pl
+AMTP003400	ARBigScreenAMTx		Amount_prompt/AMTP003400		run_test.pl
+AMTP003500	ARBigScreenAMTx		Amount_prompt/AMTP003500		run_test.pl
+AMTP003600	ARBigScreenAMTx		Amount_prompt/AMTP003600		run_test.pl
+AMTP003700	ARBigScreenAMTx		Amount_prompt/AMTP003700		run_test.pl
+AMTP003701	ARBigScreenAMTx		Amount_prompt/AMTP003701		run_test.pl
+AMTP003800	ARBigScreenAMTx		Amount_prompt/AMTP003800		run_test.pl
+AMTP003900	ARBigScreenAMTx		Amount_prompt/AMTP003900		run_test.pl
+AMTP004000	ARBigScreenAMTx		Amount_prompt/AMTP004000		run_test.pl
+AMTP004100	ARBigScreenAMTx		Amount_prompt/AMTP004100		run_test.pl
+AMTP004200	ARBigScreenAMTx		Amount_prompt/AMTP004200		run_test.pl
+AMTP004300	ARBigScreenAMTx		Amount_prompt/AMTP004300		run_test.pl
+AMTP004400	ARBigScreenAMTx		Amount_prompt/AMTP004400		run_test.pl
+AMTP004500	ARBigScreenAMTx		Amount_prompt/AMTP004500		run_test.pl
+AMTP004600	ARBigScreenAMTx		Amount_prompt/AMTP004600		run_test.pl
+AMTP004700	ARBigScreenAMTx		Amount_prompt/AMTP004700		run_test.pl
+AMTP004800	ARBigScreenAMTx		Amount_prompt/AMTP004800		run_test.pl
+AMTP004900	ARBigScreenAMTx		Amount_prompt/AMTP004900		run_test.pl
+AMTP005000	ARBigScreenAMTx		Amount_prompt/AMTP005000		run_test.pl
+AMTP005100	ARBigScreenAMTx		Amount_prompt/AMTP005100		run_test.pl
+AMTP005200	ARBigScreenAMTx		Amount_prompt/AMTP005200		run_test.pl
+AMTP005300	ARBigScreenAMTx		Amount_prompt/AMTP005300		run_test.pl
+AMTP005400	ARBigScreenAMTx		Amount_prompt/AMTP005400		run_test.pl
+AMTP005500	ARBigScreenAMTx		Amount_prompt/AMTP005500		run_test.pl
+AMTP005600	ARBigScreenAMTx		Amount_prompt/AMTP005600		run_test.pl
+AMTP005700	ARBigScreenAMTx		Amount_prompt/AMTP005700		run_test.pl
+AMTP005800	ARBigScreenAMTx		Amount_prompt/AMTP005800		run_test.pl
+AMTP005900	ARBigScreenAMTx		Amount_prompt/AMTP005900		run_test.pl
+AMTP006000	ARBigScreenAMTx		Amount_prompt/AMTP006000		run_test.pl
+AMTP006100	ARBigScreenAMTx		Amount_prompt/AMTP006100		run_test.pl
+AMTP006200	ARBigScreenAMTx		Amount_prompt/AMTP006200		run_test.pl
+AMTP006300	ARBigScreenAMTx		Amount_prompt/AMTP006300		run_test.pl
+AMTP006400	ARBigScreenAMTx		Amount_prompt/AMTP006400		run_test.pl
+AMTP006500	ARBigScreenAMTx		Amount_prompt/AMTP006500		run_test.pl
+AMTP006600	ARBigScreenAMTx		Amount_prompt/AMTP006600		run_test.pl
+AMTP006700	ARBigScreenAMTx		Amount_prompt/AMTP006700		run_test.pl
+AMTP006800	ARBigScreenAMTx		Amount_prompt/AMTP006800		run_test.pl
+AMTP006900	ARBigScreenAMTx		Amount_prompt/AMTP006900		run_test.pl
+AMTP007000	ARBigScreenAMTx		Amount_prompt/AMTP007000		run_test.pl
+AMTP007100	ARBigScreenAMTx		Amount_prompt/AMTP007100		run_test.pl
+AMTP007200	ARBigScreenAMTx		Amount_prompt/AMTP007200		run_test.pl
+AMTP007300	ARBigScreenAMTx		Amount_prompt/AMTP007300		run_test.pl
+AMTP007400	ARBigScreenAMTx		Amount_prompt/AMTP007400		run_test.pl
+AMTP007600	ARBigScreenAMTx		Amount_prompt/AMTP007600		run_test.pl
+AMTP007700	ARBigScreenAMTx		Amount_prompt/AMTP007700		run_test.pl
+AMTP007800	ARBigScreenAMTx		Amount_prompt/AMTP007800		run_test.pl
+AMTP007900	ARBigScreenAMTx		Amount_prompt/AMTP007900		run_test.pl
+AMTP008000	ARBigScreenAMTx		Amount_prompt/AMTP008000		run_test.pl
+--- try it
+DSPB000100	ARDButton		DButtons/DSPB000100	run_test.pl
+DSPB000200	ARDButton		DButtons/DSPB000200	run_test.pl
+DSPB000300	ARDButton		DButtons/DSPB000300	run_test.pl
+DSPB000400	ARDButton		DButtons/DSPB000400	run_test.pl
+DSPB000500	ARDButton		DButtons/DSPB000500	run_test.pl
+DSPB000600	ARDButton		DButtons/DSPB000600	run_test.pl
+DSPB000700	ARDButton		DButtons/DSPB000700	run_test.pl
+DSPB000800	ARDButton		DButtons/DSPB000800	run_test.pl
+DSPB000900	ARDButton		DButtons/DSPB000900	run_test.pl
+DSPB001000	ARDButton		DButtons/DSPB001000	run_test.pl
+DSPB001100	ARDButton		DButtons/DSPB001100	run_test.pl
+DSPB001200	ARDButton		DButtons/DSPB001200	run_test.pl
+DSPB001300	ARDButton		DButtons/DSPB001300	run_test.pl
+DSPB001400	ARDButton		DButtons/DSPB001400	run_test.pl
+DSPB001500	ARDButton		DButtons/DSPB001500	run_test.pl
+DSPB001600	ARDButton		DButtons/DSPB001600	run_test.pl
+DSPB001700	ARDButton		DButtons/DSPB001700	run_test.pl
+DSPB001800	ARDButton		DButtons/DSPB001800	run_test.pl
+DSPB001900	ARDButton		DButtons/DSPB001900	run_test.pl
+DSPB002000	ARDButton		DButtons/DSPB002000	run_test.pl
+DSPB002100	ARDButton		DButtons/DSPB002100	run_test.pl
+DSPB002200	ARDButton		DButtons/DSPB002200	run_test.pl
+DSPB002300	ARDButton		DButtons/DSPB002300	run_test.pl
+DSPB002400	ARDButton		DButtons/DSPB002400	run_test.pl
+DSPB002500	ARDButton		DButtons/DSPB002500	run_test.pl
+DSPB002510	ARDButton		DButtons/DSPB002510	run_test.pl
+DSPB002600	ARDButton		DButtons/DSPB002600	run_test.pl
+DSPB002700	ARDButton		DButtons/DSPB002700	run_test.pl
+DSPB002800	ARDButton		DButtons/DSPB002800	run_test.pl
+DSPB002900	ARDButton		DButtons/DSPB002900	run_test.pl
+DSPB003000	ARDButton		DButtons/DSPB003000	run_test.pl
+DSPB003100	ARDButton		DButtons/DSPB003100	run_test.pl
+DSPB003200	ARDButton		DButtons/DSPB003200	run_test.pl
+DSPB003300	ARDButton		DButtons/DSPB003300	run_test.pl
+DSPB003400	ARDButton		DButtons/DSPB003400	run_test.pl
+DSPB003500	ARDButton		DButtons/DSPB003500	run_test.pl
+DSPB003600	ARDButton		DButtons/DSPB003600	run_test.pl
+DSPB003700	ARDButton		DButtons/DSPB003700	run_test.pl
+DSPB003800	ARDButton		DButtons/DSPB003800	run_test.pl
+DSPB003900	ARDButton		DButtons/DSPB003900	run_test.pl
+DSPB004000	ARDButton		DButtons/DSPB004000	run_test.pl
+DSPB004100	ARDButton		DButtons/DSPB004100	run_test.pl
+DSPB004200	ARDButton		DButtons/DSPB004200	run_test.pl
+DSPB004300	ARDButton		DButtons/DSPB004300	run_test.pl
+DSPB004400	ARDButton		DButtons/DSPB004400	run_test.pl
+DSPB004500	ARDButton		DButtons/DSPB004500	run_test.pl
+DSPB004600	ARDButton		DButtons/DSPB004600	run_test.pl
+DSPB004700	ARDButton		DButtons/DSPB004700	run_test.pl
+DSPB004800	ARDButton		DButtons/DSPB004800	run_test.pl
+DSPB004900	ARDButton		DButtons/DSPB004900	run_test.pl
+DSPB005000	ARDButton		DButtons/DSPB005000	run_test.pl
+DSPB005100	ARDButton		DButtons/DSPB005100	run_test.pl
+DSPB005200	ARDButton		DButtons/DSPB005200	run_test.pl
+DSPB005300	ARDButton		DButtons/DSPB005300	run_test.pl
+DSPB005400	ARDButton		DButtons/DSPB005400	run_test.pl
+DSPB005500	ARDButton		DButtons/DSPB005500	run_test.pl
+DSPB005600	ARDButton		DButtons/DSPB005600	run_test.pl
+DSPB005700	ARDButton		DButtons/DSPB005700	run_test.pl
+DSPB005800	ARDButton		DButtons/DSPB005800	run_test.pl
+DSPB005900	ARDButton		DButtons/DSPB005900	run_test.pl
+DSPB006000	ARDButton		DButtons/DSPB006000	run_test.pl
+DSPB006100	ARDButton		DButtons/DSPB006100	run_test.pl
+DSPB006200	ARDButton		DButtons/DSPB006200	run_test.pl
+DSPB006300	ARDButton		DButtons/DSPB006300	run_test.pl
+DSPB006400	ARDButton		DButtons/DSPB006400	run_test.pl
+DSPB006500	ARDButton		DButtons/DSPB006500	run_test.pl
+DSPB006600	ARDButton		DButtons/DSPB006600	run_test.pl
+DSPB006700	ARDButton		DButtons/DSPB006700	run_test.pl
+DSPB006800	ARDButton		DButtons/DSPB006800	run_test.pl
+DSPB006900	ARDButton		DButtons/DSPB006900	run_test.pl
+DSPB007000	ARDButton		DButtons/DSPB007000	run_test.pl
+DSPB007100	ARDButton		DButtons/DSPB007100	run_test.pl
+DSPB007200	ARDButton		DButtons/DSPB007200	run_test.pl
+DSPB007300	ARDButton		DButtons/DSPB007300	run_test.pl
+DSPB007400	ARDButton		DButtons/DSPB007400	run_test.pl
+DSPB007500	ARDButton		DButtons/DSPB007500	run_test.pl
+DSPB007600	ARDButton		DButtons/DSPB007600	run_test.pl
+DSPB007700	ARDButton		DButtons/DSPB007700	run_test.pl
+DSPB007800	ARDButton		DButtons/DSPB007800	run_test.pl
+DSPB007900	ARDButton		DButtons/DSPB007900	run_test.pl
+DSPB008000	ARDButton		DButtons/DSPB008000	run_test.pl
+DSPB008100	ARDButton		DButtons/DSPB008100	run_test.pl
+DSPB008200	ARDButton		DButtons/DSPB008200	run_test.pl
+--------
+
+---Note: FV002 does not generate PAss-Fail in the final report -----------------------------------------------------
+
+FV001           FWVersion            GETVersion/FV001        run_test.pl
+FV002           FWVersion            GETVersion/FV002        run_test.pl
+--- FV003           FWVersion            GETVersion/FV003        run_test.pl
+------------------------------------------------------------------------
+
+#--- Time stamping ---
+CUB-001		CUB		CUB/CUB-001	run_test.pl
+CUB-002		CUB		CUB/CUB-002	run_test.pl
+CUB-003		CUB		CUB/CUB-003	run_test.pl
+CUB-004		CUB		CUB/CUB-004	run_test.pl
+CUB-005		CUB		CUB/CUB-005	run_test.pl
+#--- 0 amount cap ---
+CUB-101		CUB		CUB/CUB-101	run_test.pl
+CUB-102		CUB		CUB/CUB-102	run_test.pl
+CUB-103		CUB		CUB/CUB-103	run_test.pl
+CUB-104		CUB		CUB/CUB-104	run_test.pl
+CUB-105		CUB		CUB/CUB-105	run_test.pl
+#--- fixed fare  ---
+CUB-201		CUB		CUB/CUB-201	run_test.pl
+CUB-202		CUB		CUB/CUB-202	run_test.pl
+CUB-203		CUB		CUB/CUB-203	run_test.pl
+CUB-204		CUB		CUB/CUB-204	run_test.pl
+CUB-205		CUB		CUB/CUB-205	run_test.pl
+#--- AID matching ---
+CUB-301		CUB		CUB/CUB-301	run_test.pl
+CUB-302		CUB		CUB/CUB-302	run_test.pl
+CUB-303		CUB		CUB/CUB-303	run_test.pl
+CUB-304		CUB		CUB/CUB-304	run_test.pl
+CUB-305		CUB		CUB/CUB-305	run_test.pl
+#--- Additional tags ---
+CUB-401		CUB		CUB/CUB-401	run_test.pl
+CUB-402		CUB		CUB/CUB-402	run_test.pl
+CUB-403		CUB		CUB/CUB-403	run_test.pl
+CUB-404		CUB		CUB/CUB-404	run_test.pl
+CUB-405		CUB		CUB/CUB-405	run_test.pl
+
+
+#--- swipe in PT for AR2.1.5 and up ---
+PTMSR001	PTMSR		PT_MSR/PTMSR001		run_test.pl
+PTMSR002	PTMSR		PT_MSR/PTMSR002		run_test.pl
+PTMSR003	PTMSR		PT_MSR/PTMSR003		run_test.pl
+PTMSR004	PTMSR		PT_MSR/PTMSR004		run_test.pl
+PTMSR005	PTMSR		PT_MSR/PTMSR005		run_test.pl

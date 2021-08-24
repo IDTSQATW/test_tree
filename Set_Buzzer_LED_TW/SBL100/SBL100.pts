@@ -1,0 +1,564 @@
+DL_SCRIPTVERSION
+1
+24894
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "SBL100" ' !!!!! EDIT THIS !!!!!
+' Objective: to verify VP6300 LED
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+      
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+readercheck = msgbox("Do u test VP6300?", vbyesno)
+countfail = 0
+if readercheck = 6 then
+   '----------------------------LCD check
+   msgbox"Click OK -> Monitor the LCD...", vbokonly
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf    
+   DL.AddComment "--- All pixels on"
+   DL.SendSequence "All pixels on"
+   r1 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 1500
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- All pixels off"
+   DL.SendSequence "All pixels off"
+   r2 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 500
+
+   usercheck = msgbox("Does LCD All pixels ON and then OFF once?", vbyesno)
+   if usercheck = 7 or r1 = 0 or r2 = 0 then 
+      result = 0
+      countfail = countfail + 1
+   else
+      result = 1
+   end if
+   DL.AddComment vbCrLf
+   PrintMyResult(result)
+
+   '----------------------------RFLED check
+   msgbox"Click OK -> Monitor the RFLED...", vbokonly
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf    
+   DL.AddComment "--- RFLED 1 on"
+   DL.SendSequence "RFLED 1 on"
+   r1 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 1000
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- RFLED 1 off"
+   DL.SendSequence "RFLED 1 off"
+   r2 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 800
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf    
+   DL.AddComment "--- RFLED 2 on"
+   DL.SendSequence "RFLED 2 on"
+   r3 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 800
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- RFLED 2 off"
+   DL.SendSequence "RFLED 2 off"
+   r4 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 800
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf    
+   DL.AddComment "--- RFLED 3 on"
+   DL.SendSequence "RFLED 3 on"
+   r5 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 800
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- RFLED 3 off"
+   DL.SendSequence "RFLED 3 off"
+   r6 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 800
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf    
+   DL.AddComment "--- RFLED 4 on"
+   DL.SendSequence "RFLED 4 on"
+   r7 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 800
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- RFLED 4 off"
+   DL.SendSequence "RFLED 4 off"
+   r8 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 800
+
+   usercheck = msgbox("Does RFLED turn ON and then OFF once, from no. 1~4 by sequence?", vbyesno)
+   if usercheck = 7 or r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 or r6 = 0 or r7 = 0 or r8 = 0 then 
+      result = 0
+      countfail = countfail + 1
+   else
+      result = 1
+   end if
+   DL.AddComment vbCrLf
+   PrintMyResult(result)
+
+   '----------------------------FLASHLED check
+   msgbox"Click OK -> Monitor the FLASHLED...", vbokonly
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf    
+   DL.AddComment "--- FLASHLED 1 on"
+   DL.SendSequence "FLASHLED 1 on"
+   r1 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 1000
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- FLASHLED 1 off"
+   DL.SendSequence "FLASHLED 1 off"
+   r2 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 800
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf    
+   DL.AddComment "--- FLASHLED 2 on"
+   DL.SendSequence "FLASHLED 2 on"
+   r3 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 800
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- FLASHLED 2 off"
+   DL.SendSequence "FLASHLED 2 off"
+   r4 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 800
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf    
+   DL.AddComment "--- FLASHLED 3 on"
+   DL.SendSequence "FLASHLED 3 on"
+   r5 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 800
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- FLASHLED 3 off"
+   DL.SendSequence "FLASHLED 3 off"
+   r6 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 800
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf    
+   DL.AddComment "--- FLASHLED 4 on"
+   DL.SendSequence "FLASHLED 4 on"
+   r7 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 800
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- FLASHLED 4 off"
+   DL.SendSequence "FLASHLED 4 off"
+   r8 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 800
+
+   usercheck = msgbox("Does FLASHLED turn ON and then OFF once, from no. 1~4 by sequence?", vbyesno)
+   if usercheck = 7 or r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 or r6 = 0 or r7 = 0 or r8 = 0 then 
+      result = 0
+      countfail = countfail + 1
+   else
+      result = 1
+   end if
+   DL.AddComment vbCrLf
+   PrintMyResult(result)
+
+   '----------------------------ICCLED check
+   msgbox"Click OK -> Monitor the ICCLED...", vbokonly
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf    
+   DL.AddComment "--- All ICCLED on"
+   DL.SendSequence "All ICCLED on"
+   r1 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 1500
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- All ICCLED off"
+   DL.SendSequence "All ICCLED off"
+   r2 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 500
+
+   usercheck = msgbox("Does ICC LED turn ON and then OFF once?", vbyesno)
+   if usercheck = 7 or r1 = 0 or r2 = 0 then 
+      result = 0
+      countfail = countfail + 1
+   else
+      result = 1
+   end if
+   DL.AddComment vbCrLf
+   PrintMyResult(result)
+
+   '----------------------------Buzzer check
+   msgbox"Click OK -> Listen the Buzzer...", vbokonly
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf    
+   DL.AddComment "--- Beep on"
+   DL.SendSequence "Beep on"
+   r1 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 1000
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- Beep off"
+   DL.SendSequence "Beep off"
+   r2 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 500
+
+   usercheck = msgbox("Does Buzzer turn ON and then OFF once?", vbyesno)
+   if usercheck = 7 or r1 = 0 or r2 = 0 then 
+      result = 0
+      countfail = countfail + 1
+   else
+      result = 1
+   end if
+   DL.AddComment vbCrLf
+   PrintMyResult(result)
+
+   '----------------------------TM4 Front LED check
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- TM4 Front LED Both off"
+   DL.SendSequence "TM4 Front LED Both off"
+   dl.pause 500
+
+   msgbox"Click OK -> Monitor the TM4 Front LED...", vbokonly
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf    
+   DL.AddComment "--- TM4 Front LED Red on, green off"
+   DL.SendSequence "TM4 Front LED Red on, green off"
+   r1 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 800
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- TM4 Front LED Red off, green on"
+   DL.SendSequence "TM4 Front LED Red off, green on"
+   r2 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 800
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- TM4 Front LED Both on"
+   DL.SendSequence "TM4 Front LED Both on"
+   r3 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 800
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- TM4 Front LED Both off"
+   DL.SendSequence "TM4 Front LED Both off"
+   r4 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 800
+
+   usercheck = msgbox("Does TM4 Front LED turn (steady) ON as Red -> Green -> Amber color once by sequence and then OFF?", vbyesno)
+   if usercheck = 7 or r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 then 
+      result = 0
+      countfail = countfail + 1
+   else
+      result = 1
+   end if
+   DL.AddComment vbCrLf
+   PrintMyResult(result)
+
+   msgbox"Click OK -> Monitor the TM4 Front LED...", vbokonly
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf    
+   DL.AddComment "--- TM4 Front LED Red flash, green off"
+   DL.SendSequence "TM4 Front LED Red flash, green off"
+   r1 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 2000
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- TM4 Front LED Red off, green flash"
+   DL.SendSequence "TM4 Front LED Red off, green flash"
+   r2 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 2000
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- TM4 Front LED Both flash"
+   DL.SendSequence "TM4 Front LED Both flash"
+   r3 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 2000
+
+   usercheck = msgbox("Does TM4 Front LED turn (flash) ON as Red -> Green -> Amber color by sequence?", vbyesno)
+   if usercheck = 7 or r1 = 0 or r2 = 0 or r3 = 0 then 
+      result = 0
+      countfail = countfail + 1
+   else
+      result = 1
+   end if
+   DL.AddComment vbCrLf
+   PrintMyResult(result)
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- TM4 Front LED Both off"
+   DL.SendSequence "TM4 Front LED Both off"
+   dl.pause 500
+
+   msgbox"Click OK -> Monitor the TM4 Front LED...", vbokonly
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf    
+   DL.AddComment "--- TM4 Front LED Red flash, green on"
+   DL.SendSequence "TM4 Front LED Red flash, green on"
+   r1 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 2000
+
+   usercheck = msgbox("Does TM4 Front LED turn (flash) ON as Amber -> Green repeatedly?", vbyesno)
+   if usercheck = 7 or r1 = 0 then 
+      result = 0
+      countfail = countfail + 1
+   else
+      result = 1
+   end if
+   DL.AddComment vbCrLf
+   PrintMyResult(result)
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- TM4 Front LED Red on, green flash"
+   DL.SendSequence "TM4 Front LED Red on, green flash"
+   r1 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 2000
+
+   usercheck = msgbox("Does TM4 Front LED turn (flash) ON as Red -> Amber repeatedly?", vbyesno)
+   if usercheck = 7 or r1 = 0 then 
+      result = 0
+      countfail = countfail + 1
+   else
+      result = 1
+   end if
+   DL.AddComment vbCrLf
+   PrintMyResult(result)
+
+   '----------------------------All pixels and leds check
+   msgbox"Click OK -> Monitor All LCD & LEDs...", vbokonly
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf 
+   DL.AddComment "--- All pixels and leds on, short beeps 3 times"
+   DL.SendSequence "All pixels and leds on, short beeps 3 times"
+   r1 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 1000
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf    
+   DL.AddComment "--- All pixels and leds off"
+   DL.SendSequence "All pixels and leds off"
+   r1 = DL.WaitForSequence("01 00", 1, 3000)
+   dl.pause 500
+
+   usercheck = msgbox("Does All pixels & LEDs turn ON and beeps 3 times, finally All OFF?", vbyesno)
+   if usercheck = 7 or r1 = 0 or r2 = 0 then 
+      result = 0
+      countfail = countfail + 1
+   else
+      result = 1
+   end if
+   DL.AddComment vbCrLf
+   PrintMyResult(result)
+
+   if countfail <> 0 then result = 0
+else
+   dl.addcomment "** The case for VP6300. **"
+end if
+'------------------------------------------------------------
+DL.AddComment vbCrLf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
+
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'DL.pause 1000
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub
+

@@ -1,0 +1,387 @@
+Docklight Log File (HEX) - Started 2020/10/23 14:37:38.182 
+ TEST CASE: SGP006
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ ===================================== Set parameter
+ ===================================================
+ --- 9f 02
+
+2020/10/23 14:37:40.666 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 09 9F 02 06 00 00 00 00 10 00 A0 AA 
+2020/10/23 14:37:40.704 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- 9f 03
+
+2020/10/23 14:37:40.929 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 09 9F 03 06 00 00 00 00 20 00 E6 E8 
+2020/10/23 14:37:40.966 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- 9f 33
+
+2020/10/23 14:37:41.189 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 06 9F 33 03 00 09 E8 88 BD 
+2020/10/23 14:37:41.224 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- 9f 40
+
+2020/10/23 14:37:41.448 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 08 9F 40 05 60 00 00 30 31 78 1A 
+2020/10/23 14:37:41.485 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- 9f 1a
+
+2020/10/23 14:37:41.706 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 9F 1A 02 09 78 EB 81 
+2020/10/23 14:37:41.740 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- 9f 1b
+
+2020/10/23 14:37:41.964 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 07 9F 1B 04 00 00 18 00 6B 6B 
+2020/10/23 14:37:42.000 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- 9f 35
+
+2020/10/23 14:37:42.226 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 04 9F 35 01 26 58 7B 
+2020/10/23 14:37:42.259 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- 5f 2a
+
+2020/10/23 14:37:42.485 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 5F 2A 02 09 78 BA 9E 
+2020/10/23 14:37:42.519 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- 9c
+
+2020/10/23 14:37:42.750 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 03 9C 01 01 DC BA 
+2020/10/23 14:37:42.782 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- ff fc
+
+2020/10/23 14:37:43.010 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 39 01 00 5D 86 
+2020/10/23 14:37:43.044 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- ff fd
+
+2020/10/23 14:37:43.269 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 09 DF 81 22 05 F8 50 AC F8 01 3B 25 
+2020/10/23 14:37:43.307 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- ff fe
+
+2020/10/23 14:37:43.535 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 09 DF 81 20 05 F8 50 AC A0 01 CE C2 
+2020/10/23 14:37:43.573 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- ff ff
+
+2020/10/23 14:37:43.798 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 09 DF 81 21 05 00 00 00 00 01 6C E7 
+2020/10/23 14:37:43.837 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- ff fb
+
+2020/10/23 14:37:44.063 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 38 01 02 2F 91 
+2020/10/23 14:37:44.103 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- ff fa
+
+2020/10/23 14:37:44.333 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 06 DF EF 29 02 00 00 6A 9C 
+2020/10/23 14:37:44.366 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- ff f9
+
+2020/10/23 14:37:44.587 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 1C 01 02 29 CB 
+2020/10/23 14:37:44.621 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- ff f8
+
+2020/10/23 14:37:44.846 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 37 01 00 5C 9D 
+2020/10/23 14:37:44.880 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- ff f7
+
+2020/10/23 14:37:45.104 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 7E 01 01 41 0E 
+2020/10/23 14:37:45.244 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- ff f5
+
+2020/10/23 14:37:45.472 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 0A DF 81 26 06 00 00 00 00 90 00 73 AD 
+2020/10/23 14:37:45.511 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- ff f4
+
+2020/10/23 14:37:45.739 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 07 DF EE 35 03 00 00 00 83 D3 
+2020/10/23 14:37:45.775 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- 9f 66
+
+2020/10/23 14:37:46.001 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 07 9F 66 04 A0 00 00 00 18 00 
+2020/10/23 14:37:46.037 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- ff f2
+
+2020/10/23 14:37:46.264 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 0C DF EE 6B 08 30 30 30 30 30 30 30 31 70 76 
+2020/10/23 14:37:46.305 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- ff f1
+
+2020/10/23 14:37:46.534 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 0A DF EE 34 06 00 00 00 01 00 01 EA 40 
+2020/10/23 14:37:46.573 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- ff f3
+
+2020/10/23 14:37:46.803 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 06 DF EE 44 02 04 FF 5B 84 
+2020/10/23 14:37:46.838 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- ff f0
+
+2020/10/23 14:37:47.066 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 07 DF EE 67 03 00 00 01 13 92 
+2020/10/23 14:37:47.102 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- df 63
+
+2020/10/23 14:37:47.328 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 63 01 01 73 0F 
+2020/10/23 14:37:47.362 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- df 64
+
+2020/10/23 14:37:47.587 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 64 01 01 E3 8A 
+2020/10/23 14:37:47.621 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- df 65
+
+2020/10/23 14:37:47.850 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 65 01 01 D3 BD 
+2020/10/23 14:37:47.884 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- df 66
+
+2020/10/23 14:37:48.111 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 66 01 01 83 E4 
+2020/10/23 14:37:48.145 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- 5f 36
+
+2020/10/23 14:37:48.371 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 04 5F 36 01 01 29 C5 
+2020/10/23 14:37:48.404 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- 9f 09
+
+2020/10/23 14:37:48.632 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 9F 09 02 00 01 B6 54 
+2020/10/23 14:37:48.666 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- 9f 15
+
+2020/10/23 14:37:48.895 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 9F 15 02 00 01 23 00 
+2020/10/23 14:37:48.929 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- 9f 53
+
+2020/10/23 14:37:49.153 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 04 9F 53 01 01 16 06 
+2020/10/23 14:37:49.185 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- 9f 6d
+
+2020/10/23 14:37:49.411 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 9F 6D 02 00 00 B4 D7 
+2020/10/23 14:37:49.445 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- df 28
+
+2020/10/23 14:37:49.676 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 07 DF EE 28 03 00 08 B8 D9 59 
+2020/10/23 14:37:49.712 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- df 29
+
+2020/10/23 14:37:49.943 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 07 DF EE 29 03 00 68 B8 A2 F8 
+2020/10/23 14:37:49.979 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ ===================================== Get parameter
+ ===================================================
+ 
+
+ --- Get EMV Parameters
+
+2020/10/23 14:37:50.525 [TX] - 56 69 56 4F 74 65 63 68 32 00 03 02 00 00 5B 91 
+2020/10/23 14:37:50.552 [RX] - 56 69 56 4F 74 65 63 68 32 00 03 00 01 72 DF EE 2D 01 00 DF EE 0C 01 02 DF EE 0F 01 01 DF EF 06 01 00 DF EF 07 01 00 DF EE 68 01 01 DF EE 6A 01 01 DF EE 75 03 00 30 00 DF EE 7C 01 00 DF EE 7F 01 00 DF 81 2D 03 00 00 13 DF 81 30 01 0D DF ED 18 01 01 DF EE 1D 05 04 04 2A 0C 31 DF EE 3B 04 00 BC 61 4E DF EF 36 04 00 00 00 00 DF EF 4B 03 12 00 00 DF EF 3D 01 00 DF ED 59 01 01 DF ED 7C 04 DF FF 00 02 DF ED 46 01 09 DF EF 72 01 00 DF EF 29 02 00 00 9F 02 06 00 00 00 00 10 00 9F 03 06 00 00 00 00 20 00 9F 33 03 00 09 E8 9F 40 05 60 00 00 30 31 9F 1A 02 09 78 9F 1B 04 00 00 18 00 9F 35 01 26 5F 2A 02 09 78 9C 01 01 DF EE 39 01 00 DF 81 22 05 F8 50 AC F8 01 DF 81 20 05 F8 50 AC A0 01 DF 81 21 05 00 00 00 00 01 DF EE 38 01 02 DF EE 1C 01 02 DF EE 37 01 00 DF EE 7E 01 01 DF 81 26 06 00 00 00 00 90 00 DF EE 35 03 00 00 00 9F 66 04 A0 00 00 00 DF EE 6B 08 30 30 30 30 30 30 30 31 DF EE 34 06 00 00 00 01 00 01 DF EE 44 02 04 FF DF EE 67 03 00 00 01 DF EE 63 01 01 DF EE 64 01 01 DF EE 65 01 01 DF EE 66 01 01 5F 36 01 01 9F 09 02 00 01 9F 15 02 00 01 9F 53 01 01 9F 6D 02 00 00 DF EE 28 03 00 08 B8 DF EE 29 03 00 68 B8 9A 03 20 10 23 9F 21 03 06 37 15 11 8F  
+
+ --- 9f 02: PASS
+ --- 9f 03: PASS
+ --- 9f 33: PASS
+ --- 9f 40: PASS
+ --- 9f 1a: PASS
+ --- 9f 1b: PASS
+ --- 9f 35: PASS
+ --- 5f 2a: PASS
+ --- 9c: PASS
+ --- ff fc: PSSS
+ --- ff fd: PASS
+ --- ff fe: PASS
+ --- ff ff: PASS
+ --- ff fb: PASS
+ --- ff fa: PASS
+ --- ff f9: PASS
+ --- ff f8: PASS
+ --- ff f7: PASS
+ --- ff f5: PASS
+ --- ff f4: PASS
+ --- 9f 66: PASS
+ --- ff f2: PASS
+ --- ff f1: PASS
+ --- ff f3: PASS
+ --- ff f0: PASS
+ --- df 63: PASS
+ --- df 64: PASS
+ --- df 65: PASS
+ --- df 66: PASS
+ --- 5f 36: PASS
+ --- 9f 09: PASS
+ --- 9f 15: PASS
+ --- 9f 53: PASS
+ --- 9f 6d: PASS
+ --- df 28: PASS
+ --- df 29: PASS
+ 
+Reader has rebooted ...
+
+ 
+
+ =================== Reboot DUT, get parameter again
+ ===================================================
+ 
+
+ --- Get EMV Parameters
+
+2020/10/23 14:38:13.710 [TX] - 56 69 56 4F 74 65 63 68 32 00 03 02 00 00 5B 91 
+2020/10/23 14:38:13.737 [RX] - 56 69 56 4F 74 65 63 68 32 00 03 00 01 72 DF EE 2D 01 00 DF EE 0C 01 02 DF EE 0F 01 01 DF EF 06 01 00 DF EF 07 01 00 DF EE 68 01 01 DF EE 6A 01 01 DF EE 75 03 00 30 00 DF EE 7C 01 00 DF EE 7F 01 00 DF 81 2D 03 00 00 13 DF 81 30 01 0D DF ED 18 01 01 DF EE 1D 05 04 04 2A 0C 31 DF EE 3B 04 00 BC 61 4E DF EF 36 04 00 00 00 00 DF EF 4B 03 12 00 00 DF EF 3D 01 00 DF ED 59 01 01 DF ED 7C 04 DF FF 00 02 DF ED 46 01 09 DF EF 72 01 00 DF EF 29 02 00 00 9F 02 06 00 00 00 00 10 00 9F 03 06 00 00 00 00 20 00 9F 33 03 00 09 E8 9F 40 05 60 00 00 30 31 9F 1A 02 09 78 9F 1B 04 00 00 18 00 9F 35 01 26 5F 2A 02 09 78 9C 01 01 DF EE 39 01 00 DF 81 22 05 F8 50 AC F8 01 DF 81 20 05 F8 50 AC A0 01 DF 81 21 05 00 00 00 00 01 DF EE 38 01 02 DF EE 1C 01 02 DF EE 37 01 00 DF EE 7E 01 00 DF 81 26 06 00 00 00 00 90 00 DF EE 35 03 00 00 00 9F 66 04 A0 00 00 00 DF EE 6B 08 30 30 30 30 30 30 30 31 DF EE 34 06 00 00 00 01 00 01 DF EE 44 02 04 FF DF EE 67 03 00 00 01 DF EE 63 01 01 DF EE 64 01 01 DF EE 65 01 01 DF EE 66 01 01 5F 36 01 01 9F 09 02 00 01 9F 15 02 00 01 9F 53 01 01 9F 6D 02 00 00 DF EE 28 03 00 08 B8 DF EE 29 03 00 68 B8 9A 03 20 10 23 9F 21 03 06 37 39 66 F4  
+
+ --- 9f 02: PASS
+ --- 9f 03: PASS
+ --- 9f 33: PASS
+ --- 9f 40: PASS
+ --- 9f 1a: PASS
+ --- 9f 1b: PASS
+ --- 9f 35: PASS
+ --- 5f 2a: PSSS
+ --- 9c: PASS
+ --- ff fc: PASS
+ --- ff fd: PASS
+ --- ff fe: PASS
+ --- ff ff: PASS
+ --- ff fb: PASS
+ --- ff fa: PASS
+ --- ff f9: PASS
+ --- ff f8: PASS
+ 
+
+ **FAIL**
+ --- ff f5: PASS
+ --- ff f4: PASS
+ --- 9f 66: PASS
+ --- ff f2: PASS
+ --- ff f1: PASS
+ --- ff f3: PASS
+ --- ff f0: PASS
+ --- df 63: PASS
+ --- df 64: PASS
+ --- df 65: PASS
+ --- df 66: PASS
+ --- 5f 36: PASS
+ --- 9f 09: PASS
+ --- 9f 15: PASS
+ --- 9f 53: PASS
+ --- 9f 6d: PASS
+ --- df 28: PASS
+ --- df 29: PASS
+ 
+
+ FAIL items (check value of config after reboot) = 1
+ 
+
+ ======== 04-09 set config as default, get parameter
+ ===================================================
+ 
+
+  Default NVM
+
+2020/10/23 14:38:17.719 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 09 00 00 87 30 
+2020/10/23 14:38:20.155 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Set Parameter Successful  
+
+ --- Get EMV Parameters
+
+2020/10/23 14:38:21.182 [TX] - 56 69 56 4F 74 65 63 68 32 00 03 02 00 00 5B 91 
+2020/10/23 14:38:21.209 [RX] - 56 69 56 4F 74 65 63 68 32 00 03 00 01 07 DF EE 2D 01 00 9C 01 00 9F 02 06 00 00 00 00 00 01 DF EE 0C 01 02 DF EE 0F 01 01 DF EE 28 03 00 08 E8 DF EE 29 03 00 68 E8 DF EE 64 01 00 DF EF 06 01 00 DF EF 07 01 00 DF EE 68 01 01 DF EE 6A 01 01 DF EE 75 03 00 30 00 DF EE 7C 01 00 DF EE 7F 01 00 DF EE 35 03 01 07 01 DF 81 26 06 00 00 00 00 20 00 DF EE 7E 01 00 DF 81 22 05 00 00 00 00 00 DF 81 20 05 00 00 00 00 00 DF 81 21 05 00 00 00 00 00 DF 81 2D 03 00 00 13 DF 81 30 01 0D DF ED 18 01 01 DF EE 1D 05 04 04 2A 0C 31 DF EE 3B 04 00 BC 61 4E DF EF 36 04 00 00 00 00 DF EF 4B 03 12 00 00 DF EF 3D 01 00 DF EE 37 01 03 DF EE 38 01 00 DF ED 59 01 01 DF ED 7C 04 DF FF 00 02 DF ED 46 01 09 DF EF 72 01 00 9F 53 01 01 DF EE 6B 08 30 30 30 30 30 30 30 31 DF EE 44 02 04 FF DF EE 1C 01 02 DF EF 29 02 00 00 9A 03 20 10 23 9F 21 03 06 37 46 2F 51  
+
+ --- 9f 02 Default: PASS
+ 
+
+ --- 9f 03 Default: **FAIL**
+ --- 9f 33 Default: PASS
+ 
+
+ --- 9f 40 Default: **FAIL**
+ 
+
+ --- 9f 1a Default: **FAIL**
+ --- 9f 1b Default: PASS
+ --- 9f 35 Default: PASS
+ 
+
+ --- 5f 2a Default: **FAIL**
+ --- 9c Default: PASS
+ --- ff fc Default: PASS
+ 
+
+ --- ff fd Default: **FAIL**
+ 
+
+ --- ff fe Default: **FAIL**
+ --- ff ff Default: PASS
+ --- ff fb Default: PASS
+ --- ff fa Default >>> As spec's definition, 04-09 did not modify this tag.: PASS
+ --- ff f9 Default >>> As spec's definition, 04-09 did not modify this tag.: PASS
+ --- ff f8 Default: PASS
+ 
+
+ --- ff f7 Default: **FAIL**
+ --- ff f5 Default: PASS
+ 
+
+ --- ff f4 Default: **FAIL**
+ 
+
+ --- 9f 66 Default: **FAIL**
+ --- ff f2 Default >>> As spec's definition, 04-09 did not modify this tag.: PASS
+ 
+
+ --- ff f1 Default: **FAIL**
+ --- ff f3 Default >>> As spec's definition, 04-09 did not modify this tag.: PASS
+ --- ff f0 Default: PASS
+ --- df 63 Default: PASS
+ 
+
+ --- df 64 Default: **FAIL**
+ --- df 65 Default: PASS
+ --- df 66 Default: PASS
+ 
+
+ --- 5f 36 Default: **FAIL**
+ 
+
+ --- 9f 09 Default: **FAIL**
+ 
+
+ --- 9f 15 Default: **FAIL**
+ --- 9f 53 Default >>> As spec's definition, 04-09 did not modify this tag.: PASS
+ 
+
+ --- 9f 6d Default: **FAIL**
+ --- df 28 Default: PASS
+ --- df 29 Default: PASS
+ 
+
+ FAIL items (check value of config after reset) = 15
+ 
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 2020/10/23 14:39:32.100 
+

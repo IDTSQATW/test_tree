@@ -1,0 +1,36 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Display center of screen Inval Amt
+56 69 56 4F 74 65 63 68 32 00 83 04 00 12 00 00 31 00 31 00 31 00 80 00 61 62 63 2E 31 32 33 00 B9 72
+0
+5
+
+RECEIVE
+0
+Display center of screen Inval Amt - OK
+56 69 56 4F 74 65 63 68 32 00 83 05 00 04 00 01 00 08 C5 EF
+-1
+1
+COMMENT Display center of screen Inval Amt - OK
+1
+1
+0
+1
+

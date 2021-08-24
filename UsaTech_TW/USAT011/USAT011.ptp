@@ -1,0 +1,162 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+USA Tech F6 (Disable attraction LEDs)
+F6 F6 F6
+0
+5
+
+SEND
+1
+USA Tech F7 (Enable attraction LEDs)
+F7 F7 F7
+0
+5
+
+SEND
+2
+Poll On Demand
+56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34
+0
+5
+
+SEND
+3
+Burst OFF
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 00 B9 2E
+0
+5
+
+SEND
+4
+Burst OFF (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 7E 01 00 60 1E
+0
+5
+
+SEND
+5
+03-02
+56 69 56 4F 74 65 63 68 32 00 03 02 00 00 5B 91
+0
+5
+
+RECEIVE
+0
+01 00
+56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+04 00
+56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+03 00
+56 69 56 4F 74 65 63 68 32 00 03 00 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
+df891b -- poll on demand
+DF 89 1B 01 01
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+4
+fff7 -- burst mode off
+FF F7 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+5
+fff7 -- burst mode off (NEO2)
+DF EE 7E 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+6
+USAT CL resp
+40 1B 41 02 52 46 49 44 2D ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 03 ?? 0D
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+7
+has data
+40 1B 41 02 52 46 49 44 2D
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

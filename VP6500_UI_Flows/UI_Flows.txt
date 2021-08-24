@@ -1,0 +1,132 @@
+UI_Flow1: WalMart
+Welcome
+Please wait...
+Tap Card
+Amount $1500.99 [Y/N]
+Signature capture
+Processing...
+Approved
+Thank You
+
+
+UI_Flow2: WalMart
+Welcome
+Please wait...
+Tap card
+Amount $1500.99 [Y/N]
+Pin Pad
+Processing...
+Approved
+Thank You
+
+
+UI_Flow3: Safeway - Debit, Cancel, Credit
+Welcome
+Please enter Phone
+Amount $1500.99 [Debit/Credit] - Credit
+Tap Card
+Pin Entry -Cancel- <not available>
+Signature capture
+Processing...
+Approved
+Thank You
+
+UI_Flow4: Safeway - Debit, Cash Back
+Welcome
+Please enter Phone
+Amount $1500.99 [Debit/Credit] - Debit
+Tap Card
+Pin Entry
+Cash Back - Payment Amount [Y/N]
+Amount of cash back? (Amount Balance)
+Processing...
+Approved
+Thank You
+
+UI_Flow5: Safeway - Credit
+Welcome
+Please enter Phone
+Amount $1500.99 [Debit/Credit] - Credit
+Tap Card
+Signature Capture
+Processing...
+Approved
+Thank You
+
+UI_Flow6: PepBoys - Credit
+Welcome
+Please Swipe/Tap
+Prompt for PIN entry
+Verbal request for credit
+Prompt for signature
+Processing...
+Approved
+Thank You
+
+
+UI_Flow7: PepBoys - Credit
+Welcome
+Please Swipe/Tap
+Prompt for PIN entry
+Cancel Button (Cancel)
+Credit? (Yes)
+Prompt for signature
+Processing...
+Approved
+Thank Youvbee
+
+UI_Flow8: PepBoys - Credit
+Welcome
+Please wait... ((for items to be rung- 10 seconds))
+Please swipe/Tap
+"Confirm Amount" [Y/N]
+Prompt for signature
+
+UI_Flow9: Spencers - Debit, Clear
+Welcome
+Total, Swipe / Tap
+Pin entry
+Clear button, goes back to request swipe/tap
+Authorizing
+Approved
+Thank You
+
+UI_Flow10: Spencers - Debit
+Welcome
+Total, Swipe / Tap
+Pin entry
+Authorizing
+Approved
+Thank You
+
+UI Flow11: Spencers - Credit
+Welcome
+Total, Swipe / Tap
+Signature capture
+Authorizing
+Approved
+Thank You
+
+UI_Flow12: Target - Debit
+Welcome
+Swipe / Tap
+PIN Entry
+Cash Back - Payment Amount [Y/N]
+Amount of cash back? (Amount Balance)
+Processing...
+Approved
+Thank You
+
+UI_Flow13: Target - Credit
+Welcome
+Swipe / Tap
+Signature Capture
+Processing...
+Approved
+Thank You
+
+-----------------------------Issues-----------------------------
+
+No text to indicate SWIPE.
+No cancel button on PIN entry screen.
+Is there a cancel PIN or cancel screen?

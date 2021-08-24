@@ -1,0 +1,53 @@
+Docklight Log File (HEX) - Started 11/16/2016 17:00:56.343 
+ TEST CASE: DPGH010
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+--- Clear display
+
+11/16/2016 17:00:57.652 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 0D 00 00 52 60 
+11/16/2016 17:00:57.953 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  resultName = Positive Response
+ resultName = common 83-xx resp 
+ 
+--- Begin custom mode
+
+11/16/2016 17:00:57.983 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 08 00 00 A2 8B 
+11/16/2016 17:00:57.990 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  resultName = Positive Response
+ resultName = common 83-xx resp 
+ 
+
+--- Display paragraph at xy in specified area (multi pages) w/ width limit 1st  
+
+11/16/2016 17:00:59.025 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 28 00 CB 30 31 30 00 30 33 30 00 31 33 30 00 31 33 30 00 31 00 32 00 33 00 61 20 5C 6E 20 62 20 5C 6E 20 63 20 5C 6E 20 64 20 5C 6E 20 65 20 5C 6E 20 66 20 5C 6E 20 67 20 5C 6E 20 68 20 5C 6E 20 69 20 5C 6E 20 6A 20 5C 6E 20 6B 20 5C 6E 20 6C 20 5C 6E 20 6D 20 5C 6E 20 6E 20 5C 6E 20 6F 20 5C 6E 20 70 20 5C 6E 20 71 20 5C 6E 20 72 20 5C 6E 20 73 20 5C 6E 20 74 20 5C 6E 20 75 20 5C 6E 20 76 20 5C 6E 20 77 20 5C 6E 20 78 20 5C 6E 20 79 20 5C 6E 20 7A 20 5C 6E 20 30 20 5C 6E 20 31 20 5C 6E 20 32 20 5C 6E 20 33 20 5C 6E 20 34 20 5C 6E 20 35 20 5C 6E 20 36 20 5C 6E 20 37 20 5C 6E 20 38 20 5C 6E 20 39 20 5C 6E 20 00 00 A1 
+11/16/2016 17:00:59.560 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 04 00 14 53 70 B0 A8  resultName = Positive Response
+ resultName = common 83-xx resp 
+ resultName = Display Control OK
+ Control ID = 00 14 53 70
+ resultName = common 83-28 resp sts=00
+ 
+
+--- Display paragraph at xy in specified area (multi pages) w/ width limit 2nd 
+
+11/16/2016 17:01:00.639 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 28 00 CB 31 35 30 00 30 33 30 00 31 33 30 00 31 33 30 00 31 00 32 00 32 00 61 20 5C 6E 20 62 20 5C 6E 20 63 20 5C 6E 20 64 20 5C 6E 20 65 20 5C 6E 20 66 20 5C 6E 20 67 20 5C 6E 20 68 20 5C 6E 20 69 20 5C 6E 20 6A 20 5C 6E 20 6B 20 5C 6E 20 6C 20 5C 6E 20 6D 20 5C 6E 20 6E 20 5C 6E 20 6F 20 5C 6E 20 70 20 5C 6E 20 71 20 5C 6E 20 72 20 5C 6E 20 73 20 5C 6E 20 74 20 5C 6E 20 75 20 5C 6E 20 76 20 5C 6E 20 77 20 5C 6E 20 78 20 5C 6E 20 79 20 5C 6E 20 7A 20 5C 6E 20 30 20 5C 6E 20 31 20 5C 6E 20 32 20 5C 6E 20 33 20 5C 6E 20 34 20 5C 6E 20 35 20 5C 6E 20 36 20 5C 6E 20 37 20 5C 6E 20 38 20 5C 6E 20 39 20 5C 6E 20 00 57 6E 
+11/16/2016 17:01:00.935 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 04 00 14 5B D8 0D E3  resultName = Positive Response
+ resultName = common 83-xx resp 
+ resultName = Display Control OK
+ Control ID = 00 14 5B D8
+ resultName = common 83-28 resp sts=00
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 11/16/2016 17:01:08.811 
+

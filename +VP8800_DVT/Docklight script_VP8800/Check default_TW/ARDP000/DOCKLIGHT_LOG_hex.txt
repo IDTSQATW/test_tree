@@ -1,0 +1,68 @@
+Docklight Log File (HEX) - Started 2018/11/19 14:38:04.001 
+ TEST CASE: ARDP000
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+
+ --- Reset to default (04-09)
+
+2018/11/19 14:38:06.660 [TX] - 56 69 56 4F 70 61 79 56 33 00 04 09 00 00 30 83 
+2018/11/19 14:38:07.674 [RX] - 56 69 56 4F 70 61 79 56 33 00 04 09 00 00 00 91 EB  
+
+ --- Get Params (03-02)
+
+2018/11/19 14:38:09.679 [TX] - 56 69 56 4F 74 65 63 68 32 00 03 02 00 00 5B 91 
+2018/11/19 14:38:09.722 [RX] - 56 69 56 4F 74 65 63 68 32 00 03 00 01 2E 9A 03 18 11 19 9C 01 00 5F 2A 02 08 40 5F 36 01 02 9F 02 06 00 00 00 00 00 01 9F 03 06 00 00 00 00 00 00 9F 1A 02 08 40 9F 21 03 06 37 41 9F 33 03 60 08 E8 9F 35 01 22 9F 40 05 60 00 00 30 00 9F 53 01 00 DF EF 04 01 10 DF 81 23 06 00 00 00 00 60 00 DF 81 26 06 00 00 00 00 80 00 DF ED 77 04 00 00 00 07 DF ED 78 04 00 00 00 00 DF ED 79 04 00 00 00 01 DF ED 7A 04 00 00 00 05 DF ED 7B 04 00 00 00 06 DF ED 7C 04 DF FF 00 02 DF ED 7D 04 00 00 00 03 DF ED 7E 04 00 00 00 04 DF EE 0C 01 00 DF EE 1D 05 04 04 2A 0C 31 DF EE 34 06 00 00 00 01 00 00 DF EE 38 01 00 DF EE 44 02 B5 FF DF EE 4E 01 00 DF EE 57 02 45 4E DF EE 58 02 20 20 DF EE 63 01 00 DF EE 68 01 00 DF EE 6B 08 30 30 30 30 30 30 30 30 DF EE 79 02 00 00 DF EE 7A 01 05 DF EE 7B 03 00 20 00 DF EF 29 02 10 00 DF EF 2A 01 00 DF EF 35 02 00 00 DF EE 7D 01 01 DF EF 43 04 00 00 00 00 DF EF 70 02 02 6E DF EF 72 01 00 DF EF 79 01 00 DF EF 3C 03 01 00 3C 3F 92  
+Tag DFEE63: PASS
+ 
+***Parameter Tag DFEE64 is missing match.
+ 
+Tag DFEF2A: PASS
+ 
+***Parameter Tag DFEF2B is missing match.
+ 
+***Parameter Tag DFEE67 is missing match.
+ 
+Tag DFEE34: PASS
+ 
+Tag DFEE6B: PASS
+ 
+***Parameter Tag DFEE44 is missing match.
+ 
+***Parameter Tag DFEE37 is missing match.
+ 
+Tag DFEE38: PASS
+ 
+***Parameter Tag DFEE3A is missing match.
+ 
+***Parameter Tag DFEE3B is missing match.
+ 
+***Parameter Tag DFEE3C is missing match.
+ 
+***Parameter Tag DFEE7D is missing match.
+ 
+***Parameter Tag DFEF70 is missing match.
+ 
+***Parameter Tag DFEF72 is missing match.
+ 
+***Parameter Tag DFEF74 is missing match.
+ 
+***Parameter Tag DFEF75 is missing match.
+ 
+
+Found 13 errors in testing. Please check the log file for details.
+ 
+---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 2018/11/19 14:38:14.847 
+

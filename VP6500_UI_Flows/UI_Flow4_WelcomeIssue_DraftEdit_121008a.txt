@@ -1,0 +1,162 @@
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+'------------------------------------------------------------
+
+'------------------------------------------------------------
+'Configure prompting
+'------------------------------------------------------------
+FileInput.OpenFile "C:\vivotech\regress\regression\regress_test\test_tree\Regress.Config"
+Dim Prompting(1)
+Dim resultX
+
+Do Until FileInput.EndOfFile
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()	 
+  Prompting(1) = result
+Loop
+
+'------------------------------------------------------------
+'Definitions and Initializations
+'------------------------------------------------------------
+DL.OpenProject "UI_Flow4_WelcomeIssue.ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+
+
+Dim prompt
+Dim confirm
+
+result = 1
+
+Dim Row(1)
+Dim Button(2)
+Dim ButtonExpect(1)
+
+Row(0) = 4
+
+Button(0) = 1
+Button(1) = 2
+
+ButtonExpect(0) = "DONE"
+ButtonExpect(1) = "CREDIT"
+
+ReadButtonTO = 20
+ReadButtonEnable = 1
+
+
+'------------------------------------------------------------
+' Display amount at 239,159 - $1.00
+'------------------------------------------------------------
+For IterationsX = 1 to 999999999999
+DL.AddComment "------------- Iteration " & IterationsX & " -------------"
+'DL.SendSequence "Tap Card - Text"
+'DL.Pause 1500
+DL.SendSequence "Activate Transaction"
+DL.AddComment "I AM HERE 4"
+result = DL.WaitForSequence("activate transaction response", 1, 8200)
+DL.AddComment "Result = " & result
+DL.ResetReceiveCounter "activate transaction response"
+DL.ResetReceiveCounter "Entered Keys"
+DL.ResetReceiveCounter "Prompt Printed"
+'DL.SendSequence "Amount - Text"
+'DL.Pause 1000
+'DL.SendSequence "Activate Transaction"
+result = DL.WaitForSequence("activate transaction response", 1, 8200)
+'DL.Pause 15000
+
+If result = 0 Then
+	DL.SendSequence "Amount - Text"
+	DL.SendSequence "Activate Transaction"
+	DL.AddComment "I AM HERE 12345!!!!!"
+	result = DL.WaitForSequence("activate transaction response", 1, 8200)
+	DL.ResetReceiveCounter "activate transaction response"
+ElseIf result = 0 Then
+	DL.SendSequence "Amount - Text"
+	DL.Pause 500
+	DL.SendSequence "Activate Transaction"
+	DL.AddComment "I AM HERE 67890!!!!!"
+	result = DL.WaitForSequence("activate transaction response", 1, 8200)
+	DL.ResetReceiveCounter "activate transaction response"
+End If
+
+DL.ResetReceiveCounter "activate transaction response"
+DL.AddComment "I AM HERE 5"
+
+'If result <> 0 Then
+DL.ResetReceiveCounter "Pin Response"
+  DL.SendSequence "Pin Entry"
+'DL.AddComment "I AM HERE 6"
+result = DL.WaitForSequence("Pin Response", 1, 25000)
+'DL.Pause 25000
+'DL.SendSequence "Reset Initial State"
+
+'DL.AddComment "I AM HERE 7"
+'End If
+'DL.Pause 5000
+DL.ResetReceiveCounter "Prompt Printed"
+DL.ResetReceiveCounter "Entered Keys"
+
+DL.SendSequence "Processing... - Text"
+DL.Pause 1500
+DL.SendSequence "Approved - Text"
+DL.Pause 500
+DL.SendSequence "THANK YOU - Text"
+Next
+
+Sub DL_OnReceive()
+'DL.AddComment "I AM IN! OnReceive"
+	If DL.OnReceive_GetName() = "$20 Entered" Then
+		resultX = 20
+	ElseIf DL.OnReceive_GetName() = "$40 Entered" Then
+		resultX = 40
+	ElseIf DL.OnReceive_GetName() = "$60 Entered" Then
+		resultX = 60
+	ElseIf DL.OnReceive_GetName() = "$80 Entered" Then
+		resultX = 80
+	ElseIf DL.OnReceive_GetName() = "$100 Entered" Then
+		resultX = 100
+	ElseIf DL.OnReceive_GetName() = "$120 Entered" Then
+		resultX = 120
+	ElseIf DL.OnReceive_GetName() = "$140 Entered" Then
+		resultX = 140
+	ElseIf DL.OnReceive_GetName() = "$160 Entered" Then
+		resultX = 160
+	ElseIf DL.OnReceive_GetName() = "$180 Entered" Then
+		resultX = 180
+	ElseIf DL.OnReceive_GetName() = "Prompt Printed" Then
+		
+	End If
+'DL.AddComment "Leaving__OnReceive"	
+DL.AddComment "You entered the CASH BACK amount of " & resultX & "."
+End Sub
+DL.AddComment "XYZ --- You entered the CASH BACK amount of " & resultX & "."
+
+
+
+'If result <> 0 Then
+'DL.Pause 2000
+'  DL.SendSequence " Activate Transaction"
+'  result = DL.WaitForSequence("activate transaction response", 1, 10000)
+'End If
+
+
+'------------------------------------------------------------
+'Steps to execute
+'------------------------------------------------------------
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+
+

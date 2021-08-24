@@ -1,0 +1,266 @@
+Objective1: Encryption OFF, CT + Fallback to CT + Fallback to MSR test under Quick Chip Mode. (T=0/ Discover)
+Objective2: Output tags list should the same as Augusta
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+>>> Set CT terminal data = 5C.
+CMD: 60 06 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00
+EXR: 60 00 00 00
+
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+--------------------
+>>> CT transaction
+SWIPEKB: Click OK -> Insert T=0 card.
+EXR: DF EE 25 02 02 03
+EXR: 57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89
+EXR: 5A 08 47 61 73 90 01 01 00 10
+EXR: 9F 39 01 07
+EXR: 4F
+EXR: 50
+EXR: 82
+EXR: 84
+EXR: 8A
+EXR: 8C
+EXR: 8D
+EXR: 8E
+EXR: 95
+EXR: 99
+EXR: 9B
+EXR: 9C
+EXR: 5F20
+EXR: 5F24
+EXR: 5F25
+EXR: 5F28
+EXR: 5F2A
+EXR: 5F2D
+EXR: 5F34
+EXR: 5F57
+EXR: 9F02
+EXR: 9F03
+EXR: 9F10
+EXR: 9F13
+EXR: 9F20
+EXR: 9F26
+EXR: 9F27
+EXR: 9F34
+EXR: 9F36
+EXR: 9F37
+EXR: 9F38
+EXR: 9F4D
+EXR: 9F4F
+EXR: 9F53
+EXR: 9F5B
+EXR: DFEF57
+EXR: DFEC180956312e31302e303337
+
+--------------------
+>>> Fallback to CT transaction (default: disable)
+SWIPEKB: Click OK -> Swipe Discover card (PAN = 6510000000000125).
+EXR: %B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?
+
+--------------------
+>>> CT transaction
+SWIPEKB: Click OK -> Insert Discover card.
+EXR: DF EE 25 02 02 03
+EXR: 57 13
+EXR: 5A 08
+EXR: 9F 39 01 07
+EXR: 4F
+EXR: 50
+EXR: 82
+EXR: 84
+EXR: 8A
+EXR: 8C
+EXR: 8D
+EXR: 8E
+EXR: 95
+EXR: 99
+EXR: 9B
+EXR: 9C
+EXR: 5F20
+EXR: 5F24
+EXR: 5F25
+EXR: 5F28
+EXR: 5F2A
+EXR: 5F2D
+EXR: 5F34
+EXR: 5F57
+EXR: 9F02
+EXR: 9F03
+EXR: 9F10
+EXR: 9F13
+EXR: 9F20
+EXR: 9F26
+EXR: 9F27
+EXR: 9F34
+EXR: 9F36
+EXR: 9F37
+EXR: 9F38
+EXR: 9F4D
+EXR: 9F4F
+EXR: 9F53
+EXR: 9F5B
+EXR: DFEF57
+EXR: DFEC180956312e31302e303337
+
+--------------------
+>>> Fallback to MSR transaction (default: can retry ICC card 3 times)
+SWIPEKB: Click OK -> Insert IDT test card 3 times -> Remove card (Green LED 3 is flash ON) -> Swipe Discover card.
+EXR: DFEF6102F220
+EXR: DFEF6102F222
+EXR: DF EE 25 02 3002
+EXR: 9F 39 01 80
+EXR: DFEE236A%B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?
+MESSAGECK: After inserted card, LED 3 was turned ON (flash status)
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+>>> Quick Chip mode = 03
+CMD: 01 01 03
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+--------------------
+>>> CT transaction
+SWIPEKB: Click OK -> Insert T=0 card.
+EXR: DF EE 25 02 02 03
+EXR: 57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89
+EXR: 5A 08 47 61 73 90 01 01 00 10
+EXR: 9F 39 01 07
+EXR: 4F
+EXR: 50
+EXR: 82
+EXR: 84
+EXR: 8A
+EXR: 8C
+EXR: 8D
+EXR: 8E
+EXR: 95
+EXR: 99
+EXR: 9B
+EXR: 9C
+EXR: 5F20
+EXR: 5F24
+EXR: 5F25
+EXR: 5F28
+EXR: 5F2A
+EXR: 5F2D
+EXR: 5F34
+EXR: 5F57
+EXR: 9F02
+EXR: 9F03
+EXR: 9F10
+EXR: 9F13
+EXR: 9F20
+EXR: 9F26
+EXR: 9F27
+EXR: 9F34
+EXR: 9F36
+EXR: 9F37
+EXR: 9F38
+EXR: 9F4D
+EXR: 9F4F
+EXR: 9F53
+EXR: 9F5B
+EXR: DFEF57
+
+--------------------
+>>> Fallback to CT transaction (default: disable)
+SWIPEKB: Click OK -> Swipe Discover card (PAN = 6510000000000125).
+EXR: %B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?
+
+--------------------
+>>> CT transaction
+SWIPEKB: Click OK -> Insert Discover card.
+EXR: DF EE 25 02 02 03
+EXR: 57 13
+EXR: 5A 08
+EXR: 9F 39 01 07
+EXR: 4F
+EXR: 50
+EXR: 82
+EXR: 84
+EXR: 8A
+EXR: 8C
+EXR: 8D
+EXR: 8E
+EXR: 95
+EXR: 99
+EXR: 9B
+EXR: 9C
+EXR: 5F20
+EXR: 5F24
+EXR: 5F25
+EXR: 5F28
+EXR: 5F2A
+EXR: 5F2D
+EXR: 5F34
+EXR: 5F57
+EXR: 9F02
+EXR: 9F03
+EXR: 9F10
+EXR: 9F13
+EXR: 9F20
+EXR: 9F26
+EXR: 9F27
+EXR: 9F34
+EXR: 9F36
+EXR: 9F37
+EXR: 9F38
+EXR: 9F4D
+EXR: 9F4F
+EXR: 9F53
+EXR: 9F5B
+EXR: DFEF57
+
+--------------------
+>>> Fallback to MSR transaction (default: can retry ICC card 3 times)
+SWIPEKB: Click OK -> Insert IDT test card 3 times -> Remove card (Green LED 3 is flash ON) -> Swipe Discover card.
+EXR: DFEF6102F220
+EXR: DFEF6102F222
+EXR: DF EE 25 02 3002
+EXR: 9F 39 01 80
+EXR: DFEE236A%B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?
+MESSAGECK: After inserted card, LED 3 was turned ON (flash status)
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+>>> Quick Chip mode = 04
+CMD: 01 01 04
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+--------------------
+>>> Fallback to CT transaction
+SWIPEKB: Click OK -> Swipe Discover card.
+EXR: %B65100000
+EXR: ^
+EXR: ^
+EXR: 201
+EXR: ?
+EXR: ;65100000
+EXR: =
+EXR: 201
+EXR: ?
+MESSAGECK: After swiped card, 4 Green LEDs flashed once
+
+--------------------
+>>> Fallback to MSR transaction
+SWIPEKB: Click OK -> Insert IDT test card -> Remove card (Green LED 3 is OFF) -> Swipe Discover card.
+EXR: %B65100000
+EXR: ^
+EXR: ^
+EXR: 201
+EXR: ?
+EXR: ;65100000
+EXR: =
+EXR: 201
+EXR: ?
+MESSAGECK: After inserted card, Green LED 3 did NOT be turned ON independently
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00

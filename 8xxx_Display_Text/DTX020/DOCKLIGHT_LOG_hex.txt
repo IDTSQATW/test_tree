@@ -1,0 +1,93 @@
+Docklight Log File (HEX) - Started 10/10/2016 18:51:00.125 
+ TEST CASE: DTX020
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+--- Enable Custom Display Mode
+
+10/10/2016 18:51:01.615 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 08 00 00 A2 8B 
+10/10/2016 18:51:01.622 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  resultName = Display CUSTOM MODE OK
+ resultName = List Directory OK
+ resultName = Clear Display Resp
+ resultName = Change Text Display Resp
+ 
+--- Clear Present Display.
+
+10/10/2016 18:51:01.635 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 0D 00 00 52 60 
+10/10/2016 18:51:01.934 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  resultName = Display CUSTOM MODE OK
+ resultName = List Directory OK
+ resultName = Clear Display Resp
+ resultName = Change Text Display Resp
+ 
+
+--- Send Display Text XY 01 message
+
+10/10/2016 18:51:04.677 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 03 00 0F 30 00 30 00 31 00 34 00 30 00 41 42 43 31 00 BE 90 
+10/10/2016 18:51:04.699 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 04 00 14 53 70 B0 A8  resultName = Display: Hello World! (OK)
+ resultName = Display Control OK
+ Control ID = 00 14 53 70
+ resultName = Display Text XY Resp
+ resultName = Display Control OK
+ Control ID = 00 14 53 70
+ Debugger: ControlID = 00 14 53 70
+ 
+
+--- Send Display Text XY 02 message
+
+10/10/2016 18:51:04.784 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 03 00 13 31 30 30 00 31 30 30 00 31 00 34 00 32 00 41 42 43 32 00 2E 90 
+10/10/2016 18:51:04.799 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 04 00 14 53 A8 FA DD  resultName = Display: Hello World! (OK)
+ resultName = Display Control OK
+ Control ID = 00 14 53 A8
+ resultName = Display Text XY Resp
+ resultName = Display Control OK
+ Control ID = 00 14 53 A8
+ Debugger: ControlID = 00 14 53 A8
+ 
+
+--- Send Display Text XY 03 message
+
+10/10/2016 18:51:04.819 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 03 00 0F 30 00 30 00 31 00 34 00 34 00 41 42 43 33 00 1A 37 
+10/10/2016 18:51:04.839 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 04 00 14 53 E0 33 11  resultName = Display: Hello World! (OK)
+ resultName = Display Control OK
+ Control ID = 00 14 53 E0
+ resultName = Display Text XY Resp
+ resultName = Display Control OK
+ Control ID = 00 14 53 E0
+ Debugger: ControlID = 00 14 53 E0
+ 
+
+--- Send Change Text Display
+
+10/10/2016 18:51:16.199 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 16 00 09 00 14 53 70 61 62 63 31 00 76 06 
+10/10/2016 18:51:16.233 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  resultName = Display CUSTOM MODE OK
+ resultName = List Directory OK
+ resultName = Clear Display Resp
+ resultName = Change Text Display Resp
+ 
+
+--- Send Display Text: WELCOME (centered) 5
+
+10/10/2016 18:51:21.162 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 03 00 12 30 00 30 00 31 00 35 00 35 00 57 45 4C 43 4F 4D 45 00 D7 9D 
+10/10/2016 18:51:21.472 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 04 00 14 53 A8 FA DD  resultName = Display: Hello World! (OK)
+ resultName = Display Control OK
+ Control ID = 00 14 53 A8
+ resultName = Display Text XY Resp
+ resultName = Display Control OK
+ Control ID = 00 14 53 A8
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 10/10/2016 18:51:22.808 
+

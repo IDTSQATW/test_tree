@@ -1,0 +1,23 @@
+Docklight Log File (HEX) - Started  
+ TEST CASE: SL006
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM5 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- LED 1 Blink
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 00 01 02 64 40 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  
+
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

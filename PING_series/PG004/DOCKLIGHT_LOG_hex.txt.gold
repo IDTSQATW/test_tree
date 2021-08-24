@@ -1,0 +1,23 @@
+Docklight Log File (HEX) - Started  
+ TEST CASE: PG004
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Long ping 
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 10 00 11 22 33 44 55 66 77 88 99 AA BB CC DD EE FF CA D5  
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped  
+

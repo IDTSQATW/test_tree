@@ -1,0 +1,30 @@
+Docklight Log File (HEX) - Started 2018/9/5 15:54:46.662 
+ TEST CASE: ADPT056
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- PassThrough Start
+
+2018/9/5 15:54:47.892 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+2018/9/5 15:54:47.902 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  --- NCR Pass Through - Antenna On, Poll Token On, 1 Beep, LED 0 On
+
+2018/9/5 15:54:49.382 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 0B 00 07 1D 00 01 00 01 0A FF E5 A1 
+2018/9/5 15:55:01.941 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 08 00 00 B5 3A  --- PassThrough Stop
+
+2018/9/5 15:55:02.264 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38 
+2018/9/5 15:55:02.276 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2018/9/5 15:55:03.385 
+

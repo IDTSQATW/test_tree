@@ -1,0 +1,1120 @@
+DL_SCRIPTVERSION
+1
+53636
+
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "VALIDG101" ' !!!!! EDIT THIS !!!!!
+'+++ 
+' this test case is used to verify the commands are allowed or not allowed in pass through mode for GR2.0.0 or later
+' Refer to GR1892 and the link below
+' http://vivocontrol/wiki/display/VP6KFW/ViVOtech+Serial+Commands+Allowed+in+Pass-through+Mode
+'---
+
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  genFlag = result
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON " Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+Sub DL_OnSend()
+sendPeek = DL.OnSend_Peek(1, "H")
+cmdCode = DL.OnSend_Peek(11)
+subCmd = DL.OnSend_Peek(12)
+'DL.AddComment "cmd code =" & cmdCode
+
+    ' For all Send Sequences with minimum 3 bytes length (one byte user data,
+    ' two bytes CRC, perform the following manipulation:
+    ' - Calculate a 16 bit crc value on the characters 1 .. (DL.OnSend_Size() - 2)
+    ' - Write the low byte to character no. DL.OnSend_GetSize()-1
+    ' - Write the high byte to character no. DL.OnSend_GetSize()
+    ' Example:
+    ' Send Sequence name: MyCommand
+    ' Send Sequence in HEX representation: 02 04 00 00 00 01 00 00
+    ' --> Data transmitted by Docklight:   02 04 00 00 00 01 31 F9
+    '     (with "31" as the low byte CRC, "F9" as the high byte)
+
+    ' Check if there is at least one byte of user data
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        If cmdCode <> 44 Then 
+          DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+          DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        Else 
+          DL.OnSend_Poke usDataLen + 1, CInt("&h" + Left(crcStr, 2)) ' high byte
+          DL.OnSend_Poke usDataLen + 2, CInt("&h" + Right(crcStr, 2)) ' low byte
+        End If
+    End If
+End Sub
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+Err0BCounter = 0
+RxStatus = 0
+'============================================================
+If result <> 0 Then
+   prompt2 = "You are about to verify the commands that are allowed or not allowed in PassThrough mode. Please click OK to continue."
+   result = MsgBox(prompt2, VBOKOnly, "PassThrough")
+End If
+
+'------------------------------------------------------------
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment "--- 2c-01 PT start"
+  DL.SendSequence " 2c-01 PT start"
+  RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then 
+      DL.AddComment vbcrlf & vbcrlf & "--- 01-01"
+      DL.SendSequence " 01-01"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 01-01 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then 
+              DL.AddComment vbcrlf & vbcrlf & "--- 01-02"
+      DL.SendSequence " 01-02"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 01-02 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then 
+      DL.AddComment vbcrlf & vbcrlf & "--- 01-03"
+      DL.SendSequence " 01-03"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 01-03 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then 
+      DL.AddComment vbcrlf & vbcrlf & "--- 01-04"
+      DL.SendSequence " 01-04"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 01-04 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End If
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 01-05"
+      DL.SendSequence " 01-05"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 01-05 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 02-01"
+      DL.SendSequence " 02-01"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 02-01 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+ 	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 02-03"
+      DL.SendSequence " 02-03"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 02-03 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 02-04"
+      DL.SendSequence " 02-04"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 02-04 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 03-00"
+      DL.SendSequence " 03-00"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 03-00 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 03-02"
+      DL.SendSequence " 03-02"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 03-02 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+   
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 03-03"
+      DL.SendSequence " 03-03"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 03-03 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 03-04"
+      DL.SendSequence " 03-04"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 03-04 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 03-05"
+      DL.SendSequence " 03-05"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 03-05 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 03-06"
+      DL.SendSequence " 03-06"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 03-06 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 03-07"
+      DL.SendSequence " 03-07"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 03-07 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 04-00"
+      DL.SendSequence " 04-00"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 04-00 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 04-02"
+      DL.SendSequence " 04-02"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 04-02 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 04-03"
+      DL.SendSequence " 04-03"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 04-03 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 04-04"
+      DL.SendSequence " 04-04"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 04-04 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 04-05"
+      DL.SendSequence " 04-05"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 04-05 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 04-09"
+      DL.SendSequence " 04-09"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 10000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 04-09 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 05-01"
+      DL.SendSequence " 05-01"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 05-01 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+'If 0 Then 'not for GR2.0.0 or later
+'  DL.ResetReceiveCounter
+'   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+'      DL.AddComment vbcrlf & vbcrlf & "--- 09-00"
+'      DL.SendSequence " 09-00"
+'      RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+'        If RxStatus = 0 then
+'           DL.AddComment "Command 09-00 does not return expected 0h code"
+'           Err0BCounter = Err0BCounter + 1
+'	    End if
+'   End If
+'End IF
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 09-01"
+      DL.SendSequence " 09-01"
+      RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 09-01 does not return expected 00h code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 09-02"
+      DL.SendSequence " 09-02"
+      RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 09-02 does not return expected 00h code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 09-03"
+      DL.SendSequence " 09-03"
+      RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 09-03 does not return expected 00h code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 09-04"
+      DL.SendSequence " 09-04"
+      RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 09-04 does not return expected 00h code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 09-05"
+      DL.SendSequence " 09-05"
+      RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 09-05 does not return expected 00h code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 09-06"
+      DL.SendSequence " 09-06"
+      RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 09-06 does not return expected 00h code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 09-07"
+      DL.SendSequence " 09-07"
+      RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 09-07 does not return expected 00h code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 09-08"
+      DL.SendSequence " 09-08"
+      RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 09-08 does not return expected 00h code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 09-09"
+      DL.SendSequence " 09-09"
+      RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 09-09 does not return expected 00h code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 09-0a"
+      DL.SendSequence " 09-0a"
+      RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 09-0a does not return expected 00h code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 09-0b"
+      DL.SendSequence " 09-0b"
+      RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 09-0b does not return expected 00h code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 09-0c"
+      DL.SendSequence " 09-0c"
+      RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 09-0c does not return expected 00h code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 09-0e"
+      DL.SendSequence " 09-0e"
+      RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 09-0e does not return expected 00h code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 09-0f"
+      DL.SendSequence " 09-0f"
+      RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 09-0f does not return expected 00h code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 09-11"
+      DL.SendSequence " 09-11"
+      RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 09-11 does not return expected 00h code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 12-01"
+      DL.SendSequence " 12-01"
+	  DL.Pause 200
+      RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 12-01 does not return expected 00h code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 12-02"
+      DL.SendSequence " 12-02"
+	    If readertype = "GR" or readerType = "NEO1" then RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+           If RxStatus = 0 then
+              DL.AddComment "Command 12-02 does not return expected 00h code"
+              Err0BCounter = Err0BCounter + 1
+	       End if
+	    If readertype = "USAT" or readerType = "NEO2" then RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+           If RxStatus = 0 then
+              DL.AddComment "Command 12-02 does not return expected 00h code"
+              Err0BCounter = Err0BCounter + 1
+	       End if		
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 13-01"
+      DL.SendSequence " 13-01"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 13-01 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 13-02"
+      DL.SendSequence " 13-02"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 13-02 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 13-03"
+      DL.SendSequence " 13-03"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 13-03 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 13-04"
+      DL.SendSequence " 13-04"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 13-04 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 14-01"
+      DL.SendSequence " 14-01"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 14-01 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 15-01"
+      DL.SendSequence " 15-01"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 15-01 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 17-02"
+      DL.SendSequence " 17-02"
+      RxStatus = DL.WaitForSequence("generic xx-0B p1 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 17-02 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 17-03"
+      DL.SendSequence " 17-03"
+      RxStatus = DL.WaitForSequence("generic xx-0B p1 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 17-03 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 17-cd"
+      DL.SendSequence " 17-cd"
+      RxStatus = DL.WaitForSequence("generic xx-0B p1 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 17-cd does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 18-01"
+      DL.SendSequence " 18-01"
+      RxStatus = DL.WaitForSequence("generic xx-00 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 18-01 does not return expected 00h code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 25-01 p1"
+      DL.SendSequence " 25-01 p1"
+      RxStatus = DL.WaitForSequence("generic xx-0B p1 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 25-01 p1 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 25-02 p1"
+      DL.SendSequence " 25-02 p1"
+      RxStatus = DL.WaitForSequence("generic xx-0B p1 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 25-02 p1 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 25-03 p1"
+      DL.SendSequence " 25-03 p1"
+      RxStatus = DL.WaitForSequence("generic xx-0B p1 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 25-03 p1 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 25-04 p1"
+      DL.SendSequence " 25-04 p1"
+      RxStatus = DL.WaitForSequence("generic xx-0B p1 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 25-04 p1 p1 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- 29-00 p1"
+      DL.SendSequence " 29-00 p1"
+      RxStatus = DL.WaitForSequence("generic xx-00 p1 resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command 29-00 p1 does not return expected 00h code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- D0-01"
+      DL.SendSequence " D0-01"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command D0-01 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- D0-02"
+      DL.SendSequence " D0-02"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command D0-02 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- D0-03"
+      DL.SendSequence " D0-03"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command D0-03 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- D0-04"
+      DL.SendSequence " D0-04"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command D0-04 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+'  DL.ResetReceiveCounter
+'   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+'      DL.AddComment vbcrlf & vbcrlf & "--- D0-05"
+'      DL.SendSequence " D0-05"
+'      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+'        If RxStatus = 0 then
+'           DL.AddComment "Command D0-05 does not return expected 0Bh code"
+'           Err0BCounter = Err0BCounter + 1
+'	    End if
+'   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- D0-06"
+      DL.SendSequence " D0-06"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command D0-06 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- D0-07"
+      DL.SendSequence " D0-07"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command D0-07 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- f0-f5"
+      DL.SendSequence " f0-f5"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command f0-f5 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- f0-f6"
+      DL.SendSequence " f0-f6"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command f0-f6 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- f0-f7"
+      DL.SendSequence " f0-f7"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command f0-f7 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- f0-f9"
+      DL.SendSequence " f0-f9 (clear display)"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command f0-f9 does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- f0-fa"
+      DL.SendSequence " f0-fa"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command f0-fa does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+
+   End If
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- f0-fb"
+      DL.SendSequence " f0-fb"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command f0-fb does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- f0-fc"
+      DL.SendSequence " f0-fc (display line1)"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command f0-fc does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- f0-fd"
+      DL.SendSequence " 0f-0d (display line2)"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command f0-fd does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+  DL.ResetReceiveCounter
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "NEO2" then
+      DL.AddComment vbcrlf & vbcrlf & "--- f0-fe"
+      DL.SendSequence " f0-fe"
+      RxStatus = DL.WaitForSequence("generic xx-0B resp", 1, 3000)
+        If RxStatus = 0 then
+           DL.AddComment "Command f0-fe does not return expected 0Bh code"
+           Err0BCounter = Err0BCounter + 1
+	    End if
+   End If
+
+'------------------------------------------------------------
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbcrlf & vbcrlf & "--- 2c-01 PT stop"
+  DL.SendSequence " 2c-01 PT stop"
+  result = DL.WaitForSequence("generic xx-00 resp", 1, 10000)
+'------------------------------------------------------------
+
+If Err0BCounter <> 0 Then
+  DL.AddComment vbCRLf & vbCRLf & Err0BCounter & " command(s) found, which did not return proper status code (00h or 0Bh) as expected in PassThrough mode. Please check the log file for details." 
+  result = 0
+End If
+
+
+'------------------------------------------------------------
+
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If 0 Then
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 

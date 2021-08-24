@@ -1,0 +1,28 @@
+Docklight Log File (HEX) - Started 2019/1/29 14:35:08.824 
+ TEST CASE: MV003
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Get Hardware Information 09-14
+
+2019/1/29 14:35:10.126 [TX] - 56 69 56 4F 74 65 63 68 32 00 09 14 00 00 33 08 
+2019/1/29 14:35:10.152 [RX] - 56 69 56 4F 74 65 63 68 32 00 09 00 00 1C  
+48 57 2C 20 56 50 36 33 30 30 20 55 53 41 54 2D 53 0D 0A 4B 38 31 46 20 52 65 76 34 12 9B  
+
+ Result = PASSED
+ 
+
+ ---------- END OF TEST ----------
+
+ 
+
+ ///// NOTICE ///////////////////////////////////////////////////////////
+
+Please check ASCII screen, make sure reader return correct data that meet spec!!
+
+
+Docklight Log File (HEX) - Stopped 2019/1/29 14:35:10.783 
+

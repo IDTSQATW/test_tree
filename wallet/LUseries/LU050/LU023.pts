@@ -1,0 +1,59 @@
+DL_SCRIPTVERSION
+1
+51184
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+'------------------------------------------------------------
+DL.OpenProject "LU023.ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+
+result = 1
+
+'============================================================
+If result <> 0 Then
+  DL.AddComment "--- Profile.2"
+  DL.ResetReceiveCounter "EMV.Response"
+  DL.SendSequence "Profile.2"
+  result = DL.WaitForSequence("EMV.Response", 1, 10000)
+End If
+If result <> 0 Then
+  DL.AddComment "--- Set EMV Parameters (Amt Auth = 80.00)"
+  DL.ResetReceiveCounter "EMV.Response"
+  DL.SendSequence "Set EMV Parameters (Amt Auth = 80.00)"
+  result = DL.WaitForSequence("EMV.Response", 1, 10000)
+End If
+If result <> 0 Then
+  DL.AddComment "--- Poll On Demand"
+  DL.SendSequence "Poll on Demand"
+  result = DL.WaitForSequence("RESPONSE", 1, 10000)
+End If
+
+'------------------------------------------------------------
+If result <> 0 Then
+  prompt = "Enter <Y> When ready to " &Chr(13) &Chr(13)
+  prompt = prompt & "Present card. (15 sec timeout)" &Chr(13) 
+  confirm = InputBox(prompt, "<Enter> to continue...", "Y")  
+  result = (confirm = "y" Or confirm = "Y")
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+  DL.ResetReceiveCounter "Transaction Response"
+  DL.SendSequence "Activate Transaction"
+  result = DL.WaitForSequence("Transaction Response", 1, 20000)
+End If
+'------------------------------------------------------------
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+

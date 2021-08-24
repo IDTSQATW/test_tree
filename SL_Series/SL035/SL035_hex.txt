@@ -1,0 +1,23 @@
+Docklight Log File (HEX) - Started 1/2/2013 19:01:25.375 
+ TEST CASE: SL035
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM28 @ 19200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- 1 Long Beep, All LED On
+
+1/2/2013 19:01:27.222 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 08 FF 01 68 E9 
+1/2/2013 19:01:27.271 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  
+
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 1/2/2013 19:01:31.694 
+

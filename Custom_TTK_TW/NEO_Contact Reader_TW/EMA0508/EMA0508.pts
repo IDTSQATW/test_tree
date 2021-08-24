@@ -1,0 +1,342 @@
+DL_SCRIPTVERSION
+1
+12934
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "EMA0508" ' !!!!! EDIT THIS !!!!!
+'Objective: to verify tag FFEE1D w/ CT card.
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+      
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+DL.ResetReceiveCounter
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON " Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+ sub precondition()
+
+   DL.AddComment vbCrLf & vbCrLf & "--- Erase all Key"
+   DL.SendSequence "Erase All Key (83-00)"
+   result = DL.WaitForSequence("Erase all key successfully", 1, 10000)
+   DL.Pause 300
+
+   if result <> 0 then
+   DL.AddComment vbCrLf & vbCrLf & "--- 1-use AES to encrypt (C7-32)"
+   DL.SendSequence "1-use AES to encrypt (C7-32)"
+   result = DL.WaitForSequence("Set encryption type successfully", 1, 10000)
+   DL.Pause 300
+   end if
+
+   if result <> 0 then
+   DL.AddComment vbCrLf & vbCrLf & "--- Load Plaintext Key - command 1 (80-00)"
+   DL.SendSequence "Load Plaintext Key - command 1 (80-00)"
+   result = DL.WaitForSequence("Load Plaintext Key successfully", 1, 10000)
+   DL.Pause 400
+   end if
+ 
+   if result <> 0 then
+   DL.AddComment vbCrLf & vbCrLf & "--- Load Plaintext Key - command 2  (80-00)"
+   DL.SendSequence "Load Plaintext Key - command 2  (80-00)"
+   result = DL.WaitForSequence("Load Plaintext Key successfully", 1, 10000)
+   DL.Pause 400
+   end if
+   
+   if result <> 0 then
+   DL.AddComment vbCrLf & vbCrLf & "--- Load Encrypted KPK (80-01)"
+   DL.SendSequence "Load Encrypted KPK (80-01)"
+   result = DL.WaitForSequence("Load Plaintext Key successfully", 1, 10000)
+   DL.Pause 400
+   end if
+
+   if result <> 0 then
+   DL.AddComment vbCrLf & vbCrLf & "--- Enter DUKPT Key (81-00)"
+   DL.SendSequence "Enter DUKPT Key (81-00)"
+   result = DL.WaitForSequence("Load DUKPT Key successfully", 1, 10000)
+   DL.Pause 400
+   end if
+
+   if result <> 0 then
+   DL.AddComment vbCrLf & vbCrLf & "--- Enable Data Encryption  (C7-36)"
+   DL.SendSequence "Enable Data Encryption  (C7-36)"
+   result = DL.WaitForSequence("Data Encryption enable", 1, 10000)
+   DL.Pause 300
+   end if
+
+   if result <> 0 then
+   DL.AddComment vbCrLf & "--- Set MSR Secure Parameters (C7-38)- 08 (Default)"
+   DL.SendSequence "Set MSR Secure Parameters (C7-38)- 08"
+   result = DL.WaitForSequence("Set MSR Secure Parameters (C7-38) Default successfully", 1, 10000)
+   DL.Pause 300
+   end if
+
+ end sub
+'------------------------------------------------------------------------------------------------
+ sub POM()
+
+   DL.AddComment vbCrLf & vbCrLf & "--- Poll on Demand"
+   DL.SendSequence "Poll on Demand (01-01)"
+   result = DL.WaitForSequence("Poll mode response", 1, 10000)
+   DL.Pause 300
+
+   if result <> 0 then
+      DL.AddComment vbCrLf & vbCrLf & "--- Burst Off"
+      DL.SendSequence "Burst Off (04-00)"
+      result = DL.WaitForSequence("Burst mode response", 1, 10000)
+      DL.Pause 300
+   end if
+
+ end sub
+'---------------------------------------------------------------------------------------------------
+'========== Tag FFEE1D = 06 04 2A 0A 31 ===================================================
+'---------------------------------------------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+   DL.AddComment "--- Tag FFEE1D = 06 04 2A 0A 31"
+   DL.SendSequence "MaskHex 06 04 2A 0A 31"
+   result = DL.WaitForSequence("Set Encrypted Output Data Parameter (Default) successfully", 1, 10000)
+End If
+'---------------------------------------------------------------------------------------------------
+If result <> 0 Then
+   POM()
+End If
+'---------------------------------------------------------------------------------------------------
+If result <> 0 Then
+   precondition()
+End If
+'---------------------------------------------------------------------------------------------------PAN = 12~16, 19
+If result <> 0 Then
+countf = 0
+for i = 2 to 9
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-10 Contact Start Transaction >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " & "PAN = 1" & i
+   DL.SendSequence "60-10"
+   result = DL.WaitForSequence("60-xx 63 status", 1, 10000)
+   if result <> 0 then
+      msgbox "Click OK, insert card (EMV Test Card, T=0 -- PAN = 1" & i & ")", vbokonly
+      result = DL.WaitForSequence("60-10 00 10", 1, 20000)
+      r2 = DL.WaitForSequence("tag 57 pan=1" & i, 1, 3000)
+      r3 = DL.WaitForSequence("tag DF4C pan=1" & i, 1, 3000)
+      if result = 0 or r2 = 0 or r3 = 0 then countf = countf + 1
+      if result = 0 then dl.addcomment vbcrlf & "** RX format...FAIL"
+      if r2 = 0 then dl.addcomment vbcrlf & "** Tag 57...FAIL"
+      if r3 = 0 then dl.addcomment vbcrlf & "** Tag DF4C...FAIL"
+      dl.pause 1000
+   end if
+
+   If result <> 0 Then
+      dl.resetreceivecounter
+      dl.addcomment vbcrlf
+      DL.AddComment "--- 60-11 Contact Authenticate Transaction"
+      DL.SendSequence "60-11"
+      result = DL.WaitForSequence("60-xx 63 status", 1, 10000)
+      if result <> 0 then
+         result = DL.WaitForSequence("60-11 00 04", 1, 20000)
+         r2 = DL.WaitForSequence("tag DF4C pan=1" & i, 1, 3000)
+         if result = 0 or r2 = 0 then countf = countf + 1
+         if result = 0 then dl.addcomment vbcrlf & "** RX format...FAIL"
+         if r2 = 0 then dl.addcomment vbcrlf & "** Tag DF4C...FAIL"
+         dl.pause 1000
+      end if
+
+      If result <> 0 Then
+         dl.resetreceivecounter
+         dl.addcomment vbcrlf
+         DL.AddComment "--- 60-12 Contact Apply Host Response"
+         DL.SendSequence "60-12"
+         result = DL.WaitForSequence("60-xx 63 status", 1, 10000)
+         if result <> 0 then
+            result = DL.WaitForSequence("60-12 00 02", 1, 20000)
+            r2 = DL.WaitForSequence("tag DF4C pan=1" & i, 1, 3000)
+            if result = 0 or r2 = 0 then countf = countf + 1
+            if result = 0 then dl.addcomment vbcrlf & "** RX format...FAIL"
+            if r2 = 0 then dl.addcomment vbcrlf & "** Tag DF4C...FAIL"
+            dl.pause 1000
+            msgbox "Remove card, click OK", vbokonly
+         end if
+      End If
+   End If
+
+   if result = 0 then
+      DL.SendSequence "05-01"
+      dl.pause 2000
+      msgbox "Remove card, click OK", vbokonly
+   end if
+
+   if i = 6 then i = 8
+next
+End If
+
+if countf <> 0 then result = 0
+dl.addcomment vbcrlf & vbcrlf & "FAIL items: " & countf
+'---------------------------------------------------------------------------------------------------
+dl.addcomment vbcrlf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'DL.pause 1000
+'If 0 Then
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+'End If
+
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 

@@ -1,0 +1,8 @@
+Docklight Log File (HEX) - Started 2020/11/18 14:25:32.047 
+ TEST CASE: SL002
+
+ --- Set POS COM PORT Settings
+
+
+Docklight Log File (HEX) - Stopped 2020/11/18 14:25:32.143 
+

@@ -1,0 +1,445 @@
+DL_SCRIPTVERSION
+1
+45330
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "LDIMG000" ' !!!!! EDIT THIS !!!!!
+' This script is to erase all the virtual store images
+' 
+
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+Dim ControlID
+Dim Global_Verdict
+DebuggerOption = 1
+Global_Verdict = "INCONCLUSIVE"
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+      
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON " Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+ 
+'------------------------------------------------------------
+result = 1
+
+   prompt = "It is about to erase Virtual Target Store png images. Do you want to proceed? "
+   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+   'DL.AddComment "result = " & result
+
+If result = True Then
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- del targetLogo1.png"
+  DL.SendSequence "del targetLogo1.png"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- del targetNight.png"
+  DL.SendSequence "del targetNight.png"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- del targetLady.png"
+  DL.SendSequence "del targetLady.png"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+End If
+
+   prompt = "It is about to erase Virtual Walmart Store png images. Do you want to proceed? "
+   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+
+If result = True Then
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- del walmartLogo.png"
+  DL.SendSequence "del walmartLogo.png"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- del walmartLogo1.png.png"
+  DL.SendSequence "del walmartLogo1.png"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- del walmartLady.png"
+  DL.SendSequence "del walmartLady.png"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- del walmartNight.png"
+  DL.SendSequence "del walmartNight.png"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+End If
+
+   prompt = "It is about to erase Virtual HomeDepot Store png images. Do you want to proceed? "
+   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+
+If result = True Then
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- del hdLogo.png"
+  DL.SendSequence "del hdLogo.png"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- del hdLogo1.png"
+  DL.SendSequence "del hdLogo1.png"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- del hdDay.png"
+  DL.SendSequence "del hdDay.png"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- del hdCoupon.png"
+  DL.SendSequence "del hdCoupon.png"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+End If
+
+   prompt = "It is about to erase Virtual Subway Store png images. Do you want to proceed? "
+   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "y" Or confirm = "Y")
+
+If result = True Then
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- del subwayLogo.png"
+  DL.SendSequence "del subwayLogo.png"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- del subwayLogo2.png"
+  DL.SendSequence "del subwayLogo2.png"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- del subwayLogo3.png"
+  DL.SendSequence "del subwayLogo3.png"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- del swImg01.png"
+  DL.SendSequence "del swImg01.png"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- del swImg02.png"
+  DL.SendSequence "del swImg02.png"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- del swImg03.png"
+  DL.SendSequence "del swImg03.png"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- del swImg04.png"
+  DL.SendSequence "del swImg04.png"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+End If
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- list all dir files"
+  DL.SendSequence "list all dir files"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- check free space"
+  DL.SendSequence "check free space"
+  result = DL.WaitForSequence ("generic 83-xx resp ", 1,3000)
+
+'--------------------------------------------------------------------------------------------
+   prompt = "Please check the docklight communication pan for the script log messages. Do you see any png images show up under the message 'list all dir files'? "
+   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y / N")  
+   result = (confirm = "n" Or confirm = "N")
+'--------------------------------------------------------------------
+
+'--------------------------------------------------------------
+DL.AddComment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+'------------------------------------------------------------
+' Get 4 Byte ID (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Sub DL_OnReceive()
+resultName = DL.OnReceive_GetName()
+DL.AddComment "resultName = " & resultName
+
+Select Case resultName
+	Case "Display Control OK"
+		resultTemp = DL.OnReceive_GetData("H")	' get the result as string of Hex-values
+		'DL.AddComment resultTemp	
+		' one possible solution to get single characters
+		MyArray = Split(resultTemp , " ", -1, 1)
+
+		' ### Prints each byte in array
+		'For i = 0 to UBound(MyArray)
+   		'	DL.AddComment "i = " & i & "Array - " & (MyArray(i))
+		'Next
+		' ### Extracts 4 byte Control ID
+		ControlID = MyArray(14) & " " & MyArray(15) & " " & MyArray(16) & " " & MyArray(17)
+		' ### Prints 4 byte Control ID
+		DL.AddComment "Control ID = " & ControlID
+	Case "ENTER Key PRESSED"
+		ENTER_Key_Pressed = 1
+End Select
+End Sub
+
+'------------------------------------------------------------
+' CRC Function (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+
+Sub DL_OnSend()
+    ' For all Send Sequences with minimum 3 bytes length (one byte user data,
+    ' two bytes CRC, perform the following manipulation:
+    ' - Calculate a 16 bit crc value on the characters 1 .. (DL.OnSend_Size() - 2)
+    ' - Write the low byte to character no. DL.OnSend_GetSize()-1
+    ' - Write the high byte to character no. DL.OnSend_GetSize()
+    ' Example:
+    ' Send Sequence name: MyCommand
+    ' Send Sequence in HEX representation: 02 04 00 00 00 01 00 00
+    ' --> Data transmitted by Docklight:   02 04 00 00 00 01 31 F9
+    '     (with "31" as the low byte CRC, "F9" as the high byte)
+
+    ' Check if there is at least one byte of user data
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub
+
+'========================================
+'= Debugger
+'========================================
+Function Debugger(itemNameString, itemName)
+	If DebuggerOption = 0 Then
+	ElseIf DebuggerOption = 1 Then
+		If itemName = "" Then
+			DL.AddComment "Debugger: " & itemNameString
+		Else
+			DL.AddComment "Debugger: " & itemNameString & " = " & itemName
+		End If
+	End If
+End Function
+
+'========================================
+'= Verdict Function
+'========================================
+Function verdict(result)
+	If result = 1 Then
+		verdict = "PASS"
+		Debugger "TEST VERDICT IS", verdict
+		If Global_Verdict = "FAIL" Then
+			Global_Verdict = "FAIL"
+   			MasterResult = 0
+		ElseIf Global_Verdict = "INCONCLUSIVE" Then
+			Global_Verdict = "PASS"
+  			MasterResult = 1
+			'DL.AddComment "Debug - IN HERE 111!!!"
+			'DL.Pause 3000
+		ElseIf Global_Verdict = "PASS" Then
+			Global_Verdict = "PASS"
+  			MasterResult = 1
+			'DL.AddComment "Debug - IN HERE 222!!!"
+			'DL.Pause 3000
+		End If
+		'DL.AddComment vbCrLf & "Global V = " & Global_Verdict
+		Debugger "Global_Verdict", Global_Verdict
+	ElseIf result = 0 Then
+		verdict = "FAIL"
+		Debugger "TEST VERDICT IS", verdict
+		Global_Verdict = "FAIL"
+ 		MasterResult = 0
+		'DL.AddComment vbCrLf & "Global V = " & Global_Verdict
+		Debugger "Global_Verdict", Global_Verdict
+		
+	End If
+End Function
+
+

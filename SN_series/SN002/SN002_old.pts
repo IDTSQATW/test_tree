@@ -1,0 +1,47 @@
+DL_SCRIPTVERSION
+1
+1546
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+'------------------------------------------------------------
+DL.OpenProject "SN Series.ptp"
+DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"', false, true
+
+Dim prompt
+Dim confirm
+
+'------------------------------------------------------------
+'// Get/Set Serial number
+DL.AddComment "#1: Get Serial Number"
+DL.SendSequence "GET SERIAL NUMBER"
+result = DL.WaitForSequence("Command Rejected", 1, 200) 
+
+If result <> 0 Then
+   DL.AddComment "#2: Set Serial Number"
+   DL.SendSequence "SET SERIAL NUMBER (SN002)"
+   result = DL.WaitForSequence("SET SERIAL NUMBER Accepted", 1, 3000)
+End If
+
+
+If result <> 0 Then
+   DL.AddComment "#3: Get Serial Number"
+   DL.SendSequence "GET SERIAL NUMBER"
+   result = DL.WaitForSequence("0123456789 p/N", 1, 3000)
+End If
+
+
+' CHECK RESULTS:
+'------------------------------------------------------------
+If result = 0 then
+   DL.AddComment Chr(13) & "Result = FAILED (Serial number is not set)"
+Else
+   DL.AddComment Chr(13) & "Result = PASSED (Serial number is set and verified)"
+End If
+
+
+' SCRIPT FINISH
+'------------------------------------------------------------
+DL.StopLogging

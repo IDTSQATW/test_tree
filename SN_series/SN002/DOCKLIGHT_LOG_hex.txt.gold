@@ -1,0 +1,12 @@
+Docklight Log File (HEX) - Started  
+ #1: Get Serial Number
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 12 01 00 00 18 A5 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 12 00 00 0E  Serial Number already set, data follows: 
+
+ [RX] - 30 31 32 33 34 35 36 37 38 39 20 70 2F 4E 9E 01  Serial Number correctly set and recovered: 0123456789 p/N
+ Result = FAILED (Serial number is not set)
+
+
+Docklight Log File (HEX) - Stopped  
+

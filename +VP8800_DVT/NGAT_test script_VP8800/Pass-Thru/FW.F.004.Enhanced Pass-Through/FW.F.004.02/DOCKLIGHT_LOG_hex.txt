@@ -1,0 +1,93 @@
+Docklight Log File (HEX) - Started 2020/6/23 16:12:00.952 
+ TEST CASE: FWF00402
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+
+
+Try to Stop Pass-Through Mode
+2020/6/23 16:12:02.236 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 01 00 01 00 80 2D 
+2020/6/23 16:12:02.244 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 01 0C 00 00 6B D0 
+
+Start Pass-Through Mode
+2020/6/23 16:12:02.740 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 01 00 01 01 A1 3D 
+2020/6/23 16:12:02.748 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 01 00 00 00 1E B1 
+
+Enhanced Pass-Through, Contactless, Poll for Card Off
+2020/6/23 16:12:03.259 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 01 00 01 00 20 01 00 00 00 B2 6C 
+2020/6/23 16:12:03.272 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 00 00 05 16 
+
+Enhanced Pass-Through, Contact, Poll for Card Off
+2020/6/23 16:12:03.784 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 02 00 01 00 20 01 00 00 00 F6 41 
+2020/6/23 16:12:03.796 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 00 00 05 16 
+
+Enhanced Pass-Through, Both, Poll for Card Off
+2020/6/23 16:12:04.311 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 01 00 20 01 00 00 00 D5 AA 
+2020/6/23 16:12:04.323 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 00 00 05 16 
+
+Enhanced Pass-Through, Both, Poll for Card On
+2020/6/23 16:12:09.094 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 05 00 20 01 00 00 00 13 6B 
+2020/6/23 16:12:10.044 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 00 05 07 2F DD 90 35 81 C4 
+
+---!!!NOTE!!!---This Get ATR command is to evade the bug that pass-through polling cannot be stopped regularly
+2020/6/23 16:12:12.419 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 12 00 01 20 99 89 
+2020/6/23 16:12:12.428 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 12 0A 00 04 00 05 00 0A B5 01 
+
+Enhanced Pass-Through, Both, Poll for Card On
+2020/6/23 16:12:18.183 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 05 00 20 01 00 00 00 13 6B 
+2020/6/23 16:12:20.418 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 00 01 20 51 F6 
+
+---!!!NOTE!!!---This Get ATR command is to evade the bug that pass-through polling cannot be stopped regularly
+2020/6/23 16:12:24.611 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 12 00 01 20 99 89 
+2020/6/23 16:12:24.619 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 12 0A 00 04 00 00 00 07 8F 5C 
+
+Enhanced Pass-Through, Contactless, Poll for Card On
+2020/6/23 16:12:34.592 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 01 00 05 00 20 01 00 00 00 74 AD 
+2020/6/23 16:12:34.650 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 00 05 07 2F DD 90 35 81 C4 
+
+---!!!NOTE!!!---This Get ATR command is to evade the bug that pass-through polling cannot be stopped regularly
+2020/6/23 16:12:37.247 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 12 00 01 20 99 89 
+2020/6/23 16:12:37.256 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 12 0A 00 04 00 05 00 0A B5 01 
+
+Enhanced Pass-Through, Contactless, Poll for Card On
+2020/6/23 16:12:46.134 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 01 00 05 00 20 01 00 00 00 74 AD 
+2020/6/23 16:12:56.148 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 08 00 04 00 00 00 0A F6 67 
+
+---!!!NOTE!!!---This Get ATR command is to evade the bug that pass-through polling cannot be stopped regularly
+2020/6/23 16:12:59.936 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 12 00 01 20 99 89 
+2020/6/23 16:12:59.945 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 12 0A 00 04 00 05 00 0A B5 01 
+
+Enhanced Pass-Through, Contact, Poll for Card On
+2020/6/23 16:13:12.600 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 02 00 05 00 20 01 00 00 00 30 80 
+2020/6/23 16:13:21.673 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 08 00 04 00 00 00 0A F6 67 
+
+---!!!NOTE!!!---This Get ATR command is to evade the bug that pass-through polling cannot be stopped regularly
+2020/6/23 16:13:24.225 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 12 00 01 20 99 89 
+2020/6/23 16:13:24.234 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 12 0A 00 04 00 05 00 0A B5 01 
+
+Enhanced Pass-Through, Contact, Poll for Card On
+2020/6/23 16:13:36.703 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 02 00 05 00 20 01 00 00 00 30 80 
+2020/6/23 16:13:38.696 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 11 00 00 01 20 51 F6 
+
+---!!!NOTE!!!---This Get ATR command is to evade the bug that pass-through polling cannot be stopped regularly
+2020/6/23 16:13:41.670 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 12 00 01 20 99 89 
+2020/6/23 16:13:41.678 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 12 0A 00 04 00 00 00 07 8F 5C 
+
+Try to Stop Pass-Through Mode
+2020/6/23 16:13:42.184 [TX] - 56 69 56 4F 70 61 79 56 33 00 2C 01 00 01 00 80 2D 
+2020/6/23 16:13:42.192 [RX] - 56 69 56 4F 70 61 79 56 33 00 2C 01 00 00 00 1E B1  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2020/6/23 16:13:43.814 
+

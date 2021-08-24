@@ -1,0 +1,25 @@
+Docklight Log File (HEX) - Started 6/22/2009 10:17:42.96 
+ TEST CASE: DSPB006200
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 19200 baud...
+ Set POS COM PORT - COMPLETE
+
+
+6/22/2009 10:17:44.40 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 16 30 00 30 00 35 30 00 35 30 00 31 00 31 00 39 00 79 65 73 00 0D 00 C3 0F 
+6/22/2009 10:17:44.70 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03  Button displayed - invalid bits ignored (OK)
+ Result = PASSED
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 6/22/2009 10:17:47.46 
+

@@ -1,0 +1,12 @@
+Docklight Log File (HEX) - Started 7/15/2021 08:37:46.103 
+ TEST CASE: Mag015
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM10 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+
+
+Docklight Log File (HEX) - Stopped 7/15/2021 08:37:46.509 
+

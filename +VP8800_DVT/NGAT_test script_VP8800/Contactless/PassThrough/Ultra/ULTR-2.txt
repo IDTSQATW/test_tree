@@ -1,0 +1,81 @@
+﻿PT stop
+CMD:2C 01 00 
+EXR:2C 01 
+
+PT Start
+CMD:2C 01 01 
+EXR:2C 01 00 00 00 
+
+Poll For Card
+DLG:Please present Mifare Ultralight card and don't move it
+CMD:2C 02 0A 00
+EXR:2C 02 00 00 08 04
+
+Write Block #3
+CMD:2C 08 41 03 11 11 11 11
+EXR:2C 08 00 00 00
+
+--- Read Block #3 ---
+CMD:2C 07 41 03
+EXR:2C 07 00 00 10 11 11 11 11 
+
+Write Block #6
+CMD:2C 08 41 06 00 00 00 00
+EXR:2C 08 00 00 00 
+
+--- Read Block #6 ---
+CMD:2C 07 41 06
+EXR:2C 07 00 00 10 00 00 00 00 
+
+ReWrite Block #6
+CMD:2C 08 41 06 11 11 11 11
+EXR:2C 08 00 00 00 
+
+--- Read Block #6 ---
+CMD:2C 07 41 06
+EXR:2C 07 00 00 10 11 11 11 11
+
+Write Block #7
+CMD:2C 08 41 07 00 00 00 00 
+EXR:2C 08 00 00 00
+
+--- Read Block #7 ---
+CMD:2C 07 41 07
+EXR:2C 07 00 00 10 00 00 00 00 
+
+Write Block #10
+CMD:2C 08 41 0A 00 00 00 00 
+EXR:2C 08 00 00 00
+
+--- Read Block #10 ---
+CMD:2C 07 41 0A
+EXR:2C 07 00 00 10 00 00 00 00 
+
+Write Block #11
+CMD:2C 08 41 0B 00 00 00 00 
+EXR:2C 08 00 00 00
+
+--- Read Block #11 ---
+CMD:2C 07 41 0B
+EXR:2C 07 00 00 10 00 00 00 00 
+
+Write Block #14
+CMD:2C 08 41 0E 00 00 00 00 
+EXR:2C 08 00 00 00
+
+--- Read Block #14 ---
+CMD:2C 07 41 0E
+EXR:2C 07 00 00 10 00 00 00 00 
+
+Write Block #15
+CMD:2C 08 41 0F 00 00 00 00
+EXR:2C 08 00 00 00 
+
+--- Read Block #15 ---
+CMD:2C 07 41 0F
+EXR:2C 07 00 00 10 00 00 00 00 
+
+PT Stop
+CMD:2C 01 00 
+EXR:2C 01 00 00 00
+

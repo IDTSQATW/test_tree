@@ -1,0 +1,43 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Display center of screen Font 1
+56 69 56 4F 74 65 63 68 32 00 83 04 00 0F 00 00 31 00 31 00 30 00 80 00 31 2E 30 30 00 02 21
+0
+5
+
+SEND
+1
+Invalid Button xy coordinates
+56 69 56 4F 74 65 63 68 32 00 83 05 00 16 32 34 31 00 31 36 31 00 35 30 00 35 30 00 31 00 31 00 35 00 31 00 63 08
+0
+5
+
+RECEIVE
+0
+Button was rejected - OK
+56 69 56 4F 74 65 63 68 32 00 83 0A 00 04 00 00 00 03 C9 5D
+-1
+1
+COMMENT Button was rejected - OK
+1
+1
+0
+1
+

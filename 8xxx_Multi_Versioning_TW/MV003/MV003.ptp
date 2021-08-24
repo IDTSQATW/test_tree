@@ -1,0 +1,43 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM90
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+Get Hardware Information 09-14
+56 69 56 4F 74 65 63 68 32 00 09 14 00 00 33 08
+0
+5
+
+RECEIVE
+0
+Positive Response
+56 69 56 4F 74 65 63 68 32 00 09 00 ?? ??
+-1
+1
+COMMENT 
+1
+1
+0
+0
+

@@ -1,0 +1,28 @@
+Docklight Log File (HEX) - Started 2019/1/29 14:32:58.120 
+ TEST CASE: MV001
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Get Product Type *** USAT_SRED
+
+2019/1/29 14:32:59.547 [TX] - 56 69 56 4F 74 65 63 68 32 00 09 01 00 00 A0 A0 
+2019/1/29 14:32:59.573 [RX] - 56 69 56 4F 74 65 63 68 32 00 09 00 00 06 DF 60 03 56 34 02  
+67 80  
+
+ Result = PASSED
+ 
+
+ ---------- END OF TEST ----------
+
+ 
+
+ ///// NOTICE ///////////////////////////////////////////////////////////
+
+Please make sure reader return correct data that meet spec!!
+
+
+Docklight Log File (HEX) - Stopped 2019/1/29 14:33:00.203 
+

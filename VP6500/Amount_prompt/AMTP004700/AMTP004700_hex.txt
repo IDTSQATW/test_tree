@@ -1,0 +1,25 @@
+Docklight Log File (HEX) - Started 2/11/2009 12:50:57.86 
+ TEST CASE: AMTP004700
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Display center of screen Inval Font Size
+
+2/11/2009 12:50:59.25 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 04 00 0F 00 00 31 00 37 00 35 00 80 00 31 2E 30 30 00 3A A7 
+2/11/2009 12:50:59.48 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 05 00 04 00 03 00 04 6A 03  Display center of screen Inval Font Size - OK
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2/11/2009 12:51:27.26 
+

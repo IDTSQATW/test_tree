@@ -1,0 +1,294 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+19200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+SEND
+0
+Ping (18-01)
+56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD
+0
+5
+
+SEND
+1
+Set Param to Default (04-09)
+56 69 56 4F 74 65 63 68 32 00 04 09 00 00 87 30
+0
+5
+
+SEND
+2
+Get Params (03-02)
+56 69 56 4F 74 65 63 68 32 00 03 02 00 00 5B 91
+0
+5
+
+SEND
+3
+------ UI Scheme ------
+
+0
+5
+
+SEND
+4
+Set Params (04-00) on FFF8 to 00 (UI: VivoTech)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F8 01 00 88 02
+0
+5
+
+SEND
+5
+Set Params (04-00) on FFF8 to 02 (UI: Visa wave)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F8 01 02 CA 22
+0
+5
+
+SEND
+6
+Set Params (04-00) on FFF8 to 03 (UI: EMEA)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F8 01 03 EB 32
+0
+5
+
+SEND
+7
+----- Pre Transaction  -----
+
+0
+5
+
+SEND
+8
+Disable Backwards Compatibility (04-00)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 59 01 00 6A BF
+0
+5
+
+SEND
+9
+Enable Backwards Compatibility (40-00)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 59 01 01 4B AF
+0
+5
+
+SEND
+10
+Pass Through On (2c-01)
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19
+0
+5
+
+SEND
+11
+Pass Through Off (2c-01)
+56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38
+0
+5
+
+SEND
+12
+Burst On (04-00)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 01 98 3E
+0
+5
+
+SEND
+13
+Burst Off (04-00)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 00 B9 2E
+0
+5
+
+SEND
+14
+Burst Auto (04-00)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF F7 01 02 FB 0E
+0
+5
+
+SEND
+15
+Auto Poll (01-01)
+56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 F6 24
+0
+5
+
+SEND
+16
+Poll on Demand (01-01)
+56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34
+0
+5
+
+SEND
+17
+Magstripe only (FFFC=01)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF FC 01 01 69 CE
+0
+5
+
+SEND
+18
+Mchip profile only (FFFC=02)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF FC 01 02 0A FE
+0
+5
+
+SEND
+19
+Mchip profile and Magstripe (FFFC=00)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF FC 01 00 48 DE
+0
+5
+
+SEND
+20
+----- Activate Transactions ------
+
+0
+5
+
+SEND
+21
+Activate Transaction (02-01)
+56 69 56 4F 74 65 63 68 32 00 02 01 00 0F 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 01 34
+0
+5
+
+SEND
+22
+Activate Transaction w/o time & date (02-01)
+56 69 56 4F 74 65 63 68 32 00 02 01 00 0A 0A 9F 02 06 00 00 00 00 10 00 AB 6C
+0
+5
+
+SEND
+23
+Activate Transaction w/ date & time (02-01)
+56 69 56 4F 74 65 63 68 32 00 02 01 00 15 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20 30 12
+0
+5
+
+SEND
+24
+Cancel transaction (05-01)
+56 69 56 4F 74 65 63 68 32 00 05 01 00 00 92 EF
+0
+5
+
+SEND
+25
+Get transaction result (03-00)
+56 69 56 4F 74 65 63 68 32 00 03 00 00 00 3B FF
+0
+5
+
+SEND
+26
+---- improvided collision  detection (ICD)----
+
+0
+5
+
+SEND
+27
+disable ICD (default)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 7F 01 00 0C 8B
+0
+5
+
+SEND
+28
+set ICD (3 attempts)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 7F 01 03 6F BB
+0
+5
+
+SEND
+29
+set ICD (6 attempts)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 7F 01 06 CA EB
+0
+5
+
+SEND
+30
+set ICD (9 attempts)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF 7F 01 09 25 1A
+0
+5
+
+RECEIVE
+0
+generic 04-xx positive resp
+56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+cmd 01-01 positive resp
+56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+2
+Ping Resp
+56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
+Cancel Transaction Resp
+56 69 56 4F 74 65 63 68 32 00 05 00 00 00 D8 A2
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+4
+Collision detected resp
+56 69 56 4F 74 65 63 68 32 00 02 0A 00 ?? 21 ?? ?? ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

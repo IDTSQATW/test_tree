@@ -1,0 +1,240 @@
+VERSION
+9
+
+COMMSETTINGS
+0
+COM1
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+Start Pass-Through Mode
+56 69 56 4F 70 61 79 56 33 00 2C 01 00 01 01 00 00
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+1
+Stop Pass-Through Mode
+56 69 56 4F 70 61 79 56 33 00 2C 01 00 01 00 00 00
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+2
+----Transaction Flags---- [10s], [Act CT, No Upd LED, RF On], [CT], [1 Beep], [No LED], [No Str1], [No Str2]
+00
+0
+5
+CHECKSUM 
+
+SEND
+3
+Enhanced Pass-Through, Contactless, Poll for Card On
+56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 01 00 05 00 20 01 00 00 00 00 00
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+4
+Enhanced Pass-Through, Contact, Poll for Card On
+56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 02 00 05 00 20 01 00 00 00 00 00
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+5
+Enhanced Pass-Through, Both, Poll for Card On
+56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 05 00 20 01 00 00 00 00 00
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+6
+Enhanced Pass-Through, Contactless, Poll for Card Off
+56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 01 00 01 00 20 01 00 00 00 00 00
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+7
+Enhanced Pass-Through, Contact, Poll for Card Off
+56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 02 00 01 00 20 01 00 00 00 00 00
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+8
+Enhanced Pass-Through, Both, Poll for Card Off
+56 69 56 4F 70 61 79 56 33 00 2C 11 00 0B 00 0A 03 00 01 00 20 01 00 00 00 00 00
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+9
+----Diagnostics----
+00
+0
+5
+CHECKSUM 
+
+SEND
+10
+Reboot
+56 69 56 4F 70 61 79 56 33 00 77 05 00 00 F8 2F
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+11
+Get Firmware
+56 69 56 4F 70 61 79 56 33 00 29 00 00 00 13 69
+0
+5
+CHECKSUM CRC-CCITT L
+
+SEND
+12
+Get ATR
+56 69 56 4F 70 61 79 56 33 00 2C 12 00 01 20 99 89
+0
+5
+CHECKSUM CRC-CCITT L
+
+RECEIVE
+0
+Pass-Through Mode Success
+56 69 56 4F 70 61 79 56 33 00 2C 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+1
+Pass-Through Mode Command Not Allowed
+56 69 56 4F 70 61 79 56 33 00 2C 01 0B
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+2
+Pass-Through Mode Sub-Command Not Allowed
+56 69 56 4F 70 61 79 56 33 00 2C 01 0C
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+3
+Pass-Through Mode Incorrect Parameter
+56 69 56 4F 70 61 79 56 33 00 2C 01 05
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+4
+Enhanced Pass-Through Success
+56 69 56 4F 70 61 79 56 33 00 2C 11 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+5
+Enhanced Pass-Through Timeout
+56 69 56 4F 70 61 79 56 33 00 2C 11 08
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+6
+----Extented Status for Common Errors----
+00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+7
+ETIMEOUT
+00 00 00 0A
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+

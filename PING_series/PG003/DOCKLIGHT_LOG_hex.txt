@@ -1,0 +1,31 @@
+Docklight Log File (HEX) - Started  
+ TEST CASE: PG003
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 19200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- PING
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Status Code = '00'
+ --- PING w/ incorrect header
+
+ [TX] - 56 69 56 4F 74 65 63 68 38 00 18 01 00 00 B1 4B  --- PING
+
+ [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD 
+ [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Status Code = '00'
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped  
+

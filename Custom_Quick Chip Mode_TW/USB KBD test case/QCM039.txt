@@ -1,0 +1,27 @@
+Objective: to test cmd 01-14, "If original QuickChip is enabled, switching to QuickChip HID mode(01-14 command) is prohibited as well"
+
+--------------------------------------------------------------------------------
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 01 00 00 00
+
+----------------------------------------
+>>> cmd 01-14
+CMD: 01 14 00
+EXR: 01 0A
+
+>>> cmd 01-14
+CMD: 01 14 01
+EXR: 01 0A
+
+>>> cmd 01-14
+CMD: 01 14 02
+EXR: 01 0A
+
+>>> cmd 01-14
+CMD: 01 14 03
+EXR: 01 0A
+
+>>> cmd 01-14
+CMD: 01 14 04
+EXR: 01 0A

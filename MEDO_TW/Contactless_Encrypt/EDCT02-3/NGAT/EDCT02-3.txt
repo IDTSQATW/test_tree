@@ -48,7 +48,7 @@ EXR:04 00 00 00
 
 TID:Activate Transaction
 CMD:02 40 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
-MSG:Tap MChip (PAN = xxxx....8171) card...
+MSG:Tap MChip (ANY) card...
 EXR:56 69 56 4F 74 65 63 68 32 00 02 23 **
 TIMEOUT:120000
 

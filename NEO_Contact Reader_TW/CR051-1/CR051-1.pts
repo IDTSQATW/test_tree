@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-51085
+12642
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -169,6 +169,7 @@ if readerType = "NEO2" then
       DL.AddComment "--- First response control = Send First Response 0x63"
       DL.SendSequence "First response control = Send First Response 0x63"
       result = DL.WaitForSequence("04 00", 1, 5000)
+      dl.pause 500
    End If
 end if
 

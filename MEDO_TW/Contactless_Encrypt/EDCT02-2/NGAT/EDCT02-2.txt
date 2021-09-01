@@ -52,12 +52,12 @@ EXR:04 00 00 00
 
 TID:Activate Transaction
 CMD:02 40 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
-MSG:Tap Discover (PAN = xxxx....0125) card...
+MSG:Tap Discover (ANY) card...
 EXR:56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 **
 TIMEOUT:120000
 
 TID:Get Transaction Result
-DLG:Tap Discover (PAN = ANY) card -> Click OK...
+DLG:Tap Discover (ANY) card -> Click OK...
 TIMEOUT:30000
 CMD: 03 40
 EXR:

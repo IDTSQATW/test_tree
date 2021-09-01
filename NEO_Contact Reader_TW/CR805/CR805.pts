@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-54425
+59727
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -205,7 +205,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- 60-02 Remove Application Data"
    DL.SendSequence "60-02 Remove Application Data"
-   result = DL.WaitForSequence("60 00", 1, 2000)
+   resultignore = DL.WaitForSequence("60 00", 1, 2000)
    dl.pause 500
 End If
 

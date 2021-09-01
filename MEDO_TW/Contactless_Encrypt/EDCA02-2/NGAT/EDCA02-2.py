@@ -110,7 +110,7 @@ if (Result):
 					else:
 						DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 								
-					r1 = DL.Check_StringAB(decDFEF4D, '25 42 36 35 31 30 30 30 30 30 30 30 30 30 ')
+					r1 = DL.Check_StringAB(decDFEF4D, '25 42 36 35 31 30 30 30 30 30 30 30 30 30')
 					r2 = DL.Check_StringAB(decDFEF4D, '5E 43 41 52 44 2F 49 4D 41 47 45 20 30 38 20 20 20 20 20 20 20 20 20 20 20 20 20 5E 31 37 31 32 32 30 31 31 30 30 30 30 39 35 30 30 30 30 30 30 3F')
 					if r1 == True and r2 == True and DL.Check_StringAB(alldata, 'DF EF 4D 50'):
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
@@ -171,7 +171,7 @@ if (Result):
 						DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 								
 					r1 = DL.Check_StringAB(decDFEF4D, '25 42 36 35 31 30 30 30 30 30 30 30 30 30')
-					r2 = DL.Check_StringAB(decDFEF4D, '25 42 36 35 31 30 30 30 30 30 30 30 30 305E 43 41 52 44 2F 49 4D 41 47 45 20 30 38 20 20 20 20 20 20 20 20 20 20 20 20 20 5E 31 37 31 32 32 30 31 31 30 30 30 30 39 35 30 30 30 30 30 30 3F')
+					r2 = DL.Check_StringAB(decDFEF4D, '5E 43 41 52 44 2F 49 4D 41 47 45 20 30 38 20 20 20 20 20 20 20 20 20 20 20 20 20 5E 31 37 31 32 32 30 31 31 30 30 30 30 39 35 30 30 30 30 30 30 3F')
 					if r1 == True and r2 == True and DL.Check_StringAB(alldata, 'DF EF 4D 50'):
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-20384
+17817
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -203,6 +203,15 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- 60-0A default"
    DL.SendSequence "60-0A default"
+   result = DL.WaitForSequence("60 00", 1, 2000)
+   dl.pause 500
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-03 Load A0000000041010"
+   DL.SendSequence "60-03 Load A0000000041010"
    result = DL.WaitForSequence("60 00", 1, 2000)
    dl.pause 500
 End If

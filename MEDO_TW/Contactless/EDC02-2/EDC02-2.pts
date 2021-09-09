@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-52138
+57667
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -245,7 +245,7 @@ If result <> 0 Then
    pollondemand()
 
    if result <> 0 then
-   MsgBox "Click OK --> Tap Discover (PAN = xxxx....0125)", VBOKOnly
+   MsgBox "Click OK --> Tap Discover (ANY)", VBOKOnly
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-40 Activate Transaction"
@@ -270,7 +270,7 @@ If result <> 0 Then
    autopoll()
 
    if result <> 0 then
-   MsgBox "Tap Discover (PAN = xxxx....0125) first --> Click OK", VBOKOnly
+   MsgBox "Tap Discover (ANY) first --> Click OK", VBOKOnly
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- 03-40 Get Transaction Result"

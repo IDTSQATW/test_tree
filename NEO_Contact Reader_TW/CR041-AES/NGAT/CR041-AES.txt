@@ -17,7 +17,7 @@ EXR:01 00 00 00
 TID:Activate Transaction
 CMD:60 10 01 00 78 00 78 9C 01 00 5F 57 01 00 9F 02 06 00 00 00 00 02 00 9F 03 06 00 00 00 00 00 00 5F 2A 02 08 40
 EXR: 60 63 00 00
-DLG:Fallback to CT: Swipe Discover card (service code=201/ PAN=xxxx....0125)...
+DLG:Fallback to CT: Swipe Discover card (service code = 2xx or 6xx)...
 TIMEOUT:120000
 DLG:Does LCD show suitable msg 'USE CHIP READER'?
 TIMEOUT:120000

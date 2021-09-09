@@ -19,7 +19,7 @@ CMD:04 03 DF EE 2D 01 B0 5F 2A 02 08 40 9F 09 02 01 00 9F 1A 02 08 40 9F 02 06 0
 EXR:
 
 TID:Get Transaction Result
-DLG:Tap Discover card (PAN = xxxx....0125) -> Click OK...
+DLG:Tap Discover card (ANY) -> Click OK...
 TIMEOUT:120000
 CMD:03 40
 EXR:56 69 56 4F 74 65 63 68 32 00 03 23 **

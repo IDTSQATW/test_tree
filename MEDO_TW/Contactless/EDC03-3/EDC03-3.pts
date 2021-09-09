@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-8139
+61828
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -202,7 +202,7 @@ If result <> 0 Then
    DL.SendSequence "04-00-----DFEF4B " & i
    result = DL.WaitForSequence("burst off", 1, 10000)
 
-   MsgBox "Click OK --> Tap MChip (PAN = ANY)", VBOKOnly
+   MsgBox "Click OK --> Tap MChip (ANY)", VBOKOnly
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-40 Activate Transaction"

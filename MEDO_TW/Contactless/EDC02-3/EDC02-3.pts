@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-55666
+40985
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -177,12 +177,12 @@ sub at()
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    if poll = 1 then
-      MsgBox "Click OK --> Tap MChip (PAN = ANY)", VBOKOnly
+      MsgBox "Click OK --> Tap MChip (ANY)", VBOKOnly
       DL.AddComment "--- 02-40 Activate Transaction"
       DL.SendSequence "02-40"
       result = DL.WaitForSequence("02-40 resp", 1, 6000)
    elseif poll = 0 then
-      MsgBox "Tap MChip (PAN = ANY) --> Click OK", VBOKOnly
+      MsgBox "Tap MChip (ANY) --> Click OK", VBOKOnly
       DL.AddComment "--- 03-40 Get Transaction Result"
       DL.SendSequence "03-40"
       result = DL.WaitForSequence("03-40 resp", 1, 6000)

@@ -4,31 +4,59 @@ import sys
 import time
 RetOfStep = True
 Result= True
+readertype = 0
 
 Key='0123456789abcdeffedcba9876543210'
 MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
+# Check project type (NEOI or NEOII)
+readertype = DL.ShowMessageBox("", "Is this NEOII project?", 0)
+if readertype == 1:
+	DL.SetWindowText("Green", "*** NEOII project ***")
+else:
+	DL.SetWindowText("Green", "*** NEOI project ***")
+
 # Get Data Encryption (C7-37)
 if (Result):
 	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
+		if Result == False:
+			DL.SetWindowText("Red", "Please ENABLE data encryption (03)...")
 		
 # Encryption type -- TDES
 if (Result):
 	RetOfStep = DL.SendCommand('Encryption type -- TDES')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 01 00")
+		if Result == False:
+			DL.SetWindowText("Red", "Please set data key type as TDES...")
 		
-# Burst mode OFF		
+# Burst mode OFF
 if (Result):
-	RetOfStep = DL.SendCommand('Burst mode Off')
+	if readertype == 1:	
+		RetOfStep = DL.SendCommand('Burst mode Off (NEOII)')
+	else:
+		RetOfStep = DL.SendCommand('Burst mode Off (NEOI)')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("04 00 00 00")	
 
-# cmd 02-40, tap VISA qVSDC card
+# Poll on Demand
+if (Result):
+	RetOfStep = DL.SendCommand('Poll on Demand')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("01 00 00 00")		
+
+if readertype == 1:			
+	# group 80, support MSD only
+	if (Result):
+		RetOfStep = DL.SendCommand('group 80, support MSD only')
+		if (RetOfStep):
+			Result = Result and DL.Check_RXResponse("04 00 00 00")			
+		
+# cmd 02-40, tap MChip card
 if (Result):
 	for i in range (1, 8):
 		if i == 1:
@@ -82,7 +110,10 @@ if (Result):
 								# alldata = DL.Get_RXResponse(1)
 								# Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 03 23')
 								
-				KSN = DL.GetTLV(alldata,"DFEE12", 0)				
+				if readertype == 1:		
+					KSN = DL.GetTLV(alldata,"DFEE12")
+				else:
+					KSN = DL.GetTLV(alldata,"FFEE12")			
 				TagDFEF4C = DL.GetTLV(alldata,"DFEF4C", 0)
 				encDFEF4D = DL.GetTLV(alldata,"DFEF4D", 0)
 				decDFEF4D = DL.DecryptDLL(0,1, strKey, KSN, encDFEF4D)	

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-17864
+1964
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -170,6 +170,18 @@ If result <> 0 Then
   dl.addcomment "===================================== Set parameter"
   dl.addcomment "==================================================="
   DL.ResetReceiveCounter
+  DL.AddComment "--- 9f 4e"
+  DL.SendSequence " 9f 4e"
+  result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
+  if result = 0 then 
+     P1 = P1 + 1
+     dl.addcomment vbcrlf
+     dl.addcomment "**FAIL**"
+  end if
+'------------------------------------------------------------
+  DL.Pause 200
+  DL.ResetReceiveCounter
+  dl.addcomment vbcrlf
   DL.AddComment "--- 9f 02"
   DL.SendSequence " 9f 02"
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
@@ -279,12 +291,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- ff fc"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence "ff fc"
   elseif readerType = "NEO2" then 
      DL.SendSequence "ff fc (NEO2)"
-  else
-     DL.SendSequence "ff fc"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
   if result = 0 then 
@@ -297,12 +307,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- ff fd"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " ff fd"
   elseif readerType = "NEO2" then 
      DL.SendSequence " ff fd (NEO2)"
-  else
-     DL.SendSequence " ff fd"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
   if result = 0 then 
@@ -315,12 +323,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- ff fe"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " ff fe"
   elseif readerType = "NEO2" then 
      DL.SendSequence " ff fe (NEO2)"
-  else
-     DL.SendSequence " ff fe"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
   if result = 0 then 
@@ -333,12 +339,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- ff ff"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " ff ff"
   elseif readerType = "NEO2" then 
      DL.SendSequence " ff ff (NEO2)"
-  else
-     DL.SendSequence " ff ff"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
   if result = 0 then 
@@ -351,36 +355,30 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- ff fb"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " ff fb 02"
   elseif readerType = "NEO2" then 
      DL.SendSequence " ff fb 02 (NEO2)"
-  else
-     DL.SendSequence " ff fb 02"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 1000)
 
   if result = 1 then 
      fffb = 2
   else
-     if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+     if readerType <> "NEO2" then 
         dl.sendsequence "ff fb 01"
      elseif readerType = "NEO2" then 
         dl.sendsequence "ff fb 01 (NEO2)"
-     else
-        dl.sendsequence "ff fb 01"
      end if
      result = dl.waitforsequence("Set Parameter Response", 1, 1000)
 
      if result = 1 then
         fffb = 1
      else
-        if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+        if readerType <> "NEO2" then 
            dl.sendsequence "ff fb 03"
         elseif readerType = "NEO2" then 
            dl.sendsequence "ff fb 03 (NEO2)"
-        else
-           dl.sendsequence "ff fb 03"
         end if
         result = dl.waitforsequence("Set Parameter Response", 1, 1000)
         if result = 1 then
@@ -398,12 +396,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- ff fa"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " ff fa"
   elseif readerType = "NEO2" then 
      DL.SendSequence " ff fa (NEO2)"
-  else
-     DL.SendSequence " ff fa"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
   if result = 0 then 
@@ -416,12 +412,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- ff f9"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " ff f9"
   elseif readerType = "NEO2" then 
      DL.SendSequence " ff f9 (NEO2)"
-  else
-     DL.SendSequence " ff f9"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
   if result = 0 then 
@@ -434,12 +428,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- ff f8"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " ff f8"
   elseif readerType = "NEO2" then 
      DL.SendSequence " ff f8 (NEO2)"
-  else
-     DL.SendSequence " ff f8"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
   if result = 0 then 
@@ -452,7 +444,7 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- ff f7"
-  if readerType = "GR" or readerType = "NEO1" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " ff f7"
   elseif readerType = "NEO2" then
      if readercheck = 6 then DL.SendSequence "ff f7 (NEO2_SRED)"
@@ -471,12 +463,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- ff f5"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " ff f5"
   elseif readerType = "NEO2" then 
      DL.SendSequence " ff f5 (NEO2)"
-  else
-     DL.SendSequence " ff f5"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
   if result = 0 then 
@@ -489,12 +479,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- ff f4"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " ff f4"
   elseif readerType = "NEO2" then 
      DL.SendSequence " ff f4 (NEO2)"
-  else
-     DL.SendSequence " ff f4"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
   if result = 0 then 
@@ -519,12 +507,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- ff f2"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " ff f2"
   elseif readerType = "NEO2" then 
      DL.SendSequence " ff f2 (NEO2)"
-  else
-     DL.SendSequence " ff f2"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
   if result = 0 then 
@@ -537,12 +523,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- ff f1"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " ff f1"
   elseif readerType = "NEO2" then 
      DL.SendSequence " ff f1 (NEO2)"
-  else
-     DL.SendSequence " ff f1"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
   if result = 0 then 
@@ -555,12 +539,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- ff f3"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " ff f3"
   elseif readerType = "NEO2" then 
      DL.SendSequence " ff f3 (NEO2)"
-  else
-     DL.SendSequence " ff f3"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
   if result = 0 then 
@@ -573,12 +555,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- ff f0"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " ff f0"
   elseif readerType = "NEO2" then 
      DL.SendSequence " ff f0 (NEO2)"
-  else
-     DL.SendSequence " ff f0"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
   if result = 0 then 
@@ -591,12 +571,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- df 63"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " df 63"
   elseif readerType = "NEO2" then 
      DL.SendSequence " df 63 (NEO2)"
-  else
-     DL.SendSequence " df 63"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
   if result = 0 then 
@@ -609,12 +587,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- df 64"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " df 64"
   elseif readerType = "NEO2" then 
      DL.SendSequence " df 64 (NEO2)"
-  else
-     DL.SendSequence " df 64"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
   if result = 0 then 
@@ -627,12 +603,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- df 65"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " df 65"
   elseif readerType = "NEO2" then 
      DL.SendSequence " df 65 (NEO2)"
-  else
-     DL.SendSequence " df 65"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
   if result = 0 then 
@@ -645,12 +619,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- df 66"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " df 66"
   elseif readerType = "NEO2" then 
      DL.SendSequence " df 66 (NEO2)"
-  else
-     DL.SendSequence " df 66"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
   if result = 0 then 
@@ -723,12 +695,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- df 28"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " df 28"
   elseif readerType = "NEO2" then 
      DL.SendSequence " df 28 (NEO2)"
-  else
-     DL.SendSequence " df 28"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
   if result = 0 then 
@@ -741,12 +711,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- df 29"
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      DL.SendSequence " df 29"
   elseif readerType = "NEO2" then 
      DL.SendSequence " df 29 (NEO2)"
-  else
-     DL.SendSequence " df 29"
   end if
   result = DL.WaitForSequence("Set Parameter Response", 1, 3000)
   if result = 0 then 
@@ -777,6 +745,15 @@ If result <> 0 Then
   dl.pause 500
 
   dl.addcomment vbcrlf
+  result = DL.WaitForSequence("9f 4e Response", 1, 3000)
+  if result = 0 then 
+     P2 = P2 + 1
+     dl.addcomment vbcrlf
+     dl.addcomment "**FAIL**"
+  else
+     DL.AddComment "--- 9f 4e: PASS"
+  end if
+
   result = DL.WaitForSequence("9f 02 Response", 1, 3000)
   if result = 0 then 
      P2 = P2 + 1
@@ -858,12 +835,10 @@ If result <> 0 Then
     DL.AddComment "--- 9c: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff fc Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff fc Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff fc Response", 1, 3000)
   end if
   if result = 0 then 
      P2 = P2 + 1
@@ -873,12 +848,10 @@ If result <> 0 Then
     DL.AddComment "--- ff fc: PSSS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff fd Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff fd Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff fd Response", 1, 3000)
   end if
   if result = 0 then 
      P2 = P2 + 1
@@ -888,12 +861,10 @@ If result <> 0 Then
     DL.AddComment "--- ff fd: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff fe Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff fe Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff fe Response", 1, 3000)
   end if
   if result = 0 then 
      P2 = P2 + 1
@@ -903,12 +874,10 @@ If result <> 0 Then
     DL.AddComment "--- ff fe: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff ff Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff ff Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff ff Response", 1, 3000)
   end if
   if result = 0 then 
      P2 = P2 + 1
@@ -919,28 +888,22 @@ If result <> 0 Then
   end if
 
   if fffb = 2 then
-     if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+     if readerType <> "NEO2" then 
         result = DL.WaitForSequence("ff fb Response 02", 1, 3000)
      elseif readerType = "NEO2" then 
         result = DL.WaitForSequence("ff fb Response 02 (NEO2)", 1, 3000)
-     else
-        result = DL.WaitForSequence("ff fb Response 02", 1, 3000)
      end if
   elseif fffb = 1 then
-         if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+         if readerType <> "NEO2" then 
             result = dl.waitforsequence("ff fb Response 01", 1, 3000)
          elseif readerType = "NEO2" then 
             result = dl.waitforsequence("ff fb Response 01 (NEO2)", 1, 3000)
-         else
-            result = dl.waitforsequence("ff fb Response 01", 1, 3000)
          end if
   elseif fffb = 3 then
-         if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+         if readerType <> "NEO2" then 
             result = dl.waitforsequence("ff fb Response 03", 1, 3000)
          elseif readerType = "NEO2" then 
             result = dl.waitforsequence("ff fb Response 03 (NEO2)", 1, 3000)
-         else
-            result = dl.waitforsequence("ff fb Response 03", 1, 3000)
          end if  
   else result = 0
   end if
@@ -952,12 +915,10 @@ If result <> 0 Then
     DL.AddComment "--- ff fb: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff fa Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff fa Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff fa Response", 1, 3000)
   end if
   if result = 0 then 
      P2 = P2 + 1
@@ -967,12 +928,10 @@ If result <> 0 Then
     DL.AddComment "--- ff fa: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f9 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f9 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f9 Response", 1, 3000)
   end if
   if result = 0 then 
      P2 = P2 + 1
@@ -982,12 +941,10 @@ If result <> 0 Then
     DL.AddComment "--- ff f9: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f8 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f8 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f8 Response", 1, 3000)
   end if
   if result = 0 then 
      P2 = P2 + 1
@@ -997,13 +954,11 @@ If result <> 0 Then
     DL.AddComment "--- ff f8: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f7 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      if readercheck = 6 then result = DL.WaitForSequence("ff f7 Response (NEO2_SRED)", 1, 3000)
      if readercheck = 7 then result = DL.WaitForSequence("ff f7 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f7 Response", 1, 3000)
   end if
   if result = 0 then 
      P2 = P2 + 1
@@ -1013,12 +968,10 @@ If result <> 0 Then
     DL.AddComment "--- ff f7: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f5 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f5 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f5 Response", 1, 3000)
   end if
   if result = 0 then 
      P2 = P2 + 1
@@ -1028,12 +981,10 @@ If result <> 0 Then
     DL.AddComment "--- ff f5: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f4 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f4 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f4 Response", 1, 3000)
   end if
   if result = 0 then 
      P2 = P2 + 1
@@ -1052,12 +1003,10 @@ If result <> 0 Then
     DL.AddComment "--- 9f 66: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f2 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f2 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f2 Response", 1, 3000)
   end if
   if result = 0 then 
      P2 = P2 + 1
@@ -1067,12 +1016,10 @@ If result <> 0 Then
     DL.AddComment "--- ff f2: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f1 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f1 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f1 Response", 1, 3000)
   end if
   if result = 0 then 
      P2 = P2 + 1
@@ -1082,12 +1029,10 @@ If result <> 0 Then
     DL.AddComment "--- ff f1: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f3 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f3 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f3 Response", 1, 3000)
   end if
   if result = 0 then 
      P2 = P2 + 1
@@ -1097,7 +1042,7 @@ If result <> 0 Then
     DL.AddComment "--- ff f3: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then result = DL.WaitForSequence("ff f0 Response", 1, 3000)
+  if readerType <> "NEO2" then result = DL.WaitForSequence("ff f0 Response", 1, 3000)
   if readerType = "NEO2" then result = DL.WaitForSequence("ff f0 Response (NEO2)", 1, 3000)
   if result = 0 then 
      P2 = P2 + 1
@@ -1107,7 +1052,7 @@ If result <> 0 Then
     DL.AddComment "--- ff f0: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then result = DL.WaitForSequence("df 63 Response", 1, 3000)
+  if readerType <> "NEO2" then result = DL.WaitForSequence("df 63 Response", 1, 3000)
   if readerType = "NEO2" then result = DL.WaitForSequence("df 63 Response (NEO2)", 1, 3000)
   if result = 0 then 
      P2 = P2 + 1
@@ -1117,7 +1062,7 @@ If result <> 0 Then
     DL.AddComment "--- df 63: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then result = DL.WaitForSequence("df 64 Response", 1, 3000)
+  if readerType <> "NEO2" then result = DL.WaitForSequence("df 64 Response", 1, 3000)
   if readerType = "NEO2" then result = DL.WaitForSequence("df 64 Response (NEO2)", 1, 3000)
   if result = 0 then 
      P2 = P2 + 1
@@ -1127,7 +1072,7 @@ If result <> 0 Then
     DL.AddComment "--- df 64: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then result = DL.WaitForSequence("df 65 Response", 1, 3000)
+  if readerType <> "NEO2" then result = DL.WaitForSequence("df 65 Response", 1, 3000)
   if readerType = "NEO2" then result = DL.WaitForSequence("df 65 Response (NEO2)", 1, 3000)
   if result = 0 then 
      P2 = P2 + 1
@@ -1137,7 +1082,7 @@ If result <> 0 Then
     DL.AddComment "--- df 65: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then result = DL.WaitForSequence("df 66 Response", 1, 3000)
+  if readerType <> "NEO2" then result = DL.WaitForSequence("df 66 Response", 1, 3000)
   if readerType = "NEO2" then result = DL.WaitForSequence("df 66 Response (NEO2)", 1, 3000)
   if result = 0 then 
      P2 = P2 + 1
@@ -1192,12 +1137,10 @@ If result <> 0 Then
     DL.AddComment "--- 9f 6d: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("df 28 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("df 28 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("df 28 Response", 1, 3000)
   end if
   if result = 0 then 
      P2 = P2 + 1
@@ -1207,12 +1150,10 @@ If result <> 0 Then
     DL.AddComment "--- df 28: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("df 29 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("df 29 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("df 29 Response", 1, 3000)
   end if
   if result = 0 then 
      P2 = P2 + 1
@@ -1253,6 +1194,15 @@ If result <> 0 Then
   dl.pause 500
 
   dl.addcomment vbcrlf
+  result = DL.WaitForSequence("9f 4e Response", 1, 3000)
+  if result = 0 then 
+     P3 = P3 + 1
+     dl.addcomment vbcrlf
+     dl.addcomment "**FAIL**"
+  else
+    DL.AddComment "--- 9f 4e: PASS"
+  end if
+
   result = DL.WaitForSequence("9f 02 Response", 1, 3000)
   if result = 0 then 
      P3 = P3 + 1
@@ -1334,12 +1284,10 @@ If result <> 0 Then
     DL.AddComment "--- 9c: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff fc Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff fc Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff fc Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1349,12 +1297,10 @@ If result <> 0 Then
     DL.AddComment "--- ff fc: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff fd Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff fd Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff fd Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1364,12 +1310,10 @@ If result <> 0 Then
     DL.AddComment "--- ff fd: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff fe Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff fe Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff fe Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1379,12 +1323,10 @@ If result <> 0 Then
     DL.AddComment "--- ff fe: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff ff Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff ff Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff ff Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1395,28 +1337,22 @@ If result <> 0 Then
   end if
 
   if fffb = 2 then
-     if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+     if readerType <> "NEO2" then 
         result = DL.WaitForSequence("ff fb Response 02", 1, 3000)
      elseif readerType = "NEO2" then 
         result = DL.WaitForSequence("ff fb Response 02 (NEO2)", 1, 3000)
-     else
-        result = DL.WaitForSequence("ff fb Response 02", 1, 3000)
      end if
   elseif fffb = 1 then
-         if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+         if readerType <> "NEO2" then 
             result = dl.waitforsequence("ff fb Response 01", 1, 3000)
          elseif readerType = "NEO2" then 
             result = dl.waitforsequence("ff fb Response 01 (NEO2)", 1, 3000)
-         else
-            result = dl.waitforsequence("ff fb Response 01", 1, 3000)
          end if
   elseif fffb = 3 then
-         if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+         if readerType <> "NEO2" then 
             result = dl.waitforsequence("ff fb Response 03", 1, 3000)
          elseif readerType = "NEO2" then 
             result = dl.waitforsequence("ff fb Response 03 (NEO2)", 1, 3000)
-         else
-            result = dl.waitforsequence("ff fb Response 03", 1, 3000)
          end if
   end if
   if result = 0 then 
@@ -1427,12 +1363,10 @@ If result <> 0 Then
     DL.AddComment "--- ff fb: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff fa Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff fa Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff fa Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1442,12 +1376,10 @@ If result <> 0 Then
     DL.AddComment "--- ff fa: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f9 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f9 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f9 Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1457,12 +1389,10 @@ If result <> 0 Then
     DL.AddComment "--- ff f9: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f8 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f8 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f8 Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1472,13 +1402,11 @@ If result <> 0 Then
     DL.AddComment "--- ff f8: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f7 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      if readercheck = 6 then result = DL.WaitForSequence("ff f7 Response (NEO2_SRED)", 1, 3000)
      if readercheck = 7 then result = DL.WaitForSequence("ff f7 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f7 Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1488,12 +1416,10 @@ If result <> 0 Then
     DL.AddComment "--- ff f7: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f5 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f5 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f5 Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1503,12 +1429,10 @@ If result <> 0 Then
     DL.AddComment "--- ff f5: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f4 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f4 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f4 Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1527,12 +1451,10 @@ If result <> 0 Then
     DL.AddComment "--- 9f 66: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f2 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f2 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f2 Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1542,12 +1464,10 @@ If result <> 0 Then
     DL.AddComment "--- ff f2: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f1 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f1 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f1 Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1557,12 +1477,10 @@ If result <> 0 Then
     DL.AddComment "--- ff f1: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f3 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f3 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f3 Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1572,12 +1490,10 @@ If result <> 0 Then
     DL.AddComment "--- ff f3: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f0 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f0 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f0 Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1587,12 +1503,10 @@ If result <> 0 Then
     DL.AddComment "--- ff f0: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("df 63 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("df 63 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("df 63 Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1602,12 +1516,10 @@ If result <> 0 Then
     DL.AddComment "--- df 63: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("df 64 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("df 64 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("df 64 Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1617,12 +1529,10 @@ If result <> 0 Then
     DL.AddComment "--- df 64: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("df 65 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("df 65 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("df 65 Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1632,12 +1542,10 @@ If result <> 0 Then
     DL.AddComment "--- df 65: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("df 66 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("df 66 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("df 66 Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1692,12 +1600,10 @@ If result <> 0 Then
     DL.AddComment "--- 9f 6d: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("df 28 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("df 28 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("df 28 Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1707,12 +1613,10 @@ If result <> 0 Then
     DL.AddComment "--- df 28: PASS"
   end if
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("df 29 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("df 29 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("df 29 Response", 1, 3000)
   end if
   if result = 0 then 
      P3 = P3 + 1
@@ -1755,10 +1659,18 @@ If result <> 0 Then
   DL.AddComment "--- Get EMV Parameters"
   DL.SendSequence " Get EMV Parameters"
   dl.pause 500
- 
+'------------------------------------------------------------------
+  dl.addcomment vbcrlf
+  result = DL.WaitForSequence("9f 4e Response", 1, 3000)
+  if result = 0 then 
+     P4 = P4 + 1
+     dl.addcomment vbcrlf
+     dl.addcomment "--- 9f 4e Default: **FAIL**"
+  else
+    DL.AddComment "--- 9f 4e Default >>> As spec's definition, 04-09 did not modify this tag.: PASS"
+  end if
 '------------------------------------------------------------------
 
-  dl.addcomment vbcrlf
   result = DL.WaitForSequence("9f 02 Default Response", 1, 3000)
   if result = 0 then 
      P4 = P4 + 1
@@ -1876,12 +1788,10 @@ If result <> 0 Then
 '------------------------------------------------------------------
 
   if readercheck = 7 then
-  if readerType = "GR" or readerType = "NEO1" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff fc Default Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff fc Default Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff fc Default Response", 1, 3000)
   end if
   if readerType = "NEO2" then ReverseResult(result)
   if result = 0 then 
@@ -1895,13 +1805,11 @@ If result <> 0 Then
  
 '------------------------------------------------------------------
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff fd Default Response", 1, 3000)
   elseif readerType = "NEO2" then 
      if readercheck = 6 then result = DL.WaitForSequence("ff fd Default Response (NEO2_SRED)", 1, 3000)
      if readercheck = 7 then result = DL.WaitForSequence("ff fd Default Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff fd Default Response", 1, 3000)
   end if
   if result = 0 then 
      P4 = P4 + 1
@@ -1913,13 +1821,11 @@ If result <> 0 Then
  
 '------------------------------------------------------------------
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff fe Default Response", 1, 3000)
   elseif readerType = "NEO2" then 
      if readercheck = 6 then result = DL.WaitForSequence("ff fe Default Response (NEO2_SRED)", 1, 3000)
      if readercheck = 7 then result = DL.WaitForSequence("ff fe Default Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff fe Default Response", 1, 3000)
   end if
   if result = 0 then 
      P4 = P4 + 1
@@ -1931,13 +1837,11 @@ If result <> 0 Then
  
 '------------------------------------------------------------------
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff ff Default Response", 1, 3000)
   elseif readerType = "NEO2" then 
      if readercheck = 6 then result = DL.WaitForSequence("ff ff Default Response (NEO2_SRED)", 1, 3000)
      if readercheck = 7 then result = DL.WaitForSequence("ff ff Default Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff ff Default Response", 1, 3000)
   end if
   if result = 0 then 
      P4 = P4 + 1
@@ -1949,12 +1853,10 @@ If result <> 0 Then
  
 '------------------------------------------------------------------
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff fb Default Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff fb Default Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff fb Default Response", 1, 3000)
   end if
   if result = 0 then 
      P4 = P4 + 1
@@ -1966,12 +1868,10 @@ If result <> 0 Then
  
 '------------------------------------------------------------------
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff fa Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff fa Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff fa Response", 1, 3000)
   end if
   if result = 0 then 
      P4 = P4 + 1
@@ -1983,12 +1883,10 @@ If result <> 0 Then
  
 '------------------------------------------------------------------
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f9 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f9 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f9 Response", 1, 3000)
   end if
   if result = 0 then 
      P4 = P4 + 1
@@ -2000,12 +1898,10 @@ If result <> 0 Then
  
 '------------------------------------------------------------------
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f8 Default Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f8 Default Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f8 Default Response", 1, 3000)
   end if
   if result = 0 then 
      P4 = P4 + 1
@@ -2017,13 +1913,11 @@ If result <> 0 Then
  
 '------------------------------------------------------------------
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f7 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      if readercheck = 6 then result = DL.WaitForSequence("ff f7 Response (NEO2_SRED)", 1, 3000)
      if readercheck = 7 then result = DL.WaitForSequence("ff f7 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f7 Response", 1, 3000)
   end if
   if result = 0 then 
      P4 = P4 + 1
@@ -2035,13 +1929,11 @@ If result <> 0 Then
  
 '------------------------------------------------------------------
 
-  if readerType = "GR" or readerType = "NEO1" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f5 Default Response", 1, 3000)
   elseif readerType = "NEO2" then 
      if readercheck = 6 then result = DL.WaitForSequence("ff f5 Default Response (NEO2_SRED)", 1, 3000)
      if readercheck = 7 then result = DL.WaitForSequence("ff f5 Default Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f5 Default Response", 1, 3000)
   end if
   if readerType = "NEO2" then ReverseResult(result)
   if result = 0 then 
@@ -2054,13 +1946,11 @@ If result <> 0 Then
  
 '------------------------------------------------------------------
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f4 Default Response", 1, 3000)
   elseif readerType = "NEO2" then 
      if readercheck = 6 then result = DL.WaitForSequence("ff f4 Default Response (NEO2_SRED)", 1, 3000)
      if readercheck = 7 then result = DL.WaitForSequence("ff f4 Default Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f4 Default Response", 1, 3000)
   end if
   if result = 0 then 
      P4 = P4 + 1
@@ -2073,12 +1963,10 @@ If result <> 0 Then
 '------------------------------------------------------------------
 
   if readercheck = 7 then
-  if readerType = "GR" or readerType = "NEO1" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("9f 66 Default Response", 1, 3000)
-  elseif readerType = "NEO2" or readerType = "USAT" then 
+  elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("9f 66 Default Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("9f 66 Default Response", 1, 3000)
   end if
   if result = 0 then 
      P4 = P4 + 1
@@ -2091,13 +1979,10 @@ If result <> 0 Then
  
 '------------------------------------------------------------------
 
-  if readercheck = 7 then
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f2 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f2 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f2 Response", 1, 3000)
   end if
   if result = 0 then 
      P4 = P4 + 1
@@ -2106,17 +1991,14 @@ If result <> 0 Then
   else
     DL.AddComment "--- ff f2 Default >>> As spec's definition, 04-09 did not modify this tag.: PASS"
   end if
-  end if
  
 '------------------------------------------------------------------
 
   if readercheck = 7 then
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f1 Default Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f1 Default Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f1 Default Response", 1, 3000)
   end if
   if result = 0 then 
      P4 = P4 + 1
@@ -2129,12 +2011,10 @@ If result <> 0 Then
  
 '------------------------------------------------------------------
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f3 Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f3 Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f3 Response", 1, 3000)
   end if
   if result = 0 then 
      P4 = P4 + 1
@@ -2147,12 +2027,10 @@ If result <> 0 Then
 '------------------------------------------------------------------
 
   if readercheck = 7 then
-  if readerType = "GR" or readerType = "NEO1" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("ff f0 Default Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("ff f0 Default Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("ff f0 Default Response", 1, 3000)
   end if
   if readerType = "NEO2" then ReverseResult(result)
   if result = 0 then 
@@ -2167,12 +2045,10 @@ If result <> 0 Then
 '------------------------------------------------------------------
 
   if readercheck = 7 then
-  if readerType = "GR" or readerType = "NEO1" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("df 63 Default Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("df 63 Default Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("df 63 Default Response", 1, 3000)
   end if
   if readerType = "NEO2" then ReverseResult(result)
   if result = 0 then 
@@ -2186,12 +2062,10 @@ If result <> 0 Then
  
 '------------------------------------------------------------------
 
-  if readerType = "GR" or readerType = "NEO1" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("df 64 Default Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("df 64 Default Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("df 64 Default Response", 1, 3000)
   end if
   if readerType = "NEO2" then ReverseResult(result)
   if result = 0 then 
@@ -2204,13 +2078,11 @@ If result <> 0 Then
  
 '------------------------------------------------------------------
 
-  if readerType = "GR" or readerType = "NEO1" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("df 65 Default Response", 1, 3000)
   elseif readerType = "NEO2" then 
      if readercheck = 6 then result = DL.WaitForSequence("df 65 Default Response (NEO2_SRED)", 1, 3000)
      if readercheck = 7 then result = DL.WaitForSequence("df 65 Default Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("df 65 Default Response", 1, 3000)
   end if
   if readerType = "NEO2" then ReverseResult(result)
   if result = 0 then 
@@ -2223,13 +2095,11 @@ If result <> 0 Then
  
 '------------------------------------------------------------------
 
-  if readerType = "GR" or readerType = "NEO1" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("df 66 Default Response", 1, 3000)
   elseif readerType = "NEO2" then 
      if readercheck = 6 then result = DL.WaitForSequence("df 66 Default Response (NEO2_SRED)", 1, 3000)
      if readercheck = 7 then result = DL.WaitForSequence("df 66 Default Response (NEO2)", 1, 3000)
-  else
-     result = DL.WaitForSequence("df 66 Default Response", 1, 3000)
   end if
   if readerType = "NEO2" then ReverseResult(result)
   if result = 0 then 
@@ -2281,7 +2151,6 @@ If result <> 0 Then
  
 '------------------------------------------------------------------
 
-  if readercheck = 7 then
   result = DL.WaitForSequence("9f 53 Response", 1, 3000)
   if result = 0 then 
      P4 = P4 + 1
@@ -2289,7 +2158,6 @@ If result <> 0 Then
      dl.addcomment "--- 9f 53 Default: **FAIL**"
   else
     DL.AddComment "--- 9f 53 Default >>> As spec's definition, 04-09 did not modify this tag.: PASS"
-  end if
   end if
  
 '------------------------------------------------------------------
@@ -2307,12 +2175,10 @@ If result <> 0 Then
  
 '------------------------------------------------------------------
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("df 28 Default Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("df 28 Default Response (NEO2)", 1, 5000)
-  else
-     result = DL.WaitForSequence("df 28 Default Response", 1, 3000)
   end if
   if result = 0 then 
      P4 = P4 + 1
@@ -2324,12 +2190,10 @@ If result <> 0 Then
  
 '------------------------------------------------------------------
 
-  if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+  if readerType <> "NEO2" then 
      result = DL.WaitForSequence("df 29 Default Response", 1, 3000)
   elseif readerType = "NEO2" then 
      result = DL.WaitForSequence("df 29 Default Response (NEO2)", 1, 5000)
-  else
-     result = DL.WaitForSequence("df 29 Default Response", 1, 3000)
   end if
   if result = 0 then 
      P4 = P4 + 1

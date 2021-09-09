@@ -100,31 +100,43 @@ if (Result):
 					DL.SetWindowText("RED", "Parse Card Data Fail")
 
 if CardData!=None and CardData!="":	
-	TR1maskdata = "%*6510********0125^CARD/IMAGE 08             ^1712****************?*"
-	TR2maskdata = ";6510********0125=1712****************?*"
-	TR1plaintextdata = "2542363531303030303030303030303132355E434152442F494D414745203038202020202020202020202020205E31373132323031313030303039353030303030303F23"
-	TR2plaintextdata = "3B363531303030303030303030303132353D31373132323031313030303039353030303030303F36"
+	TR1maskdata1 = "%*6510********"
+	TR1maskdata2 = "^CARD/IMAGE"
+	TR1maskdata3 = "^1712************"
+	TR1maskdata4 = "?*"
+							
+	TR2maskdata1 = ";6510********"
+	TR2maskdata2 = "=1712************"
+	TR2maskdata3 = "?*"
+							
+	TR1plaintextdata1 = "2542363531303030303030303030"
+	TR1plaintextdata2 = "5E434152442F494D414745"
+	TR1plaintextdata3 = "5E31373132323031"
+	
+	TR2plaintextdata1 = "3B363531303030303030303030"
+	TR2plaintextdata2 = "3D31373132323031"
+	
 	TagDFEE25 = DL.GetTLV(sResult,"DFEE25")
 	Tag9F39 = DL.GetTLV(sResult,"9F39")
 	TagFFEE01 = DL.GetTLV(sResult,"FFEE01")
 	TagDFEE26 = DL.GetTLV(sResult,"DFEE26")
 
 	# Verify Mask (or clear) track data
-	if TR1maskdata == Track1_CardData: 
+	if DL.Check_StringAB(Track1_CardData, TR1maskdata1) and DL.Check_StringAB(Track1_CardData, TR1maskdata2) and DL.Check_StringAB(Track1_CardData, TR1maskdata3) and DL.Check_StringAB(Track1_CardData, TR1maskdata4):
 		DL.SetWindowText("Blue", "Track 1 Mask data: PASS")
 	else:
 		DL.SetWindowText("Red", "Track 1 Mask data: FAIL")
-	if TR2maskdata == Track2_CardData: 
+	if DL.Check_StringAB(Track2_CardData, TR2maskdata1) and DL.Check_StringAB(Track2_CardData, TR2maskdata2) and DL.Check_StringAB(Track2_CardData, TR2maskdata3):
 		DL.SetWindowText("Blue", "Track 2 Mask data: PASS")
 	else:
 		DL.SetWindowText("Red", "Track 2 Mask data: FAIL")
 		
 	# Verify Encryption track data	
-	if TR1plaintextdata == TRK1DecryptData: 
+	if DL.Check_StringAB(TRK1DecryptData, TR1plaintextdata1) and DL.Check_StringAB(TRK1DecryptData, TR1plaintextdata2) and DL.Check_StringAB(TRK1DecryptData, TR1plaintextdata3): 
 		DL.SetWindowText("Blue", "Track 1 Decryption data: PASS")
 	else:
 		DL.SetWindowText("Red", "Track 1 Decryption data: FAIL")
-	if TR2plaintextdata == TRK2DecryptData: 
+	if DL.Check_StringAB(TRK2DecryptData, TR2plaintextdata1) and DL.Check_StringAB(TRK2DecryptData, TR2plaintextdata2): 
 		DL.SetWindowText("Blue", "Track 2 Decryption data: PASS")
 	else:
 		DL.SetWindowText("Red", "Track 2 Decryption data: FAIL")

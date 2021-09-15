@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-47414
+48375
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -165,25 +165,28 @@ cmdcheck = inputbox("The reader support:" & vbcrlf & vbcrlf & "1 -- cmd 02-01 on
 
 trackcheck = inputbox("The reader support:" & vbcrlf & vbcrlf & "1 -- Track 1 + 2" & vbcrlf & "2 -- Track 1 + 2 + 3", vbokonly)
 
-if cmdcheck = 1 or cmdcheck = 3 then
+if cmdcheck = 1 or cmdcheck = 3 then     'support cmd 02-01
 If result <> 0 Then
-      If result <> 0 Then
-         dl.resetreceivecounter
-         dl.addcomment vbcrlf
-         DL.AddComment "--- DF7D = 00"
-         if readerType <> "NEO2" then DL.SendSequence "DF7D = 00"
-         if readerType = "NEO2" then DL.SendSequence "DF7D = 00 (NEO2)"
-         result = dl.waitforsequence("04 00", 1, 3000)
-      End If
+   If result <> 0 Then
+      dl.resetreceivecounter
+      dl.addcomment vbcrlf
+      DL.AddComment "--- DF7D = 00"
+      if readerType <> "NEO2" then DL.SendSequence "DF7D = 00"
+      if readerType = "NEO2" then DL.SendSequence "DF7D = 00 (NEO2)"
+      result = dl.waitforsequence("04 00", 1, 3000)
+   End If
 
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Activate Transaction"
    MsgBox "Click OK, swipe Discover card (ANY)", VBOKOnly
    DL.SendSequence "Activate Transaction 02-01"
+   dl.pause 2000
 
-   if trackcheck = 1 then result1 = dl.waitforsequence("02-01 resp - HW 2T", 1, 5000)
-   if trackcheck = 2 then result1 = dl.waitforsequence("02-01 resp - HW 3T", 1, 5000)
+   if trackcheck = 1 then result1 = dl.waitforsequence("02-01 resp - HW 2T", 1, 1500)
+      if result1 = 0 then result1 = dl.waitforsequence("02-01 resp - HW 2T-long PAN", 1, 1500)
+   if trackcheck = 2 then result1 = dl.waitforsequence("02-01 resp - HW 3T", 1, 1500)
+      if result1 = 0 then result1 = dl.waitforsequence("02-01 resp - HW 3T-long PAN", 1, 1500)
 
    if readerType <> "NEO2" then result2 = dl.waitforsequence("tag df30", 1, 1000)
    if readerType = "NEO2" then result2 = dl.waitforsequence("tag DFEE30 (NEO2)", 1, 1000)
@@ -194,38 +197,37 @@ If result <> 0 Then
    if readerType <> "NEO2" then result5 = dl.waitforsequence("tag dfee26", 1, 1000)
    if readerType = "NEO2" then result5 = dl.waitforsequence("tag dfee26 (NEO2)", 1, 1000)
    
-   if result1 <> 0 and result2 <> 0 and result3 = 0 and result4 <> 0 and result5 <> 0 then
-      result = 1
-   else
-      result = 0
-      if result1 = 0 then dl.addcomment vbcrlf & "Card data => Incorrect!"
-      if result2 = 0 then dl.addcomment vbcrlf & "Tag DF30 (NEO1) or DFEE30 (NEO2) => Incorrect!"
-      if result3 <> 0 then dl.addcomment vbcrlf & "Tag 9F 06 => Should not be returned!"    'per Shane's reply, TLV 9F06 (AID) should not be returned in response to activate transaction with swiping magstripe card.
-      if result4 = 0 then dl.addcomment vbcrlf & "Tag 9F 39 => Incorrect!"
-      if result5 = 0 then dl.addcomment vbcrlf & "Tag DF EE 26 => Incorrect!"
-   end if
+   if result1 = 0 or result2 = 0 or result3 <> 0 or result4 = 0 or result5 = 0 then result = 0
+   if result1 = 0 then dl.addcomment vbcrlf & "Card data => Incorrect!"
+   if result2 = 0 then dl.addcomment vbcrlf & "Tag DF30 (NEO1) or DFEE30 (NEO2) => Incorrect!"
+   if result3 <> 0 then dl.addcomment vbcrlf & "Tag 9F 06 => Should not be returned!"    'per Shane's reply, TLV 9F06 (AID) should not be returned in response to activate transaction with swiping magstripe card.
+   if result4 = 0 then dl.addcomment vbcrlf & "Tag 9F 39 => Incorrect!"
+   if result5 = 0 then dl.addcomment vbcrlf & "Tag DF EE 26 => Incorrect!"
 End If
 end if
 
-if cmdcheck = 2 or cmdcheck = 3 then
+if cmdcheck = 2 or cmdcheck = 3 then     'support cmd 02-40
 If result <> 0 Then
-      If result <> 0 Then
-         dl.resetreceivecounter
-         dl.addcomment vbcrlf
-         DL.AddComment "--- DF7D = 01"
-         if readerType <> "NEO2" then DL.SendSequence "DF7D = 01"
-         if readerType = "NEO2" then DL.SendSequence "DF7D = 01 (NEO2)"
-         result = dl.waitforsequence("04 00", 1, 3000)
-      End If
+   If result <> 0 Then
+      dl.resetreceivecounter
+      dl.addcomment vbcrlf
+      DL.AddComment "--- DF7D = 01"
+      if readerType <> "NEO2" then DL.SendSequence "DF7D = 01"
+      if readerType = "NEO2" then DL.SendSequence "DF7D = 01 (NEO2)"
+      result = dl.waitforsequence("04 00", 1, 3000)
+   End If
 
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Activate Transaction"
    MsgBox "Click OK, swipe Discover card (ANY)", VBOKOnly
    DL.SendSequence "Activate Transaction 02-40"
+   dl.pause 2000
 
-   if readerType <> "NEO2" then result1 = dl.waitforsequence("02-40 resp", 1, 5000)
-   if readerType = "NEO2" then result1 = dl.waitforsequence("02-40 resp (NEO2)", 1, 5000)
+   if readerType <> "NEO2" then result1 = dl.waitforsequence("02-40 resp", 1, 1500)
+      if result1 = 0 then result1 = dl.waitforsequence("02-40 resp-long PAN", 1, 1500)
+   if readerType = "NEO2" then result1 = dl.waitforsequence("02-40 resp (NEO2)", 1, 1500)
+      if result1 = 0 then result1 = dl.waitforsequence("02-40 resp (NEO2)-long PAN", 1, 1500)
 
    if readerType <> "NEO2" then result2 = dl.waitforsequence("tag df30", 1, 1000)
    if readerType = "NEO2" then result2 = dl.waitforsequence("tag DFEE30 (NEO2)", 1, 1000)
@@ -236,57 +238,50 @@ If result <> 0 Then
    if readerType <> "NEO2" then result5 = dl.waitforsequence("tag dfee26", 1, 1000)
    if readerType = "NEO2" then result5 = dl.waitforsequence("tag dfee26 (NEO2)", 1, 1000)
    
-   if result1 <> 0 and result2 <> 0 and result3 = 0 and result4 <> 0 and result5 <> 0 then
-      result = 1
-   else
-      result = 0
-      if result1 = 0 then dl.addcomment vbcrlf & "Card data => Incorrect!"
-      if result2 = 0 then dl.addcomment vbcrlf & "Tag DF30 (NEO1) or DFEE30 (NEO2) => Incorrect!"
-      if result3 <> 0 then dl.addcomment vbcrlf & "Tag 9F 06 => Should not be returned!"    'per Shane's reply, TLV 9F06 (AID) should not be returned in response to activate transaction with swiping magstripe card.
-      if result4 = 0 then dl.addcomment vbcrlf & "Tag 9F 39 => Incorrect!"
-      if result5 = 0 then dl.addcomment vbcrlf & "Tag DF EE 26 => Incorrect!"
-   end if
+   if result1 = 0 or result2 = 0 or result3 <> 0 or result4 = 0 or result5 = 0 then result = 0
+   if result1 = 0 then dl.addcomment vbcrlf & "Card data => Incorrect!"
+   if result2 = 0 then dl.addcomment vbcrlf & "Tag DF30 (NEO1) or DFEE30 (NEO2) => Incorrect!"
+   if result3 <> 0 then dl.addcomment vbcrlf & "Tag 9F 06 => Should not be returned!"    'per Shane's reply, TLV 9F06 (AID) should not be returned in response to activate transaction with swiping magstripe card.
+   if result4 = 0 then dl.addcomment vbcrlf & "Tag 9F 39 => Incorrect!"
+   if result5 = 0 then dl.addcomment vbcrlf & "Tag DF EE 26 => Incorrect!"
 End If
 end if
 
 DL.AddComment vbCrLf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)
 
-DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
 
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
-
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
-
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
-
-If MasterResult = 1 Then
-      MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-      MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)

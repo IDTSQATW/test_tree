@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-15682
+47275
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -161,7 +161,7 @@ If result <> 0 Then
    DL.SendSequence "Poll on Demand"
    result = DL.WaitForSequence("Poll Response", 1, 10000)
 End If
-'============================================================
+
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
@@ -172,13 +172,13 @@ If result <> 0 Then
 End If
 
 if readerType = "NEO2" then
-If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Set group B0 (9F66 = 80 00 40 00)"
-   DL.SendSequence "Set group B0 (9F66 = 80 00 40 00)"
-   result = DL.WaitForSequence("Burst Mode Response", 1, 10000)
-End If
+   If result <> 0 Then
+      dl.resetreceivecounter
+      dl.addcomment vbcrlf
+      DL.AddComment "--- Set group B0 (9F66 = 80 00 40 00)"
+      DL.SendSequence "Set group B0 (9F66 = 80 00 40 00)"
+      result = DL.WaitForSequence("Burst Mode Response", 1, 10000)
+   End If
 end if
 '============================================================
 If result <> 0 Then
@@ -187,9 +187,11 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Activate Transaction (02-40)"
    DL.SendSequence "Activate Transaction (02-40)"
-   if readerType <> "NEO2" then result = DL.WaitForSequence("02 23", 1, 5000)
-   if readerType = "NEO2" then result = DL.WaitForSequence("02 23 (NEO2)", 1, 5000)
-   dl.pause 1000
+   dl.pause 1500
+   if readerType <> "NEO2" then result = DL.WaitForSequence("02 23", 1, 1500)
+      if result = 0 then result = DL.WaitForSequence("02 23-long PAN", 1, 1500)
+   if readerType = "NEO2" then result = DL.WaitForSequence("02 23 (NEO2)", 1, 1500)
+      if result = 0 then result = DL.WaitForSequence("02 23 (NEO2)-long PAN", 1, 1500)
 
    if result <> 0 then
       r1 = dl.waitforsequence("9f39", 1, 1000)
@@ -200,14 +202,12 @@ If result <> 0 Then
       r4 = dl.waitforsequence("84", 1, 1000)
       r5 = dl.waitforsequence("9f02", 1, 1000)
 
-      if r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 then
-         result = 0
-         if r1 = 0 then dl.addcomment vbcrlf & "Tag 9F39: FAIL!"
-         if r2 = 0 then dl.addcomment vbcrlf & "Tag DFEE26: FAIL!"
-         if r3 = 0 then dl.addcomment vbcrlf & "DF30: FAIL!"
-         if r4 = 0 then dl.addcomment vbcrlf & "84: FAIL!"
-         if r5 = 0 then dl.addcomment vbcrlf & "9F02: FAIL!"
-      end if
+      if r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 then result = 0
+      if r1 = 0 then dl.addcomment vbcrlf & "Tag 9F39: FAIL!"
+      if r2 = 0 then dl.addcomment vbcrlf & "Tag DFEE26: FAIL!"
+      if r3 = 0 then dl.addcomment vbcrlf & "DF30: FAIL!"
+      if r4 = 0 then dl.addcomment vbcrlf & "84: FAIL!"
+      if r5 = 0 then dl.addcomment vbcrlf & "9F02: FAIL!"
    end if
 End If
 '------------------------------------------------------------

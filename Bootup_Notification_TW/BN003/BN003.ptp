@@ -1,0 +1,69 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM1
+COM2
+115200
+2
+35
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+Boot up Notification Off
+56 69 56 4F 74 65 63 68 32 00 14 01 00 01 00 FB 03
+0
+5
+
+SEND
+1
+Bootup Notification 01 On (raw)
+56 69 56 4F 74 65 63 68 32 00 14 01 00 01 01 DA 13
+0
+5
+
+SEND
+2
+Boot up Notification 02 On (frame)
+56 69 56 4F 74 65 63 68 32 00 14 01 00 01 02 B9 23
+0
+5
+
+RECEIVE
+0
+14 00
+56 69 56 4F 74 65 63 68 32 00 14 00 00 00 B5 B1
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
+rx (frame)
+56 69 56 4F 74 65 63 68 32 00 14 01 00 ??
+-1
+1
+COMMENT 
+1
+1
+0
+1
+

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-16325
+61022
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -153,8 +153,7 @@ If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- 04-09"
    DL.SendSequence "04-09"
-   result = DL.WaitForSequence("04-09", 1, 10000)
-   dl.pause 1000
+   result = DL.WaitForSequence("04-09", 1, 12000)
 End If
 
 if readerType = "NEO2" then
@@ -201,7 +200,7 @@ If result <> 0 Then
    DL.SendSequence "60-10 fallback"
    result = DL.WaitForSequence("60-xx 63 status", 1, 10000)
    if result <> 0 then
-      msgbox "Click OK, swipe discover card (service code=201/ PAN=ANY)", vbokonly
+      msgbox "Click OK --> Swipe card (service code = 2xx or 6xx)", vbokonly
 
       if readerType <> "NEO2" then 
          result = DL.WaitForSequence("USE CHIP READER", 1, 10000)
@@ -211,7 +210,7 @@ If result <> 0 Then
       end if      
 
       if result <> 0 then
-         msgbox "Click OK, insert discover card that can NOT be powered on (GR: default is 3 times to re-power on ICC card)", vbokonly  
+         msgbox "Click OK --> Insert card that can NOT be powered on IC chip (Some products may have 3 retry times)", vbokonly  
 
          if readerType <> "NEO2" then 
 	     result = DL.WaitForSequence("USE MAGSTRIPE", 1, 10000)
@@ -225,13 +224,15 @@ If result <> 0 Then
          end if
 
          if result <> 0 then
-            msgbox "Remove card, click OK, swipe discover card", vbokonly
-            dl.pause 1000
+            msgbox "Remove card --> Click OK --> Swipe Discover card", vbokonly
+            dl.pause 1500
 
             if readerType <> "NEO2" then 
-               r1 = DL.WaitForSequence("60-10 00 11", 1, 10000)
+               r1 = DL.WaitForSequence("60-10 00 11", 1, 1500)
+               if r1 = 0 then r1 = DL.WaitForSequence("60-10 00 11-long PAN", 1, 1500)
             else
-               r1 = DL.WaitForSequence("60-10 00 11 (NEO2)", 1, 10000)
+               r1 = DL.WaitForSequence("60-10 00 11 (NEO2)", 1, 1500)
+               if r1 = 0 then r1 = DL.WaitForSequence("60-10 00 11 (NEO2)-long PAN", 1, 1500)
             end if
 
             r2 = DL.WaitForSequence("9f39", 1, 2000)
@@ -249,7 +250,8 @@ If result <> 0 Then
             end if
 
             if readerType <> "NEO2" then 
-               r5 = DL.WaitForSequence("dfef4c-4d", 1, 2000)
+               r5 = DL.WaitForSequence("dfef4c-4d", 1, 1500)
+               if r5 = 0 then r5 = DL.WaitForSequence("dfef4c-4d-long PAN", 1, 1500)
             else
                r5 = 1
             end if
@@ -266,43 +268,40 @@ If result <> 0 Then
 End If
 
 DL.AddComment vbCrLf
-PrintMyResult(result)
-
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
-
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
-
-If MasterResult = 1 Then
-      MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-      MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)

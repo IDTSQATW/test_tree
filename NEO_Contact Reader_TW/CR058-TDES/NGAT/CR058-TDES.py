@@ -190,9 +190,9 @@ if DL.Get_RXResponse(2) == "YES":
 		if  CTresultcode == "0004":
 			Result = True
 			RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction (DFEF1F: 01 01 --1)')
-			if (RetOfStep):
+			if (RetOfStep):		
 				Result = DL.Check_RXResponse("60 0C 00 00")
-				if Result == True:
+				if (Result):
 					DL.SendCommand('05-01')
 					Result = DL.Check_RXResponse("05 00 00 00")
 					

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-31577
+5210
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -216,15 +216,12 @@ If result <> 0 Then
    if result <> 0 then
       msgbox "Click OK, insert card (EMV Test Card, T=0)", vbokonly
 
-      if readerType = "GR" or readerType = "NEO1" then 
+      if readerType <> "NEO2" then 
          r1 = DL.WaitForSequence("60-10 00 10", 1, 20000)
          if r1 <> 0 then r1 = DL.WaitForSequence("df30", 1, 20000)
-      elseif readerType = "NEO2" or readerType = "USAT" then 
-             r1 = DL.WaitForSequence("60-10 00 10 (NEO2)", 1, 20000)
-             dl.pause 1000
       else
-         r1 = DL.WaitForSequence("60-10 00 10", 1, 20000)
-         if r1 <> 0 then r1 = DL.WaitForSequence("df30", 1, 20000)
+         r1 = DL.WaitForSequence("60-10 00 10 (NEO2)", 1, 20000)
+         dl.pause 1000
       end if
 
       r2 = DL.WaitForSequence("dfee26", 1, 2000)
@@ -239,15 +236,12 @@ If result <> 0 Then
       result = DL.WaitForSequence("60-xx 63 status", 1, 2000)
       if result <> 0 then
 
-         if readerType = "GR" or readerType = "NEO1" then 
+         if readerType <> "NEO2" then 
             result = DL.WaitForSequence("60-11 00 04", 1, 20000)
             if result <> 0 then result = DL.WaitForSequence("df30 + dfee26", 1, 20000)
-         elseif readerType = "NEO2" or readerType = "USAT" then 
-                result = DL.WaitForSequence("60-11 00 04 (NEO2)", 1, 20000)
-                dl.pause 1000
-         else
-            result = DL.WaitForSequence("60-11 00 04", 1, 20000)
-            if result <> 0 then result = DL.WaitForSequence("df30 + dfee26", 1, 20000)
+         else                
+            result = DL.WaitForSequence("60-11 00 04 (NEO2)", 1, 20000)
+            dl.pause 1000
          end if
 
       end if
@@ -260,14 +254,12 @@ If result <> 0 Then
          result = DL.WaitForSequence("60-xx 63 status", 1, 2000)
          if result <> 0 then
 
-            if readerType = "GR" or readerType = "NEO1" then 
+            if readerType <> "NEO2" then 
                result = DL.WaitForSequence("60-12 00 02", 1, 20000)
                if result <> 0 then result = DL.WaitForSequence("9f5b + df30 + dfee26", 1, 20000)
-            elseif readerType = "NEO2" or readerType = "USAT" then 
-                   result = DL.WaitForSequence("60-12 00 02 (NEO2)", 1, 20000)
-                   dl.pause 1000
             else
-               result = DL.WaitForSequence("60-12 00 02", 1, 20000)
+               result = DL.WaitForSequence("60-12 00 02 (NEO2)", 1, 20000)
+               dl.pause 1000
             end if
 
             msgbox "Remove card, then click OK", vbokonly
@@ -288,15 +280,12 @@ If result <> 0 Then
    if result <> 0 then
       msgbox "Click OK, insert card (EMV Test Card, T=0)", vbokonly
 
-      if readerType = "GR" or readerType = "NEO1" then 
+      if readerType <> "NEO2" then 
          result = DL.WaitForSequence("60-11 00 04", 1, 20000)
          if result <> 0 then result = DL.WaitForSequence("df30 + DFEF4C4D + dfee26", 1, 20000)
-      elseif readerType = "NEO2" or readerType = "USAT" then 
-             result = DL.WaitForSequence("60-11 00 04 (NEO2)", 1, 20000)
-             dl.pause 1000
       else
-         result = DL.WaitForSequence("60-11 00 04", 1, 20000)
-         if result <> 0 then result = DL.WaitForSequence("df30 + dfee26", 1, 20000)
+         result = DL.WaitForSequence("60-11 00 04 (NEO2)", 1, 20000)
+         dl.pause 1000
       end if
 
    end if

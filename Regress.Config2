@@ -3,9 +3,9 @@ OFF
 $Prompt - Test Case Steps
 ON
 $Prompt - COM Port
-COM90
+COM1
 $Prompt - Reader Baud Rate
-115200
+9600
 $Prompt - reader type: GR (2 byte TLV), AR (3 byte TLV), NEO1 (2 byte TLV), NEO2 (3 byte TLV), USAT (VP6300_NSRED-2 byte TLV), NC (Not care)
 GR
 $Prompt - reader model: VP5000, VP4500, KiosK2, Cubic, ICP, VP8800, VP8500, VP8100, VP4800, Coinco, Vend3, Kiosk3, Vendi, NC(Not Care)

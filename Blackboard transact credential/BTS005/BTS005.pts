@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-55242
+30070
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -316,7 +316,16 @@ If result <> 0 Then
        else
           result = 0
        end if
-       if result <> 0 then result = DL.WaitForSequence("Tag DFEE02", 1, 2000)
+       if result <> 0 and readerType = "NEO2" then result = DL.WaitForSequence("Tag DFEE02", 1, 2000)
+       if result <> 0 and readerType <> "NEO2" then 
+          r1 = DL.WaitForSequence("Tag DF02", 1, 2000)
+          r2 = DL.WaitForSequence("Tag FFEE1F ", 1, 2000)
+          if r1 = 1 or r2 = 1 then 
+             result = 1
+          else
+             result = 0
+          end if
+       end if
        if result = 0 then 
           dl.addcomment vbcrlf & "** FAIL **"
           countf = 1
@@ -335,7 +344,16 @@ If result <> 0 Then
        else
           result = 0
        end if
-       if result <> 0 then result = DL.WaitForSequence("Tag DFEE02", 1, 2000)
+       if result <> 0 and readerType = "NEO2" then result = DL.WaitForSequence("Tag DFEE02", 1, 2000)
+       if result <> 0 and readerType <> "NEO2" then 
+          r1 = DL.WaitForSequence("Tag DF02", 1, 2000)
+          r2 = DL.WaitForSequence("Tag FFEE1F ", 1, 2000)
+          if r1 = 1 or r2 = 1 then 
+             result = 1
+          else
+             result = 0
+          end if
+       end if
        if result = 0 then 
           dl.addcomment vbcrlf & "** FAIL **"
           countf = 1

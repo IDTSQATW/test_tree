@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-37503
+14426
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -162,9 +162,8 @@ End Function
        dl.resetreceivecounter
        dl.addcomment vbcrlf
        dl.addcomment "--- Burst ON"
-       
-   if readerType = "GR" or readerType = "NEO1" then dl.sendsequence "burst on"
-   if readerType = "NEO2" then dl.sendsequence "burst on (NEO2)"
+       if readerType <> "NEO2" then dl.sendsequence "burst on"
+       if readerType = "NEO2" then dl.sendsequence "burst on (NEO2)"
        result = dl.waitforsequence("burst ok resp", 1, 2000)
        dl.pause 500
        if result = 0 then countf = countf + 1
@@ -175,9 +174,8 @@ End Function
        dl.resetreceivecounter
        dl.addcomment vbcrlf
        dl.addcomment "--- Burst OFF"
-       
-   if readerType = "GR" or readerType = "NEO1" then dl.sendsequence "burst off"
-   if readerType = "NEO2" then dl.sendsequence "burst off (NEO2)"
+       if readerType <> "NEO2" then dl.sendsequence "burst off"
+       if readerType = "NEO2" then dl.sendsequence "burst off (NEO2)"
        result = dl.waitforsequence("burst ok resp", 1, 2000) 
        dl.pause 500 
        if result = 0 then countf = countf + 1
@@ -217,18 +215,20 @@ End Function
        dl.addcomment vbcrlf
        dl.addcomment "--- Activate Transaction"
        dl.sendsequence "02-01-----Activate Transaction (10 sec timeout)"
-       if burstmode = 1 then result = dl.waitforsequence("02-01 resp timeout", 1, 12000)
-       if burstmode = 0 then result = dl.waitforsequence("02-01 resp OK", 1, 12000)
+       result = dl.waitforsequence("02-01 resp OK", 1, 12000)
        dl.pause 500
        if result = 0 then
           dl.addcomment vbcrlf & "** FAIL **"
-          dl.addcomment vbcrlf & "Burst ON, should return 'e-Port format data' + transaction timeout result; Burst OFF, should return 'e-Port format data' + transaction successful result!!"
+          dl.addcomment vbcrlf & "should return 'e-Port format data' + transaction successful result!!"
           countf = countf + 1
        end if
    end sub  
 '------------------------------------------------------------
 MyInput = MsgBox ("Does reader support USATech function?", VBYesNo)
 If MyInput = 6 Then
+   if readerType <> "NEO2" then dl.sendsequence "DF7D = 00"
+   if readerType = "NEO2" then dl.sendsequence "DF7D = 00 (NEO2)"
+   dl.pause 500
 
    '------------------------------------------------------------Enc OFF (w/o key)
    dl.resetreceivecounter
@@ -244,9 +244,11 @@ If MyInput = 6 Then
          usat()
       else
          countf = countf + 1
+         dl.addcomment vbcrlf & "** FAIL **"
       end if
    else
       countf = countf + 1
+      dl.addcomment vbcrlf & "** FAIL **"
    end if
    '------------------------------------------------------------Enc ON (w/o key)
       dl.resetreceivecounter
@@ -257,6 +259,7 @@ If MyInput = 6 Then
          usat()
       else
          countf = countf + 1
+         dl.addcomment vbcrlf & "** FAIL **"
       end if
    '------------------------------------------------------------
    '------------------------------------------------------------ sub usat()

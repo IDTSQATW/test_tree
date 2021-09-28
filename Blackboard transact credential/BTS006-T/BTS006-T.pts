@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-15356
+12675
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -217,11 +217,10 @@ End Function
 if readerType = "NEO2" then readercheck = msgbox("Does reader erase keys and reload Admin/ Data (KSN = 629949012C0004600001) keys first?", vbyesno)
 
 if readercheck = 6 or readerType <> "NEO2" then
-if readerType = "NEO2" then
    If result <> 0 Then
       dl.resetreceivecounter
       dl.addcomment vbcrlf
-      DL.AddComment "--- (C7-69) Del BlackBoard Private Key ***" & "NEOII project had no cmd 83-00 cmd"
+      DL.AddComment "--- (C7-69) Del BlackBoard Private Key"
       DL.SendSequence "(C7-69) Del BlackBoard Private Key"
       result = DL.WaitForSequence("C7 00", 1, 2000)
       dl.pause 500
@@ -235,7 +234,6 @@ if readerType = "NEO2" then
       result = DL.WaitForSequence("C7 00", 1, 2000)
       dl.pause 500
    End If
-end if
 
 If result <> 0 Then
    dl.resetreceivecounter

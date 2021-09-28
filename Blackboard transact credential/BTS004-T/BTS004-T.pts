@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-55430
+26032
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -311,9 +311,9 @@ If result <> 0 Then
 
        r3 = DL.WaitForSequence("Tag DFEF4C/ DFEF4D_KSN0" & i, 1, 2000)
 
-       if i <= 4 then r7 = DL.WaitForSequence("Tag FFEE06", 1, 2000)
+       'if i <= 4 then r7 = DL.WaitForSequence("Tag FFEE06", 1, 2000)
 
-       if i >= 5 then r8 = DL.WaitForSequence("Tag FFEE08", 1, 2000)
+       'if i >= 5 then r8 = DL.WaitForSequence("Tag FFEE08", 1, 2000)
 
        if readerType <> "NEO2" then r4 = DL.WaitForSequence("Tag DFEE26", 1, 2000)
        if readerType = "NEO2" then r4 = DL.WaitForSequence("Tag DFEE26 (NEO2)", 1, 2000)
@@ -323,15 +323,15 @@ If result <> 0 Then
        if readerType <> "NEO2" then r6 = DL.WaitForSequence("Tag DF30", 1, 2000)
        if readerType = "NEO2" then r6 = DL.WaitForSequence("Tag DF30 (NEO2)", 1, 2000)
 
-       if r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 or r6 = 0 or r7 = 0 or r8 = 0 then result = 0
+       if r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 or r6 = 0 then result = 0
        if r1 = 0 then DL.AddComment vbcrlf & "02-40 resp: FAIL"
        if r2 = 0 then DL.AddComment vbcrlf & "Tag FFEE12_0: FAIL"
        if r3 = 0 then DL.AddComment vbcrlf & "Tag DFEF4C/ DFEF4D_KSN0: FAIL"
        if r4 = 0 then DL.AddComment vbcrlf & "Tag DFEE26: FAIL"
        if r5 = 0 then DL.AddComment vbcrlf & "Tag 9F39: FAIL"
        if r6 = 0 then DL.AddComment vbcrlf & "Tag DF30: FAIL"
-       if r7 = 0 then DL.AddComment vbcrlf & "Tag FFEE06: FAIL"
-       if r8 = 0 then DL.AddComment vbcrlf & "Tag FFEE08: FAIL"
+       'if r7 = 0 then DL.AddComment vbcrlf & "Tag FFEE06: FAIL"
+       'if r8 = 0 then DL.AddComment vbcrlf & "Tag FFEE08: FAIL"
 
        if result = 0 then 
           dl.addcomment vbcrlf & "** FAIL **"

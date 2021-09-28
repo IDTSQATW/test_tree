@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-43814
+30485
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -63,7 +63,7 @@ End Sub
 ' -  
 '------------------------------------------------------------
 DL.OpenProject ProjectName & ".ptp"
-DL.StartCommunication
+'DL.StartCommunication
 DL.ClearCommWindows 
 DL.StartLogging "DOCKLIGHT_LOG",False, "H"
 ', false, true
@@ -97,7 +97,7 @@ DL.StartCommunication
 'Result reporting (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
 MasterResult = 0
-If ProjectName <> "" And Prompting(1) = "ON " Then
+If ProjectName <> "" And Prompting(1) = "ON" Then
    caseValid = 1
 Else
    caseValid =(Int((max-min+1)*Rnd+min))

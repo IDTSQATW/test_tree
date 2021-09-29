@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-41636
+44620
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -179,17 +179,32 @@ If result <> 0 Then
    result = DL.WaitForSequence("04 00", 1, 2000)
    dl.pause 500
 End If
+'------------------------------------------------------------default setting
+If result <> 0 Then
+   msgbox "Click OK --> Tapped MasterCard IIN SAME card", vbyesno
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 02-40"
+   DL.SendSequence "02-40"
+   dl.pause 1000
+   result = DL.WaitForSequence("02 23", 1, 2000)
+   if result <> 0 then result = DL.WaitForSequence("Tag 84 = A0000000041010 01", 1, 5000)
+   dl.pause 500
+End If
 '------------------------------------------------------------set common AID (MC)
 If result <> 0 Then
-   readercheck = msgbox ("This is VP3300 & F/W ver. greater than v1.10?", vbyesno)
+   readercheck = msgbox ("This is VP3300 & F/W ver. greater than v1.10?", vbyesno)     'VP3300 1.10 MC groups are 1, 5
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- 04-03 set group"
    if readerType <> "NEO2" then
-      if readerType <> "NEO2" and readercheck = 7 then DL.SendSequence "04-03 set group 0"
-      if readerType <> "NEO2" and readercheck = 6 then DL.SendSequence "04-03 set group 6 (VP3300)"
+      DL.SendSequence "04-03 set group 1"
       result = DL.WaitForSequence("04 00", 1, 2000)
-   elseif readerType = "NEO2" then 
+      if result <> 0 then 
+         DL.SendSequence "04-03 set group 5"
+         result = DL.WaitForSequence("04 00", 1, 2000)
+      end if
+   else
       DL.SendSequence "04-03 set group 80 (NEO2)"
       result = DL.WaitForSequence("04 00", 1, 2000)
       if result <> 0 then
@@ -204,8 +219,7 @@ If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- 04-02 set MC AID - A0000000041010"
-   if readerType <> "NEO2" and readercheck  = 7 then DL.SendSequence "04-02 set MC AID - A0000000041010"
-   if readerType <> "NEO2" and readercheck  = 6 then DL.SendSequence "04-02 set MC AID - A0000000041010 (VP3300)"
+   if readerType <> "NEO2" then DL.SendSequence "04-02 set MC AID - A0000000041010"
    if readerType = "NEO2" then DL.SendSequence "04-02 set MC AID - A0000000041010 (NEO2)"
    result = DL.WaitForSequence("04 00", 1, 2000)
    dl.pause 500

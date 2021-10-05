@@ -1,0 +1,320 @@
+
+13:57:10: If Issue ?
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\USB KBD test case\QCM009.txt
+Running Info>>
+[Issue Count: 58]
+[Wrong Items]
+>>>Error item ( 19 ).
+>>> MSR transaction
+
+>>>Error item ( 22 ).
+>>> CT transaction
+
+>>>Error item ( 23 ).
+SWIPEKB: click OK, then insert T=0 card.
+
+>>>Error item ( 24 ).
+EXR: DF EE 25 02 02 03
+
+>>>Error item ( 25 ).
+EXR: 57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89
+
+>>>Error item ( 27 ).
+EXR: 9F 39 01 07
+
+>>>Error item ( 28 ).
+EXR: 4F
+
+>>>Error item ( 29 ).
+EXR: 50
+
+>>>Error item ( 30 ).
+EXR: 82
+
+>>>Error item ( 31 ).
+EXR: 84
+
+>>>Error item ( 32 ).
+EXR: 8A
+
+>>>Error item ( 33 ).
+EXR: 8C
+
+>>>Error item ( 35 ).
+EXR: 8E
+
+>>>Error item ( 36 ).
+EXR: 95
+
+>>>Error item ( 37 ).
+EXR: 99
+
+>>>Error item ( 38 ).
+EXR: 9B
+
+>>>Error item ( 39 ).
+EXR: 9C
+
+>>>Error item ( 40 ).
+EXR: 5F20
+
+>>>Error item ( 41 ).
+EXR: 5F24
+
+>>>Error item ( 42 ).
+EXR: 5F25
+
+>>>Error item ( 43 ).
+EXR: 5F28
+
+>>>Error item ( 44 ).
+EXR: 5F2A
+
+>>>Error item ( 45 ).
+EXR: 5F2D
+
+>>>Error item ( 46 ).
+EXR: 5F34
+
+>>>Error item ( 47 ).
+EXR: 5F57
+
+>>>Error item ( 48 ).
+EXR: 9F02
+
+>>>Error item ( 49 ).
+EXR: 9F03
+
+>>>Error item ( 50 ).
+EXR: 9F10
+
+>>>Error item ( 51 ).
+EXR: 9F13
+
+>>>Error item ( 52 ).
+EXR: 9F20
+
+>>>Error item ( 53 ).
+EXR: 9F26
+
+>>>Error item ( 54 ).
+EXR: 9F27
+
+>>>Error item ( 55 ).
+EXR: 9F34
+
+>>>Error item ( 56 ).
+EXR: 9F36
+
+>>>Error item ( 57 ).
+EXR: 9F37
+
+>>>Error item ( 58 ).
+EXR: 9F38
+
+>>>Error item ( 59 ).
+EXR: 9F4D
+
+>>>Error item ( 60 ).
+EXR: 9F4F
+
+>>>Error item ( 61 ).
+EXR: 9F53
+
+>>>Error item ( 64 ).
+>>> Fallback to MSR transaction
+
+>>>Error item ( 65 ).
+SWIPEKB: click OK, then insert card 3 times (power on ICC failed) -> Remove card (Green LED 3 is flash ON) -> swipe Discover card.
+
+>>>Error item ( 66 ).
+EXR: DFEF6102F220
+
+>>>Error item ( 67 ).
+EXR: DFEF6102F222
+
+>>>Error item ( 68 ).
+EXR: DF EE 25 02 3002
+
+>>>Error item ( 82 ).
+>>> Quick Chip mode = 03
+
+>>>Error item ( 86 ).
+>>> MSR transaction
+
+>>>Error item ( 89 ).
+>>> CT transaction
+
+>>>Error item ( 90 ).
+SWIPEKB: click OK, then insert T=0 card.
+
+>>>Error item ( 91 ).
+EXR: DF EE 25 02 02 03
+
+>>>Error item ( 92 ).
+EXR: 57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89
+
+>>>Error item ( 95 ).
+>>> Fallback to MSR transaction
+
+>>>Error item ( 96 ).
+SWIPEKB: click OK, then insert card 3 times (power on ICC failed) -> Remove card (Green LED 3 is flash ON) -> swipe Discover card.
+
+>>>Error item ( 97 ).
+EXR: DFEF6102F220
+
+>>>Error item ( 98 ).
+EXR: DFEF6102F222
+
+>>>Error item ( 99 ).
+EXR: DF EE 25 02 3002
+
+>>>Error item ( 111 ).
+>>> MSR transaction
+
+>>>Error item ( 114 ).
+>>> No Fallback to CT transaction, just MSR data output
+
+>>>Error item ( 117 ).
+>>> No Fallback to MSR transaction, just MSR data output
+
+
+13:57:10: >>[Do Scripts]>>
+
+Objective: Encryption ON but w/o key, transaction test under Quick Chip Mode. (Discover/ VISA MSD/ T=0)
+========================================
+>>> Erase key but enable MSR/ MSD & EMV data encryption
+1. Erase All Key (83-00)
+CMD: 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03 
+OUT: 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 
+ASCII: Otech2 ƒ 
+2. C7-36 -- 03
+CMD: 56 69 56 4F 74 65 63 68 32 00 C7 36 00 01 03 97 6C 
+OUT: 56 69 56 4F 74 65 63 68 32 00 C7 00 00 00 86 
+ASCII: Otech2 Ç 
+3. Set encryption type as TDES
+CMD: 56 69 56 4F 74 65 63 68 32 00 C7 32 00 01 00 6D FE 
+OUT: 56 69 56 4F 74 65 63 68 32 00 C7 00 00 00 86 
+ASCII: Otech2 Ç 
+========================================
+>>> Quick Chip mode = 02
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 
+ASCII: Otech2   
+--------------------
+>>> MSR transaction
+SWIPEKB: click OK, then swipe VISA MSD card.
+Error! >>>> Expect OUT:EXR: ;4761739001010010=20121200012339900031?
+>>> CT transaction
+SWIPEKB: click OK, then insert T=0 card.
+Error! >>>> Expect OUT:EXR: DF EE 25 02 02 03
+Error! >>>> Expect OUT:EXR: 57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89
+Error! >>>> Expect OUT:EXR: 5A 08 47 61 73 90 01 01 00 10
+Error! >>>> Expect OUT:EXR: 9F 39 01 07
+Error! >>>> Expect OUT:EXR: 50
+Error! >>>> Expect OUT:EXR: 82
+Error! >>>> Expect OUT:EXR: 84
+Error! >>>> Expect OUT:EXR: 8A
+Error! >>>> Expect OUT:EXR: 8C
+Error! >>>> Expect OUT:EXR: 8D
+Error! >>>> Expect OUT:EXR: 8E
+Error! >>>> Expect OUT:EXR: 99
+Error! >>>> Expect OUT:EXR: 9B
+Error! >>>> Expect OUT:EXR: 9C
+Error! >>>> Expect OUT:EXR: 5F20
+Error! >>>> Expect OUT:EXR: 5F24
+Error! >>>> Expect OUT:EXR: 5F25
+Error! >>>> Expect OUT:EXR: 5F28
+Error! >>>> Expect OUT:EXR: 5F2A
+Error! >>>> Expect OUT:EXR: 5F2D
+Error! >>>> Expect OUT:EXR: 5F34
+Error! >>>> Expect OUT:EXR: 5F57
+Error! >>>> Expect OUT:EXR: 9F02
+Error! >>>> Expect OUT:EXR: 9F03
+Error! >>>> Expect OUT:EXR: 9F10
+Error! >>>> Expect OUT:EXR: 9F13
+Error! >>>> Expect OUT:EXR: 9F20
+Error! >>>> Expect OUT:EXR: 9F26
+Error! >>>> Expect OUT:EXR: 9F27
+Error! >>>> Expect OUT:EXR: 9F34
+Error! >>>> Expect OUT:EXR: 9F36
+Error! >>>> Expect OUT:EXR: 9F37
+Error! >>>> Expect OUT:EXR: 9F38
+Error! >>>> Expect OUT:EXR: 9F4D
+Error! >>>> Expect OUT:EXR: 9F4F
+Error! >>>> Expect OUT:EXR: 9F53
+Error! >>>> Expect OUT:EXR: 9F5B
+Error! >>>> Expect OUT:EXR: DFEF57
+>>> Fallback to MSR transaction
+SWIPEKB: click OK, then insert card 3 times (power on ICC failed) -> Remove card (Green LED 3 is flash ON) -> swipe Discover card.
+Error! >>>> Expect OUT:EXR: DFEF6102F220
+Error! >>>> Expect OUT:EXR: DFEF6102F222
+Error! >>>> Expect OUT:EXR: DF EE 25 02 3002
+Error! >>>> Expect OUT:EXR: 9F 39 01 80
+Error! >>>> Expect OUT:EXR: DFEE236A%B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?
+MESSAGECK: After inserted card, LED 3 was turned ON (flash status)
+User Judgment Pass
+
+>>> CL transaction
+SWIPEKB: click OK, then tap VISA MSD card.
+KB Unit Swipe Card:
+FFEE134C42343736313733393030313031303031305E46554C4C2F46554E4354494F4E414C5E323031323132303030313233303130323033303430353036303730383039313030333939303330303030FFEE1425343736313733393030313031303031303D32303132313230303031323333393930303033314F07A0000000031010500C5649534120544553542030318407A00000000310109F02060000000000019F0607A00000000310109F3501229F39019157134761739001010010D20121200012339900031F9C01009F1E0832333435363738399B0200005F200F46554C4C2F46554E4354494F4E414CFFEE0108DF300100DF5B0108DFEF7F0100DFEF4C06002700000000DFEF4D273B343736313733393030313031303031303D32303132313230303031323333393930303033313FDFEE2601D1DFEC181456697361205643505320322E312E332076312E30DFEF571856503333303020555342204E454F2076312E31302E303337DFED2006536C696D4344DFED2103110218DFED220A312E337C303432333138
+
+--------------------
+>>> Quick Chip mode = 03
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 03 14 95 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 05 00 00 F9 
+ASCII: Otech2   
+Error! >>>> Expect OUT:EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+--------------------
+>>> MSR transaction
+SWIPEKB: click OK, then swipe VISA MSD card.
+Error! >>>> Expect OUT:EXR: ;4761739001010010=20121200012339900031?
+>>> CT transaction
+SWIPEKB: click OK, then insert T=0 card.
+Error! >>>> Expect OUT:EXR: DF EE 25 02 02 03
+Error! >>>> Expect OUT:EXR: 57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89
+Error! >>>> Expect OUT:EXR: 5A 08 47 61 73 90 01 01 00 10
+Error! >>>> Expect OUT:EXR: 9F 39 01 07
+>>> Fallback to MSR transaction
+SWIPEKB: click OK, then insert card 3 times (power on ICC failed) -> Remove card (Green LED 3 is flash ON) -> swipe Discover card.
+Error! >>>> Expect OUT:EXR: DFEF6102F220
+Error! >>>> Expect OUT:EXR: DFEF6102F222
+Error! >>>> Expect OUT:EXR: DF EE 25 02 3002
+Error! >>>> Expect OUT:EXR: 9F 39 01 80
+Error! >>>> Expect OUT:EXR: DFEE236A%B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?
+MESSAGECK: After inserted card 3 times, LED 3 was turned ON (flash status)
+User Judgment Pass
+
+>>> CL transaction
+SWIPEKB: click OK, then tap VISA MSD card. (NOTE: NO output data/ NO reaction of beep & LEDs)
+KB Unit Swipe Card:
+FFEE134C42343736313733393030313031303031305E46554C4C2F46554E4354494F4E414C5E323031323132303030313233303130323033303430353036303730383039313030333939303330303030FFEE1425343736313733393030313031303031303D32303132313230303031323333393930303033314F07A0000000031010500C5649534120544553542030318407A00000000310109F02060000000000019F0607A00000000310109F3501229F39019157134761739001010010D20121200012339900031F9C01009F1E0832333435363738399B0200005F200F46554C4C2F46554E4354494F4E414CFFEE0108DF300100DF5B0108DFEF7F0100DFEF4C06002700000000DFEF4D273B343736313733393030313031303031303D32303132313230303031323333393930303033313FDFEE2601D1DFEC181456697361205643505320322E312E332076312E30DFEF571856503333303020555342204E454F2076312E31302E303337DFED2006536C696D4344DFE
+MESSAGECK: NO output data/ NO reaction of beep & LEDs
+User Judgment Pass
+
+--------------------
+>>> Quick Chip mode = 04
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 04 64 72 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 
+ASCII: Otech2   
+--------------------
+>>> MSR transaction
+SWIPEKB: click OK, then swipe VISA MSD card.
+Error! >>>> Expect OUT:EXR: ;4761739001010010=20121200012339900031?
+>>> No Fallback to CT transaction, just MSR data output
+SWIPEKB: click OK, then swipe Discover card.
+Error! >>>> Expect OUT:EXR: %B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?
+>>> No Fallback to MSR transaction, just MSR data output
+SWIPEKB: click OK -> insert IDT test card (no reaction) -> swipe Discover card.
+Error! >>>> Expect OUT:EXR: %B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?
+>>> CL transaction
+SWIPEKB: click OK, then tap VISA MSD card.
+KB Unit Swipe Card:
+FFEE134C42343736313733393030313031303031305E46554C4C2F46554E4354494F4E414C5E323031323132303030313233303130323033303430353036303730383039313030333939303330303030FFEE1425343736313733393030313031303031303D32303132313230303031323333393930303033314F07A0000000031010500C5649534120544553542030318407A00000000310109F02060000000000019F0607A00000000310109F3501229F39019157134761739001010010D20121200012339900031F9C01009F1E0832333435363738399B0200005F200F46554C4C2F46554E4354494F4E414CFFEE0108DF300100DF5B0108DFEF7F0100DFEF4C06002700000000DFEF4D273B343736313733393030313031303031303D32303132313230303031323333393930303033313FDFEE2601D1DFEC181456697361205643505320322E312E332076312E30DFEF571856503333303020555342204E454F2076312E31302E303337DFED2006536C696D4344DFED2103110218DFED220A312E337C303432333138
+
+--------------------
+>>> Quick Chip mode = 02
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 
+ASCII: Otech2   

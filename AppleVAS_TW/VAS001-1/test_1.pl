@@ -27,7 +27,7 @@ for(;;)						# forever loop
 
 }						# end forever
 
-`start /REALTIME docklight_scripting -r -m VAS001.pts`;
+`start /REALTIME docklight_scripting -r -m VAS001-1.pts`;
 
 # Main Code
 

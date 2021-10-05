@@ -1,0 +1,63 @@
+
+13:47:04: If Issue ?
+Pass Test
+[Issue Count: 0]
+
+13:47:04: >>[Do Scripts]>>
+
+Objective: to verify Tag DFEF6E (Carriage Return)
+===========================================
+>>> Quick Chip mode = 02
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 
+ASCII: Otech2   
+--------------------
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EF 6E 01 0D FA 1A 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 
+ASCII: Otech2   
+--------------------
+>>> MSR transaction
+MESSAGE: Open PC "NotePad" -> tap any CL card 3 times -> notice the cursor position
+MESSAGECK: the cursor will be moved to the beginning of next line (CR) per tap
+User Judgment Pass
+
+--------------------
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 06 DF EF 6E 02 0D 0A 74 CD 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 
+ASCII: Otech2   
+--------------------
+>>> MSR transaction
+MESSAGE: Open PC "NotePad" -> tap any CL card 3 times -> notice the cursor position
+MESSAGECK: the cursor will be skipped a new line and was moved to the beginning of the next line (CR + LF) per tap
+User Judgment Pass
+
+===========================================
+>>> Quick Chip mode = 04
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 04 64 72 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 
+ASCII: Otech2   
+--------------------
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EF 6E 01 0D FA 1A 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 
+ASCII: Otech2   
+--------------------
+>>> MSR transaction
+MESSAGE: Open PC "NotePad" -> tap any CL card 3 times -> notice the cursor position
+MESSAGECK: the cursor will be moved to the beginning of next line (CR) per tap
+User Judgment Pass
+
+--------------------
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 06 DF EF 6E 02 0D 0A 74 CD 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 
+ASCII: Otech2   
+--------------------
+>>> MSR transaction
+MESSAGE: Open PC "NotePad" -> tap any CL card 3 times -> notice the cursor position
+MESSAGECK: the cursor will be skipped a new line and was moved to the beginning of the next line (CR + LF) per tap
+User Judgment Pass
+
+===========================================
+>>> Quick Chip mode = 02
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 
+ASCII: Otech2   

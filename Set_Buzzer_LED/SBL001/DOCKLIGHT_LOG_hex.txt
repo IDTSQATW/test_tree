@@ -1,0 +1,24 @@
+Docklight Log File (HEX) - Started 2021/10/4 11:36:11.295 
+ TEST CASE: SBL001
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM90 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- not audible
+
+2021/10/4 11:36:12.532 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 00 00 00 17 53 
+2021/10/4 11:36:12.608 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  Passed 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 2021/10/4 11:36:16.078 
+

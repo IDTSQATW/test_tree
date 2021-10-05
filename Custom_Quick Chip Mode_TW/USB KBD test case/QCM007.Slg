@@ -1,0 +1,36 @@
+
+13:40:53: If Issue ?
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\USB KBD test case\QCM007.txt
+Running Info>>
+[Issue Count: 1]
+[Wrong Items]
+>>>Error item ( 12 ).
+>>> CT transaction
+
+
+13:40:53: >>[Do Scripts]>>
+
+Objective: Encryption OFF, MSR/ CT/ CL transaction are failed under Quick Chip Mode.
+--------------------
+>>> Quick Chip mode = 02
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 
+ASCII: Otech2   
+--------------------
+>>> MSR transaction
+SWIPEKB: click OK, then swipe card w/ abnormal method (transaction is failed).
+MESSAGECK: NO any output data
+User Judgment Pass
+
+--------------------
+>>> CT transaction
+SWIPEKB: click OK, then insert card (P/N: 80005206-002).
+Error! >>>> Expect OUT:EXR: DF EE 25 02 50 25
+--------------------
+>>> CL transaction
+SWIPEKB: click OK, then tap T=0 card.
+KB Unit Swipe Card:
+FFEE1F0427900001DFEF571856503333303020555342204E454F2076312E31302E303337DFED2006536C696D4344DFED2103110218DFED220A312E337C303432333138
+MESSAGECK: hear beep twice
+User Judgment Pass
+

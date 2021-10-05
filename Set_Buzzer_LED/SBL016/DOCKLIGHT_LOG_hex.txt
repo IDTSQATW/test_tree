@@ -1,16 +1,17 @@
-Docklight Log File (HEX) - Started  
+Docklight Log File (HEX) - Started 2021/10/4 11:47:49.910 
  TEST CASE: SBL016
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM28 @ 19200 baud...
+ POS operating on COM90 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  --- One Beep and Turn On LED 1
 
- [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 01 01 01 37 47 
- [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  Passed  
+2021/10/4 11:47:51.311 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 01 01 01 37 47 
+2021/10/4 11:47:51.319 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  Passed 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
+ Result = PASSED
  ---------- END OF TEST ----------
 
  Result = PASSED
@@ -19,5 +20,5 @@ Docklight Log File (HEX) - Started
  MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped  
+Docklight Log File (HEX) - Stopped 2021/10/4 11:47:53.626 
 

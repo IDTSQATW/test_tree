@@ -1,0 +1,33 @@
+
+13:47:59: If Issue ?
+Pass Test
+[Issue Count: 0]
+
+13:47:59: >>[Do Scripts]>>
+
+Objective: to verify Tag DFED4F (USB KB prefix)
+===========================================
+>>> Quick Chip mode = 02
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 
+ASCII: Otech2   
+--------------------
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 09 DF ED 4F 05 24 24 24 24 24 62 1F 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 
+ASCII: Otech2   
+--------------------
+>>> MSR transaction
+MESSAGE: Open PC "NotePad" -> Swipe/ Insert/ Tap any card -> notice the prefix of output
+MESSAGECK: the prefix of output display msg '$$$$$'
+User Judgment Pass
+
+===========================================
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 04 DF ED 4F 00 B3 96 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 
+ASCII: Otech2   
+--------------------
+>>> MSR transaction
+MESSAGE: Open PC "NotePad" -> Swipe/ Insert/ Tap any card -> notice the prefix of output
+MESSAGECK: the prefix of output display nothing
+User Judgment Pass
+

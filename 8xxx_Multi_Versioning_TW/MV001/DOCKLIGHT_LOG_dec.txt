@@ -1,16 +1,16 @@
-Docklight Log File (Decimal) - Started 2019/1/29 14:32:58.120 
+Docklight Log File (Decimal) - Started 2021/10/4 09:37:40.690 
  TEST CASE: MV001
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM1 @ 9600 baud...
+ POS operating on COM90 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
- --- Get Product Type *** USAT_SRED
+ --- Get Product Type *** GR
 
-2019/1/29 14:32:59.547 [TX] - 086 105 086 079 116 101 099 104 050 000 009 001 000 000 160 160 
-2019/1/29 14:32:59.573 [RX] - 086 105 086 079 116 101 099 104 050 000 009 000 000 006 223 096 003 086 052 002  
-103 128  
+2021/10/4 09:37:41.812 [TX] - 086 105 086 079 116 101 099 104 050 000 009 001 000 000 160 160 
+2021/10/4 09:37:41.819 [RX] - 086 105 086 079 116 101 099 104 050 000 009 000 000 006 223 096 003 085 051 051  
+129 053 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000  
 
  Result = PASSED
  
@@ -24,5 +24,5 @@ Docklight Log File (Decimal) - Started 2019/1/29 14:32:58.120
 Please make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (Decimal) - Stopped 2019/1/29 14:33:00.203 
+Docklight Log File (Decimal) - Stopped 2021/10/4 09:37:42.394 
 

@@ -1,0 +1,58 @@
+Docklight Log File (HEX) - Started 2021/10/8 09:34:27.464 
+ TEST CASE: BR003
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ ---------- BEGIN TEST ----------
+
+ --- Testing 38400 Baud
+ Set Reader Baud Rate...
+
+2021/10/8 09:34:28.594 [TX] - 56 69 56 4F 74 65 63 68 32 00 30 01 00 01 03 2A B2 
+2021/10/8 09:34:28.626 [RX] - 56 69 56 4F 74 65 63 68 32 00 30 00 00 00 48 0E  Baud Rate accepted
+ Result = PASSED
+ Reader Baud Rate set to 38400...
+ Set Reader Baud Rate - COMPLETE
+
+ --- Set Docklight COM PORT
+ POS COM port set to 38400 baud...
+ Set Docklight COM PORT - COMPLETE
+
+ --- Ping OPEN COM PORT
+ Pinging open port...
+
+2021/10/8 09:34:30.835 [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD 
+2021/10/8 09:34:30.849 [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Ping Successful
+ Result = PASSED
+ COM port pinged...
+ Ping OPEN COM PORT - COMPLETE
+
+ --- Set Reader back to Regress.Config baudrate of 9600
+
+
+2021/10/8 09:34:30.872 [TX] - 56 69 56 4F 74 65 63 68 32 00 30 01 00 01 01 68 92 
+2021/10/8 09:34:30.884 [RX] - 56 69 56 4F 74 65 63 68 32 00 30 00 00 00 48 0E  Baud Rate accepted
+ --- Set POS COM PORT to default Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- Ping OPEN COM PORT
+ Pinging open port...
+
+2021/10/8 09:34:32.083 [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD 
+2021/10/8 09:34:32.111 [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Ping Successful
+ Result = PASSED
+ COM port pinged...
+ Ping OPEN COM PORT - COMPLETE
+
+ ---------- END OF TEST ----------
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2021/10/8 09:34:33.224 
+

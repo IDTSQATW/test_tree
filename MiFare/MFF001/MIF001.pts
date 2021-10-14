@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-35000
+8971
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -94,7 +94,7 @@ DL.StartCommunication
 'Result reporting (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
 MasterResult = 0
-If ProjectName <> "" And Prompting(1) = "ON " Then
+If ProjectName <> "" And Prompting(1) = "ON" Then
    caseValid = 1
 Else
    caseValid =(Int((max-min+1)*Rnd+min))

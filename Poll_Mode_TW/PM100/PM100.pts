@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-55549
+2451
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -241,7 +241,7 @@ If result <> 0 Then
    if readerType <> "NEO2" then
       if result <> 0 then result = DL.WaitForSequence("60-10 rx", 1, 6000)
    else
-      if result <> 0 then result = DL.WaitForSequence("60-10 rx (NEO2)", 1, 6000)
+      if result <> 0 then result = DL.WaitForSequence("60-10 rx (NEO2)", 1, 8000)
    end if
    dl.pause 1000
    if result <> 0 then

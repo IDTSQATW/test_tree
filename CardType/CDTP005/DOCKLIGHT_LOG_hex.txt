@@ -1,27 +1,27 @@
-Docklight Log File (HEX) - Started 2017/12/11 14:42:06.212 
+Docklight Log File (HEX) - Started 2021/10/6 15:05:11.796 
  TEST CASE: CDTP005
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM1 @ 9600 baud...
+ POS operating on COM36 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  --- Enable Pass Through
 
-2017/12/11 14:42:07.497 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
-2017/12/11 14:42:07.524 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START and STOP (OK)
+2021/10/6 15:05:13.406 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+2021/10/6 15:05:13.429 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START and STOP (OK)
  Enter OK and then tap a type 4 card (e.g. Mifare Ultralight C).
  
 
 --- Poll for Token (10 Seconds)
 
-2017/12/11 14:42:08.709 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51 
-2017/12/11 14:42:09.339 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 08 04 04 87 14 9A 67 34 84 25 55  
+2021/10/6 15:05:20.427 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51 
+2021/10/6 15:05:20.819 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 08 04 04 2B 6E 9A 67 34 80 D4  
 
 --- Pass-Through - STOP
-
-2017/12/11 14:42:09.365 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38 
-2017/12/11 14:42:09.391 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START and STOP (OK)
+32 
+2021/10/6 15:05:20.845 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38 
+2021/10/6 15:05:21.304 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START and STOP (OK)
  
 
  Result = PASSED
@@ -32,5 +32,5 @@ Docklight Log File (HEX) - Started 2017/12/11 14:42:06.212
  MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2017/12/11 14:42:10.525 
+Docklight Log File (HEX) - Stopped 2021/10/6 15:05:22.613 
 

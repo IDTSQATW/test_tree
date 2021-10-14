@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-26327
+15360
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -219,8 +219,8 @@ If result <> 0 Then
             r1 = DL.WaitForSequence("60-10 00 11", 1, 1500)
             if r1 = 0 then r1 = DL.WaitForSequence("60-10 00 11-long PAN", 1, 1500)
          else
-            r1 = DL.WaitForSequence("60-10 00 11 (NEO2)", 1, 1500)
-            if r1 = 0 then r1 = DL.WaitForSequence("60-10 00 11 (NEO2)-long PAN", 1, 1500)
+            r1 = DL.WaitForSequence("60-10 00 11 (NEO2)", 1, 2000)
+            if r1 = 0 then r1 = DL.WaitForSequence("60-10 00 11 (NEO2)-long PAN", 1, 2000)
          end if
 
          r2 = DL.WaitForSequence("9f39", 1, 2000)

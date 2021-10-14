@@ -190,11 +190,10 @@ if (Result):
 					else:
 						DL.SetWindowText("red", "Tag DFEF17_Mask: FAIL")
 								
-					r1 = DL.Check_StringAB(decDFEF17, 'DF EF 17')
-					r2 = DL.Check_StringAB(decDFEF17, '42 36 35 31 30 30 30 30 30 30 30 30 30')
+					r2 = DL.Check_StringAB(decDFEF17, '25 42 36 35 31 30 30 30 30 30 30 30 30 30')
 					r3 = DL.Check_StringAB(decDFEF17, '5E 43 41 52 44 2F 49 4D 41 47 45')
 					r4 = DL.Check_StringAB(decDFEF17, '5E 31 37 31 32 32 30 31')
-					if r1 == True and r2 == True and r3 == True and r4 == True and DL.Check_StringAB(alldata, "DF EF 17 C1"):
+					if r2 == True and r3 == True and r4 == True and DL.Check_StringAB(alldata, "DF EF 17 C1"):
 						DL.SetWindowText("blue", "Tag DFEF17_Enc: PASS")
 					else:
 						DL.SetWindowText("red", "Tag DFEF17_Enc: FAIL")
@@ -207,10 +206,9 @@ if (Result):
 					else:
 						DL.SetWindowText("red", "Tag DFEF18_Mask: FAIL")
 								
-					r1 = DL.Check_StringAB(decDFEF18, 'DF EF 18')
-					r2 = DL.Check_StringAB(decDFEF18, '36 35 31 30 30 30 30 30 30 30 30 30')
+					r2 = DL.Check_StringAB(decDFEF18, '3B 36 35 31 30 30 30 30 30 30 30 30 30')
 					r3 = DL.Check_StringAB(decDFEF18, '3D 31 37 31 32 32 30 31')
-					if r1 == True and r2 == True and r3 == True and DL.Check_StringAB(alldata, "DF EF 18 C1"):
+					if r2 == True and r3 == True and DL.Check_StringAB(alldata, "DF EF 18 C1"):
 						DL.SetWindowText("blue", "Tag DFEF18_Enc: PASS")
 					else:
 						DL.SetWindowText("red", "Tag DFEF18_Enc: FAIL")
@@ -224,11 +222,10 @@ if (Result):
 					else:
 						DL.SetWindowText("red", "Tag 56_Mask: FAIL")
 							
-					r1 = DL.Check_StringAB(dec56, '56')
-					r2 = DL.Check_StringAB(dec56, '42 36 35 31 30 30 30 30 30 30 30 30 30')
+					r2 = DL.Check_StringAB(dec56, '25 42 36 35 31 30 30 30 30 30 30 30 30 30')
 					r3 = DL.Check_StringAB(dec56, '5E 43 41 52 44 2F 49 4D 41 47 45')
 					r4 = DL.Check_StringAB(dec56, '5E 31 37 31 32 32 30 31')
-					if r1 == True and r2 == True and r3 == True and r4 == True and DL.Check_StringAB(alldata, "56 C1"):
+					if r2 == True and r3 == True and r4 == True and DL.Check_StringAB(alldata, "56 C1"):
 						DL.SetWindowText("blue", "Tag 56_Enc: PASS")
 					else:
 						DL.SetWindowText("red", "Tag 56_Enc: FAIL")
@@ -241,10 +238,9 @@ if (Result):
 					else:
 						DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 								
-					r1 = DL.Check_StringAB(dec57, '57')
-					r2 = DL.Check_StringAB(dec57, '65 10 00 00 00 00')
-					r3 = DL.Check_StringAB(dec57, 'D1 71 22 01')
-					if r1 == True and r2 == True and r3 == True and DL.Check_StringAB(alldata, "57 C1"):
+					r2 = DL.Check_StringAB(dec57, '3B363531303030303030303030')
+					r3 = DL.Check_StringAB(dec57, '3D31373132323031')
+					if r2 == True and r3 == True and DL.Check_StringAB(alldata, "57 C1"):
 						DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 					else:
 						DL.SetWindowText("red", "Tag 57_Enc: FAIL")	

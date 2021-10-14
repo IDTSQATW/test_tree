@@ -1,27 +1,27 @@
-Docklight Log File (HEX) - Started 2017/12/11 14:41:18.535 
+Docklight Log File (HEX) - Started 2021/10/6 15:05:00.278 
  TEST CASE: CDTP004
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM1 @ 9600 baud...
+ POS operating on COM36 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  --- Enable Pass Through
 
-2017/12/11 14:41:19.820 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
-2017/12/11 14:41:19.847 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START and STOP (OK)
+2021/10/6 15:05:01.900 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+2021/10/6 15:05:01.923 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START and STOP (OK)
  Enter OK and then tap a type 7 card (e.g. vivo.com, Kurkish type'07' or Mifare(NFC phone)).
  
 
 --- Poll for Token (10 Seconds)
 
-2017/12/11 14:41:36.384 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51 
-2017/12/11 14:41:37.118 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 05 07 CF DB 90 35 FF 16  
+2021/10/6 15:05:04.119 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51 
+2021/10/6 15:05:05.014 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 05 07 7F 30 F8 6C 17 58  
 
 --- Pass-Through - STOP
 
-2017/12/11 14:41:37.653 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38 
-2017/12/11 14:41:37.679 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START and STOP (OK)
+2021/10/6 15:05:05.537 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38 
+2021/10/6 15:05:05.564 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START and STOP (OK)
  
 
  Result = PASSED
@@ -32,5 +32,5 @@ Docklight Log File (HEX) - Started 2017/12/11 14:41:18.535
  MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2017/12/11 14:41:38.923 
+Docklight Log File (HEX) - Stopped 2021/10/6 15:05:06.856 
 

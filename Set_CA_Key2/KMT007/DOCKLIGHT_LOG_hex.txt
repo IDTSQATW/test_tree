@@ -1,23 +1,20 @@
-Docklight Log File (HEX) - Started 2021/10/4 09:44:55.899 
+Docklight Log File (HEX) - Started 2021/10/8 09:20:59.684 
  TEST CASE: KMT007
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 9600 baud...
+ POS operating on COM1 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  DeleteAllKeys
 
-2021/10/4 09:44:57.540 [TX] - 56 69 56 4F 74 65 63 68 32 00 D0 05 00 00 14 27 
-2021/10/4 09:44:57.547 [RX] - 56 69 56 4F 74 65 63 68 32 00 D0 00 00 00 CC E4  Pass 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+2021/10/8 09:21:01.230 [TX] - 56 69 56 4F 74 65 63 68 32 00 D0 05 00 00 14 27 
+2021/10/8 09:21:01.392 [RX] - 56 69 56 4F 74 65 63 68 32 00 D0 00 00 00 CC E4  Pass  
 
  Result = PASSED
  ---------- END OF TEST ----------
 
- 
-
- MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2021/10/4 09:44:58.736 
+Docklight Log File (HEX) - Stopped 2021/10/8 09:21:02.360 
 

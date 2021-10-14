@@ -1,23 +1,20 @@
-Docklight Log File (HEX) - Started 2021/10/4 09:46:50.313 
+Docklight Log File (HEX) - Started 2021/10/8 09:23:25.389 
  TEST CASE: KMT013
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 9600 baud...
+ POS operating on COM1 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  Delete Invalid Key Index
 
-2021/10/4 09:46:51.955 [TX] - 56 69 56 4F 74 65 63 68 32 00 D0 04 00 06 A0 00 00 00 03 3F D4 49 
-2021/10/4 09:46:51.963 [RX] - 56 69 56 4F 74 65 63 68 32 00 D0 4B 00 00 21 B8  Passed 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+2021/10/8 09:23:27.043 [TX] - 56 69 56 4F 74 65 63 68 32 00 D0 04 00 06 A0 00 00 00 03 3F D4 49 
+2021/10/8 09:23:27.111 [RX] - 56 69 56 4F 74 65 63 68 32 00 D0 4B 00 00 21 B8  Passed  
 
  Result = PASSED
  ---------- END OF TEST ----------
 
- 
-
- MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2021/10/4 09:46:53.037 
+Docklight Log File (HEX) - Stopped 2021/10/8 09:23:27.799 
 

@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2020/10/29 13:36:18.846 
+Docklight Log File (HEX) - Started 2021/10/8 13:28:13.681 
  TEST CASE: VL018
 
  --- Set POS COM PORT Settings
@@ -8,13 +8,13 @@ Docklight Log File (HEX) - Started 2020/10/29 13:36:18.846
 
  --- Yellow LED control
 
-2020/10/29 13:36:46.955 [TX] - 56 69 56 4F 74 65 63 68 32 00 F0 FA 00 00 39 DF 
-2020/10/29 13:36:46.980 [RX] - 56 69 56 4F 74 65 63 68 32 00 F0 00 00 00 FB AA  
+2021/10/8 13:28:43.005 [TX] - 56 69 56 4F 74 65 63 68 32 00 F0 FA 00 00 39 DF 
+2021/10/8 13:28:43.033 [RX] - 56 69 56 4F 74 65 63 68 32 00 F0 00 00 00 FB AA  
 
  ---------- END OF TEST ----------
 
  Result = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2020/10/29 13:36:49.841 
+Docklight Log File (HEX) - Stopped 2021/10/8 13:28:44.278 
 

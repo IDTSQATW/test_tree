@@ -1,16 +1,18 @@
 DL_SCRIPTVERSION
 1
-46267
+38334
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "AC006" ' !!!!! EDIT THIS !!!!!
+ProjectName = "VAS005-1" ' !!!!! EDIT THIS !!!!!
 '+++
-' For Vendi design: test MagStripe card, and check LED/ LCD/ Buzzer behavior under 3 UI scheme.
-' Modify from AC011-1
+' This test is to verify AppleVAS w/ VAS And Payment process (w/ and w/o exlusive bit set in DF50)
+' Expect payment data only in response when there are active payment but no active passes on iPhone
+'---
+
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -71,6 +73,7 @@ Do Until FileInput.EndOfFile
   result = FileInput.GetLine()      
   genFlag = result
 Loop
+
 Sub StepPrompt(PromptString)
       DL.AddComment PromptString
       If Prompting(1) = "ON" Then
@@ -144,12 +147,6 @@ Function ReverseResult(ResultParam)
       End If
 End Function
 
-countf = 0
-sub count()
-    countf = countf + 1
-    dl.addcomment vbcrlf
-    dl.addcomment "** FAIL **"
-end sub
 '------------------------------------------------------------
 'Debugging (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
@@ -161,133 +158,84 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-lcdcheck = msgbox ("Does reader support LCD?", vbyesno)
+errFlg = 0
 
-if lcdcheck = 6 then
-'------------------------------------------------------------
+For I = 1 To 6
+  DL.ResetReceiveCounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Clear Merchant " & I
+  DL.SendSequence "Clear Merchant " & I
+  result = DL.WaitForSequence("Generic 04-xx + resp", 1, 10000)
+Next
+
 If result <> 0 Then
-   dl.resetreceivecounter
-   DL.AddComment "--- Poll on Demand"
-   DL.SendSequence "Poll on Demand"
-   result = DL.WaitForSequence("Poll Response", 1, 10000)
-End If
-
-if result <> 0 then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   dl.addcomment "--- Burst mode: OFF"
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then dl.sendsequence "burst off"
-   if readerType = "NEO2" then dl.sendsequence "burst off (NEO2)"
-   result = dl.waitforsequence("burst ok resp", 1, 10000)
-end if
-
-if result <> 0 Then
-   dl.resetreceivecounter
-   DL.AddComment "--- DF7D = 01" 
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then DL.SendSequence "DF7D = 01"
-   if readerType = "NEO2" then DL.SendSequence "DF7D = 01 (NEO2)"
-   result = DL.WaitForSequence("04 00", 1, 3000)
-end if
-'------------------------------------------------------------
-If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   dl.addcomment "--- UI scheme: ViVOpay"
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then dl.sendsequence "vivopay ui"
-   if readerType = "NEO2" then dl.sendsequence "vivopay ui (NEO2)"
-   result1 = dl.waitforsequence("ui ok resp", 1, 10000)
-   if result1 <> 0 then
-      ans = msgbox("Click OK and then swipe IDT test card; check Buzzer/ LED behavior", vbyesno)
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- Activate Transaction (02-40)"
-      DL.SendSequence "Activate Transaction (02-40)"
-      result1 = DL.WaitForSequence("idt resp_2T", 1, 10000)
-      dl.pause 500
-      if result1 <> 0 then
-         ans = msgbox("Does reader has correct behavior (Beep 200ms/ all LED flash 200ms)?", vbyesno)
-         if ans = 7 then
-            count()
-         end if
-      else
-         count()
-      end if
-   else
-      count()
-   end if
+  DL.ResetReceiveCounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Set Merchant 3 - pass.com.apple.wallet.vas.test_Starbucks "
+  DL.SendSequence "Set Merchant 3 - pass.com.apple.wallet.vas.test_Starbucks"
+  result = DL.WaitForSequence("Generic 04-xx + resp", 1, 10000)
 End If
 
 If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   dl.addcomment "--- UI scheme: VISA Wave"
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then dl.sendsequence "visawave ui"
-   if readerType = "NEO2" then dl.sendsequence "visawave ui (NEO2)" 
-   result1 = dl.waitforsequence("ui ok resp", 1, 10000)
-   if result1 <> 0 then
-      ans = msgbox("Click OK and then swipe IDT test card; check Buzzer/ LED behavior", vbyesno)
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- Activate Transaction (02-40)"
-      DL.SendSequence "Activate Transaction (02-40)"
-      result1 = DL.WaitForSequence("idt resp_2T", 1, 10000)
-      dl.pause 500
-      if result1 <> 0 then
-         ans = msgbox("Does reader has correct behavior (No Beep/ No LED response)?", vbyesno)
-         if ans = 7 then
-            count()
-         end if
-      else
-         count()
-      end if
-   else
-      count()
-   end if
+  DL.ResetReceiveCounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Set Merchant 4 - pass.com.apple.wallet.panera w/URL "
+  DL.SendSequence "Set Merchant 4 - pass.com.apple.wallet.panera w/URL"
+  result = DL.WaitForSequence("Generic 04-xx + resp", 1, 10000)
 End If
 
 If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   dl.addcomment "--- UI scheme: EMEA"
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then dl.sendsequence "emea ui"
-   if readerType = "NEO2" then dl.sendsequence "emea ui (NEO2)"
-   result1 = dl.waitforsequence("ui ok resp", 1, 10000)
-   if result1 <> 0 then
-      ans = msgbox("Click OK and then swipe IDT test card; check Buzzer/ LED/ LCD", vbyesno)
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- Activate Transaction (02-40)"
-      DL.SendSequence "Activate Transaction (02-40)"
-      result1 = DL.WaitForSequence("idt resp_2T", 1, 10000)
-      dl.pause 500
-      if result1 <> 0 then
-         ans = msgbox("Does reader has correct behavior (Beep 400ms/ all LED flash 500ms)?", vbyesno)
-         if ans = 7 then
-            count()
-         end if
-      else
-         count()
-      end if
-   else
-      count()
-   end if
+  DL.ResetReceiveCounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Get Merchant 3  "
+  DL.SendSequence "Get Merchant 3 "
+  result = DL.WaitForSequence("Get pass.com.apple.wallet.vas.test_Starbucks resp", 1, 10000)
 End If
-else
-   DL.AddComment vbcrlf & "The reader does NOT support LCD. SKIP this case."
-end if
-'------------------------------------------------------------
-if countf <> 0 then result = 0
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Get Merchant 4  "
+  DL.SendSequence "Get Merchant 4 "
+  result = DL.WaitForSequence("Get pass.com.apple.wallet.panera w/URL resp", 1, 10000)
+End If
+'============================================================
+If result <> 0 Then
+   prompt2 = "Click Ok and then present iPhone w/ active payment..."
+   result = MsgBox(prompt2, VBOKOnly, "Acivate Transaction")
+End If
+
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- ACT - VAS AND Pay"
+  if readerType <> "NEO2" then
+     DL.SendSequence " ACT - VAS AND Pay"
+  else
+     DL.SendSequence " ACT - VAS AND Pay (NEO2)"
+  end if
+  result = DL.WaitForSequence("Payment AID tag 84 generic resp", 1, 32000)
+End If
+
+If result = 0 Or errFlg <> 0 Then
+  result = 0
+Else 
+  result = 1
+End If
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)
+
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
+
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
 'DL.pause 1000
+
 'If 0 Then
 'If result = 0 then
 '  DL.AddComment Chr(13) & "Result = FAILED"
@@ -295,6 +243,7 @@ End If '""
 '  DL.AddComment Chr(13) & "Result = PASSED"
 'End If
 'End If
+
 'If Prompting(0) = "ON" Then
 '  If result = 0 then
 '    MsgBox "Result = FAILED", VBOKOnly, "Result"
@@ -331,7 +280,7 @@ ElseIf MasterResult = 1 Then
 	FileOutput.WriteLine "1|PASS|OK"
 End If
 'FileOutput.WriteLine MasterResult
-FileOutput.CloseFile
+FileOutput.CloseFile 
 
 Sub DL_OnSend()
     usDataLen = DL.OnSend_GetSize() - 2

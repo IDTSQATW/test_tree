@@ -1,17 +1,17 @@
-Docklight Log File (HEX) - Started 2021/9/13 10:09:18.771 
+Docklight Log File (HEX) - Started 2021/10/8 09:27:08.503 
  TEST CASE: BN003
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM1 @ 115200 baud...
+ POS operating on COM1 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  --- Boot up Notification 02 On (frame)
 
-2021/9/13 10:09:19.969 [TX] - 56 69 56 4F 74 65 63 68 32 00 14 01 00 01 02 B9 23 
-2021/9/13 10:09:19.988 [RX] - 56 69 56 4F 74 65 63 68 32 00 14 00 00 00 B5 B1 56 69 56 4F 74 65 63 68 32 00 14 01 00 0D  
+2021/10/8 09:27:09.700 [TX] - 56 69 56 4F 74 65 63 68 32 00 14 01 00 01 02 B9 23 
+2021/10/8 09:27:09.732 [RX] - 56 69 56 4F 74 65 63 68 32 00 14 00 00 00 B5 B1 56 69 56 4F 74 65 63 68 32 00 14 01 00 0D  
 
-2021/9/13 10:09:31.866 [RX] - 4E 45 4F 20 32 2E 30 20 76 31 2E 30 30 9F 30  
+2021/10/8 09:27:20.994 [RX] - 4E 45 4F 20 32 2E 30 20 76 31 2E 30 30 9F 30  
 
  
 Note: per spec's definition, RX should return 'platform info', ex. NEO 2.0 v1.00
@@ -20,5 +20,5 @@ Note: per spec's definition, RX should return 'platform info', ex. NEO 2.0 v1.00
  Result = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2021/9/13 10:09:41.447 
+Docklight Log File (HEX) - Stopped 2021/10/8 09:27:46.376 
 

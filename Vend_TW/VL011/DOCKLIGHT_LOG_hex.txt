@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2020/10/29 13:26:06.873 
+Docklight Log File (HEX) - Started 2021/10/12 16:18:01.898 
  TEST CASE: VL011
 
  --- Set POS COM PORT Settings
@@ -20,16 +20,11 @@ Docklight Log File (HEX) - Started 2020/10/29 13:26:06.873
 
  --- F0-F7: Enable Blue LED Sequence
 
-2020/10/29 13:26:21.104 [TX] - 56 69 56 4F 74 65 63 68 32 00 F0 F7 00 19 01 80 00 0F C0 00 0F E0 00 0F 60 00 0F 20 00 0F 00 00 1F F0 00 7F 00 00 1F 08 62 
-2020/10/29 13:26:21.156 [RX] - 56 69 56 4F 74 65 63 68 32 00 F0 00 00 00 FB AA  
+2021/10/12 16:18:10.278 [TX] - 56 69 56 4F 74 65 63 68 32 00 F0 F7 00 19 01 80 00 0F C0 00 0F E0 00 0F 60 00 0F 20 00 0F 00 00 1F F0 00 7F 00 00 1F 08 62 
+2021/10/12 16:18:10.332 [RX] - 56 69 56 4F 74 65 63 68 32 00 F0 00 00 00 FB AA  
 User selected 'Yes'
 
- 
-
- Result = PASSED
- ---------- END OF TEST ----------
 
 
-
-Docklight Log File (HEX) - Stopped 2020/10/29 13:26:35.536 
+Docklight Log File (HEX) - Stopped 2021/10/12 16:18:25.673 
 

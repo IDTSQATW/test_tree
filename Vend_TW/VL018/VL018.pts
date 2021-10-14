@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-42529
+50645
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -154,7 +154,7 @@ End Function
 'TEST BEGINS
 '------------------------------------------------------------
 msgbox"Power off/ on the reader once --> Click OK", vbokonly
-dl.pause 12000
+dl.pause 8000
 readercheck = MsgBox ("Is this VP6300 (USAT) reader?", VBYesNo)
 
 ledcheck = msgbox("Yellow LED is OFF status?", vbyesno)

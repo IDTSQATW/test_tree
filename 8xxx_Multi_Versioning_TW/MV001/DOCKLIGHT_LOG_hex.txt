@@ -1,16 +1,16 @@
-Docklight Log File (HEX) - Started 2021/10/8 08:59:18.027 
+Docklight Log File (HEX) - Started 2021/10/20 15:28:51.451 
  TEST CASE: MV001
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM1 @ 9600 baud...
+ POS operating on COM90 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
- --- Get Product Type *** NEO2
+ --- Get Product Type *** GR
 
-2021/10/8 08:59:19.292 [TX] - 56 69 56 4F 74 65 63 68 32 00 09 01 00 00 A0 A0 
-2021/10/8 08:59:19.321 [RX] - 56 69 56 4F 74 65 63 68 32 00 09 00 00 07 DF EE 60 03 56 34 01  
-FB 78  
+2021/10/20 15:28:52.692 [TX] - 56 69 56 4F 74 65 63 68 32 00 09 01 00 00 A0 A0 
+2021/10/20 15:28:52.752 [RX] - 56 69 56 4F 74 65 63 68 32 00 09 00 00 06 DF 60 03 55 33 34  
+F1 D2 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  Result = PASSED
  
@@ -24,5 +24,5 @@ FB 78
 Please make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (HEX) - Stopped 2021/10/8 08:59:19.943 
+Docklight Log File (HEX) - Stopped 2021/10/20 15:28:53.328 
 

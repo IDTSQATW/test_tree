@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-18885
+3967
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -317,7 +317,12 @@ If result <> 0 Then
    DL.AddComment vbcrlf
    DL.AddComment "--- CL: MasterCard paypass"
    msgbox "Tap MasterCard paypass --> Click OK"
-   result = DL.WaitForSequence("CL_MasterCard paypass", 1, 10000)
+   result = DL.WaitForSequence("MC1", 1, 1000)
+   if result <> 0 then result = DL.WaitForSequence("MC2", 1, 1000)
+   if result <> 0 then result = DL.WaitForSequence("MC3", 1, 1000)
+   if result <> 0 then result = DL.WaitForSequence("MC4", 1, 1000)
+   if result <> 0 then result = DL.WaitForSequence("MC5", 1, 1000)
+   if result <> 0 then result = DL.WaitForSequence("MC6", 1, 1000)
    dl.pause 500
 End If
 
@@ -326,7 +331,13 @@ If result <> 0 Then
    DL.AddComment vbcrlf
    DL.AddComment "--- CL: VISA MSD"
    msgbox "Tap VISA MSD --> Click OK"
-   result = DL.WaitForSequence("CL_VISA MSD", 1, 10000)
+   result = DL.WaitForSequence("MSD1", 1, 10000)
+   if result <> 0 then result = DL.WaitForSequence("MSD2", 1, 1000)
+   if result <> 0 then result = DL.WaitForSequence("MSD3", 1, 1000)
+   if result <> 0 then result = DL.WaitForSequence("MSD4", 1, 1000)
+   if result <> 0 then result = DL.WaitForSequence("MSD5", 1, 1000)
+   if result <> 0 then result = DL.WaitForSequence("MSD6", 1, 1000)
+   if result <> 0 then result = DL.WaitForSequence("MSD7", 1, 1000)
    dl.pause 500
 End If
 end sub

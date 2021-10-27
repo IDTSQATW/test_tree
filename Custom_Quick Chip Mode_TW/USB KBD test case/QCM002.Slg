@@ -1,14 +1,9 @@
 
-13:37:21: If Issue ?
-Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\USB KBD test case\QCM002.txt
-Running Info>>
-[Issue Count: 1]
-[Wrong Items]
->>>Error item ( 30 ).
->>> Quick Chip mode = 03
+15:28:08: If Issue ?
+Pass Test
+[Issue Count: 0]
 
-
-13:37:21: >>[Do Scripts]>>
+15:28:08: >>[Do Scripts]>>
 
 Objective: under Quick Chip mode, some transaction cmd can not be worked. (02-01, 02-40, 60-10~12, 60-16)
 ----------------------------------------
@@ -47,9 +42,8 @@ ASCII: Otech2 `
 ----------------------------------------
 >>> Quick Chip mode = 03
 CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 03 14 95 
-OUT: 56 69 56 4F 74 65 63 68 32 00 01 05 00 00 F9 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 
 ASCII: Otech2   
-Error! >>>> Expect OUT:EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
 --------------------
 >>> cmd 02-01
 CMD: 56 69 56 4F 74 65 63 68 32 00 02 01 00 15 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20 12 30 

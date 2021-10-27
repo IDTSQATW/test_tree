@@ -1,18 +1,9 @@
 
-15:41:11: If Issue ?
-Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (03=CT+MSR).txt
-Running Info>>
-[Issue Count: 2]
-[Wrong Items]
->>>Error item ( 23 ).
->>> Change to Quick Chip Mode
+15:18:02: If Issue ?
+Pass Test
+[Issue Count: 0]
 
->>>Error item ( 26 ).
-EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
-User Judgment Fail:MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
-
-
-15:41:11: >>[Do Scripts]>>
+15:18:02: >>[Do Scripts]>>
 
 Objective: set reader to Quick Chip mode = 03 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 03 = CT and MSR would be active.
 --------------------
@@ -48,14 +39,12 @@ CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 
 OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
 ASCII: Otech2 `  
 >>> Change to Quick Chip Mode
-Pack L = 17-5669564F74656368320001050000F9A300
+Pack L = 17-5669564F74656368320001000000125300
 CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 03 14 95 
-OUT: 56 69 56 4F 74 65 63 68 32 00 01 05 00 00 F9 A3 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
 ASCII: Otech2    
-Error! >>>> Expect OUT:EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
 --------------------
 >>> Check USB connection type
 MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
-EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
-Error! >>>> User Judgment Fail:MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
+User Judgment Pass
 

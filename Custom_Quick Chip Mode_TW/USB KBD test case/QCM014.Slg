@@ -1,0 +1,37 @@
+
+16:32:31: If Issue ?
+Pass Test
+[Issue Count: 0]
+
+16:32:31: >>[Do Scripts]>>
+
+Objective: check Timeout feature if Fallback to MSR transaction
+--------------------
+>>> Quick Chip mode = 02
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 
+ASCII: Otech2   
+>>> Fallback to MSR transaction
+SWIPEKB: click OK -> Insert IDT teest card 3 times -> waited 60 sec fallback timeout.
+KB Unit Swipe Card:
+DFEF6102F220DFEF6102F220DFEF6102F222DFEE25020008
+MESSAGECK: LED 3 is ON (flash status) if fallback to MSR reader, LED 3 is OFF if fallback timeout
+User Judgment Pass
+
+--------------------
+>>> Quick Chip mode = 03
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 03 14 95 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 
+ASCII: Otech2   
+>>> Fallback to MSR transaction
+SWIPEKB: click OK -> Insert IDT teest card 3 times -> waited 60 sec fallback timeout.
+KB Unit Swipe Card:
+DFEF6102F220DFEF6102F220DFEF6102F222DFEE25020008
+MESSAGECK: LED 3 is ON (flash status) if fallback to MSR reader, LED 3 is OFF if fallback timeout
+User Judgment Pass
+
+--------------------
+>>> Quick Chip mode = 02
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 
+ASCII: Otech2   

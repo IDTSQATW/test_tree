@@ -1,24 +1,20 @@
-Docklight Log File (HEX) - Started 2021/10/12 13:56:46.169 
+Docklight Log File (HEX) - Started 2021/10/21 13:03:31.136 
  TEST CASE: SBL003
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM1 @ 9600 baud...
+ POS operating on COM90 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  --- Double audible beep
 
-2021/10/12 13:56:47.385 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 02 00 00 77 3D 
-2021/10/12 13:56:47.417 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  Passed  
+2021/10/21 13:03:32.370 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 02 00 00 77 3D 
+2021/10/21 13:03:32.377 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  Passed 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
- Result = FAILED
+ Result = PASSED
  ---------- END OF TEST ----------
 
- Result = PASSED
- 
-
- MASTER RESULT = FAILED
 
 
-Docklight Log File (HEX) - Stopped 2021/10/12 13:56:49.399 
+Docklight Log File (HEX) - Stopped 2021/10/21 13:03:34.518 
 

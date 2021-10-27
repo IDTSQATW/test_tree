@@ -1,9 +1,9 @@
 
-13:49:52: If Issue ?
+08:57:55: If Issue ?
 Pass Test
 [Issue Count: 0]
 
-13:49:52: >>[Do Scripts]>>
+08:57:55: >>[Do Scripts]>>
 
 Objective: to test cmd 01-14, "If original QuickChip is enabled, switching to QuickChip HID mode(01-14 command) is prohibited as well"
 --------------------------------------------------------------------------------

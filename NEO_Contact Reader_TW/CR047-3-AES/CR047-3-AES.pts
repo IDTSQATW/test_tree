@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-17784
+33450
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -331,6 +331,15 @@ If result <> 0 Then
       DL.SendSequence "60-13 (for 60-12)"
       result = DL.WaitForSequence("60-13 (for 60-12)", 1, 10000)
       dl.pause 1000
+   end if
+
+   if result <> 0 then
+      dl.resetreceivecounter
+      dl.addcomment vbcrlf
+      DL.AddComment "--- 60-13 (#CS-4187)"
+      DL.SendSequence "60-13 (#CS-4187)"
+      result = DL.WaitForSequence("Tag 5F20", 1, 10000)
+      dl.pause 500
    end if
 else
    dl.sendsequence "05-01 Cancel transaction"

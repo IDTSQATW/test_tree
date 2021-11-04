@@ -1,27 +1,27 @@
-Docklight Log File (HEX) - Started 2021/10/6 15:04:47.115 
+Docklight Log File (HEX) - Started 2021/10/29 16:08:01.103 
  TEST CASE: CDTP003
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM36 @ 9600 baud...
+ POS operating on COM1 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  --- Enable Pass Through
 
-2021/10/6 15:04:48.787 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
-2021/10/6 15:04:48.809 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START and STOP (OK)
+2021/10/29 16:08:02.226 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+2021/10/29 16:08:02.256 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START and STOP (OK)
  Enter OK and then tap a type 3 card (e.g. VIVOtech W001 or Mifare sample 308-002).
  
 
 --- Poll for Token (10 Seconds)
 
-2021/10/6 15:04:52.423 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51 
-2021/10/6 15:04:53.238 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 05 03 4A A8 45 01 0A 30  
+2021/10/29 16:08:03.584 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51 
+2021/10/29 16:08:04.264 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 05 03 4A A8 45 01 0A 30  
 
 --- Pass-Through - STOP
 
-2021/10/6 15:04:53.761 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38 
-2021/10/6 15:04:53.787 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START and STOP (OK)
+2021/10/29 16:08:04.789 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38 
+2021/10/29 16:08:04.822 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  Pass-Through - START and STOP (OK)
  
 
  Result = PASSED
@@ -32,5 +32,5 @@ Docklight Log File (HEX) - Started 2021/10/6 15:04:47.115
  MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2021/10/6 15:04:54.982 
+Docklight Log File (HEX) - Stopped 2021/10/29 16:08:05.940 
 

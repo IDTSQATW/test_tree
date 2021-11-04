@@ -98,6 +98,7 @@ if (Result):
 				if (Result):
 					Result = DL.Check_StringAB(DL.Get_RXResponse(3), 'E8 DF EE 25')
 				sResult=DL.Get_RXResponse(3)
+				time.sleep(2)
 			if (Result):	
 				if sResult!=None and sResult!="":
 					sResult=sResult.replace(" ","")

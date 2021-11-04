@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2021/10/8 09:26:27.257 
+Docklight Log File (HEX) - Started 2021/10/29 16:41:11.083 
  TEST CASE: BN002
 
  --- Set POS COM PORT Settings
@@ -8,8 +8,8 @@ Docklight Log File (HEX) - Started 2021/10/8 09:26:27.257
 
  --- Boot up Notification Off
 
-2021/10/8 09:26:29.076 [TX] - 56 69 56 4F 74 65 63 68 32 00 14 01 00 01 00 FB 03 
-2021/10/8 09:26:29.107 [RX] - 56 69 56 4F 74 65 63 68 32 00 14 00 00 00 B5 B1  
+2021/10/29 16:41:14.268 [TX] - 56 69 56 4F 74 65 63 68 32 00 14 01 00 01 00 FB 03 
+2021/10/29 16:41:14.300 [RX] - 56 69 56 4F 74 65 63 68 32 00 14 00 00 00 B5 B1  
 
  Result = PASSED
  ---------- END OF TEST ----------
@@ -19,5 +19,5 @@ Docklight Log File (HEX) - Started 2021/10/8 09:26:27.257
  MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2021/10/8 09:26:46.414 
+Docklight Log File (HEX) - Stopped 2021/10/29 16:41:32.347 
 

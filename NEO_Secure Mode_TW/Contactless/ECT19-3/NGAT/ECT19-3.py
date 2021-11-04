@@ -61,13 +61,13 @@ if (Result):
 		TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 		
 	# Tag 57
-		Result = DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D2 01 2C CC CC CC CC CC CC CC CC')
+		Result = DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D3 01 2C CC CC CC CC CC CC CC CC')
 		if Result == True and DL.Check_RXResponse("57 A1 13"):
 			DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 		else:
 			DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 			
-		Result = DL.Check_StringAB(dec57, '3B 34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30 3D 32 30 31 32 31 32 30 30 30 31 32 33 33 39 39 30 30 30 33 31 3F')
+		Result = DL.Check_StringAB(dec57, '3B 34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30 3D 33 30 31 32 31 32 30 30 30 31 32 33 33 39 39 30 30 30 33 31 3F')
 		if Result == True and DL.Check_RXResponse("57 C1 28"):
 			DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 		else:

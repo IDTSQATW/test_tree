@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2021/10/8 09:38:49.307 
+Docklight Log File (HEX) - Started 2021/11/1 08:44:28.252 
  TEST CASE: BR005
 
  --- Set POS COM PORT Settings
@@ -8,8 +8,8 @@ Docklight Log File (HEX) - Started 2021/10/8 09:38:49.307
 
  --- Testing 115200 Baud
 
-2021/10/8 09:38:50.434 [TX] - 56 69 56 4F 74 65 63 68 32 00 30 01 00 01 05 EC D2 
-2021/10/8 09:38:50.465 [RX] - 56 69 56 4F 74 65 63 68 32 00 30 00 00 00 48 0E  Baud Rate accepted
+2021/11/1 08:44:29.377 [TX] - 56 69 56 4F 74 65 63 68 32 00 30 01 00 01 05 EC D2 
+2021/11/1 08:44:29.408 [RX] - 56 69 56 4F 74 65 63 68 32 00 30 00 00 00 48 0E  Baud Rate accepted
  
 
  --- Set Docklight COM PORT >> 115200
@@ -18,10 +18,9 @@ Docklight Log File (HEX) - Started 2021/10/8 09:38:49.307
 
  --- Ping OPEN COM PORT
 
-2021/10/8 09:38:52.669 [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD 
-2021/10/8 09:38:52.676 [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Ping Successful
-
-2021/10/8 09:39:03.478 [RX] - 56 69 56 4F 74 65 63 68 32 00 14 01 00 0D 4E 45 4F 20 32 2E 30 20 76 31 2E 30 30 9F 30  
+2021/11/1 08:44:31.611 [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD 
+2021/11/1 08:44:31.620 [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Ping Successful
+ 
 
  --- Power off/ on the reader...
  
@@ -29,19 +28,19 @@ Docklight Log File (HEX) - Started 2021/10/8 09:38:49.307
 
  --- Ping OPEN COM PORT
 
-2021/10/8 09:39:07.276 [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD 
-2021/10/8 09:39:07.288 [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Ping Successful
+2021/11/1 08:44:45.295 [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD 
+2021/11/1 08:44:45.309 [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Ping Successful
  
 
  --- Set Reader back to Regress.Config baudrate of 9600
 
-2021/10/8 09:39:07.301 [TX] - 56 69 56 4F 74 65 63 68 32 00 30 01 00 01 01 68 92 
-2021/10/8 09:39:07.316 [RX] - 56 69 56 4F 74 65 63 68 32 00 30 00 00 00 48 0E  Baud Rate accepted
+2021/11/1 08:44:45.318 [TX] - 56 69 56 4F 74 65 63 68 32 00 30 01 00 01 01 68 92 
+2021/11/1 08:44:45.326 [RX] - 56 69 56 4F 74 65 63 68 32 00 30 00 00 00 48 0E  Baud Rate accepted
  
 ---------- END OF TEST ----------
 
  Result = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2021/10/8 09:39:08.385 
+Docklight Log File (HEX) - Stopped 2021/11/1 08:44:46.406 
 

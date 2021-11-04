@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-62486
+25864
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -192,7 +192,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Get Transaction Result (03-40)"
    DL.SendSequence " Get Transaction Result (03-40)"
-   dl.pause 2000
+   dl.pause 1000
 
    if readerType <> "NEO2" then result1 = DL.WaitForSequence("03 23_02", 1, 5000)
    if readerType = "NEO2" then result1 = DL.WaitForSequence("03 23_02 (NEO2)", 1, 5000)
@@ -249,7 +249,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Get Transaction Result (03-40)"
    DL.SendSequence " Get Transaction Result (03-40)"
-   dl.pause 2000
+   dl.pause 1000
 
    if readerType <> "NEO2" then result1 = DL.WaitForSequence("03 23", 1, 5000)
    if readerType = "NEO2" then result1 = DL.WaitForSequence("03 23 (NEO2)", 1, 5000)
@@ -283,14 +283,13 @@ If result <> 0 Then
       if result6 = 0 then dl.addcomment vbcrlf & "Tag 9F39: FAIL!"
       if result7 = 0 then dl.addcomment vbcrlf & "Tag DF30: FAIL!"
       if result8 = 0 then dl.addcomment vbcrlf & "Tag 9F02: FAIL!"
-   result8 = dl.waitforsequence("9f02", 1, 1000)
    end if
 End If
 '------------------------------------------------------------
 DL.AddComment vbCrLf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)
 
-DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
@@ -298,28 +297,26 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If 0 Then
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
-End If
+'If 0 Then
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
-
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
-
 If MasterResult = 1 Then
       MasterVerdict = "PASSED"
 ElseIf MasterResult = 0 Then

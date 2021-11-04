@@ -1,15 +1,15 @@
-Docklight Log File (HEX) - Started 2021/10/20 17:01:02.562 
+Docklight Log File (HEX) - Started 2021/11/1 09:22:14.893 
  TEST CASE: CA006
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 9600 baud...
+ POS operating on COM1 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  --- Delete Group ID Failed as expected
 
-2021/10/20 17:01:03.796 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 05 00 04 FF E4 01 00 2D 4D 
-2021/10/20 17:01:03.801 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 0C 00 00 DB 77  Status Code "00" Pass 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+2021/11/1 09:22:16.025 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 05 00 05 DF EE 2D 01 00 40 51 
+2021/11/1 09:22:16.059 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 0C 00 00 DB 77  Status Code "00" Pass  
 
  Result = PASSED
  ---------- END OF TEST ----------
@@ -19,5 +19,5 @@ Docklight Log File (HEX) - Started 2021/10/20 17:01:02.562
  MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2021/10/20 17:01:04.877 
+Docklight Log File (HEX) - Stopped 2021/11/1 09:22:17.162 
 

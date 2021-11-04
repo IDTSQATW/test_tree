@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-22549
+63230
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -231,6 +231,7 @@ if result <> 0 then
 			  dl.addcomment vbcrlf
 			  dl.addcomment "--- 02-01"
 			  dl.sendsequence "02-01"
+                      dl.pause 500
 		   
 			  if result <> 0 then
 				 dl.resetreceivecounter

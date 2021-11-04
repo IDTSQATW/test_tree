@@ -48,7 +48,7 @@ if (Result):
 		TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 		
 	# Tag 57
-		Result = DL.Check_StringAB(mask57, '47 61 73 90 01 01 00 10 D2 01 21 20 00 12 33 99 00 03 1F')
+		Result = DL.Check_StringAB(mask57, '47 61 73 90 01 01 00 10 D3 01 21 20 00 12 33 99 00 03 1F')
 		if Result == False:
 			DL.SetWindowText("red", "Tag 57: FAIL")
 		else:

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-45338
+39555
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -191,31 +191,36 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Activate Transaction (02-40)"
    DL.SendSequence "Activate Transaction (02-40)"
+   dl.pause 500
    
    if readerType <> "NEO2" then result1 = DL.WaitForSequence("02 23", 1, 5000)
    if readerType = "NEO2" then result1 = DL.WaitForSequence("02 23 (NEO2)", 1, 5000)
 
-   result2 = dl.waitforsequence("9f39", 1, 5000)
+   result2 = dl.waitforsequence("9f39", 1, 500)
    
-   if readerType <> "NEO2" then result3 = dl.waitforsequence("df30", 1, 5000)
-   if readerType = "NEO2" then result3 = dl.waitforsequence("df30 (NEO2)", 1, 5000)
+   if readerType <> "NEO2" then result3 = dl.waitforsequence("df30", 1, 500)
+   if readerType = "NEO2" then result3 = dl.waitforsequence("df30 (NEO2)", 1, 500)
 
-   if readerType <> "NEO2" then result4 = dl.waitforsequence("dfee26", 1, 5000)
-   if readerType = "NEO2" then result4 = dl.waitforsequence("dfee26 (NEO2)", 1, 5000)
+   if readerType <> "NEO2" then result4 = dl.waitforsequence("dfee26", 1, 500)
+   if readerType = "NEO2" then result4 = dl.waitforsequence("dfee26 (NEO2)", 1, 500)
 
    if readerType <> "NEO2" then 
-      result5 = dl.waitforsequence("dfef4c", 1, 5000)
-      result6 = dl.waitforsequence("dfef4d", 1, 5000)
+      result5 = dl.waitforsequence("dfef4c", 1, 500)
+      if result5 = 0 then result5 = dl.waitforsequence("dfef4c MC No.21", 1, 500)
+      result6 = dl.waitforsequence("dfef4d", 1, 500)
+      if result6 = 0 then result6 = dl.waitforsequence("dfef4d MC No.21", 1, 500)
    else
       result5 = 1
       result6 = 1
    end if
 
-   result7 = dl.waitforsequence("Tag 5A", 1, 5000)
+   result7 = dl.waitforsequence("Tag 5A", 1, 500)
+   if result7 = 0 then result7 = dl.waitforsequence("Tag 5A MC No.21", 1, 500)
 
-   result8 = dl.waitforsequence("Tag 57", 1, 5000)
+   result8 = dl.waitforsequence("Tag 57", 1, 500)
+   if result8 = 0 then result8 = dl.waitforsequence("Tag 57 MC No.21", 1, 500)
 
-   result9 = dl.waitforsequence("9f02", 1, 5000)
+   result9 = dl.waitforsequence("9f02", 1, 500)
 
    if result1 = 0 or result2 = 0 or result3 = 0 or result4 = 0 or result5 = 0 or result6 = 0 or result7 = 0 or result8 = 0 or result9 = 0 then
       result = 0
@@ -234,9 +239,9 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 DL.AddComment vbCrLf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)
 
-DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
@@ -244,28 +249,26 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If 0 Then
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
-End If
+'If 0 Then
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
-
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
-
 If MasterResult = 1 Then
       MasterVerdict = "PASSED"
 ElseIf MasterResult = 0 Then

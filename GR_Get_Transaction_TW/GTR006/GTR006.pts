@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-28995
+44788
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -188,19 +188,27 @@ If result <> 0 Then
    DL.SendSequence "03-00 Get transaction"
 
    if readerType <> "NEO2" then r1 = DL.WaitForSequence("03 23", 1, 5000)
-   if readerType = "NEO2" then r1 = DL.WaitForSequence("03 23 (NEO2)", 1, 5000)
+   if readerType = "NEO2" then
+      r1 = DL.WaitForSequence("03 23 (NEO2)", 1, 5000)
+      if r1 = 0 then r1 = DL.WaitForSequence("03 23 (NEO2) MC No.21", 1, 5000)
+   end if
    
-   r2 = dl.waitforsequence("9f39", 1, 5000)
+   r2 = dl.waitforsequence("9f39", 1, 500)
    
-   if readerType <> "NEO2" then r3 = dl.waitforsequence("df30", 1, 5000)
-   if readerType = "NEO2" then r3 = dl.waitforsequence("df30 (NEO2)", 1, 5000)
+   if readerType <> "NEO2" then r3 = dl.waitforsequence("df30", 1, 500)
+   if readerType = "NEO2" then r3 = dl.waitforsequence("df30 (NEO2)", 1, 500)
 
-   if readerType <> "NEO2" then r4 = dl.waitforsequence("dfee26", 1, 5000)
-   if readerType = "NEO2" then r4 = dl.waitforsequence("dfee26 (NEO2)", 1, 5000)
+   if readerType <> "NEO2" then r4 = dl.waitforsequence("dfee26", 1, 500)
+   if readerType = "NEO2" then r4 = dl.waitforsequence("dfee26 (NEO2)", 1, 500)
 
-   r5 = dl.waitforsequence("Tag 5A", 1, 5000)
-   r6 = dl.waitforsequence("Tag 57", 1, 5000)
-   r7 = dl.waitforsequence("9f02", 1, 5000)
+   r5 = dl.waitforsequence("Tag 5A", 1, 500)
+   if r5 = 0 then r5 = dl.waitforsequence("Tag 5A MC No.21", 1, 500)
+
+   r6 = dl.waitforsequence("Tag 57", 1, 500)
+   if r6 = 0 then r6 = dl.waitforsequence("Tag 57 MC No.21", 1, 500)
+
+
+   r7 = dl.waitforsequence("9f02", 1, 500)
 
    if r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 or r6 = 0 or r7 = 0 then
       result = 0
@@ -215,9 +223,9 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 DL.AddComment vbCrLf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)
 
-DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
@@ -225,36 +233,34 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If 0 Then
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
-End If
+'If 0 Then
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
-
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
-
-If MasterResult = 1 Then
-      MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-      MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)

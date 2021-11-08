@@ -1,12 +1,12 @@
-Docklight Log File (HEX) - Started 2021/11/3 16:08:24.188 
+Docklight Log File (HEX) - Started 2021/11/4 13:21:05.719 
  TEST CASE: AC005
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 9600 baud...
+ POS operating on COM1 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
 
 
-Docklight Log File (HEX) - Stopped 2021/11/3 16:08:24.482 
+Docklight Log File (HEX) - Stopped 2021/11/4 13:21:06.252 
 

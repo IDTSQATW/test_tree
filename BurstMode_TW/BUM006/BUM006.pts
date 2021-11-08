@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-20373
+32345
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -160,7 +160,7 @@ If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Burst Mode On *** " & readerType 
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then DL.SendSequence "Burst Mode On"
+   if readerType <> "NEO2" then DL.SendSequence "Burst Mode On"
    if readerType = "NEO2" then DL.SendSequence "Burst Mode On (NEO2)"
    result = DL.WaitForSequence("Configuration Change Response", 1, 10000)
 End If
@@ -172,6 +172,15 @@ If result <> 0 Then
    DL.AddComment "--- Auto Poll"
    DL.SendSequence "Auto Poll"
    result = DL.WaitForSequence("Change Poll Mode Response", 1, 10000)
+End If
+
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set FFFC=02 *** " & readerType
+   if readerType <> "NEO2" then DL.SendSequence "Set FFFC_02"
+   if readerType = "NEO2" then DL.SendSequence "Set FFFC_02 (NEO2)"
+   result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
 End If
 
 If result <> 0 Then

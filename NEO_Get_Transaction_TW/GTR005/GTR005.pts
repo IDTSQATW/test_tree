@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-25864
+9148
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -197,24 +197,31 @@ If result <> 0 Then
    if readerType <> "NEO2" then result1 = DL.WaitForSequence("03 23_02", 1, 5000)
    if readerType = "NEO2" then result1 = DL.WaitForSequence("03 23_02 (NEO2)", 1, 5000)
 
-   if readerType <> "NEO2" then result2 = dl.waitforsequence("dfee26_02", 1, 1000)
-   if readerType = "NEO2" then result2 = dl.waitforsequence("dfee26_02 (NEO2)", 1, 1000)
+   if readerType <> "NEO2" then result2 = dl.waitforsequence("dfee26_02", 1, 500)
+   if readerType = "NEO2" then result2 = dl.waitforsequence("dfee26_02 (NEO2)", 1, 500)
 
    if readerType <> "NEO2" then 
-      result3 = dl.waitforsequence("dfef4c_02", 1, 1000)
-      result4 = dl.waitforsequence("dfef4d_02", 1, 1000)
+      result3 = dl.waitforsequence("dfef4c_02", 1, 500)
+      if result3 = 0 then result3 = dl.waitforsequence("dfef4c_02 MC No.21", 1, 500)
+      result4 = dl.waitforsequence("dfef4d_02", 1, 500)
+      if result4 = 0 then result4 = dl.waitforsequence("dfef4d_02 MC No.21", 1, 500)
    else
       result3 = 1
       result4 = 1
    end if
-   result5 = dl.waitforsequence("Tag 5A", 1, 1000)
-   result6 = dl.waitforsequence("Tag 57", 1, 1000)
-   result7 = dl.waitforsequence("9f39_02", 1, 1000)
 
-   if readerType <> "NEO2" then result8 = dl.waitforsequence("df30", 1, 1000)
-   if readerType = "NEO2" then result8 = dl.waitforsequence("df30 (NEO2)", 1, 1000)
+   result5 = dl.waitforsequence("Tag 5A", 1, 500)
+   if result5 = 0 then result5 = dl.waitforsequence("Tag 5A MC No.21", 1, 500)
 
-   result9 = dl.waitforsequence("9f02", 1, 1000)
+   result6 = dl.waitforsequence("Tag 57", 1, 500)
+   if result6 = 0 then result6 = dl.waitforsequence("Tag 57 MC No.21", 1, 500)
+
+   result7 = dl.waitforsequence("9f39_02", 1, 500)
+
+   if readerType <> "NEO2" then result8 = dl.waitforsequence("df30", 1, 500)
+   if readerType = "NEO2" then result8 = dl.waitforsequence("df30 (NEO2)", 1, 500)
+
+   result9 = dl.waitforsequence("9f02", 1, 500)
 
    if result1 = 0 or result2 = 0 or result3 = 0 or result4 = 0 or result5 = 0 or result6 = 0 or result7 = 0 or result8 = 0 or result9 = 0 then
       result = 0
@@ -254,24 +261,27 @@ If result <> 0 Then
    if readerType <> "NEO2" then result1 = DL.WaitForSequence("03 23", 1, 5000)
    if readerType = "NEO2" then result1 = DL.WaitForSequence("03 23 (NEO2)", 1, 5000)
 
-   if readerType <> "NEO2" then result2 = dl.waitforsequence("dfee26", 1, 1000)
-   if readerType = "NEO2" then result2 = dl.waitforsequence("dfee26 (NEO2)", 1, 1000)
+   if readerType <> "NEO2" then result2 = dl.waitforsequence("dfee26", 1, 500)
+   if readerType = "NEO2" then result2 = dl.waitforsequence("dfee26 (NEO2)", 1, 500)
 
    if readerType <> "NEO2" then 
-      result3 = dl.waitforsequence("dfef4c", 1, 1000)
-      result4 = dl.waitforsequence("dfef4d", 1, 1000)
+      result3 = dl.waitforsequence("dfef4c", 1, 500)
+      result4 = dl.waitforsequence("dfef4d", 1, 500)
+      if result4 = 0 then result4 = dl.waitforsequence("dfef4d MC No.21", 1, 500)
    else
       result3 = 1
       result4 = 1
    end if
 
-   result5 = dl.waitforsequence("Tag 56/ 9F6B", 1, 1000)
-   result6 = dl.waitforsequence("9f39", 1, 1000)
+   result5 = dl.waitforsequence("Tag 56/ 9F6B", 1, 500)
+   if result5 = 0 then result5 = dl.waitforsequence("Tag 56/ 9F6B MC No.21", 1, 500)
 
-   if readerType <> "NEO2" then result7 = dl.waitforsequence("df30", 1, 1000)
-   if readerType = "NEO2" then result7 = dl.waitforsequence("df30 (NEO2)", 1, 1000)
+   result6 = dl.waitforsequence("9f39", 1, 500)
 
-   result8 = dl.waitforsequence("9f02", 1, 1000)
+   if readerType <> "NEO2" then result7 = dl.waitforsequence("df30", 1, 500)
+   if readerType = "NEO2" then result7 = dl.waitforsequence("df30 (NEO2)", 1, 500)
+
+   result8 = dl.waitforsequence("9f02", 1, 500)
 
    if result1 = 0 or result2 = 0 or result3 = 0 or result4 = 0 or result5 = 0 or result6 = 0 or result7 = 0 or result8 = 0 then
       result = 0
@@ -293,12 +303,10 @@ PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
-
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
 'DL.pause 1000
-
 'If 0 Then
 'If result = 0 then
 '  DL.AddComment Chr(13) & "Result = FAILED"
@@ -306,7 +314,6 @@ End If '""
 '  DL.AddComment Chr(13) & "Result = PASSED"
 'End If
 'End If
-
 'If Prompting(0) = "ON" Then
 '  If result = 0 then
 '    MsgBox "Result = FAILED", VBOKOnly, "Result"
@@ -317,14 +324,14 @@ End If '""
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
-If MasterResult = 1 Then
-      MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-      MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)

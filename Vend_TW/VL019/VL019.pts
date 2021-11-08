@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-63181
+40711
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -157,21 +157,35 @@ End Function
 '------------------------------------------------------------
 dl.addcomment "--- POD & Burst OFF"
 DL.SendSequence "poll on demand"
-dl.pause 200
+dl.pause 500
 
-if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then 
+if readerType <> "NEO2" then 
    dl.sendsequence "burst off"
-elseif readerType = "NEO2" then 
-   dl.sendsequence "burst off (NEO2)"
 else
-   dl.sendsequence "burst off"
+   dl.sendsequence "burst off (NEO2)"
 end if
-dl.pause 200
+dl.pause 500
+
+if result <> 0 then 
+   for i = 1 to 5
+       if result <> 0 then
+          dl.resetreceivecounter
+          dl.addcomment vbcrlf
+          dl.addcomment "--- LCD Display msg: Line " & i
+          DL.SendSequence "F0-F0 Set Both Lines LCD Display" & i
+          result = DL.WaitForSequence("Positive Response", 1, 3000)
+          if result <> 0 then
+             msg = msgbox("Does LCD display line " & i & " msg?", vbyesno)
+             if msg = 7 then result = 0
+          end if
+       end if
+   next
+end if
 
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
-   dl.addcomment "--- LCD Display Line 1 Message"
+   dl.addcomment "--- LCD Display Line 1/ 2 Message"
    DL.SendSequence "F0-F0 Set Both Lines LCD Display"
    result = DL.WaitForSequence("Positive Response", 1, 3000)
    DL.Pause 400

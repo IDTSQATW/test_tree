@@ -1,20 +1,21 @@
-Docklight Log File (ASCII) - Started 2021/10/29 16:33:05.703 
+Docklight Log File (ASCII) - Started 2021/11/24 09:39:10.099 
  TEST CASE: FV002
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM1 @ 9600 baud...
+ POS operating on COM90 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  --- Get UID of MCU (29-17)
 
-2021/10/29 16:33:06.899 [TX] - ViVOtech2<NUL>)<ETB><NUL><NUL>-f
-2021/10/29 16:33:06.927 [RX] - ViVOtech2<NUL>)<NUL><NUL><DLE>??<NUL><NUL>??<NUL>1<NUL>;@<DC3>PvNE?> 
+2021/11/24 09:39:11.335 [TX] - ViVOtech2<NUL>)<ETB><NUL><NUL>-f
+2021/11/24 09:39:11.340 [RX] - ViVOtech2<NUL>)<NUL><NUL><DLE><NUL><NUL>'<NUL>??5?#SEN<GS><NUL><CR>
+P?U<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
 
  ---------- END OF TEST ----------
 
  Result = PASSED
 
 
-Docklight Log File (ASCII) - Stopped 2021/10/29 16:33:08.330 
+Docklight Log File (ASCII) - Stopped 2021/11/24 09:39:12.277 
 

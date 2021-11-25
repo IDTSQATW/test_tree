@@ -1,24 +1,25 @@
-Docklight Log File (HEX) - Started 2021/10/29 16:34:04.882 
+Docklight Log File (HEX) - Started 2021/11/24 09:31:20.442 
  TEST CASE: RD00101
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM1 @ 9600 baud...
+ POS operating on COM90 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
 
-2021/10/29 16:34:07.136 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 05 00 00 A3 F9  
+2021/11/24 09:31:22.493 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 05 00 00 A3 F9  
 User selected 'No'
 
 
-2021/10/29 16:34:07.193 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 02 15 05 CD C4  
+2021/11/24 09:31:22.500 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 02 11 05 01 00  
 
- 
+
+2021/11/24 09:31:22.500 [RX] - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  Result = PASSED
  ---------- END OF TEST ----------
 
 
 
-Docklight Log File (HEX) - Stopped 2021/10/29 16:34:09.512 
+Docklight Log File (HEX) - Stopped 2021/11/24 09:31:24.568 
 

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-56986
+59769
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -143,6 +143,29 @@ Function ReverseResult(ResultParam)
       End If
 End Function
 
+sub Tag_9A()
+    datecheck = dl.waitforsequence("9A", 1, 500)
+    if datecheck <> 0 then 
+       datecheck = dl.waitforsequence("9A ffffff", 1, 500)
+       ReverseResult(datecheck)
+       if result = 0 then dl.addcomment vbcrlf & "9A: FAIL!"
+    else
+       result = 0
+       dl.addcomment vbcrlf & "9A: FAIL!"
+    end if
+end sub
+
+sub Tag_9F21()
+    timecheck = dl.waitforsequence("9F21", 1, 500)
+    if timecheck <> 0 then 
+       timecheck = dl.waitforsequence("9F21 ffffff", 1, 500)
+       ReverseResult(timecheck)
+       if result = 0 then dl.addcomment vbcrlf & "9F21: FAIL!"
+    else
+       result = 0
+       dl.addcomment vbcrlf & "9F21: FAIL!"
+    end if
+end sub
 '------------------------------------------------------------
 'Debugging (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
@@ -222,6 +245,9 @@ If result <> 0 Then
          if r3 = 0 then dl.addcomment vbcrlf & "DF30: FAIL!"
          if r4 = 0 then dl.addcomment vbcrlf & "84: FAIL!"
       end if
+
+      Tag_9A()     'CS-4225
+      Tag_9F21()     'CS-4225
    end if
 End If
 '------------------------------------------------------------

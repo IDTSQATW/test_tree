@@ -1,4 +1,4 @@
-Docklight Log File (ASCII) - Started 2021/10/20 15:30:13.337 
+Docklight Log File (ASCII) - Started 2021/11/24 13:09:57.782 
  TEST CASE: MV003
 
  --- Set POS COM PORT Settings
@@ -8,8 +8,8 @@ Docklight Log File (ASCII) - Started 2021/10/20 15:30:13.337
 
  --- Get Hardware Information 09-14
 
-2021/10/20 15:30:14.573 [TX] - ViVOtech2<NUL><HT>	<DC4><NUL><NUL>3<BS>
-2021/10/20 15:30:14.580 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL><RS> 
+2021/11/24 13:09:58.899 [TX] - ViVOtech2<NUL><HT>	<DC4><NUL><NUL>3<BS>
+2021/11/24 13:09:58.907 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL><RS> 
 HW,VP3300 Bluetooth<CR><LF>
 K21F Rev9<CR>
 ?<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
@@ -26,5 +26,5 @@ K21F Rev9<CR>
 Please check ASCII screen, make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (ASCII) - Stopped 2021/10/20 15:30:15.155 
+Docklight Log File (ASCII) - Stopped 2021/11/24 13:09:59.482 
 

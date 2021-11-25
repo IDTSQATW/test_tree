@@ -1,9 +1,9 @@
 
-16:38:49: If Issue ?
+10:53:50: If Issue ?
 Pass Test
 [Issue Count: 0]
 
-16:38:49: >>[Do Scripts]>>
+10:53:50: >>[Do Scripts]>>
 
 Objective: check Cancel feature if Fallback to MSR or Fallback to CT transaction
 >>> Set CT terminal data = 5C (enable MSR fallback to CT function)

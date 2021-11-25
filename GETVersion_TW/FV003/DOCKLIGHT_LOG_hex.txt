@@ -1,23 +1,23 @@
-Docklight Log File (HEX) - Started 2021/10/29 16:33:21.286 
+Docklight Log File (HEX) - Started 2021/11/24 09:39:15.973 
  TEST CASE: FV003
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM1 @ 9600 baud...
+ POS operating on COM90 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  --- GETFirmwareVersion Protocol 1
 
-2021/10/29 16:33:22.541 [TX] - 56 69 56 4F 74 65 63 68 00 43 29 00 00 00 A8 FB  
+2021/11/24 09:39:17.211 [TX] - 56 69 56 4F 74 65 63 68 00 43 29 00 00 00 A8 FB  
 
  ** Result = FAILED **
  
 
  --- GETFirmwareVersion Protocol 2
 
-2021/10/29 16:33:25.751 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 00 DE A0 
-2021/10/29 16:33:25.779 [RX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 22 
-2021/10/29 16:33:25.787 [RX] - 56 50 36 33 30 30 20 55 53 41 54 20 46 57 20 76 31 2E 30 31 2E 30 39 37 2E 30 34 36 35 20 54 65 73 74 90 E2  
+2021/11/24 09:39:20.416 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 00 DE A0 
+2021/11/24 09:39:20.424 [RX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 1E 
+2021/11/24 09:39:20.424 [RX] - 56 50 33 33 30 30 20 42 6C 75 65 74 6F 6F 74 68 20 4E 45 4F 20 76 31 2E 31 30 2E 30 34 32 77 D8 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  Result = PASSED
  
@@ -31,5 +31,5 @@ Docklight Log File (HEX) - Started 2021/10/29 16:33:21.286
 Please check ASCII screen, make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (HEX) - Stopped 2021/10/29 16:33:26.087 
+Docklight Log File (HEX) - Stopped 2021/11/24 09:39:20.698 
 

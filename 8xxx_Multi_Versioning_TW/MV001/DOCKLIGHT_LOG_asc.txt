@@ -1,4 +1,4 @@
-Docklight Log File (ASCII) - Started 2021/10/20 15:28:51.451 
+Docklight Log File (ASCII) - Started 2021/11/24 12:00:22.842 
  TEST CASE: MV001
 
  --- Set POS COM PORT Settings
@@ -8,8 +8,8 @@ Docklight Log File (ASCII) - Started 2021/10/20 15:28:51.451
 
  --- Get Product Type *** GR
 
-2021/10/20 15:28:52.692 [TX] - ViVOtech2<NUL><HT>	<SOH><NUL><NUL>??
-2021/10/20 15:28:52.752 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL><ACK>?`<ETX>U34 
+2021/11/24 12:00:23.960 [TX] - ViVOtech2<NUL><HT>	<SOH><NUL><NUL>??
+2021/11/24 12:00:23.969 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL><ACK>?`<ETX>U34 
 ??<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
 
  Result = PASSED
@@ -24,5 +24,5 @@ Docklight Log File (ASCII) - Started 2021/10/20 15:28:51.451
 Please make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (ASCII) - Stopped 2021/10/20 15:28:53.328 
+Docklight Log File (ASCII) - Stopped 2021/11/24 12:00:24.552 
 

@@ -1,20 +1,20 @@
-Docklight Log File (HEX) - Started 2021/11/1 09:24:44.047 
+Docklight Log File (HEX) - Started 2021/11/23 08:53:14.721 
  TEST CASE: CA014
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM1 @ 9600 baud...
+ POS operating on COM90 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  --- Create Group 8 not Created As Expected
 
-2021/11/1 09:24:45.170 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 03 00 0F DF EE 2D 01 FD 5F 2A 02 09 01 9F 1A 02 01 58 E0 31 
-2021/11/1 09:24:45.268 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Action Code "05" Pass  
+2021/11/23 08:53:15.956 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 03 00 0E FF E4 01 FD 5F 2A 02 09 01 9F 1A 02 01 58 C6 BD 
+2021/11/23 08:53:15.961 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Action Code "05" Pass 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  Result = PASSED
  ---------- END OF TEST ----------
 
 
 
-Docklight Log File (HEX) - Stopped 2021/11/1 09:24:46.346 
+Docklight Log File (HEX) - Stopped 2021/11/23 08:53:17.062 
 

@@ -1,27 +1,27 @@
-Docklight Log File (ASCII) - Started 2021/12/1 16:16:03.813 
+Docklight Log File (ASCII) - Started 2021/12/16 15:12:51.420 
  TEST CASE: FV001
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 9600 baud...
+ POS operating on COM1 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  
 
  --- GET F/W Ver. P2 (0 data length but has 1 byte data, INVALID)
 
-2021/12/1 16:16:06.296 [TX] - ViVOtech2<NUL>)<NUL><NUL><NUL><DC1>?i
-2021/12/1 16:16:06.304 [RX] - ViVOtech2<NUL>)<EOT><NUL><NUL>|<RS> 04 status = CRC Error <NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
+2021/12/16 15:12:54.916 [TX] - ViVOtech2<NUL>)<NUL><NUL><NUL><DC1>?i
+2021/12/16 15:12:54.972 [RX] - UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUfViVOtech2<NUL>)<EOT><NUL><NUL>|<RS> 04 status = CRC Error  
 
  --- GET F/W Ver. P2 (data length <> 0, INVALID)
 
-2021/12/1 16:16:06.309 [TX] - ViVOtech2<NUL>)<NUL><NUL><SOH><DC1>?Z
-2021/12/1 16:16:06.316 [RX] - ViVOtech2<NUL>)<ENQ><NUL><NUL>K. 05 status = Incorrect Parameter <NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
+2021/12/16 15:12:55.066 [TX] - ViVOtech2<NUL>)<NUL><NUL><SOH><DC1>?Z
+2021/12/16 15:12:55.124 [RX] - UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUfViVOtech2<NUL>)<ENQ><NUL><NUL>K. 05 status = Incorrect Parameter  
 
  ---------- END OF TEST ----------
 
  Result = PASSED
 
 
-Docklight Log File (ASCII) - Stopped 2021/12/1 16:16:07.391 
+Docklight Log File (ASCII) - Stopped 2021/12/16 15:12:56.309 
 

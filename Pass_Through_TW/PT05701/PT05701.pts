@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-63688
+41735
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -132,7 +132,7 @@ If result <> 0 Then
   DL.AddComment vbcrlf & "--- Poll for Token - Card Read (OK)"
   StepPrompt("Press OK --> tap ViVOtech card")
   DL.SendSequence "Poll For Token"
-  result = DL.WaitForSequence("Poll for Token - Card Read (OK)", 1, 1000)
+  result = DL.WaitForSequence("Poll for Token - Card Read (OK)", 1, 5000)
 End If
 
 If result <> 0 Then

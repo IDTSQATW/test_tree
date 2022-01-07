@@ -12,7 +12,7 @@ if (Result):
 	Result = DL.Check_RXResponse("01 00 00 00")	
 if (Result):
 	DL.SetWindowText("black", "*** Burst mode off")
-	DL.SendIOCommand("IDG", "04 00 DF EE 7E 01 00", 3000, 1) 
+	DL.SendIOCommand("IDG", "04 00 DF EE 7E 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("04 00 00 00")	
 	
 #########################################################################

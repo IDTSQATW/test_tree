@@ -369,6 +369,222 @@ notify = msgbox ("Must load F/W via J-Link before running this case. Click OK to
       else
          dl.addcomment vbcrlf & "Tag FFEE20: PASS"
       End If
+	  
+  	result = DL.WaitForSequence ("Tag 9C resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag 9C is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag 9C: PASS"
+      End If
+
+  	result = DL.WaitForSequence ("Tag 5F2A resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag 5F2A is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag 5F2A: PASS"
+      End If	
+
+  	result = DL.WaitForSequence ("Tag 5F36 resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag 5F36 is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag 5F36: PASS"
+      End If
+
+  	result = DL.WaitForSequence ("Tag 9F02 resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag 9F02 is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag 9F02: PASS"
+      End If	
+
+  	result = DL.WaitForSequence ("Tag 9F03 resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag 9F03 is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag 9F03: PASS"
+      End If
+
+  	result = DL.WaitForSequence ("Tag 9F09 resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag 9F09 is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag 9F09: PASS"
+      End If	
+
+  	result = DL.WaitForSequence ("Tag 9F1A resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag 9F1A is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag 9F1A: PASS"
+      End If	
+
+  	result = DL.WaitForSequence ("Tag 9F1B resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag 9F1B is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag 9F1B: PASS"
+      End If
+
+  	result = DL.WaitForSequence ("Tag 9F33 resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag 9F33 is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag 9F33: PASS"
+      End If	
+
+  	result = DL.WaitForSequence ("Tag 9F35 resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag 9F35 is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag 9F35: PASS"
+      End If
+
+  	result = DL.WaitForSequence ("Tag 9F66 resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag 9F66 is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag 9F66: PASS"
+      End If	
+
+  	result = DL.WaitForSequence ("Tag DF64 resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag DF64 is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag DF64: PASS"
+      End If
+
+  	result = DL.WaitForSequence ("Tag FFF0 resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag FFF0 is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag FFF0: PASS"
+      End If	
+
+  	result = DL.WaitForSequence ("Tag FFF1 resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag FFF1 is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag FFF1: PASS"
+      End If
+
+  	result = DL.WaitForSequence ("Tag FFF4 resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag FFF4 is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag FFF4: PASS"
+      End If	
+
+  	result = DL.WaitForSequence ("Tag FFF5 resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag FFF5 is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag FFF5: PASS"
+      End If
+
+  	result = DL.WaitForSequence ("Tag FFFD resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag FFFD is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag FFFD: PASS"
+      End If	
+
+  	result = DL.WaitForSequence ("Tag FFFE resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag FFFE is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag FFFE: PASS"
+      End If
+
+  	result = DL.WaitForSequence ("Tag FFFF resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag FFFF is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag FFFF: PASS"
+      End If	
+
+  	result = DL.WaitForSequence ("Tag DFED3F resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag DFED3F is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag DFED3F: PASS"
+      End If
+
+  	result = DL.WaitForSequence ("Tag DFED49 resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag DFED49 is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag DFED49: PASS"
+      End If	
+
+  	result = DL.WaitForSequence ("Tag FFEE1D resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag FFEE1D is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag FFEE1D: PASS"
+      End If	
+
+  	result = DL.WaitForSequence ("Tag DFEF4B resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag DFEF4B is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag DFEF4B: PASS"
+      End If	
+
+  	result = DL.WaitForSequence ("Tag DFEE3A resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag DFEE3A is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag DFEE3A: PASS"
+      End If	
+
+  	result = DL.WaitForSequence ("Tag DFEF6E resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag DFEF6E is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag DFEF6E: PASS"
+      End If	
+
+  	result = DL.WaitForSequence ("Tag DFEF6F resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag DFEF6F is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag DFEF6F: PASS"
+      End If	
+
+  	result = DL.WaitForSequence ("Tag DFEF72 resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag DFEF72 is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag DFEF72: PASS"
+      End If		  
 
 '--- check Group 0 params -----------------------------------------------------------------------------
 '------------------------------------------------------------------------------------------------------
@@ -595,6 +811,14 @@ notify = msgbox ("Must load F/W via J-Link before running this case. Click OK to
       else
          dl.addcomment vbcrlf & "Tag FFEE1D : PASS"
       End If
+	  
+  	result = DL.WaitForSequence ("Tag FFEE20 resp", 1,300)
+      If result = 0 Then
+         DL.AddComment vbCrLf & "***Parameter Tag FFEE20 is missing match."
+         errorCounter = errorCounter + 1
+      else
+         dl.addcomment vbcrlf & "Tag FFEE20 : PASS"
+      End If	  
 
 '-----------------------------------------------------------------------------
 ' check params in gorup 1 (payPass default group)
@@ -750,20 +974,20 @@ notify = msgbox ("Must load F/W via J-Link before running this case. Click OK to
          dl.addcomment vbcrlf & "Tag 9F7E: PASS"
       End If
 
-  	result = DL.WaitForSequence ("Tag DF28 Grp1 resp", 1,300)
+  	result = DL.WaitForSequence ("Tag DF8119 Grp1 resp", 1,300)
       If result = 0 Then
-         DL.AddComment vbCrLf & "***Parameter Tag DF28 in group 1 is missing match."
+         DL.AddComment vbCrLf & "***Parameter Tag DF8119 in group 1 is missing match."
          errorCounter = errorCounter + 1
       else
-         dl.addcomment vbcrlf & "Tag DF28: PASS"
+         dl.addcomment vbcrlf & "Tag DF8119: PASS"
       End If
 
-  	result = DL.WaitForSequence ("Tag DF29 Grp1 resp", 1,300)
+  	result = DL.WaitForSequence ("Tag DF8118 Grp1 resp", 1,300)
       If result = 0 Then
-         DL.AddComment vbCrLf & "***Parameter Tag DF29 in group 1 is missing match."
+         DL.AddComment vbCrLf & "***Parameter Tag DF8118 in group 1 is missing match."
          errorCounter = errorCounter + 1
       else
-         dl.addcomment vbcrlf & "Tag DF29: PASS"
+         dl.addcomment vbcrlf & "Tag DF8118: PASS"
       End If
 
   	result = DL.WaitForSequence ("Tag DF811A Grp1 resp", 1,300)
@@ -969,12 +1193,12 @@ notify = msgbox ("Must load F/W via J-Link before running this case. Click OK to
          dl.addcomment vbcrlf & "Tag 9F6E: PASS"
       End If
 
-  	result = DL.WaitForSequence ("Tag DF51 Grp2 resp", 1,300)
+  	result = DL.WaitForSequence ("Tag 9F6D Grp2 resp", 1,300)
       If result = 0 Then
-         DL.AddComment vbCrLf & "***Parameter Tag DF51 in group 2 is missing match."
+         DL.AddComment vbCrLf & "***Parameter Tag 9F6D in group 2 is missing match."
          errorCounter = errorCounter + 1
       else
-         dl.addcomment vbcrlf & "Tag DF51: PASS"
+         dl.addcomment vbcrlf & "Tag 9F6D: PASS"
       End If
 	  
   	result = DL.WaitForSequence ("Tag FFF1 Grp2 resp", 1,300)

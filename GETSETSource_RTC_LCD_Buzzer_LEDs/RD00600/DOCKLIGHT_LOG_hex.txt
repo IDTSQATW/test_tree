@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2021/12/16 15:15:06.257 
+Docklight Log File (HEX) - Started 2021/12/29 14:14:54.993 
  TEST CASE: RD00600
 
  --- Set POS COM PORT Settings
@@ -10,8 +10,8 @@ Docklight Log File (HEX) - Started 2021/12/16 15:15:06.257
 User selected 'No'
 
 
-2021/12/16 15:15:08.259 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 05 00 02 15 05 93 EE 
-2021/12/16 15:15:08.420 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  GR - Set Source success (OK)
+2021/12/29 14:14:56.583 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 05 00 02 15 05 93 EE 
+2021/12/29 14:14:56.743 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  GR - Set Source success (OK)
  
 
  Result = PASSED
@@ -22,5 +22,5 @@ User selected 'No'
  MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2021/12/16 15:15:11.113 
+Docklight Log File (HEX) - Stopped 2021/12/29 14:14:59.429 
 

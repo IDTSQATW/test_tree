@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2021/12/17 09:25:07.063 
+Docklight Log File (HEX) - Started 2022/1/4 10:22:48.222 
  TEST CASE: SBL005
 
  --- Set POS COM PORT Settings
@@ -8,13 +8,17 @@ Docklight Log File (HEX) - Started 2021/12/17 09:25:07.063
 
  --- Fourt short beeps
 
-2021/12/17 09:25:08.186 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 04 00 00 D7 8F 
-2021/12/17 09:25:08.251 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  Passed  
+2022/1/4 10:22:49.345 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 04 00 00 D7 8F 
+2022/1/4 10:22:49.410 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  Passed  
 
  Result = PASSED
  ---------- END OF TEST ----------
 
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2021/12/17 09:25:11.077 
+Docklight Log File (HEX) - Stopped 2022/1/4 10:22:52.473 
 

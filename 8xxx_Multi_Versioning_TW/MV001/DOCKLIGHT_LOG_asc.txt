@@ -1,16 +1,16 @@
-Docklight Log File (ASCII) - Started 2021/12/7 14:42:10.438 
+Docklight Log File (ASCII) - Started 2022/1/4 11:41:55.088 
  TEST CASE: MV001
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 9600 baud...
+ POS operating on COM1 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  --- Get Product Type *** GR
 
-2021/12/7 14:42:11.555 [TX] - ViVOtech2<NUL><HT>	<SOH><NUL><NUL>??
-2021/12/7 14:42:11.561 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL><ACK>?`<ETX>U31 
-?w<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
+2022/1/4 11:41:56.353 [TX] - ViVOtech2<NUL><HT>	<SOH><NUL><NUL>??
+2022/1/4 11:41:56.409 [RX] - UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUfViVOtech2<NUL><HT>	<NUL><NUL><ACK>?`<ETX>U3<NUL> 
+?<ENQ> 
 
  Result = PASSED
  
@@ -24,5 +24,5 @@ Docklight Log File (ASCII) - Started 2021/12/7 14:42:10.438
 Please make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (ASCII) - Stopped 2021/12/7 14:42:12.137 
+Docklight Log File (ASCII) - Stopped 2022/1/4 11:41:57.096 
 

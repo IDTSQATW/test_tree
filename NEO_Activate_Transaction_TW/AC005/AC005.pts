@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-2242
+5414
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -196,33 +196,33 @@ If result <> 0 Then
    if readerType <> "NEO2" then result1 = DL.WaitForSequence("02 23", 1, 5000)
    if readerType = "NEO2" then result1 = DL.WaitForSequence("02 23 (NEO2)", 1, 5000)
 
-   result2 = dl.waitforsequence("9f39", 1, 500)
+   result2 = dl.waitforsequence("9f39", 1, 3000)
    
-   if readerType <> "NEO2" then result3 = dl.waitforsequence("df30", 1, 500)
-   if readerType = "NEO2" then result3 = dl.waitforsequence("df30 (NEO2)", 1, 500)
+   if readerType <> "NEO2" then result3 = dl.waitforsequence("df30", 1, 3000)
+   if readerType = "NEO2" then result3 = dl.waitforsequence("df30 (NEO2)", 1, 3000)
 
-   if readerType <> "NEO2" then result4 = dl.waitforsequence("dfee26", 1, 500)
-   if readerType = "NEO2" then result4 = dl.waitforsequence("dfee26 (NEO2)", 1, 500)
+   if readerType <> "NEO2" then result4 = dl.waitforsequence("dfee26", 1, 3000)
+   if readerType = "NEO2" then result4 = dl.waitforsequence("dfee26 (NEO2)", 1, 3000)
 
    if readerType <> "NEO2" then 
-      result5 = dl.waitforsequence("dfef4c", 1, 500)
-      if result5 = 0 then result5 = dl.waitforsequence("dfef4c MC No.21", 1, 500)
-      result6 = dl.waitforsequence("dfef4d", 1, 500)
-      if result6 = 0 then result6 = dl.waitforsequence("dfef4d MC No.21", 1, 500)
+      result5 = dl.waitforsequence("dfef4c", 1, 3000)
+      if result5 = 0 then result5 = dl.waitforsequence("dfef4c MC No.21", 1, 3000)
+      result6 = dl.waitforsequence("dfef4d", 1, 3000)
+      if result6 = 0 then result6 = dl.waitforsequence("dfef4d MC No.21", 1, 3000)
    else
       result5 = 1
       result6 = 1
    end if
 
-   result7 = dl.waitforsequence("Tag 5A", 1, 500)
-   if result7 = 0 then result7 = dl.waitforsequence("Tag 5A MC No.21", 1, 500)
+   result7 = dl.waitforsequence("Tag 5A", 1, 3000)
+   if result7 = 0 then result7 = dl.waitforsequence("Tag 5A MC No.21", 1, 3000)
 
-   result8 = dl.waitforsequence("Tag 57", 1, 500)
-   if result8 = 0 then result8 = dl.waitforsequence("Tag 57 MC No.21", 1, 500)
+   result8 = dl.waitforsequence("Tag 57", 1, 3000)
+   if result8 = 0 then result8 = dl.waitforsequence("Tag 57 MC No.21", 1, 3000)
 
-   result9 = dl.waitforsequence("9f02", 1, 500)
-   result10 = dl.waitforsequence("9A", 1, 500)
-   result11 = dl.waitforsequence("9F21", 1, 500)
+   result9 = dl.waitforsequence("9f02", 1, 3000)
+   result10 = dl.waitforsequence("9A", 1, 3000)
+   result11 = dl.waitforsequence("9F21", 1, 3000)
 
    if result1 = 0 or result2 = 0 or result3 = 0 or result4 = 0 or result5 = 0 or result6 = 0 or result7 = 0 or result8 = 0 or result9 = 0 or result10 = 0 or result11 = 0 then
       result = 0

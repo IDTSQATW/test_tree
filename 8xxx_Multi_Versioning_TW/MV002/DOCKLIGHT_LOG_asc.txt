@@ -1,16 +1,16 @@
-Docklight Log File (ASCII) - Started 2021/12/7 14:42:51.267 
+Docklight Log File (ASCII) - Started 2022/1/4 11:42:53.052 
  TEST CASE: MV002
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 9600 baud...
+ POS operating on COM1 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  --- Get Main Firmware Version *** GR
 
-2021/12/7 14:42:52.384 [TX] - ViVOtech2<NUL><HT>	<ETX><NUL><NUL>??
-2021/12/7 14:42:52.392 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL><ETB>?b<DC4> 
-VP3300 USB NEO v1.01?#<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
+2022/1/4 11:42:54.308 [TX] - ViVOtech2<NUL><HT>	<ETX><NUL><NUL>??
+2022/1/4 11:42:54.363 [RX] - UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUfViVOtech2<NUL><HT>	<NUL><NUL><RS>?b<ESC> 
+VP3300 Audio Jack NEO v1.10<ENQ>; 
 
  Result = PASSED
  
@@ -24,5 +24,5 @@ VP3300 USB NEO v1.01?#<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL
 Please check ASCII screen, make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (ASCII) - Stopped 2021/12/7 14:42:53.467 
+Docklight Log File (ASCII) - Stopped 2022/1/4 11:42:55.540 
 

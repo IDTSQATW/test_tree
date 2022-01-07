@@ -1,9 +1,9 @@
 
-13:45:09: If Issue ?
+10:14:10: If Issue ?
 Pass Test
 [Issue Count: 0]
 
-13:45:09: >>[Do Scripts]>>
+10:14:10: >>[Do Scripts]>>
 
 Objective: 
 [JIRA] GRN-56 >> [Quick Chip Mode] Swiped card (service code = 201) -> waited for fallback transaction timeout, reader returned timeout status but LED 3 was still ON.

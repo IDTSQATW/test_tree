@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-44788
+24546
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -193,22 +193,22 @@ If result <> 0 Then
       if r1 = 0 then r1 = DL.WaitForSequence("03 23 (NEO2) MC No.21", 1, 5000)
    end if
    
-   r2 = dl.waitforsequence("9f39", 1, 500)
+   r2 = dl.waitforsequence("9f39", 1, 2000)
    
-   if readerType <> "NEO2" then r3 = dl.waitforsequence("df30", 1, 500)
-   if readerType = "NEO2" then r3 = dl.waitforsequence("df30 (NEO2)", 1, 500)
+   if readerType <> "NEO2" then r3 = dl.waitforsequence("df30", 1, 2000)
+   if readerType = "NEO2" then r3 = dl.waitforsequence("df30 (NEO2)", 1, 2000)
 
-   if readerType <> "NEO2" then r4 = dl.waitforsequence("dfee26", 1, 500)
-   if readerType = "NEO2" then r4 = dl.waitforsequence("dfee26 (NEO2)", 1, 500)
+   if readerType <> "NEO2" then r4 = dl.waitforsequence("dfee26", 1, 2000)
+   if readerType = "NEO2" then r4 = dl.waitforsequence("dfee26 (NEO2)", 1, 2000)
 
-   r5 = dl.waitforsequence("Tag 5A", 1, 500)
-   if r5 = 0 then r5 = dl.waitforsequence("Tag 5A MC No.21", 1, 500)
+   r5 = dl.waitforsequence("Tag 5A", 1, 2000)
+   if r5 = 0 then r5 = dl.waitforsequence("Tag 5A MC No.21", 1, 2000)
 
-   r6 = dl.waitforsequence("Tag 57", 1, 500)
-   if r6 = 0 then r6 = dl.waitforsequence("Tag 57 MC No.21", 1, 500)
+   r6 = dl.waitforsequence("Tag 57", 1, 2000)
+   if r6 = 0 then r6 = dl.waitforsequence("Tag 57 MC No.21", 1, 2000)
 
 
-   r7 = dl.waitforsequence("9f02", 1, 500)
+   r7 = dl.waitforsequence("9f02", 1, 2000)
 
    if r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 or r6 = 0 or r7 = 0 then
       result = 0

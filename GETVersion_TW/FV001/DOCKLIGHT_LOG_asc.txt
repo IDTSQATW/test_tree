@@ -1,4 +1,4 @@
-Docklight Log File (ASCII) - Started 2021/12/29 14:13:09.253 
+Docklight Log File (ASCII) - Started 2022/1/13 11:07:42.589 
  TEST CASE: FV001
 
  --- Set POS COM PORT Settings
@@ -10,18 +10,18 @@ Docklight Log File (ASCII) - Started 2021/12/29 14:13:09.253
 
  --- GET F/W Ver. P2 (0 data length but has 1 byte data, INVALID)
 
-2021/12/29 14:13:11.505 [TX] - ViVOtech2<NUL>)<NUL><NUL><NUL><DC1>?i
-2021/12/29 14:13:11.561 [RX] - UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUfViVOtech2<NUL>)<EOT><NUL><NUL>|<RS> 04 status = CRC Error  
+2022/1/13 11:07:44.651 [TX] - ViVOtech2<NUL>)<NUL><NUL><NUL><DC1>?i
+2022/1/13 11:07:44.706 [RX] - UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUfViVOtech2<NUL>)<EOT><NUL><NUL>|<RS> 04 status = CRC Error  
 
  --- GET F/W Ver. P2 (data length <> 0, INVALID)
 
-2021/12/29 14:13:11.655 [TX] - ViVOtech2<NUL>)<NUL><NUL><SOH><DC1>?Z
-2021/12/29 14:13:11.714 [RX] - UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUfViVOtech2<NUL>)<ENQ><NUL><NUL>K. 05 status = Incorrect Parameter  
+2022/1/13 11:07:44.801 [TX] - ViVOtech2<NUL>)<NUL><NUL><SOH><DC1>?Z
+2022/1/13 11:07:44.859 [RX] - UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUfViVOtech2<NUL>)<ENQ><NUL><NUL>K. 05 status = Incorrect Parameter  
 
  ---------- END OF TEST ----------
 
  Result = PASSED
 
 
-Docklight Log File (ASCII) - Stopped 2021/12/29 14:13:12.902 
+Docklight Log File (ASCII) - Stopped 2022/1/13 11:07:46.044 
 

@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2022/1/5 10:06:41.749 
+Docklight Log File (HEX) - Started 2022/1/17 15:10:08.714 
  TEST CASE: PM029
 
  --- Set POS COM PORT Settings
@@ -8,8 +8,8 @@ Docklight Log File (HEX) - Started 2022/1/5 10:06:41.749
 
  --- F0-02 Get Battery Level
 
-2022/1/5 10:06:42.862 [TX] - 56 69 56 4F 74 65 63 68 32 00 F0 02 00 00 CA 95 
-2022/1/5 10:06:42.918 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 F0 00 00 01 C0 1E 09  
+2022/1/17 15:10:09.964 [TX] - 56 69 56 4F 74 65 63 68 32 00 F0 02 00 00 CA 95 
+2022/1/17 15:10:10.020 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 F0 00 00 01 CC DF 85  
 
  Result = PASSED
  ---------- END OF TEST ----------
@@ -19,5 +19,5 @@ Docklight Log File (HEX) - Started 2022/1/5 10:06:41.749
  MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2022/1/5 10:06:44.086 
+Docklight Log File (HEX) - Stopped 2022/1/17 15:10:11.200 
 

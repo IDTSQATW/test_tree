@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2022/1/4 10:22:29.548 
+Docklight Log File (HEX) - Started 2022/1/13 14:43:45.129 
  TEST CASE: SBL003
 
  --- Set POS COM PORT Settings
@@ -8,8 +8,8 @@ Docklight Log File (HEX) - Started 2022/1/4 10:22:29.548
 
  --- Double audible beep
 
-2022/1/4 10:22:30.675 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 02 00 00 77 3D 
-2022/1/4 10:22:30.740 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  Passed  
+2022/1/13 14:43:46.251 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 02 00 00 77 3D 
+2022/1/13 14:43:46.316 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  Passed  
 
  Result = PASSED
  ---------- END OF TEST ----------
@@ -20,5 +20,5 @@ Docklight Log File (HEX) - Started 2022/1/4 10:22:29.548
  MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2022/1/4 10:22:33.406 
+Docklight Log File (HEX) - Stopped 2022/1/13 14:43:49.146 
 

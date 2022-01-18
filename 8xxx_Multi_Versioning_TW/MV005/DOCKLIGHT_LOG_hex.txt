@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2022/1/4 11:45:25.402 
+Docklight Log File (HEX) - Started 2022/1/13 11:46:23.454 
  TEST CASE: MV005
 
  --- Set POS COM PORT Settings
@@ -8,8 +8,8 @@ Docklight Log File (HEX) - Started 2022/1/4 11:45:25.402
 
  --- Get Processor Type *** GR
 
-2022/1/4 11:45:26.658 [TX] - 56 69 56 4F 74 65 63 68 32 00 09 02 00 00 F0 F9 
-2022/1/4 11:45:26.714 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 09 00 00 05 DF 61 02 4D 00  
+2022/1/13 11:46:24.712 [TX] - 56 69 56 4F 74 65 63 68 32 00 09 02 00 00 F0 F9 
+2022/1/13 11:46:24.768 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 09 00 00 05 DF 61 02 4D 00  
 AC 4D  
 
  Result = PASSED
@@ -24,5 +24,5 @@ AC 4D
 Please make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (HEX) - Stopped 2022/1/4 11:45:27.410 
+Docklight Log File (HEX) - Stopped 2022/1/13 11:46:25.463 
 

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-38351
+50052
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -178,7 +178,7 @@ If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Burst mode Off"
-   if readerType = "GR" or readerType = "NEO1" then DL.SendSequence "burst mode off"
+   if readerType <> "NEO2" then DL.SendSequence "burst mode off"
    if readerType = "NEO2" then DL.SendSequence "burst mode off (NEO2)"
    result = DL.WaitForSequence("burst off", 1, 2000)
    dl.pause 500
@@ -213,7 +213,7 @@ If result <> 0 Then
    if result <> 0 then
       r(0) = dl.waitforsequence("Tag 9F39", 1, 1000)
            if r(0) = 0 then dl.addcomment vbcrlf & "Tag 9F39...FAIL!"
-      if readerType = "GR" or readerType = "NEO1" then r(1) = dl.waitforsequence("Tag FFEE01", 1, 1000)
+      if readerType <> "NEO2" then r(1) = dl.waitforsequence("Tag FFEE01", 1, 1000)
       if readerType = "NEO2" then r(1) = dl.waitforsequence("Tag FFEE01 (NEO2)", 1, 1000)
            if r(1) = 0 then dl.addcomment vbcrlf & "Tag FFEE01...FAIL!"
       r(2) = dl.waitforsequence("Tag DFEE26", 1, 1000)

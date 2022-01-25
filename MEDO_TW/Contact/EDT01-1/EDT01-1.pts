@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-41838
+39785
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -176,7 +176,7 @@ If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Burst mode Off"
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then DL.SendSequence "burst mode off"
+   if readerType <> "NEO2" then DL.SendSequence "burst mode off"
    if readerType = "NEO2" then DL.SendSequence "burst mode off (NEO2)"
    result = DL.WaitForSequence("burst off", 1, 2000)
    dl.pause 500
@@ -221,10 +221,10 @@ If result <> 0 Then
    if i = 5 then DL.AddComment "--- 04-00-----DFEF4B = 28 T1+T3"
    if i = 6 then DL.AddComment "--- 04-00-----DFEF4B = 18 T2+T3"
    if i = 7 then DL.AddComment "--- 04-00-----DFEF4B = 38 T1+T2+T3"
-   if readerType = "GR" or readerType = "NEO1" then DL.SendSequence "04-00-----DFEF4B " & i
-   if readerType = "NEO2" or readerType = "USAT" then DL.SendSequence "04-00-----DFEF4B " & i & " (NEO2)"
-   if readerType = "GR" or readerType = "NEO1" then result = DL.WaitForSequence("burst off", 1, 10000)
-   if readerType = "NEO2" or readerType = "USAT" then result = DL.WaitForSequence("60 00", 1, 10000)
+   if readerType <> "NEO2" then DL.SendSequence "04-00-----DFEF4B " & i
+   if readerType = "NEO2" then DL.SendSequence "04-00-----DFEF4B " & i & " (NEO2)"
+   if readerType <> "NEO2" then result = DL.WaitForSequence("burst off", 1, 10000)
+   if readerType = "NEO2" then result = DL.WaitForSequence("60 00", 1, 10000)
 
    If result <> 0 Then
       dl.resetreceivecounter
@@ -236,8 +236,8 @@ If result <> 0 Then
          msgbox "Click OK, insert card (EMV Test Card, T=0)", vbokonly
          result1 = DL.WaitForSequence("60-10 00 10", 1, 20000)
          result2 = DL.WaitForSequence("Tag DFEE26", 1, 2000)
-         if readerType = "GR" or readerType = "NEO1" then result3 = DL.WaitForSequence("DFEF4C-4D " & i, 1, 2000)
-         if readerType = "NEO2" or readerType = "USAT" then
+         if readerType <> "NEO2" then result3 = DL.WaitForSequence("DFEF4C-4D " & i, 1, 2000)
+         if readerType = "NEO2" then
             if i = 1 or i = 3 or i = 5 then
                check = DL.WaitForSequence("DFEF4C-4D (NEO2)", 1, 2000)
                if check = 1 then 

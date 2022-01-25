@@ -1,44 +1,33 @@
-Docklight Log File (HEX) - Started  
+Docklight Log File (HEX) - Started 2022/1/25 08:33:02.271 
  TEST CASE: PT05400
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM1 @ 115200 baud...
+ POS operating on COM90 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  --- Pass-Through Mode - (START)
 
- [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
- [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00  Poll for Token - Card Read (OK)
+2022/1/25 08:33:03.672 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
+2022/1/25 08:33:03.691 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00  Poll for Token - Card Read (OK)
 
- [RX] - 00 1C 9B  Pass-Through Mode - (STOP)  (OK)
+2022/1/25 08:33:03.691 [RX] - 00 1C 9B  Pass-Through Mode - (STOP)  (OK)
  Pass-Through Mode - (START) (OK)
- Result = PASSED
+
+2022/1/25 08:33:03.691 [RX] - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  Result = PASSED
  --- Poll for Token - Card Read (OK)
  Press OK, then tap a card.
 
- [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51 
- [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00  Poll for Token - Card Read (OK)
+2022/1/25 08:33:06.622 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51 
+2022/1/25 08:33:06.729 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00  Poll for Token - Card Read (OK)
 
- [RX] - 05 03 A4 18 CE 7D AA 06  
+2022/1/25 08:33:06.729 [RX] - 05 03 7E BD BA E5 FA EE 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  Result = PASSED
  --- PCD Single Command Exchange RESPONSE
 
- [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 04 00 09 1E 00 00 00 6A 00 07 50 00 2C 7A 
- [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00  Poll for Token - Card Read (OK)
+2022/1/25 08:33:08.239 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 04 00 09 1E 00 00 00 6A 00 07 50 00 2C 7A 
+2022/1/25 08:33:08.269 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 08 00 05 E5 00 00 00 00 12 71 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
 
- [RX] - 05 FF 00 00 00 00 4E 5F  PCD Single Command Exchange RESPONSE (OK)
- 
-
- Result = PASSED
- ---------- END OF TEST ----------
-
- Result = PASSED
- 
-
- MASTER RESULT = PASSED
-
-
-Docklight Log File (HEX) - Stopped  
+Docklight Log File (HEX) - Stopped 2022/1/25 08:33:24.839 
 

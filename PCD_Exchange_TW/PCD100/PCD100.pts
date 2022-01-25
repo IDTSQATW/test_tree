@@ -1,14 +1,14 @@
 DL_SCRIPTVERSION
 1
-24123
+26734
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "EDM03-1" ' !!!!! EDIT THIS !!!!!
-' Objective: 
+ProjectName = "PCD100" ' !!!!! EDIT THIS !!!!!
+
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -18,7 +18,7 @@ ProjectName = "EDM03-1" ' !!!!! EDIT THIS !!!!!
 '   - Assign Docklight COM port
 '   - Assign Docklight Baud Rate
 '------------------------------------------------------------
-FileInput.OpenFile prefix & "Regress.Config2"
+FileInput.OpenFile prefix & "Regress.Config"
 Dim Prompting(1)
 Dim COM_Port(1)
 Dim POSBaudRate(1)
@@ -43,31 +43,7 @@ Do Until FileInput.EndOfFile
   result = FileInput.GetLine() 'by pass variable name
   result = FileInput.GetLine()      
   POSBaudRate(1) = result
-
-  'Set Reader Type
-  result = FileInput.GetLine() 'by pass variable name
-  result = FileInput.GetLine()      
-  readerType = result
-
-  'Set Reader Model
-  result = FileInput.GetLine() 'by pass variable name
-  result = FileInput.GetLine()      
-  readerModel = result
-
-  'Set Reader FW version
-  result = FileInput.GetLine() 'by pass variable name
-  result = FileInput.GetLine()      
-  fwVersion = result
-
-  'Set Reader FW build
-  result = FileInput.GetLine() 'by pass variable name
-  result = FileInput.GetLine()      
-  fwBuild = result
-
-  'Set Reader General Flag
-  result = FileInput.GetLine() 'by pass variable name
-  result = FileInput.GetLine()      
-  genFlag = result
+      
 Loop
 
 Sub StepPrompt(PromptString)
@@ -90,13 +66,11 @@ DL.StartLogging "DOCKLIGHT_LOG",False, "H"
 
 Dim prompt
 Dim confirm
-dim r(15)
 max=1
 min=0
 Randomize
 errCnt = 0
 caseValid = 0
-countf = 0
 result = 1
 
 DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
@@ -136,7 +110,6 @@ Sub PrintMyResult(ResultX)
       End If
 End Sub
 
-
 Function ReverseResult(ResultParam)
       If ResultParam = 1 Then
             result = 0
@@ -145,13 +118,6 @@ Function ReverseResult(ResultParam)
       End If
 End Function
 
-sub countfail()
-    for j = 0 to 4
-        if r(j) = 0 then
-           countf = countf + 1
-        end if
-    next
-end sub
 '------------------------------------------------------------
 'Debugging (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
@@ -163,88 +129,84 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+result = 1
+
+DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
+DL.Pause 1000
+
 If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Poll on Demand"
-   DL.SendSequence "Poll on Demand"
-   result = DL.WaitForSequence("Poll Response", 1, 2000)
-   dl.pause 500
-else 
-   countf = countf + 1
+   prompt1 = prompt1 & "Place Mifare Ultralight card onto reader. When Ready Click OK"
+   result = MsgBox(prompt1, VBOKOnly, "PAL Tests")
+End If
+'============================================================
+
+If result <> 0 Then
+  DL.Pause 400
+  dl.addcomment vbclrf
+  DL.ResetReceiveCounter
+  DL.AddComment "--- Start PT Mode"
+  DL.SendSequence "Start PT Mode"
+  result = DL.WaitForSequence("Start Pass Through Response", 1, 2000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.Pause 400
+  dl.addcomment vbclrf
+  DL.ResetReceiveCounter
+  DL.AddComment "---Turn On Antenna"
+  DL.SendSequence "Turn On Antenna"
+  result = DL.WaitForSequence("Turn On Attenna response", 1, 2000)
+End If
+'============================================================
+If result <> 0 Then
+  DL.Pause 400
+  dl.addcomment vbclrf
+  DL.ResetReceiveCounter
+  DL.AddComment "---Poll For Token"
+  DL.SendSequence "Poll For Token"
+  result = DL.WaitForSequence("Poll For Token Mifare UL card", 1, 2000)
+End If
+'============================================================
+
+If result <> 0 Then
+  DL.Pause 800
+  dl.addcomment vbclrf
+  DL.ResetReceiveCounter
+  DL.AddComment "--- PCD Write Block 6"
+  DL.SendSequence "PCD Write Block 6"
+  result = DL.WaitForSequence("Write Block Response", 1, 2000)
 End If
 '------------------------------------------------------------
+
 If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Burst mode Off"
-   if readerType <> "NEO2" then DL.SendSequence "burst mode off"
-   if readerType = "NEO2" then DL.SendSequence "burst mode off (NEO2)"
-   result = DL.WaitForSequence("burst off", 1, 2000)
-   dl.pause 500
-else 
-   countf = countf + 1
+  DL.Pause 800
+  dl.addcomment vbclrf
+  DL.ResetReceiveCounter
+  DL.AddComment "--- PCD Write Data - 44's"
+  DL.SendSequence "PCD Write Data - 44's"
+  result = DL.WaitForSequence("Write in Block Response", 1, 2000)
 End If
 '------------------------------------------------------------
+
 If result <> 0 Then
-   for i = 1 to 7
-   DL.ClearCommWindows
-'------------------------------------------------------------
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   if i = 1 then DL.AddComment "--- 04-00-----DFEF4B = 60 T1+PAN"
-   if i = 2 then DL.AddComment "--- 04-00-----DFEF4B = 50 T2+PAN"
-   if i = 3 then DL.AddComment "--- 04-00-----DFEF4B = 48 T3+PAN"
-   if i = 4 then DL.AddComment "--- 04-00-----DFEF4B = 70 T1+T2+PAN"
-   if i = 5 then DL.AddComment "--- 04-00-----DFEF4B = 68 T1+T3+PAN"
-   if i = 6 then DL.AddComment "--- 04-00-----DFEF4B = 58 T2+T3+PAN"
-   if i = 7 then DL.AddComment "--- 04-00-----DFEF4B = 78 T1+T2+T3+PAN"
-   DL.SendSequence "04-00-----DFEF4B " & i
-   result = DL.WaitForSequence("burst off", 1, 10000)
-
-   MsgBox "Click OK and then Swipe ISO4909", VBOKOnly
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- 02-40 Activate Transaction"
-   DL.SendSequence "02-40"
-   result = DL.WaitForSequence("ACT response - iso4909", 1, 10000)
-           if result = 0 then dl.addcomment vbcrlf & "ACT response...FAIL!"
-
-   if result <> 0 then
-      r(0) = dl.waitforsequence("Tag 9F39", 1, 1000)
-           if r(0) = 0 then dl.addcomment vbcrlf & "Tag 9F39...FAIL!"
-      if readerType <> "NEO2" then r(1) = dl.waitforsequence("Tag FFEE01", 1, 1000)
-      if readerType = "NEO2" then r(1) = dl.waitforsequence("Tag FFEE01 (NEO2)", 1, 1000)
-           if r(1) = 0 then dl.addcomment vbcrlf & "Tag FFEE01...FAIL!"
-      r(2) = dl.waitforsequence("Tag DFEE26", 1, 1000)
-           if r(2) = 0 then dl.addcomment vbcrlf & "Tag DFEE26...FAIL!"
-      r(3) = dl.waitforsequence("DFEF4C " & i, 1, 1000)
-           if r(3) = 0 then dl.addcomment vbcrlf & "DFEF4C...FAIL!"
-      r(4) = dl.waitforsequence("DFEF4D " & i, 1, 1000)
-           if r(4) = 0 then dl.addcomment vbcrlf & "DFEF4D...FAIL!"
-
-      countfail()
-
-   '------------------------------------------------------------
-   else 
-      countf = countf + 1
-   end if
-   dl.pause 500
-   next
+  DL.Pause 800
+  dl.addcomment vbclrf
+  DL.ResetReceiveCounter
+  DL.AddComment "--- PCD Read Block 6"
+  DL.SendSequence "PCD Read Block 6"
+  result = DL.WaitForSequence("Read Block 6 Response", 1, 2000)
 End If
 '------------------------------------------------------------
-if countf <> 0 then
-   result = 0
-   dl.addcomment vbcrlf
-   dl.addcomment "=============="
-   dl.addcomment "FAIL items: " & countf
-   dl.addcomment "=============="
-else
-   result = 1
-end if
 
-DL.AddComment vbcrlf & "---------- END OF TEST ----------" & vbCrLf
+dl.addcomment vbclrf
+DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
+DL.Pause 1000
+
+DL.AddComment vbCrLf
 PrintMyResult(result)
+DL.Pause 1000
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
@@ -252,21 +214,24 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-'DL.pause 1000
+DL.pause 1000
 
-'If result = 0 then
-'  DL.AddComment Chr(13) & "Result = FAILED"
-'Else
-'  DL.AddComment Chr(13) & "Result = PASSED"
-'End If
+If 0 Then
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+End If
 
-'If Prompting(0) = "ON" Then
-'  If result = 0 then
-'    MsgBox "Result = FAILED", VBOKOnly, "Result"
-'  Else 
-'    MsgBox "Result = PASSED", VBOKOnly, "Result"
-'  End If
-'End If
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------

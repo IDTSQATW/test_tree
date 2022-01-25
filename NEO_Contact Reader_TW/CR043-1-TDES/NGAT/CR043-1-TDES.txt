@@ -38,6 +38,7 @@ TID:Activate Transaction
 CMD:60 10 01 00 78 00 78 9C 01 00 5F 57 01 00 9F 02 06 00 00 00 00 02 00 9F 03 06 00 00 00 00 00 00 5F 2A 02 08 40
 EXR: 60 63 00 00
 DLG:Swipe EMV Test Card (T=0) 3 times --> Click OK
+EXR:
 TIMEOUT:120000
 MSG:Insert CT card (EMV Test Card V2 T=0) card...
 EXR:

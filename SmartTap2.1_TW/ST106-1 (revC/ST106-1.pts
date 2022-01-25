@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-1863
+10731
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -164,7 +164,7 @@ If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Burst mode off"
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then DL.SendSequence "burst mode off"
+   if readerType <> "NEO2" then DL.SendSequence "burst mode off"
    if readerType = "NEO2" then DL.SendSequence "burst mode off (NEO2)"
    result = DL.WaitForSequence("04-00 resp 00", 1, 3000)
 End If

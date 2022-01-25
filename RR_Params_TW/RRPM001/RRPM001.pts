@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-41372
+4673
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -185,12 +185,10 @@ If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf 
    DL.AddComment "--- disable all  RR (FFF4 in default)"
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then 
+   if readerType <> "NEO2" then 
       DL.SendSequence "disable all  RR (FFF4 in default)"
-   elseif readerType = "NEO2" then 
-      DL.SendSequence "disable all  RR (FFF4 in default) (NEO2)"
    else
-      DL.SendSequence "disable all  RR (FFF4 in default)"
+      DL.SendSequence "disable all  RR (FFF4 in default) (NEO2)"
    end if
    result = DL.WaitForSequence("generic 04-xx cmd resp", 1, 5000)
 End If
@@ -209,12 +207,10 @@ If result <> 0 Then
 End If
 
 If result <> 0 Then
-   if readerType = "GR" or readerType = "NEO1" then 
+   if readerType <> "NEO2" then 
       result = DL.WaitForSequence("default 9F66 (TTQ) resp", 1, 1000)
-   elseif readerType = "NEO2" or readerType = "USAT" or readerType = "USAT_SRED" then 
-      result = DL.WaitForSequence("default 9F66 (TTQ) resp (NEO2)", 1, 1000)
    else
-      result = DL.WaitForSequence("default 9F66 (TTQ) resp", 1, 1000)
+      result = DL.WaitForSequence("default 9F66 (TTQ) resp (NEO2)", 1, 1000)
    end if
 End If
 
@@ -223,12 +219,10 @@ If result <> 0 Then
 End If
 
 If result <> 0 Then
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then 
+   if readerType <> "NEO2" then 
       result = DL.WaitForSequence("default FFF1 (terminal CL trans limit) resp", 1, 1000)
-   elseif readerType = "NEO2" then 
-      result = DL.WaitForSequence("default FFF1 (terminal CL trans limit) resp (NEO2)", 1, 1000)
    else
-      result = DL.WaitForSequence("default FFF1 (terminal CL trans limit) resp", 1, 1000)
+      result = DL.WaitForSequence("default FFF1 (terminal CL trans limit) resp (NEO2)", 1, 1000)
    end if
 End If
 
@@ -271,9 +265,9 @@ If result <> 0 Then result = DL.WaitForSequence("default FFF5 (CVM req'd limit) 
 end if
 
 DL.AddComment vbCrLf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)
 
-DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
@@ -281,40 +275,36 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If 0 Then
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
-End If
+'If 0 Then
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
-
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
-
-If MasterResult = 1 Then
-	MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-	MasterVerdict = "FAILED"
-End If
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
-
+'If MasterResult = 1 Then
+'	MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'	MasterVerdict = "FAILED"
+'End If
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT FILE(!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-
 FileOutput.CreateFile "FINAL_VERDICT.txt"
 
 If MasterResult = 0 Then 

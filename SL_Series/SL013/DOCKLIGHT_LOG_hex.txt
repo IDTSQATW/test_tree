@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2022/1/13 11:04:08.998 
+Docklight Log File (HEX) - Started 2022/2/17 08:59:27.551 
  TEST CASE: SL013
 
  --- Set POS COM PORT Settings
@@ -8,17 +8,13 @@ Docklight Log File (HEX) - Started 2022/1/13 11:04:08.998
 
  --- LED All On
 
-2022/1/13 11:04:10.196 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 00 FF 01 C9 40 
-2022/1/13 11:04:10.262 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  
+2022/2/17 08:59:28.754 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 00 FF 01 C9 40 
+2022/2/17 08:59:28.786 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  
 
  Result = PASSED
  ---------- END OF TEST ----------
 
- Result = PASSED
- 
-
- MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2022/1/13 11:04:18.103 
+Docklight Log File (HEX) - Stopped 2022/2/17 08:59:31.692 
 

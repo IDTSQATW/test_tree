@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2022/1/13 11:49:26.376 
+Docklight Log File (HEX) - Started 2022/2/15 16:36:20.522 
  TEST CASE: KMT007
 
  --- Set POS COM PORT Settings
@@ -8,16 +8,13 @@ Docklight Log File (HEX) - Started 2022/1/13 11:49:26.376
 
  DeleteAllKeys
 
-2022/1/13 11:49:27.920 [TX] - 56 69 56 4F 74 65 63 68 32 00 D0 05 00 00 14 27 
-2022/1/13 11:49:27.978 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 D0 00 00 00 CC E4  Pass  
+2022/2/15 16:36:22.063 [TX] - 56 69 56 4F 74 65 63 68 32 00 D0 05 00 00 14 27 
+2022/2/15 16:36:22.207 [RX] - 56 69 56 4F 74 65 63 68 32 00 D0 00 00 00 CC E4  Pass  
 
  Result = PASSED
  ---------- END OF TEST ----------
 
- 
-
- MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2022/1/13 11:49:29.163 
+Docklight Log File (HEX) - Stopped 2022/2/15 16:36:23.193 
 

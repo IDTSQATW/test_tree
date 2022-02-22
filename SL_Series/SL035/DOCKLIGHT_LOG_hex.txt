@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2022/1/13 11:06:52.862 
+Docklight Log File (HEX) - Started 2022/2/17 09:01:41.451 
  TEST CASE: SL035
 
  --- Set POS COM PORT Settings
@@ -8,13 +8,13 @@ Docklight Log File (HEX) - Started 2022/1/13 11:06:52.862
 
  --- 1 Long Beep, All LED On
 
-2022/1/13 11:06:54.054 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 08 FF 01 68 E9 
-2022/1/13 11:06:54.119 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  
+2022/2/17 09:01:42.653 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 08 FF 01 68 E9 
+2022/2/17 09:01:42.686 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  
 
  Result = PASSED
  ---------- END OF TEST ----------
 
 
 
-Docklight Log File (HEX) - Stopped 2022/1/13 11:06:58.166 
+Docklight Log File (HEX) - Stopped 2022/2/17 09:01:45.780 
 

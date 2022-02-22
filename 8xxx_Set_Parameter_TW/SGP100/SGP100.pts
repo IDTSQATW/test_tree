@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-3056
+31635
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -308,7 +308,7 @@ sub newtagcheck()
        r(2) = dl.waitforsequence("DFEE34" & i, 1, 200)
             if r(2) = 1 then dl.addcomment vbcrlf & "DFEE34...FAIL!"
        r(3) = dl.waitforsequence("9F1E" & i, 1, 200)
-            if r(3) = 1 then dl.addcomment vbcrlf & "9F1E...FAIL!"
+            if r(3) = 0 then dl.addcomment vbcrlf & "9F1E...FAIL!"
        r(4) = dl.waitforsequence("DFEE44" & i, 1, 200)
             if r(4) = 1 then dl.addcomment vbcrlf & "DFEE44...FAIL!"
        r(5) = dl.waitforsequence("DFEE35" & i, 1, 200)

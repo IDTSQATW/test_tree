@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2022/1/13 13:31:58.880 
+Docklight Log File (HEX) - Started 2022/2/15 09:02:17.212 
  TEST CASE: CA014
 
  --- Set POS COM PORT Settings
@@ -8,16 +8,13 @@ Docklight Log File (HEX) - Started 2022/1/13 13:31:58.880
 
  --- Create Group 8 not Created As Expected
 
-2022/1/13 13:32:00.005 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 03 00 0E FF E4 01 FD 5F 2A 02 09 01 9F 1A 02 01 58 C6 BD 
-2022/1/13 13:32:00.094 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Action Code "05" Pass  
+2022/2/15 09:02:18.351 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 03 00 0F DF EE 2D 01 FD 5F 2A 02 09 01 9F 1A 02 01 58 E0 31 
+2022/2/15 09:02:18.449 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Action Code "05" Pass  
 
  Result = PASSED
  ---------- END OF TEST ----------
 
- 
-
- MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2022/1/13 13:32:01.281 
+Docklight Log File (HEX) - Stopped 2022/2/15 09:02:19.482 
 

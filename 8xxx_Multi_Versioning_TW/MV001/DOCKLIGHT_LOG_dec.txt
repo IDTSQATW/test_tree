@@ -1,4 +1,4 @@
-Docklight Log File (Decimal) - Started 2022/1/13 11:41:47.447 
+Docklight Log File (Decimal) - Started 2022/2/17 09:32:22.174 
  TEST CASE: MV001
 
  --- Set POS COM PORT Settings
@@ -6,11 +6,11 @@ Docklight Log File (Decimal) - Started 2022/1/13 11:41:47.447
  POS operating on COM1 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
- --- Get Product Type *** GR
+ --- Get Product Type *** NEO2
 
-2022/1/13 11:41:48.691 [TX] - 086 105 086 079 116 101 099 104 050 000 009 001 000 000 160 160 
-2022/1/13 11:41:48.746 [RX] - 085 085 085 085 085 085 085 085 085 085 085 085 085 085 085 085 085 085 085 085 085 085 085 085 085 085 085 085 085 085 102 086 105 086 079 116 101 099 104 050 000 009 000 000 006 223 096 003 085 051 000  
-135 005  
+2022/2/17 09:32:23.536 [TX] - 086 105 086 079 116 101 099 104 050 000 009 001 000 000 160 160 
+2022/2/17 09:32:23.564 [RX] - 086 105 086 079 116 101 099 104 050 000 009 000 000 007 223 238 096 003 086 052 001  
+251 120  
 
  Result = PASSED
  
@@ -24,5 +24,5 @@ Docklight Log File (Decimal) - Started 2022/1/13 11:41:47.447
 Please make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (Decimal) - Stopped 2022/1/13 11:41:49.431 
+Docklight Log File (Decimal) - Stopped 2022/2/17 09:32:24.192 
 

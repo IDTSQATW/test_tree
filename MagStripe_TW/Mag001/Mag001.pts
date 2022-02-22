@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-51664
+163
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -166,7 +166,7 @@ if result <> 0 then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- DF7D = 00"
-   if readerType = "GR" or readerType = "NEO1" then DL.SendSequence "DF7D = 00"
+   if readerType <> "NEO2" then DL.SendSequence "DF7D = 00"
    if readerType = "NEO2" then DL.SendSequence "DF7D = 00 (NEO2)"
    result = dl.waitforsequence("04 00", 1, 5000)
 end if
@@ -183,14 +183,14 @@ if result <> 0 then
    If hwcheck = 2 then result1 = dl.waitforsequence("IDT std card resp2", 1, 5000)
    if hwcheck = 3 then result1 = dl.waitforsequence("IDT std card resp3", 1, 5000)
 
-   if readerType = "GR" or readerType = "NEO1" then result2 = dl.waitforsequence("tag DF30 (NEO1)", 1, 1000)
+   if readerType <> "NEO2" then result2 = dl.waitforsequence("tag DF30 (NEO1)", 1, 1000)
    if readerType = "NEO2" then result2 = dl.waitforsequence("tag DFEE30 (NEO2)", 1, 1000)
 
    result3 = dl.waitforsequence("tag 9f06", 1, 1000)
 
    result4 = dl.waitforsequence("tag 9f39", 1, 1000)
 
-   if readerType = "GR" or readerType = "NEO1" then result5 = dl.waitforsequence("tag dfee26", 1, 1000)
+   if readerType <> "NEO2" then result5 = dl.waitforsequence("tag dfee26", 1, 1000)
    if readerType = "NEO2" then result5 = dl.waitforsequence("tag dfee26 (NEO2)", 1, 1000)
 
    if result1 = 0 or result2 = 0 or result3 <> 0 or result4 = 0 or result5 = 0 then

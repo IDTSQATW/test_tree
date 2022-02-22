@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2022/1/13 13:33:20.309 
+Docklight Log File (HEX) - Started 2022/2/15 09:03:34.685 
  TEST CASE: CA019
 
  --- Set POS COM PORT Settings
@@ -8,16 +8,13 @@ Docklight Log File (HEX) - Started 2022/1/13 13:33:20.309
 
  --- Delete Non Existing UID
 
-2022/1/13 13:33:21.429 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 04 00 0A 9F 06 07 A0 21 34 57 13 10 10 80 4E 
-2022/1/13 13:33:21.508 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 04 05 00 00 45 E6  Action Code "05" Pass  
+2022/2/15 09:03:35.937 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 04 00 0A 9F 06 07 A0 21 34 57 13 10 10 80 4E 
+2022/2/15 09:03:36.011 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 60 00 00 35 7D  Action Code "05" Pass  
 
  Result = PASSED
  ---------- END OF TEST ----------
 
- 
-
- MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2022/1/13 13:33:23.191 
+Docklight Log File (HEX) - Stopped 2022/2/15 09:03:37.370 
 

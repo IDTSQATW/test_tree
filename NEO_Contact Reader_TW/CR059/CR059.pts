@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-52533
+4450
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -149,9 +149,18 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+   DL.AddComment "--- 04-0A"
+   DL.SendSequence "04-0A"
+   result = DL.WaitForSequence("04 00", 1, 10000)
+   if result <> 0 then dl.pause 8000
+End If
+
 if readerType = "NEO2" then
    If result <> 0 Then
       dl.resetreceivecounter
+      dl.addcomment vbcrlf
       DL.AddComment "--- DFED59 =  00 (Send First Response 0x63)"
       DL.SendSequence "DFED59 =  00 (Send First Response 0x63)"
       result = DL.WaitForSequence("04 00", 1, 10000)
@@ -201,11 +210,6 @@ If result <> 0 Then
       if ledcheck = 7 then result = 0
    end if
    dl.pause 1000
-else
-   dl.addcomment vbcrlf
-   DL.AddComment "--- 05-01 Cancel transaction"
-   DL.SendSequence "05-01 Cancel transaction"
-   dl.pause 1000
 End If
 '------------------------------------------------------------fallback to MSR reader
 If result <> 0 Then
@@ -239,14 +243,16 @@ If result <> 0 Then
       if ledcheck = 7 then result = 0
    end if
    dl.pause 1000
-else
+End If
+
+next
+
+if result = 0 then
    dl.addcomment vbcrlf
    DL.AddComment "--- 05-01 Cancel transaction"
    DL.SendSequence "05-01 Cancel transaction"
    dl.pause 1000
-End If
-
-next
+end if
 
 DL.SendSequence "01-01-----Poll on Demand"
 '------------------------------------------------------------

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-19190
+49370
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -160,7 +160,7 @@ End Function
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- Burst mode OFF *** " & readerType 
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then DL.SendSequence "Burst mode off"
+   if readerType <> "NEO2" then DL.SendSequence "Burst mode off"
    if readerType = "NEO2" then DL.SendSequence "Burst mode off (NEO2)"
    result = DL.WaitForSequence("04-00 resp ok", 1, 5000)
 End If
@@ -182,11 +182,7 @@ if modelcheck = 1 or modelcheck = 3 then
       dl.addcomment vbcrlf
       DL.AddComment "--- Activate Transaction 02-01"
       DL.SendSequence "Activate Transaction 02-01"
-      if readerType = "USAT" then 
-         r1 = DL.WaitForSequence("02 08", 1, 15000)
-      else
-         r1 = DL.WaitForSequence("02 08", 1, 11000)
-      end if
+      r1 = DL.WaitForSequence("02 08", 1, 11000)
       r2 = DL.WaitForSequence("02 00", 1, 2000)
       if r1 <> 0 or r2 <> 0 then
          checklcd = msgbox("Does LCD/ LED change to idle mode?", vbyesno)
@@ -204,11 +200,7 @@ if modelcheck = 2 or modelcheck = 3 then
       dl.addcomment vbcrlf
       DL.AddComment "--- Activate Transaction 02-40"
       DL.SendSequence "Activate Transaction 02-40"
-      if readerType = "USAT" then 
-         r1 = DL.WaitForSequence("02 08", 1, 15000)
-      else
-         r1 = DL.WaitForSequence("02 08", 1, 11000)
-      end if
+      r1 = DL.WaitForSequence("02 08", 1, 11000)
       r2 = DL.WaitForSequence("02 00", 1, 2000)
       if r1 <> 0 or r2 <> 0 then
          checklcd = msgbox("Does LCD/ LED change to idle mode?", vbyesno)

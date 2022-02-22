@@ -65,11 +65,10 @@ if (Result):
 	RetOfStep = DL.SendCommand('Activate Transaction')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("60 63 00 00")
-		alldata = DL.Get_RXResponse(3)
-		DL.SetWindowText("red", alldata)
+		alldata = DL.Get_RXResponse(2)
 		CTresultcode = DL.GetTLV(alldata,"DFEE25")
 		if (Result):
-			Result = DL.Check_StringAB(DL.Get_RXResponse(3), '56 69 56 4F 74 65 63 68 32 00 60 00')
+			Result = DL.Check_StringAB(DL.Get_RXResponse(2), '56 69 56 4F 74 65 63 68 32 00 60 00')
 			if (Result):
 				ksn = DL.GetTLV(alldata,"DFEE12")	
 		

@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2022/1/11 14:32:20.877 
+Docklight Log File (HEX) - Started 2022/2/16 11:53:53.013 
  TEST CASE: TTK012
 
  --- Set POS COM PORT Settings
@@ -8,13 +8,13 @@ Docklight Log File (HEX) - Started 2022/1/11 14:32:20.877
 
  --- 77-05 reboot
 
-2022/1/11 14:32:22.121 [TX] - 56 69 56 4F 74 65 63 68 32 00 77 05 00 00 4F 9C 
-2022/1/11 14:32:22.176 [RX] - 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 66 56 69 56 4F 74 65 63 68 32 00 77 00 00 00 77 BF  
+2022/2/16 11:53:54.364 [TX] - 56 69 56 4F 74 65 63 68 32 00 77 05 00 00 4F 9C 
+2022/2/16 11:53:54.393 [RX] - 56 69 56 4F 74 65 63 68 32 00 77 00 00 00 77 BF  
 
  ---------- END OF TEST ----------
 
  Result = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2022/1/11 14:32:24.876 
+Docklight Log File (HEX) - Stopped 2022/2/16 11:53:57.386 
 

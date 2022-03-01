@@ -3,7 +3,7 @@ OFF
 $Prompt - Test Case Steps
 ON
 $Prompt - COM Port
-COM1
+COM90
 $Prompt - Reader Baud Rate
 9600
 $Prompt - reader type: GR (2 byte TLV), AR (3 byte TLV), NEO1 (2 byte TLV), NEO2 (3 byte TLV), NC (Not care)

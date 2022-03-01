@@ -1,0 +1,12 @@
+Docklight Log File (HEX) - Started 
+ TEST CASE: ADPT100
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM90 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+
+
+Docklight Log File (HEX) - Stopped 
+

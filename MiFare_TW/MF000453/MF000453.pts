@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-22780
+12299
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -208,6 +208,7 @@ DL.AddComment "----- Read 2 Block and start at Block 59 (Blocks 59 to 61 are rea
    if readerType = "GR" or readerType = "NEO1" then DL.SendSequence "MiFare Read next 2 Block - Start at Block 59"
    if readerType = "NEO2" then DL.SendSequence "MiFare Read next 2 Block - Start at Block 59 (NEO2)"
 result = DL.WaitForSequence("MiFare Read next 2 Block - Start at Block 59 - (OK)", 1, 10000)
+dl.pause 500
 PrintMyResult(result)
 
 'PT_Start
@@ -216,6 +217,7 @@ DL.AddComment "----- Read 3 Block and start at Block 59 (Blocks 59 to 62 are rea
    if readerType = "GR" or readerType = "NEO1" then DL.SendSequence "MiFare Read next 3 Block - Start at Block 59"
    if readerType = "NEO2" then DL.SendSequence "MiFare Read next 3 Block - Start at Block 59 (NEO2)"
 result = DL.WaitForSequence("MiFare Read next 3 Block - Start at Block 59 or 60 - (OK)", 1, 10000)
+dl.pause 500
 PrintMyResult(result)
 
 End Sub
@@ -238,6 +240,13 @@ PrintMyResult(result)
 DL.SendSequence "Poll for Token (10 sec)"
 result = DL.WaitForSequence("Poll for Token (OK)", 1, 10000)
 PrintMyResult(result)
+
+If result <> 0 Then
+ DL.ResetReceiveCounter
+ DL.AddComment vbCrLf & "Mifare auth - Sector 1" & vbCrLf
+ DL.SendSequence "Mifare auth - Sector 1"
+ result = DL.WaitForSequence("PT command (OK)", 1, 3000)
+End If
 
 'DL.SendSequence "MiFare Read 1 Block - Start at Block 0"
 'result = DL.WaitForSequence("MiFare Read next 3 Block 59", 1, 10000)

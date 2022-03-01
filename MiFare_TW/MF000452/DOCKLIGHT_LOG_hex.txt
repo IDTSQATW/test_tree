@@ -1,56 +1,8 @@
-Docklight Log File (HEX) - Started 2022/2/15 09:55:24.264 
+Docklight Log File (HEX) - Started 2022/2/22 16:49:23.293 
  TEST CASE: MF000452
 
  --- Set POS COM PORT Settings
- Set POS COM PORT...
- POS operating on COM1 @ 9600 baud...
- Set POS COM PORT - COMPLETE
 
 
-2022/2/15 09:55:26.496 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
-2022/2/15 09:55:26.525 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  PT command (OK)
- Result = PASSED
-
-2022/2/15 09:55:26.542 [TX] - 56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 94 1F 
-2022/2/15 09:55:26.571 [RX] - 56 69 56 4F 74 65 63 68 32 00 28 00 00 00 D6 6A  Antenna Enable (OK)
- Result = PASSED
-
-2022/2/15 09:55:26.588 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 00 B1 E4 
-2022/2/15 09:55:26.703 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 05  Poll for Token (OK)
-
-2022/2/15 09:55:26.711 [RX] - 03 7E  Result = PASSED
-BD BA E5 FA EE  ----- Read 1 Block and start at Block 63 (Block 63 is read --- Block 63 is a Trailer Block, but not skipped because this is a single read and not multiple block read). -----
-
-2022/2/15 09:55:26.726 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 3F 8C 60 
-2022/2/15 09:55:26.768 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 10 00 00 00 00 00 00 FF 07 80 BC FF FF FF FF FF FF 64 4A  MiFare Read next 1 Block - Start at Block 63 (OK)
- Result = PASSED
-
-2022/2/15 09:55:26.804 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19 
-2022/2/15 09:55:26.834 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B  PT command (OK)
- Result = PASSED
-
-2022/2/15 09:55:26.849 [TX] - 56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 94 1F 
-2022/2/15 09:55:26.878 [RX] - 56 69 56 4F 74 65 63 68 32 00 28 00 00 00 D6 6A  Antenna Enable (OK)
- Result = PASSED
-
-2022/2/15 09:55:26.894 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 00 B1 E4 
-2022/2/15 09:55:27.007 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 05  Poll for Token (OK)
-
-2022/2/15 09:55:27.016 [RX] - 03 7E  Result = PASSED
-BD BA E5 FA EE  ----- Read 1 Block and start at Block 35 (Block 35 is read --- Block 35 is a Trailer Block, but not skipped because this is a single read and not multiple block read). -----
-
-2022/2/15 09:55:27.038 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 23 5F DD 
-2022/2/15 09:55:27.080 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 10 00 00 00 00 00 00 FF 07 80 69 FF FF FF FF FF FF 5C 83  MiFare Read next 1 Block - Start at Block 35 (OK)
- Result = PASSED
- 
-
- Result = PASSED
- ---------- END OF TEST ----------
-
- 
-
- MASTER RESULT = PASSED
-
-
-Docklight Log File (HEX) - Stopped 2022/2/15 09:55:29.730 
+Docklight Log File (HEX) - Stopped 2022/2/22 16:49:23.374 
 

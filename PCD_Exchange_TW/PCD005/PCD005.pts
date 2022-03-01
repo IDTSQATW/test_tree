@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-15696
+2466
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -176,6 +176,7 @@ End If
 If result <> 0 Then
   DL.Pause 400
   DL.ResetReceiveCounter
+dl.addcomment vbcrlf
   DL.AddComment "---Turn On Antenna"
   DL.SendSequence "Turn On Antenna"
   result = DL.WaitForSequence("Turn On Attenna response", 1, 10000)
@@ -184,6 +185,7 @@ End If
 If result <> 0 Then
   DL.Pause 400
   DL.ResetReceiveCounter
+dl.addcomment vbcrlf
   DL.AddComment "---Poll For Token"
   DL.SendSequence "Poll For Token"
   result = DL.WaitForSequence("Poll For Token MPS001 4 byte UID", 1, 10000)
@@ -192,6 +194,7 @@ End If
 If result <> 0 Then
   DL.Pause 400
   DL.ResetReceiveCounter
+dl.addcomment vbcrlf
   DL.AddComment "--- PCD Load Key 0F0F0F0F"
   DL.SendSequence "PCD Load Key 0F0F0F0F"
   result = DL.WaitForSequence("Auth Sector Response", 1, 10000)
@@ -200,6 +203,7 @@ End If
 If result <> 0 Then
   DL.Pause 400
   DL.ResetReceiveCounter
+dl.addcomment vbcrlf
   DL.AddComment "--- PCD Auth Sector 1 - add card snr"
   DL.SendSequence "PCD Auth Sector 1 - add card snr"
   result = DL.WaitForSequence("Auth Sector Response", 1, 10000)
@@ -208,6 +212,7 @@ End If
 If result <> 0 Then
   DL.Pause 400
   DL.ResetReceiveCounter
+dl.addcomment vbcrlf
   DL.AddComment "--- PCD Read Block 0"
   DL.SendSequence "PCD Read Block 0"
   if readerType <> "NEO2" then
@@ -218,8 +223,9 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 If result <> 0 Then
-  DL.Pause 400
+  DL.Pause 1000
   DL.ResetReceiveCounter
+dl.addcomment vbcrlf
   DL.AddComment "--- PCD Read Block 1"
   DL.SendSequence "PCD Read Block 1"
   if readerType <> "NEO2" then
@@ -231,8 +237,9 @@ End If
 '------------------------------------------------------------
 
 If result <> 0 Then
-  DL.Pause 400
+  DL.Pause 500
   DL.ResetReceiveCounter
+dl.addcomment vbcrlf
   DL.AddComment "--- PCD Read Block 2"
   DL.SendSequence "PCD Read Block 2"
   if readerType <> "NEO2" then
@@ -244,8 +251,9 @@ End If
 '------------------------------------------------------------
 
 If result <> 0 Then
-  DL.Pause 400
+  DL.Pause 500
   DL.ResetReceiveCounter
+dl.addcomment vbcrlf
   DL.AddComment "--- PCD Read Block 3"
   DL.SendSequence "PCD Read Block 3"
   if readerType <> "NEO2" then

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-19775
+29947
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -284,9 +284,8 @@ dl.addcomment vbcrlf
 dl.addcomment vbcrlf
    DL.AddComment "----- MiFare Read 1 Block - Start at Block 0 -----"
    DL.SendSequence "MiFare Read 1 Block - Start at Block 0"
-   
-   if readerType = "GR" or readerType = "NEO1" then result = DL.WaitForSequence("MiFare Read Error Expected - (OK)", 1, 10000)
-   if readerType = "NEO2" then result = DL.WaitForSequence("MiFare Read 1 Block - Start at Block 0 - (OK)", 1, 10000)
+   result = DL.WaitForSequence("MiFare Read Error Expected - (OK)", 1, 1000)
+   if result = 0 then result = DL.WaitForSequence("MiFare Read 1 Block - Start at Block 0 - (OK)", 1, 1000)
  End If
 
  If result <> 0 then
@@ -314,9 +313,8 @@ dl.addcomment vbcrlf
 dl.addcomment vbcrlf
    DL.AddComment "----- MiFare Read 1 Block - Start at Block 0 -----"
    DL.SendSequence "MiFare Read 1 Block - Start at Block 0"
-
-   if readerType = "GR" or readerType = "NEO1" then result = DL.WaitForSequence("MiFare Read Error Expected - (OK)", 1, 10000)
-   if readerType = "NEO2" then result = DL.WaitForSequence("MiFare Read 1 Block - Start at Block 0 - (OK)", 1, 10000)
+   result = DL.WaitForSequence("MiFare Read Error Expected - (OK)", 1, 1000)
+   if result = 0 then result = DL.WaitForSequence("MiFare Read 1 Block - Start at Block 0 - (OK)", 1, 1000)
  End If
 
  If result <> 0 then

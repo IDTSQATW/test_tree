@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-44048
+54475
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -201,6 +201,7 @@ For i = 1 to 255
 	      DL.ResetReceiveCounter
 		DL.SendSequence "Read 1 block on block #x", i,"D"
 		Written = Written + 1
+              dl.pause 100
 		result = DL.WaitForSequence ("Read 1 Block OK", 1, 10000)
 
             If result <> 0 And rxBlkVal = txBlkNo + 1 Then

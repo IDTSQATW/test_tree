@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-16694
+63275
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -8,7 +8,7 @@ DL_SCRIPTVERSION
 '------------------------------------------------------------
 Dim ProjectName
 ProjectName = "ULTR101" ' !!!!! EDIT THIS !!!!!
-Objective: To verify AT cmd can detect Mifare Ultralight C card and then auto switch to Pass-through mode to communicate the card (K4 design)
+'Objective: To verify AT cmd can detect Mifare Ultralight C card and then auto switch to Pass-through mode to communicate the card (K4 design)
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -18,32 +18,56 @@ Objective: To verify AT cmd can detect Mifare Ultralight C card and then auto sw
 '   - Assign Docklight COM port
 '   - Assign Docklight Baud Rate
 '------------------------------------------------------------
-FileInput.OpenFile prefix & "Regress.Config"
+FileInput.OpenFile prefix & "Regress.Config2"
 Dim Prompting(1)
 Dim COM_Port(1)
 Dim POSBaudRate(1)
 
 Do Until FileInput.EndOfFile
-  'Display Test Case Number and Description	
+  'Display Test Case Number and Description     
   result = FileInput.GetLine() 'by pass variable name
   result = FileInput.GetLine()
   Prompting(0) = result
-	
-  'Display Test Steps 	
+      
+  'Display Test Steps   
   result = FileInput.GetLine() 'by pass variable name
-  result = FileInput.GetLine()	 
+  result = FileInput.GetLine()      
   Prompting(1) = result
 
-  'Set Docklight COM Port	
+  'Set Docklight COM Port     
   result = FileInput.GetLine() 'by pass variable name
-  result = FileInput.GetLine()	 
+  result = FileInput.GetLine()      
   COM_Port(1) = result
 
   'Set Reader Baud Rate
   result = FileInput.GetLine() 'by pass variable name
-  result = FileInput.GetLine()	 
+  result = FileInput.GetLine()      
   POSBaudRate(1) = result
-	
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  genFlag = result
 Loop
 
 Sub StepPrompt(PromptString)
@@ -146,7 +170,8 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- cmd 02-01 =================================================================="
    DL.SendSequence "CLT 02-01"
-   result = DL.WaitForSequence("Tag DFEC0F (02)", 1, 4000)
+   result = DL.WaitForSequence("02-01 resp", 1, 4000)
+   if result <> 0 then result = DL.WaitForSequence("Tag DFEC0F (02)", 1, 4000)
    dl.pause 500
    if result <> 0 then ReadBlock()
    if result <> 0 then WriteBlock()
@@ -158,7 +183,9 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- cmd 02-40 =================================================================="
    DL.SendSequence "CLT 02-40"
-   result = DL.WaitForSequence("Tag DFEC0F (02)", 1, 4000)
+   if readerType <> "NEO2" then result = DL.WaitForSequence("02-40 resp", 1, 4000)
+   if readerType = "NEO2" then result = DL.WaitForSequence("02-40 resp (NEO3)", 1, 4000)
+   if result <> 0 then result = DL.WaitForSequence("Tag DFEC0F (02)", 1, 4000)
    dl.pause 500
    if result <> 0 then ReadBlock()
    if result <> 0 then WriteBlock()

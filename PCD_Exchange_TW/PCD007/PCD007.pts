@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-53753
+41045
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -197,11 +197,8 @@ If result <> 0 Then
   dl.addcomment vbcrlf
   DL.AddComment "--- PCD Read Block 0"
   DL.SendSequence "PCD Read Block 0"
-  if readerType <> "NEO2" then
-     result = DL.WaitForSequence("1st Invalid Read Response", 1, 10000)
-  else
-     result = DL.WaitForSequence("1st Invalid Read Response (NEO2)", 1, 10000)
-  end if
+  result = DL.WaitForSequence("1st Invalid Read Response", 1, 1000)
+  if result = 0 then result = DL.WaitForSequence("1st Invalid Read Response (NEO2)", 1, 1000)
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -210,11 +207,9 @@ If result <> 0 Then
   dl.addcomment vbcrlf
   DL.AddComment "--- PCD Read Block 1"
   DL.SendSequence "PCD Read Block 1"
-  if readerType <> "NEO2" then
-     result = DL.WaitForSequence("2nd Invalid Read Response", 1, 10000)
-  else
-     result = DL.WaitForSequence("2nd Invalid Read Response (NEO2)", 1, 10000)
-  end if
+  result = DL.WaitForSequence("2nd Invalid Read Response", 1, 1000)
+  if result = 0 then result = DL.WaitForSequence("2nd Invalid Read Response (NEO2)", 1, 1000)
+  if result = 0 then result = DL.WaitForSequence("2nd Invalid Read Response (NEO3)", 1, 1000)
 End If
 '------------------------------------------------------------
 
@@ -224,11 +219,9 @@ If result <> 0 Then
   dl.addcomment vbcrlf
   DL.AddComment "--- PCD Read Block 2"
   DL.SendSequence "PCD Read Block 2"
-  if readerType <> "NEO2" then
-     result = DL.WaitForSequence("2nd Invalid Read Response", 1, 10000)
-  else
-     result = DL.WaitForSequence("2nd Invalid Read Response (NEO2)", 1, 10000)
-  end if
+  result = DL.WaitForSequence("2nd Invalid Read Response", 1, 1000)
+  if result = 0 then result = DL.WaitForSequence("2nd Invalid Read Response (NEO2)", 1, 1000)
+  if result = 0 then result = DL.WaitForSequence("2nd Invalid Read Response (NEO3)", 1, 1000)
 End If
 '------------------------------------------------------------
 
@@ -238,11 +231,9 @@ If result <> 0 Then
   dl.addcomment vbcrlf
   DL.AddComment "--- PCD Read Block 3"
   DL.SendSequence "PCD Read Block 3"
-  if readerType <> "NEO2" then
-     result = DL.WaitForSequence("2nd Invalid Read Response", 1, 10000)
-  else
-     result = DL.WaitForSequence("2nd Invalid Read Response (NEO2)", 1, 10000)
-  end if
+  result = DL.WaitForSequence("2nd Invalid Read Response", 1, 1000)
+  if result = 0 then result = DL.WaitForSequence("2nd Invalid Read Response (NEO2)", 1, 1000)
+  if result = 0 then result = DL.WaitForSequence("2nd Invalid Read Response (NEO3)", 1, 1000)
 End If
 '------------------------------------------------------------
 dl.addcomment vbcrlf

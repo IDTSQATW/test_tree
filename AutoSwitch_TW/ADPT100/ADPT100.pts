@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-14278
+10977
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -180,6 +180,7 @@ End If
 '------------------------------------------------------------
 sub DesfireProcess()
 If result <> 0 Then
+   dl.pause 300
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- GetVersion 1"

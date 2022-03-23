@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-34602
+29263
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -218,6 +218,7 @@ If result <> 0 Then
 End If
 
 If result <> 0 Then
+   dl.pause 500
  DL.ResetReceiveCounter
  dl.addcomment vbCrLf
  DL.AddComment "--- Read 15Blocks, starting Block #0"
@@ -226,6 +227,7 @@ If result <> 0 Then
 End If
 
 If result <> 0 Then
+   dl.pause 500
  DL.ResetReceiveCounter
  dl.addcomment vbCrLf
  DL.AddComment "--- Read 15Blocks, starting Block #16"
@@ -234,6 +236,7 @@ If result <> 0 Then
 End If
 
 If result <> 0 Then
+   dl.pause 500
  DL.ResetReceiveCounter
  dl.addcomment vbCrLf
  DL.AddComment "--- Read 15Blocks, starting Block #32"
@@ -242,6 +245,7 @@ If result <> 0 Then
 End If
 
 If result <> 0 Then
+   dl.pause 500
  DL.ResetReceiveCounter
  dl.addcomment vbCrLf
  DL.AddComment "--- Read 12Blocks, starting Block #48"

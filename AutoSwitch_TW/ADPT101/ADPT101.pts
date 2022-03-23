@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-60789
+43219
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -188,16 +188,6 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 sub underPTcmd()
-If result <> 0 Then
-   dl.pause 500
-   DL.ResetReceiveCounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- GetVersion 1"
-   DL.SendSequence "2c-03 GetVersion 1"
-   result = DL.WaitForSequence("2c cmd 00 resp", 1, 3000)
-   dl.pause 300
-End If
-'------------------------------------------------------------
 If result <> 0 Then
    dl.pause 500
    DL.ResetReceiveCounter

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-63275
+20454
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -202,6 +202,7 @@ For i = 0 to 39
     Else
 	i = "0" & i
     End If
+    dl.pause 300
     DL.SendSequence "Read Block", i, "D"
     result = DL.WaitForSequence("Read Block OK" , 1, 2000)
     PrintMyResult(result)
@@ -217,6 +218,7 @@ End Sub
 
 sub WriteBlock()
 If result <> 0 Then
+   dl.pause 300
    DL.AddComment vbCrLf
    DL.AddComment "---------- WRITE BLOCKS ----------"
    DL.AddComment vbCrLf
@@ -227,6 +229,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+   dl.pause 300
    DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "---Write Block #3"
@@ -235,6 +238,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+   dl.pause 300
    DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "---Write Block #5"
@@ -243,6 +247,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+   dl.pause 300
    DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "---Write Block #6"
@@ -251,6 +256,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+   dl.pause 300
    DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "---Write Block #7"
@@ -259,6 +265,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+   dl.pause 300
    DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "---Write Block #9"
@@ -267,6 +274,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+   dl.pause 300
    DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "---Write Block #10"
@@ -275,6 +283,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+   dl.pause 300
    DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "---Write Block #11"
@@ -283,6 +292,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+   dl.pause 300
    DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "---Write Block #13"
@@ -291,6 +301,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+   dl.pause 300
    DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "---Write Block #14"
@@ -299,6 +310,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+   dl.pause 300
    DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "---Write Block #15"
@@ -307,6 +319,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+   dl.pause 300
    DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "---Write Block #17"
@@ -315,6 +328,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+   dl.pause 300
    DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "---Write Block #18"
@@ -324,6 +338,7 @@ End If
 '------------------------------------------------------------
 msgbox "Remove the card", vbyesonly
 If result <> 0 Then
+   dl.pause 300
    DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "---PT Stop"

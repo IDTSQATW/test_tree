@@ -6,10 +6,6 @@ Result= True
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
 if (Result):
-	DL.SetWindowText("black", "*** 04-09")
-	DL.SendIOCommand("IDG", "04 09", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
-if (Result):
 	DL.SetWindowText("black", "*** DFED59 =  00 (Send First Response 0x63)")
 	DL.SendIOCommand("IDG", "04 00 DF ED 59 01 00", 3000, 1) 
 	Result = DL.Check_RXResponse("04 00 00 00")
@@ -17,13 +13,13 @@ if (Result):
 #Send cmd 60-10, w/o inserting CT card, wait for cmd timeout
 if (Result):
 	DL.SetWindowText("black", "*** 60-10 Contact Start Transaction")
-	DL.SendIOCommand("IDG", "60 10 00 23 01 00 0A 00 0A 9C 01 00 5F 57 01 00 9F 02 06 00 00 00 00 02 00 9F 03 06 00 00 00 00 00 00 5F 2A 02 08 40", 12000, 1) 
-	Result = DL.Check_RXResponse("60 08")	
-    if (Result):
-        Result = DL.Check_RXResponse("DF EE 25 02 30 13")	
+	DL.SendIOCommand("IDG", "60 10 01 00 03 00 03 9C 01 00 5F 57 01 00 9F 02 06 00 00 00 00 02 00 9F 03 06 00 00 00 00 00 00 5F 2A 02 08 40", 12000, 2) 
+	Result = DL.Check_RXResponse(1, "60 08")	
+	if (Result):
+		Result = DL.Check_RXResponse(1, "DF EE 25 02 30 13")	
 
 #Send cmd 60-10, w/ inserting CT card, wait for cmd timeout
 if (Result):
 	DL.SetWindowText("black", "*** 60-10 Contact Start Transaction, Please insert  EMV Test Card (T=0)..........")
-	DL.SendIOCommand("IDG", "60 10 00 23 01 00 0A 00 0A 9C 01 00 5F 57 01 00 9F 02 06 00 00 00 00 02 00 9F 03 06 00 00 00 00 00 00 5F 2A 02 08 40", 12000, 1) 
-	Result = DL.Check_RXResponse("60 08")	
+	DL.SendIOCommand("IDG", "60 10 01 00 0A 00 03 9C 01 00 5F 57 01 00 9F 02 06 00 00 00 00 02 00 9F 03 06 00 00 00 00 00 00 5F 2A 02 08 40", 12000, 3) 
+	Result = DL.Check_RXResponse(2, "60 08")	

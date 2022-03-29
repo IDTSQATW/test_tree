@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-20454
+46180
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -202,7 +202,7 @@ For i = 0 to 39
     Else
 	i = "0" & i
     End If
-    dl.pause 300
+    dl.pause 100
     DL.SendSequence "Read Block", i, "D"
     result = DL.WaitForSequence("Read Block OK" , 1, 2000)
     PrintMyResult(result)

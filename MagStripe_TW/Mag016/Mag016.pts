@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-26555
+20149
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -145,23 +145,23 @@ Function ReverseResult(ResultParam)
 End Function
 
 sub autopoll()
-if result <> 0 then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   dl.addcomment "--- Auto poll"
-   dl.sendsequence "Auto poll"
-   result = dl.waitforsequence("Poll Response", 1, 2000)
-end if
+    if result <> 0 then
+       dl.resetreceivecounter
+       dl.addcomment vbcrlf
+       dl.addcomment "--- Auto poll"
+       dl.sendsequence "Auto poll"
+       result = dl.waitforsequence("Poll Response", 1, 2000)
+    end if
 end sub
 
 sub pollondemand()
-if result <> 0 then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   dl.addcomment "--- Poll on demand"
-   dl.sendsequence "poll on demand"
-   result = dl.waitforsequence("Poll Response", 1, 2000)
-end if
+    if result <> 0 then
+       dl.resetreceivecounter
+       dl.addcomment vbcrlf
+       dl.addcomment "--- Poll on demand"
+       dl.sendsequence "poll on demand"
+       result = dl.waitforsequence("Poll Response", 1, 2000)
+    end if
 end sub
 '------------------------------------------------------------
 'Debugging (!!!!! DO NOT EDIT !!!!!)
@@ -177,8 +177,7 @@ End Function
 if result <> 0 then
    dl.resetreceivecounter
    dl.addcomment "--- Burst off"
-   
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then dl.sendsequence "Burst off"
+   if readerType <> "NEO2" then dl.sendsequence "Burst off"
    if readerType = "NEO2" then dl.sendsequence "Burst off (NEO2)"
    result = dl.waitforsequence("04 00", 1, 2000)
 end if
@@ -192,7 +191,7 @@ if result <> 0 then
          dl.resetreceivecounter
          dl.addcomment vbcrlf
          DL.AddComment "--- DF7D = 00"
-         if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then DL.SendSequence "DF7D = 00"
+         if readerType <> "NEO2" then DL.SendSequence "DF7D = 00"
          if readerType = "NEO2" then DL.SendSequence "DF7D = 00 (NEO2)"
          result = dl.waitforsequence("04 00", 1, 3000)
       End If
@@ -206,10 +205,19 @@ if result <> 0 then
             DL.AddComment "--- 02-01"
             MsgBox "Click OK --> Swipe JIS 2", VBOKOnly
             DL.SendSequence "02-01"
-            if trackcheck = 1 then result = dl.waitforsequence("02-01 resp - HW 2T", 1, 6000)
-            if trackcheck = 2 and (readerType = "GR" or readerType = "NEO1") then result = dl.waitforsequence("02-01 resp - HW 3T", 1, 6000)
-            if trackcheck = 2 and (readerType = "NEO2") then result = dl.waitforsequence("02-01 resp - HW 3T (NEO2)", 1, 6000)
-            if trackcheck = 2 and (readerType = "USAT") then result = dl.waitforsequence("02-01 resp - HW 3T (VP6300_USAT)", 1, 6000)
+            dl.pause 1000
+            if trackcheck = 1 then 
+               result = dl.waitforsequence("02-01 resp - HW 2T", 1, 2500)
+               if result = 0 then result = dl.waitforsequence("02-01 resp - HW 2T new card", 1, 2500)
+            end if
+            if trackcheck = 2 and readerType <> "NEO2" then 
+               result = dl.waitforsequence("02-01 resp - HW 3T", 1, 2500)
+               if result = 0 then result = dl.waitforsequence("02-01 resp - HW 3T new card", 1, 2500)
+            end if
+            if trackcheck = 2 and readerType = "NEO2" then 
+               result = dl.waitforsequence("02-01 resp - HW 3T (NEO2)", 1, 2500)
+               if result = 0 then result = dl.waitforsequence("02-01 resp - HW 3T (NEO2) new card", 1, 2500)
+            end if
          end if
       End If
       If result <> 0 Then
@@ -222,10 +230,18 @@ if result <> 0 then
             DL.AddComment "--- 03-00"
             MsgBox "Swipe JIS 2 --> Click OK", VBOKOnly
             DL.SendSequence "03-00"
-            if trackcheck = 1 then result = dl.waitforsequence("03-00 resp - HW 2T", 1, 4000)
-            if trackcheck = 2 and (readerType = "GR" or readerType = "NEO1") then result = dl.waitforsequence("03-00 resp - HW 3T", 1, 4000)
-            if trackcheck = 2 and (readerType = "NEO2") then result = dl.waitforsequence("03-00 resp - HW 3T (NEO2)", 1, 4000)
-            if trackcheck = 2 and (readerType = "USAT") then result = dl.waitforsequence("03-00 resp - HW 3T (VP6300_USAT)", 1, 4000)
+            if trackcheck = 1 then 
+               result = dl.waitforsequence("03-00 resp - HW 2T", 1, 2500)
+               if result = 0 then result = dl.waitforsequence("03-00 resp - HW 2T new card", 1, 2500)
+            end if
+            if trackcheck = 2 and readerType <> "NEO2" then 
+               result = dl.waitforsequence("03-00 resp - HW 3T", 1, 2500)
+               if result = 0 then result = dl.waitforsequence("03-00 resp - HW 3T new card", 1, 2500)
+            end if
+            if trackcheck = 2 and readerType = "NEO2" then 
+               result = dl.waitforsequence("03-00 resp - HW 3T (NEO2)", 1, 2500)
+               if result = 0 then result = dl.waitforsequence("03-00 resp - HW 3T (NEO2) new card", 1, 2500)
+            end if
          end if
       End If
    end if
@@ -235,7 +251,7 @@ if result <> 0 then
          dl.resetreceivecounter
          dl.addcomment vbcrlf
          DL.AddComment "--- DF7D = 01"
-         if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then DL.SendSequence "DF7D = 01"
+         if readerType <> "NEO2" then DL.SendSequence "DF7D = 01"
          if readerType = "NEO2" then DL.SendSequence "DF7D = 01 (NEO2)"
          result = dl.waitforsequence("04 00", 1, 3000)
       End If
@@ -250,9 +266,15 @@ if result <> 0 then
             DL.AddComment "--- 02-40"
             MsgBox "Click OK --> Swipe JIS 2", VBOKOnly
             DL.SendSequence "02-40"
-            if readerType = "GR" or readerType = "NEO1" then result = dl.waitforsequence("02-40 resp", 1, 6000)
-            if readerType = "NEO2" then result = dl.waitforsequence("02-40 resp (NEO2)", 1, 6000)
-            if readerType = "USAT" then result = dl.waitforsequence("02-40 resp (VP6300_USAT)", 1, 6000)
+            dl.pause 1000
+            if readerType <> "NEO2" then 
+               result = dl.waitforsequence("02-40 resp", 1, 2500)
+               if result = 0 then result = dl.waitforsequence("02-40 resp new card", 1, 2500)
+            end if
+            if readerType = "NEO2" then 
+               result = dl.waitforsequence("02-40 resp (NEO2)", 1, 2500)
+               if result = 0 then result = dl.waitforsequence("02-40 resp (NEO2) new card", 1, 2500)
+            end if
          end if
       End If
       If result <> 0 Then
@@ -265,9 +287,14 @@ if result <> 0 then
             DL.AddComment "--- 03-40"
             MsgBox "Swipe JIS 2 --> Click OK", VBOKOnly
             DL.SendSequence "03-40"
-            if readerType = "GR" or readerType = "NEO1" then result = dl.waitforsequence("03-40 resp", 1, 4000)
-            if readerType = "NEO2" then result = dl.waitforsequence("03-40 resp (NEO2)", 1, 4000)
-            if readerType = "USAT" then result = dl.waitforsequence("03-40 resp (VP6300_USAT)", 1, 4000)
+            if readerType <> "NEO2" then 
+               result = dl.waitforsequence("03-40 resp", 1, 2500)
+               if result = 0 then result = dl.waitforsequence("03-40 resp new card", 1, 2500)
+            end if
+            if readerType = "NEO2" then 
+               result = dl.waitforsequence("03-40 resp (NEO2)", 1, 2500)
+               if result = 0 then result = dl.waitforsequence("03-40 resp (NEO2) new card", 1, 2500)
+            end if
          end if
       End If
    end if
@@ -275,46 +302,44 @@ end if
 '------------------------------------------------------------
 dl.addcomment vbcrlf
 DL.SendSequence "poll on demand"
-dl.pause 2000
+dl.pause 1000
 
 DL.AddComment vbCrLf
-PrintMyResult(result)
-
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
-
-If MasterResult = 1 Then
-      MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-      MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)

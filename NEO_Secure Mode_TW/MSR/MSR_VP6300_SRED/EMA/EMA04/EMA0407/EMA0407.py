@@ -269,10 +269,15 @@ if (Result):
 								if i == 4:
 									# Transaction result verification
 									TR2plaintextdata = "7F 61 39 30 30 30 30 30 30 30 32 31 31 31 31 31 32 33 34 35 36 37 38 39 30 31 32 32 32 32 32 33 33 33 33 33 34 34 34 34 34 35 35 35 35 35 36 36 36 36 36 37 37 37 37 37 38 38 38 38 38 39 39 39 39 39 30 30 30 30 7F 15"
+									TR2plaintextdata2 = "7F 31 32 33 34 35 36 37 38 39 30 31 32 33 34 35 36 37 38 39 30 31 32 33 34 35 36 37 38 39 30 31 32 33 34 35 36 37 38 39 30 31 32 33 34 35 36 37 38 39 30 31 32 33 34 35 36 37 38 39 30 31 32 33 34 35 36 37 38 39 7F 4E"
 									
 									Result = DL.Check_StringAB(TR2plaintextdata, TRK2DecryptData)
 									if Result != True:
-										DL.SetWindowText("red", "TR2plaintextdata: FAIL")
+										Result = DL.Check_StringAB(TR2plaintextdata2, TRK2DecryptData)
+										if Result != True:
+											DL.SetWindowText("red", "TR2plaintextdata: FAIL")
+										else:
+											DL.SetWindowText("green", "JIS2 final verification result: PASS")
 
 								# AAMVA
 								if i == 5:

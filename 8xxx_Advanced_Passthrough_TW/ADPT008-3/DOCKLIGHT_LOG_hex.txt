@@ -1,0 +1,12 @@
+Docklight Log File (HEX) - Started 2022/4/18 15:36:32.452 
+ TEST CASE: ADPT008-3
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM90 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+
+
+Docklight Log File (HEX) - Stopped 2022/4/18 15:36:32.777 
+

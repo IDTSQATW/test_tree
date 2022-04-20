@@ -269,10 +269,15 @@ if (Result):
 								if i == 4:
 									# Transaction result verification
 									TR2maskdata = "a90000000211111234567890122222333334444455555666667777788888999990000"
+									TR2maskdata2 = "123456789012345678901234567890123456789012345678901234567890123456789"
 									
 									Result = DL.Check_StringAB(TR2maskdata, Track2_CardData)
 									if Result != True:
-										DL.SetWindowText("red", "TR2maskdata: FAIL")
+										Result = DL.Check_StringAB(TR2maskdata2, Track2_CardData)
+										if Result != True:
+											DL.SetWindowText("red", "TR2maskdata: FAIL")
+										else:
+											DL.SetWindowText("green", "JIS2 final verification result: PASS")
 
 								# AAMVA
 								if i == 5:

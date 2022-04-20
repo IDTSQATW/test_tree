@@ -1,20 +1,23 @@
-Docklight Log File (HEX) - Started 2022/2/15 08:59:08.880 
+Docklight Log File (HEX) - Started 2022/4/11 10:15:59.433 
  TEST CASE: CA004
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM1 @ 9600 baud...
+ POS operating on COM90 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  --- Create AID Failed as Expected
 
-2022/2/15 08:59:10.004 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 02 00 14 DF EE 2D 01 90 9F 06 07 A0 00 00 00 65 10 10 DF EE 4C 01 01 3A 2D 
-2022/2/15 08:59:10.054 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 06 00 00 1C B6  Status Code "00" Pass  
+2022/4/11 10:16:00.668 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 02 00 14 DF EE 2D 01 90 9F 06 07 A0 00 00 00 65 10 10 DF EE 4C 01 01 3A 2D 
+2022/4/11 10:16:00.729 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 06 00 00 1C B6  Status Code "00" Pass 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  Result = PASSED
  ---------- END OF TEST ----------
 
+ 
+
+ MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2022/2/15 08:59:10.987 
+Docklight Log File (HEX) - Stopped 2022/4/11 10:16:01.804 
 

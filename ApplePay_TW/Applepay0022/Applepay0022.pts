@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-40661
+57829
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -181,6 +181,14 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Set group A0"
    DL.SendSequence "Set group A0"
+   result = DL.WaitForSequence("Configuration Change Response", 1, 3000)
+End If
+else
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set group 2"
+   DL.SendSequence "Set group 2"
    result = DL.WaitForSequence("Configuration Change Response", 1, 3000)
 End If
 end if

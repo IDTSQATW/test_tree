@@ -1,15 +1,15 @@
-Docklight Log File (HEX) - Started 2022/2/17 08:59:56.677 
+Docklight Log File (HEX) - Started 2022/5/6 16:00:12.114 
  TEST CASE: SL018
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM1 @ 9600 baud...
+ POS operating on COM90 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  --- No Tone or LEDs
 
-2022/2/17 08:59:57.878 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 00 FF 00 E8 50 
-2022/2/17 08:59:57.910 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  
+2022/5/6 16:00:13.518 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 00 FF 00 E8 50 
+2022/5/6 16:00:13.525 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  Result = FAILED
  ---------- END OF TEST ----------
@@ -20,5 +20,5 @@ Docklight Log File (HEX) - Started 2022/2/17 08:59:56.677
  MASTER RESULT = FAILED
 
 
-Docklight Log File (HEX) - Stopped 2022/2/17 09:00:01.823 
+Docklight Log File (HEX) - Stopped 2022/5/6 16:00:17.142 
 

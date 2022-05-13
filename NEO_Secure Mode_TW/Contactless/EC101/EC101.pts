@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-46970
+64977
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -8,7 +8,7 @@ DL_SCRIPTVERSION
 '------------------------------------------------------------
 Dim ProjectName
 ProjectName = "EC101" ' !!!!! EDIT THIS !!!!!
-' Objective: for JIRA#CS-3663, DFEF4C/DFEF4D can be outputed when status code is 0x0A and transaction type is refund.
+' Objective: for JIRA#CS-3663, DFEF4C/DFEF4D can be outputed when status code is 0x0A and transaction type is refund (the error code = 42900005).
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -212,7 +212,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 If result <> 0 Then
-   MsgBox "Click OK --> Tap any MChip card", vbokonly
+   MsgBox "Click OK --> Tap Card 13#-MC No.1 card", vbokonly
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-40 w/ 9C = 20"
@@ -225,6 +225,7 @@ End If
 '------------------------------------------------------------
 DL.AddComment vbcrlf & "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)
+
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
@@ -251,14 +252,14 @@ End If '""
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
 
-If MasterResult = 1 Then
-      MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-      MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
@@ -269,15 +270,15 @@ DL.AddComment "MASTER RESULT = " & MasterVerdict
 '	FileOutput.CreateFile "MR_PASS"
 'End If
 
-FileOutput.CreateFile "FINAL_VERDICT.txt"
+'FileOutput.CreateFile "FINAL_VERDICT.txt"
 
-If MasterResult = 0 Then 
-	FileOutput.WriteLine "0|FAIL|NOK"
-ElseIf MasterResult = 1 Then
-	FileOutput.WriteLine "1|PASS|OK"
-End If
+'If MasterResult = 0 Then 
+'	FileOutput.WriteLine "0|FAIL|NOK"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.WriteLine "1|PASS|OK"
+'End If
 'FileOutput.WriteLine MasterResult
-FileOutput.CloseFile 
+'FileOutput.CloseFile 
 
 Sub DL_OnSend()
     usDataLen = DL.OnSend_GetSize() - 2

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-17546
+28171
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -279,3 +279,13 @@ ElseIf MasterResult = 1 Then
 End If
 'FileOutput.WriteLine MasterResult
 FileOutput.CloseFile
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub

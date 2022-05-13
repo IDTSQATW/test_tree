@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-29291
+20662
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -227,8 +227,8 @@ if result <> 0 then
        end if
    next
 
-   dl.addcomment vbcrlf & vbcrlf & "1) AT w/ AppleVAS -- VAS and PAY, Failed count (10 cycles): " & countfa 
-   dl.addcomment vbcrlf & "2) AT w/ AppleVAS -- PAY only, Failed count (10 cycles): " & countfb
+   dl.addcomment vbcrlf & vbcrlf & "1) AT w/ AppleVAS -- VAS and PAY, Failed count (5 cycles): " & countfa 
+   dl.addcomment vbcrlf & "2) AT w/ AppleVAS -- PAY only, Failed count (5 cycles): " & countfb
 end if
 '------------------------------------------------------------
 DL.AddComment vbCrLf

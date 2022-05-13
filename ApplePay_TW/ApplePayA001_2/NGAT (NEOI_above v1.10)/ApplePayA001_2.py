@@ -56,7 +56,7 @@ if (Result):
 				TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 				
 			# Tag 57					
-				Result = DL.Check_StringAB(Tag57, '57134817499130371965D23122260000016799993F')
+				Result = DL.Check_RXResponse(0, '5713')
 				if Result == True:
 					DL.SetWindowText("blue", "Tag 57: PASS")
 				else:
@@ -98,7 +98,7 @@ if (Result):
 				TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 				
 			# Tag 57					
-				Result = DL.Check_StringAB(Tag57, '57134817499130371965D23122260000016799993F')
+				Result = DL.Check_RXResponse(1, '5713')
 				if Result == True:
 					DL.SetWindowText("blue", "Tag 57: PASS")
 				else:

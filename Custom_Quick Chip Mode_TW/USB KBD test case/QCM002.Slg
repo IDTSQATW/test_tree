@@ -1,9 +1,9 @@
 
-16:57:36: If Issue ?
+14:27:44: If Issue ?
 Pass Test
 [Issue Count: 0]
 
-16:57:36: >>[Do Scripts]>>
+14:27:44: >>[Do Scripts]>>
 
 Objective: under Quick Chip mode, some transaction cmd can not be worked. (02-01, 02-40, 60-10~12, 60-16)
 ----------------------------------------

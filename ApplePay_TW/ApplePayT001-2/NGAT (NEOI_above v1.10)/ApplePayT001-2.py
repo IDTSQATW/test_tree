@@ -49,14 +49,13 @@ if (Result):
 				DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** 41")
 				alldata = DL.Get_RXResponse(0)
 				
-				Tag57 = DL.GetTLV(alldata,"57")
-				
+				Tag57 = DL.GetTLV(alldata,"57")		
 				Tag9F39 = DL.GetTLV(alldata,"9F39")
 				TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
 				TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 				
 			# Tag 57			
-				Result = DL.Check_StringAB(Tag57, '57134817499130371965D23122260000016799993F')
+				Result = DL.Check_RXResponse(0, '5713')
 				if Result == True:
 					DL.SetWindowText("blue", "Tag 57: PASS")
 				else:
@@ -98,7 +97,7 @@ if (Result):
 				TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 				
 			# Tag 57			
-				Result = DL.Check_StringAB(Tag57, '57134817499130371965D23122260000016799993F')
+				Result = DL.Check_RXResponse(1, '5713')
 				if Result == True:
 					DL.SetWindowText("blue", "Tag 57: PASS")
 				else:

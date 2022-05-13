@@ -1,9 +1,9 @@
 
-09:54:12: If Issue ?
+13:13:46: If Issue ?
 Pass Test
 [Issue Count: 0]
 
-09:54:12: >>[Do Scripts]>>
+13:13:46: >>[Do Scripts]>>
 
 Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
 --------------------

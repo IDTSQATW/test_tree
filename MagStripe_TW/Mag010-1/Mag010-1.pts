@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-8417
+31090
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -191,14 +191,14 @@ sub at()
    DL.SendSequence "Activate Transaction"
    result1 = dl.waitforsequence("IDT std card resp2", 1, 10000)
 
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then result2 = dl.waitforsequence("tag df30", 1, 1000)
+   if readerType <> "NEO2" then result2 = dl.waitforsequence("tag df30", 1, 1000)
    if readerType = "NEO2" then result2 = dl.waitforsequence("tag DFEE30 (NEO2)", 1, 1000)
 
    result3 = dl.waitforsequence("tag 9f06", 1, 1000)
    result4 = dl.waitforsequence("tag 9f39", 1, 1000)
 
-   if readerType = "GR" or readerType = "NEO1" then result5 = dl.waitforsequence("tag dfee26", 1, 1000)
-   if readerType = "NEO2" or readerType = "USAT" then result5 = dl.waitforsequence("tag dfee26 (VP6300_USAT)", 1, 1000)
+   if readerType <> "NEO2" then result5 = dl.waitforsequence("tag dfee26", 1, 1000)
+   if readerType = "NEO2" then result5 = dl.waitforsequence("tag dfee26 (VP6300_USAT)", 1, 1000)
 
    result6 = dl.waitforsequence("1t data", 1, 1000)
    result7 = dl.waitforsequence("2t data", 1, 1000)

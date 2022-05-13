@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-25188
+29972
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -196,7 +196,7 @@ If result <> 0 Then
    if i = 1 then cmd = "ACT (02-01)"
    if i = 2 then cmd = "ACT (02-40)"
    DL.ResetReceiveCounter
-   msgbox "Click OK --> Tap ApplePay VISA_PAN = xxxx....0492"
+   msgbox "Click OK --> Tap ApplePay VISA"
    dl.addcomment vbcrlf
    DL.AddComment "--- " & cmd
    DL.SendSequence cmd

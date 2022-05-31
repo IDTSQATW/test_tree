@@ -57,13 +57,13 @@ if (Result):
 				TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 				
 			# Tag 57
-				Result = DL.Check_StringAB(mask57, '4817CCCCCCCC1965D2312226CCCCCCCCCCCCCC')
+				Result = DL.Check_StringAB(mask57, '4831CCCCCCCC2892D2312201CCCCCCCCCCCCCC')
 				if Result == True and DL.Check_RXResponse("57 A1 13"):
 					DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 				else:
 					DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 					
-				Result = DL.Check_StringAB(dec57, '57134817499130371965D23122260000016799993F')
+				Result = DL.Check_StringAB(dec57, '57134831961250122892D23122010000099699993F')
 				if Result == True and DL.Check_RXResponse("57 C1"):
 					DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 				else:
@@ -108,13 +108,13 @@ if (Result):
 				TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 				
 			# Tag 57
-				Result = DL.Check_StringAB(mask57, '4817CCCCCCCC1965D2312226CCCCCCCCCCCCCC')
+				Result = DL.Check_StringAB(mask57, '4831CCCCCCCC2892D2312201CCCCCCCCCCCCCC')
 				if Result == True and DL.Check_StringAB(alldata, "57 A1 13"):
 					DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 				else:
 					DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 					
-				Result = DL.Check_StringAB(dec57, '57134817499130371965D23122260000016799993F')
+				Result = DL.Check_StringAB(dec57, '57134831961250122892D23122010000099699993F')
 				if Result == True and DL.Check_StringAB(alldata, "57 C1"):
 					DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 				else:

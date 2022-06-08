@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-14519
+28378
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -157,7 +157,7 @@ If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- Set default config"
    DL.SendSequence "Set default config"
-   result = DL.WaitForSequence("04 00", 1, 5000)
+   result = DL.WaitForSequence("04 00", 1, 10000)
    dl.pause 500
 End If
 

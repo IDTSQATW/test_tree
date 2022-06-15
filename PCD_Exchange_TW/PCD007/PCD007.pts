@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-41045
+46070
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -154,6 +154,7 @@ End Function
 'TEST BEGINS
 '------------------------------------------------------------
 result = 1
+cardowner = inputbox ("Which card do u want to test?" & vbcrlf & "1) UID = D3 AC 5A E3" & vbcrlf & "2) UID = 7E BD BA E5", vbokonly)
 
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
 DL.Pause 3000
@@ -188,7 +189,8 @@ If result <> 0 Then
   dl.addcomment vbcrlf
   DL.AddComment "---Poll For Token"
   DL.SendSequence "Poll For Token"
-  result = DL.WaitForSequence("Poll For Token MPS001 4 byte UID", 1, 10000)
+  if cardowner = 1 then result = DL.WaitForSequence("Poll For Token MPS001 4 byte UID", 1, 10000)
+  if cardowner = 2 then result = DL.WaitForSequence("Poll For Token MPS001 4 byte UID-mindy", 1, 10000)
 End If
 '============================================================
 If result <> 0 Then
@@ -251,7 +253,7 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
 If 0 Then
 If result = 0 then

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-26272
+63840
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -154,6 +154,7 @@ End Function
 'TEST BEGINS
 '------------------------------------------------------------
 result = 1
+cardowner = inputbox ("Which card do u want to test?" & vbcrlf & "1) UID = D3 AC 5A E3" & vbcrlf & "2) UID = 7E BD BA E5", vbokonly)
 
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
 DL.Pause 3000
@@ -186,7 +187,8 @@ If result <> 0 Then
   DL.Pause 400
   DL.ResetReceiveCounter
   DL.AddComment "--- PCD Auth Sector 0 - add card snr"
-  DL.SendSequence "PCD Auth Sector 0 - add card snr"
+  if cardowner  = 1 then DL.SendSequence "PCD Auth Sector 0 - add card snr"
+  if cardowner  = 2 then DL.SendSequence "PCD Auth Sector 0 - add card snr-mindy"
   result = DL.WaitForSequence("2nd Invalid Read Response", 1, 1000)
   if result = 0 then result = DL.WaitForSequence("2nd Invalid Read Response (NEO2)", 1, 1000)
   if result = 0 then result = DL.WaitForSequence("2nd Invalid Read Response (NEO3)", 1, 1000)
@@ -248,7 +250,7 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
 If 0 Then
 If result = 0 then
@@ -298,5 +300,13 @@ End If
 'FileOutput.WriteLine MasterResult
 FileOutput.CloseFile 
 
-
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub
 

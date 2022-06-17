@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-29295
+37249
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -153,12 +153,14 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+If readerType <> "NEO2" then
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- Set default config"
    DL.SendSequence "Set default config"
    result = DL.WaitForSequence("04 00", 1, 5000)
    dl.pause 500
+End If
 End If
 
 If result <> 0 Then

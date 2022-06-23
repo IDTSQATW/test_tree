@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-46924
+50004
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -153,12 +153,14 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+If readerType <> "NEO2" then
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- Set default config"
    DL.SendSequence "Set default config"
    result = DL.WaitForSequence("04 00", 1, 5000)
    dl.pause 500
+End If
 End If
 
 If result <> 0 Then
@@ -233,9 +235,11 @@ If result <> 0 Then
    DL.SendSequence "60-10 Start Transaction-Credit/No CVM"
    menu = msgbox ("Does LCD display menu for Debit/Credit?", vbyesno) 
    if menu = 6 then
-      dl.pause 1000
+      dl.pause 3000
       result = DL.WaitForSequence("Tag 9F34 = 1F", 1, 2000)
       dl.pause 500
+      DL.SendSequence "05-01"
+      dl.pause 1000
    else
       DL.SendSequence "05-01"
       dl.pause 1000
@@ -251,13 +255,14 @@ If result <> 0 Then
    menu = msgbox ("Does LCD display menu for Debit/Credit?", vbyesno) 
    if menu = 6 then
       result = DL.WaitForSequence("Tag 9F34 = 1F", 1, 5000)
+      dl.pause 500
+      DL.SendSequence "05-01"
       dl.pause 1000
    else
       result = 0
-   end if
-
    DL.SendSequence "05-01"
    dl.pause 2000
+   end if
 
    msgbox "Remove card --> Click OK", vbyesno
 End If

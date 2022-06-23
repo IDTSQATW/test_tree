@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-44262
+9788
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -149,18 +149,18 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+hwtype = msgbox ("Does the CT reader has Front switch? ex. VP6300", vbyesno)
+
 If result <> 0 Then
    msgbox "Insert card, then click OK", vbokonly
    dl.resetreceivecounter
    DL.AddComment "--- 60-14 Get Contact Reader Status (ICC) *** " & readerType 
    DL.SendSequence "60-14 Get Contact Reader Status (ICC)"
 
-   if readerType = "GR" or readerType = "NEO1" then 
+   if hwtype = 7 then 
       result = DL.WaitForSequence("ICC Get Status OK 02", 1, 2000)
-   elseif readerType = "NEO2" or readerType = "USAT" or readerType = "USAT_SRED" then 
-          result = DL.WaitForSequence("ICC Get Status OK 06", 1, 2000)
    else
-      result = DL.WaitForSequence("ICC Get Status OK 02", 1, 2000)
+      result = DL.WaitForSequence("ICC Get Status OK 06", 1, 2000)
    end if
 
 End If
@@ -196,12 +196,10 @@ If result <> 0 Then
    DL.AddComment "--- 60-14 Get Contact Reader Status (ICC)"
    DL.SendSequence "60-14 Get Contact Reader Status (ICC)"
 
-   if readerType = "GR" or readerType = "NEO1" then 
+   if hwtype = 7 then 
       result = DL.WaitForSequence("ICC Get Status OK 03", 1, 2000)
-   elseif readerType = "NEO2" or readerType = "USAT" or readerType = "USAT_SRED" then 
-          result = DL.WaitForSequence("ICC Get Status OK 07", 1, 2000)
    else
-      result = DL.WaitForSequence("ICC Get Status OK 03", 1, 2000)
+      result = DL.WaitForSequence("ICC Get Status OK 07", 1, 2000)
    end if
 
    msgbox "Remove card, then click OK", vbokonly
@@ -217,43 +215,40 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 DL.AddComment vbCrLf
-PrintMyResult(result)
-
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
-
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
-
-If MasterResult = 1 Then
-      MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-      MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)

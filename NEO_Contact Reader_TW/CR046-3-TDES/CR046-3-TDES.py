@@ -15,24 +15,37 @@ strKey = '0123456789ABCDEFFEDCBA9876543210'
 readertype = DL.ShowMessageBox("", "Is this NEOII project?", 0)
 if readertype == 1:
 	DL.SetWindowText("Green", "*** NEOII project ***")
+	# Check project has LCD or not
+	lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
+	if lcdtype == 1:
+		DL.SetWindowText("Green", "*** The project has LCD ***")
+	else:
+		DL.SetWindowText("Green", "*** The project has NO LCD ***")
 else:
 	DL.SetWindowText("Green", "*** NEOI project ***")
-	
-# Get Data Encryption (C7-37)
-if (Result):
-	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
-		if Result == False:
-			DL.SetWindowText("Red", "Please ENABLE data encryption (03)...")
 
-# Encryption Type -- TDES
-if (Result):
-	RetOfStep = DL.SendCommand('Encryption Type -- TDES')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 00")	
-		if Result == False:
-			DL.SetWindowText("Red", "Please set data key type as TDES...")
+# Check data encryption TYPE is TDES	
+if readertype == 1:	
+	# Get DUKPT DEK Attribution based on KeySlot (C7-A3)
+	if (Result):
+		RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+		if (RetOfStep):
+			Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
+else:	
+	# Get Data Encryption (C7-37)
+	if (Result):
+		RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
+		if (RetOfStep):
+			Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
+			if Result == False:
+				DL.SetWindowText("Red", "Please ENABLE data encryption (03)...")
+	# Encryption Type -- TDES
+	if (Result):
+		RetOfStep = DL.SendCommand('Encryption Type -- TDES')
+		if (RetOfStep):
+			Result = Result and DL.Check_RXResponse("C7 00 00 01 00")	
+			if Result == False:
+				DL.SetWindowText("Red", "Please set data key type as TDES...")
 
 # First response control = Send First Response 0x63
 if (Result):
@@ -40,14 +53,7 @@ if (Result):
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("04 00 00 00")	
 			
-# Burst mode OFF & Poll on demand		
-if (Result):
-	if readertype == 1:	
-		RetOfStep = DL.SendCommand('Burst mode Off (NEOII)')
-	else:
-		RetOfStep = DL.SendCommand('Burst mode Off (NEOI)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")	
+# Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):
@@ -80,12 +86,28 @@ if (Result):
 # cmd 60-10, fallback to MSR, swipe card
 if (Result):
 	if readertype == 1:
-		RetOfStep = DL.SendCommand('Activate Transaction_NEOII')
+		if lcdtype == 1:
+			RetOfStep = DL.SendCommand('Activate Transaction_NEOII_w LCD')
+		if lcdtype == 0:
+			RetOfStep = DL.SendCommand('Activate Transaction_NEOII_w/o LCD')			
 	else:
 		RetOfStep = DL.SendCommand('Activate Transaction_NEOI')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("60 63 00 00")
 		if (Result):
+			if readertype == 1:		
+				if lcdtype == 1:
+					Result = DL.Check_StringAB(DL.Get_RXResponse(3), '56 69 56 4F 74 65 63 68 32 00 60 00')
+					if (Result):
+						Result = DL.Check_StringAB(DL.Get_RXResponse(3), 'E8 DF EE 25')
+					sResult=DL.Get_RXResponse(3)
+					time.sleep(2)		
+				if lcdtype == 0:
+					Result = DL.Check_StringAB(DL.Get_RXResponse(5), '56 69 56 4F 74 65 63 68 32 00 60 00')
+					if (Result):
+						Result = DL.Check_StringAB(DL.Get_RXResponse(5), 'E8 DF EE 25')
+					sResult=DL.Get_RXResponse(5)
+					time.sleep(2)						
 			if readertype == 0:
 				Result = DL.Check_StringAB(DL.Get_RXResponse(3), '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 13 1C 02 00 00 00 23 0F')
 				if (Result):
@@ -93,12 +115,6 @@ if (Result):
 					if (Result):
 						Result = DL.Check_StringAB(DL.Get_RXResponse(5), 'C8 DF EE 25')
 				sResult=DL.Get_RXResponse(5)		
-			if readertype == 1:			
-				Result = DL.Check_StringAB(DL.Get_RXResponse(3), '56 69 56 4F 74 65 63 68 32 00 60 00')
-				if (Result):
-					Result = DL.Check_StringAB(DL.Get_RXResponse(3), 'E8 DF EE 25')
-				sResult=DL.Get_RXResponse(3)
-				time.sleep(2)
 			if (Result):	
 				if sResult!=None and sResult!="":
 					sResult=sResult.replace(" ","")

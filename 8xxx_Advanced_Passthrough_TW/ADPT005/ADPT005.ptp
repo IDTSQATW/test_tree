@@ -136,6 +136,20 @@ Step 14. Read file 01, no offset , no size
 
 SEND
 16
+End of Transaction(Select Application(0x5A))
+56 69 56 4F 74 65 63 68 32 00 2C 03 00 09 90 5A 00 00 03 00 00 00 00 88 63
+0
+5
+
+SEND
+17
+2C-FB
+56 69 56 4F 74 65 63 68 32 00 2C FB 00 01 05 7B AA
+0
+5
+
+SEND
+18
 >>>>> Set PT mode OFF >>>>>>>>>>>>>>>
 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38
 0

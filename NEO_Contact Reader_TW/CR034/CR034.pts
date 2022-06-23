@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-57757
+50617
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -153,7 +153,7 @@ If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- PassThrough: START"
    DL.SendSequence "*** Step 2: PassThrough-----START"
-   result = DL.WaitForSequence("2C-xx ok", 1, 2000)
+   result = DL.WaitForSequence("2C-xx ok", 1, 1200)
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -161,7 +161,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Get ATR length error"
    DL.SendSequence "Get ATR length error"
-   result = DL.WaitForSequence("2c-xx 04 status", 1, 2000)
+   result = DL.WaitForSequence("2c-xx 04 status", 1, 1200)
 End If
 
 If result <> 0 Then
@@ -169,15 +169,8 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Get ATR data error"
    DL.SendSequence "Get ATR data error"
-
-   if readerType = "GR" or readerType = "NEO1" then 
-      result = DL.WaitForSequence("2c-xx 05 status", 1, 2000)
-   elseif readerType = "NEO2" or readerType = "USAT" then 
-      result = DL.WaitForSequence("2c 0a", 1, 2000)
-   else
-      result = DL.WaitForSequence("2c-xx 05 status", 1, 2000)
-   end if
-
+   result = DL.WaitForSequence("2c-xx 05 status", 1, 1200)
+   if result = 0 then result = DL.WaitForSequence("2c 0a", 1, 1200)
 End If
 
 If result <> 0 Then
@@ -185,7 +178,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Get ATR crc error"
    DL.SendSequence "Get ATR crc error"
-   result = DL.WaitForSequence("2c-xx 04 status", 1, 2000)
+   result = DL.WaitForSequence("2c-xx 04 status", 1, 1200)
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -193,7 +186,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Exchange APDU Data length error"
    DL.SendSequence "Exchange APDU Data length error"
-   result = DL.WaitForSequence("2c-xx 04 status", 1, 2000)
+   result = DL.WaitForSequence("2c-xx 04 status", 1, 1200)
 End If
 
 If result <> 0 Then
@@ -201,15 +194,8 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Exchange APDU Data data error"
    DL.SendSequence "Exchange APDU Data data error"
-
-   if readerType = "GR" or readerType = "NEO1" then 
-      result = DL.WaitForSequence("2c-xx 05 status", 1, 2000)
-   elseif readerType = "NEO2" or readerType = "USAT" then 
-      result = DL.WaitForSequence("2c 0c", 1, 2000)
-   else
-      result = DL.WaitForSequence("2c-xx 05 status", 1, 2000)
-   end if
-
+   result = DL.WaitForSequence("2c-xx 05 status", 1, 1200)
+   if result = 0 then result = DL.WaitForSequence("2c 0c", 1, 1200)
 End If
 
 If result <> 0 Then
@@ -217,7 +203,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Exchange APDU Data crc error"
    DL.SendSequence "Exchange APDU Data crc error"
-   result = DL.WaitForSequence("2c-xx 04 status", 1, 2000)
+   result = DL.WaitForSequence("2c-xx 04 status", 1, 1200)
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -225,7 +211,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Contact Power Off length error"
    DL.SendSequence "Contact Power Off length error"
-   result = DL.WaitForSequence("2c-xx 04 status", 1, 2000)
+   result = DL.WaitForSequence("2c-xx 04 status", 1, 1200)
 End If
 
 If result <> 0 Then
@@ -233,7 +219,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Contact Power Off data error"
    DL.SendSequence "Contact Power Off data error"
-   result = DL.WaitForSequence("2c-xx 05 status", 1, 2000)
+   result = DL.WaitForSequence("2c-xx 05 status", 1, 1200)
 End If
 
 If result <> 0 Then
@@ -241,7 +227,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Contact Power Off crc error"
    DL.SendSequence "Contact Power Off crc error"
-   result = DL.WaitForSequence("2c-xx 04 status", 1, 2000)
+   result = DL.WaitForSequence("2c-xx 04 status", 1, 1200)
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -249,7 +235,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- PassThrough: STOP"
    DL.SendSequence "*** Step 6: PassThrough-----STOP"
-   result = DL.WaitForSequence("2C-xx ok", 1, 2000)
+   result = DL.WaitForSequence("2C-xx ok", 1, 1200)
 End If
 '------------------------------------------------------------
 DL.AddComment vbCrLf

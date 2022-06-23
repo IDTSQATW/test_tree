@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-103
+14601
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -181,7 +181,7 @@ If result <> 0 Then
    DL.SendSequence "60-10 DFEE27 01 (MSR only enable)"
    result = DL.WaitForSequence("60-xx 63 status", 1, 10000)
    if result <> 0 then
-      if readerType = "GR" or readerType = "NEO1" then result = DL.WaitForSequence("USE MAGSTRIPE", 1, 10000)
+      if readerType <> "NEO2" then result = DL.WaitForSequence("USE MAGSTRIPE", 1, 10000)
       if result <> 0 then
          msgbox "Click OK, swipe card (IDT test card)", vbokonly
          result = DL.WaitForSequence("60-10 00 11", 1, 20000)

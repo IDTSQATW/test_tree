@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-52942
+29483
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -158,12 +158,13 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+   defaultvalue = inputbox ("Please enter the default value of the ICS host configuration number for this project.", vbokonly)
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- 60-15 Contact Get ICS Identification"
    DL.SendSequence "60-15 Contact Get ICS Identification"
-   if readerType = "GR" or readerType = "NEO1" then result = DL.WaitForSequence("60 00", 1, 2000)
-   if readerType = "NEO2" or readerType = "USAT" then result = DL.WaitForSequence("60 00 (NEO2)", 1, 2000)
+   if defaultvalue = 2 then result = DL.WaitForSequence("60 00 (value 02)", 1, 2000)
+   if defaultvalue = 4 then result = DL.WaitForSequence("60 00 (value 04)", 1, 2000)
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -195,15 +196,8 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- 60-15 Contact Get ICS Identification"
    DL.SendSequence "60-15 Contact Get ICS Identification"
-
-   if readerType = "GR" or readerType = "NEO1" then 
-      result = DL.WaitForSequence("60 00", 1, 2000)
-   elseif readerType = "NEO2" or readerType = "USAT" then 
-          result = DL.WaitForSequence("60 00 (NEO2)", 1, 2000)
-   else
-      result = DL.WaitForSequence("60 00", 1, 2000)
-   end if
-
+   if defaultvalue = 2 then result = DL.WaitForSequence("60 00 (value 02)", 1, 2000)
+   if defaultvalue = 4 then result = DL.WaitForSequence("60 00 (value 04)", 1, 2000)
 End If
 '------------------------------------------------------------
 DL.AddComment vbCrLf

@@ -18,30 +18,30 @@ if readertype == 1:
 else:
 	DL.SetWindowText("Green", "*** NEOI project ***")
 
+# Check the reader is TDES
+if readertype == 1:
+	# Get DUKPT DEK Attribution based on KeySlot (C7-A3)
+	if (Result):
+		RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+		if (RetOfStep):
+			Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")	
+else:			
 # Get Data Encryption (C7-37)
-if (Result):
-	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
-	if (RetOfStep):
-		Result = DL.Check_RXResponse("C7 00 00 01 03")
-		if Result == False:
-			DL.SetWindowText("Red", "Please ENABLE data encryption (03)...")
-
-# Encryption Type -- TDES
-if (Result):
-	RetOfStep = DL.SendCommand('Encryption Type -- TDES')
-	if (RetOfStep):
-		Result = DL.Check_RXResponse("C7 00 00 01 00")	
-		if Result == False:
-			DL.SetWindowText("Red", "Please set data key type as TDES...")
+	if (Result):
+		RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
+		if (RetOfStep):
+			Result = DL.Check_RXResponse("C7 00 00 01 03")
+			if Result == False:
+				DL.SetWindowText("Red", "Please ENABLE data encryption (03)...")
+	# Encryption Type -- TDES
+	if (Result):
+		RetOfStep = DL.SendCommand('Encryption Type -- TDES')
+		if (RetOfStep):
+			Result = DL.Check_RXResponse("C7 00 00 01 00")	
+			if Result == False:
+				DL.SetWindowText("Red", "Please set data key type as TDES...")
 			
-# Burst mode OFF & Poll on demand		
-if (Result):
-	if readertype == 1:	
-		RetOfStep = DL.SendCommand('Burst mode Off (NEOII)')
-	else:
-		RetOfStep = DL.SendCommand('Burst mode Off (NEOI)')
-	if (RetOfStep):
-		Result = DL.Check_RXResponse("04 00 00 00")	
+# Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):
@@ -71,6 +71,11 @@ if (Result):
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("60 63 00 00")
 		if (Result):
+			if readertype == 1:		
+				Result = DL.Check_StringAB(DL.Get_RXResponse(5), '56 69 56 4F 74 65 63 68 32 00 60 00')
+				if (Result):
+					Result = DL.Check_StringAB(DL.Get_RXResponse(5), 'E8 DF EE 25')
+				sResult=DL.Get_RXResponse(5)		
 			if readertype == 0:
 				Result = DL.Check_StringAB(DL.Get_RXResponse(2), '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 0E 1C 02 00 00 00 77 C8')
 				if (Result):
@@ -80,11 +85,6 @@ if (Result):
 						if (Result):
 							Result = DL.Check_StringAB(DL.Get_RXResponse(6), 'C8 DF EE 25')
 				sResult=DL.Get_RXResponse(6)
-			if readertype == 1:		
-				Result = DL.Check_StringAB(DL.Get_RXResponse(5), '56 69 56 4F 74 65 63 68 32 00 60 00')
-				if (Result):
-					Result = DL.Check_StringAB(DL.Get_RXResponse(5), 'E8 DF EE 25')
-				sResult=DL.Get_RXResponse(5)
 			if (Result):	
 				if sResult!=None and sResult!="":
 					sResult=sResult.replace(" ","")

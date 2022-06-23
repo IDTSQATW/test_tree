@@ -10,23 +10,15 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
-# Get Data Encryption (C7-37)
-if (Result):
-	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
+# Objective: Tag FFEE1D can work if had been changed before
 
-# Encryption Type -- TDES
+# Check data encryption TYPE is TDES	
 if (Result):
-	RetOfStep = DL.SendCommand('Encryption Type -- TDES')
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 00")		
+		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")	
 		
-# Burst mode OFF & Poll on demand		
-if (Result):
-	RetOfStep = DL.SendCommand('Burst mode Off')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")	
+# Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):

@@ -10,17 +10,20 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
-# Get Data Encryption (C7-37)
-if (Result):
-	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
+# Objective: to verify case V2CC0140900v4.3d (SDK: Standard/ Decline)
 
-# Encryption Type -- TDES
+# Check project has LCD or not
+lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** The project has LCD ***")
+else:
+	DL.SetWindowText("Green", "*** The project has NO LCD ***")
+
+# Check data encryption TYPE is TDES	
 if (Result):
-	RetOfStep = DL.SendCommand('Encryption Type -- TDES')
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 00")	
+		Result = DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
 
 # First Response Control (0x63) = enable
 if (Result):
@@ -28,11 +31,7 @@ if (Result):
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("04 00 00 00")			
 		
-# Burst mode OFF & Poll on demand		
-if (Result):
-	RetOfStep = DL.SendCommand('Burst mode Off')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")	
+# Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):

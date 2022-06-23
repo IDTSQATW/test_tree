@@ -10,21 +10,13 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
-# Get Data Encryption (C7-37)
-if (Result):
-	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
-	if (RetOfStep):
-		Result = DL.Check_RXResponse("C7 00 00 01 03")
-		if Result != True:
-			DL.SetWindowText("red", "Set cmd C7-36 = 03 first!")
+# Objective: for JIRA#CS-3879, swipe card (server code 2xx) twice, and then completed CT transaction but get incorrect dfef4D data
 
-# Encryption Type -- TDES
+# Check encryption type is TDES
 if (Result):
-	RetOfStep = DL.SendCommand('Encryption Type -- TDES')
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = DL.Check_RXResponse("C7 00 00 01 00")	
-		if Result != True:
-			DL.SetWindowText("red", "Change encryption type = TDES first!")
+		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")	
 
 # First Response Control (0x63) = enable
 if (Result):
@@ -32,11 +24,7 @@ if (Result):
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("04 00 00 00")			
 		
-# Burst mode OFF & Poll on demand		
-if (Result):
-	RetOfStep = DL.SendCommand('Burst mode Off')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")	
+# Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):

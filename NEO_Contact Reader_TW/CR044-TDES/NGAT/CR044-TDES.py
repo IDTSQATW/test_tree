@@ -10,17 +10,18 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
-# Check Encryption (03)
-if (Result):
-	RetOfStep = DL.SendCommand('Check Encryption (03)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
+# Check project has LCD or not
+readertype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
+if readertype == 1:
+	DL.SetWindowText("Green", "*** The project has LCD ***")
+else:
+	DL.SetWindowText("Green", "*** The project has NO LCD ***")
 
-# Encryption Type -- TDES
+# Get DUKPT DEK Attribution based on KeySlot (C7-A3)
 if (Result):
-	RetOfStep = DL.SendCommand('Encryption Type -- TDES')
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 00")
+		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
 
 # Set MSR Secure Parameters (C7-38)
 if (Result):
@@ -34,11 +35,7 @@ if (Result):
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("04 00 00 00")			
 		
-# Burst mode OFF & Poll on demand		
-if (Result):
-	RetOfStep = DL.SendCommand('Burst mode Off')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")	
+# Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):
@@ -64,15 +61,24 @@ if (Result):
 		
 # cmd 60-10, fallback to MSR, swipe card
 if (Result):
-	RetOfStep = DL.SendCommand('Activate Transaction')
+	if readertype == 1:
+		RetOfStep = DL.SendCommand('Activate Transaction_w LCD')
+	if readertype == 0:
+		RetOfStep = DL.SendCommand('Activate Transaction_w/o LCD')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("60 63 00 00")
 		if (Result):
-			Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
-			if (Result):
-				Result = DL.Check_StringAB(DL.Get_RXResponse(1), 'E8 DF EE 25')
+			if readertype == 1:
+				Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
+				if (Result):
+					Result = DL.Check_StringAB(DL.Get_RXResponse(1), 'E8 DF EE 25')
+					sResult=DL.Get_RXResponse(1)
+			if readertype == 0:
+				Result = DL.Check_StringAB(DL.Get_RXResponse(2), '56 69 56 4F 74 65 63 68 32 00 60 00')
+				if (Result):
+					Result = DL.Check_StringAB(DL.Get_RXResponse(2), 'E8 DF EE 25')
+					sResult=DL.Get_RXResponse(2)
 			if (Result):	
-				sResult=DL.Get_RXResponse(1)
 				if sResult!=None and sResult!="":
 					sResult=sResult.replace(" ","")
 					CardData=DL.GetTLV(sResult,"DFEE23")
@@ -108,45 +114,44 @@ if (Result):
 								DL.SetWindowText("blue", "Track 3:")
 								TRK3DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK3)
 								TRK3DecryptData = TRK3DecryptData[0:((objectMSR[0].msr_track3Length)*2)]
+
+						TR1cleardata = "%TRACK17676760707077676760707077676760707077676760707077676760707077676760707?C"
+						TR2cleardata = ";2121212121767676070707767676762121212?0"
+						TR3cleardata = ";33333333337676760707077676763333333333767676070707767676333333333376767607070776767633333333337676760707?2"
+						TagDFEE25 = DL.GetTLV(sResult,"DFEE25")
+						Tag9F39 = DL.GetTLV(sResult,"9F39")
+						TagFFEE01 = DL.GetTLV(sResult,"FFEE01")
+						TagDFEE26 = DL.GetTLV(sResult,"DFEE26")
+
+						# Verify Mask (or clear) track data
+						if TR1cleardata == Track1_CardData: 
+							DL.SetWindowText("Blue", "Track 1 Clear data: PASS")
+						else:
+							DL.SetWindowText("Red", "Track 1 Clear data: FAIL")
+						if TR2cleardata == Track2_CardData: 
+							DL.SetWindowText("Blue", "Track 2 Clear data: PASS")
+						else:
+							DL.SetWindowText("Red", "Track 2 Clear data: FAIL")
+						if TR3cleardata == Track3_CardData: 
+							DL.SetWindowText("Blue", "Track 3 Clear data: PASS")
+						else:
+							DL.SetWindowText("Red", "Track 3 Clear data: FAIL")
+									
+						# Verify specific tags
+						Result = DL.Check_StringAB(CardData, '83 3F 4F 28 6B 87 00')
+						if Result == False:
+							DL.SetWindowText("Red", "Tag DFEE23: FAIL")
+							
+						if TagDFEE25 != "0011": 
+							DL.SetWindowText("Red", "Tag DFEE25: FAIL")
+						if Tag9F39 != "90": 
+							DL.SetWindowText("Red", "Tag 9F39: FAIL")
+						if TagFFEE01 != "DFEE30010C": 
+							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
+						if TagDFEE26 != "E800": 
+							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 				else:
-					DL.SetWindowText("RED", "Parse Card Data Fail")
-
-if CardData!=None and CardData!="":	
-	TR1cleardata = "%TRACK17676760707077676760707077676760707077676760707077676760707077676760707?C"
-	TR2cleardata = ";2121212121767676070707767676762121212?0"
-	TR3cleardata = ";33333333337676760707077676763333333333767676070707767676333333333376767607070776767633333333337676760707?2"
-	TagDFEE25 = DL.GetTLV(sResult,"DFEE25")
-	Tag9F39 = DL.GetTLV(sResult,"9F39")
-	TagFFEE01 = DL.GetTLV(sResult,"FFEE01")
-	TagDFEE26 = DL.GetTLV(sResult,"DFEE26")
-
-	# Verify Mask (or clear) track data
-	if TR1cleardata == Track1_CardData: 
-		DL.SetWindowText("Blue", "Track 1 Clear data: PASS")
-	else:
-		DL.SetWindowText("Red", "Track 1 Clear data: FAIL")
-	if TR2cleardata == Track2_CardData: 
-		DL.SetWindowText("Blue", "Track 2 Clear data: PASS")
-	else:
-		DL.SetWindowText("Red", "Track 2 Clear data: FAIL")
-	if TR3cleardata == Track3_CardData: 
-		DL.SetWindowText("Blue", "Track 3 Clear data: PASS")
-	else:
-		DL.SetWindowText("Red", "Track 3 Clear data: FAIL")
-				
-	# Verify specific tags
-	Result = DL.Check_StringAB(CardData, '83 3F 4F 28 6B 87 00')
-	if Result == False:
-		DL.SetWindowText("Red", "Tag DFEE23: FAIL")
-		
-	if TagDFEE25 != "0011": 
-		DL.SetWindowText("Red", "Tag DFEE25: FAIL")
-	if Tag9F39 != "90": 
-		DL.SetWindowText("Red", "Tag 9F39: FAIL")
-	if TagFFEE01 != "DFEE30010C": 
-		DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-	if TagDFEE26 != "E800": 
-		DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+					DL.SetWindowText("RED", "Parse Card Data Fail")							
 					
 # cmd 60-13
 RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')

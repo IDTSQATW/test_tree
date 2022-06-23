@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-26947
+39923
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -173,12 +173,10 @@ If result <> 0 Then
    DL.AddComment "--- Exchange APDU Data -- 1 PAY (ICC)"
    DL.SendSequence "*** Step 4: Exchange APDU Data -- 1 PAY (ICC)"
 
-   if readerType = "GR" or readerType = "NEO1" then 
+   if readerType <> "NEO2" then 
       result = DL.WaitForSequence("2c-13 ok", 1, 2000)
-   elseif readerType = "NEO2" or readerType = "USAT" then 
-          result = DL.WaitForSequence("2c-13 ok (NEO2)", 1, 2000)
    else
-      result = DL.WaitForSequence("2c-13 ok", 1, 2000)
+      result = DL.WaitForSequence("2c-13 ok (NEO2)", 1, 2000)
    end if
 
    dl.pause 1000
@@ -189,15 +187,8 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Contact Power Off (SAM 1)"
    DL.SendSequence "*** Step 5: Contact Power Off (SAM 1)"
-
-   if readerType = "GR" or readerType = "NEO1" then 
-      result = DL.WaitForSequence("2c-xx 05 status", 1, 2000)
-   elseif readerType = "NEO2" or readerType = "USAT" then 
-          result = DL.WaitForSequence("2c-18 ok", 1, 2000)
-   else
-      result = DL.WaitForSequence("2c-xx 05 status", 1, 2000)
-   end if
-
+   result = DL.WaitForSequence("2c-xx 05 status", 1, 1000)
+   if result = 0 then result = DL.WaitForSequence("2c-18 ok", 1, 1000)
 End If
 
 If result <> 0 Then
@@ -205,15 +196,8 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Contact Power Off (SAM 2)"
    DL.SendSequence "*** Step 5: Contact Power Off (SAM 2)"
-
-   if readerType = "GR" or readerType = "NEO1" then 
-      result = DL.WaitForSequence("2c-xx 05 status", 1, 2000)
-   elseif readerType = "NEO2" or readerType = "USAT" then 
-          result = DL.WaitForSequence("2c-18 ok", 1, 2000)
-   else
-      result = DL.WaitForSequence("2c-xx 05 status", 1, 2000)
-   end if
-
+   result = DL.WaitForSequence("2c-xx 05 status", 1, 1000)
+   if result = 0 then result = DL.WaitForSequence("2c-18 ok", 1, 1000)
 End If
 
 If result <> 0 Then

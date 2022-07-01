@@ -1,13 +1,13 @@
 DL_SCRIPTVERSION
 1
-33335
+56507
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "CR035" ' !!!!! EDIT THIS !!!!!
+ProjectName = "CR035_VP5300M" ' !!!!! EDIT THIS !!!!!
 ' Objective: cmd 2C-13 test
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)

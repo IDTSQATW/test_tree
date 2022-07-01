@@ -100,7 +100,7 @@ if (Result):
 						if i == 2:
 							Result = DL.Check_RXResponse(0, "56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 44 28 00 B3 9B")
 						if i == 3:
-							Result = DL.Check_RXResponse(0, "56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 86 1F 48 28 00 93 00")
+							Result = DL.Check_RXResponse(0, "56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 48 28 00 B3 9B")
 						if i == 4:
 							Result = DL.Check_RXResponse(0, "56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 85 17 00 48 00 92 00")
 						if i == 5:
@@ -243,8 +243,10 @@ if (Result):
 								# JIS 1	
 								if i == 3:
 									# Transaction result verification
-									TR1maskdata = "a90000000211111234567890122222333334444455555666667777788888999990000"
-									TR2maskdata = ";4322061000872833=11082018864082510000?;"
+									TR1maskdata = "a900*************************************************************0000"
+									TR2maskdata = ";4322********2833=1108****************?*"
+									TR1plaintextdata = "613930303030303030323131313131323334353637383930313232323232333333333334343434343535353535363636363637373737373838383838393939393930303030"
+									TR2plaintextdata = "3B 34 33 32 32 30 36 31 30 30 30 38 37 32 38 33 33 3D 31 31 30 38 32 30 31 38 38 36 34 30 38 32 35 31 30 30 30 30 3F 3B"                                    
 									
 									Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
 									if Result != True:
@@ -253,11 +255,19 @@ if (Result):
 									Result = DL.Check_StringAB(TR2maskdata, Track2_CardData)
 									if Result != True:
 										DL.SetWindowText("red", "TR2maskdata: FAIL")
+                                        
+									Result = DL.Check_StringAB(TR1plaintextdata, TRK1DecryptData)
+									if Result != True:
+										DL.SetWindowText("red", "TR1plaintextdata: FAIL")
+										
+									Result = DL.Check_StringAB(TR2plaintextdata, TRK2DecryptData)
+									if Result != True:
+										DL.SetWindowText("red", "TR2plaintextdata: FAIL")
 
 								# JIS 2	
 								if i == 4:
 									# Transaction result verification
-									TR2maskdata = "a90000000211111234567890122222333334444455555666667777788888999990000"
+									TR2maskdata = "123456789012345678901234567890123456789012345678901234567890123456789"
 									
 									Result = DL.Check_StringAB(TR2maskdata, Track2_CardData)
 									if Result != True:

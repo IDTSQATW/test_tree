@@ -57,39 +57,60 @@ if (Result):
 		
 # cmd 60-10, insert card
 if (Result):
-	RetOfStep = DL.SendCommand('Activate Transaction')
+	if lcdtype == 1:
+		RetOfStep = DL.SendCommand('Activate Transaction_w LCD')
+	if lcdtype == 0:
+		RetOfStep = DL.SendCommand('Activate Transaction_w/o LCD')	
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("60 63 00 00")
-		alldata = DL.Get_RXResponse(1)
+		if lcdtype == 1:
+			alldata = DL.Get_RXResponse(1)
+		if lcdtype == 0:
+			alldata = DL.Get_RXResponse(9)	
 		CTresultcode = DL.GetTLV(alldata,"DFEE25")
 		if (Result):
-			DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
+			DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')
 
 		# cmd 60-11					
 		if  CTresultcode == "0010":
 			Result = True
-			RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction')
+			if lcdtype == 1:
+				RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction_w LCD')
+			if lcdtype == 0:
+				RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction_w/o LCD')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("60 63 00 00")
-				alldata = DL.Get_RXResponse(1)
+				if lcdtype == 1:
+					alldata = DL.Get_RXResponse(1)
+				if lcdtype == 0:
+					alldata = DL.Get_RXResponse(4)
 				CTresultcode = DL.GetTLV(alldata,"DFEE25")	
 				if (Result):
-					DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
+					DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')
 				
 				# cmd 60-12
 				if  CTresultcode == "0004":
 					Result = True
-					RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response')
+					if lcdtype == 1:
+						RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response_w LCD')
+					if lcdtype == 0:
+						RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response_w/o LCD')
 					if (RetOfStep):
 						Result = DL.Check_RXResponse("60 63 00 00")
-						alldata = DL.Get_RXResponse(1)
+						if lcdtype == 1:
+							alldata = DL.Get_RXResponse(1)
+						if lcdtype == 0:
+							alldata = DL.Get_RXResponse(2)
 						CTresultcode = DL.GetTLV(alldata,"DFEE25")
 						if (Result):
-							Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
+							Result = DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')
 							if (Result):
 								Result = DL.Check_StringAB(CTresultcode, '00 03')
 								if Result != True:
 									DL.SetWindowText("red", "cmd 60-12, tag DFEE25 value: FAIL")
-								lcdcheck = DL.ShowMessageBox('Notice','Does LCD display msg "DECLINED"?', 0)
+								if lcdtype == 1:
+									lcdcheck = DL.ShowMessageBox('Notice','Does LCD display msg "DECLINED"?', 0)
+								if lcdtype == 0:
+									lcdcheck = DL.Check_RXResponse(1, "56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 53 03 00 81 07 1C 02 00 FF FF 88 3E")	
 								if lcdcheck != 1:
 									DL.SetWindowText("red", "LCD msg: FAIL")

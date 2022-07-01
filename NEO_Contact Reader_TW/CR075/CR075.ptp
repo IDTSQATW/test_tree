@@ -155,6 +155,13 @@ LCD confirmed, OK
 0
 5
 
+SEND
+19
+LCD confirmed, Cancel
+56 69 56 4F 74 65 63 68 32 00 61 01 00 04 02 01 00 43 00 00
+0
+5
+
 RECEIVE
 0
 erase key ok

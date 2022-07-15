@@ -1,14 +1,14 @@
 DL_SCRIPTVERSION
 1
-54374
+27492
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "Applepay0023-A" ' !!!!! EDIT THIS !!!!!
-' Objective: To verify Androidpay data under Auto poll + Burst mode ON with NEO data format
+ProjectName = "PM030" ' !!!!! EDIT THIS !!!!!
+' Objective: to verify BT wake up key
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -18,7 +18,7 @@ ProjectName = "Applepay0023-A" ' !!!!! EDIT THIS !!!!!
 '   - Assign Docklight COM port
 '   - Assign Docklight Baud Rate
 '------------------------------------------------------------
-FileInput.OpenFile prefix & "Regress.Config2"
+FileInput.OpenFile prefix & "Regress.Config"
 Dim Prompting(1)
 Dim COM_Port(1)
 Dim POSBaudRate(1)
@@ -43,31 +43,7 @@ Do Until FileInput.EndOfFile
   result = FileInput.GetLine() 'by pass variable name
   result = FileInput.GetLine()      
   POSBaudRate(1) = result
-
-  'Set Reader Type
-  result = FileInput.GetLine() 'by pass variable name
-  result = FileInput.GetLine()      
-  readerType = result
-
-  'Set Reader Model
-  result = FileInput.GetLine() 'by pass variable name
-  result = FileInput.GetLine()      
-  readerModel = result
-
-  'Set Reader FW version
-  result = FileInput.GetLine() 'by pass variable name
-  result = FileInput.GetLine()      
-  fwVersion = result
-
-  'Set Reader FW build
-  result = FileInput.GetLine() 'by pass variable name
-  result = FileInput.GetLine()      
-  fwBuild = result
-
-  'Set Reader General Flag
-  result = FileInput.GetLine() 'by pass variable name
-  result = FileInput.GetLine()      
-  genFlag = result
+      
 Loop
 
 Sub StepPrompt(PromptString)
@@ -142,6 +118,7 @@ Function ReverseResult(ResultParam)
             result = 1
       End If
 End Function
+
 '------------------------------------------------------------
 'Debugging (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
@@ -149,69 +126,22 @@ Function MyDebug(DebugString)
       DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
       MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
 End Function
+
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-If result <> 0 Then
-   DL.Pause 400
-   DL.ResetReceiveCounter
-   DL.AddComment "--- Poll on demand"
-   DL.SendSequence "Poll on demand"
-   result = DL.WaitForSequence("Change Poll Mode Response", 1, 10000)
-End If
 
-if readerType = "NEO2" then
-If result <> 0 Then
-   DL.Pause 400
-   DL.ResetReceiveCounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- 04-03 set g80 (DF811B =  00) (NEO2)"
-   DL.SendSequence "04-03 set g80 (DF811B =  00) (NEO2)"
-   result = DL.WaitForSequence("Configuration Change Response", 1, 10000)
-End If
-end if
-'---------------------------------------------------------------------------
-If result <> 0 Then
-   DL.ResetReceiveCounter
-   msgbox "Click OK --> Tap Applepay MasterCard_PAN=****1488", vbokonly
+' Under RUN mode: Press BT and hold wake up key > 1s, will enter Sleep mode
+' Under Sleep mode: Press BT wake up key, will enter RUN mode
+' Under Standby mode: Press BT wake up key, will enter RUN mode
 
-   dl.addcomment vbcrlf
-   DL.AddComment "--- ACT (02-40)"
-   DL.SendSequence "ACT (02-40)"
+' Under RUN mode: Press BT button, will stay RUN mode
 
-   if readerType <> "NEO2" then 
-      result1 = DL.WaitForSequence("0240_MC_1471", 1, 3000)
-   elseif readerType = "NEO2" then 
-      result1 = DL.WaitForSequence("0240_MC_1471 (NEO2)", 1, 10000)
-   end if
-
-   if readerType <> "NEO2" then 
-      result2 = DL.WaitForSequence("dfee26", 1, 3000)
-   elseif readerType = "NEO2" then 
-      result2 = DL.WaitForSequence("dfee26 (NEO2)", 1, 3000)
-   end if
-
-   result5 = DL.WaitForSequence("9f39", 1, 3000)
-
-   if readerType <> "NEO2" then 
-      result6 = DL.WaitForSequence("df30", 1, 3000)
-   elseif readerType = "NEO2" then 
-      result6 = DL.WaitForSequence("df30 (NEO2)", 1, 3000)
-   end if
-  
-   if result1 = 0 or result2 = 0 or result5 = 0 or result6 = 0 then
-      result = 0
-      if result1 = 0 then dl.addcomment vbcrlf & "Data: incorrect!"
-      if result2 = 0 then dl.addcomment vbcrlf & "Tag DFEE26: incorrect!"
-      if result5 = 0 then dl.addcomment vbcrlf & "Tag 9F39: incorrect!"
-      if result6 = 0 then dl.addcomment vbcrlf & "Tag DF30: incorrect!"
-   end if
-End If
 '------------------------------------------------------------
 DL.AddComment vbCrLf
-DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)
 
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
@@ -219,34 +149,36 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-'DL.pause 1000
+DL.pause 1000
 
-'If 0 Then
-'If result = 0 then
-'  DL.AddComment Chr(13) & "Result = FAILED"
-'Else
-'  DL.AddComment Chr(13) & "Result = PASSED"
-'End If
-'End If
+If 0 Then
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+End If
 
-'If Prompting(0) = "ON" Then
-'  If result = 0 then
-'    MsgBox "Result = FAILED", VBOKOnly, "Result"
-'  Else 
-'    MsgBox "Result = PASSED", VBOKOnly, "Result"
-'  End If
-'End If
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
-'If MasterResult = 1 Then
-'      MasterVerdict = "PASSED"
-'ElseIf MasterResult = 0 Then
-'      MasterVerdict = "FAILED"
-'End If
-'result = MasterResult
-'DL.AddComment vbCrLf
-'DL.AddComment "MASTER RESULT = " & MasterVerdict
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
@@ -266,13 +198,3 @@ ElseIf MasterResult = 1 Then
 End If
 'FileOutput.WriteLine MasterResult
 FileOutput.CloseFile 
-
-Sub DL_OnSend()
-    usDataLen = DL.OnSend_GetSize() - 2
-    If usDataLen > 0 Then
-        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
-        ' Write result to the last two bytes of the sequence
-        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
-        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
-    End If
-End Sub

@@ -1,14 +1,14 @@
 DL_SCRIPTVERSION
 1
-19938
+44820
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "Applepay0022-A" ' !!!!! EDIT THIS !!!!!
-' Objective: To verify ApplePay data under POD + Burst mode OFF w/ AMEX card
+ProjectName = "PM002-2" ' !!!!! EDIT THIS !!!!!
+' Objective: to verify wait mode (VP3350 PMS)
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -62,12 +62,12 @@ Do Until FileInput.EndOfFile
   'Set Reader FW build
   result = FileInput.GetLine() 'by pass variable name
   result = FileInput.GetLine()      
-  fwBuild = result
+  fwBuild = result   
 
   'Set Reader General Flag
   result = FileInput.GetLine() 'by pass variable name
   result = FileInput.GetLine()      
-  genFlag = result
+  fwGF = result    
 Loop
 
 Sub StepPrompt(PromptString)
@@ -76,9 +76,7 @@ Sub StepPrompt(PromptString)
             MsgBox PromptString, VBOKOnly, "Test Step"
       Else
       End If
-      
 End Sub
-
 '------------------------------------------------------------
 ' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
 ' -  
@@ -96,11 +94,11 @@ min=0
 Randomize
 errCnt = 0
 caseValid = 0
+
 result = 1
 
 DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
 If authn Then '""
-
 '------------------------------------------------------------
 'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
@@ -113,7 +111,6 @@ DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
 DL.Pause 1000
 
 DL.StartCommunication
-
 '------------------------------------------------------------
 'Result reporting (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
@@ -142,7 +139,6 @@ Function ReverseResult(ResultParam)
             result = 1
       End If
 End Function
-
 '------------------------------------------------------------
 'Debugging (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
@@ -150,73 +146,99 @@ Function MyDebug(DebugString)
       DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
       MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
 End Function
-
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+for i = 1 to 2
+'------------------------------------------------------------(Standby0 = 5 sec)
+if i = 1 then msgbox "Take Type D reader, plug-in USB cable in USB Female --> Click OK", vbokonly
+if i = 2 then msgbox "Take Type A reader, Plug-in USB cable in USB Female --> Click OK", vbokonly
+dl.addcomment vbcrlf & "==================================="
+DL.SendSequence "18-01 Ping"
+dl.pause 1000
+
 If result <> 0 Then
-   DL.Pause 400
-   DL.ResetReceiveCounter
-   DL.AddComment "--- Poll on demand"
-   DL.SendSequence "Poll on demand"
-   result = DL.WaitForSequence("Change Poll Mode Response", 1, 3000)
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- F0-04 Set Low Power Consumption 02 = 5 sec"
+   DL.SendSequence "F0-04 Set Low Power Consumption 02 = 5 sec"
+   result = DL.WaitForSequence("F0 00", 1, 3000)
+   dl.pause 500
 End If
 
-if readerType = "NEO2" then
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
-   DL.AddComment "--- Set group A0"
-   DL.SendSequence "Set group A0"
-   result = DL.WaitForSequence("Configuration Change Response", 1, 3000)
+   DL.AddComment "--- F0-05 Get Low Power Consumption Configuration"
+   DL.SendSequence "F0-05 Get Low Power Consumption Configuration"
+   result = DL.WaitForSequence("Standby0 - 5 sec", 1, 3000)
 End If
-else
+
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
-   DL.AddComment "--- Set group 2"
-   DL.SendSequence "Set group 2"
-   result = DL.WaitForSequence("Configuration Change Response", 1, 3000)
+   DL.AddComment "--- 18-01 Ping"
+   DL.SendSequence "18-01 Ping"
+   result = DL.WaitForSequence("18 00", 1, 3000)
+End If
+
+if result <> 0 then     'IDG CMD can change to RUN (USB-C female)
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   ledcheck = msgbox ("Wait & Make sure LED1 did not blink --> click OK", vbokonly)
+   DL.AddComment "--- 18-01 Ping #IDG CMD can change to RUN (USB-C female)"
+   DL.SendSequence "18-01 Ping"
+   result = DL.WaitForSequence("18 00", 1, 3000)
+   if result <> 0 then
+      ledcheck = msgbox ("Does LED1 blink?", vbyesno)
+      if ledcheck = 7 then result = 0
+   end if
+End If
+
+if result <> 0 then     'ICC Card Inserted can change to RUN
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   ledcheck = msgbox ("Wait & Make sure LED1 did not blink --> click OK", vbokonly)
+   DL.AddComment "--- ICC card inserted"
+   msgbox "Click OK -> insert ICC card", vbokonly
+   ledcheck = msgbox ("Does LED1 blink?", vbyesno)
+   if ledcheck = 7 then result = 0
+   msgbox "Remove card --> Click OK", vbokonly
+   dl.addcomment vbcrlf & "## Done"
+End If
+
+if i = 2 then     'For type A reader
+if result <> 0 then     'IDG CMD can change to RUN  (USB-C male)
+   msgbox "Plug-in USB cable in USB Male, unplug USB cable from USB female --> Click OK", vbokonly
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   ledcheck = msgbox ("Wait & Make sure LED1 did not blink --> click OK", vbokonly)
+   DL.AddComment "--- 18-01 Ping #IDG CMD can change to RUN  (USB-C male)"
+   DL.SendSequence "18-01 Ping"
+   result = DL.WaitForSequence("18 00", 1, 3000)
+   if result <> 0 then
+      ledcheck = msgbox ("Does LED1 blink?", vbyesno)
+      if ledcheck = 7 then result = 0
+   end if
+End If
+
+if result <> 0 then     'USB-C female plug-ing can change to RUN
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   ledcheck = msgbox ("Wait & Make sure LED1 did not blink --> click OK", vbokonly)
+   DL.AddComment "--- USB-C female plug-in"
+   msgbox "Click OK -> plug-in USB cable in USB female", vbokonly
+   ledcheck = msgbox ("Does LED1 blink?", vbyesno)
+   if ledcheck = 7 then result = 0
+   dl.addcomment vbcrlf & "## Done"
 End If
 end if
-'---------------------------------------------------------------------------
-If result <> 0 Then
-   DL.ResetReceiveCounter
-   msgbox "Click OK --> Tap Applepay AMEX_PAN ****2212"
 
-   dl.addcomment vbcrlf
-   DL.AddComment "--- ACT (02-40)"
-   DL.SendSequence "ACT (02-40)"
-   dl.pause 2000
-
-   if readerType <> "NEO2" then       
-      result1 = DL.WaitForSequence("0240_AMEX_2212", 1, 5000)
-   else
-      result1 = DL.WaitForSequence("0240_AMEX_2212 (NEO2)", 1, 5000)
-   end if
-
-   if readerType <> "NEO2" then 
-      result2 = DL.WaitForSequence("dfee26", 1, 3000)
-   else
-      result2 = DL.WaitForSequence("dfee26 (NEO2)", 1, 3000)
-   end if
-
-   result5 = DL.WaitForSequence("9f39", 1, 3000)
-
-   if readerType <> "NEO2" then  
-     result6 = DL.WaitForSequence("df30", 1, 3000)
-   else
-      result6 = DL.WaitForSequence("df30 (NEO2)", 1, 3000)
-   end if
-   
-   if result1 = 0 or result2 = 0 or result5 = 0 or result6 = 0 then
-      result = 0
-      if result1 = 0 then dl.addcomment vbcrlf & "Data: incorrect!"
-      if result2 = 0 then dl.addcomment vbcrlf & "Tag DFEE26: incorrect!"
-      if result5 = 0 then dl.addcomment vbcrlf & "Tag 9F39: incorrect!"
-      if result6 = 0 then dl.addcomment vbcrlf & "Tag DF30: incorrect!"
-   end if
-End If
+dl.addcomment vbcrlf & ">>>>>>>>>>>>>>>>>> set to default >>>>>>>>>>>>>>>>>>"
+DL.SendSequence "F0-04 Set Low Power Consumption 02 = 0 sec"
+dl.pause 1500
+dl.addcomment vbcrlf & ">>>>>>>>>>>>>>>>>> end >>>>>>>>>>>>>>>>>>"
+next
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
@@ -225,18 +247,15 @@ PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
-
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
 'DL.pause 1000
 
-'If 0 Then
 'If result = 0 then
 '  DL.AddComment Chr(13) & "Result = FAILED"
 'Else
 '  DL.AddComment Chr(13) & "Result = PASSED"
-'End If
 'End If
 
 'If Prompting(0) = "ON" Then
@@ -246,9 +265,11 @@ End If '""
 '    MsgBox "Result = PASSED", VBOKOnly, "Result"
 '  End If
 'End If
+
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
+
 'If MasterResult = 1 Then
 '      MasterVerdict = "PASSED"
 'ElseIf MasterResult = 0 Then
@@ -276,13 +297,3 @@ ElseIf MasterResult = 1 Then
 End If
 'FileOutput.WriteLine MasterResult
 FileOutput.CloseFile 
-
-Sub DL_OnSend()
-    usDataLen = DL.OnSend_GetSize() - 2
-    If usDataLen > 0 Then
-        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
-        ' Write result to the last two bytes of the sequence
-        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
-        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
-    End If
-End Sub

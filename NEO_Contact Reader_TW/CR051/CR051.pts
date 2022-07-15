@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-61895
+47116
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -154,7 +154,7 @@ If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- 04-09"
    DL.SendSequence "04-09"
-   result = DL.WaitForSequence("04-09", 1, 5000)
+   result = DL.WaitForSequence("04-09", 1, 10000)
 End If
 
 if readerType = "NEO2" then
@@ -204,7 +204,10 @@ If result <> 0 Then
          dl.addcomment vbcrlf & "Waiting for 1 min..." & vbcrlf
          if lcdcheck = 7 then
             result = DL.WaitForSequence("TIME OUT", 1, 63000)
-            if result <> 0 then result = DL.WaitForSequence("60-10 timeout1", 1, 3000)
+            if result <> 0 then 
+               if readerType <> "NEO2" then result = DL.WaitForSequence("60-10 timeout1", 1, 3000)
+               if readerType = "NEO2" then result = DL.WaitForSequence("60-10 timeout1 (NEO2)", 1, 3000)
+            end if
          else
             result = DL.WaitForSequence("60-10 timeout1 (NEO2)", 1, 63000)
          end if

@@ -1,0 +1,12 @@
+Docklight Log File (HEX) - Started 2022/7/7 08:39:03.100 
+ TEST CASE: Applepay0022-A
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+
+
+Docklight Log File (HEX) - Stopped 2022/7/7 08:39:03.390 
+

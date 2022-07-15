@@ -1,0 +1,59 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM90
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+18-01 Ping
+56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD
+0
+5
+
+SEND
+1
+   1. awaken upon MSR or CL card
+
+0
+5
+
+SEND
+2
+      Enter Low Power Mode (F0-03) = 0001
+56 69 56 4F 74 65 63 68 32 00 F0 03 00 02 00 01 08 4B
+0
+5
+
+SEND
+3
+   2. awaken upon CT card
+
+0
+5
+
+SEND
+4
+      Enter Low Power Mode (F0-03) = 0000
+56 69 56 4F 74 65 63 68 32 00 F0 03 00 02 00 00 29 5B
+0
+5
+

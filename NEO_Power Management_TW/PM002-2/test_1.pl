@@ -27,7 +27,7 @@ for(;;)						# forever loop
 
 }						# end forever
 
-`start /REALTIME docklight_scripting -r -m Applepay0024-A.pts`;
+`start /REALTIME docklight_scripting -r -m PM002-2.pts`;
 
 # Main Code
 

@@ -1,3 +1,7 @@
+TID:Get DUKPT DEK Attribution based on KeySlot (C7-A3)
+CMD:C7 A3 01 00
+EXR:C7 00 00 06 00 00 00 00 00 00
+
 TID:Get Encryption status (03)
 CMD:C7 37
 EXR:C7 00 00 01
@@ -17,5 +21,8 @@ EXR:01 00 00 00
 TID:Activate Transaction
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00
 MSG:Tap VISA qVSDC card...
-EXR:56 69 56 4F 74 65 63 68 32 00 02 23 ** F3
+EXR:
+EXR:
+EXR:
+EXR:
 TIMEOUT:120000

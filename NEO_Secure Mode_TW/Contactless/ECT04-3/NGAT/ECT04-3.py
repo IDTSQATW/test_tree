@@ -31,7 +31,10 @@ if (Result):
 
 # cmd 02-40, tap card
 if (Result):
-	RetOfStep = DL.SendCommand('Activate Transaction')
+	if lcdtype == 1:
+		RetOfStep = DL.SendCommand('Activate Transaction w/ LCD')
+	if lcdtype == 0:
+		RetOfStep = DL.SendCommand('Activate Transaction w/o LCD')		
 	if (RetOfStep):
 		if lcdtype == 1:
 			rx = 0

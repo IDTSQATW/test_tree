@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-47641
+44471
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -201,8 +201,8 @@ If result <> 0 Then
       result = 0
       if result1 = 0 then dl.addcomment vbcrlf & "Card data => Incorrect!"
       if result2 = 0 then dl.addcomment vbcrlf & "Tag DF30 (NEO1) or DFEE30 (NEO2) => Incorrect!"
-      if result4 = 0 then dl.addcomment vbcrlf & "Tag 9F 39 => Incorrect!"
-      if result5 = 0 then dl.addcomment vbcrlf & "Tag DF EE 26 => Incorrect!"
+      if result4 = 0 then dl.addcomment vbcrlf & "Tag 9F39 => Incorrect!"
+      if result5 = 0 then dl.addcomment vbcrlf & "Tag DFEE26 => Incorrect!"
    end if
    else
       result = 0

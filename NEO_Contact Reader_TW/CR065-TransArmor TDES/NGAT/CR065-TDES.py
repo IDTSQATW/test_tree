@@ -10,31 +10,25 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
-# Check Encryption status(03)
-if (Result):
-	RetOfStep = DL.SendCommand('Check Encryption status(03)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
+# Check project has LCD or not
+lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** The project has LCD ***")
+else:
+	DL.SetWindowText("Green", "*** The project has NO LCD ***")
 
 # Encryption Type -- TransArmor TDES
 if (Result):
-	RetOfStep = DL.SendCommand('2-use TransArmor TDES to encrypt (C7-32)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 00")
-		if Result != True:
-			Result = DL.SendCommand('0-use TDES to encrypt (C7-32)')
-			if (Result):
-				Result = DL.SendCommand('2-use TransArmor TDES to encrypt (C7-32)')
+	RetOfStep = DL.SendCommand('C7-A2 TDES DUKPT manage_TransArmor TDES, data key')
+	time.sleep(1)
+	
+# Check data encryption TYPE is TDES	
 if (Result):
-	RetOfStep = DL.SendCommand('Encryption Type -- TransArmor TDES')
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 02")		
+		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 02 00 00 00 00")	
 		
-# Burst mode OFF & Poll on demand		
-if (Result):
-	RetOfStep = DL.SendCommand('Burst mode Off')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")	
+# Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):
@@ -60,13 +54,19 @@ if (Result):
 		
 # cmd 60-10, insert card
 if (Result):
-	RetOfStep = DL.SendCommand('Activate Transaction')
+	if lcdtype == 1:
+		RetOfStep = DL.SendCommand('Activate Transaction_w LCD')
+	if lcdtype == 0:
+		RetOfStep = DL.SendCommand('Activate Transaction_w/o LCD')	
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("60 63 00 00")
-		alldata = DL.Get_RXResponse(1)
+		if lcdtype == 1:
+			alldata = DL.Get_RXResponse(1)
+		if lcdtype == 0:
+			alldata = DL.Get_RXResponse(9)	
 		CTresultcode = DL.GetTLV(alldata,"DFEE25")
 		if (Result):
-			Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
+			Result = DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')
 			if (Result):
 				ksn = DL.GetTLV(alldata,"DFEE12")	
 		
@@ -84,26 +84,26 @@ if (Result):
 		
 			# Tag 57
 				Result = DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D2 01 2C CC CC CC CC CC CC')
-				if Result == True and DL.Check_StringAB(DL.Get_RXResponse(1), '57 A1 11'):
+				if Result == True and DL.Check_StringAB(alldata, '57 A1 11'):
 					DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 				else:
 					DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 			
 				Result = DL.Check_StringAB(dec57, '3B 34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30 3D 32 30 31 32 32 30 31 30 31 32 33 34 35 36 37 38 39 3F')
-				if Result == True and DL.Check_StringAB(DL.Get_RXResponse(1), '57 C1 28'):
+				if Result == True and DL.Check_StringAB(alldata, '57 C1 28'):
 					DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 				else:
 					DL.SetWindowText("red", "Tag 57_Enc: FAIL")
 
 			# Tag 5A
 				Result = DL.Check_StringAB(mask5A, '47 61 CC CC CC CC 00 10')
-				if Result == True and DL.Check_StringAB(DL.Get_RXResponse(1), '5A A1 08'):
+				if Result == True and DL.Check_StringAB(alldata, '5A A1 08'):
 					DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
 				else:
 					DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
 			
 				Result = DL.Check_StringAB(dec5A, '34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30')
-				if Result == True and DL.Check_StringAB(DL.Get_RXResponse(1), '5A C1 10'):
+				if Result == True and DL.Check_StringAB(alldata, '5A C1 10'):
 					DL.SetWindowText("blue", "Tag 5A_Enc: PASS")
 				else:
 					DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
@@ -121,13 +121,19 @@ if (Result):
 # cmd 60-11					
 if  CTresultcode == "0010":
 	Result = True
-	RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction')
+	if lcdtype == 1:
+		RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction_w LCD')
+	if lcdtype == 0:
+		RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction_w/o LCD')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("60 63 00 00")
-		alldata = DL.Get_RXResponse(1)
+		if lcdtype == 1:
+			alldata = DL.Get_RXResponse(1)
+		if lcdtype == 0:
+			alldata = DL.Get_RXResponse(4)
 		CTresultcode = DL.GetTLV(alldata,"DFEE25")	
 		if (Result):
-			Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
+			Result = DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')
 			if (Result):
 				ksn = DL.GetTLV(alldata,"DFEE12")	
 				
@@ -148,13 +154,19 @@ if  CTresultcode == "0010":
 # cmd 60-12
 if  CTresultcode == "0004":
 	Result = True
-	RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response')
+	if lcdtype == 1:
+		RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response_w LCD')
+	if lcdtype == 0:
+		RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response_w/o LCD')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("60 63 00 00")
-		alldata = DL.Get_RXResponse(1)
+		if lcdtype == 1:
+			alldata = DL.Get_RXResponse(1)
+		if lcdtype == 0:
+			alldata = DL.Get_RXResponse(2)
 		CTresultcode = DL.GetTLV(alldata,"DFEE25")
 		if (Result):
-			Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
+			Result = DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')
 			if (Result):
 				ksn = DL.GetTLV(alldata,"DFEE12")
 				

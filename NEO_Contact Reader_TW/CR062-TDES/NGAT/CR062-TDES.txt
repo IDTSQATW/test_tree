@@ -42,7 +42,7 @@ CMD:60 10 01 00 78 00 78 9C 01 00 5F 57 01 00 9F 02 06 00 00 00 00 02 00 9F 03 0
 EXR: 60 63 00 00
 EXR:
 TIMEOUT:120000
-MSG:Insert CT card (EMV Test Card V2 T=0)...
+MSG:Insert CT card (EMV Test Card T=1) card...
 EXR:
 EXR:
 EXR:

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-59051
+19754
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -166,33 +166,24 @@ If result <> 0 Then
       DL.SendSequence "Delete Group 6"
    end if
 
-   if readerType = "GR" or readerType = "NEO1" then 
-      result = DL.WaitForSequence("Delete Group 6 Response", 1, 10000)
-   elseif readerType = "NEO2" or readerType = "USAT" or readerType = "USAT_SRED" then 
-      result = DL.WaitForSequence("Delete Group 6 Response (NEO2)", 1, 10000)
-   else
-      result = DL.WaitForSequence("Delete Group 6 Response", 1, 10000)
-   end if
+   result = DL.WaitForSequence("Delete Group 6 Response", 1, 2000)
+   if result = 0 then result = DL.WaitForSequence("Delete Group 6 Response (NEO2)", 1, 2000)
 End If
 '------------------------------------------------------------
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf 
    DL.AddComment "--- Set System ID"
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then 
+   if readerType <> "NEO2" then 
       DL.SendSequence "Get Group 6"
-   elseif readerType = "NEO2" then 
-      DL.SendSequence "Get Group 6 (NEO2)"
    else
-      DL.SendSequence "Get Group 6"
+      DL.SendSequence "Get Group 6 (NEO2)"
    end if
 
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then 
-      result = DL.WaitForSequence("Get Group 6 Response", 1, 10000)
-   elseif readerType = "NEO2" then 
-      result = DL.WaitForSequence("Get Group 6 Response (NEO2)", 1, 10000)
+   if readerType <> "NEO2" then 
+      result = DL.WaitForSequence("Get Group 6 Response", 1, 2000)
    else
-      result = DL.WaitForSequence("Get Group 6 Response", 1, 10000)
+      result = DL.WaitForSequence("Get Group 6 Response (NEO2)", 1, 2000)
    end if
 End If
 '------------------------------------------------------------

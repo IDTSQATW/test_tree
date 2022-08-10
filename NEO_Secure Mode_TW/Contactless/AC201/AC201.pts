@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-53352
+51554
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -157,7 +157,7 @@ If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- Set default config"
    DL.SendSequence "Set default config"
-   result = DL.WaitForSequence("04 00", 1, 5000)
+   result = DL.WaitForSequence("04 00", 1, 10000)
    dl.pause 500
 End If
 
@@ -210,7 +210,7 @@ If result <> 0 Then
    DL.AddComment "--- 02-40"
    DL.SendSequence "02-40"
    dl.pause 1000
-   result = DL.WaitForSequence("02 23", 1, 2000)
+   result = DL.WaitForSequence("02 23", 1, 5000)
    if result <> 0 then result = DL.WaitForSequence("Tag 84 = A0000000041010 01", 1, 5000)
    dl.pause 500
 End If
@@ -243,7 +243,7 @@ If result <> 0 Then
    DL.AddComment "--- 02-40"
    DL.SendSequence "02-40"
    dl.pause 1000
-   result = DL.WaitForSequence("02 23", 1, 2000)
+   result = DL.WaitForSequence("02 23", 1, 5000)
    if result <> 0 then result = DL.WaitForSequence("Tag 84 = A0000000041010 01", 1, 5000)
    dl.pause 500
 End If
@@ -264,7 +264,7 @@ If result <> 0 Then
    DL.AddComment "--- 02-40"
    DL.SendSequence "02-40"
    dl.pause 1000
-   result = DL.WaitForSequence("02 23", 1, 2000)
+   result = DL.WaitForSequence("02 23", 1, 5000)
    if result <> 0 then result = DL.WaitForSequence("Tag 84 = A0000000042203", 1, 2000)
    dl.pause 500
 End If
@@ -276,7 +276,7 @@ If result <> 0 Then
    DL.AddComment "--- 02-40"
    DL.SendSequence "02-40"
    dl.pause 1000
-   result = DL.WaitForSequence("02 23", 1, 2000)
+   result = DL.WaitForSequence("02 23", 1, 5000)
    if result <> 0 then result = DL.WaitForSequence("Tag 84 = A0000000041010 ", 1, 2000)
    dl.pause 500
 End If

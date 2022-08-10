@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-63774
+57148
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -187,7 +187,7 @@ If result <> 0 Then
    DL.AddComment "--- 02-40"
    DL.SendSequence "02-40"
    dl.pause 1000
-   result = DL.WaitForSequence("02 23", 1, 2000)
+   result = DL.WaitForSequence("02 23", 1, 5000)
    if result <> 0 then result = DL.WaitForSequence("Tag 84 = A0000000031010", 1, 5000)
    dl.pause 500
 End If
@@ -233,7 +233,7 @@ If result <> 0 Then
    DL.AddComment "--- 02-40"
    DL.SendSequence "02-40"
    dl.pause 1000
-   result = DL.WaitForSequence("02 23", 1, 2000)
+   result = DL.WaitForSequence("02 23", 1, 5000)
    if result <> 0 then result = DL.WaitForSequence("Tag 84 = A0000000031010", 1, 5000)
    dl.pause 500
 End If
@@ -254,8 +254,8 @@ If result <> 0 Then
    DL.AddComment "--- 02-40"
    DL.SendSequence "02-40"
    dl.pause 1000
-   result = DL.WaitForSequence("02 23", 1, 2000)
-   if result <> 0 then result = DL.WaitForSequence("Tag 84 = A0000000980840", 1, 2000)
+   result = DL.WaitForSequence("02 23", 1, 5000)
+   if result <> 0 then result = DL.WaitForSequence("Tag 84 = A0000000980840", 1, 5000)
    dl.pause 500
 End If
 
@@ -266,7 +266,7 @@ If result <> 0 Then
    DL.AddComment "--- 02-40"
    DL.SendSequence "02-40"
    dl.pause 1000
-   result = DL.WaitForSequence("02 23", 1, 2000)
+   result = DL.WaitForSequence("02 23", 1, 5000)
    if result <> 0 then result = DL.WaitForSequence("Tag 84 = A0000000031010", 1, 5000)
    dl.pause 500
 End If

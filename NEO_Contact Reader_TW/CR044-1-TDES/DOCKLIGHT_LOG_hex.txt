@@ -1,9 +1,9 @@
-Docklight Log File (HEX) - Started 2022/6/17 14:51:30.166 
+Docklight Log File (HEX) - Started 2022/8/2 09:40:41.103 
  TEST CASE: CR044-1-TDES
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 9600 baud...
+ POS operating on COM90 @ 115200 baud...
  Set POS COM PORT - COMPLETE
 
  If u want to test non-GR reader, please use NGAT script
@@ -12,7 +12,11 @@ Docklight Log File (HEX) - Started 2022/6/17 14:51:30.166
  Result = FAILED
  ---------- END OF TEST ----------
 
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
 
 
-Docklight Log File (HEX) - Stopped 2022/6/17 14:51:31.712 
+Docklight Log File (HEX) - Stopped 2022/8/2 09:40:43.399 
 

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-52006
+1522
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -9,7 +9,7 @@ DL_SCRIPTVERSION
 Dim ProjectName
 ProjectName = "CR019" ' !!!!! EDIT THIS !!!!!
 ' Objective: cmd 60-0A negative test
-' NEO2: #define MAX_INDEXS 8/ MAX_LISTS 16 (JIRA#NEOII-480)
+' NEO2: #define MAX_INDEXS 8/ MAX_LISTS 16 (JIRA#NEOII-480) 'NEO2: no limit
 ' GR: Maxed out by memory space
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
@@ -96,6 +96,7 @@ min=0
 Randomize
 errCnt = 0
 caseValid = 0
+count = 0
 
 result = 1
 
@@ -220,7 +221,13 @@ for k = 1 to 10
           dl.addcomment vbcrlf
           DL.AddComment "--- 60-0A Contact Set CA Public Key" & " >>> " & k
           DL.SendSequence "60-0A " & k
-          result = DL.WaitForSequence("60 00", 1, 2000)
+          result = DL.WaitForSequence("60 00", 1, 1000)
+          count = k
+          if result = 0 then 
+             count = k - 1
+             k = 11
+             result = DL.WaitForSequence("60 61", 1, 1000)
+          end if
     end if
 next
 end if
@@ -242,7 +249,10 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- 60-0B Contact Retrieve CA Public Key List"
    DL.SendSequence "60-0B Contact Retrieve CA Public Key List"
-   result = DL.WaitForSequence("60-0B (NEO2)", 1, 5000)
+   if count = 10 then result = DL.WaitForSequence("60-0B (NEO2) *10", 1, 5000)
+   if count = 8 then result = DL.WaitForSequence("60-0B (NEO2) *8", 1, 5000)
+   if count <> 10 and count <> 8 then result = 0
+   dl.pause 100
 End If
 '======================================================= >>> others
 else
@@ -250,43 +260,43 @@ else
 end if
 '=======================================================
 DL.AddComment vbCrLf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)
 
-DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
 
-If MasterResult = 1 Then
-      MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-      MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)

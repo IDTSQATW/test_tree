@@ -1,0 +1,58 @@
+TID:Get DUKPT DEK Attribution based on KeySlot (C7-A3)
+CMD:C7 A3 01 00
+EXR:C7 00 00 06 00 00 00 00 00 00
+
+TID:Get Data Encryption (C7-37)
+CMD:C7 37
+EXR:C7 00 00 00
+
+TID:Encryption Type -- TDES
+CMD:C7 33
+EXR:C7 00 00 01 00
+
+TID:Burst mode Off
+CMD:04 00 DF EE 7E 01 00
+EXR:04 00 00 00
+
+TID:Poll on demand
+CMD:01 01 01
+EXR:01 00 00 00
+
+TID:AT w/ LCD
+CMD:02 40 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG: Waiting for timeout...(10 sec)
+EXR:
+TIMEOUT:12000
+
+TID:AT w/o LCD
+CMD:02 40 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG: Waiting for timeout...(10 sec)
+EXR:
+EXR:
+EXR:
+EXR:
+TIMEOUT:12000
+
+TID:Auto Poll w/ LCD
+CMD:01 01 00
+EXR:01 00 00 00
+
+TID:Auto Poll w/o LCD
+CMD:01 01 00
+EXR:
+EXR:01 00 00 00
+
+TID:Get Transaction Result w/ LCD
+DLG:Swipe VISA MSD card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+
+TID:Get Transaction Result w/o LCD
+DLG:Swipe VISA MSD card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+EXR:
+EXR:
+EXR:

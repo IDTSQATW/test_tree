@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-46370
+62716
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -194,10 +194,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- Enable Visa system AID (04-02) w/o FFE5"
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then DL.SendSequence " Enable Visa system AID (04-02) w/o FFE5"
+   if readerType <> "NEO2" then DL.SendSequence " Enable Visa system AID (04-02) w/o FFE5"
    if readerType = "NEO2" then DL.SendSequence " Enable Visa system AID (04-02) w/o FFE5 (NEO2)"
-   if readerType = "GR" or readerType = "NEO1" then result = DL.WaitForSequence("set VISA AID resp 06", 1, 3000)
-   if readerType = "NEO2" or readerType = "USAT" or readerType = "USAT_SRED" then result = DL.WaitForSequence("set VISA AID resp 06 (NEO2)", 1, 3000)
+   result = DL.WaitForSequence("set VISA AID resp 06", 1, 1500)
+   if result = 0 then result = DL.WaitForSequence("set VISA AID resp 06 (NEO2)", 1, 1500)
   DL.Pause 1000
 End If
 

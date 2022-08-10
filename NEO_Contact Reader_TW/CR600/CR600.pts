@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-50457
+20580
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -190,7 +190,7 @@ if result <> 0 then
              if readerType <> "NEO2" then 
                 DL.SendSequence "60-06 CT Set Terminal Data w/ tag DFED5A = 20"
                 result = DL.WaitForSequence("60-xx 00 status", 1, 10000)
-             elseif readerType = "NEO2" then 
+             else
                 DL.SendSequence "04-00 DF ED 5A = 20"
                 result = DL.WaitForSequence("04 00", 1, 10000)
              end if
@@ -207,7 +207,7 @@ if result <> 0 then
              if readerType <> "NEO2" then 
                 DL.SendSequence "60-06 CT Set Terminal Data w/ tag DFED5A = 00"
                 result = DL.WaitForSequence("60-xx 00 status", 1, 10000)
-             elseif readerType = "NEO2" then 
+             else
                 DL.SendSequence "04-00 DF ED 5A = 00"
                 result = DL.WaitForSequence("04 00", 1, 10000)
              end if

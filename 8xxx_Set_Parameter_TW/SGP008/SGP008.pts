@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-38174
+26463
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -165,7 +165,7 @@ If result <> 0 Then
   dl.addcomment vbcrlf
   DL.AddComment "--- get AID (03-04) VISA *** " & readerType 
   DL.SendSequence " get AID (03-04) VISA"
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then result = DL.WaitForSequence("get VISA AID resp 00", 1, 3000)
+   if readerType <> "NEO2" then result = DL.WaitForSequence("get VISA AID resp 00", 1, 3000)
    if readerType = "NEO2" then result = DL.WaitForSequence("get VISA AID resp 00 (NEO2)", 1, 3000)
   DL.Pause 1000
 End If
@@ -184,7 +184,7 @@ If result <> 0 Then
   dl.addcomment vbcrlf
   DL.AddComment "--- get AID (03-04) VISA"
   DL.SendSequence " get AID (03-04) VISA"
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then result = DL.WaitForSequence("get VISA AID resp disabled", 1, 3000)
+   if readerType <> "NEO2" then result = DL.WaitForSequence("get VISA AID resp disabled", 1, 3000)
    if readerType = "NEO2" then result = DL.WaitForSequence("get VISA AID resp disabled (NEO2)", 1, 3000)
   DL.Pause 1000
 End If
@@ -193,10 +193,10 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- Enable Visa system AID (04-02) w/o FFE1 & FFE5"
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then DL.SendSequence "Enable Visa system AID (04-02) w/o FFE1 & FFE5"
+   if readerType <> "NEO2" then DL.SendSequence "Enable Visa system AID (04-02) w/o FFE1 & FFE5"
    if readerType = "NEO2" then DL.SendSequence "Enable Visa system AID (04-02) w/o FFE1 & FFE5 (NEO2)"
-   if readerType = "GR" or readerType = "NEO1" then result = DL.WaitForSequence("set VISA AID resp 06", 1, 3000)
-   if readerType = "NEO2" or readerType = "USAT" or readerType = "USAT_SRED" then result = DL.WaitForSequence("set VISA AID resp 06 (NEO2)", 1, 3000)
+   if readerType <> "NEO2" then result = DL.WaitForSequence("set VISA AID resp 06", 1, 3000)
+   if readerType = "NEO2" then result = DL.WaitForSequence("set VISA AID resp 06 (NEO2)", 1, 3000)
   DL.Pause 1000
 End If
 
@@ -205,7 +205,7 @@ If result <> 0 Then
   dl.addcomment vbcrlf
   DL.AddComment "--- get AID (03-04) VISA"
   DL.SendSequence " get AID (03-04) VISA"
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then result = DL.WaitForSequence("get VISA AID resp disabled", 1, 3000)
+   if readerType <> "NEO2" then result = DL.WaitForSequence("get VISA AID resp disabled", 1, 3000)
    if readerType = "NEO2" then result = DL.WaitForSequence("get VISA AID resp disabled (NEO2)", 1, 3000)
   DL.Pause 1000
 End If

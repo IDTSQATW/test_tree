@@ -10,27 +10,28 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
-# Encryption status verification		
+# Objective: to verify 6 test Blackboard card that provided by USAtech
+
+# Check project has LCD or not
+lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** The project has LCD ***")
+else:
+	DL.SetWindowText("Green", "*** The project has NO LCD ***")
+
+# Get DUKPT DEK Attribution based on KeySlot (C7-A3)
 if (Result):
-	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37) = 03')
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")	
-if (Result):
-	RetOfStep = DL.SendCommand('Get account DUKPT encryption type (C7-33) = AES')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 01")
+		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")	
 		
-# Set MSR Secure Parameters (C7-38)
-if (Result):
-	RetOfStep = DL.SendCommand('Set MSR Secure Parameters (C7-38)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 00")	
+# # Set MSR Secure Parameters (C7-38)
+# if (Result):
+	# RetOfStep = DL.SendCommand('Set MSR Secure Parameters (C7-38)')
+	# if (RetOfStep):
+		# Result = Result and DL.Check_RXResponse("C7 00 00 00")	
 		
-# Burst mode OFF & Poll on demand		
-if (Result):
-	RetOfStep = DL.SendCommand('Burst mode Off')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")	
+# Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):
@@ -40,36 +41,58 @@ if (Result):
 if (Result):
 	for i in range (1, 7):
 		if i == 1:
-			RetOfStep = DL.SendCommand('Activate Transaction (Card: USAT Maintenance)')
+			if lcdtype == 1:
+				RetOfStep = DL.SendCommand('Activate Transaction (Card: USAT Maintenance) w/ LCD')
+			if lcdtype == 0:
+				RetOfStep = DL.SendCommand('Activate Transaction (Card: USAT Maintenance) w/o LCD')
 		if i == 2:
-			RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Valid card)')
+			if lcdtype == 1:
+				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Valid card) w/ LCD')
+			if lcdtype == 0:
+				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Valid card) w/o LCD')
 		if i == 3:
-			RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Invalid account)')
+			if lcdtype == 1:
+				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Invalid account) w/ LCD')
+			if lcdtype == 0:
+				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Invalid account) w/o LCD')
 		if i == 4:
-			RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard -$0.00 balance)')
+			if lcdtype == 1:
+				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard -$0.00 balance) w/ LCD')
+			if lcdtype == 0:
+				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard -$0.00 balance) w/o LCD')
 		if i == 5:
-			RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Expired)')
+			if lcdtype == 1:
+				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Expired) w/ LCD')
+			if lcdtype == 0:
+				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Expired) w/o LCD')
 		if i == 6:
-			RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-lost card)')
+			if lcdtype == 1:
+				RetOfStep = DL.SendCommand('Activate Transaction (Card: USAT Maintenance) w/ LCD')		
+			if lcdtype == 0:
+				RetOfStep = DL.SendCommand('Activate Transaction (Card: USAT Maintenance) w/o LCD')
 				
 		if (RetOfStep):
-			Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23")	
+			if lcdtype == 1:
+				rx = 0
+			if lcdtype == 0:
+				rx = 1	
+			Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 00 ** E8 ** DF EE 25 02 00 11 DF EE 23")	
 			if (Result):
 				if i == 1:
-					Result = DL.Check_RXResponse("02 ** 80 1E 00 1F 00 92 92")
+					Result = DL.Check_RXResponse(rx, "02 ** 80 1E 00 1F 00 82 92")
 				if i == 2:
-					Result = DL.Check_RXResponse("02 ** 83 1F 25 13 00 93 00")
+					Result = DL.Check_RXResponse(rx, "02 ** 83 1F 25 13 00 83 00")
 				if i == 3:
-					Result = DL.Check_RXResponse("02 ** 83 1F 1D 13 00 93 00")
+					Result = DL.Check_RXResponse(rx, "02 ** 83 1F 1D 13 00 83 00")
 				if i == 4:
-					Result = DL.Check_RXResponse("02 ** 83 1F 28 13 00 93 00")
+					Result = DL.Check_RXResponse(rx, "02 ** 83 1F 28 13 00 83 00")
 				if i == 5:
-					Result = DL.Check_RXResponse("02 ** 83 1F 1F 13 00 93 00")
+					Result = DL.Check_RXResponse(rx, "02 ** 83 1F 1F 13 00 83 00")
 				if i == 6:
-					Result = DL.Check_RXResponse("02 ** 83 1F 17 13 00 93 00")
+					Result = DL.Check_RXResponse(rx, "02 ** 83 1F 17 13 00 83 00")
 					
 				if (Result):			
-					sResult=DL.Get_RXResponse(0)
+					sResult=DL.Get_RXResponse(rx)
 					if sResult!=None and sResult!="":
 						sResult=sResult.replace(" ","")
 						CardData=DL.GetTLV(sResult,"DFEE23")

@@ -1,0 +1,107 @@
+TID:Get DUKPT DEK Attribution based on KeySlot (C7-A3)
+CMD:C7 A3 01 00
+EXR:
+
+TID:Get Data Encryption (C7-37) = 03
+CMD:C7 37
+EXR:
+
+TID:Get account DUKPT encryption type (C7-33) = AES
+CMD:C7 33
+EXR:
+
+TID:Set MSR Secure Parameters (C7-38)
+CMD:C7 38 DFEF04 01 10
+EXR:C7 00 00 00
+
+TID:Burst mode Off
+CMD:04 00 DFEE7E 01 00
+EXR:04 00 00 00
+
+TID:Poll on Demand
+CMD:01 01 01
+EXR:01 00 00 00
+
+TID:Activate Transaction (Card: USAT Maintenance) w/ LCD
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG:Swipe USAT Maintenance card...
+EXR:
+TIMEOUT:120000
+
+TID:Activate Transaction (Card: Blackboard-Valid card) w/ LCD
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG:Swipe Blackboard-Valid card card...
+EXR:
+TIMEOUT:120000
+
+TID:Activate Transaction (Card: Blackboard-Invalid account) w/ LCD
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG:Swipe Blackboard-Invalid account card...
+EXR:
+TIMEOUT:120000
+
+TID:Activate Transaction (Card: Blackboard -$0.00 balance) w/ LCD
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG:Swipe Blackboard -$0.00 balance card...
+EXR:
+TIMEOUT:120000
+
+TID:Activate Transaction (Card: Blackboard-Expired) w/ LCD
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG:Swipe Blackboard-Expired card...
+EXR:
+TIMEOUT:120000
+
+TID:Activate Transaction (Card: Blackboard-lost card) w/ LCD
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG:Swipe Blackboard-lost card card...
+EXR:
+TIMEOUT:120000
+
+TID:Activate Transaction (Card: USAT Maintenance) w/o LCD
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG:Swipe USAT Maintenance card...
+EXR:
+EXR:
+EXR:
+TIMEOUT:120000
+
+TID:Activate Transaction (Card: Blackboard-Valid card) w/o LCD
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG:Swipe Blackboard-Valid card card...
+EXR:
+EXR:
+EXR:
+TIMEOUT:120000
+
+TID:Activate Transaction (Card: Blackboard-Invalid account) w/o LCD
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG:Swipe Blackboard-Invalid account card...
+EXR:
+EXR:
+EXR:
+TIMEOUT:120000
+
+TID:Activate Transaction (Card: Blackboard -$0.00 balance) w/o LCD
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG:Swipe Blackboard -$0.00 balance card...
+EXR:
+EXR:
+EXR:
+TIMEOUT:120000
+
+TID:Activate Transaction (Card: Blackboard-Expired) w/o LCD
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG:Swipe Blackboard-Expired card...
+EXR:
+EXR:
+EXR:
+TIMEOUT:120000
+
+TID:Activate Transaction (Card: Blackboard-lost card) w/o LCD
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG:Swipe Blackboard-lost card card...
+EXR:
+EXR:
+EXR:
+TIMEOUT:120000

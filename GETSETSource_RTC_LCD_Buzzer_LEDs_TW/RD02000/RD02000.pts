@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-58906
+64364
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -176,9 +176,8 @@ ElseIf MyInput = 7 Then
  	If result <> 0 Then
           DL.ResetReceiveCounter
 	   DL.AddComment vbCrLf & "Set Params (04-00) on FFF8 to 00 (UI: VivoTech)" & vbCrLf
-      	   
-   if readerType = "GR" or readerType = "NEO1" then DL.SendSequence "Set Params (04-00) on FFF8 to 00 (UI: VivoTech)"
-   if readerType = "NEO2" then DL.SendSequence "Set Params (04-00) on FFF8 to 00 (UI: VivoTech) (NEO2)"
+   	   if readerType <> "NEO2" then DL.SendSequence "Set Params (04-00) on FFF8 to 00 (UI: VivoTech)"
+          if readerType = "NEO2" then DL.SendSequence "Set Params (04-00) on FFF8 to 00 (UI: VivoTech) (NEO2)"
 	   result = DL.WaitForSequence("Generic 04-xx positive resp", 1, 5000)
 	End If
 

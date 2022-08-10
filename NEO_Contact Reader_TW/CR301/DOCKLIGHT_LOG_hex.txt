@@ -1,12 +1,22 @@
-Docklight Log File (HEX) - Started 2022/6/16 13:39:22.914 
+Docklight Log File (HEX) - Started 2022/8/1 14:30:17.588 
  TEST CASE: CR301
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 9600 baud...
+ POS operating on COM90 @ 115200 baud...
  Set POS COM PORT - COMPLETE
 
+ The reader did not support FastEMV, please skip this case.
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2022/6/16 13:39:23.184 
+Docklight Log File (HEX) - Stopped 2022/8/1 14:30:23.594 
 

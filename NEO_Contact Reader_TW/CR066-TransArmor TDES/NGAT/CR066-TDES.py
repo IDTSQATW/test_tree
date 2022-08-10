@@ -10,31 +10,25 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
-# Get Data Encryption (C7-37)
-if (Result):
-	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
+# Check project has LCD or not
+lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** The project has LCD ***")
+else:
+	DL.SetWindowText("Green", "*** The project has NO LCD ***")
 
 # Encryption Type -- TransArmor TDES
 if (Result):
-	RetOfStep = DL.SendCommand('2-use TransArmor TDES to encrypt (C7-32)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 00")
-		if Result != True:
-			Result = DL.SendCommand('0-use TDES to encrypt (C7-32)')
-			if (Result):
-				Result = DL.SendCommand('2-use TransArmor TDES to encrypt (C7-32)')
+	RetOfStep = DL.SendCommand('C7-A2 TDES DUKPT manage_TransArmor TDES, data key')
+	time.sleep(1)
+	
+# Check data encryption TYPE is TDES	
 if (Result):
-	RetOfStep = DL.SendCommand('Encryption Type -- TransArmor TDES')
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 02")		
+		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 02 00 00 00 00")		
 		
-# Burst mode OFF & Poll on demand		
-if (Result):
-	RetOfStep = DL.SendCommand('Burst mode Off')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")	
+# Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):
@@ -42,10 +36,17 @@ if (Result):
 		
 # cmd 60-10, swipe card
 if (Result):
-	RetOfStep = DL.SendCommand('Activate Transaction')
+	if lcdtype == 1:
+		RetOfStep = DL.SendCommand('Activate Transaction_w LCD')
+	if lcdtype == 0:
+		RetOfStep = DL.SendCommand('Activate Transaction_w/o LCD')	
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("60 63 00 00")
-		alldata = DL.Get_RXResponse(1)
+		if lcdtype == 1:
+			rx = 1
+		if lcdtype == 0:
+			rx = 2
+		alldata = DL.Get_RXResponse(rx)
 		if alldata!=None and alldata!="":
 			alldata=alldata.replace(" ","")
 			CardData=DL.GetTLV(alldata,"DFEE23")

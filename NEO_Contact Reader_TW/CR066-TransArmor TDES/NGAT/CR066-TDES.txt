@@ -1,18 +1,10 @@
-TID:Get Data Encryption (C7-37)
-CMD:C7 37
-EXR:C7 00 00 00
+TID:Get DUKPT DEK Attribution based on KeySlot (C7-A3)
+CMD:C7 A3 01 00
+EXR:
 
-TID:0-use TDES to encrypt (C7-32)
-CMD:C7 32 00
+TID:C7-A2 TDES DUKPT manage_TransArmor TDES, data key
+CMD:C7 A2 01 00 00 02 00 00 00 00
 EXR:C7 00 00 00
-
-TID:2-use TransArmor TDES to encrypt (C7-32)
-CMD:C7 32 02
-EXR:C7 00 00 00
-
-TID:Encryption Type -- TransArmor TDES
-CMD:C7 33
-EXR:C7 00 00 01 02
 
 TID:Burst mode Off
 CMD:04 00 DF EE 7E 01 00
@@ -22,9 +14,18 @@ TID:Poll on Demand
 CMD:01 01 01
 EXR:01 00 00 00
 
-TID:Activate Transaction
+TID:Activate Transaction_w/ LCD
 CMD:60 10 01 00 78 00 78 9C 01 00 5F 57 01 00 9F 02 06 00 00 00 00 02 00 9F 03 06 00 00 00 00 00 00 5F 2A 02 08 40
 EXR: 60 63 00 00
 MSG:Click OK --> Swipe card (ISO4909, 3T)...
+EXR:
+TIMEOUT:12000
+
+TID:Activate Transaction_w/o LCD
+CMD:60 10 01 00 78 00 78 9C 01 00 5F 57 01 00 9F 02 06 00 00 00 00 02 00 9F 03 06 00 00 00 00 00 00 5F 2A 02 08 40
+EXR: 60 63 00 00
+EXR:
+MSG:Click OK --> Swipe card (ISO4909, 3T)...
+EXR:
 EXR:
 TIMEOUT:12000

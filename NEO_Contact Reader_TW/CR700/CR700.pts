@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-62116
+38650
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -176,6 +176,7 @@ If result <> 0 Then
    if result <> 0 then
       DL.SendSequence "05-01 Cancel transaction"
       result = DL.WaitForSequence("05 00", 1, 1000)
+      dl.pause 100
       if result = 0 then
          dl.pause 3000
          DL.SendSequence "02-40"

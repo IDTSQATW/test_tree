@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-15816
+16089
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -244,10 +244,9 @@ End Sub
 DL.Pause 1500
 DL.AddComment vbCrLf
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 3000
+DL.Pause 15000
 
 PrintMyResult(result)
-DL.Pause 1000
 
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 Else '""

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-6996
+27074
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -83,7 +83,7 @@ End Sub
 ' -  
 '------------------------------------------------------------
 DL.OpenProject ProjectName & ".ptp"
-DL.StartCommunication
+'DL.StartCommunication
 DL.ClearCommWindows 
 DL.StartLogging "DOCKLIGHT_LOG",False, "H"
 ', false, true
@@ -160,6 +160,9 @@ If result <> 0 Then
    DL.SendSequence "PT off"
    dl.pause 800
 End If
+
+DL.SendSequence "Set Configuration Global On (NEO2)"
+result = DL.WaitForSequence("04 00", 1, 2000)
 '------------------------------------------------------------
 atcmd = msgbox ("Does reader support cmd 02-01?", vbyesno)
 if atcmd = 6 then
@@ -220,6 +223,9 @@ if result = 0 then
    DL.SendSequence "PT off"
    dl.pause 1000
 End If
+
+DL.SendSequence "Set Configuration Global Off (NEO2)"
+result = DL.WaitForSequence("04 00", 1, 2000)
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 PrintMyResult(result)
@@ -279,3 +285,13 @@ ElseIf MasterResult = 1 Then
 End If
 'FileOutput.WriteLine MasterResult
 FileOutput.CloseFile
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Left(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Right(crcStr, 2)) ' high byte
+    End If
+End Sub

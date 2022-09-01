@@ -166,7 +166,7 @@ if (Result):
 		dec57 = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc57)	
 		if DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D3 01 2C CC CC CC CC CC CC CC CC') == False:
 			DL.SetWindowText("red", "Tag 57_Mask: FAIL")
-		if DL.Check_StringAB(dec57, '57 13 47 61 73 90 01 01 00 10 D3 01 21 20 00 12 33 99 00 03 1F') == False:
+		if DL.Check_StringAB(dec57, '57134761739001010010D30121200012339900031F0000000000000000000000') == False:
 			DL.SetWindowText("red", "Tag 57_Enc: FAIL")
 		# 5A
 		DL.SetWindowText("blue", "Tag 5A Mask/ Encryption data:")

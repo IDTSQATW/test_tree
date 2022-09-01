@@ -124,7 +124,7 @@ if (Result):
 		dec57 = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc57)
 		if DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D2 01 2C CC CC CC CC CC CC') == False:
 			DL.SetWindowText("red", "Tag 57_Mask: FAIL")
-		if DL.Check_StringAB(dec57, '57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89') == False:
+		if DL.Check_StringAB(dec57, '57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89 00000000000000000000000000') == False:
 			DL.SetWindowText("red", "Tag 57_Enc: FAIL")
 		# 5A
 		DL.SetWindowText("blue", "Tag 5A Mask/ Encryption data:")
@@ -134,7 +134,7 @@ if (Result):
 		dec5A = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc5A)
 		if DL.Check_StringAB(mask5A, '47 61 CC CC CC CC 00 10') == False:
 			DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
-		if DL.Check_StringAB(dec5A, '5A 08 47 61 73 90 01 01 00 10') == False:
+		if DL.Check_StringAB(dec5A, '5A 08 47 61 73 90 01 01 00 10 000000000000') == False:
 			DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
 		if  CTresultcode == "0010":
 			RetOfStep = DL.SendCommand('60-11')
@@ -151,7 +151,7 @@ if (Result):
 				dec57 = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc57)
 				if DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D2 01 2C CC CC CC CC CC CC') == False:
 					DL.SetWindowText("red", "Tag 57_Mask: FAIL")
-				if DL.Check_StringAB(dec57, '57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89') == False:
+				if DL.Check_StringAB(dec57, '57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89 00000000000000000000000000') == False:
 					DL.SetWindowText("red", "Tag 57_Enc: FAIL")
 				# 5A
 				DL.SetWindowText("blue", "Tag 5A Mask/ Encryption data:")
@@ -161,7 +161,7 @@ if (Result):
 				dec5A = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc5A)
 				if DL.Check_StringAB(mask5A, '47 61 CC CC CC CC 00 10') == False:
 					DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
-				if DL.Check_StringAB(dec5A, '5A 08 47 61 73 90 01 01 00 10') == False:
+				if DL.Check_StringAB(dec5A, '5A 08 47 61 73 90 01 01 00 10 000000000000') == False:
 					DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
 				if  CTresultcode == "0004":
 					RetOfStep = DL.SendCommand('60-12')

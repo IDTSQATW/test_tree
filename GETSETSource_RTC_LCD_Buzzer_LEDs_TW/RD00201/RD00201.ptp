@@ -1,0 +1,109 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM90
+COM2
+115200
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+Get Source
+56 69 56 4F 74 65 63 68 32 00 01 05 00 00 A3 F9
+0
+5
+
+SEND
+1
+Set Source - RTC_None - All Internal
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 05 05 E0 ED
+0
+5
+
+SEND
+2
+Set Source - LCD_None - All Internal
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 11 05 57 22
+0
+5
+
+SEND
+3
+Set Source - Buzzer_None - All Internal
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 14 05 A2 DD
+0
+5
+
+SEND
+4
+Set Source - Power LED_None - All Internal
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 15 01 17 AE
+0
+5
+
+SEND
+5
+Set Source - Transaction LED_None - All Internal
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 15 04 B2 FE
+0
+5
+
+SEND
+6
+VP3350 default
+56 69 56 4F 74 65 63 68 32 00 01 05 00 02 19 05 FE AB
+0
+5
+
+RECEIVE
+0
+VP8xxx - Get Source reject acknowledged (OK)
+56 69 56 4F 74 65 63 68 32 00 01 02 00 00 7C 33
+-1
+1
+COMMENT VP8xxx - Get Source reject acknowledged (OK)
+1
+1
+0
+1
+
+RECEIVE
+1
+GR - Set Source success (OK)
+56 69 56 4F 74 65 63 68 32 00 01 00 ?? ?? ?? ??
+-1
+1
+COMMENT 
+1
+1
+0
+1
+
+RECEIVE
+2
+0A
+56 69 56 4F 74 65 63 68 32 00 01 0A 00 00
+-1
+1
+COMMENT 
+1
+1
+0
+1
+

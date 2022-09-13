@@ -1,3 +1,7 @@
+TID:Get DUKPT DEK Attribution based on KeySlot (C7-A3)
+CMD:C7 A3 01 00
+EXR:
+
 TID:Get Data Encryption (C7-37)
 CMD:C7 37
 EXR:C7 00
@@ -14,9 +18,17 @@ TID:Poll on Demand
 CMD:01 01 01
 EXR:01 00 00 00
 
-TID:Auto poll
+TID:Auto Poll
 CMD:01 01 00
 EXR:01 00 00 00
+
+TID:0105 do not use LCD
+CMD:01 05 11 05
+EXR:
+
+TID:0105 default (VP3350)
+CMD:01 05 19 05
+EXR:
 
 TID:04-00-----DFEF4B 1
 CMD:04 00 DF EF 4B 03 24 00 00
@@ -49,7 +61,7 @@ EXR:04 00 00 00
 TID:Activate Transaction
 CMD:02 40 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
 MSG:Tap VISA qVSDC card...
-EXR:56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 **
+EXR:
 TIMEOUT:120000
 
 TID:Get Transaction Result

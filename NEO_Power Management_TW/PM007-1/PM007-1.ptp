@@ -38,22 +38,36 @@ SEND
 
 SEND
 2
-      Enter Low Power Mode (F0-03) = 0001
+      Enter Low Power Mode (F0-03) sleep = 0001
 56 69 56 4F 74 65 63 68 32 00 F0 03 00 02 00 01 08 4B
 0
 5
 
 SEND
 3
+      Enter Low Power Mode (F0-03) stop = 0101
+56 69 56 4F 74 65 63 68 32 00 F0 03 00 02 00 01 00 00
+0
+5
+
+SEND
+4
    2. awaken upon CT card
 
 0
 5
 
 SEND
-4
-      Enter Low Power Mode (F0-03) = 0000
+5
+      Enter Low Power Mode (F0-03) sleep = 0000
 56 69 56 4F 74 65 63 68 32 00 F0 03 00 02 00 00 29 5B
+0
+5
+
+SEND
+6
+      Enter Low Power Mode (F0-03) stop = 0100
+56 69 56 4F 74 65 63 68 32 00 F0 03 00 02 00 00 00 00
 0
 5
 

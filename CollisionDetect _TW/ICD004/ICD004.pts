@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-35670
+55011
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -188,29 +188,32 @@ End Function
   End If
 
   If result <> 0 Then
+     DL.ResetReceiveCounter
    prompt2 = "Please click OK and then present two type A cards fanned together."
    result = MsgBox(prompt2, VBOKOnly, "Collision Detection")
    DL.ResetReceiveCounter
    DL.AddComment "Activate Transaction w/ date & time (02-40) "
    DL.SendSequence "Activate Transaction w/ date & time (02-40)"
    if readerType <> "NEO2" then result = DL.WaitForSequence("Collision detected resp", 1, 6000)
-   if readerType = "NEO2" then result = DL.WaitForSequence("Collision detected resp (NEO2)", 1, 6000)
+   if readerType = "NEO2" then 
+      result = DL.WaitForSequence("Collision detected resp (NEO2)", 1, 2000)
+      if result = 0 then result = DL.WaitForSequence("Collision detected resp (NEO2) 2", 1, 8000)
+   end if
   End If
 
   If result <> 0 Then
+     DL.ResetReceiveCounter
    prompt2 = "Please click OK and then present one test card."
    result = MsgBox(prompt2, VBOKOnly, "Collision Detection")
    DL.ResetReceiveCounter
    DL.AddComment "Activate Transaction w/ date & time (02-40) "
    DL.SendSequence "Activate Transaction w/ date & time (02-40)"
-   if readerType <> "NEO2" then result = DL.WaitForSequence("Collision detected resp", 1, 6000)
-   if readerType = "NEO2" then result = DL.WaitForSequence("Collision detected resp (NEO2)", 1, 6000)
-
-   If result <> 0 Then
+   result = DL.WaitForSequence("error code", 1, 5000)
+   If result <> 0 Then 
       result = 0
-   Else 
+   else
       result = 1
-   End If
+   end if
   End If
 
 DL.Pause 1000

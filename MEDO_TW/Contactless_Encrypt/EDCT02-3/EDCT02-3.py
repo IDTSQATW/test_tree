@@ -17,22 +17,39 @@ if readertype == 1:
 	DL.SetWindowText("Green", "*** NEOII project ***")
 else:
 	DL.SetWindowText("Green", "*** NEOI project ***")
+	
+# Check reader is VP3350 or not
+lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
 
-# Get Data Encryption (C7-37)
-if (Result):
-	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
-		if Result == False:
-			DL.SetWindowText("Red", "Please ENABLE data encryption (03)...")
+if readertype == 1:
+	# Check data encryption TYPE is TDES	
+	if (Result):
+		RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+		if (RetOfStep):
+			Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
+else:
+	# Get Data Encryption (C7-37)
+	if (Result):
+		RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
+		if (RetOfStep):
+			Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
+			if Result == False:
+				DL.SetWindowText("Red", "Please ENABLE data encryption (03)...")
 		
-# Encryption type -- TDES
-if (Result):
-	RetOfStep = DL.SendCommand('Encryption type -- TDES')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 00")
-		if Result == False:
-			DL.SetWindowText("Red", "Please set data key type as TDES...")
+	# Encryption type -- TDES
+	if (Result):
+		RetOfStep = DL.SendCommand('Encryption type -- TDES')
+		if (RetOfStep):
+			Result = Result and DL.Check_RXResponse("C7 00 00 01 00")
+			if Result == False:
+				DL.SetWindowText("Red", "Please set data key type as TDES...")
 		
 # Burst mode OFF
 if (Result):
@@ -109,6 +126,7 @@ if (Result):
 								Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23")	
 								
 				if k == 2:
+					time.sleep(1)
 					RetOfStep = DL.SendCommand('Auto poll')
 					if (RetOfStep):
 						Result = DL.Check_RXResponse("01 00 00 00")
@@ -234,3 +252,8 @@ if (Result):
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:
 						DL.SetWindowText("red", "Tag DFEF4D: FAIL")
+						
+if lcdtype == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")						

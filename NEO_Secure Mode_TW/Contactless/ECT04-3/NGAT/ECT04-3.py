@@ -41,7 +41,7 @@ if (Result):
 			DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E1 ** DF EE 12")
 			alldata = DL.Get_RXResponse(rx)
 		if lcdtype == 0:
-			rx = 3
+			rx = 4
 			DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E1 ** DF EE 12")
 			alldata = DL.GetTLV(DL.Get_RXResponse(rx),"FF8105")
 		
@@ -54,10 +54,6 @@ if (Result):
 		mask5A = DL.GetTLV(alldata,"5A", 0)
 		enc5A = DL.GetTLV(alldata,"5A", 1)
 		dec5A = DL.DecryptDLL(0,1, strKey, ksn, enc5A)	
-		
-		Tag9F39 = DL.GetTLV(alldata,"9F39")
-		TagFFEE01 = DL.GetTLV(DL.Get_RXResponse(rx),"FFEE01")
-		TagDFEE26 = DL.GetTLV(DL.Get_RXResponse(rx),"DFEE26")
 		
 	# Tag 57
 		Result = DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D')
@@ -90,17 +86,11 @@ if (Result):
 			DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
 			
 	# Tags 9F39/ FFEE01/ DFEE26
-		if Tag9F39 == "07": 
-			DL.SetWindowText("blue", "Tag 9F39: PASS")
-		else:
+		if DL.Check_RXResponse(rx, "9F39 01 07") == False: 
 			DL.SetWindowText("Red", "Tag 9F39: FAIL")
-		
-		if (DL.Check_StringAB(TagFFEE01, "DFEE300100")): 
-			DL.SetWindowText("blue", "Tag FFEE01: PASS")
-		else:
+				
+		if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300100") == False: 
 			DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-		
-		if TagDFEE26 == "E100": 
-			DL.SetWindowText("blue", "Tag DFEE26: PASS")
-		else:
+				
+		if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False: 
 			DL.SetWindowText("Red", "Tag DFEE26: FAIL")

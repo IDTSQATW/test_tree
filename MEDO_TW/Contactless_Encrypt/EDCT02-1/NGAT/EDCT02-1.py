@@ -10,23 +10,34 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
-# Get Data Encryption (C7-37)
-if (Result):
-	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
+# # Check project has LCD or not
+# lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
+# if lcdtype == 1:
+	# DL.SetWindowText("Green", "*** The project has LCD ***")
+# else:
+	# DL.SetWindowText("Green", "*** The project has NO LCD ***")
+	
+# Check reader is VP3350 or not
+lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
+
+# Check data encryption TYPE is TDES	
+if (Result):
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
 		
-# Encryption type -- TDES
+# Poll on demand		
 if (Result):
-	RetOfStep = DL.SendCommand('Encryption type -- TDES')
+	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 00")
-		
-# Burst mode OFF		
-if (Result):
-	RetOfStep = DL.SendCommand('Burst mode Off')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")	
+		Result = Result and DL.Check_RXResponse("01 00 00 00")
 
 # cmd 02-40, tap Discover card
 if (Result):
@@ -75,20 +86,23 @@ if (Result):
 						Result = DL.Check_RXResponse("01 00 00 00")
 						time.sleep(1)
 						if (Result):
-							RetOfStep = DL.SendCommand('Activate Transaction')	
+							RetOfStep = DL.SendCommand('Activate Transaction')
+							rx = 0
 							if (RetOfStep):
-								Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 **")	
-								alldata=DL.Get_RXResponse(0)
+								Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 **")	
+								alldata=DL.Get_RXResponse(rx)
 				if k == 2:
-					RetOfStep = DL.SendCommand('Auto poll')
+					time.sleep(1)
+					RetOfStep = DL.SendCommand('Auto Poll')
 					if (RetOfStep):
 						Result = DL.Check_RXResponse("01 00 00 00")
 						time.sleep(1)
 						if (Result):
-							RetOfStep = DL.SendCommand('Get Transaction Result')	
+							RetOfStep = DL.SendCommand('Get Transaction Result')
+							rx = 1						
 							if (RetOfStep):
-								alldata = DL.Get_RXResponse(1)
-								Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 03 23')
+								alldata = DL.Get_RXResponse(rx)
+								Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 03 23')
 								
 				KSN = DL.GetTLV(alldata,"DFEE12")				
 				TagDFEF4C = DL.GetTLV(alldata,"DFEF4C", 0)
@@ -97,14 +111,12 @@ if (Result):
 
 				#1 Tag DFEF4C-4D	
 				if i == 1:
-					Result = DL.Check_StringAB(TagDFEF4C, '00 00 00 00 00 00')
-					if Result == True:
+					if TagDFEF4C == "" or TagDFEF4C == "000000000000":
 						DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 					else:
 						DL.SetWindowText("red", "Tag DFEF4C: FAIL")
-								
-					Result = DL.Check_StringAB(decDFEF4D, '')
-					if Result == True and DL.Check_StringAB(alldata, 'DF EF 4D 00'):
+							
+					if encDFEF4D == "":
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:
 						DL.SetWindowText("red", "Tag DFEF4D: FAIL")
@@ -125,14 +137,12 @@ if (Result):
 								
 				#3 Tag DFEF4C-4D	
 				if i == 3:
-					Result = DL.Check_StringAB(TagDFEF4C, '00 00 00 00 00 00')
-					if Result == True:
+					if TagDFEF4C == "" or TagDFEF4C == "000000000000":
 						DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 					else:
 						DL.SetWindowText("red", "Tag DFEF4C: FAIL")
-								
-					Result = DL.Check_StringAB(decDFEF4D, '')
-					if Result == True and DL.Check_StringAB(alldata, 'DF EF 4D 00'):
+							
+					if encDFEF4D == "":
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:
 						DL.SetWindowText("red", "Tag DFEF4D: FAIL")
@@ -153,14 +163,12 @@ if (Result):
 								
 				#5 Tag DFEF4C-4D	
 				if i == 5:
-					Result = DL.Check_StringAB(TagDFEF4C, '00 00 00 00 00 00')
-					if Result == True:
+					if TagDFEF4C == "" or TagDFEF4C == "000000000000":
 						DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 					else:
 						DL.SetWindowText("red", "Tag DFEF4C: FAIL")
-								
-					Result = DL.Check_StringAB(decDFEF4D, '')
-					if Result == True and DL.Check_StringAB(alldata, 'DF EF 4D 00'):
+							
+					if encDFEF4D == "":
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:
 						DL.SetWindowText("red", "Tag DFEF4D: FAIL")
@@ -192,3 +200,8 @@ if (Result):
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:
 						DL.SetWindowText("red", "Tag DFEF4D: FAIL")
+						
+if lcdtype == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")

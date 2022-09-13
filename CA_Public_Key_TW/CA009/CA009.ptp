@@ -48,3 +48,15 @@ COMMENT
 0
 0
 
+RECEIVE
+1
+Create User AID in Non-Exising Group Response 2
+56 69 56 4F 74 65 63 68 32 00 04 05
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

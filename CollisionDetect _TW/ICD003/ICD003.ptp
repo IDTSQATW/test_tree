@@ -3,7 +3,7 @@ VERSION
 
 COMMSETTINGS
 0
-COM1
+COM90
 COM2
 19200
 2
@@ -60,7 +60,7 @@ Poll on Demand (01-01)
 SEND
 5
 Activate Transaction w/ date & time (02-40)
-56 69 56 4F 74 65 63 68 32 00 02 40 00 15 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20 5E 34
+56 69 56 4F 74 65 63 68 32 00 02 40 00 15 05 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20 00 00
 0
 5
 
@@ -142,6 +142,30 @@ RECEIVE
 5
 Collision detected resp (NEO2)
 56 69 56 4F 74 65 63 68 32 00 02 0A ?? ?? ?? DF EE 02 04 21 00 00 00 DF EE 26
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+6
+Collision detected resp (NEO2) 2
+56 69 56 4F 74 65 63 68 32 00 02 08 ?? ?? ?? ## ## ## ## ## ## DF EE 02 04 21 00 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+7
+error code
+?? EE ?? 04 21 00 00 00
 -1
 1
 COMMENT 

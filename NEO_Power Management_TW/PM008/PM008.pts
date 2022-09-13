@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-53055
+5956
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -157,8 +157,8 @@ If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- 12-02 Set Serial Number"
    DL.SendSequence "12-02 Set Serial Number"
-   result1 = DL.WaitForSequence("12 0B", 1, 2000)
-   result2 = DL.WaitForSequence("12 00", 1, 2000)
+   result1 = DL.WaitForSequence("12 0B", 1, 1000)
+   result2 = DL.WaitForSequence("12 00", 1, 1000)
    if result1 = 1 or result2 = 1 then
       result = 1
    else
@@ -171,56 +171,61 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- 04-09 Set Configuration Defaults Command"
    DL.SendSequence "04-09 Set Configuration Defaults Command"
-   result = DL.WaitForSequence("04 00", 1, 5000)
-   dl.pause 5000
+   result = DL.WaitForSequence("04 00", 1, 8000)
 End If
 
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- F0-01 Get PMC Status"
-   DL.SendSequence "F0-01 Get PMC Status"
-   result = DL.WaitForSequence("F0 00", 1, 5000)
+   if readerType <> "NEO2" then
+      DL.SendSequence "F0-01 Get PMC Status"
+      result = DL.WaitForSequence("F0 00", 1, 5000)
+   else
+      DL.SendSequence "F0-05 Get Low Power Consumption Configuration"
+      result = DL.WaitForSequence("F0 00 00 09", 1, 5000)
+   end if
 End If
 
 DL.AddComment vbCrLf
-PrintMyResult(result)
+
 
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
 
-If MasterResult = 1 Then
-      MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-      MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)

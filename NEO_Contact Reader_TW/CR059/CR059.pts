@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-4450
+28359
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -192,8 +192,13 @@ If result <> 0 Then
       if readerType <> "NEO2" then 
          result = DL.WaitForSequence("USE CHIP READER", 1, 10000)
       else
-         result = msgbox("Does LCD show 'USE CHIP READER'?", vbyesno)
-         if result = 7 then result = 0
+         lcdcheck = msgbox ("Does reader has LCD?", vbyesno)
+         if lcdcheck = 6 then
+            result = msgbox("Does LCD show 'USE CHIP READER'?", vbyesno)
+            if result = 7 then result = 0
+         elseif lcdcheck = 7 then
+            result = DL.WaitForSequence("USE CHIP READER", 1, 10000)
+         end if
       end if
    end if
 End If
@@ -224,8 +229,13 @@ If result <> 0 Then
       if readerType <> "NEO2" then 
          result = DL.WaitForSequence("USE MAGSTRIPE", 1, 10000)
       else
-         result = msgbox("Does LCD show 'USE MAGSTRIPE'?", vbyesno)
-         if result = 7 then result = 0
+         lcdcheck = msgbox ("Does reader has LCD?", vbyesno)
+         if lcdcheck = 6 then
+            result = msgbox("Does LCD show 'USE MAGSTRIPE'?", vbyesno)
+            if result = 7 then result = 0
+         elseif lcdcheck = 7 then
+            result = DL.WaitForSequence("USE MAGSTRIPE", 1, 10000)
+         end if
       end if
    end if
 End If

@@ -5,7 +5,7 @@ ON
 $Prompt - COM Port
 COM90
 $Prompt - Reader Baud Rate
-9600
+115200
 $Prompt - reader type: GR, AR, NC(Not care)
 NEO2
 $Prompt - reader model: VP5000, VP4500, KiosK2, Cubic, ICP, VP8800, VP8500, VP8100, VP4800, Coinco, Vend3, NC(Not Care)

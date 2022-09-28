@@ -12,44 +12,52 @@ PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
 # Check project type (NEOI or NEOII)
-readertype = DL.ShowMessageBox("", "Is this NEOII project?", 0)
+readertype = DL.ShowMessageBox("", "Is this NEOII and upward project?", 0)
 if readertype == 1:
 	DL.SetWindowText("Green", "*** NEOII project ***")
 else:
 	DL.SetWindowText("Green", "*** NEOI project ***")
 
-# Get Data Encryption (C7-37)
-if (Result):
-	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
+# Check reader is VP3350 or not
+readermodel = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if readermodel == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
-		if Result == False:
-			DL.SetWindowText("Red", "Please ENABLE data encryption (03)...")
-		
-# Encryption type -- AES
-if (Result):
-	RetOfStep = DL.SendCommand('Encryption type -- AES')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 01")
-		if Result == False:
-			DL.SetWindowText("Red", "Please set data key type as AES...")
-		
-# Burst mode OFF
-if (Result):
-	if readertype == 1:	
-		RetOfStep = DL.SendCommand('Burst mode Off (NEOII)')
-	else:
-		RetOfStep = DL.SendCommand('Burst mode Off (NEOI)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")	
-		
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")	
+	
 # Poll on Demand
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("01 00 00 00")
+		Result = Result and DL.Check_RXResponse("01 00 00 00")	
+	
+if readertype == 0: #NEOI project		
+	# Get Data Encryption (C7-37)
+	if (Result):
+		RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
+		if (RetOfStep):
+			Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
+			if Result == False:
+				DL.SetWindowText("Red", "Please ENABLE data encryption (03)...")
+			
+	# Encryption type -- AES
+	if (Result):
+		RetOfStep = DL.SendCommand('Encryption type -- AES')
+		if (RetOfStep):
+			Result = Result and DL.Check_RXResponse("C7 00 00 01 01")
+			if Result == False:
+				DL.SetWindowText("Red", "Please set data key type as AES...")
 
-if readertype == 1:				
+if readertype == 1: #NEO2 or upward project			
+	# Check data encryption TYPE is TDES	
+	if (Result):
+		RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+		if (RetOfStep):
+			Result = Result and DL.Check_RXResponse("C7 00 00 06 00 01 00 00 00 00")
+	
 	# Set group 80 -- DF 81 1B = 40
 	if (Result):
 		RetOfStep = DL.SendCommand('Set group 80 -- DF 81 1B = 40')
@@ -237,3 +245,8 @@ if (Result):
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:
 						DL.SetWindowText("red", "Tag DFEF4D: FAIL")
+						
+if readermodel == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")						

@@ -42,11 +42,11 @@ if (Result):
 		rx = 1
 	if lcdtype == 0:
 		RetOfStep = DL.SendCommand('Get Transaction Result w/o LCD')
-		rx = 3
+		rx = 5
 	time.sleep(4)
 	if (RetOfStep):			
 		alldata = DL.Get_RXResponse(rx)
-		DL.Get_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 03 23 ** F1 ** DF EE 12')			
+		DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 03 23 ** F1 ** DF EE 12')			
 		
 		ksn = DL.GetTLV(alldata,"DFEE12")	
 		
@@ -63,10 +63,6 @@ if (Result):
 		mask9F6B = DL.GetTLV(tagFF8105,"9F6B", 0)
 		enc9F6B = DL.GetTLV(tagFF8105,"9F6B", 1)
 		dec9F6B = DL.DecryptDLL(0,2, strKey, ksn, enc9F6B)	
-		
-		Tag9F39 = DL.GetTLV(alldata,"9F39")
-		TagFFEE01 = DL.GetTLV(alldata,"FFEE01")	
-		TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 			
 	# Tag DF812A/ DF812B (only need enc data)
 		Result = DL.Check_StringAB(decDF812A, 'DF 81 2A 18 30 30 30 31 30 30 30 30 30 31 30 30 31 31 31 31 31 31 31 31 31 31 31 32')
@@ -108,17 +104,17 @@ if (Result):
 			DL.SetWindowText("red", "Tag 9F6B_Enc: FAIL")
 			
 	# Tags 9F39/ FFEE01/ DFEE26
-		if DL.Get_RXResponse(alldata, "9F39 01 91"): 
+		if DL.Check_RXResponse(rx, "9F39 01 91"): 
 			DL.SetWindowText("blue", "Tag 9F39: PASS")
 		else:
 			DL.SetWindowText("Red", "Tag 9F39: FAIL")
 		
-		if DL.Get_RXResponse(alldata, "FFEE01 ** DFEE300100"): 
+		if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300100"): 
 			DL.SetWindowText("blue", "Tag FFEE01: PASS")
 		else:
 			DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 		
-		if DL.Get_RXResponse(alldata, "DFEE26 02 F100"): 
+		if DL.Check_RXResponse(rx, "DFEE26 02 F100"): 
 			DL.SetWindowText("blue", "Tag DFEE26: PASS")
 		else:
 			DL.SetWindowText("Red", "Tag DFEE26: FAIL")

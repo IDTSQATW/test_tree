@@ -2,13 +2,13 @@ TID:Get DUKPT DEK Attribution based on KeySlot (C7-A3)
 CMD:C7 A3 01 00
 EXR:
 
-TID:Get Encryption status (03)
+TID:Get Data Encryption (C7-37)
 CMD:C7 37
-EXR:C7 00 00 01
+EXR:C7 00 00 00
 
-TID:Encryption Type -- TDES
+TID:Encryption Type -- AES
 CMD:C7 33
-EXR:C7 00 00 01 00
+EXR:C7 00 00 01 01
 
 TID:Burst mode Off
 CMD:04 00 DF EE 7E 01 00

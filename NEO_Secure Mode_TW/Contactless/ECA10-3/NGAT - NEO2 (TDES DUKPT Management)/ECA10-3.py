@@ -31,7 +31,7 @@ else:
 if (Result):
 	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")	
+		Result = DL.Check_RXResponse("C7 00 00 06 00 01 00 00 00 00")		
 		
 # Auto Poll	
 if (Result):
@@ -47,17 +47,17 @@ if (Result):
 			alldata = DL.Get_RXResponse(1)
 		if lcdtype == 0:
 			alldata = DL.GetTLV(DL.Get_RXResponse(1),"FF8105")
-		DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 03 23')
-		DL.Check_StringAB(DL.Get_RXResponse(1), 'E1 DF EE 12')
+		DL.Check_RXResponse(1, '56 69 56 4F 74 65 63 68 32 00 03 23')
+		DL.Check_RXResponse(1, 'E1 ** DF EE 12')
 		ksn = DL.GetTLV(DL.Get_RXResponse(1),"DFEE12")
 		
 		mask57 = DL.GetTLV(alldata,"57", 0)
 		enc57 = DL.GetTLV(alldata,"57", 1)
-		dec57 = DL.DecryptDLL(0,1, strKey, ksn, enc57)	
+		dec57 = DL.DecryptDLL(0,2, strKey, ksn, enc57)	
 		
 		mask5A = DL.GetTLV(alldata,"5A", 0)
 		enc5A = DL.GetTLV(alldata,"5A", 1)
-		dec5A = DL.DecryptDLL(0,1, strKey, ksn, enc5A)		
+		dec5A = DL.DecryptDLL(0,2, strKey, ksn, enc5A)		
 		
 	# Tag 57
 		Result = DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D3 01 2C CC CC CC CC CC CC CC CC')
@@ -67,7 +67,7 @@ if (Result):
 			DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 			
 		Result = DL.Check_StringAB(dec57, '57 13 47 61 73 90 01 01 00 10 D3 01 21 20 00 12 33 99 00 03 1F')
-		if Result == True and DL.Check_StringAB(alldata, "57 C1 18"):
+		if Result == True and DL.Check_StringAB(alldata, "57 C1 20"):
 			DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 		else:
 			DL.SetWindowText("red", "Tag 57_Enc: FAIL")
@@ -85,7 +85,7 @@ if (Result):
 		else:
 			DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
 			
-	# Tags 9F39/ FFEE01/ DFEE26
+	# Tags 9F39/ FFEE01/ DFEE26	
 		if DL.Check_RXResponse(1, "9F39 01 07") == False: 
 			DL.SetWindowText("Red", "Tag 9F39: FAIL")
 				
@@ -93,9 +93,9 @@ if (Result):
 			DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
 		if DL.Check_RXResponse(1, "DFEE26 02 E100") == False: 
-			DL.SetWindowText("Red", "Tag DFEE26: FAIL")	
+			DL.SetWindowText("Red", "Tag DFEE26: FAIL")				
 			
 if readertype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):
-		Result = DL.Check_RXResponse("01 00 00 00")				
+		Result = DL.Check_RXResponse("01 00 00 00")					

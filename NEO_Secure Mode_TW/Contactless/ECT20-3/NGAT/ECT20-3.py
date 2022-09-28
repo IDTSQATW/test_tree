@@ -10,25 +10,30 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
-# Get Data Encryption (C7-37)
-if (Result):
-	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
+# Check project has LCD or not
+lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** The project has LCD ***")
+else:
+	DL.SetWindowText("Green", "*** The project has NO LCD ***")
+	
+# Check reader is VP3350 or not
+readertype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if readertype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")	
 
-# Encryption Type -- TransArmor TDES
+# Check data encryption TYPE is TDES (TransArmor TDES)	
 if (Result):
-	RetOfStep = DL.SendCommand('2-use TransArmor TDES to encrypt (C7-32)')
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 00")
-		if Result != True:
-			Result = DL.SendCommand('0-use TDES to encrypt (C7-32)')
-			if (Result):
-				Result = DL.SendCommand('2-use TransArmor TDES to encrypt (C7-32)')
-if (Result):
-	RetOfStep = DL.SendCommand('Encryption Type -- TransArmor TDES')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 02")		
+		Result = DL.Check_RXResponse("C7 00 00 06 00 02 00 00 00 00")	
+		if Result == False:
+			DL.SetWindowText("red", "Set TDES DUKPT Output Mode as TransArmor TDES first...")
 		
 # Set group 80 (MSD only)
 if (Result):
@@ -36,11 +41,7 @@ if (Result):
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("04 00 00 00")
 		
-# Burst mode OFF & Poll on demand		
-if (Result):
-	RetOfStep = DL.SendCommand('Burst mode Off')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")	
+# Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):
@@ -50,7 +51,7 @@ if (Result):
 if (Result):
 	RetOfStep = DL.SendCommand('Activate Transaction')
 	if (RetOfStep):
-		DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** F5 DF EE 12")
+		DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** F5 ** DF EE 12")
 		alldata = DL.Get_RXResponse(0)
 		ksn = DL.GetTLV(alldata,"DFEE12")	
 		
@@ -78,10 +79,6 @@ if (Result):
 		mask9F6B = DL.GetTLV(tagFF8105,"9F6B", 0)
 		enc9F6B = DL.GetTLV(tagFF8105,"9F6B", 1)
 		dec9F6B = DL.DecryptDLL(0,1, strKey, ksn, enc9F6B)	
-		
-		Tag9F39 = DL.GetTLV(alldata,"9F39")
-		TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
-		TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 		
 	# Tag DFED29
 		Result = DL.Check_StringAB(decDFED29, '25 42 35 32 35 36 38 33 32 30 33 30 30 30 30 30 30 30 5E 53 75 70 70 6C 69 65 64 2F 4E 6F 74 5E 31 32 31 32 35 30 32')
@@ -155,18 +152,17 @@ if (Result):
 		else:
 			DL.SetWindowText("red", "Tag 9F6B_Enc: FAIL")
 			
-	# Tags 9F39/ FFEE01/ DFEE26
-		if Tag9F39 == "91": 
-			DL.SetWindowText("blue", "Tag 9F39: PASS")
-		else:
+	# Tags 9F39/ FFEE01/ DFEE26		
+		if DL.Check_RXResponse(0, "9F39 01 91") == False: 
 			DL.SetWindowText("Red", "Tag 9F39: FAIL")
-		
-		if (DL.Check_RXResponse("FFEE01 ** DFEE300100")): 
-			DL.SetWindowText("blue", "Tag FFEE01: PASS")
-		else:
+				
+		if DL.Check_RXResponse(0, "FFEE01 ** DFEE300100") == False: 
 			DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-		
-		if TagDFEE26 == "F506": 
-			DL.SetWindowText("blue", "Tag DFEE26: PASS")
-		else:
-			DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+				
+		if DL.Check_RXResponse(0, "DFEE26 02 F506") == False: 
+			DL.SetWindowText("Red", "Tag DFEE26: FAIL")			
+			
+if readertype == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")					

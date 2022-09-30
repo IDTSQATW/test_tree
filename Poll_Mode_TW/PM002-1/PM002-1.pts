@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-7075
+27235
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -165,7 +165,7 @@ End If
 '------------------------------------------------------------
 If result <> 0 Then
    prompt = prompt & "Tap CL card --> NO beep sound?...After giving result, tap any CL card again"
-   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y / N")  
+   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y")  
    result = (confirm = "y" Or confirm = "Y")
 End If
 '------------------------------------------------------------
@@ -178,7 +178,7 @@ End If
 '------------------------------------------------------------
 If result <> 0 Then
    prompt2 = prompt2 & "Did you hear it beep?"
-   confirm2 = InputBox(prompt2, "Enter (Y / y / N / n)", "Y / N")  
+   confirm2 = InputBox(prompt2, "Enter (Y / y / N / n)", "Y")  
    result = (confirm2 = "y" Or confirm2 = "Y")
 End If
 

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-16190
+61473
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -258,7 +258,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Poll for token"
    DL.SendSequence "Poll for token"
-   result = DL.WaitForSequence("poll token resp", 1, 2000)
+   result = DL.WaitForSequence("poll token resp", 1, 5000)
 End If
 
 If result <> 0 Then

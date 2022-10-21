@@ -197,6 +197,13 @@ C7-A3 (KeySlot 00)
 0
 5
 
+SEND
+25
+60-16 Contact Set ICS Identification (04)
+56 69 56 4F 74 65 63 68 32 00 60 16 00 01 04 75 9D
+0
+5
+
 RECEIVE
 0
 C7-A3 rx (AES)

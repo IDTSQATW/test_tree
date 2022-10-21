@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-53412
+37108
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -188,8 +188,8 @@ If result <> 0 Then
    DL.ResetReceiveCounter
    DL.AddComment vbCrLf & vbCrLf & "--- Get EMV Exception List (84-0C)"
    DL.SendSequence "Get EMV Exception List (84-0C)"
-   if readerType = "GR" or readerType = "NEO1" then result = DL.WaitForSequence("Get R or E list with no record resp for K3vdi", 1, 10000)
-   if readerType = "NEO2" or readerType = "USAT" or readerType = "USAT_SRED" then result = DL.WaitForSequence("Get R or E list with no record resp for K3vdi (NEO2)", 1, 10000)
+   if readerType <> "NEO2" then result = DL.WaitForSequence("Get R or E list with no record resp for K3vdi", 1, 10000)
+   if readerType = "NEO2" then result = DL.WaitForSequence("Get R or E list with no record resp for K3vdi (NEO2)", 1, 10000)
 End If
 '============================================================
 If result <> 0 Then
@@ -198,14 +198,14 @@ If result <> 0 Then
   DL.SendSequence "Add Entry to EMV Exception List (84-09) - EMV Contact V2CA0160100v4.1b"
   result = DL.WaitForSequence("Add or Del Entry of EMV R or E List resp", 1, 10000)
 End If
-'============================================================
+
 If result <> 0 Then
   DL.ResetReceiveCounter
   DL.AddComment vbCrLf & vbCrLf & "--- Get EMV Exception Log Status (84-08)"
   DL.SendSequence "Get EMV Exception Log Status (84-08)"
   result = DL.WaitForSequence("Get R or E log status with 1 record resp", 1, 10000)
 End If
-'============================================================
+
 If result <> 0 Then
   DL.ResetReceiveCounter
   DL.AddComment vbCrLf & vbCrLf & "--- Get EMV Exception List (84-0C)"
@@ -219,19 +219,20 @@ If result <> 0 Then
   DL.SendSequence "Add Entry to EMV Exception List (84-09) - HSIEN VISA"
   result = DL.WaitForSequence("Add or Del Entry of EMV R or E List resp", 1, 10000)
 End If
-'============================================================
+
 If result <> 0 Then
   DL.ResetReceiveCounter
   DL.AddComment vbCrLf & vbCrLf & "--- Get EMV Exception Log Status (84-08)"
   DL.SendSequence "Get EMV Exception Log Status (84-08)"
   result = DL.WaitForSequence("Get R or E log status with 2 record resp", 1, 10000)
 End If
-'============================================================
+
 If result <> 0 Then
   DL.ResetReceiveCounter
   DL.AddComment vbCrLf & vbCrLf & "--- Get EMV Exception List (84-0C)"
   DL.SendSequence "Get EMV Exception List (84-0C)"
-  result = DL.WaitForSequence("Get E list with record EMV Contact V2CA0160100v4.1b and HSIEN VISA resp", 1, 10000)
+  result = DL.WaitForSequence("Get E list with record EMV Contact V2CA0160100v4.1b and HSIEN VISA resp", 1, 1200)
+  if result = 0 then result = DL.WaitForSequence("Get E list with record EMV Contact V2CA0160100v4.1b and HSIEN VISA resp 2", 1, 1200)
 End If
 '============================================================
 If result <> 0 Then
@@ -240,19 +241,20 @@ If result <> 0 Then
   DL.SendSequence "Add Entry to EMV Exception List (84-09) - CUBIC VISA"
   result = DL.WaitForSequence("Add or Del Entry of EMV R or E List resp", 1, 10000)
 End If
-'============================================================
+
 If result <> 0 Then
   DL.ResetReceiveCounter
   DL.AddComment vbCrLf & vbCrLf & "--- Get EMV Exception Log Status (84-08)"
   DL.SendSequence "Get EMV Exception Log Status (84-08)"
   result = DL.WaitForSequence("Get R or E log status with 3 records resp", 1, 10000)
 End If
-'============================================================
+
 If result <> 0 Then
   DL.ResetReceiveCounter
   DL.AddComment vbCrLf & vbCrLf & "--- Get EMV Exception List (84-0C)"
   DL.SendSequence "Get EMV Exception List (84-0C)"
-  result = DL.WaitForSequence("Get E list with record EMV Contact V2CA0160100v4.1b and HSIEN VISA and CUBIC VISA resp", 1, 10000)
+  result = DL.WaitForSequence("Get E list with record EMV Contact V2CA0160100v4.1b and HSIEN VISA and CUBIC VISA resp", 1, 1200)
+  if result = 0 then result = DL.WaitForSequence("Get E list with record EMV Contact V2CA0160100v4.1b and HSIEN VISA and CUBIC VISA resp 2", 1, 1200)
 End If
 '============================================================
 If result <> 0 Then
@@ -261,14 +263,14 @@ If result <> 0 Then
   DL.SendSequence "Delete Entry from EMV Exception List (84-0A) - EMV Contact V2CA0160100v4.1b"
   result = DL.WaitForSequence("Add or Del Entry of EMV R or E List resp", 1, 10000)
 End If
-'============================================================
+
 If result <> 0 Then
   DL.ResetReceiveCounter
   DL.AddComment vbCrLf & vbCrLf & "--- Get EMV Exception Log Status (84-08)"
   DL.SendSequence "Get EMV Exception Log Status (84-08)"
   result = DL.WaitForSequence("Get R or E log status with 2 record resp", 1, 10000)
 End If
-'============================================================
+
 If result <> 0 Then
   DL.ResetReceiveCounter
   DL.AddComment vbCrLf & vbCrLf & "--- Get EMV Exception List (84-0C)"
@@ -282,14 +284,14 @@ If result <> 0 Then
   DL.SendSequence "Delete Entry from EMV Exception List (84-0A) - HSIEN VISA"
   result = DL.WaitForSequence("Add or Del Entry of EMV R or E List resp", 1, 10000)
 End If
-'============================================================
+
 If result <> 0 Then
   DL.ResetReceiveCounter
   DL.AddComment vbCrLf & vbCrLf & "--- Get EMV Exception Log Status (84-08)"
   DL.SendSequence "Get EMV Exception Log Status (84-08)"
   result = DL.WaitForSequence("Get R or E log status with 1 record resp", 1, 10000)
 End If
-'============================================================
+
 If result <> 0 Then
   DL.ResetReceiveCounter
   DL.AddComment vbCrLf & vbCrLf & "--- Get EMV Exception List (84-0C)"
@@ -303,29 +305,28 @@ If result <> 0 Then
   DL.SendSequence "Delete Entry from EMV Exception List (84-0A) - CUBIC VISA"
   result = DL.WaitForSequence("Add or Del Entry of EMV R or E List resp", 1, 10000)
 End If
-'============================================================
+
 If result <> 0 Then
   DL.ResetReceiveCounter
   DL.AddComment vbCrLf & vbCrLf & "--- Get EMV Exception Log Status (84-08)"
   DL.SendSequence "Get EMV Exception Log Status (84-08)"
   result = DL.WaitForSequence("Get R or E log status with no record resp", 1, 10000)
 End If
-'============================================================
+
 If result <> 0 Then
    DL.ResetReceiveCounter
    DL.AddComment vbCrLf & vbCrLf & "--- Get EMV Exception List (84-0C)"
    DL.SendSequence "Get EMV Exception List (84-0C)"
-   if readerType = "GR" or readerType = "NEO1" then result = DL.WaitForSequence("Get R or E list with no record resp for K3vdi", 1, 10000)
-   if readerType = "NEO2" or readerType = "USAT" or readerType = "USAT_SRED" then result = DL.WaitForSequence("Get R or E list with no record resp for K3vdi (NEO2)", 1, 10000)
+   if readerType <> "NEO2" then result = DL.WaitForSequence("Get R or E list with no record resp for K3vdi", 1, 10000)
+   if readerType = "NEO2" then result = DL.WaitForSequence("Get R or E list with no record resp for K3vdi (NEO2)", 1, 10000)
    dl.pause 400
 End If
 
 '------------------------------------------------------------
 
 DL.AddComment vbCrLf
-PrintMyResult(result)
-
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
@@ -333,34 +334,34 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
 
-If MasterResult = 1 Then
-      MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-      MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)

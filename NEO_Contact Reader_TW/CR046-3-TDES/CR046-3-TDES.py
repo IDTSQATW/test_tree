@@ -12,9 +12,9 @@ PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
 # Check project type (NEOI or NEOII)
-readertype = DL.ShowMessageBox("", "Is this NEOII project?", 0)
+readertype = DL.ShowMessageBox("", "Is this NEOII and upward project?", 0)
 if readertype == 1:
-	DL.SetWindowText("Green", "*** NEOII project ***")
+	DL.SetWindowText("Green", "*** NEOII and upward project ***")
 	# Check project has LCD or not
 	lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
 	if lcdtype == 1:
@@ -25,13 +25,13 @@ else:
 	DL.SetWindowText("Green", "*** NEOI project ***")
 
 # Check data encryption TYPE is TDES	
-if readertype == 1:	
+if readertype == 1:	     # NEOII and upward project
 	# Get DUKPT DEK Attribution based on KeySlot (C7-A3)
 	if (Result):
 		RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 		if (RetOfStep):
 			Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
-else:	
+else:     # NEOI	
 	# Get Data Encryption (C7-37)
 	if (Result):
 		RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
@@ -85,36 +85,33 @@ if (Result):
 		
 # cmd 60-10, fallback to MSR, swipe card
 if (Result):
-	if readertype == 1:
+	if readertype == 1:     # NEOII and upward project
 		if lcdtype == 1:
 			RetOfStep = DL.SendCommand('Activate Transaction_NEOII_w LCD')
 		if lcdtype == 0:
-			RetOfStep = DL.SendCommand('Activate Transaction_NEOII_w/o LCD')			
-	else:
+			RetOfStep = DL.SendCommand('Activate Transaction_NEOII_w/o LCD')
+	else:     # NEOI
 		RetOfStep = DL.SendCommand('Activate Transaction_NEOI')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("60 63 00 00")
 		if (Result):
-			if readertype == 1:		
+			if readertype == 1:		# NEOII and upward project
 				if lcdtype == 1:
-					Result = DL.Check_StringAB(DL.Get_RXResponse(3), '56 69 56 4F 74 65 63 68 32 00 60 00')
-					if (Result):
-						Result = DL.Check_StringAB(DL.Get_RXResponse(3), 'E8 DF EE 25')
-					sResult=DL.Get_RXResponse(3)
-					time.sleep(2)		
+					rx = 3
 				if lcdtype == 0:
-					Result = DL.Check_StringAB(DL.Get_RXResponse(5), '56 69 56 4F 74 65 63 68 32 00 60 00')
-					if (Result):
-						Result = DL.Check_StringAB(DL.Get_RXResponse(5), 'E8 DF EE 25')
-					sResult=DL.Get_RXResponse(5)
-					time.sleep(2)						
-			if readertype == 0:
-				Result = DL.Check_StringAB(DL.Get_RXResponse(3), '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 13 1C 02 00 00 00 23 0F')
+					rx = 5					
+				Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')
 				if (Result):
-					Result = DL.Check_StringAB(DL.Get_RXResponse(5), '56 69 56 4F 74 65 63 68 32 00 60 00')
+					Result = DL.Check_RXResponse(rx, 'E8 DF EE 25')
+				time.sleep(2)							
+			if readertype == 0:     # NEOI
+				rx = 5
+				Result = DL.Check_RXResponse(3, '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 13 1C 02 00 00 00 23 0F')
+				if (Result):
+					Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')
 					if (Result):
-						Result = DL.Check_StringAB(DL.Get_RXResponse(5), 'C8 DF EE 25')
-				sResult=DL.Get_RXResponse(5)		
+						Result = DL.Check_RXResponse(rx, 'C8 DF EE 25')
+			sResult=DL.Get_RXResponse(rx)		
 			if (Result):	
 				if sResult!=None and sResult!="":
 					sResult=sResult.replace(" ","")
@@ -221,11 +218,11 @@ if (Result):
 									DL.SetWindowText("Red", "Tag DFEF4D: FAIL")
 							
 # cmd 60-13
-if readertype == 1:
+if readertype == 1:     # NEOII and upward project
 	RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** E8 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
-if readertype == 0:
+		Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** E8 ** 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
+if readertype == 0:     # NEOI
 	RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')	
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 05 00 00 D6 C5")
+		Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 60 05 00 00 D6 C5")

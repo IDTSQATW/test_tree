@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-65523
+32401
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -249,20 +249,14 @@ If result <> 0 Then
    if result <> 0 then
       msgbox "Click OK, swipe EMV Test Card (T=0)", vbokonly
       dl.pause 5000
-
-      if readerType <> "NEO2" then  
-         ledcheck = msgbox ("LED 0 is still steady ON? (if has no LED 0, select YES directly)", vbyesno)
-      else
-         ledcheck = msgbox ("ICC LED is still ON?", vbyesno)
-      end if
+      ledcheck = msgbox ("CT transaction LED (ex. LED 0 or ICC LED) is still steady ON? (if has no LED 0, select YES directly)", vbyesno)
 
       if ledcheck = 6 then
-
          if readerType <> "NEO2" then  
             result = DL.WaitForSequence("USE CHIP READER", 1, 5000)
          else
-            msgcheck = msgbox("Does LCD show 'USE CHIP READER'?", vbyesno)
-            if msgcheck = 7 then result = 0
+            msgcheck = msgbox("Does reader have LCD and show msg 'USE CHIP READER'?", vbyesno)
+            if msgcheck = 7 then result = DL.WaitForSequence("USE CHIP READER", 1, 3000)
          end if
 
          if result <> 0 then
@@ -293,43 +287,42 @@ else
 End If
 end if
 DL.AddComment vbCrLf
-PrintMyResult(result)
-
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
 
-If MasterResult = 1 Then
-      MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-      MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)

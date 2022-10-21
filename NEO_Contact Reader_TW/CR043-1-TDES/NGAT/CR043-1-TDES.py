@@ -12,6 +12,16 @@ strKey = '0123456789ABCDEFFEDCBA9876543210'
 
 # Objective: for JIRA#CS-3879, swipe card (server code 2xx) twice, and then completed CT transaction but get incorrect dfef4D data
 
+# Check reader is VP3350 or not
+modeltype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if modeltype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
+
 # Check encryption type is TDES
 if (Result):
 	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
@@ -177,4 +187,9 @@ if  CTresultcode == "0004":
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 		
 				if TagDFEE26 != "E000": 
-					DL.SetWindowText("Red", "Tag DFEE26: FAIL")				
+					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+
+if modeltype == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")					

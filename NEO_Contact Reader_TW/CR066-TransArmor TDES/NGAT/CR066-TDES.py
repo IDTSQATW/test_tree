@@ -37,7 +37,7 @@ if (Result):
 # cmd 60-10, swipe card
 if (Result):
 	if lcdtype == 1:
-		RetOfStep = DL.SendCommand('Activate Transaction_w LCD')
+		RetOfStep = DL.SendCommand('Activate Transaction_w/ LCD')
 	if lcdtype == 0:
 		RetOfStep = DL.SendCommand('Activate Transaction_w/o LCD')	
 	if (RetOfStep):

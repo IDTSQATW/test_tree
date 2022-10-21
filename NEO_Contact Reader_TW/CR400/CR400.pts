@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-49376
+15647
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -159,6 +159,13 @@ If result <> 0 Then
 End If
 
 if readerType = "NEO2" then
+DL.SendSequence "60-16 Contact Set ICS Identification (02 = Default)"
+dl.pause 500
+DL.SendSequence "60-03 Contact Set Application Data (VISA)"
+dl.pause 500
+DL.SendSequence "60-06 Contact Set Terminal Data (9f39=05"
+dl.pause 500
+
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- 04-00-----Burst OFF"

@@ -141,7 +141,7 @@ COMMENT
 RECEIVE
 5
 Collision detected resp (NEO2)
-56 69 56 4F 74 65 63 68 32 00 02 0A ?? ?? ?? DF EE 02 04 21 00 00 00 DF EE 26
+56 69 56 4F 74 65 63 68 32 00 02 0A ?? ?? ?? ## ## ## ## ## ## DF EE 02 04 21 00 00 00
 -1
 1
 COMMENT 

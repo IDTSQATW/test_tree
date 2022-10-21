@@ -21,36 +21,31 @@ else:
 if (Result):
 	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 01 00 00 00 00")	
+		Result = DL.Check_RXResponse("C7 00 00 06 00 01 00 00 00 00")	
 
 # Set group 80 (MSD only)
 if (Result):
 	RetOfStep = DL.SendCommand('Set group 80 (MSD only)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")		
+		Result = DL.Check_RXResponse("04 00 00 00")		
 		
 # Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("01 00 00 00")
+		Result = DL.Check_RXResponse("01 00 00 00")
 
 # cmd 02-40, tap card
 if (Result):
 	if lcdtype == 1:
 		RetOfStep = DL.SendCommand('Activate Transaction w/ LCD')
+		rx = 0
 	if lcdtype == 0:
-		RetOfStep = DL.SendCommand('Activate Transaction w/o LCD')		
+		RetOfStep = DL.SendCommand('Activate Transaction w/o LCD')	
+		rx = 4		
 	if (RetOfStep):
-		if lcdtype == 1:
-			rx = 0
-			DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** F1 ** DF EE 12")
-			alldata = DL.Get_RXResponse(rx)	
-		if lcdtype == 0:
-			rx = 4
-			DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** F1 ** DF EE 12")
-			alldata = DL.Get_RXResponse(rx)			
-
+		DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** F1 ** DF EE 12")
+		alldata = DL.Get_RXResponse(rx)			
 		ksn = DL.GetTLV(alldata,"DFEE12")	
 		
 		tagFF8106 = DL.GetTLV(alldata,"FF8106")
@@ -66,10 +61,6 @@ if (Result):
 		mask9F6B = DL.GetTLV(tagFF8105,"9F6B", 0)
 		enc9F6B = DL.GetTLV(tagFF8105,"9F6B", 1)
 		dec9F6B = DL.DecryptDLL(0,2, strKey, ksn, enc9F6B)	
-		
-		Tag9F39 = DL.GetTLV(alldata,"9F39")
-		TagFFEE01 = DL.GetTLV(alldata,"FFEE01")	
-		TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 			
 	# Tag DF812A/ DF812B (only need enc data)
 		Result = DL.Check_StringAB(decDF812A, 'DF 81 2A 18 30 30 30 31 30 30 30 30 30 31 30 30 31 31 31 31 31 31 31 31 31 31 31 32')

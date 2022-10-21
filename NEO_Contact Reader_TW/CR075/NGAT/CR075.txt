@@ -62,8 +62,6 @@ EXR:
 EXR:
 EXR:
 EXR:
-EXR:
-EXR:
 
 TID:60-11 Contact Authenticate Transaction_w LCD
 CMD:60 11 00 00 78
@@ -75,10 +73,9 @@ TIMEOUT:120000
 TID:60-11 Contact Authenticate Transaction_w/o LCD
 CMD:60 11 00 00 78
 EXR: 60 63 00 00
-EXR:
-EXR:
-EXR:
 MSG:Waiting...
+EXR:
+EXR:
 EXR:
 TIMEOUT:120000
 
@@ -93,9 +90,6 @@ TID:60-12 Contact Apply Host Response_w/o LCD
 CMD:60 12 01 8A 02 30 31 91 0A 1A 1B 1C 1D 1E 1F 2A 2B 30 30
 EXR: 60 63 00 00
 EXR:
-EXR:
-EXR:
-EXR:
 MSG:Waiting...
 EXR:
 EXR:
@@ -103,4 +97,6 @@ TIMEOUT:120000
 
 TID:LCD confirmed, OK
 CMD:61 01 02 01 00 45
+EXR:
+EXR:
 EXR:

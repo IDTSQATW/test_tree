@@ -86,3 +86,15 @@ COMMENT Action Code "00" Pass
 0
 0
 
+RECEIVE
+3
+Get Group 2 Response (NEO2) 2
+56 69 56 4F 74 65 63 68 32 00 03 00 ?? ?? DF EE 2D 01 02 DF 81 1B 01 ?? DF EE 39 01 01 DF EE 37 01 03 9F 35 01 26 ?? ??
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

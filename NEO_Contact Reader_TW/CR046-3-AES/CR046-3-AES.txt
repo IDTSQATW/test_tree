@@ -1,3 +1,7 @@
+TID:Get DUKPT DEK Attribution based on KeySlot (C7-A3)
+CMD:C7 A3 01 00
+EXR:
+
 TID:Get Data Encryption (C7-37)
 CMD:C7 37
 EXR:C7 00 00 00
@@ -17,6 +21,14 @@ EXR:04 00 00 00
 TID:Poll on Demand
 CMD:01 01 01
 EXR:01 00 00 00
+
+TID:0105 do not use LCD
+CMD:01 05 11 05
+EXR:
+
+TID:0105 default (VP3350)
+CMD:01 05 19 05
+EXR:
 
 TID:First response control = Send First Response 0x63
 CMD:04 00 DF ED 59 01 00
@@ -54,6 +66,18 @@ TIMEOUT:120000
 
 TID:Activate Transaction_NEOI
 CMD:60 10 01 00 78 00 78 9C 01 00 5F 57 01 00 9F 02 06 00 00 00 00 02 00 9F 03 06 00 00 00 00 00 00 5F 2A 02 08 40
+EXR:
+EXR:
+EXR:
+EXR:56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 13 1C 02 00 00 00 23 0F
+MSG: Insert card (once) that can not be powered on IC chip --> Remove card --> Swipe Discover card...(ANY)
+EXR:
+EXR:
+TIMEOUT:120000
+
+TID:Activate Transaction_VP3350
+CMD:60 10 01 00 78 00 78 9C 01 00 5F 57 01 00 9F 02 06 00 00 00 00 02 00 9F 03 06 00 00 00 00 00 00 5F 2A 02 08 40
+EXR:
 EXR:
 EXR:
 EXR:

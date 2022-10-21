@@ -72,7 +72,7 @@ if (Result):
 		if lcdtype == 1:
 			alldata = DL.Get_RXResponse(1)
 		if lcdtype == 0:
-			alldata = DL.Get_RXResponse(9)	
+			alldata = DL.Get_RXResponse(7)	
 		CTresultcode = DL.GetTLV(alldata,"DFEE25")
 		if (Result):
 			DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')
@@ -88,7 +88,7 @@ if (Result):
 				if lcdtype == 1:
 					alldata = DL.Get_RXResponse(1)
 				if lcdtype == 0:
-					alldata = DL.Get_RXResponse(4)
+					alldata = DL.Get_RXResponse(3)
 				CTresultcode = DL.GetTLV(alldata,"DFEE25")	
 				if (Result):
 					DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')
@@ -115,12 +115,15 @@ if (Result):
 								if lcdtype == 1:
 									alldata = DL.Get_RXResponse(1)
 								if lcdtype == 0:	
-									alldata = DL.Get_RXResponse(5)
+									alldata = DL.Get_RXResponse(2)
 								CTresultcode = DL.GetTLV(alldata,"DFEE25")
 								if (RetOfStep):
 									Result = DL.Check_StringAB(CTresultcode, '00 02')
 									if Result != True:
 										DL.SetWindowText("red", "cmd 60-12, tag DFEE25 value: FAIL")
-									lcdcheck = DL.ShowMessageBox('Notice','Does LCD display msg "APPROVED"?', 0)
+									if lcdtype == 1:
+										lcdcheck = DL.ShowMessageBox('Notice','Does LCD display msg "APPROVED"?', 0)
+									if lcdtype == 0:
+										lcdcheck = DL.Check_RXResponse(1, "56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 53 03 00 82 03 1C 02 00 **")
 									if lcdcheck != 1:
 										DL.SetWindowText("red", "LCD msg: FAIL")

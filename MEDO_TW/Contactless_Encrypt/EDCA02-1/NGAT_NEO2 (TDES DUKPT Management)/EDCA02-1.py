@@ -31,13 +31,13 @@ else:
 if (Result):
 	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 01 00 00 00 00")
+		Result = DL.Check_RXResponse("C7 00 00 06 00 01 00 00 00 00")
 		
 # Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("01 00 00 00")
+		Result = DL.Check_RXResponse("01 00 00 00")
 
 # cmd 02-40, tap Discover card
 if (Result):
@@ -202,4 +202,4 @@ if (Result):
 if lcdtype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):
-		Result = DL.Check_RXResponse("01 00 00 00")						
+		Result = DL.Check_RXResponse("01 00 00 00")

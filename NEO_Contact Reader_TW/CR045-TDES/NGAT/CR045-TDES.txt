@@ -47,7 +47,6 @@ EXR: 60 63 00 00
 EXR: 
 MSG: Swipe VISA MSD card...
 EXR:
-EXR: 
 TIMEOUT:120000
 
 TID:60-13 Contact Retrieve Transaction Result

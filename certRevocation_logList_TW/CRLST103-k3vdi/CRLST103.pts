@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-61550
+50142
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -162,7 +162,7 @@ End Function
 If result <> 0 Then
    DL.ResetReceiveCounter
    DL.AddComment vbCrLf & "--- Enable Revocation List (DF26=1) *** " & readerType 
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then DL.SendSequence "Enable Revocation List (DF26=1)"
+   if readerType <> "NEO2" then DL.SendSequence "Enable Revocation List (DF26=1)"
    if readerType = "NEO2" then DL.SendSequence "Enable Revocation List (DF26=1) (NEO2)"
    result = DL.WaitForSequence("set cfg (04-xx)generic positive resp", 1, 10000)
 End If
@@ -171,7 +171,8 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   DL.AddComment vbCrLf & "--- Delete All Entries from EMV Revocation List (84-06)"
   DL.SendSequence "Delete All Entries from EMV Revocation List (84-06)"
-  result = DL.WaitForSequence("Add or Del Entry of EMV R or E List resp", 1, 10000)
+  'result = DL.WaitForSequence("Add or Del Entry of EMV R or E List resp", 1, 10000)
+  dl.pause 1000
 End If
 '============================================================
 If result <> 0 Then
@@ -185,8 +186,8 @@ If result <> 0 Then
    DL.ResetReceiveCounter
    DL.AddComment vbCrLf & vbCrLf & "--- Get EMV Revocation List (84-07)"
    DL.SendSequence "Get EMV Revocation List (84-07)"
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then result = DL.WaitForSequence("Get R or E list with no record resp for k3vdi", 1, 3000)
-   if readerType = "NEO2" or readerType = "USAT_SRED" then result = DL.WaitForSequence("Get R or E list with no record resp for k3vdi (NEO2)", 1, 3000)
+   if readerType <> "NEO2" then result = DL.WaitForSequence("Get R or E list with no record resp for k3vdi", 1, 3000)
+   if readerType = "NEO2" then result = DL.WaitForSequence("Get R or E list with no record resp for k3vdi (NEO2)", 1, 3000)
 End If
 '=============================================================
 I = 10
@@ -248,9 +249,8 @@ End If
 '------------------------------------------------------------
 
 DL.AddComment vbCrLf
-PrintMyResult(result)
-
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
@@ -258,34 +258,34 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
 
-If MasterResult = 1 Then
-      MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-      MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)

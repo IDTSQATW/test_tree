@@ -64,11 +64,15 @@ MSG:Swipe USAT Maintenance card...
 EXR:
 EXR:
 EXR:
+EXR:
+EXR:
 TIMEOUT:120000
 
 TID:Activate Transaction (Card: Blackboard-Valid card) w/o LCD
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
 MSG:Swipe Blackboard-Valid card card...
+EXR:
+EXR:
 EXR:
 EXR:
 EXR:
@@ -80,11 +84,15 @@ MSG:Swipe Blackboard-Invalid account card...
 EXR:
 EXR:
 EXR:
+EXR:
+EXR:
 TIMEOUT:120000
 
 TID:Activate Transaction (Card: Blackboard -$0.00 balance) w/o LCD
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
 MSG:Swipe Blackboard -$0.00 balance card...
+EXR:
+EXR:
 EXR:
 EXR:
 EXR:
@@ -96,11 +104,15 @@ MSG:Swipe Blackboard-Expired card...
 EXR:
 EXR:
 EXR:
+EXR:
+EXR:
 TIMEOUT:120000
 
 TID:Activate Transaction (Card: Blackboard-lost card) w/o LCD
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
 MSG:Swipe Blackboard-lost card card...
+EXR:
+EXR:
 EXR:
 EXR:
 EXR:

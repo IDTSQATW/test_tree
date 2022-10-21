@@ -67,15 +67,15 @@ if (Result):
 				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Expired) w/o LCD')
 		if i == 6:
 			if lcdtype == 1:
-				RetOfStep = DL.SendCommand('Activate Transaction (Card: USAT Maintenance) w/ LCD')		
+				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-lost card) w/ LCD')		
 			if lcdtype == 0:
-				RetOfStep = DL.SendCommand('Activate Transaction (Card: USAT Maintenance) w/o LCD')
+				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-lost card) w/o LCD')
 				
 		if (RetOfStep):
 			if lcdtype == 1:
 				rx = 0
 			if lcdtype == 0:
-				rx = 1	
+				rx = 3	
 			Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 00 ** E8 ** DF EE 25 02 00 11 DF EE 23")	
 			if (Result):
 				if i == 1:

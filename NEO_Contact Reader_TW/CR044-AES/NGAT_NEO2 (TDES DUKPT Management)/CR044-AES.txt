@@ -1,0 +1,46 @@
+TID:Get DUKPT DEK Attribution based on KeySlot (C7-A3)
+CMD:C7 A3 01 00
+EXR:
+
+TID:Get Data Encryption (C7-37)
+CMD:C7 37
+EXR:C7 00 00 00
+
+TID:Encryption Type -- AES
+CMD:C7 33
+EXR:C7 00 00 01 01
+
+TID:Set MSR Secure Parameters (C7-38)
+CMD:C7 38 DFEF04 01 10
+EXR:C7 00 00 00
+
+TID:First Response Control (0x63) = enable
+CMD:04 00 DFED59 01 00
+EXR:04 00 00 00
+
+TID:Burst mode Off
+CMD:04 00 DF EE 7E 01 00
+EXR:04 00 00 00
+
+TID:Poll on Demand
+CMD:01 01 01
+EXR:01 00 00 00
+
+TID:0105 do not use LCD
+CMD:01 05 11 05
+EXR:
+
+TID:0105 default (VP3350)
+CMD:01 05 19 05
+EXR:
+
+TID:Activate Transaction
+CMD:60 10 01 00 78 00 78 9C 01 00 5F 57 01 00 9F 02 06 00 00 00 00 02 00 9F 03 06 00 00 00 00 00 00 5F 2A 02 08 40
+EXR: 60 63 00 00
+MSG: Swipe IDT test card...
+EXR:
+TIMEOUT:120000
+
+TID:60-13 Contact Retrieve Transaction Result
+CMD:60 13 57 5A 5F 34 5F 20 5F 24 9F 20 5F 25 5F 2D 50 4F 84 DF EE 23 9F 39
+EXR:

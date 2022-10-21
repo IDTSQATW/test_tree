@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-41869
+41783
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -220,16 +220,16 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-if readerType = "GR" or readerType = "NEO1" then 
+if readerType <> "NEO2" then 
    precondition()
-   if result <> 0 then
-      loadkey_D()
-   end if
+   if result <> 0 then loadkey_D()
 else
    enctype = msgbox ("Reader had data key & enc type is AES?", vbyesno)
    if enctype = 7 then result = 0
 end if
 '------------------------------------------------------------
+lcdcheck = msgbox("Does the reader have LCD?", vbyesno)
+
 if readerType = "GR" or readerType = "NEO1" or enctype = 6 then
 
 if result <> 0 then
@@ -247,33 +247,23 @@ If result <> 0 Then
    DL.SendSequence "60-10"
    result = DL.WaitForSequence("60-xx 63 status", 1, 2000)
    if result <> 0 then
-      msgbox "Click OK, swipe EMV Test Card (T=0)", vbokonly
+      msgbox "Click OK --> Swipe EMV Test Card (T=0)", vbokonly
       dl.pause 5000
 
-      if readerType = "GR" or readerType = "NEO1" then 
-         ledcheck = msgbox ("LED 0 is still steady ON? (if has no LED 0, select YES directly)", vbyesno)
-      elseif readerType = "NEO2" or readerType = "USAT" or readerType = "USAT_SRED" then 
-             ledcheck = msgbox ("ICC LED is still ON?", vbyesno)
-      else
-         ledcheck = msgbox ("LED 0 is still steady ON? (if has no LED 0, select YES directly)", vbyesno)
-      end if
-
+      ledcheck = msgbox ("LED 0 or ICC LED is still steady ON? (if has no LED 0, select YES directly)", vbyesno)
       if ledcheck = 6 then
-
-         if readerType = "GR" or readerType = "NEO1" then 
+         if lcdcheck = 7 then 
             result = DL.WaitForSequence("USE CHIP READER", 1, 5000)
-         elseif readerType = "NEO2" or readerType = "USAT" or readerType = "USAT_SRED" then 
-                msgcheck = msgbox("Does LCD show 'USE CHIP READER'?", vbyesno)
-                if msgcheck = 7 then result = 0
          else
-            result = DL.WaitForSequence("USE CHIP READER", 1, 5000)
+            msgcheck = msgbox("Does LCD show 'USE CHIP READER'?", vbyesno)
+            if msgcheck = 7 then result = 0
          end if
 
          if result <> 0 then
             msgbox "Insert EMV Test Card (T=0) --> Click OK", vbokonly
-            result = DL.WaitForSequence("60-10 resp code 0010", 1, 20000)
+            result = DL.WaitForSequence("60-10 resp code 0010", 1, 8000)
             if result <> 0 then
-               ledcheck = msgbox ("LED 0 is flashing & tri-color LED is flashed Amber continuously?", vbyesno)
+               ledcheck = msgbox ("LED 0 is flashing & tri-color LED (if have) is flashed Amber continuously?", vbyesno)
                if ledcheck = 7 then result = 0
             end if
          end if
@@ -298,43 +288,39 @@ End If
 end if
 
 DL.AddComment vbCrLf
-PrintMyResult(result)
-
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
 
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
-
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
-
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
-
-If MasterResult = 1 Then
-      MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-      MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)

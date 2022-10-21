@@ -12,79 +12,95 @@ PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
 # Check project type (NEOI or NEOII)
-readertype = DL.ShowMessageBox("", "Is this NEOII project?", 0)
+readertype = DL.ShowMessageBox("", "Is this NEOII or upward project?", 0)
 if readertype == 1:
 	DL.SetWindowText("Green", "*** NEOII project ***")
 else:
 	DL.SetWindowText("Green", "*** NEOI project ***")
+	
+# Check project has LCD or not
+lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** The project has LCD ***")
+else:
+	DL.SetWindowText("Green", "*** The project has NO LCD ***")
 
-# Get Data Encryption (C7-37)
-if (Result):
-	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
-		if Result == False:
-			DL.SetWindowText("Red", "Please ENABLE data encryption (03)...")
-
-# Encryption Type -- AES
-if (Result):
-	RetOfStep = DL.SendCommand('Encryption Type -- AES')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 01")	
-		if Result == False:
-			DL.SetWindowText("Red", "Please set data key type as AES...")		
-		
-# Burst mode OFF & Poll on demand		
-if (Result):
-	if readertype == 1:	
-		RetOfStep = DL.SendCommand('Burst mode Off (NEOII)')
-	else:
-		RetOfStep = DL.SendCommand('Burst mode Off (NEOI)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")	
+if readertype == 1:     # NEO2 or upward
+	# Check data encryption TYPE is TDES	
+	if (Result):
+		RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+		if (RetOfStep):
+			Result = DL.Check_RXResponse("C7 00 00 06 00 01 00 00 00 00")
+else:     # NEO1
+	# Get Data Encryption (C7-37)
+	if (Result):
+		RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
+		if (RetOfStep):
+			Result = DL.Check_RXResponse("C7 00 00 01 03")
+			if Result == False:
+				DL.SetWindowText("Red", "Please ENABLE data encryption (03)...")
+	# Encryption Type -- AES
+	if (Result):
+		RetOfStep = DL.SendCommand('Encryption Type -- AES')
+		if (RetOfStep):
+			Result = DL.Check_RXResponse("C7 00 00 01 01")	
+			if Result == False:
+				DL.SetWindowText("Red", "Please set data key type as AES...")	
+				
+# Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("01 00 00 00")
+		Result = DL.Check_RXResponse("01 00 00 00")
 		
-if readertype == 0:	
+if readertype == 0:	     # NEO1
 	# CT config		
 	if (Result):
 		RetOfStep = DL.SendCommand('60-06 Contact Set Terminal Data (NEOI)')
 		if (RetOfStep):
-			Result = Result and DL.Check_RXResponse("60 00 00 00")		
+			Result = DL.Check_RXResponse("60 00 00 00")		
 	if (Result):
 		RetOfStep = DL.SendCommand('60-03 Contact Set Application Data (VISA)')
 		if (RetOfStep):
-			Result = Result and DL.Check_RXResponse("60 00 00 00")		
+			Result = DL.Check_RXResponse("60 00 00 00")		
 	if (Result):
 		RetOfStep = DL.SendCommand('60-0A Contact Set CA Public Key')
 		if (RetOfStep):
-			Result = Result and DL.Check_RXResponse("60 00 00 00")		
+			Result = DL.Check_RXResponse("60 00 00 00")		
 		
 # cmd 60-10, fallback to MSR, swipe card
 if (Result):
-	if readertype == 1:
+	if readertype == 1:     # NEO2 or upward
 		RetOfStep = DL.SendCommand('Activate Transaction_NEOII')
-	else:
+	else:     # NEO1
 		RetOfStep = DL.SendCommand('Activate Transaction_NEOI')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("60 63 00 00")
 		if (Result):
-			if readertype == 0:
-				Result = DL.Check_StringAB(DL.Get_RXResponse(2), '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 0E 1C 02 00 00 00 77 C8')
+			if readertype == 0:     # NEO1
+				Result = DL.Check_RXResponse(2, '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 0E 1C 02 00 00 00 77 C8')
 				if (Result):
-					Result = DL.Check_StringAB(DL.Get_RXResponse(4), '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 13 1C 02 00 00 00 23 0F')
+					Result = DL.Check_RXResponse(4, '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 13 1C 02 00 00 00 23 0F')
 					if (Result):
-						Result = DL.Check_StringAB(DL.Get_RXResponse(6), '56 69 56 4F 74 65 63 68 32 00 60 00')
+						Result = DL.Check_RXResponse(6, '56 69 56 4F 74 65 63 68 32 00 60 00')
 						if (Result):
-							Result = DL.Check_StringAB(DL.Get_RXResponse(6), 'CA DF EE 25')
+							Result = DL.Check_RXResponse(6, 'CA DF EE 25')
 				sResult=DL.Get_RXResponse(6)
-			if readertype == 1:	
-				Result = DL.Check_StringAB(DL.Get_RXResponse(5), '56 69 56 4F 74 65 63 68 32 00 60 00')
-				if (Result):
-					Result = DL.Check_StringAB(DL.Get_RXResponse(5), 'EA DF EE 25')
-				sResult=DL.Get_RXResponse(5)
+			if readertype == 1:	     # NEO2 or upward
+				if lcdtype == 1:
+					Result = DL.Check_RXResponse(5, '56 69 56 4F 74 65 63 68 32 00 60 00')
+					if (Result):
+						Result = DL.Check_RXResponse(5, 'EA DF EE 25')
+					sResult=DL.Get_RXResponse(5)
+				if lcdtype == 0:	
+					Result = DL.Check_RXResponse(2, '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 ** 0E 1C')
+					if (Result):
+						Result = DL.Check_RXResponse(4, '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 ** 13 1C')
+						if (Result):
+							Result = DL.Check_RXResponse(6, '56 69 56 4F 74 65 63 68 32 00 60 00')
+							if (Result):
+								Result = DL.Check_RXResponse(6, 'E8 DF EE 25')
+					sResult=DL.Get_RXResponse(6)
 			if (Result):	
 				if sResult!=None and sResult!="":
 					sResult=sResult.replace(" ","")
@@ -174,12 +190,16 @@ if (Result):
 								DL.SetWindowText("Red", "Tag DFEE25: FAIL")
 							if Tag9F39 != "80": 
 								DL.SetWindowText("Red", "Tag 9F39: FAIL")
-							if readertype == 1:	
+							if readertype == 1:		     # NEO2 or upward
 								if TagFFEE01 != "DFEE30010C": 
 									DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-								if TagDFEE26 != "EA01": 
-									DL.SetWindowText("Red", "Tag DFEE26: FAIL")
-							if readertype == 0:
+								if lcdtype == 1:	
+									if TagDFEE26 != "EA01": 
+										DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+								if lcdtype == 0:	
+									if TagDFEE26 != "E800":
+										DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+							if readertype == 0:     # NEO1
 								if TagFFEE01 != "DF30010C": 
 									DL.SetWindowText("Red", "Tag FFEE01: FAIL")	
 								if TagDFEE26 != "CA": 
@@ -189,8 +209,8 @@ if (Result):
 								if DL.Check_StringAB(decDFEF4D, '3B36353130303030') == False:
 									DL.SetWindowText("Red", "Tag DFEF4D: FAIL")
 
-if readertype == 1:									
+if readertype == 1:	     # NEO2 or upward								
 	# cmd 60-13
 	RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** EA 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
+		Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** EA 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")		

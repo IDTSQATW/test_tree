@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2022/10/11 15:39:58.162 
+Docklight Log File (HEX) - Started 2022/10/26 15:45:27.242 
  TEST CASE: CR400
 
  --- Set POS COM PORT Settings
@@ -8,5 +8,5 @@ Docklight Log File (HEX) - Started 2022/10/11 15:39:58.162
 
 
 
-Docklight Log File (HEX) - Stopped 2022/10/11 15:39:58.500 
+Docklight Log File (HEX) - Stopped 2022/10/26 15:45:27.445 
 

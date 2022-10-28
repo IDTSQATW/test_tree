@@ -10,51 +10,60 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
-# Get Data Encryption (C7-37)
-if (Result):
-	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
+# Objective: to verify JIRA#CS-3754, under auto poll, user keep sending cmd 03-40, insert card first and then send CT transaction cmd
 
-# Encryption Type -- TDES
-if (Result):
-	RetOfStep = DL.SendCommand('Encryption Type -- TDES')
+# Check project has LCD or not
+lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** The project has LCD ***")
+else:
+	DL.SetWindowText("Green", "*** The project has NO LCD ***")
+	
+# Check reader is VP3350 or not
+modeltype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if modeltype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 00")	
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")	
+
+# Check data encryption TYPE is TDES	
+if (Result):
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
 
 # First Response Control (0x63) = enable
 if (Result):
 	RetOfStep = DL.SendCommand('First Response Control (0x63) = enable')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")
+		Result = DL.Check_RXResponse("04 00 00 00")
 		
-# Burst mode OFF & Auto Poll		
-if (Result):
-	RetOfStep = DL.SendCommand('Burst mode Off')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")	
+# Auto Poll		
 if (Result):
 	RetOfStep = DL.SendCommand('Auto poll')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("01 00 00 00")
+		Result = DL.Check_RXResponse("01 00 00 00")
 
 # CT config		
 if (Result):
 	RetOfStep = DL.SendCommand('60-16 Contact Set ICS Identification (02)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("60 00 00 00")	
+		Result = DL.Check_RXResponse("60 00 00 00")	
 if (Result):
 	RetOfStep = DL.SendCommand('60-03 Contact Set Application Data (VISA)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("60 00 00 00")	
+		Result = DL.Check_RXResponse("60 00 00 00")	
 if (Result):
 	RetOfStep = DL.SendCommand('60-06 Contact Set Terminal Data')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("60 00 00 00")	
+		Result = DL.Check_RXResponse("60 00 00 00")	
 if (Result):
 	RetOfStep = DL.SendCommand('60-0A Contact Set CA Public Key')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("60 00 00 00")	
+		Result = DL.Check_RXResponse("60 00 00 00")	
 
 if (Result):
 	DL.ShowMessageBox('Notice','cmd 03-40 will be sent all the time (100 cycles), insert card (EMV Test Card, T=0) in ANY time. Note: this is stress test, you should repeat above action until the case was stopped', 0)
@@ -63,10 +72,11 @@ if (Result):
 		RetOfStep = DL.SendCommand('03-40')
 		if (RetOfStep):
 			Result = DL.Check_RXResponse("03 00 ** E0")
+			time.sleep (2)
 			if (Result):
 				RetOfStep = DL.SendCommand('Activate Transaction_60-10')
 				if (RetOfStep):
-					Result = Result and DL.Check_RXResponse("60 63 00 00")
+					Result = DL.Check_RXResponse("60 63 00 00")
 					alldata = DL.Get_RXResponse(1)
 					CTresultcode = DL.GetTLV(alldata,"DFEE25")
 					if (Result):
@@ -111,10 +121,9 @@ if (Result):
 
 					# cmd 60-11					
 					if  CTresultcode == "0010":
-						Result = True
 						RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction')
 						if (RetOfStep):
-							Result = Result and DL.Check_RXResponse("60 63 00 00")
+							Result = DL.Check_RXResponse("60 63 00 00")
 							alldata = DL.Get_RXResponse(1)
 							CTresultcode = DL.GetTLV(alldata,"DFEE25")	
 							if (Result):
@@ -122,10 +131,9 @@ if (Result):
 							
 							# cmd 60-12
 							if  CTresultcode == "0004":
-								Result = True
 								RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response')
 								if (RetOfStep):
-									Result = Result and DL.Check_RXResponse("60 63 00 00")
+									Result = DL.Check_RXResponse("60 63 00 00")
 									alldata = DL.Get_RXResponse(1)
 									CTresultcode = DL.GetTLV(alldata,"DFEE25")
 									if (Result):

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-32619
+58042
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -184,9 +184,11 @@ If result <> 0 Then
 
    confirm = MsgBox ("Click Yes then tap ViVOtech card.")  
    dl.resetreceivecounter
-   result1 = DL.WaitForSequence("burst mode data", 1, 5000)
-   result2 = DL.WaitForSequence("transaction data", 1, 5000)
-   If result1 = 1 or result2 = 1 Then
+   r1 = DL.WaitForSequence("burst mode data 1", 1, 4000)
+   r2 = DL.WaitForSequence("burst mode data 2", 1, 1000)
+   r3 = DL.WaitForSequence("burst mode data 3", 1, 1000)
+   r4 = DL.WaitForSequence("transaction data", 1, 4000)
+   If r1 = 1 or r2 = 1 or r3 = 1 or r4 = 1 Then
       result = 0
    else 
       result = 1
@@ -203,9 +205,11 @@ PrintMyResult(result)
 
    confirm = MsgBox ("Click OK then tap VISA card.")  
    dl.resetreceivecounter
-   result1 = DL.WaitForSequence("burst mode data", 1, 5000)
-   result2 = DL.WaitForSequence("transaction data", 1, 5000)
-   If result1 = 1 or result2 = 1 Then
+   r1 = DL.WaitForSequence("burst mode data 1", 1, 4000)
+   r2 = DL.WaitForSequence("burst mode data 2", 1, 1000)
+   r3 = DL.WaitForSequence("burst mode data 3", 1, 1000)
+   r4 = DL.WaitForSequence("transaction data", 1, 4000)
+   If r1 = 1 or r2 = 1 or r3 = 1 or r4 = 1 Then
       result = 0
    else 
       result = 1
@@ -222,9 +226,11 @@ PrintMyResult(result)
 
    confirm = MsgBox ("Click OK then tap MasterCard card.")  
    dl.resetreceivecounter
-   result1 = DL.WaitForSequence("burst mode data", 1, 5000)
-   result2 = DL.WaitForSequence("transaction data", 1, 5000)
-   If result1 = 1 or result2 = 1 Then
+   r1 = DL.WaitForSequence("burst mode data 1", 1, 4000)
+   r2 = DL.WaitForSequence("burst mode data 2", 1, 1000)
+   r3 = DL.WaitForSequence("burst mode data 3", 1, 1000)
+   r4 = DL.WaitForSequence("transaction data", 1, 4000)
+   If r1 = 1 or r2 = 1 or r3 = 1 or r4 = 1 Then
       result = 0
    else 
       result = 1

@@ -18,6 +18,16 @@ if lcdtype == 1:
 	DL.SetWindowText("Green", "*** The project has LCD ***")
 else:
 	DL.SetWindowText("Green", "*** The project has NO LCD ***")
+	
+# Check reader is VP3350 or not
+modeltype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if modeltype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")	
 
 # Check data encryption TYPE is TDES	
 if (Result):
@@ -109,10 +119,9 @@ if (Result):
 
 		# cmd 60-11					
 		if  CTresultcode == "0010":
-			Result = True
 			RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction')
 			if (RetOfStep):
-				Result = Result and DL.Check_RXResponse("60 63 00 00")
+				Result = DL.Check_RXResponse("60 63 00 00")
 				alldata = DL.Get_RXResponse(1)
 				CTresultcode = DL.GetTLV(alldata,"DFEE25")	
 				if (Result):
@@ -120,10 +129,9 @@ if (Result):
 					
 				# cmd 60-12
 				if  CTresultcode == "0004":
-					Result = True
 					RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response')
 					if (RetOfStep):
-						Result = Result and DL.Check_RXResponse("60 63 00 00")
+						Result = DL.Check_RXResponse("60 63 00 00")
 						alldata = DL.Get_RXResponse(1)
 						CTresultcode = DL.GetTLV(alldata,"DFEE25")
 						if (Result):
@@ -205,4 +213,9 @@ if (Result):
 						if (Result):
 							Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
 			
-	DL.ShowMessageBox('Notice','Please remove card then click OK', 0)			
+	DL.ShowMessageBox('Notice','Please remove card then click OK', 0)		
+
+if modeltype == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")	

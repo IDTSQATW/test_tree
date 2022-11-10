@@ -59,6 +59,7 @@ MSG:Swipe Discover card (PAN = xxxx .... 0026)...
 EXR:
 EXR:
 EXR:
+EXR:
 TIMEOUT:120000
 
 TID:03-40, MSR -- Discover w/ LCD
@@ -74,18 +75,26 @@ CMD: 03 40
 EXR:
 EXR:
 EXR:
-EXR:
-EXR:
 
 TID:02-40, CL -- Discover w/ LCD
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00
 MSG:Tap Discover card (ANY)...
-EXR:56 69 56 4F 74 65 63 68 32 00 02 23 ** F3
+EXR:
 TIMEOUT:120000
 
 TID:02-40, CL -- Discover w/o LCD
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00
 MSG:Tap Discover card (ANY)...
+EXR:
+EXR:
+EXR:
+EXR:
+EXR:
+TIMEOUT:120000
+
+TID:02-40, CL -- VISA w/o LCD
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Tap VISA qVSDC card...
 EXR:
 EXR:
 EXR:
@@ -101,6 +110,16 @@ EXR:
 
 TID:03-40, CL -- Discover w/o LCD
 DLG:Tap Discover card (ANY) -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+EXR:
+EXR:
+EXR:
+EXR:
+
+TID:03-40, CL -- VISA w/o LCD
+DLG:Tap VISA qVSDC card -> Click OK...
 TIMEOUT:30000
 CMD: 03 40
 EXR:
@@ -127,11 +146,11 @@ EXR:
 EXR:
 EXR:
 EXR:
-EXR:
-EXR:
 TIMEOUT:120000
 
 TID:05-01
+DLG:Remove card -> Click OK
+TIMEOUT:120000
 CMD:0501
 
 TID:Reset to default

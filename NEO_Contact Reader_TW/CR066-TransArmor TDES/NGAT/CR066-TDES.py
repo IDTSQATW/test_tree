@@ -81,12 +81,7 @@ if (Result):
 					if len(TRK3) > 0:
 						DL.SetWindowText("blue", "Track 3:")
 						TRK3DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK3)
-						TRK3DecryptData = TRK3DecryptData[0:((objectMSR[0].msr_track3Length)*2)]	
-							
-					TagDFEE25 = DL.GetTLV(alldata,"DFEE25")						
-					Tag9F39 = DL.GetTLV(alldata,"9F39")
-					TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
-					TagDFEE26 = DL.GetTLV(alldata,"DFEE26")							
+						TRK3DecryptData = TRK3DecryptData[0:((objectMSR[0].msr_track3Length)*2)]				
 		
 					# Track 1
 					TR1maskdata = "%*4547********0000^LLIBRE ROBERT-GUILLERMO ^1102***************************?;4547********0000=1102***************?"	
@@ -109,14 +104,14 @@ if (Result):
 					if Result != True:
 						DL.SetWindowText("red", "TR3plaintextdata: FAIL")										
 					# Tags DFEE25/ 9F39/ FFEE01/ DFEE26
-					if TagDFEE25 != "0011": 
+					if DL.Check_RXResponse(rx, "DFEE25 02 0011") == False: 
 						DL.SetWindowText("Red", "Tag DFEE25: FAIL")
 						
-					if Tag9F39 != "90": 
+					if DL.Check_RXResponse(rx, "9F39 01 90") == False: 
 						DL.SetWindowText("Red", "Tag 9F39: FAIL")
 		
-					if TagFFEE01 != "DFEE30010C": 
+					if DL.Check_RXResponse(rx, "FFEE01 ** DFEE30010C") == False: 
 						DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 		
-					if TagDFEE26 != "EC06": 
+					if DL.Check_RXResponse(rx, "DFEE26 02 EC06") == False: 
 						DL.SetWindowText("Red", "Tag DFEE26: FAIL")

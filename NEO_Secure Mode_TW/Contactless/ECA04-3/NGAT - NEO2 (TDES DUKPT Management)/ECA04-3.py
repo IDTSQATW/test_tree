@@ -33,23 +33,21 @@ if (Result):
 if (Result):
 	if lcdtype == 1:
 		RetOfStep = DL.SendCommand('Activate Transaction w/ LCD')
+		rx = 0
 	if lcdtype == 0:
-		RetOfStep = DL.SendCommand('Activate Transaction w/o LCD')		
+		RetOfStep = DL.SendCommand('Activate Transaction w/o LCD')	
+		rx = 4
 	if (RetOfStep):
 		DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E1 ** DF EE 12")
 		if lcdtype == 1:
-			rx = 0
 			alldata = DL.Get_RXResponse(rx)
 		if lcdtype == 0:
-			rx = 4
 			alldata = DL.GetTLV(DL.Get_RXResponse(rx),"FF8105")
 
 		ksn = DL.GetTLV(DL.Get_RXResponse(rx),"DFEE12")	
-		
 		mask57 = DL.GetTLV(alldata,"57", 0)
 		enc57 = DL.GetTLV(alldata,"57", 1)
 		dec57 = DL.DecryptDLL(0,2, strKey, ksn, enc57)	
-		
 		mask5A = DL.GetTLV(alldata,"5A", 0)
 		enc5A = DL.GetTLV(alldata,"5A", 1)
 		dec5A = DL.DecryptDLL(0,2, strKey, ksn, enc5A)	

@@ -57,11 +57,6 @@ if (Result):
 		mask5A = DL.GetTLV(alldata,"5A", 0)	
 		enc5A = DL.GetTLV(alldata,"5A", 1)
 		dec5A = DL.DecryptDLL(0,1, strKey, ksn, enc5A)	
-
-		
-		Tag9F39 = DL.GetTLV(alldata,"9F39")
-		TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
-		TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 		
 	# Tag 57
 		Result = DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D3 01 2C CC CC CC CC CC CC CC CC')

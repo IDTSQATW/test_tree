@@ -18,6 +18,16 @@ if (Result):
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")	
 		
+# Check reader is VP3350 or not
+readertype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if readertype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")		
+		
 # Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
@@ -52,9 +62,6 @@ if (Result):
 						mask5A = DL.GetTLV(alldata,"5A", 0)
 						enc5A = DL.GetTLV(alldata,"5A", 1)
 						dec5A = DL.DecryptDLL(0,1, strKey, ksn, enc5A)	
-						Tag9F39 = DL.GetTLV(alldata,"9F39")
-						TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
-						TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 					
 						# Tag 57
 						if i == 1:
@@ -62,13 +69,13 @@ if (Result):
 						if i == 2:
 							Result = DL.Check_StringAB(mask57, '47 61 73 FF FF FF 00 10 D2 01 2F FF FF FF FF FF FF')
 							
-						if Result == True and DL.Check_StringAB(DL.Get_RXResponse(1), '57 A1 11'):
+						if Result == True and DL.Check_RXResponse(1, '57 A1 11'):
 							DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 						else:
 							DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 						
 						Result = DL.Check_StringAB(dec57, '57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89')
-						if Result == True and DL.Check_StringAB(DL.Get_RXResponse(1), '57 C1 18'):
+						if Result == True and DL.Check_RXResponse(1, '57 C1 18'):
 							DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 						else:
 							DL.SetWindowText("red", "Tag 57_Enc: FAIL")
@@ -79,23 +86,23 @@ if (Result):
 						if i == 2:
 							Result = DL.Check_StringAB(mask5A, '47 61 73 FF FF FF 00 10')
 							
-						if Result == True and DL.Check_StringAB(DL.Get_RXResponse(1), '5A A1 08'):
+						if Result == True and DL.Check_RXResponse(1, '5A A1 08'):
 							DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
 						else:
 							DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
 						
 						Result = DL.Check_StringAB(dec5A, '5A 08 47 61 73 90 01 01 00 10')
-						if Result == True and DL.Check_StringAB(DL.Get_RXResponse(1), '5A C1 10'):
+						if Result == True and DL.Check_RXResponse(1, '5A C1 10'):
 							DL.SetWindowText("blue", "Tag 5A_Enc: PASS")
 						else:
 							DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
 						
 						# Tags 9F39/ FFEE01/ DFEE26
-						if Tag9F39 != "05": 
+						if DL.Check_RXResponse(1, "9F39 01 05") == False: 
 							DL.SetWindowText("Red", "Tag 9F39: FAIL")
-						if TagFFEE01 != "DFEE300101": 
+						if DL.Check_RXResponse(1, "FFEE01 ** DFEE300101") == False: 
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")				
-						if TagDFEE26 != "E000": 
+						if DL.Check_RXResponse(1, "DFEE26 02 E000") == False: 
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 
 				# cmd 60-11					
@@ -106,19 +113,14 @@ if (Result):
 						alldata = DL.Get_RXResponse(1)
 						CTresultcode = DL.GetTLV(alldata,"DFEE25")	
 						if (Result):
-							Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
+							Result = DL.Check_RXResponse(1, '56 69 56 4F 74 65 63 68 32 00 60 00')
 							if (Result):
-								ksn = DL.GetTLV(alldata,"DFEE12")										
-								Tag9F39 = DL.GetTLV(alldata,"9F39")
-								TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
-								TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
-								
 								# Tags 9F39/ FFEE01/ DFEE26
-								if Tag9F39 != "05": 
-									DL.SetWindowText("Red", "Tag 9F39: FAIL")						
-								if TagFFEE01 != "DFEE300101": 
-									DL.SetWindowText("Red", "Tag FFEE01: FAIL")							
-								if TagDFEE26 != "E000": 
+								if DL.Check_RXResponse(1, "9F39 01 05") == False: 
+									DL.SetWindowText("Red", "Tag 9F39: FAIL")
+								if DL.Check_RXResponse(1, "FFEE01 ** DFEE300101") == False: 
+									DL.SetWindowText("Red", "Tag FFEE01: FAIL")				
+								if DL.Check_RXResponse(1, "DFEE26 02 E000") == False: 
 									DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 							
 				# cmd 60-12
@@ -129,18 +131,17 @@ if (Result):
 						alldata = DL.Get_RXResponse(1)
 						CTresultcode = DL.GetTLV(alldata,"DFEE25")
 						if (Result):
-							Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
+							Result = DL.Check_RXResponse(1, '56 69 56 4F 74 65 63 68 32 00 60 00')
 							if (Result):
-								ksn = DL.GetTLV(alldata,"DFEE12")									
-								Tag9F39 = DL.GetTLV(alldata,"9F39")
-								TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
-								TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
-										
 								# Tags 9F39/ FFEE01/ DFEE26
-								if Tag9F39 != "05": 
-									DL.SetWindowText("Red", "Tag 9F39: FAIL")						
-								if TagFFEE01 != "DFEE300101": 
-									DL.SetWindowText("Red", "Tag FFEE01: FAIL")						
-								if TagDFEE26 != "E000": 
-									DL.SetWindowText("Red", "Tag DFEE26: FAIL")	
-									
+								if DL.Check_RXResponse(1, "9F39 01 05") == False: 
+									DL.SetWindowText("Red", "Tag 9F39: FAIL")
+								if DL.Check_RXResponse(1, "FFEE01 ** DFEE300101") == False: 
+									DL.SetWindowText("Red", "Tag FFEE01: FAIL")				
+								if DL.Check_RXResponse(1, "DFEE26 02 E000") == False: 
+									DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+
+if readertype == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")									

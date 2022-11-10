@@ -18,8 +18,8 @@ strKey = '0123456789ABCDEFFEDCBA9876543210'
 	# DL.SetWindowText("Green", "*** The project has NO LCD ***")
 	
 # Check reader is VP3350 or not
-lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
-if lcdtype == 1:
+readertype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if readertype == 1:
 	DL.SetWindowText("Green", "*** This is VP3350 ***")
 	RetOfStep = DL.SendCommand('0105 do not use LCD')
 	if (RetOfStep):
@@ -201,7 +201,7 @@ if (Result):
 					else:
 						DL.SetWindowText("red", "Tag DFEF4D: FAIL")
 						
-if lcdtype == 1:
+if readertype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("01 00 00 00")

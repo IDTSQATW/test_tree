@@ -4,7 +4,7 @@ import sys
 import time
 RetOfStep = True
 Result= True
-readertype = 0
+platformtype = 0
 
 Key='0123456789abcdeffedcba9876543210'
 MacKey='0123456789abcdeffedcba9876543210'
@@ -12,50 +12,70 @@ PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
 # Check project type (NEOI or NEOII)
-readertype = DL.ShowMessageBox("", "Is this NEOII project?", 0)
-if readertype == 1:
+platformtype = DL.ShowMessageBox("", "Is this NEOII project?", 0)
+if platformtype == 1:
 	DL.SetWindowText("Green", "*** NEOII project ***")
 else:
 	DL.SetWindowText("Green", "*** NEOI project ***")
+	
+# Check project has LCD or not
+lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** The project has LCD ***")
+else:
+	DL.SetWindowText("Green", "*** The project has NO LCD ***")	
+	
+# Check reader is VP3350 or not
+readertype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if readertype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")	
 
-# Check Encryption status(03)
-if (Result):
-	RetOfStep = DL.SendCommand('Check Encryption status(03)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
-		if Result == False:
-			DL.SetWindowText("Red", "Please ENABLE data encryption (03)...")
-
-# Encryption Type -- TransArmor TDES
-if (Result):
-	RetOfStep = DL.SendCommand('2-use TransArmor TDES to encrypt (C7-32)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 00")
-		if Result != True:
-			Result = DL.SendCommand('0-use TDES to encrypt (C7-32)')
-			if (Result):
-				Result = DL.SendCommand('2-use TransArmor TDES to encrypt (C7-32)')
-				if Result == False:
-					DL.SetWindowText("Red", "Please set data key type as TransArmor TDES...")
-if (Result):
-	RetOfStep = DL.SendCommand('Encryption Type -- TransArmor TDES')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 02")		
+if platformtype == 1:
+	# Encryption Type -- TransArmor TDES
+	if (Result):
+		RetOfStep = DL.SendCommand('C7-A2 TDES DUKPT manage_TransArmor TDES, data key')
+		time.sleep(1)
 		
-# Burst mode OFF & Poll on demand		
-if (Result):
-	if readertype == 1:	
-		RetOfStep = DL.SendCommand('Burst mode Off (NEOII)')
-	else:
-		RetOfStep = DL.SendCommand('Burst mode Off (NEOI)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")	
+	# Check data encryption TYPE is TDES	
+	if (Result):
+		RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+		if (RetOfStep):
+			Result = Result and DL.Check_RXResponse("C7 00 00 06 00 02 00 00 00 00")		
+
+if platformtype == 0:
+	# Check Encryption status(03)
+	if (Result):
+		RetOfStep = DL.SendCommand('Check Encryption status(03)')
+		if (RetOfStep):
+			Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
+			if Result == False:
+				DL.SetWindowText("Red", "Please ENABLE data encryption (03)...")
+
+	# Encryption Type -- TransArmor TDES
+	if (Result):
+		RetOfStep = DL.SendCommand('2-use TransArmor TDES to encrypt (C7-32)')
+		if (RetOfStep):
+			Result = Result and DL.Check_RXResponse("C7 00 00 00")
+			if Result != True:
+				Result = DL.SendCommand('0-use TDES to encrypt (C7-32)')
+				if (Result):
+					Result = DL.SendCommand('2-use TransArmor TDES to encrypt (C7-32)')
+					if Result == False:
+						DL.SetWindowText("Red", "Please set data key type as TransArmor TDES...")
+	if (Result):
+		RetOfStep = DL.SendCommand('Encryption Type -- TransArmor TDES')
+		if (RetOfStep):
+			Result = Result and DL.Check_RXResponse("C7 00 00 01 02")		
+		
+# Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("01 00 00 00")
 
-if readertype == 1:	
+if platformtype == 1:	
 	# CT config		
 	if (Result):
 		RetOfStep = DL.SendCommand('60-16 Contact Set ICS Identification (02)')
@@ -81,22 +101,31 @@ else:
 		
 # cmd 60-10, fallback to MSR, swipe card
 if (Result):
-	if readertype == 1:
-		RetOfStep = DL.SendCommand('Activate Transaction_NEOII')
+	if platformtype == 1:
+		if lcdtype == 1:
+			RetOfStep = DL.SendCommand('Activate Transaction_NEOII_w/ LCD')
+		if lcdtype == 0:
+			RetOfStep = DL.SendCommand('Activate Transaction_NEOII_w/o LCD')
 	else:
 		RetOfStep = DL.SendCommand('Activate Transaction_NEOI')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("60 63 00 00")
 		if (Result):
-			if readertype == 0:
-				Result = DL.Check_StringAB(DL.Get_RXResponse(3), '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 13 1C 02 00 00 00 23 0F')
+			if platformtype == 0:
+				Result = DL.Check_RXResponse(3, '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 13 1C 02 00 00 00 23 0F')
+			if platformtype == 1:
+				if lcdtype == 0:
+					Result = DL.Check_RXResponse(4, '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 ** 03 00 ** 13 1C 02 **')	
 			if (Result):	
-				if readertype == 0:
-					Result = DL.Check_StringAB(DL.Get_RXResponse(5), '56 69 56 4F 74 65 63 68 32 00 60 00')
-					sResult=DL.Get_RXResponse(5)
-				else:
-					Result = DL.Check_StringAB(DL.Get_RXResponse(3), '56 69 56 4F 74 65 63 68 32 00 60 00')
-					sResult=DL.Get_RXResponse(3)
+				if platformtype == 0:
+					rx = 5
+				if platformtype == 1:
+					if lcdtype == 1:
+						rx = 3
+					if lcdtype == 0:
+						rx = 5
+				Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')
+				sResult=DL.Get_RXResponse(rx)
 				if (Result):	
 					if sResult!=None and sResult!="":
 						sResult=sResult.replace(" ","")
@@ -146,10 +175,6 @@ if (Result):
 								TR1plaintextdata4 = "3F3B363531303030303030303030"
 								TR1plaintextdata5 = "3D31373132323031"
 
-								TagDFEE25 = DL.GetTLV(sResult,"DFEE25")
-								Tag9F39 = DL.GetTLV(sResult,"9F39")
-								TagFFEE01 = DL.GetTLV(sResult,"FFEE01")
-								TagDFEE26 = DL.GetTLV(sResult,"DFEE26")
 								TagDFEF4C = DL.GetTLV(sResult,"DFEF4C")
 								TagDFEF4D = DL.GetTLV(sResult,"DFEF4D")
 								decDFEF4D = DL.DecryptDLL(0,1, strKey, KSN, TagDFEF4D)	
@@ -177,28 +202,27 @@ if (Result):
 									DL.SetWindowText("Red", "Track 2 Decryption data: FAIL")
 										
 							# Verify specific tags
-							Result = DL.Check_StringAB(CardData, '80 4F 6A 00 00 A1 89 01 12')
-							if Result == False:
+							if DL.Check_RXResponse(rx, '80 4F 6A 00 00 A1 89 01 12') == False:
 								DL.SetWindowText("Red", "Tag DFEE23: FAIL")
 								
-							if TagDFEE25 != "0007": 
+							if DL.Check_RXResponse(rx, "DFEE25 02 0007") == False: 
 								DL.SetWindowText("Red", "Tag DFEE25: FAIL")
 								
-							if Tag9F39 != "80": 
+							if DL.Check_RXResponse(rx, "9F39 01 80") == False: 
 								DL.SetWindowText("Red", "Tag 9F39: FAIL")
 								
-							if readertype == 1:
-								if TagFFEE01 != "DFEE30010C": 
+							if platformtype == 1:
+								if DL.Check_RXResponse(rx, "FFEE01 ** DFEE30010C") == False: 
 									DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-							if readertype == 0:
-								if TagFFEE01 != "DF30010C": 
+							if platformtype == 0:
+								if DL.Check_RXResponse(rx, "FFEE01 ** DF30010C") == False: 
 									DL.SetWindowText("Red", "Tag FFEE01: FAIL")	
 									
-							if TagDFEE26 != "EC06": 
+							if DL.Check_RXResponse(rx, "DFEE26 02 EC06") == False: 
 								DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 								
-							if readertype == 0:	
-								if TagDFEF4C != "6A0000000000": 
+							if platformtype == 0:	
+								if DL.Check_RXResponse(rx, "DFEF4C 06 6A0000000000") == False: 
 									DL.SetWindowText("Red", "Tag DFEF4C: FAIL")	
 								r1 = DL.Check_StringAB(decDFEF4D, '2542363531303030303030303030')
 								r2 = DL.Check_StringAB(decDFEF4D, '5E434152442F494D414745')
@@ -208,4 +232,4 @@ if (Result):
 								if r1 == False or r2 == False or r3 == False or r4 == False or r5 == False:
 									DL.SetWindowText("Red", "Tag DFEF4D: FAIL")		
 					else:
-						DL.SetWindowText("RED", "Parse Card Data Fail")								
+						DL.SetWindowText("RED", "Parse Card Data Fail")				

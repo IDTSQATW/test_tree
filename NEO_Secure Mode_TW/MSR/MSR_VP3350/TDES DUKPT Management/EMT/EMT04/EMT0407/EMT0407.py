@@ -140,9 +140,10 @@ if (Result):
 									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 3F 4D 27 69 87 BF")
 									
 					if j == 1:
-						sResult=DL.Get_RXResponse(0)
+						rx = 0
 					if j == 2:
-						sResult=DL.Get_RXResponse(1)
+						rx = 1
+					sResult=DL.Get_RXResponse(rx)
 						
 					if Result == True and sResult!=None and sResult!="":
 						sResult=sResult.replace(" ","")
@@ -180,19 +181,12 @@ if (Result):
 									TRK3DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK3)
 									TRK3DecryptData = TRK3DecryptData[0:((objectMSR[0].msr_track3Length)*2)]
 							
-								Tag9F39 = DL.GetTLV(sResult,"9F39")
-								TagFFEE01 = DL.GetTLV(sResult,"FFEE01")
-								TagDFEE26 = DL.GetTLV(sResult,"DFEE26")
-								
 								# Verify specific tags
-								Result = DL.Check_StringAB(Tag9F39, '90')
-								if Result != True:
+								if DL.Check_RXResponse(rx, "9F39 01 90") == False:
 									DL.SetWindowText("red", "Tag9F39: FAIL")							
-								Result = DL.Check_StringAB(TagFFEE01, 'DFEE30010C')
-								if Result != True:
+								if DL.Check_RXResponse(rx, 'FFEE01 ** DFEE30010C') == False:
 									DL.SetWindowText("red", "TagFFEE01: FAIL")	
-								Result = DL.Check_StringAB(TagDFEE26, 'E800')
-								if Result != True:
+								if DL.Check_RXResponse(rx, 'DFEE26 02 E800') == False:
 									DL.SetWindowText("red", "TagDFEE26: FAIL")	
 								
 								# IDT
@@ -389,4 +383,4 @@ if (Result):
 if lcdtype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):
-		Result = DL.Check_RXResponse("01 00 00 00")						
+		Result = DL.Check_RXResponse("01 00 00 00")				

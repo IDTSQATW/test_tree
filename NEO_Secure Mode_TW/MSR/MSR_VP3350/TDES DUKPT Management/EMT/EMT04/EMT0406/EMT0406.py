@@ -9,17 +9,21 @@ Key='0123456789abcdeffedcba9876543210'
 MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 
-# Get Data Encryption Enable Flag (C7-37)
-if (Result):
-	RetOfStep = DL.SendCommand('Get Data Encryption Enable Flag (C7-37)')
+# Check reader is VP3350 or not
+lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
-		
-# Encryption type -- TDES
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
+
+# Check data encryption TYPE is TDES	
 if (Result):
-	RetOfStep = DL.SendCommand('Encryption type -- TDES')
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 00")
+		Result = DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
 
 # Set/ Get MSR Secure Parameters		
 if (Result):
@@ -142,9 +146,10 @@ if (Result):
 									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 3F 4D 27 69 87 BF")
 									
 					if j == 1:
-						sResult=DL.Get_RXResponse(0)
+						rx = 0
 					if j == 2:
-						sResult=DL.Get_RXResponse(1)
+						rx = 1
+					sResult=DL.Get_RXResponse(rx)
 						
 					if Result == True and sResult!=None and sResult!="":
 						sResult=sResult.replace(" ","")
@@ -182,19 +187,12 @@ if (Result):
 									TRK3DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK3)
 									TRK3DecryptData = TRK3DecryptData[0:((objectMSR[0].msr_track3Length)*2)]
 							
-								Tag9F39 = DL.GetTLV(sResult,"9F39")
-								TagFFEE01 = DL.GetTLV(sResult,"FFEE01")
-								TagDFEE26 = DL.GetTLV(sResult,"DFEE26")
-								
 								# Verify specific tags
-								Result = DL.Check_StringAB(Tag9F39, '90')
-								if Result != True:
+								if DL.Check_RXResponse(rx, "9F39 01 90") == False:
 									DL.SetWindowText("red", "Tag9F39: FAIL")							
-								Result = DL.Check_StringAB(TagFFEE01, 'DFEE30010C')
-								if Result != True:
+								if DL.Check_RXResponse(rx, 'FFEE01 ** DFEE30010C') == False:
 									DL.SetWindowText("red", "TagFFEE01: FAIL")	
-								Result = DL.Check_StringAB(TagDFEE26, 'E800')
-								if Result != True:
+								if DL.Check_RXResponse(rx, 'DFEE26 02 E800') == False:
 									DL.SetWindowText("red", "TagDFEE26: FAIL")	
 								
 								# IDT
@@ -387,3 +385,8 @@ if (Result):
 										DL.SetWindowText("red", "TR3plaintextdata: FAIL")					
 						else:
 							DL.SetWindowText("RED", "Parse Card Data Fail")
+							
+if lcdtype == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")							

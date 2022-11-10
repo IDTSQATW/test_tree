@@ -1,3 +1,11 @@
+TID:Get DUKPT DEK Attribution based on KeySlot (C7-A3)
+CMD:C7 A3 01 00
+EXR:
+
+TID:C7-A2 TDES DUKPT manage_TransArmor TDES, data key
+CMD:C7 A2 01 00 00 02 00 00 00 00
+EXR:C7 00 00 00
+
 TID:Check Encryption status(03)
 CMD:C7 37
 EXR:C7 00 00 01 03
@@ -26,6 +34,14 @@ TID:Poll on Demand
 CMD:01 01 01
 EXR:01 00 00 00
 
+TID:0105 do not use LCD
+CMD:01 05 11 05
+EXR:
+
+TID:0105 default (VP3350)
+CMD:01 05 19 05
+EXR:
+
 TID:60-16 Contact Set ICS Identification (02)
 CMD:60 16 02
 EXR:60 00 00 00
@@ -45,7 +61,7 @@ TID:60-0A Contact Set CA Public Key
 CMD:60 0A A0 00 00 99 99 E1 01 01 F8 70 7B 9B ED F0 31 E5 8A 9F 84 36 31 B9 0C 90 D8 0E D6 95 00 00 00 03 70 00 99 C5 B7 0A A6 1B 4F 4C 51 B6 F9 0B 0E 3B FB 7A 3E E0 E7 DB 41 BC 46 68 88 B3 EC 8E 99 77 C7 62 40 7E F1 D7 9E 0A FB 28 23 10 0A 02 0C 3E 80 20 59 3D B5 0E 90 DB EA C1 8B 78 D1 3F 96 BB 2F 57 EE DD C3 0F 25 65 92 41 7C DF 73 9C A6 80 4A 10 A2 9D 28 06 E7 74 BF A7 51 F2 2C F3 B6 5B 38 F3 7F 91 B4 DA F8 AE C9 B8 03 F7 61 0E 06 AC 9E 6B
 EXR:60 00 00 00
 
-TID:Activate Transaction_NEOII
+TID:Activate Transaction_NEOII_w/ LCD
 CMD:60 10 01 00 78 00 78 9C 01 00 5F 57 01 00 9F 02 06 00 00 00 00 02 00 9F 03 06 00 00 00 00 00 00 5F 2A 02 08 40
 EXR: 60 63 00 00
 DLG:Fallback to MSR: Insert card that can not be powered on ICC...
@@ -54,6 +70,19 @@ DLG:Does LCD show suitable msg 'USE MAGSTRIPE'?
 TIMEOUT:120000
 MSG: Swipe Discover card...(ANY)
 EXR:
+TIMEOUT:120000
+
+TID:Activate Transaction_NEOII_w/o LCD
+CMD:60 10 01 00 78 00 78 9C 01 00 5F 57 01 00 9F 02 06 00 00 00 00 02 00 9F 03 06 00 00 00 00 00 00 5F 2A 02 08 40
+EXR: 60 63 00 00
+EXR:
+EXR:
+EXR: 
+EXR: 
+MSG: Insert card (once) that can not be powered on IC chip --> Remove card --> Swipe Discover card...(ANY)
+EXR:
+EXR:
+EXR: 
 TIMEOUT:120000
 
 TID:Activate Transaction_NEOI

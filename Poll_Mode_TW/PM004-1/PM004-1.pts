@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-31270
+24839
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -165,6 +165,12 @@ sec(4) = 10000
 sec(5) = 10250
 sec(6) = 10500
 
+lcdcheck = msgbox ("Is this VP3350 reader?", vbyesno)
+if lcdcheck = 6 then
+   DL.SendSequence "Set Source - LCD_None - All Internal"
+   dl.pause 500
+end if
+
 for i = 0 to 6
 
 dl.addcomment vbcrlf & "Round >> " & i + 1
@@ -207,6 +213,13 @@ End If
 DL.ClearCommWindows
 
 next
+
+DL.SendSequence "Poll On Demand"
+dl.pause 1000
+if lcdcheck = 6 then
+   DL.SendSequence "VP3350 default"
+   dl.pause 500
+end if
 
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf

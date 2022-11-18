@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-58042
+61914
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -171,7 +171,7 @@ If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Burst Mode: OFF"
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then DL.SendSequence "burst mode off"
+   if readerType <> "NEO2" then DL.SendSequence "burst mode off"
    if readerType = "NEO2" then DL.SendSequence "burst mode off (NEO2)"
    result = DL.WaitForSequence("burst mode off", 1, 10000)
 End If
@@ -198,6 +198,14 @@ dl.pause 2000
       prompt1 = prompt1 & "Did it BEEP?"
       confirm1 = InputBox(prompt1, "Enter (Y / y / N / n)", "Y / N")  
       result = (confirm1 = "y" Or confirm1 = "Y")
+   else
+      confirm = MsgBox ("Do u see RX has data AND that is burst mode data?", vbyesno) 
+      if confirm = 6 then 
+      elseif confirm = 7 then
+         prompt1 = prompt1 & "Did it BEEP?"
+         confirm1 = InputBox(prompt1, "Enter (Y / y / N / n)", "Y / N")  
+         result = (confirm1 = "y" Or confirm1 = "Y")
+      end if
    End If
 dl.addcomment vbcrlf
 dl.addcomment "ViVOtech card: "
@@ -216,9 +224,17 @@ PrintMyResult(result)
    end if
 dl.pause 2000
    if result <> 0 then 
-      prompt2 = prompt2 & "Did it BEEP?"
-      confirm2 = InputBox(prompt2, "Enter (Y / y / N / n)", "Y / N")  
-      result = (confirm2 = "y" Or confirm2 = "Y")
+      prompt1 = prompt1 & "Did it BEEP?"
+      confirm1 = InputBox(prompt1, "Enter (Y / y / N / n)", "Y / N")  
+      result = (confirm1 = "y" Or confirm1 = "Y")
+   else
+      confirm = MsgBox ("Do u see RX has data AND that is burst mode data?", vbyesno) 
+      if confirm = 6 then 
+      elseif confirm = 7 then
+         prompt1 = prompt1 & "Did it BEEP?"
+         confirm1 = InputBox(prompt1, "Enter (Y / y / N / n)", "Y / N")  
+         result = (confirm1 = "y" Or confirm1 = "Y")
+      end if
    End If
 dl.addcomment vbcrlf
 dl.addcomment "VISA card: "
@@ -237,9 +253,17 @@ PrintMyResult(result)
    end if
 dl.pause 2000
    if result <> 0 then 
-      prompt3 = prompt3 & "Did it BEEP?"
-      confirm3 = InputBox(prompt3, "Enter (Y / y / N / n)", "Y / N")  
-      result = (confirm3 = "y" Or confirm3 = "Y")
+      prompt1 = prompt1 & "Did it BEEP?"
+      confirm1 = InputBox(prompt1, "Enter (Y / y / N / n)", "Y / N")  
+      result = (confirm1 = "y" Or confirm1 = "Y")
+   else
+      confirm = MsgBox ("Do u see RX has data AND that is burst mode data?", vbyesno) 
+      if confirm = 6 then 
+      elseif confirm = 7 then
+         prompt1 = prompt1 & "Did it BEEP?"
+         confirm1 = InputBox(prompt1, "Enter (Y / y / N / n)", "Y / N")  
+         result = (confirm1 = "y" Or confirm1 = "Y")
+      end if
    End If
 dl.addcomment vbcrlf
 dl.addcomment "MasterCard card: "

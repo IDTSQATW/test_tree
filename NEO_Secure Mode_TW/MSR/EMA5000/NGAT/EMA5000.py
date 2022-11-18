@@ -114,13 +114,13 @@ if (Result):
 					DL.SetWindowText("green", DL.getASCIIArray(DL.Get_DeviceRSN_CardData()))
 					if len(TRK1)> 0:
 						DL.SetWindowText("blue", "Track 1 Decryption data:")
-						TRK1DecryptData = DL.AES_DUPKT_MSRData_Decipher(KSN, strKey, TRK1)
+						TRK1DecryptData = DL.AES_DUPKT_EMVData_Decipher(KSN, strKey, TRK1)
 					if len(TRK2)> 0:
 						DL.SetWindowText("blue", "Track 2 Decryption data:")
-						TRK2DecryptData = DL.AES_DUPKT_MSRData_Decipher(KSN, strKey, TRK2)
+						TRK2DecryptData = DL.AES_DUPKT_EMVData_Decipher(KSN, strKey, TRK2)
 					if len(TRK3)> 0:
 						DL.SetWindowText("blue", "Track 3 Decryption data:")
-						TRK3DecryptData = DL.AES_DUPKT_MSRData_Decipher(KSN, strKey, TRK3)
+						TRK3DecryptData = DL.AES_DUPKT_EMVData_Decipher(KSN, strKey, TRK3)
 
 
 					TR1maskdata = "%*4547********0000^LLIBRE ROBERT-GUILLERMO ^1102***************************?*"

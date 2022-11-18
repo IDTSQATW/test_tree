@@ -164,7 +164,7 @@ if (Result):
 		enc57 = DL.GetTLV(TagFF8105,"57", 1)
 		DL.SetWindowText("blue", "Tag 57 Decryption data:")
 		dec57 = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc57)	
-		if DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D3 01 2C CC CC CC CC CC CC CC CC') == False:
+		if DL.Check_RXResponse(rx, '57A113 47 61 CC CC CC CC 00 10 D3 01 2C CC CC CC CC CC CC CC CC') == False:
 			DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 		if DL.Check_StringAB(dec57, '57134761739001010010D30121200012339900031F0000000000000000000000') == False:
 			DL.SetWindowText("red", "Tag 57_Enc: FAIL")
@@ -174,7 +174,7 @@ if (Result):
 		enc5A = DL.GetTLV(TagFF8105,"5A", 1)
 		DL.SetWindowText("blue", "Tag 5A Decryption data:")
 		dec5A = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc5A)	
-		if DL.Check_StringAB(mask5A, '47 61 CC CC CC CC 00 10') == False:
+		if DL.Check_RXResponse(rx, '5AA108 47 61 CC CC CC CC 00 10') == False:
 			DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
 		if DL.Check_StringAB(dec5A, '5A 08 47 61 73 90 01 01 00 10') == False:
 			DL.SetWindowText("red", "Tag 5A_Enc: FAIL")

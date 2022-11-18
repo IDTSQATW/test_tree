@@ -85,7 +85,7 @@ if (Result):
 							
 		if lcdtype == 1:					
 			RetOfStep = DL.SendCommand('Activate Transaction_w LCD')
-			rx = 1
+			rx6010 = 1
 		if lcdtype == 0:
 			RetOfStep = DL.SendCommand('Activate Transaction_w/o LCD')	
 			rx6010 = 7 #for VP3350	
@@ -105,7 +105,7 @@ if (Result):
 				
 				#1 Tag DFEF4C-4D	
 					if i == 1:
-						Result = DL.Check_StringAB(TagDFEF4C, '00 00 00 10 00 00')
+						Result = DL.Check_RXResponse(rx6010, 'DFEF4C 06 00 00 00 10 00 00')
 						if Result == True:
 							DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 						else:
@@ -119,7 +119,7 @@ if (Result):
 				
 				#2 Tag DFEF4C-4D	
 					if i == 2:
-						Result = DL.Check_StringAB(TagDFEF4C, '00 24 00 10 00 00')
+						Result = DL.Check_RXResponse(rx6010, 'DFEF4C 06 00 24 00 10 00 00')
 						if Result == True:
 							DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 						else:
@@ -133,7 +133,7 @@ if (Result):
 							
 				#3 Tag DFEF4C-4D	
 					if i == 3:
-						Result = DL.Check_StringAB(TagDFEF4C, '00 00 00 10 00 00')
+						Result = DL.Check_RXResponse(rx6010, 'DFEF4C 06 00 00 00 10 00 00')
 						if Result == True:
 							DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 						else:
@@ -147,7 +147,7 @@ if (Result):
 							
 				#4 Tag DFEF4C-4D	
 					if i == 4:
-						Result = DL.Check_StringAB(TagDFEF4C, '00 24 00 10 00 00')
+						Result = DL.Check_RXResponse(rx6010, 'DFEF4C 06 00 24 00 10 00 00')
 						if Result == True:
 							DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 						else:
@@ -161,7 +161,7 @@ if (Result):
 							
 				#5 Tag DFEF4C-4D	
 					if i == 5:
-						Result = DL.Check_StringAB(TagDFEF4C, '00 00 00 10 00 00')
+						Result = DL.Check_RXResponse(rx6010, 'DFEF4C 06 00 00 00 10 00 00')
 						if Result == True:
 							DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 						else:
@@ -175,7 +175,7 @@ if (Result):
 
 				#6 Tag DFEF4C-4D	
 					if i == 6:
-						Result = DL.Check_StringAB(TagDFEF4C, '00 24 00 10 00 00')
+						Result = DL.Check_RXResponse(rx6010, 'DFEF4C 06 00 24 00 10 00 00')
 						if Result == True:
 							DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 						else:
@@ -189,7 +189,7 @@ if (Result):
 
 				#7 Tag DFEF4C-4D	
 					if i == 7:
-						Result = DL.Check_StringAB(TagDFEF4C, '00 24 00 10 00 00')
+						Result = DL.Check_RXResponse(rx6010, 'DFEF4C 06 00 24 00 10 00 00')
 						if Result == True:
 							DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 						else:
@@ -228,4 +228,4 @@ if (Result):
 					alldata = DL.Get_RXResponse(rx)
 					CTresultcode = DL.GetTLV(alldata,"DFEE25")
 					if (Result):
-						Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')	
+						Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')						

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-7746
+16348
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -155,13 +155,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-If result <> 0 Then
-   DL.ResetReceiveCounter
-   DL.AddComment "--- Auto Poll"
-   DL.SendSequence " Auto Poll"
-   result = DL.WaitForSequence("Poll Response", 1, 3000)
-   dl.pause 500
-End If
+platformcheck = msgbox ("Is this NEO3 project?", vbyesno)     'for NEO3-3003, change test sequence
 
 If result <> 0 Then
    DL.ResetReceiveCounter
@@ -183,10 +177,22 @@ If result <> 0 Then
    dl.pause 500
 End If
 
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   DL.AddComment "--- Auto Poll"
+   DL.SendSequence " Auto Poll"
+   result = DL.WaitForSequence("Poll Response", 1, 3000)
+   dl.pause 500
+End If
+
 if result <> 0 then
    MsgBox "Tap paypass card first -> Click OK", VBOKOnly
    result = msgbox ("Reader can NOT read card successfully?", vbyesno)
    if result = 6 then 
+      if platformcheck = 6 then
+         DL.SendSequence "Poll on Demand"
+         dl.pause 1000
+      end if
       DL.ResetReceiveCounter
       dl.addcomment vbcrlf
       DL.AddComment "--- 04-09"
@@ -240,6 +246,9 @@ End If
 '------------------------------------------------------------
 DL.SendSequence "04-09"
 dl.pause 6000
+
+DL.SendSequence "Poll on Demand"
+dl.pause 1000
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 

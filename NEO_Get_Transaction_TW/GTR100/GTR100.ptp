@@ -78,6 +78,13 @@ Set DF811B=00 (NEO2)
 0
 5
 
+SEND
+8
+Poll on Demand
+56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34
+0
+5
+
 RECEIVE
 0
 Poll Response

@@ -183,7 +183,7 @@ if (Result):
 								
 								# Verify specific tags
 								if DL.Check_RXResponse(rx, "9F39 01 90") == False:
-									DL.SetWindowText("red", "Tag9F39: FAIL")							
+									DL.SetWindowText("red", "Tag9F39: FAIL")
 								if DL.Check_RXResponse(rx, 'FFEE01 ** DFEE30010C') == False:
 									DL.SetWindowText("red", "TagFFEE01: FAIL")	
 								if DL.Check_RXResponse(rx, 'DFEE26 02 E800') == False:

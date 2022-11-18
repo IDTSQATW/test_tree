@@ -36,14 +36,13 @@ if (Result):
 	if lcdtype == 0:
 		RetOfStep = DL.SendCommand('Activate Transaction w/o LCD')		
 	if (RetOfStep):
-		DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E1 ** DF EE 12")
 		if lcdtype == 1:
 			rx = 0
 			alldata = DL.Get_RXResponse(rx)
 		if lcdtype == 0:
 			rx = 4
 			alldata = DL.GetTLV(DL.Get_RXResponse(rx),"FF8105")
-		
+		DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E1 ** DF EE 12")
 		ksn = DL.GetTLV(DL.Get_RXResponse(rx),"DFEE12")
 		
 		mask57 = DL.GetTLV(alldata,"57", 0)
@@ -87,9 +86,7 @@ if (Result):
 	# Tags 9F39/ FFEE01/ DFEE26
 		if DL.Check_RXResponse(rx, "9F39 01 07") == False: 
 			DL.SetWindowText("Red", "Tag 9F39: FAIL")
-				
 		if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300100") == False: 
 			DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-				
 		if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False: 
 			DL.SetWindowText("Red", "Tag DFEE26: FAIL")

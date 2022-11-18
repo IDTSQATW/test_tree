@@ -1,3 +1,7 @@
+TID:Get DUKPT DEK Attribution based on KeySlot (C7-A3)
+CMD:C7 A3 01 00
+EXR:
+
 TID:Get Data Encryption (C7-37)
 CMD:C7 37
 EXR:C7 00 00 01 03
@@ -13,6 +17,14 @@ EXR:04 00 00 00
 TID:Poll on Demand
 CMD:01 01 01
 EXR:01 00 00 00
+
+TID:0105 do not use LCD
+CMD:01 05 11 05
+EXR:
+
+TID:0105 default (VP3350)
+CMD:01 05 19 05
+EXR:
 
 TID:04-00-----DFEF4B 1
 CMD:04 00 DF EF 4B 03 24 00 00

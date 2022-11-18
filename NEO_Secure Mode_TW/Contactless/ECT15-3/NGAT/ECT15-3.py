@@ -44,12 +44,11 @@ if (Result):
 	if (RetOfStep):
 		if lcdtype == 1:
 			rx = 0
-			DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E1 ** DF EE 12")
 			alldata = DL.Get_RXResponse(rx)
 		if lcdtype == 0:
 			rx = 4
-			DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E1 ** DF EE 12")
 			alldata = DL.GetTLV(DL.Get_RXResponse(rx),"FF8105")
+		DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E1 ** DF EE 12")
 			
 		ksn = DL.GetTLV(DL.Get_RXResponse(rx),"DFEE12")	
 		

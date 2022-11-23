@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-25115
+49273
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -224,27 +224,20 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-if readerType = "GR" or readerType = "NEO1" then 
+if readerType <> "NEO2" then 
    precondition()
-   if result <> 0 then
-      loadkey_D()
-   end if
-elseif readerType = "NEO2" or readerType = "USAT" or readerType = "USAT_SRED" then
-       if result <> 0 then
-          dl.resetreceivecounter
-          dl.addcomment vbcrlf
-          dl.addcomment "--- Get DUKPT Key Encryption Type... (AES)"
-          dl.sendsequence "Get account DUKPT encryption type (C7-33)"
-          result = dl.waitforsequence("get dukpt type", 1, 2000)
-       end if
-end if
+   if result <> 0 then loadkey_D()
 
-if result <> 0 then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Get Data Encryption (C7-37) *** " & readerType 
-   DL.SendSequence "C7-37"
-   result = DL.WaitForSequence("C7-37 resp", 1, 2000)
+   if result <> 0 then
+      dl.resetreceivecounter
+      dl.addcomment vbcrlf
+      DL.AddComment "--- Get Data Encryption (C7-37) *** " & readerType 
+      DL.SendSequence "C7-37"
+      result = DL.WaitForSequence("C7-37 resp", 1, 2000)
+   end if
+else
+   enccheck = msgbox ("Does the reader has AES key & enc ON?", vbyesno)
+   if enccheck = 7 then result = 0
 end if
 
 if result <> 0 then
@@ -267,7 +260,7 @@ if result <> 0 then
    result = DL.WaitForSequence("04 00", 1, 2000)
 end if
 
-if readerType = "GR" or readerType = "NEO1" then
+if readerType <> "NEO2" then
 if result <> 0 then
    readercheck = msgbox ("This is VP3300 & F/W ver. greater than v1.10?", vbyesno)
    dl.resetreceivecounter

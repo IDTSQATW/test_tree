@@ -42,7 +42,6 @@ else:
 			Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
 			if Result == False:
 				DL.SetWindowText("Red", "Please ENABLE data encryption (03)...")
-			
 	# Encryption type -- TDES
 	if (Result):
 		RetOfStep = DL.SendCommand('Encryption type -- TDES')
@@ -124,16 +123,6 @@ if (Result):
 							if (RetOfStep):
 								alldata=DL.Get_RXResponse(0)
 								Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23")	
-								
-				# if k == 2:
-					# RetOfStep = DL.SendCommand('Auto poll')
-					# if (RetOfStep):
-						# Result = DL.Check_RXResponse("01 00 00 00")
-						# if (Result):
-							# RetOfStep = DL.SendCommand('Get Transaction Result')	
-							# if (RetOfStep):
-								# alldata = DL.Get_RXResponse(1)
-								# Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 03 23')
 								
 				if readertype == 1:		
 					KSN = DL.GetTLV(alldata,"DFEE12")

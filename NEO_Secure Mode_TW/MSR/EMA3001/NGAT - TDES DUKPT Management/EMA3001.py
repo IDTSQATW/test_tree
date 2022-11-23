@@ -9,27 +9,21 @@ Key='0123456789abcdeffedcba9876543210'
 MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 
-# Get Data Encryption Enable Flag (C7-37)
-if (Result):
-	RetOfStep = DL.SendCommand('Get Data Encryption Enable Flag (C7-37)')
+# Check reader is VP3350 or not
+readermodel = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if readermodel == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
-		
-# Encryption Type -- TransArmor TDES
-#if (Result):
-#	RetOfStep = DL.SendCommand('2-use TransArmor TDES to encrypt (C7-32)')
-#	if (RetOfStep):
-#		Result = Result and DL.Check_RXResponse("C7 00 00 00")
-#		if Result != True:
-#			Result = DL.SendCommand('0-use TDES to encrypt (C7-32)')
-#			if (Result):
-#				Result = DL.SendCommand('2-use TransArmor TDES to encrypt (C7-32)')
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")	
 
-# Get Encryption Type -- AES(C7-33)
+# Check data encryption TYPE is TDES	
 if (Result):
-	RetOfStep = DL.SendCommand('Get Encryption Type -- AES(C7-33)')
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 01")	
+		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 01 00 00 00 00")
 		
 # Burst mode OFF		
 if (Result):
@@ -47,7 +41,7 @@ if (Result):
 if (Result):
 	Result = DL.SendCommand('Activate Transaction')
 	if (Result):
-		Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 37 00 28 6B B6 B6")
+		Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** E8 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 37 00 28 6B B6 B6")
 		sResult=DL.Get_RXResponse(0)
 			
 		if Result == True and sResult!=None and sResult!="":
@@ -91,18 +85,13 @@ if (Result):
 					TagDFEE26 = DL.GetTLV(sResult,"DFEE26")
 								
 					# Verify specific tags
-					Result = DL.Check_StringAB(Tag9F39, '90')
-					if Result != True:
+					if DL.Check_RXResponse('9F39 01 90') == False:
 						DL.SetWindowText("red", "Tag9F39: FAIL")	
-						
-					Result = DL.Check_StringAB(TagFFEE01, 'DFEE30010C')
-					if Result != True:
+					if DL.Check_RXResponse('FFEE01 ** DFEE30010C') == False:
 						DL.SetWindowText("red", "TagFFEE01: FAIL")	
-						
-					Result = DL.Check_StringAB(TagDFEE26, 'EA01')
-					if Result != True:
+					if DL.Check_RXResponse('DFEE26 02 E800') == False:
 						DL.SetWindowText("red", "TagDFEE26: FAIL")	
-																								
+
 					# Transaction result verification
 					TR2maskdata = ";6725***********0066=1812*************?*"
 					TR2plaintextdata = "3B 36 37 32 35 32 30 30 31 31 33 35 32 39 30 38 30 30 36 36 3D 31 38 31 32 32 30 31 32 35 32 37 37 37 30 30 30 30 3F 33"
@@ -126,7 +115,10 @@ if (Result):
 					Result = DL.Check_StringAB(TR3plaintextdata, TRK3DecryptData)
 					if Result != True:
 						DL.SetWindowText("red", "TR3plaintextdata: FAIL")
-
-									
 			else:
 				DL.SetWindowText("RED", "Parse Card Data Fail")
+				
+if readermodel == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")						

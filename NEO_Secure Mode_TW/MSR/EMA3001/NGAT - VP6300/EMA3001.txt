@@ -1,0 +1,46 @@
+TID:Get DUKPT DEK Attribution based on KeySlot (C7-A3)
+CMD:C7 A3 01 00
+EXR:
+
+
+TID:Get Data Encryption Enable Flag (C7-37)
+CMD:C7 37
+EXR:03
+
+TID:2-use TransArmor TDES to encrypt (C7-32)
+CMD:C7 32 02
+EXR:C7 00
+
+TID:Set MSR Secure Parameters (C7-38)- 08
+CMD:C7 38 DF DE 04 01 08
+EXR:00
+
+TID:0-use TDES to encrypt (C7-32)
+CMD:C7 32 00
+EXR:C7 00
+
+TID:Get Encryption Type -- AES(C7-33)
+CMD:C7 33
+EXR:C7 00
+
+TID:Burst mode Off
+CMD:04 00 DF EE 7E 01 00
+EXR:04 00 00 00
+
+TID:Poll on Demand
+CMD:01 01 01
+EXR:01 00 00 00
+
+TID:0105 do not use LCD
+CMD:01 05 11 05
+EXR:
+
+TID:0105 default (VP3350)
+CMD:01 05 19 05
+EXR:
+
+TID:Activate Transaction
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG:Swipe EC_Card card...
+EXR:
+TIMEOUT:120000

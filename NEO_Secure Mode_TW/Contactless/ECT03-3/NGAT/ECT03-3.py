@@ -45,7 +45,7 @@ if (Result):
 		rx = 4
 		
 	if (RetOfStep):
-		DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** F1 ** DF EE 12")
+		DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** F1 ** DF EE 12")
 		alldata = DL.Get_RXResponse(rx)
 		ksn = DL.GetTLV(alldata,"DFEE12")	
 	

@@ -51,7 +51,7 @@ if (Result):
 		RetOfStep = DL.SendCommand('Get Transaction Result w/ LCD')
 	if lcdtype == 0:
 		RetOfStep = DL.SendCommand('Get Transaction Result w/o LCD')		
-	time.sleep(4)
+	time.sleep(1)
 	if (RetOfStep):
 		alldata = DL.Get_RXResponse(1)
 		DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 03 23')

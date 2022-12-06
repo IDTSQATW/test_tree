@@ -10,6 +10,21 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
+# Check reader is VP3350 or not
+readertype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if readertype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
+
+# Check data encryption TYPE is TDES	
+if (Result):
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 01 00 00 00 00")
 
 # Burst mode OFF & Poll on demand		
 if (Result):
@@ -170,3 +185,8 @@ if (Result):
 					DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 				else:
 					DL.SetWindowText("red", "Tag DFEF4D: FAIL")
+					
+if readertype == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")							

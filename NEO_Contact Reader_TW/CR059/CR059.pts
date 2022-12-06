@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-28359
+26703
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -149,14 +149,6 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-If result <> 0 Then
-   dl.resetreceivecounter
-   DL.AddComment "--- 04-0A"
-   DL.SendSequence "04-0A"
-   result = DL.WaitForSequence("04 00", 1, 10000)
-   if result <> 0 then dl.pause 8000
-End If
-
 if readerType = "NEO2" then
    If result <> 0 Then
       dl.resetreceivecounter

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-17811
+9700
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -412,12 +412,19 @@ if readercheck = 7 or keytypecheck  = 1 then
 	   end if
 	End If
 
-	If result <> 0 Then
+       If result <> 0 Then
 	   dl.resetreceivecounter
 	   dl.addcomment vbcrlf
 	   DL.AddComment "--- Get account DUKPT encryption type (C7-33) = TDES"
 	   DL.SendSequence "Get account DUKPT encryption type (C7-33)"
-	   result = DL.WaitForSequence("c7-33 tdes", 1, 5000)
+	   result = DL.WaitForSequence("c7-33 tdes", 1, 2000)
+          if result = 0 then 
+	      dl.resetreceivecounter
+	      dl.addcomment vbcrlf
+	      DL.AddComment "--- C7-A3 (KeySlot 00)"
+	      DL.SendSequence "C7-A3 (KeySlot 00)"
+	      result = DL.WaitForSequence("c7-a3 = TDES, TDES", 1, 2000)          
+          end if
 	   if result = 0 then DL.AddComment vbcrlf & vbcrlf & "Please set data key type as TDES first..."
 	End If
 
@@ -458,7 +465,14 @@ if readercheck = 7 or keytypecheck  = 1 then
 	   dl.addcomment vbcrlf
 	   DL.AddComment "--- Get account DUKPT encryption type (C7-33) = TDES"
 	   DL.SendSequence "Get account DUKPT encryption type (C7-33)"
-	   result = DL.WaitForSequence("c7-33 tdes", 1, 5000)
+	   result = DL.WaitForSequence("c7-33 tdes", 1, 2000)
+          if result = 0 then 
+	      dl.resetreceivecounter
+	      dl.addcomment vbcrlf
+	      DL.AddComment "--- C7-A3 (KeySlot 00)"
+	      DL.SendSequence "C7-A3 (KeySlot 00)"
+	      result = DL.WaitForSequence("c7-a3 = TDES, TDES", 1, 2000)          
+          end if
 	End If
 
 	If result <> 0 Then

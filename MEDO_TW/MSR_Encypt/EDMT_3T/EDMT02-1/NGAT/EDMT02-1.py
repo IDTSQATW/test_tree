@@ -181,3 +181,8 @@ if (Result):
 					DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 				else:
 					DL.SetWindowText("red", "Tag DFEF4D: FAIL")
+					
+if readertype == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")							

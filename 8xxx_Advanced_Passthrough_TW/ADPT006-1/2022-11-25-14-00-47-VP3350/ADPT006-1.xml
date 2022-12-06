@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="neoii_scriptts.idt" root=".">
+  <functions>
+    <function name="K_NFC">
+      <subfunction name="K06_PassThrough">
+        <file result="1" log="FW.K.06.11-01_2C41+2C42+2C43FelicaCommands_NormalRead.py_20221125140055678.log">FW.K.06.11-01_2C41+2C42+2C43FelicaCommands_NormalRead.py</file>
+        <file result="1" log="FW.K.06.11-02_2C41+2C42+2C43FelicaCommands_NormalWrite.py_20221125140047363.log">FW.K.06.11-02_2C41+2C42+2C43FelicaCommands_NormalWrite.py</file>
+        <file>FW.K.06.11-03_2C41+2C42+2C43FelicaCommands_SecureRead.py</file>
+        <file>FW.K.06.11-04_2C41+2C42+2C43FelicaCommands_SecureWrite.py</file>
+        <file>FW.K.06.11-05_2C41+2C42+2C43FelicaCommands_AuthWrongKey.py</file>
+        <file>FW.K.06.11-06_2C41+2C42+2C43FelicaCommands_CommandWrongLength.py</file>
+        <file>FW.K.06.11-07.01_2C41+2C42+2C43FelicaCommands_AfterCTLSTypeA.py</file>
+        <file>FW.K.06.11-07.02_2C41+2C42+2C43FelicaCommands_AfterCTLSTypeB.py</file>
+        <file>FW.K.06.11-07.03_2C41+2C42+2C43FelicaCommands_AfterCT.py</file>
+        <file>FW.K.06.11-07.04_2C41+2C42+2C43FelicaCommands_AfterMSR.py</file>
+        <file>FW.K.06.11-07.05_2C41+2C42+2C43FelicaCommands_AfterTimeout.py</file>
+        <file>FW.K.06.11-07.06_2C41+2C42+2C43FelicaCommands_AfterCollision.py</file>
+        <file>FW.K.06.11-07.07_2C41+2C42+2C43FelicaCommands_AfterTryAgain.py</file>
+        <file result="1" log="FW.K.06.12-01_2C44PackageWithFelica_ReadLite.py_20221125140128659.log">FW.K.06.12-01_2C44PackageWithFelica_ReadLite.py</file>
+        <file result="1" log="FW.K.06.12-02_2C44PackageWithFelica_WriteLite.py_20221125140124960.log">FW.K.06.12-02_2C44PackageWithFelica_WriteLite.py</file>
+        <file>FW.K.06.12-03_2C44PackageWithFelica_WrongPara.py</file>
+        <file>FW.K.06.12-04.01_2C44PackageWithFelicas_AfterCTLSTypeA.py</file>
+        <file>FW.K.06.12-04.02_2C44PackageWithFelicas_AfterCTLSTypeB.py</file>
+        <file>FW.K.06.12-04.03_2C44PackageWithFelicas_AfterCT.py</file>
+        <file>FW.K.06.12-04.04_2C44PackageWithFelicas_AfterMSR.py</file>
+        <file>FW.K.06.12-04.05_2C44PackageWithFelicas_AfterTimeout.py</file>
+        <file>FW.K.06.12-04.06_2C44PackageWithFelicas_AfterCollision.py</file>
+        <file>FW.K.06.12-04.07_2C44PackageWithFelicas_AfterTryAgain.py</file>
+        <file>FW.K.06.16-07_TDESEncryptRAPDU_2C4123FelicaCommands.py</file>
+        <file>FW.K.06.16-08_TDESEncryptRAPDU_2C44PackageWithFelica.py</file>
+        <file>FW.K.06.17-07_TDESEncryptRAPDU+MAC_2C4123FelicaCommands.py</file>
+        <file>FW.K.06.17-08_TDESEncryptRAPDU+MAC_2C44PackageWithFelica.py</file>
+        <file>FW.K.06.18-07_AESEncryptRAPDU_2C4123FelicaCommands.py</file>
+        <file>FW.K.06.18-08_AESEncryptRAPDU_2C44PackageWithFelica.py</file>
+        <file>FW.K.06.19-07_AESEncryptRAPDU+MAC_2C4123FelicaCommands.py</file>
+        <file>FW.K.06.19-08_AESEncryptRAPDU+MAC_2C44PackageWithFelica.py</file>
+      </subfunction>
+    </function>
+    <function name="Trans_Lib">
+      <file>ICCTransaction.py</file>
+      <file>Tran_Res.py</file>
+      <file>Tran_ResAuto.py</file>
+      <file>Tra_Type_1.py</file>
+      <file>Tra_Type_1x.py</file>
+    </function>
+    <function name="Utility_Lib">
+      <file>Pro_CfgCLSL2.py</file>
+      <file>Pro_CfgCTL2.py</file>
+      <file>Pro_Command.py</file>
+      <file>Pro_DecToHex.py</file>
+      <file>Pro_Encryption.py</file>
+      <file>Pro_Excuse.py</file>
+      <file>Pro_GetDevice.py</file>
+      <file>Pro_GetDRS.py</file>
+      <file>Pro_GlobalConfig.py</file>
+      <file>Pro_ISOCardData.py</file>
+      <file>Pro_KeyInjection.py</file>
+      <file>Pro_MSR.py</file>
+      <file>Pro_MSRData.py</file>
+      <file>Pro_PKI.py</file>
+      <file>Pro_PreFile.py</file>
+      <file>Pro_SendCmd.py</file>
+    </function>
+  </functions>
+  <test>
+    <fmversion />
+    <begintime />
+    <endtime />
+    <spent />
+    <testor />
+    <stoppoint />
+  </test>
+</project>

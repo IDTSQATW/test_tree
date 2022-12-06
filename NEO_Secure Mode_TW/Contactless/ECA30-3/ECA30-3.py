@@ -5,6 +5,16 @@ import time
 Result= True
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
+# Check reader is VP3350 or not
+readertype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if readertype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")	
+	DL.SetWindowText("black", "*** 0105 do not use LCD")
+	DL.SendIOCommand("IDG", "01 05 11 05", 3000, 1) 
+	Result = DL.Check_RXResponse("01 00 00 00")		
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")	
+
 # Poll On Demand/ Burst mode off
 if (Result):
 	DL.SetWindowText("black", "*** Poll On Demand")
@@ -14,18 +24,6 @@ if (Result):
 	DL.SetWindowText("black", "*** Burst mode off")
 	DL.SendIOCommand("IDG", "04 00 DF EE 7E 01 00", 3000, 1) 
 	Result = DL.Check_RXResponse("04 00 00 00")	
-	
-# Get Data Encryption (C7-37)
-if (Result):
-	DL.SetWindowText("black", "*** Get Data Encryption (C7-37)")
-	DL.SendIOCommand("IDG", "C7 37", 3000, 1) 
-	Result = DL.Check_RXResponse("C7 00 00 01 03")	
-		
-# Encryption Type -- AES
-if (Result):
-	DL.SetWindowText("black", "*** Encryption Type -- AES")
-	DL.SendIOCommand("IDG", "C7 33", 3000, 1) 
-	Result = DL.Check_RXResponse("C7 00 00 01 01")			
 
 # Set Configuration
 if (Result):
@@ -129,14 +127,13 @@ if (Result):
 		dec57 = DL.DecryptDLL(0,2, strKey, ksn, enc57)
 		
 		# Tag 50
-		if Tag50 == "4A434220437265646974": 
+		if DL.Check_RXResponse("50 ** 4A434220437265646974"): 
 			DL.SetWindowText("blue", "Tag 50: PASS")
 		else:
 			DL.SetWindowText("Red", "Tag 50: FAIL")
 		
 		# Tag 57
-		Result = DL.Check_StringAB(mask57, '35 40 CC CC CC CC 10 12 D4 91 2C CC CC CC CC CC CC CC CC ')
-		if Result == True and DL.Check_RXResponse("57 A1 13"):
+		if DL.Check_RXResponse('57 A1 13 35 40 CC CC CC CC 10 12 D4 91 2C CC CC CC CC CC CC CC CC '):
 			DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 		else:
 			DL.SetWindowText("red", "Tag 57_Mask: FAIL")
@@ -155,3 +152,8 @@ if (Result):
 else:
 	DL.SendIOCommand("IDG", "05 01", 3000, 1)
 	time.sleep(2)
+	
+if readertype == 1:
+	DL.SetWindowText("black", "*** 0105 default (VP3350)")
+	DL.SendIOCommand("IDG", "01 05 19 05", 3000, 1) 
+	Result = DL.Check_RXResponse("01 00 00 00")		

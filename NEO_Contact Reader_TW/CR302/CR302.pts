@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-1199
+65020
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -252,22 +252,27 @@ If result <> 0 Then
       if r1 = 0 or r2 = 0 or r3 = 0 then result = 0
 
       if lcdcheck = 7 then
-         if tagvalue = 7 then
-            if result <> 0 then result = DL.WaitForSequence("APPROVED", 1, 10000)
-            if result <> 0 then result = DL.WaitForSequence("REMOVE CARD", 1, 10000)
-            if result <> 0 then result = DL.WaitForSequence("WELCOME", 1, 1500)
-            usercheck = msgbox ("no beep sound -> remove card > no beep sound => Does reader meet process?", vbyesno)
-            if result = 0 then 
-               result = DL.WaitForSequence("WELCOME", 1, 10000)
-            else
-               result = 0
+         if tagvalue = 1 then
+            if result <> 0 then result = DL.WaitForSequence("AUTHORIZING", 1, 10000)
+            usercheck = msgbox ("(Transaction finished) no beep sound -> remove card > no beep sound => Does reader meet process?", vbyesno)
+            if result <> 0 then 
+               result = DL.WaitForSequence("WELCOME", 1, 2000)
+               ReverseResult(result)
             end if
             if result <> 0 then 
                if usercheck = 7 then result = 0
             end if
          end if
 
-
+         if tagvalue = 7 then
+            if result <> 0 then result = DL.WaitForSequence("APPROVED", 1, 10000)
+            if result <> 0 then result = DL.WaitForSequence("REMOVE CARD", 1, 10000)
+            usercheck = msgbox ("(Transaction finished) no beep sound -> remove card > no beep sound => Does reader meet process?", vbyesno)
+            if result <> 0 then result = DL.WaitForSequence("WELCOME", 1, 10000)
+            if result <> 0 then 
+               if usercheck = 7 then result = 0
+            end if
+         end if
       end if
    end if
 end if
@@ -289,43 +294,41 @@ else
 end if
 '------------------------------------------------------------
 DL.AddComment vbCrLf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)
 
-DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
-
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
-
-If MasterResult = 1 Then
-      MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-      MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)

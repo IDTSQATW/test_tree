@@ -164,14 +164,12 @@ if (Result):
 								
 				#3 Tag DFEF4C-4D	
 				if i == 3:
-					Result = DL.Check_StringAB(TagDFEF4C, '00 00 00 00 00 00')
-					if Result == True:
+					if TagDFEF4C == "" or TagDFEF4C == "000000000000":
 						DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 					else:
 						DL.SetWindowText("red", "Tag DFEF4C: FAIL")
-								
-					Result = DL.Check_StringAB(decDFEF4D, '')
-					if Result == True and DL.Check_StringAB(alldata, 'DF EF 4D 00'):
+							
+					if encDFEF4D == "":
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:
 						DL.SetWindowText("red", "Tag DFEF4D: FAIL")

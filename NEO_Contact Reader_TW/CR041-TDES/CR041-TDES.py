@@ -17,6 +17,13 @@ if readertype == 1:
 	DL.SetWindowText("Green", "*** NEOII project ***")
 else:
 	DL.SetWindowText("Green", "*** NEOI project ***")
+	
+# Check project has LCD or not
+lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** The project has LCD ***")
+else:
+	DL.SetWindowText("Green", "*** The project has NO LCD ***")	
 
 # Check the reader is TDES
 if readertype == 1:
@@ -64,19 +71,32 @@ if readertype == 0:
 
 # cmd 60-10, fallback to MSR, swipe card
 if (Result):
-	if readertype == 1:
-		RetOfStep = DL.SendCommand('Activate Transaction_NEOII')
-	else:
+	if readertype == 1:     # NEO2 or upward
+		if lcdtype == 1:
+			RetOfStep = DL.SendCommand('Activate Transaction_NEOII w/ LCD')
+		if lcdtype == 0:
+			RetOfStep = DL.SendCommand('Activate Transaction_NEOII w/o LCD')
+	else:     # NEO1
 		RetOfStep = DL.SendCommand('Activate Transaction_NEOI')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("60 63 00 00")
 		if (Result):
-			if readertype == 1:		
-				Result = DL.Check_StringAB(DL.Get_RXResponse(5), '56 69 56 4F 74 65 63 68 32 00 60 00')
-				if (Result):
-					Result = DL.Check_StringAB(DL.Get_RXResponse(5), 'E8 DF EE 25')
-				sResult=DL.Get_RXResponse(5)		
-			if readertype == 0:
+			if readertype == 1:		# NEO2 or upward
+				if lcdtype == 1:
+					Result = DL.Check_StringAB(DL.Get_RXResponse(5), '56 69 56 4F 74 65 63 68 32 00 60 00')
+					if (Result):
+						Result = DL.Check_StringAB(DL.Get_RXResponse(5), 'E8 DF EE 25')
+					sResult=DL.Get_RXResponse(5)		
+				if lcdtype == 0:	
+					Result = DL.Check_RXResponse(2, '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 ** 03 00 ** 0E 1C')
+					if (Result):
+						Result = DL.Check_RXResponse(5, '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 ** 03 00 ** 13 1C')
+						if (Result):
+							Result = DL.Check_RXResponse(6, '56 69 56 4F 74 65 63 68 32 00 60 00')
+							if (Result):
+								Result = DL.Check_RXResponse(6, 'E8 ** DF EE 25')
+					sResult=DL.Get_RXResponse(6)
+			if readertype == 0:     # NEO1
 				Result = DL.Check_StringAB(DL.Get_RXResponse(2), '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 0E 1C 02 00 00 00 77 C8')
 				if (Result):
 					Result = DL.Check_StringAB(DL.Get_RXResponse(4), '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 13 1C 02 00 00 00 23 0F')
@@ -191,8 +211,11 @@ if (Result):
 								if DL.Check_StringAB(decDFEF4D, '3B36353130303030') == False:
 									DL.SetWindowText("Red", "Tag DFEF4D: FAIL")		
 
-if readertype == 1:
+if readertype == 1:     # NEO2 or upward
 	# cmd 60-13
 	RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** E8 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
+		if lcdtype == 1:
+			Result = Result and DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** E8 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
+		if lcdtype == 0:
+			Result = Result and DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** E8 ** 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")			

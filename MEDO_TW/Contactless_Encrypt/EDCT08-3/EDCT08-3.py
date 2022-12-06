@@ -64,7 +64,7 @@ if (Result):
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("01 00 00 00")		
+		Result = Result and DL.Check_RXResponse("01 00 00 00")	
 
 if readertype == 1:			
 	# group 80, support MSD only
@@ -76,6 +76,7 @@ if readertype == 1:
 # cmd 02-40, tap MChip card
 if (Result):
 	for i in range (1, 8):
+		time.sleep(0.5)
 		if i == 1:
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 1')
 			if (RetOfStep):
@@ -111,6 +112,7 @@ if (Result):
 					RetOfStep = DL.SendCommand('Poll on Demand')
 					if (RetOfStep):
 						Result = DL.Check_RXResponse("01 00 00 00")
+						time.sleep(0.5)
 						if (Result):
 							RetOfStep = DL.SendCommand('Activate Transaction')	
 							if (RetOfStep):

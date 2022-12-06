@@ -8600,3 +8600,9 @@ User Judgment Pass
 
 
 10:37:59: CONNECT SUCCESS
+
+15:55:18: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (02=CT+CL+MSR).txt
+Items: 27
+Load Case Succeed!
+

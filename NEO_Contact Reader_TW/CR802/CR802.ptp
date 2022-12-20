@@ -127,6 +127,13 @@ SEND
 0
 5
 
+SEND
+15
+60-16 Contact Set ICS Identification (04)
+56 69 56 4F 74 65 63 68 32 00 60 16 00 01 04 75 9D
+0
+5
+
 RECEIVE
 0
 60 00

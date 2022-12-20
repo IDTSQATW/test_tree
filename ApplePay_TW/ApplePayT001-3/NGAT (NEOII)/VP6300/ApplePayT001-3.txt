@@ -18,6 +18,14 @@ TID:Auto Poll
 CMD:01 01 00
 EXR:01 00 00 00
 
+TID:0105 do not use LCD
+CMD:01 05 11 05
+EXR:
+
+TID:0105 default (VP3350)
+CMD:01 05 19 05
+EXR:
+
 TID:Activate Transaction
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00
 MSG:Tap iPhone (ApplePay: VISA card -- PAN = xxxx........0492)...

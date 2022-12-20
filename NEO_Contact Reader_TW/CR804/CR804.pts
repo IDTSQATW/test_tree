@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-58522
+26910
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -180,6 +180,15 @@ If result <> 0 Then
    dl.pause 500
 End If
 '------------------------------------------------------------default setting
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-16 Contact Set ICS Identification (04)"
+   DL.SendSequence "60-16 Contact Set ICS Identification (04)"
+   result = DL.WaitForSequence("60 00", 1, 2000)
+   dl.pause 500
+End If
+
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf

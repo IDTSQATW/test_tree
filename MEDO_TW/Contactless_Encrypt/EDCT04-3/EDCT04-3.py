@@ -79,31 +79,38 @@ if (Result):
 		if i == 1:
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 1')
 			if (RetOfStep):
-				Result = DL.Check_RXResponse("04 00 00 00")			
+				Result = DL.Check_RXResponse("04 00 00 00")	
+				time.sleep(1)
 		if i == 2:
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 2')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("04 00 00 00")	
+				time.sleep(1)
 		if i == 3:
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 3')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("04 00 00 00")	
+				time.sleep(1)
 		if i == 4:
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 4')
 			if (RetOfStep):
-				Result = DL.Check_RXResponse("04 00 00 00")			
+				Result = DL.Check_RXResponse("04 00 00 00")	
+				time.sleep(1)
 		if i == 5:
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 5')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("04 00 00 00")	
+				time.sleep(1)
 		if i == 6:
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 6')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("04 00 00 00")	
+				time.sleep(1)
 		if i == 7:
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 7')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("04 00 00 00")	
+				time.sleep(1)
 		
 		if (Result):
 			for k in range (1, 2):

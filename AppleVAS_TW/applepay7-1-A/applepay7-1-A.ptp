@@ -3,7 +3,7 @@ VERSION
 
 COMMSETTINGS
 0
-COM1
+COM90
 COM2
 9600
 2
@@ -341,7 +341,7 @@ COMMENT
 
 RECEIVE
 6
-===== VP6300_USAT
+===== NEO2
 
 -1
 1
@@ -353,8 +353,8 @@ COMMENT
 
 RECEIVE
 7
-===== NEO2
-
+VAS fail response (NEO3)
+56 69 56 4F 74 65 63 68 32 00 02 57 ?? ?? ?? ## ## ## ## ## ## FF EE 06 ## ## 13 9A 03 ?? ?? ?? 9F 21 03 ?? ?? ?? DF EE 02 04 20 ?? ?? 02
 -1
 1
 COMMENT 

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-2886
+5378
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -234,6 +234,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+readercheck = msgbox ("Is this NEO3 project?", vbyesno)
 if result <> 0 then
    dl.resetreceivecounter
    DL.AddComment "--- Get Data Encryption (C7-37)"
@@ -258,7 +259,7 @@ If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Burst mode Off *** " & readerType 
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then DL.SendSequence "burst mode off"
+   if readerType <> "NEO2" then DL.SendSequence "burst mode off"
    if readerType = "NEO2" then DL.SendSequence "burst mode off (NEO2)"
    result = DL.WaitForSequence("burst off", 1, 2000)
    dl.pause 500
@@ -278,7 +279,7 @@ End If
 '------------------------------------------------------------
 for k = 1 to 2
 
-if readerType = "GR" or readerType = "NEO1" then
+if readerType <> "NEO2" then
    if result <> 0 then
       precondition()
       if result <> 0 then
@@ -288,6 +289,7 @@ if readerType = "GR" or readerType = "NEO1" then
       countf = countf + 1
    end if
 else
+if readercheck = 7 then
    if result <> 0 then
       dl.resetreceivecounter
       dl.addcomment vbcrlf
@@ -296,6 +298,7 @@ else
       result = dl.waitforsequence("get dukpt type", 1, 2000)
       dl.pause 500
    end if
+end if
 end if
 
 If result <> 0 Then
@@ -315,6 +318,7 @@ If result <> 0 Then
       r(12) = dl.waitforsequence("Tag DFEF7B", 1, 1000)
            if r(12) = 0 then dl.addcomment vbcrlf & "Tag DFEF7B...FAIL!"
       r(13) = dl.waitforsequence("Tag FFEE06", 1, 1000)
+           if r(13) = 0 then r(13) = dl.waitforsequence("Tag FFEE06-2", 1, 1000)
            if r(13) = 0 then dl.addcomment vbcrlf & "Tag FFEE06...FAIL!"
 
       countfail()

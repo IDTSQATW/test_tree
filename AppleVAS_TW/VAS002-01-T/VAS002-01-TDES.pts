@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-36986
+1920
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -218,28 +218,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-if readerType <> "NEO2" then
-   precondition()
-   if result <> 0 then
-      loadkey_D()
-   end if
-elseif readerType = "NEO2" then
-       if result <> 0 then
-          dl.resetreceivecounter
-          dl.addcomment vbcrlf
-          dl.addcomment "--- Get DUKPT Key Encryption Type... (TDES)"
-          dl.sendsequence "Get account DUKPT encryption type (C7-33)"
-          result = dl.waitforsequence("get dukpt type", 1, 2000)
-       end if
-end if
 
-if result <> 0 then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Get Data Encryption (C7-37)"
-   DL.SendSequence "Get Data Encryption (C7-37)"
-   result = DL.WaitForSequence("C7-37 resp", 1, 2000)
-end if
 '------------------------------------------------------------
 errFlg = 0
 
@@ -281,11 +260,15 @@ If result <> 0 Then
 End If
 
 If result <> 0 Then
-   DL.ResetReceiveCounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- ACT - VAS OR Pay *** " & readerType
-   DL.SendSequence " ACT - VAS OR Pay"
-   result = DL.WaitForSequence("Payment AID tag 84 generic resp", 1, 6000)
+  DL.ResetReceiveCounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- ACT - VAS OR Pay *** " & readerType
+  if readerType <> "NEO2" then
+     DL.SendSequence " ACT - VAS OR Pay"
+  else
+     DL.SendSequence " ACT - VAS OR Pay (NEO2)"
+  end if
+  result = DL.WaitForSequence("Payment AID tag 84 generic resp", 1, 6000)
 End If
 '------------------------------------------------------------
 DL.AddComment vbCrLf

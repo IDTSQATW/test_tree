@@ -10,18 +10,21 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
-# Encryption Type -- AES
-if (Result):
-	RetOfStep = DL.SendCommand('Encryption Type -- AES')
+# Check reader is VP3350 or not
+lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 01")	
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
 
 # Get Data Encryption (C7-37)
 if (Result):
 	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")			
-		
 # Burst mode OFF & Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Burst mode Off')
@@ -41,7 +44,7 @@ if (Result):
 			RetOfStep = DL.SendCommand('02-40 #9987 VAS_OR_PAY')	
 			
 		if (RetOfStep):
-			DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** E3 DFEE12 0A **")
+			DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** DFEE12 0A")
 			alldata = DL.Get_RXResponse(0)
 			ksn = DL.GetTLV(alldata,"DFEE12")	
 			
@@ -92,7 +95,7 @@ if (Result):
 			else:
 				DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 			
-			if (DL.Check_RXResponse("DF EE 26 02 E3 01")): 
+			if DL.Check_RXResponse("DF EE 26 02 **"): 
 				DL.SetWindowText("blue", "Tag DFEE26: PASS")
 			else:
 				DL.SetWindowText("Red", "Tag DFEE26: FAIL")
@@ -101,3 +104,7 @@ if (Result):
 				DL.SetWindowText("blue", "Tag DFEF7B: PASS")
 			else:
 				DL.SetWindowText("Red", "Tag DFEF7B: FAIL")				
+if lcdtype == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-45039
+44029
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -156,6 +156,17 @@ countf = 0
 DL.SendSequence "Set Poll Mode - Poll On Demand"
 DL.Pause 1000
 
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- data key type = TDES"
+   DL.SendSequence "C7-33"
+   result = DL.WaitForSequence("C7 00 TDES", 1, 1500)
+   if result = 0 then 
+      DL.SendSequence "C7-A3 (KeySlot 00)"
+      result = DL.WaitForSequence("C7 00 TDES (NEO2)", 1, 1500)
+   end if
+End If
 '============================================================
 If result <> 0 Then
    DL.ResetReceiveCounter
@@ -204,7 +215,10 @@ If result <> 0 Then
    if readerType = "NEO2" then DL.SendSequence "ACT - VAS Only (NEO2)"
 
    if readerType <> "NEO2" then result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
-   if readerType = "NEO2" then result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 10000)
+   if readerType = "NEO2" then 
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 3000)
+      if result = 0 then result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response (NEO2)-2" , 1, 3000)
+   end if
    if result = 0 then 
       countf = countf + 1
       DL.AddComment vbcrlf & "** FAIL **"
@@ -220,7 +234,10 @@ If result <> 0 Then
    if readerType = "NEO2" then DL.SendSequence "ACT - VAS OR Pay (NEO2)"
    
    if readerType <> "NEO2" then result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
-   if readerType = "NEO2" then result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 10000)
+   if readerType = "NEO2" then 
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 3000)
+      if result = 0 then result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response (NEO2)-2" , 1, 3000)
+   end if
    if result = 0 then 
       countf = countf + 1
       DL.AddComment vbcrlf & "** FAIL **"
@@ -236,7 +253,10 @@ If result <> 0 Then
    if readerType = "NEO2" then DL.SendSequence "ACT - VAS AND Pay (NEO2)"
    
    if readerType <> "NEO2" then result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
-   if readerType = "NEO2" then result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 10000)
+   if readerType = "NEO2" then 
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 3000)
+      if result = 0 then result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response (NEO2)-2" , 1, 3000)
+   end if
    if result = 0 then 
       countf = countf + 1
       DL.AddComment vbcrlf & "** FAIL **"
@@ -343,7 +363,10 @@ If result <> 0 Then
    if readerType = "NEO2" then DL.SendSequence "ACT - VAS Only (NEO2)"
    
    if readerType <> "NEO2" then result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
-   if readerType = "NEO2" then result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 10000)
+   if readerType = "NEO2" then 
+      result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 3000)
+      if result = 0 then result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response (NEO2)-2" , 1, 3000)
+   end if
    if result = 0 then 
       countf = countf + 1
       DL.AddComment vbcrlf & "** FAIL **"
@@ -359,8 +382,10 @@ If result <> 0 Then
    if readerType = "NEO2" then DL.SendSequence "ACT - VAS OR Pay (NEO2)"
    
    if readerType <> "NEO2" then result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
-   if readerType = "NEO2" then result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 10000)
-   
+   if readerType = "NEO2" then 
+      result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 3000)
+      if result = 0 then result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response (NEO2)-2" , 1, 3000)   
+   end if
    if result = 0 then 
       countf = countf + 1
       DL.AddComment vbcrlf & "** FAIL **"
@@ -376,8 +401,10 @@ If result <> 0 Then
    if readerType = "NEO2" then DL.SendSequence "ACT - VAS AND Pay (NEO2)"
 
    if readerType <> "NEO2" then result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
-   if readerType = "NEO2" then result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 10000)
-   
+   if readerType = "NEO2" then 
+      result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 3000)
+      if result = 0 then result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response (NEO2)-2" , 1, 3000)
+   end if
    if result = 0 then 
       countf = countf + 1
       DL.AddComment vbcrlf & "** FAIL **"
@@ -393,7 +420,7 @@ If result <> 0 Then
    if readerType = "NEO2" then DL.SendSequence "ACT - Pay Only (NEO2)"
    
    if readerType <> "NEO2" then result = DL.WaitForSequence("request payment response" , 1, 10000)
-   if readerType = "NEO2" then result = DL.WaitForSequence("request payment response (NEO2)" , 1, 10000)
+   if readerType = "NEO2" then result = DL.WaitForSequence("request payment response (NEO2)" , 1, 3000)
    if result = 0 then 
       countf = countf + 1
       DL.AddComment vbcrlf & "** FAIL **"

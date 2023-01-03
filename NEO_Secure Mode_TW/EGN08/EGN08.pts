@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-16126
+54438
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -349,7 +349,7 @@ if readercheck = 6 then     'SRED project
       if readerType <> "NEO2" then 
          result = DL.WaitForSequence("02 0C", 1, 3000)
       else 
-         result = DL.WaitForSequence("02 02", 1, 3000)
+         result = DL.WaitForSequence("02 0B", 1, 3000)
       end if
    End If
 
@@ -358,7 +358,7 @@ if readercheck = 6 then     'SRED project
       dl.addcomment vbcrlf
       DL.AddComment "--- 03-00"
       DL.SendSequence "03-00"
-      result = DL.WaitForSequence("03 02", 1, 3000)
+      result = DL.WaitForSequence("03 0B", 1, 3000)
    End If
 
    If result <> 0 Then

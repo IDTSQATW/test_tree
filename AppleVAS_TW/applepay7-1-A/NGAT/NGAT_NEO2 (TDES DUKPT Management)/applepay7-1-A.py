@@ -125,19 +125,11 @@ for i in range (1, 6):
 				DL.SetWindowText("red", "Tag 9F6B_Enc: FAIL")
 				
 		# Tags 9F39/ FFEE01/ DFEE26
-			if Tag9F39 == "91": 
-				DL.SetWindowText("blue", "Tag 9F39: PASS")
-			else:
+			if DL.Check_RXResponse("9F39 01 91") == False: 
 				DL.SetWindowText("Red", "Tag 9F39: FAIL")
-			
-			if (DL.Check_StringAB(TagFFEE01, 'DFEE300100')):
-				DL.SetWindowText("blue", "Tag FFEE01: PASS")
-			else:
+			if DL.Check_RXResponse("FFEE01 ** DFEE300100") == False:
 				DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-			
-			if TagDFEE26 == "F301": 
-				DL.SetWindowText("blue", "Tag DFEE26: PASS")
-			else:
+			if DL.Check_RXResponse("DFEE26 02 F301") ==  False: 
 				DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 				
 if readermodel == 1:

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-61914
+55301
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -195,14 +195,14 @@ If result <> 0 Then
    end if
 dl.pause 2000
    if result <> 0 then 
-      prompt1 = prompt1 & "Did it BEEP?"
+      prompt1 = "Did it BEEP?"
       confirm1 = InputBox(prompt1, "Enter (Y / y / N / n)", "Y / N")  
       result = (confirm1 = "y" Or confirm1 = "Y")
    else
       confirm = MsgBox ("Do u see RX has data AND that is burst mode data?", vbyesno) 
       if confirm = 6 then 
       elseif confirm = 7 then
-         prompt1 = prompt1 & "Did it BEEP?"
+         prompt1 = "Did it BEEP?"
          confirm1 = InputBox(prompt1, "Enter (Y / y / N / n)", "Y / N")  
          result = (confirm1 = "y" Or confirm1 = "Y")
       end if
@@ -224,14 +224,14 @@ PrintMyResult(result)
    end if
 dl.pause 2000
    if result <> 0 then 
-      prompt1 = prompt1 & "Did it BEEP?"
+      prompt1 = "Did it BEEP?"
       confirm1 = InputBox(prompt1, "Enter (Y / y / N / n)", "Y / N")  
       result = (confirm1 = "y" Or confirm1 = "Y")
    else
       confirm = MsgBox ("Do u see RX has data AND that is burst mode data?", vbyesno) 
       if confirm = 6 then 
       elseif confirm = 7 then
-         prompt1 = prompt1 & "Did it BEEP?"
+         prompt1 = "Did it BEEP?"
          confirm1 = InputBox(prompt1, "Enter (Y / y / N / n)", "Y / N")  
          result = (confirm1 = "y" Or confirm1 = "Y")
       end if
@@ -253,14 +253,14 @@ PrintMyResult(result)
    end if
 dl.pause 2000
    if result <> 0 then 
-      prompt1 = prompt1 & "Did it BEEP?"
+      prompt1 = "Did it BEEP?"
       confirm1 = InputBox(prompt1, "Enter (Y / y / N / n)", "Y / N")  
       result = (confirm1 = "y" Or confirm1 = "Y")
    else
       confirm = MsgBox ("Do u see RX has data AND that is burst mode data?", vbyesno) 
       if confirm = 6 then 
       elseif confirm = 7 then
-         prompt1 = prompt1 & "Did it BEEP?"
+         prompt1 = "Did it BEEP?"
          confirm1 = InputBox(prompt1, "Enter (Y / y / N / n)", "Y / N")  
          result = (confirm1 = "y" Or confirm1 = "Y")
       end if

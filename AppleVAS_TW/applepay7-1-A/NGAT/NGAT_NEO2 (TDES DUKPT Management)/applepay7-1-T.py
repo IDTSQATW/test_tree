@@ -43,12 +43,16 @@ for i in range (1, 6):
 	if i == 1:
 		RetOfStep = DL.SendCommand('ACT - VAS Only')
 	if i == 2:
+		time.sleep(1)
 		RetOfStep = DL.SendCommand('ACT - VAS OR Pay')
 	if i == 3:
+		time.sleep(1)
 		RetOfStep = DL.SendCommand('ACT - VAS AND Pay')
 	if i == 4:
+		time.sleep(1)
 		RetOfStep = DL.SendCommand('ACT - Pay Only')
 	if i == 5:
+		time.sleep(1)
 		RetOfStep = DL.SendCommand('ACT - VAS URL Only Protocol')
 	
 	if i <= 5:
@@ -70,10 +74,6 @@ for i in range (1, 6):
 			mask9F6B = DL.GetTLV(tagFF8105,"9F6B", 0)
 			enc9F6B = DL.GetTLV(tagFF8105,"9F6B", 1)
 			dec9F6B = DL.DecryptDLL(0,1, strKey, ksn, enc9F6B)	
-			
-			Tag9F39 = DL.GetTLV(alldata,"9F39")
-			TagFFEE01 = DL.GetTLV(alldata,"FFEE01")	
-			TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 				
 		# Tag DF812A/ DF812B (only need enc data)
 			Result = DL.Check_StringAB(decDF812A, 'DF 81 2A 18 30 30 30 31 30 30 30 30 30 31 30 30 31 31 31 31 31 31 31 31 31 31 31 32')
@@ -117,10 +117,8 @@ for i in range (1, 6):
 		# Tags 9F39/ FFEE01/ DFEE26
 			if DL.Check_RXResponse("9F39 01 91") == False: 
 				DL.SetWindowText("Red", "Tag 9F39: FAIL")
-			
 			if DL.Check_RXResponse("FFEE01 ** DFEE300100") == False:
 				DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-			
 			if DL.Check_RXResponse("DFEE26 02 F100") ==  False: 
 				DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 				

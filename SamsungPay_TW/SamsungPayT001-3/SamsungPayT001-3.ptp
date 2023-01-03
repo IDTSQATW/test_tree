@@ -446,7 +446,7 @@ COMMENT
 RECEIVE
 17
 Activate transaction response - Samsungpay (NEO2)
-56 69 56 4F 74 65 63 68 32 00 02 23 ?? ?? ?? DF EE 12 0A
+56 69 56 4F 74 65 63 68 32 00 02 23 ?? ?? ?? ## ## ## ## ## ## DF EE 12 0A
 -1
 1
 COMMENT 
@@ -482,7 +482,7 @@ COMMENT
 RECEIVE
 20
 get transaction result response - Samsungpay (NEO2)
-56 69 56 4F 74 65 63 68 32 00 03 23 ?? ?? ?? DF EE 12 0A
+56 69 56 4F 74 65 63 68 32 00 03 23 ?? ?? ?? ## ## ## ## ## ## DF EE 12 0A
 -1
 1
 COMMENT 

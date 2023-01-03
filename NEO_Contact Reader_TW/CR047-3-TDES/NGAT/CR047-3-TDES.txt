@@ -54,9 +54,6 @@ EXR:
 EXR:
 EXR:
 EXR:
-EXR:
-EXR:
-EXR:
 
 TID:60-11 Contact Authenticate Transaction_w LCD
 CMD:60 11 00 00 78
@@ -68,7 +65,6 @@ TIMEOUT:120000
 TID:60-11 Contact Authenticate Transaction_w/o LCD
 CMD:60 11 00 00 78
 EXR: 60 63 00 00
-EXR:
 EXR:
 EXR:
 MSG:Waiting...

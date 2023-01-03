@@ -176,6 +176,13 @@ Set Poll Mode - Poll On Demand
 0
 5
 
+SEND
+22
+C7-A3 (KeySlot 00)
+56 69 56 4F 74 65 63 68 32 00 C7 A3 00 02 01 00 B1 A5
+0
+5
+
 RECEIVE
 0
 C7 00 AES

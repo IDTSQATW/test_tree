@@ -59,7 +59,7 @@ if (Result):
 			if readertype == 1: 
 				alldata = DL.Get_RXResponse(1)
 			if readertype == 0: 
-				alldata = DL.Get_RXResponse(5)	
+				alldata = DL.Get_RXResponse(4)	
 			CTresultcode = DL.GetTLV(alldata,"DFEE25")
 			Result = DL.Check_StringAB(CTresultcode, '30 04')
 		
@@ -74,8 +74,8 @@ if (Result):
 			alldata = DL.Get_RXResponse(1)
 			Result = Result and DL.Check_RXResponse(0, "60 63 00 00")
 		if readertype == 0: 
-			alldata = DL.Get_RXResponse(10)	
-			Result = Result and DL.Check_RXResponse(1, "60 63 00 00")			
+			alldata = DL.Get_RXResponse(4)	
+			Result = Result and DL.Check_RXResponse(0, "60 63 00 00")			
 		CTresultcode = DL.GetTLV(alldata,"DFEE25")
 		if (Result):
 			Result = DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')
@@ -171,7 +171,7 @@ if (Result):
 				if readertype == 1:
 					alldata = DL.Get_RXResponse(1)
 				if readertype == 0:
-					alldata = DL.Get_RXResponse(4)
+					alldata = DL.Get_RXResponse(2)
 				CTresultcode = DL.GetTLV(alldata,"DFEE25")	
 				if (Result):
 					Result = DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')

@@ -81,8 +81,6 @@ EXR:
 EXR: 
 MSG: Insert card (once) that can not be powered on IC chip --> Remove card --> Swipe Discover card...(ANY)
 EXR:
-EXR:
-EXR: 
 TIMEOUT:120000
 
 TID:Activate Transaction_NEOI

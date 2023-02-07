@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2022/8/2 09:40:41.103 
+Docklight Log File (HEX) - Started 2023/2/1 13:27:46.816 
  TEST CASE: CR044-1-TDES
 
  --- Set POS COM PORT Settings
@@ -18,5 +18,5 @@ Docklight Log File (HEX) - Started 2022/8/2 09:40:41.103
  MASTER RESULT = FAILED
 
 
-Docklight Log File (HEX) - Stopped 2022/8/2 09:40:43.399 
+Docklight Log File (HEX) - Stopped 2023/2/1 13:27:49.004 
 

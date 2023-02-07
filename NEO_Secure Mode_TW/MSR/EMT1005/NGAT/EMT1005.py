@@ -11,12 +11,22 @@ PAN=''
 
 # Objective: VENDI-324_After cmd 02-40 was timeout -> swiped card -> sent cmd 03-00, reader returned incorrect response frame format.
 
-# Check project has LCD or not
-lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
-if lcdtype == 1:
-	DL.SetWindowText("Green", "*** The project has LCD ***")
+# # Check project has LCD or not
+# lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
+# if lcdtype == 1:
+	# DL.SetWindowText("Green", "*** The project has LCD ***")
+# else:
+	# DL.SetWindowText("Green", "*** The project has NO LCD ***")
+	
+# Check reader is VP3350 or not
+modeltype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if modeltype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")
 else:
-	DL.SetWindowText("Green", "*** The project has NO LCD ***")
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")	
 
 # Check data encryption TYPE is TDES	
 if (Result):
@@ -32,31 +42,19 @@ if (Result):
 
 # cmd 02-40		
 if (Result):
-	if lcdtype == 1:
-		Result = DL.SendCommand('AT w/ LCD')
-	if lcdtype == 0:
-		Result = DL.SendCommand('AT w/o LCD')	
+	Result = DL.SendCommand('AT w/ LCD')
 		
 # Auto Poll	
 if (Result):
-	if lcdtype == 1:
-		RetOfStep = DL.SendCommand('Auto Poll w/ LCD')
-	if lcdtype == 0:
-		RetOfStep = DL.SendCommand('Auto Poll w/o LCD')		
+	RetOfStep = DL.SendCommand('Auto Poll w/ LCD')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("01 00 00 00")	
 
 # Get Transaction Result
 if (Result):
-	if lcdtype == 1:
-		Result = DL.SendCommand('Get Transaction Result w/ LCD')
-	if lcdtype == 0:
-		Result = DL.SendCommand('Get Transaction Result w/o LCD')		
+	Result = DL.SendCommand('Get Transaction Result w/ LCD')
 	if (Result):
-		if lcdtype == 1:
-			rx = 0
-		if lcdtype == 0:
-			rx = 4			
+		rx = 1
 		Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 03 00 ** E8 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80")
 		sResult=DL.Get_RXResponse(rx)
 		if Result == True and sResult!=None and sResult!="":
@@ -125,3 +123,8 @@ if (Result):
 									
 			else:
 				DL.SetWindowText("RED", "Parse Card Data Fail")
+				
+if modeltype == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")						

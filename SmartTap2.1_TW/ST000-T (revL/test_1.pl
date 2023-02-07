@@ -27,7 +27,7 @@ for(;;)						# forever loop
 
 }						# end forever
 
-`start /REALTIME docklight_scripting -r -m CR001-AES.pts`;
+`start /REALTIME docklight_scripting -r -m ST000-T.pts`;
 
 # Main Code
 

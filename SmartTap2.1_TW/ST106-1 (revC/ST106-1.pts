@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-10731
+11316
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -150,6 +150,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+readerchedk = msgbox ("Is this SRED project?", vbyesno)
 if readerType = "GR" or readerType = "NEO1" then
 If result <> 0 Then
    dl.resetreceivecounter
@@ -209,6 +210,7 @@ if result <> 0 then
           if k = 5 then at = "Push VAS AND Payment"
           if k = 6 then at = "Payment Only"
 
+          if readerchedk = 7 then
           if result <> 0 then
              dl.resetreceivecounter
              dl.addcomment vbcrlf & ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " & at
@@ -220,6 +222,7 @@ if result <> 0 then
                 result = DL.WaitForSequence("02 08", 1, 5000)
                 ReverseResult(result)
              end if
+          end if
           end if
 
           if result <> 0 then
@@ -241,6 +244,9 @@ end sub
 
 DL.AddComment vbCrLf
 '============================================================
+
+DL.SendSequence "Poll on demand"
+dl.pause 500
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)
 

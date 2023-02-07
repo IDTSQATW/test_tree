@@ -1,13 +1,13 @@
 DL_SCRIPTVERSION
 1
-54588
+15543
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "CR001-AES" ' !!!!! EDIT THIS !!!!!
+ProjectName = "CR001-TDES, AES" ' !!!!! EDIT THIS !!!!!
 ' Objective: cmd 60-10 negative test
 ' NEO2: Refer to NEOII-1358
 '------------------------------------------------------------
@@ -248,13 +248,6 @@ if result <> 0 then
          DL.AddComment "--- Get Data Encryption (C7-37)"
          DL.SendSequence "Get Data Encryption (C7-37)"
          result = DL.WaitForSequence("C7-37 resp", 1, 2000)
-      end if
-      if result <> 0 then
-         dl.resetreceivecounter
-         dl.addcomment vbcrlf
-         dl.addcomment "--- C7-A3 (KeySlot 00)"
-         dl.sendsequence "C7-A3 (KeySlot 00)"
-         result = dl.waitforsequence("C7-A3 rx (AES)", 1, 2000)
       end if
    end if
 

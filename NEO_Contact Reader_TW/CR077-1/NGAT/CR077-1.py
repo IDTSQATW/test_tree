@@ -72,6 +72,8 @@ if (Result):
 		RetOfStep = DL.SendCommand('03-40')
 		if (RetOfStep):
 			Result = DL.Check_RXResponse("03 00 ** E0")
+			# if Result == False:
+				# Result = DL.Check_RXResponse("03 00")
 			time.sleep (2)
 			if (Result):
 				RetOfStep = DL.SendCommand('Activate Transaction_60-10')

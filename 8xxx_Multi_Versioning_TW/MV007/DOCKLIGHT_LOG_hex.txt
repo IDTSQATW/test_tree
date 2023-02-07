@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2022/12/20 16:01:59.672 
+Docklight Log File (HEX) - Started 2023/2/3 16:16:46.384 
  TEST CASE: MV007
 
  --- Set POS COM PORT Settings
@@ -8,9 +8,9 @@ Docklight Log File (HEX) - Started 2022/12/20 16:01:59.672
 
  --- Get FW ver (29-00)
 
-2022/12/20 16:02:00.907 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 00 DE A0 
-2022/12/20 16:02:00.916 [RX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 1A  
-56 50 33 33 35 30 20 46 57 20 76 31 2E 30 30 2E 31 36 35 2E 32 32 34 39 2E 54 42 9C 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+2023/2/3 16:16:47.622 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 00 DE A0 
+2023/2/3 16:16:47.629 [RX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 1A  
+56 50 33 33 35 30 20 46 57 20 76 31 2E 30 30 2E 31 39 36 2E 32 33 30 33 2E 54 B5 DC 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  Result = PASSED
  
@@ -24,5 +24,5 @@ Docklight Log File (HEX) - Started 2022/12/20 16:01:59.672
 Please check ASCII screen, make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (HEX) - Stopped 2022/12/20 16:02:01.490 
+Docklight Log File (HEX) - Stopped 2023/2/3 16:16:48.205 
 

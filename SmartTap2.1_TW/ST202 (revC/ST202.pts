@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-22119
+43070
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -275,7 +275,7 @@ End If
 '------------------------------------------------------------
 
 
-if readerType = "GR" or readerType = "NEO1" then
+if readerType <> "NEO2" then
 if result <> 0 then
    precondition()
    if result <> 0 then
@@ -286,7 +286,7 @@ if result <> 0 then
 else 
    countf = countf + 1
 end if
-elseif readerType = "NEO2" then
+
        if result <> 0 then
           dl.resetreceivecounter
           dl.addcomment vbcrlf

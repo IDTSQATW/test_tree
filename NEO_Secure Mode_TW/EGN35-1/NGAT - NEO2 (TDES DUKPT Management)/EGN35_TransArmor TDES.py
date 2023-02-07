@@ -22,6 +22,9 @@ else:
 readermodel = DL.ShowMessageBox("", "Is this VP3350?", 0)
 if readermodel == 1:
 	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")	
 else:
 	DL.SetWindowText("Green", "*** non-VP3350 reader ***")		
 
@@ -55,59 +58,27 @@ if (Result):
 					Result = DL.Check_RXResponse("01 00 00 00")	
 			if (Result):			
 				if i == 1:
-					if lcdtype == 1:
-						RetOfStep = DL.SendCommand('02-40, MSR -- Discover w/ LCD')
-						rx = 0
-					if lcdtype == 0:
-						time.sleep(1)
-						RetOfStep = DL.SendCommand('02-40, MSR -- Discover w/o LCD')
-						rx = 1
+					RetOfStep = DL.SendCommand('02-40, MSR -- Discover w/ LCD')
 				if i == 2:
-					if lcdtype == 1:
-						RetOfStep = DL.SendCommand('02-40, CL -- Discover w/ LCD')
-						rx = 0
-					if lcdtype == 0:
-						if readermodel == 0:
-							RetOfStep = DL.SendCommand('02-40, CL -- Discover w/o LCD')	
-						if readermodel == 1:
-							time.sleep(2)
-							RetOfStep = DL.SendCommand('02-40, CL -- VISA w/o LCD')
-						rx = 4
+					time.sleep(1)
+					RetOfStep = DL.SendCommand('02-40, CL -- Discover w/ LCD')
 				if i == 3:
-					if lcdtype == 1:
-						RetOfStep = DL.SendCommand('60-10, CT -- EMV Test Card V2 T=0 w/ LCD')	
-						rx = 1
-					if lcdtype == 0:
-						time.sleep(1)
-						RetOfStep = DL.SendCommand('60-10, CT -- EMV Test Card V2 T=0 w/o LCD')	
-						rx = 7
+					time.sleep(1)
+					RetOfStep = DL.SendCommand('60-10, CT -- EMV Test Card V2 T=0 w/ LCD')	
+					rx = 1
 		if i >= 4:
 			if i == 4:
-				if lcdtype == 1:
-					RetOfStep = DL.SendCommand('Auto Poll 1rx')
-				if lcdtype == 0:
-					RetOfStep = DL.SendCommand('Auto Poll 2rx')
+				RetOfStep = DL.SendCommand('Auto Poll 1rx')
 				if (RetOfStep):
 					Result = DL.Check_RXResponse("01 00 00 00")		
 			if (Result):
 				if i == 4:
-					if lcdtype == 1:
-						RetOfStep = DL.SendCommand('03-40, MSR -- Discover w/ LCD')
-						rx = 1
-					if lcdtype == 0:
-						RetOfStep = DL.SendCommand('03-40, MSR -- Discover w/o LCD')
-						rx = 3
+					RetOfStep = DL.SendCommand('03-40, MSR -- Discover w/ LCD')
+					rx = 1
 					time.sleep(1)
 				if i == 5:
-					if lcdtype == 1:
-						RetOfStep = DL.SendCommand('03-40, CL -- Discover w/ LCD')
-						rx = 1
-					if lcdtype == 0:
-						if readermodel == 0:
-							RetOfStep = DL.SendCommand('03-40, CL -- Discover w/o LCD')
-						if readermodel == 1:
-							RetOfStep = DL.SendCommand('03-40, CL -- VISA w/o LCD')	
-						rx = 5	
+					RetOfStep = DL.SendCommand('03-40, CL -- Discover w/ LCD')
+					rx = 1
 					time.sleep(1)
 				
 		if (RetOfStep):
@@ -273,34 +244,18 @@ if (Result):
 						enc57 = DL.GetTLV(alldata,"57", 1)
 						dec57 = DL.DecryptDLL(1,1, strKey, ksn, enc57)	
 						
-						mask5A = DL.GetTLV(alldata,"5A", 0)
-						enc5A = DL.GetTLV(alldata,"5A", 1)
-						dec5A = DL.DecryptDLL(1,1, strKey, ksn, enc5A)
 					# Tag 57
-						Result = DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D3 01 2C CC CC CC CC CC CC CC CC')
-						if Result == True and DL.Check_RXResponse(rx, "57 A1 13"):
+						r1 = DL.Check_StringAB(mask57, '36 07 CC CC CC C0 00 1D 49 12 CC CC CC CC CC CC CC CC')
+						if r1 == True and DL.Check_RXResponse(rx, "57 A1 12"):
 							DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 						else:
 							DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 							
-						Result = DL.Check_StringAB(dec57, '3B 34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30 3D 33 30 31 32 31 32 30 30 30 31 32 33 33 39 39 30 30 30 33 31 3F')
+						Result = DL.Check_StringAB(dec57, '3B3336303730353030303030303030313D34393132313031303030303333323131323330313F')
 						if Result == True and DL.Check_RXResponse(rx, "57 C1 28"):
 							DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 						else:
 							DL.SetWindowText("red", "Tag 57_Enc: FAIL")
-
-					# Tag 5A
-						Result = DL.Check_StringAB(mask5A, '47 61 CC CC CC CC 00 10')
-						if Result == True and DL.Check_RXResponse(rx, "5A A1 08"):
-							DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
-						else:
-							DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
-							
-						Result = DL.Check_StringAB(dec5A, '34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30')
-						if Result == True and DL.Check_RXResponse(rx, "5A C1 10"):
-							DL.SetWindowText("blue", "Tag 5A_Enc: PASS")
-						else:
-							DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
 							
 					# Tags 9F39/ FFEE01/ DFEE26
 						if DL.Check_RXResponse(rx, "9F39 01 07") == False: 
@@ -359,10 +314,12 @@ if (Result):
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 						
 						DL.SendCommand('05-01')
-						
-# # Reset to default
-# RetOfStep = DL.SendCommand('Reset to default')
-# time.sleep(2)
+						time.sleep(2)
 
 RetOfStep = DL.SendCommand('Poll on Demand')
 time.sleep(2)
+
+if readermodel == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")

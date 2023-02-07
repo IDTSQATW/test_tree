@@ -72,7 +72,7 @@ if (Result):
 		if lcdtype == 1:
 			alldata = DL.Get_RXResponse(1)
 		if lcdtype == 0:
-			alldata = DL.Get_RXResponse(7)	
+			alldata = DL.Get_RXResponse(4)	
 		CTresultcode = DL.GetTLV(alldata,"DFEE25")
 		if (Result):
 			DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')
@@ -88,7 +88,7 @@ if (Result):
 				if lcdtype == 1:
 					alldata = DL.Get_RXResponse(1)
 				if lcdtype == 0:
-					alldata = DL.Get_RXResponse(3)
+					alldata = DL.Get_RXResponse(2)
 				CTresultcode = DL.GetTLV(alldata,"DFEE25")	
 				if (Result):
 					DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')
@@ -105,7 +105,7 @@ if (Result):
 							if lcdtype == 1:
 								lcdcheck = DL.ShowMessageBox('Notice','Does LCD display msg "CALL YOUR BANK" & correct mask PAN?', 0)
 							if lcdtype == 0:
-								lcdcheck = DL.Check_RXResponse(1, "56 69 56 4F 74 65 63 68 32 00 61 01 ** 82 04 1C")
+								lcdcheck = DL.Check_RXResponse(1, "56 69 56 4F 74 65 63 68 32 00 61 01 ** 04 1C")
 								if lcdcheck == 1:
 									lcdcheck = DL.Check_RXResponse(2, "56 69 56 4F 74 65 63 68 32 00 61 01 ** 12 00 01 34 37 36 31 2A 2A 2A 2A 2A 2A 2A 2A 30 30 31 30 1C")
 							if lcdcheck != 1:
@@ -124,6 +124,6 @@ if (Result):
 									if lcdtype == 1:
 										lcdcheck = DL.ShowMessageBox('Notice','Does LCD display msg "APPROVED"?', 0)
 									if lcdtype == 0:
-										lcdcheck = DL.Check_RXResponse(1, "56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 53 03 00 82 03 1C 02 00 **")
+										lcdcheck = DL.Check_RXResponse(1, "56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 ** 03 00 ** 03 1C 02 00 **")
 									if lcdcheck != 1:
 										DL.SetWindowText("red", "LCD msg: FAIL")

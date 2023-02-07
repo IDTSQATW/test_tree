@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-65181
+56098
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -143,6 +143,8 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+readercheck = msgbox ("Is this SRED project?", vbyesno)
+platformcheck = msgbox ("Is this NEO3 project?", vbyesno)
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
@@ -198,6 +200,7 @@ End If
 
 if result <> 0 then
    for k = 1 to 2
+       if readercheck = 6 then k = 2
        DL.ClearCommWindows
        if k = 1 then a = "01"
        if k = 2 then a = "40"
@@ -232,8 +235,8 @@ if result <> 0 then
                DL.AddComment "--- " & at & " >>>>> " & card
                DL.SendSequence at
                if b <= 2 then 
-                  if readerType <> "NEO2" then vasonly()
-                  if readerType = "NEO2" then payonly()
+                  if readerType <> "NEO2" or platformcheck = 6 then vasonly()
+                  if readerType = "NEO2" and platformcheck = 7 then payonly()
                end if
 
                if b = 3 then payonly()
@@ -255,26 +258,26 @@ end if
 
 sub payonly()
     result = DL.WaitForSequence("02 23", 1, 15000)
-    if result <> 0 then 
-       if readerType <> "NEO2" then result = DL.WaitForSequence("ST 00", 1, 1000)
-       if result = 0 then dl.addcomment vbcrlf & "FFEE08: FAIL!"
-    end if
+    'if result <> 0 then 
+    '   if readerType <> "NEO2" then result = DL.WaitForSequence("ST 00", 1, 1000)
+    '   if result = 0 then dl.addcomment vbcrlf & "FFEE08: FAIL!"
+    'end if
 end sub
 
 sub payandst()
     result = DL.WaitForSequence("02 23", 1, 15000)
-    if result <> 0 then 
-       if readerType <> "NEO2" then result = DL.WaitForSequence("ST 6a82", 1, 1000)
-       if result = 0 then dl.addcomment vbcrlf & "FFEE08: FAIL!"
-    end if
+    'if result <> 0 then 
+    '   if readerType <> "NEO2" then result = DL.WaitForSequence("ST 6a82", 1, 1000)
+    '   if result = 0 then dl.addcomment vbcrlf & "FFEE08: FAIL!"
+    'end if
 end sub
 
 sub vasonly()
     result = DL.WaitForSequence("02 0A", 1, 15000)
-    if result <> 0 then 
-       if readerType <> "NEO2" then result = DL.WaitForSequence("ST 6a82", 1, 1000)
-       if result = 0 then dl.addcomment vbcrlf & "FFEE08: FAIL!"
-    end if
+    'if result <> 0 then 
+    '   if readerType <> "NEO2" then result = DL.WaitForSequence("ST 6a82", 1, 1000)
+    '   if result = 0 then dl.addcomment vbcrlf & "FFEE08: FAIL!"
+    'end if
 end sub
 
 DL.AddComment vbCrLf

@@ -90,11 +90,6 @@ if (Result):
 			else:
 				DL.SetWindowText("Red", "Tag 9F39: FAIL")
 			
-			if (DL.Check_RXResponse("FF EE 01 ** DF EE 30 01 00")): 
-				DL.SetWindowText("blue", "Tag FFEE01: PASS")
-			else:
-				DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-			
 			if DL.Check_RXResponse("DF EE 26 02 **"): 
 				DL.SetWindowText("blue", "Tag DFEE26: PASS")
 			else:

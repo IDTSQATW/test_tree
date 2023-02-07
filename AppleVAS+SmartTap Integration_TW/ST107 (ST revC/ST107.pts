@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-33453
+4281
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -143,6 +143,8 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+platformcheck = msgbox ("Is this SRED project?", vbyesno)
+
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
@@ -175,6 +177,7 @@ End If
 
 if result <> 0 then
    for k = 1 to 2
+       if platformcheck = 6 then k = 2
        if k = 1 then a = "01"
        if k = 2 then a = "40"
        

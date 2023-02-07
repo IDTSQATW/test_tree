@@ -28,13 +28,11 @@ MSG:Tap Interac card...
 TIMEOUT:120000
 EXR:
 
-
 TID:Get Transaction Result w/ LCD
 DLG:Tap Interac card -> Click OK...
 TIMEOUT:120000
 CMD:03 40
 EXR:
-
 
 TID:03-03
 CMD:03 03 00 E3 00 06 31 32 33 34 35 36 9A 03 15 07 30 9F 21 03 10 10 10
@@ -47,8 +45,6 @@ TIMEOUT:120000
 EXR:
 EXR:
 EXR:
-EXR:
-
 
 TID:Get Transaction Result w/o LCD
 DLG:Tap Interac card -> Click OK...

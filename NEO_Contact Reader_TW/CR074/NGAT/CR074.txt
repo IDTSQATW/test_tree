@@ -54,11 +54,6 @@ MSG:Insert CT card (EMV Test Card V2 T=0)...
 EXR:
 EXR:
 EXR:
-EXR:
-EXR:
-EXR:
-EXR:
-EXR:
 
 TID:60-11 Contact Authenticate Transaction_w LCD
 CMD:60 11 00 00 78
@@ -72,9 +67,7 @@ CMD:60 11 00 00 78
 EXR: 60 63 00 00
 EXR:
 EXR:
-EXR:
 MSG:Waiting...
-EXR:
 TIMEOUT:120000
 
 TID:60-12 Contact Apply Host Response_w LCD

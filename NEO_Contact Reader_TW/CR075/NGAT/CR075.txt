@@ -59,9 +59,6 @@ MSG:Insert CT card (V2CA0250300v4.1a) card...
 EXR:
 EXR:
 EXR:
-EXR:
-EXR:
-EXR:
 
 TID:60-11 Contact Authenticate Transaction_w LCD
 CMD:60 11 00 00 78
@@ -74,7 +71,6 @@ TID:60-11 Contact Authenticate Transaction_w/o LCD
 CMD:60 11 00 00 78
 EXR: 60 63 00 00
 MSG:Waiting...
-EXR:
 EXR:
 EXR:
 TIMEOUT:120000

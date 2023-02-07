@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-43123
+27523
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -230,7 +230,6 @@ End Function
 if readerType <> "NEO2" then
    precondition()
    if result <> 0 then loadkey_D()
-else
    if result <> 0 then
       dl.resetreceivecounter
       dl.addcomment vbcrlf

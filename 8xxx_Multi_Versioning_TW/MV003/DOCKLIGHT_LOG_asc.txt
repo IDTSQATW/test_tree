@@ -1,4 +1,4 @@
-Docklight Log File (ASCII) - Started 2022/12/20 16:00:01.217 
+Docklight Log File (ASCII) - Started 2023/2/3 16:14:25.697 
  TEST CASE: MV003
 
  --- Set POS COM PORT Settings
@@ -8,8 +8,8 @@ Docklight Log File (ASCII) - Started 2022/12/20 16:00:01.217
 
  --- Get Hardware Information 09-14
 
-2022/12/20 16:00:02.336 [TX] - ViVOtech2<NUL><HT>	<DC4><NUL><NUL>3<BS>
-2022/12/20 16:00:02.345 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL><NAK> 
+2023/2/3 16:14:26.815 [TX] - ViVOtech2<NUL><HT>	<DC4><NUL><NUL>3<BS>
+2023/2/3 16:14:26.822 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL><NAK> 
 HW, VP3350<CR><LF>
 K81F Rev4?p<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
 
@@ -25,5 +25,5 @@ K81F Rev4?p<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NU
 Please check ASCII screen, make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (ASCII) - Stopped 2022/12/20 16:00:02.919 
+Docklight Log File (ASCII) - Stopped 2023/2/3 16:14:27.398 
 

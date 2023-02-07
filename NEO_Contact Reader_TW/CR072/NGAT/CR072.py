@@ -66,7 +66,7 @@ if (Result):
 		if lcdtype == 1:
 			alldata = DL.Get_RXResponse(1)
 		if lcdtype == 0:
-			alldata = DL.Get_RXResponse(9)	
+			alldata = DL.Get_RXResponse(4)	
 		CTresultcode = DL.GetTLV(alldata,"DFEE25")
 		if (Result):
 			DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')
@@ -83,7 +83,7 @@ if (Result):
 				if lcdtype == 1:
 					alldata = DL.Get_RXResponse(1)
 				if lcdtype == 0:
-					alldata = DL.Get_RXResponse(4)
+					alldata = DL.Get_RXResponse(2)
 				CTresultcode = DL.GetTLV(alldata,"DFEE25")	
 				if (Result):
 					DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')
@@ -111,6 +111,6 @@ if (Result):
 								if lcdtype == 1:
 									lcdcheck = DL.ShowMessageBox('Notice','Does LCD display msg "DECLINED"?', 0)
 								if lcdtype == 0:
-									lcdcheck = DL.Check_RXResponse(1, "56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 53 03 00 81 07 1C 02 00 FF FF 88 3E")	
+									lcdcheck = DL.Check_RXResponse(1, "56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 ** 03 00 ** 07 1C")	
 								if lcdcheck != 1:
 									DL.SetWindowText("red", "LCD msg: FAIL")

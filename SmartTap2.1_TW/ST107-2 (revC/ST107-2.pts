@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-58781
+40287
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -142,6 +142,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+readercheck = msgbox ("Is this SRED project?", vbyesno)
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- 04-09"
@@ -178,6 +179,7 @@ End If
 
 If result <> 0 Then
 for i = 1 to 2
+   if readercheck = 6 then i = 2
    if result <> 0 then
    msgbox "Click Ok -> tap phone (Merchant APP: case 0.1)", vbokonly
    if i = 1 then cmd = "01"
@@ -220,6 +222,7 @@ End If
 
 If result <> 0 Then
 for i = 1 to 2
+   if readercheck = 6 then i = 2
    if result <> 0 then
    msgbox "Click Ok -> tap phone (Merchant APP: case 0.1)", vbokonly
    if i = 1 then cmd = "01"
@@ -258,6 +261,7 @@ End If
 
 If result <> 0 Then
 for i = 1 to 2
+   if readercheck = 6 then i = 2
    if result <> 0 then
    msgbox "Click Ok -> tap phone (Merchant APP: case 0.1)", vbokonly
    if i = 1 then cmd = "01"

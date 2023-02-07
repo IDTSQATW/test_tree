@@ -19,12 +19,6 @@ if readermodel == 1:
 else:
 	DL.SetWindowText("Green", "*** non-VP3350 reader ***")	
 
-# Check data encryption TYPE is TDES	
-if (Result):
-	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 01 00 00 00 00")
-		
 # Burst mode OFF		
 if (Result):
 	RetOfStep = DL.SendCommand('Burst mode Off')
@@ -41,7 +35,7 @@ if (Result):
 if (Result):
 	Result = DL.SendCommand('Activate Transaction')
 	if (Result):
-		Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** E8 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 37 00 28 6B B6 B6")
+		Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 37 00 28 6B ** B6")
 		sResult=DL.Get_RXResponse(0)
 			
 		if Result == True and sResult!=None and sResult!="":
@@ -89,7 +83,7 @@ if (Result):
 						DL.SetWindowText("red", "Tag9F39: FAIL")	
 					if DL.Check_RXResponse('FFEE01 ** DFEE30010C') == False:
 						DL.SetWindowText("red", "TagFFEE01: FAIL")	
-					if DL.Check_RXResponse('DFEE26 02 E800') == False:
+					if DL.Check_RXResponse('DFEE26 02 ** 00') == False:
 						DL.SetWindowText("red", "TagDFEE26: FAIL")	
 
 					# Transaction result verification

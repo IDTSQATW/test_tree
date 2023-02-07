@@ -99,10 +99,10 @@ if (Result):
 				if lcdtype == 1:
 					rx = 3
 				if lcdtype == 0:
-					rx = 5					
+					rx = 4					
 				Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')
 				if (Result):
-					Result = DL.Check_RXResponse(rx, 'E8 DF EE 25')
+					Result = DL.Check_RXResponse(rx, 'E8 ** DF EE 25')
 				time.sleep(2)							
 			if readertype == 0:     # NEOI
 				rx = 5

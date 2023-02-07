@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-16337
+54720
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -220,17 +220,15 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-if readerType = "GR" or readerType = "NEO1" then 
+if readerType <> "NEO2" then 
    precondition()
-   if result <> 0 then
-      loadkey_D()
-   end if
+   if result <> 0 then loadkey_D()
 else
    enctype = msgbox ("Reader had data key & enc type is TDES?", vbyesno)
    if enctype = 7 then result = 0
 end if
 '------------------------------------------------------------
-if readerType = "GR" or readerType = "NEO1" or enctype = 6 then
+if readerType <> "NEO2" or enctype = 6 then
 
 if result <> 0 then
    dl.resetreceivecounter
@@ -307,6 +305,7 @@ If result <> 0 Then
    DL.SendSequence "60-12"
    result = DL.WaitForSequence("60-xx 0c status", 1, 2000)
 End If
+end if
 
 DL.AddComment vbCrLf
 PrintMyResult(result)

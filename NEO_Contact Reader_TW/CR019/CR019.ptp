@@ -496,3 +496,15 @@ COMMENT
 0
 0
 
+RECEIVE
+8
+60-0B Contact Retrieve CA Public Key List 2
+56 69 56 4F 74 65 63 68 32 00 60 00 01 20
+-1
+1
+COMMENT 
+0
+1
+0
+0
+

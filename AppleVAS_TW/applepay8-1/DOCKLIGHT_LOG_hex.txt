@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2022/11/21 13:58:22.140 
+Docklight Log File (HEX) - Started 2023/1/5 11:25:56.463 
  TEST CASE: applepay8-1
 
  --- Set POS COM PORT Settings
@@ -8,5 +8,5 @@ Docklight Log File (HEX) - Started 2022/11/21 13:58:22.140
 
 
 
-Docklight Log File (HEX) - Stopped 2022/11/21 13:58:22.334 
+Docklight Log File (HEX) - Stopped 2023/1/5 11:25:56.657 
 

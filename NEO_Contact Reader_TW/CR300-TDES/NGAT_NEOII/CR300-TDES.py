@@ -63,17 +63,17 @@ if (Result):
 		rx = 1
 	if lcdtype == 0:
 		RetOfStep = DL.SendCommand('1. 60-10 Normal --1_w/o LCD')
-		rx = 8		
+		rx = 4		
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("60 63 00 00")
 		alldata = DL.Get_RXResponse(rx)
 		CTresultcode = DL.GetTLV(alldata,"DFEE25")
 		if lcdtype == 0:
-			Result = Result and DL.Check_RXResponse(9, "61 01 ** 03 00 00 02 00 ** 03 00 ** 03 1C")
+			Result = Result and DL.Check_RXResponse(5, "61 01 ** 03 00 00 02 00 ** 03 00 ** 03 1C")
 			if (Result):
-				Result = Result and DL.Check_RXResponse(10, "61 01 ** 03 00 00 02 00 ** 03 00 ** 27 1C")
+				Result = Result and DL.Check_RXResponse(6, "61 01 ** 03 00 00 02 00 ** 03 00 ** 27 1C")
 				if (Result):
-					Result = Result and DL.Check_RXResponse(11, "61 01 ** 03 00 00 02 00 ** 03 00 ** 23 1C")
+					Result = Result and DL.Check_RXResponse(7, "61 01 ** 03 00 00 02 00 ** 03 00 ** 23 1C")
 		if (Result) and CTresultcode == "0003":
 			Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')
 			if (Result):
@@ -94,7 +94,7 @@ if (Result):
 		rx = 1
 	if lcdtype == 0:
 		RetOfStep = DL.SendCommand('3. 60-10 FastEMV OFF_w/o LCD')	
-		rx = 7
+		rx = 4
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("60 63 00 00")
 		alldata = DL.Get_RXResponse(rx)
@@ -150,7 +150,7 @@ if  CTresultcode == "0010":
 		rx = 1
 	if lcdtype == 0:
 		RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction_w/o LCD')	
-		rx = 3
+		rx = 2
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("60 63 00 00")
 		alldata = DL.Get_RXResponse(rx)
@@ -201,7 +201,7 @@ if (Result):
 		rx = 1
 	if lcdtype == 0:
 		RetOfStep = DL.SendCommand('1. 60-10 Normal --2_w/o LCD')	
-		rx = 7	
+		rx = 4	
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("60 63 00 00")
 		alldata = DL.Get_RXResponse(rx)
@@ -257,7 +257,7 @@ if  CTresultcode == "0010":
 		rx = 1
 	if lcdtype == 0:
 		RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction_w/o LCD')	
-		rx = 3	
+		rx = 2	
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("60 63 00 00")
 		alldata = DL.Get_RXResponse(rx)
@@ -301,17 +301,17 @@ if (Result):
 		rx = 1
 	if lcdtype == 0:
 		RetOfStep = DL.SendCommand('2. 60-10 FastEMV ON_w/o LCD')
-		rx = 8		
+		rx = 4		
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("60 63 00 00")
 		alldata = DL.Get_RXResponse(rx)
 		CTresultcode = DL.GetTLV(alldata,"DFEE25")
 		if lcdtype == 0:
-			Result = Result and DL.Check_RXResponse(9, "61 01 ** 03 00 00 02 00 ** 03 00 ** 03 1C")
+			Result = Result and DL.Check_RXResponse(5, "61 01 ** 03 00 00 02 00 ** 03 00 ** 03 1C")
 			if (Result):
-				Result = Result and DL.Check_RXResponse(10, "61 01 ** 03 00 00 02 00 ** 03 00 ** 27 1C")
+				Result = Result and DL.Check_RXResponse(6, "61 01 ** 03 00 00 02 00 ** 03 00 ** 27 1C")
 				if (Result):
-					Result = Result and DL.Check_RXResponse(11, "61 01 ** 03 00 00 02 00 ** 03 00 ** 23 1C")
+					Result = Result and DL.Check_RXResponse(7, "61 01 ** 03 00 00 02 00 ** 03 00 ** 23 1C")
 		if (Result) and CTresultcode == "0003":
 			Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')
 			if (Result):

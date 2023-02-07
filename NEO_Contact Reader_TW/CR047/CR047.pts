@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-21376
+49850
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -164,6 +164,15 @@ if readerType = "NEO2" then
       DL.AddComment "--- First response control = Send First Response 0x63"
       DL.SendSequence "First response control = Send First Response 0x63"
       result = DL.WaitForSequence("04 00", 1, 5000)
+   End If
+
+   If result <> 0 Then
+      dl.resetreceivecounter
+      dl.addcomment vbcrlf
+      DL.AddComment "--- 60-16 Contact Set ICS Identification (04)"
+      DL.SendSequence "60-16 Contact Set ICS Identification (04)"
+      result = DL.WaitForSequence("60-xx 00 status", 1, 3000)
+      dl.pause 1000
    End If
 
    If result <> 0 Then

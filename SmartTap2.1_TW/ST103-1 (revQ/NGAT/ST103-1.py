@@ -10,17 +10,21 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
-# Encryption Type -- AES
-if (Result):
-	RetOfStep = DL.SendCommand('Encryption Type -- AES')
+# Check reader is VP3350 or not
+lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 01")	
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
 
-# Get Data Encryption (C7-37)
+# Check data encryption TYPE is TDES	
 if (Result):
-	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")			
+		Result = DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")	
 		
 # Burst mode OFF & Poll on demand		
 if (Result):
@@ -60,10 +64,13 @@ if (Result):
 			if i == 1:
 				RetOfStep = DL.SendCommand('02-40 case 1.1')
 			if i == 2:
+				time.sleep(1)
 				RetOfStep = DL.SendCommand('02-40 case 3.1')	
 			if i == 3:
+				time.sleep(1)
 				RetOfStep = DL.SendCommand('02-40 case 5.1')	
 			if i == 4:
+				time.sleep(1)
 				RetOfStep = DL.SendCommand('02-40 case 0.6')		
 			
 			if (RetOfStep):		
@@ -72,21 +79,21 @@ if (Result):
 				FFEE08 = DL.GetTLV(alldata,"FFEE08", 0)
 				if i != 3:
 					encDFEF76 = DL.GetTLV(FFEE08,"DFEF76", 0)
-					decDFEF76 = DL.DecryptDLL(0,2, strKey, ksn, encDFEF76)	
+					decDFEF76 = DL.DecryptDLL(0,1, strKey, ksn, encDFEF76)	
 				
 				if i <= 2:
-					DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 57 ** E3 DFEE12 0A ** FF EE 08")
+					DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 57 ** E1 ** DFEE12 0A ** FF EE 08")
 				if i == 3:
-					DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 57 ** E3 FF EE 08")
+					DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 57 ** E1 ** FF EE 08")
 				if i == 4:
-					DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** F3 DFEE12 0A **")	
+					DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** F1 ** DFEE12 0A **")	
 					TagFF8105 = DL.GetTLV(alldata,"FF8105", 0)
 					mask56 = DL.GetTLV(TagFF8105,"56", 0)
 					enc56 = DL.GetTLV(TagFF8105,"56", 1)
-					dec56 = DL.DecryptDLL(0,2, strKey, ksn, enc56)		
+					dec56 = DL.DecryptDLL(0,1, strKey, ksn, enc56)		
 					mask9F6B = DL.GetTLV(TagFF8105,"9F6B", 0)
 					enc9F6B = DL.GetTLV(TagFF8105,"9F6B", 1)
-					dec9F6B = DL.DecryptDLL(0,2, strKey, ksn, enc9F6B)	
+					dec9F6B = DL.DecryptDLL(0,1, strKey, ksn, enc9F6B)	
 					
 				# Tag FFEE08	
 				if i != 3:
@@ -130,31 +137,8 @@ if (Result):
 						DL.SetWindowText("blue", "Tag 9F6B_Enc: PASS")
 					else:
 						DL.SetWindowText("red", "Tag 9F6B_Enc: FAIL")
-											
-				# Tags 9F39/ FFEE01/ DFEE26
-				if i <= 3:
-					if (DL.Check_RXResponse("9F 39 01 07")): 
-						DL.SetWindowText("blue", "Tag 9F39: PASS")
-					else:
-						DL.SetWindowText("Red", "Tag 9F39: FAIL")
-				if i == 4:
-					if (DL.Check_RXResponse("9F 39 01 91")): 
-						DL.SetWindowText("blue", "Tag 9F39: PASS")
-					else:
-						DL.SetWindowText("Red", "Tag 9F39: FAIL")						
-				
-				if (DL.Check_RXResponse("FF EE 01 ** DF EE 30 01 00")): 
-					DL.SetWindowText("blue", "Tag FFEE01: PASS")
-				else:
-					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-				
-				if i <= 3:
-					if (DL.Check_RXResponse("DF EE 26 02 E3 01")): 
-						DL.SetWindowText("blue", "Tag DFEE26: PASS")
-					else:
-						DL.SetWindowText("Red", "Tag DFEE26: FAIL")		
-				if i == 4:
-					if (DL.Check_RXResponse("DF EE 26 02 F3 01")): 
-						DL.SetWindowText("blue", "Tag DFEE26: PASS")
-					else:
-						DL.SetWindowText("Red", "Tag DFEE26: FAIL")								
+						
+if lcdtype == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")								

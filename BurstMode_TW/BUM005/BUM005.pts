@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-34616
+52229
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -160,7 +160,7 @@ If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Burst Mode On *** " & readerType 
-   if readerType <> "NEo2" then DL.SendSequence "Burst Mode On"
+   if readerType <> "NEO2" then DL.SendSequence "Burst Mode On"
    if readerType = "NEO2" then DL.SendSequence "Burst Mode On (NEO2)"
    result = DL.WaitForSequence("Configuration Change Response", 1, 10000)
 End If

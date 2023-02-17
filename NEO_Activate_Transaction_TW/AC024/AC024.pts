@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-3443
+14297
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -155,6 +155,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+platformcheck = msgbox ("Is this NEO3 project?", vbyesno)
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- Poll on Demand"
@@ -171,6 +172,7 @@ If result <> 0 Then
    result = DL.WaitForSequence("Burst Mode Response", 1, 10000)
 End If
 
+if platformcheck = 7 then
 if readerType = "NEO2" then
 If result <> 0 Then
    dl.resetreceivecounter
@@ -188,35 +190,57 @@ If result <> 0 Then
    result = DL.WaitForSequence("Burst Mode Response", 1, 10000)
 End If
 end if
+end if
 '============================================================
 If result <> 0 Then
-   MsgBox "Click OK --> Tap AMEX XP4 card", VBOKOnly
+   MsgBox "Click OK --> Tap AMEX XP4 card (For NEO3, tap Amex XP8-online: card #86)", VBOKOnly
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Activate Transaction (02-40)"
    DL.SendSequence "Activate Transaction (02-40)"
-   if readerType <> "NEO2" then result = DL.WaitForSequence("02 23", 1, 5000)
-   if readerType = "NEO2" then result = DL.WaitForSequence("02 23 (NEO2)", 1, 5000) 
+   if platformcheck = 7 then
+      if readerType <> "NEO2" then r9 = DL.WaitForSequence("02 23", 1, 5000)
+      if readerType = "NEO2" then r9 = DL.WaitForSequence("02 23 (NEO2)", 1, 5000) 
+   elseif platformcheck = 6 then
+      r9 = DL.WaitForSequence("02 23 EMV", 1, 5000)
+   end if
    dl.pause 1000
 
-   if result <> 0 then
-      r1 = dl.waitforsequence("9f39", 1, 1000)
-      if readerType <> "NEO2" then r2 = dl.waitforsequence("dfee26", 1, 1000)
-      if readerType = "NEO2" then r2 = dl.waitforsequence("dfee26 (NEO2)", 1, 1000)
+      if platformcheck = 7 then r1 = dl.waitforsequence("9f39", 1, 1000)
+      if platformcheck = 6 then r1 = dl.waitforsequence("9f39 = 07", 1, 1000)
+
+      if platformcheck = 7 then
+         if readerType <> "NEO2" then r2 = dl.waitforsequence("dfee26", 1, 1000)
+         if readerType = "NEO2" then r2 = dl.waitforsequence("dfee26 (NEO2)", 1, 1000)
+      elseif platformcheck = 6 then
+             r2 = dl.waitforsequence("dfee26 (NEO2) EMV", 1, 1000)
+      end if
+
       if readerType <> "NEO2" then r3 = dl.waitforsequence("df30", 1, 1000)
-      if readerType = "NEO2" then r3 = dl.waitforsequence("df30 (NEO2)", 1, 1000)
+      if readerType = "NEO2" then r3 = 1
+
       r4 = dl.waitforsequence("84", 1, 1000)
       r5 = dl.waitforsequence("9f02", 1, 1000)
 
-      if r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 then
+      if platformcheck = 6 then
+         r6 = dl.waitforsequence("tag 57 (#86", 1, 1000)
+         r7 = dl.waitforsequence("tag 5a (#86", 1, 1000)
+      else
+         r6 = 1
+         r7 = 1
+      end if
+
+      if r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 or r6 = 0 or r7 = 0 or r9 = 0 then
          result = 0
+         if r9 = 0 then dl.addcomment vbcrlf & "Card data: FAIL!"
          if r1 = 0 then dl.addcomment vbcrlf & "Tag 9F39: FAIL!"
          if r2 = 0 then dl.addcomment vbcrlf & "Tag DFEE26: FAIL!"
          if r3 = 0 then dl.addcomment vbcrlf & "DF30: FAIL!"
          if r4 = 0 then dl.addcomment vbcrlf & "84: FAIL!"
          if r5 = 0 then dl.addcomment vbcrlf & "84: FAIL!"
+         if r6 = 0 then dl.addcomment vbcrlf & "Tag 57: FAIL!"
+         if r7 = 0 then dl.addcomment vbcrlf & "Tag 5A: FAIL!"
       end if
-   end if
 End If
 '------------------------------------------------------------
 DL.AddComment vbCrLf

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-62338
+31200
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -155,6 +155,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+platformcheck = msgbox ("Is this NEO3 project?", vbyesno)
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- Poll on Demand"
@@ -182,30 +183,54 @@ if readerType = "NEO2" then
 end if
 '============================================================
 If result <> 0 Then
-   MsgBox "Click OK --> Tap Discover card (ANY)", VBOKOnly
+   MsgBox "Click OK --> Tap ANY Discover card (for NEO3, tap card#84)", VBOKOnly
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Activate Transaction"
    DL.SendSequence "Activate Transaction"
    dl.pause 1500
-   result = DL.WaitForSequence("02 23", 1, 1500)
-   if result = 0 then result = DL.WaitForSequence("02 23-long PAN", 1, 1500)
+   if platformcheck = 7 then
+      result = DL.WaitForSequence("02 23", 1, 1500)
+      if result = 0 then result = DL.WaitForSequence("02 23-long PAN", 1, 1500)
+   elseif platformcheck = 6 then
+      result = DL.WaitForSequence("02 23 (NEO3)", 1, 1500)
+   end if
+   dl.pause 1000
 
    if result <> 0 then
-      r1 = dl.waitforsequence("9f39", 1, 1000)
-      if readerType <> "NEO2" then r2 = dl.waitforsequence("dfee26", 1, 1000)
-      if readerType = "NEO2" then r2 = dl.waitforsequence("dfee26 (NEO2)", 1, 1000)
+      if platformcheck = 7 then r1 = dl.waitforsequence("9f39", 1, 1000)
+      if platformcheck = 6 then r1 = dl.waitforsequence("9f39 (NEO3)", 1, 1000)
+
+      if platformcheck = 7 then 
+         if readerType <> "NEO2" then r2 = dl.waitforsequence("dfee26", 1, 1000)
+         if readerType = "NEO2" then r2 = dl.waitforsequence("dfee26 (NEO2)", 1, 1000)
+      end if
+      if platformcheck = 6 then r2 = dl.waitforsequence("dfee26 (NEO3)", 1, 1000)
+
       if readerType <> "NEO2" then r3 = dl.waitforsequence("df30", 1, 1000)
       if readerType = "NEO2" then r3 = dl.waitforsequence("df30 (NEO2)", 1, 1000)
-      r4 = dl.waitforsequence("84", 1, 1000)
+
+      if platformcheck = 7 then r4 = dl.waitforsequence("84 (ZIP)", 1, 1000)
+      if platformcheck = 6 then r4 = dl.waitforsequence("84 (DPAS)", 1, 1000)
+
       r5 = dl.waitforsequence("9f02", 1, 1000)
 
-      if r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 then result = 0
+      if platformcheck = 6 then
+         r6 = dl.waitforsequence("tag 57 (NEO3)", 1, 1000)
+         r7 = dl.waitforsequence("tag 5A (NEO3)", 1, 1000)
+      else
+         r6 = 1
+         r7 = 1
+      end if
+
+      if r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 or r6 = 0 or r7 = 0 then result = 0
       if r1 = 0 then dl.addcomment vbcrlf & "Tag 9F39: FAIL!"
       if r2 = 0 then dl.addcomment vbcrlf & "Tag DFEE26: FAIL!"
-      if r3 = 0 then dl.addcomment vbcrlf & "DF30: FAIL!"
-      if r4 = 0 then dl.addcomment vbcrlf & "84: FAIL!"
-      if r5 = 0 then dl.addcomment vbcrlf & "9F02: FAIL!"
+      if r3 = 0 then dl.addcomment vbcrlf & "Tag DF30: FAIL!"
+      if r4 = 0 then dl.addcomment vbcrlf & "Tag 84: FAIL!"
+      if r5 = 0 then dl.addcomment vbcrlf & "Tag 9F02: FAIL!"
+      if r6 = 0 then dl.addcomment vbcrlf & "Tag 57: FAIL!"
+      if r7 = 0 then dl.addcomment vbcrlf & "Tag 5A: FAIL!"
    end if
 End If
 '------------------------------------------------------------

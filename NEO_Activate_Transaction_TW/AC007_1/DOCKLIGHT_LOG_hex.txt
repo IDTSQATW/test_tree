@@ -1,9 +1,9 @@
-Docklight Log File (HEX) - Started 2022/8/2 15:56:03.272 
+Docklight Log File (HEX) - Started 2023/2/8 16:30:13.197 
  TEST CASE: AC007_1
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 115200 baud...
+ POS operating on COM90 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  
@@ -15,5 +15,5 @@ The case for GR/ NEO1 product only
  Result = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2022/8/2 15:56:07.349 
+Docklight Log File (HEX) - Stopped 2023/2/8 16:30:15.975 
 

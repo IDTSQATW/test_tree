@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-65008
+57288
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -142,7 +142,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-readercheck = msgbox ("Is this SRED project?", vbyesno)
+readercheck = msgbox ("Is encryption ON?", vbyesno)
 reader = msgbox ("This reader is VP6300 SRED_USAT?", vbyesno)     'Refer to spec: NEO 2 IDG Supplement for VP6300 SRED (USAT) v1.0.9 Draft
 
 If result <> 0 Then

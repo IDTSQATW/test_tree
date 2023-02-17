@@ -31,15 +31,20 @@ if (Result):
 
 # cmd 02-40/ 03-40, tap card
 if (Result):
-	for i in range(1, 2):
+	for i in range(1, 3):
 		if i == 1:
 			RetOfStep = DL.SendCommand('Poll on Demand')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("01 00 00 00")
 		if i == 2:
-			RetOfStep = DL.SendCommand('Auto Poll')
+			if lcdtype == 1:
+				RetOfStep = DL.SendCommand('Auto Poll w/ LCD')
+				rx = 0
+			if lcdtype == 0:
+				RetOfStep = DL.SendCommand('Auto Poll w/o LCD')
+				rx = 1
 			if (RetOfStep):
-				Result = DL.Check_RXResponse("01 00 00 00")
+				Result = DL.Check_RXResponse(rx, "01 00 00 00")
 		
 		if (Result):
 			if i == 1:
@@ -131,5 +136,8 @@ if (Result):
 				if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False: 
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 		
-				RetOfStep = DL.SendCommand('03-03')
-				time.sleep(4)
+				if lcdtype == 1:
+					RetOfStep = DL.SendCommand('03-03 w/ LCD')
+				if lcdtype == 0:
+					RetOfStep = DL.SendCommand('03-03 w/o LCD')	
+				time.sleep(3)

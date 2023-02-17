@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-31339
+58203
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -153,6 +153,16 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+modelcheck = msgbox ("Is this NEO3 project?", vbokonly)
+
+If result <> 0 Then
+   DL.Pause 400
+   DL.ResetReceiveCounter
+   DL.AddComment "--- 04-09"
+   DL.SendSequence "04-09"
+   result = DL.WaitForSequence("Configuration Change Response", 1, 10000)
+End If
+
 If result <> 0 Then
    DL.Pause 400
    DL.ResetReceiveCounter
@@ -176,6 +186,7 @@ If result <> 0 Then
    result = DL.WaitForSequence("Configuration Change Response", 1, 3000)
 End If
 
+if modelcheck = 7 then
 if readerType = "NEO2" then
 If result <> 0 Then
    dl.resetreceivecounter
@@ -184,6 +195,7 @@ If result <> 0 Then
    DL.SendSequence "Set group B0 (9F66 = 80 00 40 00)"
    result = DL.WaitForSequence("Configuration Change Response", 1, 3000)
 End If
+end if
 end if
 '---------------------------------------------------------------------------
 If result <> 0 Then
@@ -194,38 +206,45 @@ If result <> 0 Then
    DL.AddComment "--- ACT (02-01)"
    DL.SendSequence "ACT (02-01)"
 
-   if readerType = "GR" or readerType = "NEO1" then 
-      result1 = DL.WaitForSequence("0201_Discover_8741", 1, 5000)
-   elseif readerType = "NEO2" then 
-      result1 = DL.WaitForSequence("0201_Discover_8741 (NEO2)", 1, 5000)
+   if modelcheck = 7 then
+      if readerType <> "NEO2" then 
+         result1 = DL.WaitForSequence("0201_Discover_8741", 1, 5000)
+      elseif readerType = "NEO2" then 
+         result1 = DL.WaitForSequence("0201_Discover_8741 (NEO2)", 1, 5000)
+      end if
    else
-      result1 = DL.WaitForSequence("0201_Discover_8741", 1, 5000)
+      result1 = DL.WaitForSequence("0201_Discover_8741 (NEO3)", 1, 5000)
    end if
 
-   if readerType = "GR" or readerType = "NEO1" then 
-      result2 = DL.WaitForSequence("dfee26", 1, 2000)
-   elseif readerType = "NEO2" then 
-      result2 = DL.WaitForSequence("dfee26 (NEO2)", 1, 2000)
+   if modelcheck = 7 then
+      if readerType <> "NEO2" then 
+         result2 = DL.WaitForSequence("dfee26", 1, 2000)
+      elseif readerType = "NEO2" then 
+         result2 = DL.WaitForSequence("dfee26 (NEO2)", 1, 2000)
+      end if
    else
-      result2 = DL.WaitForSequence("dfee26", 1, 2000)
+      result2 = DL.WaitForSequence("dfee26 EMV", 1, 2000)
    end if
 
-   if readerType = "GR" or readerType = "NEO1" then 
+   if readerType <> "NEO2" then 
       result3 = DL.WaitForSequence("ffee01", 1, 2000)
    elseif readerType = "NEO2" then 
       result3 = DL.WaitForSequence("ffee01 (NEO2)", 1, 2000)
-   else
-      result3 = DL.WaitForSequence("ffee01", 1, 2000)
    end if
 
-   result4 = DL.WaitForSequence("56/ 57", 1, 2000)
-   result5 = DL.WaitForSequence("9f39", 1, 2000)
+   if modelcheck = 7 then
+      result4 = DL.WaitForSequence("56/ 57", 1, 2000)
+      result5 = DL.WaitForSequence("9f39", 1, 2000)
+   else
+      result4 = DL.WaitForSequence("57 EMV", 1, 2000)
+      result5 = DL.WaitForSequence("9f39 EMV", 1, 2000)
+   end if
    
    if result1 = 0 or result2 = 0 or result3 = 0 or result4 = 0 or result5 = 0 then result = 0
    if result1 = 0 then dl.addcomment vbcrlf & "Data: incorrect!"
    if result2 = 0 then dl.addcomment vbcrlf & "Tag DFEE26: incorrect!"
    if result3 = 0 then dl.addcomment vbcrlf & "Tag FFEE01: incorrect!"
-   if result4 = 0 then dl.addcomment vbcrlf & "Tags 56/57: incorrect!"
+   if result4 = 0 then dl.addcomment vbcrlf & "Track Tag(s) ex. 56, 57..., etc.: incorrect!"
    if result5 = 0 then dl.addcomment vbcrlf & "Tag 9F39: incorrect!"
 '-----------------------------------------------------------------------------
    DL.ResetReceiveCounter
@@ -235,38 +254,45 @@ If result <> 0 Then
    DL.AddComment "--- ACT (02-40)"
    DL.SendSequence "ACT (02-40)"
 
-   if readerType = "GR" or readerType = "NEO1" then 
-      result1 = DL.WaitForSequence("0240_Discover_8741", 1, 5000)
-   elseif readerType = "NEO2" then 
-      result1 = DL.WaitForSequence("0240_Discover_8741 (NEO2)", 1, 5000)
+   if modelcheck = 7 then
+      if readerType <> "NEO2" then 
+         result1 = DL.WaitForSequence("0240_Discover_8741", 1, 5000)
+      elseif readerType = "NEO2" then 
+         result1 = DL.WaitForSequence("0240_Discover_8741 (NEO2)", 1, 5000)
+      end if
    else
-      result1 = DL.WaitForSequence("0240_Discover_8741", 1, 5000)
+      result1 = DL.WaitForSequence("0240_Discover_8741 (NEO3)", 1, 5000)
    end if
 
-   if readerType = "GR" or readerType = "NEO1" then 
-      result2 = DL.WaitForSequence("dfee26", 1, 2000)
-   elseif readerType = "NEO2" then 
-      result2 = DL.WaitForSequence("dfee26 (NEO2)", 1, 2000)
+   if modelcheck = 7 then
+      if readerType <> "NEO2" then 
+         result2 = DL.WaitForSequence("dfee26", 1, 2000)
+      elseif readerType = "NEO2" then 
+         result2 = DL.WaitForSequence("dfee26 (NEO2)", 1, 2000)
+      end if
    else
-      result2 = DL.WaitForSequence("dfee26", 1, 2000)
+      result2 = DL.WaitForSequence("dfee26 EMV", 1, 2000)
    end if
 
-   if readerType = "GR" or readerType = "NEO1" then 
+   if readerType <> "NEO2" then 
       result5 = DL.WaitForSequence("ffee01", 1, 2000)
    elseif readerType = "NEO2" then 
       result5 = DL.WaitForSequence("ffee01 (NEO2)", 1, 2000)
-   else
-      result5 = DL.WaitForSequence("ffee01", 1, 2000)
    end if
-   
-   result6 = DL.WaitForSequence("56/ 57", 1, 2000)
-   result7 = DL.WaitForSequence("9f39", 1, 2000)
+
+   if modelcheck = 7 then
+      result6 = DL.WaitForSequence("56/ 57", 1, 2000)
+      result7 = DL.WaitForSequence("9f39", 1, 2000)
+   else
+      result6 = DL.WaitForSequence("57 EMV", 1, 2000)
+      result7 = DL.WaitForSequence("9f39 EMV", 1, 2000)
+   end if
 
    if result1 = 0 or result2 = 0 or result5 = 0 or result6 = 0 or result7 = 0 then result = 0
    if result1 = 0 then dl.addcomment vbcrlf & "Data: incorrect!"
    if result2 = 0 then dl.addcomment vbcrlf & "Tag DFEE26: incorrect!"
    if result5 = 0 then dl.addcomment vbcrlf & "Tag FFEE01: incorrect!"
-   if result6 = 0 then dl.addcomment vbcrlf & "Tags 56/57: incorrect!"
+   if result6 = 0 then dl.addcomment vbcrlf & "Track Tag(s) ex. 56, 57..., etc.: incorrect!"
    if result7 = 0 then dl.addcomment vbcrlf & "Tag 9F39: incorrect!"
 End If
 '------------------------------------------------------------

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-12642
+4054
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -157,6 +157,8 @@ If result <> 0 Then
 End If
 
 if readerType = "NEO2" then
+   DL.SendSequence "60-16 Contact Set ICS Identification (04)"
+   dl.pause 500
    DL.SendSequence "60-06 Contact Set Terminal Data"
    dl.pause 500
    DL.SendSequence "60-03 Contact Set Application Data (VISA)"
@@ -183,8 +185,13 @@ If result <> 0 Then
       msgbox "Click OK --> swipe card but pull out it in the middle (target: failed and then terminate the transaction). Note: some readers may have retry time", vbokonly
       if readerType <> "NEO2" then result = DL.WaitForSequence("TERMINATE", 1, 20000)
       if readerType = "NEO2" then 
-         result = msgbox ("Does LCD display msg 'TERMINATE' finally?", vbyesno)
-         if result = 7 then result = 0
+         lcdcheck = msgbox ("Does reader have LCD?", vbyesno)
+         if lcdcheck = 6 then
+            result = msgbox ("Does LCD display msg 'TERMINATE' finally?", vbyesno)
+            if result = 7 then result = 0
+         elseif lcdcheck = 7 then
+            result = DL.WaitForSequence("TERMINATE (NEO3)", 1, 5000)
+         end if
       end if
       if result <> 0 then 
 	  r1 = DL.WaitForSequence("60-10 30 07", 1, 2000)

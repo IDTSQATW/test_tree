@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-54586
+61249
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -173,7 +173,7 @@ If result <> 0 Then
 End If
 '============================================================
 If result <> 0 Then
-   prompt = prompt & "Clock OK --> Tap card"
+   prompt = prompt & "Click OK --> Tap card"
    result = MsgBox(prompt, VBOKOnly, "Activate Transaction")
   dl.addcomment vbcrlf
   dl.addcomment "Burst mode data -> Payload Frame (On Successful Read)"

@@ -1,4 +1,4 @@
-Docklight Log File (ASCII) - Started 2023/2/3 16:12:01.848 
+Docklight Log File (ASCII) - Started 2023/2/8 11:31:15.891 
  TEST CASE: FV001
 
  --- Set POS COM PORT Settings
@@ -10,18 +10,18 @@ Docklight Log File (ASCII) - Started 2023/2/3 16:12:01.848
 
  --- GET F/W Ver. P2 (0 data length but has 1 byte data, INVALID)
 
-2023/2/3 16:12:04.077 [TX] - ViVOtech2<NUL>)<NUL><NUL><NUL><DC1>?i
-2023/2/3 16:12:04.080 [RX] - ViVOtech2<NUL>)<EOT><NUL><NUL>|<RS> 04 status = CRC Error <NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
+2023/2/8 11:31:18.064 [TX] - ViVOtech2<NUL>)<NUL><NUL><NUL><DC1>?i
+2023/2/8 11:31:18.067 [RX] - ViVOtech2<NUL>)<EOT><NUL><NUL>|<RS> 04 status = CRC Error <NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
 
  --- GET F/W Ver. P2 (data length <> 0, INVALID)
 
-2023/2/3 16:12:04.086 [TX] - ViVOtech2<NUL>)<NUL><NUL><SOH><DC1>?Z
-2023/2/3 16:12:04.124 [RX] - ViVOtech2<NUL>)<ENQ><NUL><NUL>K. 05 status = Incorrect Parameter <NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
+2023/2/8 11:31:18.073 [TX] - ViVOtech2<NUL>)<NUL><NUL><SOH><DC1>?Z
+2023/2/8 11:31:18.118 [RX] - ViVOtech2<NUL>)<ENQ><NUL><NUL>K. 05 status = Incorrect Parameter <NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
 
  ---------- END OF TEST ----------
 
  Result = PASSED
 
 
-Docklight Log File (ASCII) - Stopped 2023/2/3 16:12:05.328 
+Docklight Log File (ASCII) - Stopped 2023/2/8 11:31:19.199 
 

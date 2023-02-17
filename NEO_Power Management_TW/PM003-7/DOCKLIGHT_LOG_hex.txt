@@ -1,12 +1,12 @@
-Docklight Log File (HEX) - Started 2022/9/7 10:57:26.286 
+Docklight Log File (HEX) - Started 2023/2/15 14:43:46.457 
  TEST CASE: PM003-7
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 115200 baud...
+ POS operating on COM90 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
 
 
-Docklight Log File (HEX) - Stopped 2022/9/7 10:57:26.579 
+Docklight Log File (HEX) - Stopped 2023/2/15 14:43:46.740 
 

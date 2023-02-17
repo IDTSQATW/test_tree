@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-15543
+30266
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -392,6 +392,8 @@ else
    DL.SendSequence "05-01 Cancel transaction"
    resultignore = DL.WaitForSequence("05-xx 00 status", 1, 5000)
 End If
+
+dl.pause 800
 
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf

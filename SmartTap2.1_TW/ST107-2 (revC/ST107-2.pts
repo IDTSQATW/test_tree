@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-40287
+58405
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -142,7 +142,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-readercheck = msgbox ("Is this SRED project?", vbyesno)
+readercheck = msgbox ("Is encryption ON?", vbyesno)
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- 04-09"
@@ -159,7 +159,7 @@ If result <> 0 Then
    if readerType <> "NEO2" then
       result = DL.WaitForSequence("03-05 resp", 1, 3000)
    else
-      result = DL.WaitForSequence("03-05 resp (NEO2)", 1, 3000)
+      result = DL.WaitForSequence("03-05 resp (NEO2)", 1, 10000)
    end if
    dl.pause 500
 End If

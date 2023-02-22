@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-45321
+3275
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -182,15 +182,20 @@ If result <> 0 Then
    DL.SendSequence "60-10 fallback"
    result = DL.WaitForSequence("60-xx 63 status", 1, 10000)
    if result <> 0 then
+       
+      check = msgbox ("Is this NEO3 reader?", vbyesno)
+        if check = 6 then readerType = "NEO3"
+
       msgbox "Click OK, swipe VISA MSD card", vbokonly
       if readerType <> "NEO2" then r1 = DL.WaitForSequence("60-10 00 11", 1, 10000)
-      if readerType = "NEO2" then r1 = DL.WaitForSequence("60-10 00 11 (NEO2)", 1, 10000)
+      if readerType = "NEO2" or readerType = "NEO3" then r1 = DL.WaitForSequence("60-10 00 11 (NEO2)", 1, 10000)
+
       r2 = DL.WaitForSequence("dfee26", 1, 2000)
       r3 = DL.WaitForSequence("9f39 90", 1, 2000)
 
       if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
          r4 = DL.WaitForSequence("df30", 1, 2000)
-      elseif readerType = "NEO2" then 
+      elseif readerType = "NEO2" or readerType = "NEO3" then 
          r4 = DL.WaitForSequence("df30 (NEO2)", 1, 2000)
       else
          r4 = DL.WaitForSequence("df30", 1, 2000)
@@ -198,7 +203,7 @@ If result <> 0 Then
 
       if readerType = "GR" or readerType = "NEO1" then 
          r5 = DL.WaitForSequence("dfef4c-4d", 1, 2000)
-      elseif readerType = "NEO2" or readerType = "USAT" then 
+      elseif readerType = "NEO2" or readerType = "NEO3" or readerType = "USAT" then 
           r5 = 1
       else
          r5 = DL.WaitForSequence("dfef4c-4d", 1, 2000)
@@ -219,20 +224,22 @@ If result <> 0 Then
    if result <> 0 then
       msgbox "Click OK, insert card that can not be powered on ICC (fallback to MSR)", vbokonly
       if readerType <> "NEO2" then result = dl.waitforsequence("USE MAGSTRIPE", 1, 10000)
-      if readerType = "NEO2" then 
+      if readerType = "NEO2" or readerType = "NEO3" then 
          result = msgbox("Does LCD show 'USE MAGSTRIPE'?", vbyesno)
          if result = 7 then result = 0
       end if
       if result <> 0 then
          msgbox "Click OK, remove card and then swipe VISA MSD card", vbokonly
-         if readerType <> "NEO2" then r1 = DL.WaitForSequence("60-10 00 07", 1, 10000)
+         if readerType <> "NEO2" or readerType <> "NEO3" then r1 = DL.WaitForSequence("60-10 00 07", 1, 10000)
          if readerType = "NEO2" then r1 = DL.WaitForSequence("60-10 00 11 (NEO2)", 1, 10000)
+         if readerType = "NEO3" then r1 = DL.WaitForSequence("60-10 00 07 (NEO2)", 1, 10000)
+
          r2 = DL.WaitForSequence("dfee26", 1, 2000)
          r3 = DL.WaitForSequence("9f39 80", 1, 2000)
 
          if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
             r4 = DL.WaitForSequence("df30", 1, 2000)
-         elseif readerType = "NEO2" then 
+         elseif readerType = "NEO2" or readerType = "NEO3" then 
             r4 = DL.WaitForSequence("df30 (NEO2)", 1, 2000)
          else
             r4 = DL.WaitForSequence("df30", 1, 2000)
@@ -240,7 +247,7 @@ If result <> 0 Then
 
          if readerType = "GR" or readerType = "NEO1" then 
             r5 = DL.WaitForSequence("dfef4c-4d", 1, 2000)
-         elseif readerType = "NEO2" or readerType = "USAT" then 
+         elseif readerType = "NEO2" or readerType = "NEO3" or readerType = "USAT" then 
              r5 = 1
          else
             r5 = DL.WaitForSequence("dfef4c-4d", 1, 2000)

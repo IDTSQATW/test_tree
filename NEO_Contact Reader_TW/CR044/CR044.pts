@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-52371
+47107
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -158,6 +158,8 @@ If result <> 0 Then
 End If
 
 if readerType = "NEO2" then
+   DL.SendSequence "60-16 Set Terminal config_4C"
+   dl.pause 500
    DL.SendSequence "60-06 Contact Set Terminal Data"
    dl.pause 500
    DL.SendSequence "60-03 Contact Set Application Data (VISA)"

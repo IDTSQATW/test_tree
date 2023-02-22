@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-39655
+9892
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -215,6 +215,8 @@ if readerType = "NEO2" then
       DL.SendSequence "DFED59 =  00 (Send First Response 0x63)"
       result = DL.WaitForSequence("04-09 resp", 1, 10000)
    End If
+   DL.SendSequence "60-16 Set Terminal config"
+   dl.pause 500
    DL.SendSequence "60-06 Contact Set Terminal Data"
    dl.pause 500
    DL.SendSequence "60-03 Contact Set Application Data (VISA)"

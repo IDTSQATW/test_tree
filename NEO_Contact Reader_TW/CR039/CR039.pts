@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-41118
+62061
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -154,6 +154,16 @@ If result <> 0 Then
    DL.AddComment "--- 60-03 Contact Set Application Data (VISA)"
    DL.SendSequence "60-03 Contact Set Application Data (VISA)"
    result = DL.WaitForSequence("60-xx 00 status", 1, 5000)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   if readerType = "NEO2" then 
+      DL.AddComment "--- 60-16 Set Terminal config_4C"
+      DL.SendSequence "60-06 (NEO2)"
+      result = DL.WaitForSequence("60-xx 00 status", 1, 5000)
+   end if
 End If
 
 If result <> 0 Then

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-48203
+8342
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -149,6 +149,8 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+kernelvercheck = inputbox ("Does reader support:" & vbcrlf & "1. Gen 1 or 2 common kernel -- max 20 sets" & vbcrlf & "2. Gen 3 common kernel -- max 32 sets", vbokonly)
+
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
@@ -161,7 +163,8 @@ if result <> 0 then
    if readerType <> "NEO2" then 
       limit = 16
    else
-      limit = 20
+      if kernelvercheck = 1 then limit = 20
+      if kernelvercheck = 2 then limit = 32
    end if
    For i = 1 to (limit+2) 
        if i <= 9 then

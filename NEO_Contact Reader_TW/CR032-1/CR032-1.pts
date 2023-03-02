@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-59951
+6655
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -150,6 +150,7 @@ End Function
 'TEST BEGINS
 '------------------------------------------------------------
 readercheck = msgbox("Does reader support to read SAM card & card was inserted?", vbyesno)
+SAMamountcheck = inputbox ("How many SAM slot does the reader support?", vbokonly)
 
 if readercheck = 6 then
 If result <> 0 Then
@@ -160,41 +161,26 @@ If result <> 0 Then
    dl.pause 400
 End If
 
-If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Get ATR (SAM 1)"
-   DL.SendSequence "*** Step 3: Get ATR (SAM 1)"
-   result = DL.WaitForSequence("2C-xx ok", 1, 2000)
-   dl.pause 400
-End If
+ For i = 1 to SAMamountcheck
+    
+     if result <> 0 Then
+       DL.resetreceivecounter
+	DL.AddComment vbCrLf 
+       DL.AddComment "--- Get ATR (SAM " & i & ")"
+       DL.SendSequence "*** Step 3: Get ATR (SAM " & i & ")"
+       result = DL.WaitForSequence("2C-xx ok", 1, 2000)
+       dl.pause 400
+     End If
 
-If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Contact Power Off (SAM1)"
-   DL.SendSequence "*** Step 5: Contact Power Off (SAM1)"
-   result = DL.WaitForSequence("2c-18 ok", 1, 2000)
-   dl.pause 400
-End If
-
-If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Get ATR (SAM 2)"
-   DL.SendSequence "*** Step 3: Get ATR (SAM 2)"
-   result = DL.WaitForSequence("2C-xx ok", 1, 2000)
-   dl.pause 400
-End If
-
-If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Contact Power Off (SAM2)"
-   DL.SendSequence "*** Step 5: Contact Power Off (SAM2)"
-   result = DL.WaitForSequence("2c-18 ok", 1, 2000)
-   dl.pause 400
-End If
+     If result <> 0 Then
+       dl.resetreceivecounter
+       dl.addcomment vbcrlf
+       DL.AddComment "--- Contact Power Off (SAM " & i & ")"
+       DL.SendSequence "*** Step 5: Contact Power Off (SAM " & i & ")"
+       result = DL.WaitForSequence("2c-18 ok", 1, 2000)
+       dl.pause 400
+     End If
+ Next
 
 If result <> 0 Then
    dl.resetreceivecounter

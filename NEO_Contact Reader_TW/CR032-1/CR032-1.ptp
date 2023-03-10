@@ -59,76 +59,160 @@ SEND
 
 SEND
 5
+*** Step 3: Get ATR (SAM 3)
+56 69 56 4F 74 65 63 68 32 00 2C 12 00 01 23 42 99
+0
+5
+
+SEND
+6
+*** Step 3: Get ATR (SAM 4)
+56 69 56 4F 74 65 63 68 32 00 2C 12 00 01 24 A5 E9
+0
+5
+
+SEND
+7
+*** Step 3: Get ATR (SAM 5)
+56 69 56 4F 74 65 63 68 32 00 2C 12 00 01 25 84 F9
+0
+5
+
+SEND
+8
+*** Step 3: Get ATR (SAM 6)
+56 69 56 4F 74 65 63 68 32 00 2C 12 00 01 26 E7 C9
+0
+5
+
+SEND
+9
+*** Step 3: Get ATR (SAM 7)
+56 69 56 4F 74 65 63 68 32 00 2C 12 00 01 27 C6 D9
+0
+5
+
+SEND
+10
+*** Step 3: Get ATR (SAM 8)
+56 69 56 4F 74 65 63 68 32 00 2C 12 00 01 28 29 28
+0
+5
+
+SEND
+11
 2C-02-----Poll for Token (10 sec)
 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 14 E3 51
 0
 5
 
 SEND
-6
+12
 2C-0B
 56 69 56 4F 74 65 63 68 32 00 2C 0B 00 07 1D 00 01 00 01 0A FF E5 A1
 0
 5
 
 SEND
-7
+13
 *** Step 4: Exchange APDU Data -- 1 PAY (ICC)
 56 69 56 4F 74 65 63 68 32 00 2C 13 00 14 20 00 A4 04 00 0E 31 50 41 59 2E 53 59 53 2E 44 44 46 30 31 71 ED
 0
 5
 
 SEND
-8
+14
 *** Step 4: Exchange APDU Data -- 1 PAY (SAM 1)
 56 69 56 4F 74 65 63 68 32 00 2C 13 00 14 21 00 A4 04 00 0E 31 50 41 59 2E 53 59 53 2E 44 44 46 30 31 D8 C2
 0
 5
 
 SEND
-9
+15
 *** Step 4: Exchange APDU Data -- 1 PAY (SAM 2)
 56 69 56 4F 74 65 63 68 32 00 2C 13 00 14 22 00 A4 04 00 0E 31 50 41 59 2E 53 59 53 2E 44 44 46 30 31 86 17
 0
 5
 
 SEND
-10
+16
 *** Step 4: Exchange APDU Data -- 2 PAY (ICC)
 56 69 56 4F 74 65 63 68 32 00 2C 13 00 14 20 00 A4 04 00 0E 32 50 41 59 2E 53 59 53 2E 44 44 46 30 31 D2 60
 0
 5
 
 SEND
-11
+17
 *** Step 5: Contact Power Off (ICC)
 56 69 56 4F 74 65 63 68 32 00 2C 18 00 01 20 8A C1
 0
 5
 
 SEND
-12
-*** Step 5: Contact Power Off (SAM1)
+18
+*** Step 5: Contact Power Off (SAM 1)
 56 69 56 4F 74 65 63 68 32 00 2C 18 00 01 21 00 00
 0
 5
 
 SEND
-13
-*** Step 5: Contact Power Off (SAM2)
+19
+*** Step 5: Contact Power Off (SAM 2)
 56 69 56 4F 74 65 63 68 32 00 2C 18 00 01 22 00 00
 0
 5
 
 SEND
-14
+20
+*** Step 5: Contact Power Off (SAM 3)
+56 69 56 4F 74 65 63 68 32 00 2C 18 00 01 23 E9 F1
+0
+5
+
+SEND
+21
+*** Step 5: Contact Power Off (SAM 4)
+56 69 56 4F 74 65 63 68 32 00 2C 18 00 01 24 0E 81
+0
+5
+
+SEND
+22
+*** Step 5: Contact Power Off (SAM 5)
+56 69 56 4F 74 65 63 68 32 00 2C 18 00 01 25 2F 91
+0
+5
+
+SEND
+23
+*** Step 5: Contact Power Off (SAM 6)
+56 69 56 4F 74 65 63 68 32 00 2C 18 00 01 26 4C A1
+0
+5
+
+SEND
+24
+*** Step 5: Contact Power Off (SAM 7)
+56 69 56 4F 74 65 63 68 32 00 2C 18 00 01 27 6D B1
+0
+5
+
+SEND
+25
+*** Step 5: Contact Power Off (SAM 8)
+56 69 56 4F 74 65 63 68 32 00 2C 18 00 01 28 82 40
+0
+5
+
+SEND
+26
 *** Step 6: PassThrough-----STOP
 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38
 0
 5
 
 SEND
-15
+27
 --------------------------------------------------------------------------------
 00
 0

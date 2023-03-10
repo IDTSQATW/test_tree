@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-56381
+53873
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -373,14 +373,15 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-if readerType = "GR" or readerType = "NEO1" then    
+sredcheck = msgbox ("Is this SRED project?", vbyesno)
+if readerType <> "NEO2" then    
    DL.SendSequence "04-F0"
    result = DL.WaitForSequence("04 00", 1, 3000)
    dl.pause 15000
 else
    DL.SendSequence "04-0A"
    dl.pause 15000
-   enccheck = msgbox ("Does reader has data key (AES type)?", vbyesno)
+   enccheck = msgbox ("Does reader has data key?", vbyesno)
    if enccheck = 7 then result = 0
 end if
 '------------------------------------------------------------Enc ON
@@ -397,19 +398,15 @@ If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Burst OFF mode"
-
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then 
+   if readerType <> "NEO2" then 
       DL.SendSequence "Burst OFF mode"
-   elseif readerType = "NEO2" then 
-      DL.SendSequence "Burst OFF mode (NEO2)"
    else
-      DL.SendSequence "Burst OFF mode"
+      DL.SendSequence "Burst OFF mode (NEO2)"
    end if
-
    result = DL.WaitForSequence("04 00", 1, 3000)
 End If
 
-if readerType = "GR" or readerType = "NEO1" then 
+if readerType <> "NEO2" then 
    if result <> 0 then
       dl.resetreceivecounter
       dl.addcomment vbcrlf
@@ -429,14 +426,16 @@ If result <> 0 Then
    dl.pause 500
 End If
 '------------------------------------------------------------Enc ON w/ key (TDES), DFEF7A = 00/ 01
-if readerType = "GR" or readerType = "NEO1" then 
+encstatus = 1
+if readerType <> "NEO2" then 
 if result <> 0 then
-   encstatus = 1
    dl.addcomment vbcrlf & "------------------------------------------------------------Enc ON w/ key (TDES), DFEF7A = 00/ 01"
    precondition()
    if result <> 0 then loadkey_D()
 end if
+end if
 
+if sredcheck = 7 then
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
@@ -454,21 +453,19 @@ If result <> 0 Then
    result = DL.WaitForSequence("get dukpt type 00", 1, 3000)
    dl.pause 500
 End If
+end if
 
 yes7A()
-end if
 '------------------------------------------------------------Enc ON w/ key (AES), DFEF7A = 00/ 01
+if readerType <> "NEO2" then 
 If result <> 0 Then
-   encstatus = 1
    dl.addcomment vbcrlf & "------------------------------------------------------------Enc ON w/ key (AES), DFEF7A = 00/ 01"
-   if readerType = "GR" or readerType = "NEO1" then 
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- 1-use AES to encrypt (C7-32)"
-      DL.SendSequence "1-use AES to encrypt (C7-32)"
-      result = DL.WaitForSequence("C7 00", 1, 3000)
-      dl.pause 500 
-   end if
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 1-use AES to encrypt (C7-32)"
+   DL.SendSequence "1-use AES to encrypt (C7-32)"
+   result = DL.WaitForSequence("C7 00", 1, 3000)
+   dl.pause 500 
 End If
 
 If result <> 0 Then
@@ -481,6 +478,7 @@ If result <> 0 Then
 End If
 
 yes7A()
+end if
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 PrintMyResult(result)

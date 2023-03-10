@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-43232
+57776
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -180,6 +180,7 @@ If result <> 0 Then
    DL.AddComment "--- 02-40 Activate Transaction"
    DL.SendSequence "02-40"
    result = DL.WaitForSequence("02 08", 1, 20000)
+   dl.pause 800
 End If
 '------------------------------------------------------------
 DL.AddComment vbcrlf & "---------- END OF TEST ----------" & vbCrLf

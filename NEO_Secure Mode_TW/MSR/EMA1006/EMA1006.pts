@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-7133
+28384
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -181,7 +181,7 @@ for k = 2 to 2
           dl.pause 1000
        else
           dl.resetreceivecounter
-          MsgBox "Click OK --> Tap combo_MSR+CLcard", vbokonly
+          MsgBox "Click OK --> Tap combo_MSR+CL card", vbokonly
           dl.addcomment vbcrlf
           DL.AddComment "--- Activate Transaction >>> " & cmd
           DL.SendSequence cmd  
@@ -189,7 +189,7 @@ for k = 2 to 2
           dl.pause 1000  
           if result <> 0 then
              dl.resetreceivecounter
-             MsgBox "Click OK --> Swipe combo_MSR+CLcard", vbokonly
+             MsgBox "Click OK --> Swipe combo_MSR+CL card", vbokonly
              dl.addcomment vbcrlf
              DL.AddComment "--- Activate Transaction >>> " & cmd
              DL.SendSequence cmd  

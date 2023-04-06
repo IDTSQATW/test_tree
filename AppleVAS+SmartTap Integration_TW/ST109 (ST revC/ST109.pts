@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-58549
+63403
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -155,7 +155,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-platformcheck = msgbox ("Is this SRED project?", vbyesno)
+platformcheck = msgbox ("Is this SRED project? (or Enc ON)", vbyesno)
 
 If result <> 0 Then
    dl.resetreceivecounter

@@ -99,7 +99,7 @@ if (Result):
 				if lcdtype == 1:
 					rx = 3
 				if lcdtype == 0:
-					rx = 4					
+					rx = 5					
 				Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')
 				if (Result):
 					Result = DL.Check_RXResponse(rx, 'E8 ** DF EE 25')
@@ -225,4 +225,4 @@ if readertype == 1:     # NEOII and upward project
 if readertype == 0:     # NEOI
 	RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')	
 	if (RetOfStep):
-		Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 60 05 00 00 D6 C5")
+		Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 05 00 00 D6 C5")

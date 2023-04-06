@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-50077
+42084
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -148,7 +148,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-readercheck = msgbox ("Is this SRED project?", vbyesno)
+readercheck = msgbox ("Is this SRED project? (or Enc ON)", vbyesno)
 if result <> 0 then
    dl.resetreceivecounter
    dl.addcomment vbcrlf

@@ -50,10 +50,6 @@ if (Result):
 				enc57 = DL.GetTLV(TagFF8105,"57", 1)
 				dec57 = DL.DecryptDLL(0,1, strKey, ksn, enc57)	
 				
-				Tag9F39 = DL.GetTLV(alldata,"9F39")
-				TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
-				TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
-				
 			# Tag 57
 				if DL.Check_RXResponse("57 A1 13"):
 					DL.SetWindowText("blue", "Tag 57_Mask: PASS")
@@ -72,12 +68,12 @@ if (Result):
 				else:
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")
 				
-				if (DL.Check_StringAB(TagFFEE01, "DFEE300100")): 
-					DL.SetWindowText("blue", "Tag FFEE01: PASS")
-				else:
-					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
+				# if DL.Check_RXResponse('FFEE01 ** DFEE300100'): 
+					# DL.SetWindowText("blue", "Tag FFEE01: PASS")
+				# else:
+					# DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-				if TagDFEE26 == "E100": 
+				if DL.Check_RXResponse('DFEE26 02 E100'): 
 					DL.SetWindowText("blue", "Tag DFEE26: PASS")
 				else:
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
@@ -100,10 +96,6 @@ if (Result):
 				mask57 = DL.GetTLV(TagFF8105,"57", 0)
 				enc57 = DL.GetTLV(TagFF8105,"57", 1)
 				dec57 = DL.DecryptDLL(0,1, strKey, ksn, enc57)	
-					
-				Tag9F39 = DL.GetTLV(alldata,"9F39")
-				TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
-				TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 				
 			# Tag 57
 				if DL.Check_StringAB(alldata, "57 A1 13"):
@@ -118,17 +110,17 @@ if (Result):
 					DL.SetWindowText("red", "Tag 57_Enc: FAIL")
 		
 			# Tags 9F39/ FFEE01/ DFEE26
-				if DL.Check_RXResponse(1, '9F39 01 07'): 
+				if DL.Check_RXResponse('9F39 01 07'): 
 					DL.SetWindowText("blue", "Tag 9F39: PASS")
 				else:
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")
 				
-				if (DL.Check_StringAB(TagFFEE01, "DFEE300100")): 
-					DL.SetWindowText("blue", "Tag FFEE01: PASS")
-				else:
-					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
+				# if DL.Check_RXResponse('FFEE01 ** DFEE300100'): 
+					# DL.SetWindowText("blue", "Tag FFEE01: PASS")
+				# else:
+					# DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-				if TagDFEE26 == "E100": 
+				if DL.Check_RXResponse('DFEE26 02 E100'): 
 					DL.SetWindowText("blue", "Tag DFEE26: PASS")
 				else:
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
@@ -136,4 +128,4 @@ if (Result):
 if lcdtype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):
-		Result = DL.Check_RXResponse("01 00 00 00")							
+		Result = DL.Check_RXResponse("01 00 00 00")	

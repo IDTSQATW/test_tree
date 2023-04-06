@@ -115,7 +115,7 @@ if (Result):
 				Result = DL.Check_RXResponse(3, '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 13 1C 02 00 00 00 23 0F')
 			if platformtype == 1:
 				if lcdtype == 0:
-					Result = DL.Check_RXResponse(3, '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 ** 03 00 ** 13 1C 02 **')	
+					Result = DL.Check_RXResponse(4, '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 ** 03 00 ** 13 1C 02 **')	
 			if (Result):	
 				if platformtype == 0:
 					rx = 5
@@ -123,7 +123,7 @@ if (Result):
 					if lcdtype == 1:
 						rx = 3
 					if lcdtype == 0:
-						rx = 4
+						rx = 5
 				Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')
 				sResult=DL.Get_RXResponse(rx)
 				if (Result):	

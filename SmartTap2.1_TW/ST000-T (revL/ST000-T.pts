@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-63675
+53459
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -199,9 +199,9 @@ If result <> 0 Then
    dl.pause 1000
    dl.resetreceivecounter
    dl.addcomment vbcrlf
-   DL.AddComment "--- C7-33, data key = AES type"
+   DL.AddComment "--- C7-33, data key = TDES type"
    DL.SendSequence "C7-33"
-   result = DL.WaitForSequence("C7-33 resp = AES", 1, 5000)
+   result = DL.WaitForSequence("C7-33 resp = TDES", 1, 5000)
 
    If result <> 0 Then
       dl.pause 1000
@@ -212,7 +212,7 @@ If result <> 0 Then
       result = DL.WaitForSequence("C7-37 resp", 1, 5000)
    End If
 
-   if result = 0 then DL.AddComment vbcrlf & "*** Please load data key (AES type) & enabled encryption (03) by manual first..."
+   if result = 0 then DL.AddComment vbcrlf & "*** Please load data key (TDES type) & enabled encryption (03) by manual first..."
 end if
 end if
 

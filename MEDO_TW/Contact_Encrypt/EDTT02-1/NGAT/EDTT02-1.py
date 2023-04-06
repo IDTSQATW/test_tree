@@ -86,7 +86,7 @@ if (Result):
 			rx = 1
 		if lcdtype == 0:
 			RetOfStep = DL.SendCommand('Activate Transaction_w/o LCD')	
-			rx = 4
+			rx = 5
 		if (RetOfStep):
 			Result = DL.Check_RXResponse("60 63 00 00")
 			alldata = DL.Get_RXResponse(rx)

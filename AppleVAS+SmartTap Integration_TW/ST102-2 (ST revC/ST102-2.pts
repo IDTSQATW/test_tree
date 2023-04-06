@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-56098
+40620
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -143,7 +143,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-readercheck = msgbox ("Is this SRED project?", vbyesno)
+readercheck = msgbox ("Is this SRED project? (or Enc ON)", vbyesno)
 platformcheck = msgbox ("Is this NEO3 project?", vbyesno)
 If result <> 0 Then
    dl.resetreceivecounter

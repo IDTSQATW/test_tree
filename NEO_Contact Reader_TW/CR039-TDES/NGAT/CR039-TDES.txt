@@ -50,6 +50,7 @@ EXR:
 EXR:
 EXR:
 EXR:
+EXR:
 DLG: Remove the card --> Click OK...
 TIMEOUT:120000
 
@@ -68,6 +69,7 @@ EXR: 60 63 00 00
 EXR:
 TIMEOUT:120000
 MSG:Insert CT card (EMV Test Card V2 T=0)...
+EXR:
 EXR:
 EXR:
 

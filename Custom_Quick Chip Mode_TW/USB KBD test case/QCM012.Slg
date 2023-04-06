@@ -1,9 +1,9 @@
 
-16:48:28: If Issue ?
+13:37:53: If Issue ?
 Pass Test
 [Issue Count: 0]
 
-16:48:28: >>[Do Scripts]>>
+13:37:53: >>[Do Scripts]>>
 
 Objective: 
 [JIRA] GRN-56 >> [Quick Chip Mode] Swiped card (service code = 201) -> waited for fallback transaction timeout, reader returned timeout status but LED 3 was still ON.
@@ -36,7 +36,7 @@ User Judgment Pass
 >>> JIRA#GRN-515
 SWIPEKB: click OK -> insert any MSR only card -> remove the card
 KB Unit Swipe Card:
-DFEF6102F220DFEF6102F220DFEF6102F222DFEE25020008
+DFEF6102F220
 MESSAGECK: Reader did not output garbage data
 User Judgment Pass
 

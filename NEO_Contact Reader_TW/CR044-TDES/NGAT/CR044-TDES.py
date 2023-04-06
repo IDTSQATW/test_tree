@@ -73,11 +73,12 @@ if (Result):
 				if (Result):
 					Result = DL.Check_StringAB(DL.Get_RXResponse(1), 'E8 DF EE 25')
 					sResult=DL.Get_RXResponse(1)
-			if readertype == 0:
-				Result = DL.Check_StringAB(DL.Get_RXResponse(2), '56 69 56 4F 74 65 63 68 32 00 60 00')
+			if readertype == 0:   
+                                rx = 3
+				Result = DL.Check_StringAB(DL.Get_RXResponse(rx), '56 69 56 4F 74 65 63 68 32 00 60 00')
 				if (Result):
-					Result = DL.Check_StringAB(DL.Get_RXResponse(2), 'E8 DF EE 25')
-					sResult=DL.Get_RXResponse(2)
+					Result = DL.Check_StringAB(DL.Get_RXResponse(rx), 'E8 DF EE 25')
+					sResult=DL.Get_RXResponse(rx)
 			if (Result):	
 				if sResult!=None and sResult!="":
 					sResult=sResult.replace(" ","")

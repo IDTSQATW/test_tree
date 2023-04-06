@@ -77,6 +77,7 @@ CMD:60 10 01 00 78 00 78 9C 01 00 5F 57 01 00 9F 02 06 00 00 00 00 02 00 9F 03 0
 EXR: 60 63 00 00
 EXR:
 EXR:
+EXR:
 EXR: 
 EXR: 
 MSG: Insert card (once) that can not be powered on IC chip --> Remove card --> Swipe Discover card...(ANY)

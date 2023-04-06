@@ -10,19 +10,27 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 
 # Objective: to verify MSR w/ specific card (T2 + T3 data only)
+    
+# Check project type (NEOI or NEOII)
+readertype = DL.ShowMessageBox("", "Is this NEOII and upward project?", 0)
+if readertype == 1:
+	DL.SetWindowText("Green", "*** NEOII and upward project ***")
+else:
+	DL.SetWindowText("Green", "*** NEOI project ***")  
 
 # Check project has LCD or not
 lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
 if lcdtype == 1:
 	DL.SetWindowText("Green", "*** The project has LCD ***")
 else:
-	DL.SetWindowText("Green", "*** The project has NO LCD ***")
+	DL.SetWindowText("Green", "*** The project has NO LCD ***")    
 
-# Check data encryption TYPE is TDES	
-if (Result):
-	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
+if readertype == 1:
+    # Check data encryption TYPE is TDES	
+    if (Result):
+        RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+        if (RetOfStep):
+            Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
 		
 # Poll on Demand		
 if (Result):
@@ -34,13 +42,19 @@ if (Result):
 if (Result):
 	if lcdtype == 1:
 		Result = DL.SendCommand('Activate Transaction -- ISO4909 (3T) w/ LCD')
-	if lcdtype == 0:
-		Result = DL.SendCommand('Activate Transaction -- ISO4909 (3T) w/o LCD')		
+    if lcdtype == 0:
+        if readertype == 1:
+            Result = DL.SendCommand('Activate Transaction -- ISO4909 (3T) w/o LCD (NEOII/ III)')
+        if readertype == 0:
+            Result = DL.SendCommand('Activate Transaction -- ISO4909 (3T) w/o LCD (NEOI)')
 	if (Result):
-		if lcdtype == 1:
+		if lcdtype == 1:  
 			rx = 0
-		if lcdtype == 0:
-			rx = 1			
+        if lcdtype == 0:
+           if readertype == 1:     #NEOII and upward project
+                rx = 2	
+           if readertype == 0:     #NEOI project
+                rx = 0	   
 		Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 00 ** E8 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 37 00 28 69 86 B6")
 		sResult=DL.Get_RXResponse(rx)
 		if Result == True and sResult!=None and sResult!="":

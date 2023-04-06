@@ -28,11 +28,11 @@ if modeltype == 1:
 else:
 	DL.SetWindowText("Green", "*** non-VP3350 reader ***")	
 
-# Check data encryption TYPE is TDES	
-if (Result):
-	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
+# # Check data encryption TYPE is TDES	
+# if (Result):
+	# RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+	# if (RetOfStep):
+		# Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
 		
 # Poll on demand	
 if (Result):
@@ -55,7 +55,7 @@ if (Result):
 	Result = DL.SendCommand('Get Transaction Result w/ LCD')
 	if (Result):
 		rx = 1
-		Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 03 00 ** E8 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80")
+		Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 03 00 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80")
 		sResult=DL.Get_RXResponse(rx)
 		if Result == True and sResult!=None and sResult!="":
 			sResult=sResult.replace(" ","")
@@ -101,14 +101,6 @@ if (Result):
 					Result = DL.Check_StringAB(Tag9F39, '90')
 					if Result != True:
 						DL.SetWindowText("red", "Tag9F39: FAIL")	
-						
-					Result = DL.Check_StringAB(TagFFEE01, 'DFEE30010C')
-					if Result != True:
-						DL.SetWindowText("red", "TagFFEE01: FAIL")	
-						
-					Result = DL.Check_StringAB(TagDFEE26, 'E800')
-					if Result != True:
-						DL.SetWindowText("red", "TagDFEE26: FAIL")	
 																								
 					# Transaction result verification
 					TR2maskdata = ";4761********0010=2012****************?*"

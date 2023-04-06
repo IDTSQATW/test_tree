@@ -1,9 +1,9 @@
 
-14:29:24: If Issue ?
+13:22:44: If Issue ?
 Pass Test
 [Issue Count: 0]
 
-14:29:24: >>[Do Scripts]>>
+13:22:44: >>[Do Scripts]>>
 
 Objective: set tag DFEF6F (output delay time) w/ data 30~36
 >>> Tag DFEF6F = 30 (default, 1200 us)

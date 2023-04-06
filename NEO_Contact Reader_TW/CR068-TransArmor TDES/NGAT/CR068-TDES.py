@@ -76,7 +76,7 @@ if (Result):
 			else:
 				DL.SetWindowText("blue", "Notice: check string fail is normal")
 		if lcdtype == 0:
-			alldata = DL.Get_RXResponse(5)	
+			alldata = DL.Get_RXResponse(6)	
 		CTresultcode = DL.GetTLV(alldata,"DFEE25")
 		if (Result):
 			Result = DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')

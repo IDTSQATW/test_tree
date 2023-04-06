@@ -55,7 +55,7 @@ if (Result):
 		if lcdtype == 1:
 			alldata = DL.Get_RXResponse(1)
 		if lcdtype == 0:
-			alldata = DL.Get_RXResponse(4)	
+			alldata = DL.Get_RXResponse(5)	
 		CTresultcode = DL.GetTLV(alldata,"DFEE25")
 		if (Result):
 			Result = DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')
@@ -187,7 +187,7 @@ if (Result):
 		if lcdtype == 1:
 			alldata = DL.Get_RXResponse(1)
 		if lcdtype == 0:
-			alldata = DL.Get_RXResponse(5)			
+			alldata = DL.Get_RXResponse(6)			
 		CTresultcode = DL.GetTLV(alldata,"DFEE25")	
 		if (Result):
 			Result = DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')
@@ -233,7 +233,7 @@ if (Result):
 		if lcdtype == 1:
 			alldata = DL.Get_RXResponse(1)
 		if lcdtype == 0:
-			alldata = DL.Get_RXResponse(5)			
+			alldata = DL.Get_RXResponse(6)			
 		CTresultcode = DL.GetTLV(alldata,"DFEE25")	
 		if (Result):
 			Result = DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')
@@ -298,7 +298,7 @@ if (Result):
 		if lcdtype == 1:
 			alldata = DL.Get_RXResponse(1)
 		if lcdtype == 0:
-			alldata = DL.Get_RXResponse(5)	
+			alldata = DL.Get_RXResponse(6)	
 		CTresultcode = DL.GetTLV(alldata,"DFEE25")	
 		if (Result):
 			Result = DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')

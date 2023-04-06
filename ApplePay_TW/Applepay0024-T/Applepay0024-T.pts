@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-12113
+41790
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -153,7 +153,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-modelcheck = msgbox ("Is this NEO3 project?", vbokonly)
+modelcheck = msgbox ("Is this NEO3 project?", vbyesno)
 If result <> 0 Then
    DL.Pause 400
    DL.ResetReceiveCounter
@@ -201,17 +201,15 @@ If result <> 0 Then
       result5 = DL.WaitForSequence("ffee01 (NEO2)", 1, 2000)
    end if
    
-   result6 = DL.WaitForSequence("56/ 57", 1, 2000)
    result7 = DL.WaitForSequence("9f39", 1, 2000)
    end if
 
    dl.pause 500
    if modelcheck = 7 then
-      if result1 = 0 or result2 = 0 or result5 = 0 or result6 = 0 or result7 = 0 then result = 0
+      if result1 = 0 or result2 = 0 or result5 = 0 or result7 = 0 then result = 0
       if result1 = 0 then dl.addcomment vbcrlf & "Data: incorrect!"
       if result2 = 0 then dl.addcomment vbcrlf & "Tag DFEE26: incorrect!"
       if result5 = 0 then dl.addcomment vbcrlf & "Tag FFEE01: incorrect!"
-      if result6 = 0 then dl.addcomment vbcrlf & "Tags 56/57: incorrect!"
       if result7 = 0 then dl.addcomment vbcrlf & "Tag 9F39: incorrect!"
    else
       if result1 = 0 then result = 0

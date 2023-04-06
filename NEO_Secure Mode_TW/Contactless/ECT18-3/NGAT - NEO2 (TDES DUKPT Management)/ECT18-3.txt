@@ -56,6 +56,7 @@ TIMEOUT:120000
 EXR:
 EXR:
 EXR:
+EXR:
 
 TID:Get Transaction Result w/o LCD
 DLG:Tap Interac card -> Click OK...

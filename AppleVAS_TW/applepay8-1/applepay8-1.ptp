@@ -448,7 +448,7 @@ COMMENT
 RECEIVE
 9
 request payment response
-56 69 56 4F 74 65 63 68 32 00 02 0A ?? ?? ?? 6A 82 01
+56 69 56 4F 74 65 63 68 32 00 02 0A ?? ?? ?? ?? ?? ?? 04 ?? 6A 82 01
 -1
 1
 COMMENT 

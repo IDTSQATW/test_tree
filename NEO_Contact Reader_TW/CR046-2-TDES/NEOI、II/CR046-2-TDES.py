@@ -36,9 +36,9 @@ else:     # NEOI
 	if (Result):
 		RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
 		if (RetOfStep):
-			Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
+			Result = Result and DL.Check_RXResponse("C7 00 00 01 02")
 			if Result == False:
-				DL.SetWindowText("Red", "Please ENABLE data encryption (03)...")
+				DL.SetWindowText("Red", "Please ENABLE data encryption (02)...")
 	# Encryption Type -- TDES
 	if (Result):
 		RetOfStep = DL.SendCommand('Encryption Type -- TDES')
@@ -225,4 +225,4 @@ if readertype == 1:     # NEOII and upward project
 if readertype == 0:     # NEOI
 	RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')	
 	if (RetOfStep):
-		Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 60 05 00 00 D6 C5")
+		Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 05 00 00 D6 C5")

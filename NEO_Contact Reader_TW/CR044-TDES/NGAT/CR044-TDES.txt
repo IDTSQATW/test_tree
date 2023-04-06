@@ -56,6 +56,7 @@ EXR:
 MSG: Swipe IDT test card...
 EXR:
 EXR: 
+EXR: 
 TIMEOUT:120000
 
 TID:60-13 Contact Retrieve Transaction Result

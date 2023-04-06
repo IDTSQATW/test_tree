@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-39561
+15548
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -193,18 +193,17 @@ If result <> 0 Then
 
    result5 = DL.WaitForSequence("9f39", 1, 3000)
 
-   if readerType <> "NEO2" then 
-      result6 = DL.WaitForSequence("df30", 1, 3000)
-   elseif readerType = "NEO2" then 
-      result6 = DL.WaitForSequence("df30 (NEO2)", 1, 3000)
-   end if
+'   if readerType <> "NEO2" then 
+'      result6 = DL.WaitForSequence("df30", 1, 3000)
+'   elseif readerType = "NEO2" then 
+'      result6 = DL.WaitForSequence("df30 (NEO2)", 1, 3000)
+'   end if
   
-   if result1 = 0 or result2 = 0 or result5 = 0 or result6 = 0 then
+   if result1 = 0 or result2 = 0 or result5 = 0 then
       result = 0
       if result1 = 0 then dl.addcomment vbcrlf & "Data: incorrect!"
       if result2 = 0 then dl.addcomment vbcrlf & "Tag DFEE26: incorrect!"
       if result5 = 0 then dl.addcomment vbcrlf & "Tag 9F39: incorrect!"
-      if result6 = 0 then dl.addcomment vbcrlf & "Tag DF30: incorrect!"
    end if
 End If
 '------------------------------------------------------------

@@ -18,9 +18,16 @@ TID:Poll on Demand
 CMD:01 01 01
 EXR:01 00 00 00
 
-TID:Activate Transaction -- ISO4909 (3T) w/o LCD
+TID:Activate Transaction -- ISO4909 (3T) w/o LCD (NEOII/ III)
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
 MSG:Swipe the specific card (has tracks 2+3 data only) EX. ISO 4909 only T2+T3
 EXR:
+EXR:
+EXR:
+TIMEOUT:120000
+
+TID:Activate Transaction -- ISO4909 (3T) w/o LCD (NEOI)
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG:Swipe the specific card (has tracks 2+3 data only) EX. ISO 4909 only T2+T3
 EXR:
 TIMEOUT:120000

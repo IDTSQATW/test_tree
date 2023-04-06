@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-39574
+3572
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -184,54 +184,55 @@ end_case = 20
        if result <> 0 then
           dl.pause 1000
           '------------------------------------------------------------
-          if k = start_case then 
-             cmdcheck = msgbox ("Does reader support cmd 02-01?", vbyesno)
-             if cmdcheck = 6 then vivotech = 1
-          end if
+'          if k = start_case then 
+'             cmdcheck = msgbox ("Does reader support cmd 02-01?", vbyesno)
+'             if cmdcheck = 6 then vivotech = 1
+'          end if
    
-          if vivotech = 1 then
-             msgbox "Click OK --> tap mobile phone (Merchant APP w/ case 5." & k & ")", vbokonly
-             dl.resetreceivecounter
-             dl.addcomment vbcrlf
-             DL.AddComment "--- 02-01 case 5." & k
-             DL.SendSequence "02-01 case " & k
-             if readerType <> "NEO2" then 
-                r = DL.WaitForSequence("02-01 case " & k, 1, 6000)
-             elseif readerType = "NEO2" then 
-                    if k = 3 or k = 4 or k = 5 or k = 6 then
-                       r = DL.WaitForSequence("02-01 case " & k & " (NEO2)", 1, 6000)
-                    else
-                       r = DL.WaitForSequence("02-01 (NEO2)", 1, 6000)
-                    end if
-             end if
+'          if vivotech = 1 then
+'             msgbox "Click OK --> tap mobile phone (Merchant APP w/ case 5." & k & ")", vbokonly
+'             dl.resetreceivecounter
+'             dl.addcomment vbcrlf
+'             DL.AddComment "--- 02-01 case 5." & k
+'             DL.SendSequence "02-01 case " & k
+'             if readerType <> "NEO2" then 
+'                r = DL.WaitForSequence("02-01 case " & k, 1, 6000)
+'             elseif readerType = "NEO2" then 
+'                    if k = 3 or k = 4 or k = 5 or k = 6 then
+'                       r = DL.WaitForSequence("02-01 case " & k & " (NEO2)", 1, 6000)
+'                    else
+'                       r = DL.WaitForSequence("02-01 (NEO2)", 1, 6000)
+'                    end if
+'             end if
 
-             if r = 1 and k <> 2 and k <> 3 and k <> 4 and k <> 5 and k <> 6 then
-                msgcheck = msgbox ("Phone APP displayed msg:" & vbcrlf & vbcrlf & "SmartTap Status: SUCCESS" & vbcrlf & "Payment Status: DEACTIVATED - Link loss" & vbcrlf & "Validation Status: Validation succeeded", vbyesno)
-                if msgcheck = 7 then 
-                   r = 0
-                   dl.addcomment vbcrlf & "***** RX was Passed, but APP msg was Failed *****"
-                end if 
-             elseif r = 1 and (k = 2 or k = 3 or k = 4 or k = 5 or k = 6) then
-                    msgcheck = msgbox ("Phone APP displayed msg:" & vbcrlf & vbcrlf & "SmartTap Status: ERROR" & vbcrlf & "Payment Status: DEACTIVATED - Link loss" & vbcrlf & "Validation Status: Validation succeeded", vbyesno)
-                    if msgcheck = 7 then 
-                       r = 0
-                       dl.addcomment vbcrlf & "***** RX was Passed, but APP msg was Failed *****"
-                    end if         
-             end if
+'             if r = 1 and k <> 2 and k <> 3 and k <> 4 and k <> 5 and k <> 6 then
+'                msgcheck = msgbox ("Phone APP displayed msg:" & vbcrlf & vbcrlf & "SmartTap Status: SUCCESS" & vbcrlf & "Payment Status: DEACTIVATED - Link loss" & vbcrlf & "Validation Status: Validation succeeded", vbyesno)
+'                if msgcheck = 7 then 
+'                   r = 0
+'                   dl.addcomment vbcrlf & "***** RX was Passed, but APP msg was Failed *****"
+'                end if 
+'             elseif r = 1 and (k = 2 or k = 3 or k = 4 or k = 5 or k = 6) then
+'                    msgcheck = msgbox ("Phone APP displayed msg:" & vbcrlf & vbcrlf & "SmartTap Status: ERROR" & vbcrlf & "Payment Status: DEACTIVATED - Link loss" & vbcrlf & "Validation Status: Validation succeeded", vbyesno)
+'                    if msgcheck = 7 then 
+'                       r = 0
+'                       dl.addcomment vbcrlf & "***** RX was Passed, but APP msg was Failed *****"
+'                    end if         
+'             end if
 
-             if r = 0 then 
-                countf = countf + 1
-                dl.addcomment vbcrlf & "***** FAIL *****"
-             end if
-             dl.pause 500
-          else 
-             DL.AddComment vbCrLf & vbcrlf & "cmd 02-01: NA" & vbcrlf 
-          end if
+'             if r = 0 then 
+'                countf = countf + 1
+'                dl.addcomment vbcrlf & "***** FAIL *****"
+'             end if
+'             dl.pause 500
+'          else 
+'             DL.AddComment vbCrLf & vbcrlf & "cmd 02-01: NA" & vbcrlf 
+'          end if
           '------------------------------------------------------------
-          if k = start_case then 
-             cmdcheck = msgbox ("Does reader support cmd 02-40?", vbyesno)
-             if cmdcheck = 6 then idtech = 1
-          end if
+          'if k = start_case then 
+          '   cmdcheck = msgbox ("Does reader support cmd 02-40?", vbyesno)
+          '   if cmdcheck = 6 then idtech = 1
+          'end if
+                       idtech = 1
 
           if idtech = 1 then
              msgbox "Click OK --> tap mobile phone (Merchant APP w/ case 5." & k & ")", vbokonly

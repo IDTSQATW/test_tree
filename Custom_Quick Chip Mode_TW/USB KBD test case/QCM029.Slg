@@ -1,9 +1,19 @@
 
-10:30:39: If Issue ?
-Pass Test
-[Issue Count: 0]
+14:01:40: If Issue ?
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\USB KBD test case\QCM029.txt
+Running Info>>
+[Issue Count: 2]
+[Wrong Items]
+>>>Error item ( 18 ).
+--------------------
+User Judgment Fail:MESSAGECK: the cursor will be skipped a new line and was moved to the beginning of the next line (CR + LF) per tap
 
-10:30:39: >>[Do Scripts]>>
+>>>Error item ( 36 ).
+--------------------
+User Judgment Fail:MESSAGECK: the cursor will be skipped a new line and was moved to the beginning of the next line (CR + LF) per tap
+
+
+14:01:40: >>[Do Scripts]>>
 
 Objective: to verify Tag DFEF6E (Carriage Return)
 ===========================================
@@ -29,7 +39,8 @@ ASCII: Otech2
 >>> MSR transaction
 MESSAGE: Open PC "NotePad" -> tap any CL card 3 times -> notice the cursor position
 MESSAGECK: the cursor will be skipped a new line and was moved to the beginning of the next line (CR + LF) per tap
-User Judgment Pass
+--------------------
+Error! >>>> User Judgment Fail:MESSAGECK: the cursor will be skipped a new line and was moved to the beginning of the next line (CR + LF) per tap
 
 ===========================================
 >>> Quick Chip mode = 04
@@ -54,7 +65,8 @@ ASCII: Otech2
 >>> MSR transaction
 MESSAGE: Open PC "NotePad" -> tap any CL card 3 times -> notice the cursor position
 MESSAGECK: the cursor will be skipped a new line and was moved to the beginning of the next line (CR + LF) per tap
-User Judgment Pass
+--------------------
+Error! >>>> User Judgment Fail:MESSAGECK: the cursor will be skipped a new line and was moved to the beginning of the next line (CR + LF) per tap
 
 ===========================================
 >>> Quick Chip mode = 02

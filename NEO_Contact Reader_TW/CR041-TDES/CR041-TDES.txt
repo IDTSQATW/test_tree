@@ -63,6 +63,7 @@ EXR:
 EXR:
 EXR:
 EXR:
+EXR:
 MSG: Swipe card (service code = 2xx or 6xx) --> Insert card (once) that can not be powered on IC chip --> Remove card --> Swipe Discover card...(ANY)
 EXR:
 EXR:

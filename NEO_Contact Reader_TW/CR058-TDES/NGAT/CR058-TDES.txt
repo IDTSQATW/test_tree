@@ -43,6 +43,7 @@ MSG:Insert CT card (EMV Test Card V2 T=0)...
 EXR:
 EXR:
 EXR:
+EXR:
 
 TID:60-11 Contact Authenticate Transaction (DFEF1F: 00 00)_w LCD
 CMD:60 11 00 00 78
@@ -93,6 +94,7 @@ EXR:
 EXR:
 EXR:
 EXR:
+EXR:
 TIMEOUT:120000
 
 TID:60-11 Contact Authenticate Transaction (DFEF1F: 01 01 --1)
@@ -129,6 +131,7 @@ EXR:
 EXR:
 EXR:
 EXR:
+EXR:
 TIMEOUT:120000
 
 TID:60-12 Contact Apply Host Response (DFEF1F: 01 01 --2)_w LCD
@@ -160,6 +163,7 @@ TID:60-10 w/ DFEF1F: 01 00_w/o LCD
 CMD:60 10 01 00 78 00 78 9C 01 00 5F 57 01 00 9F 02 06 00 00 00 00 02 00 9F 03 06 00 00 00 00 00 00 5F 2A 02 08 40 DF EF 1F 02 01 01
 EXR: 60 63 00 00
 MSG:Insert CT card (EMV Test Card V2 T=0)...
+EXR:
 EXR:
 EXR:
 EXR:

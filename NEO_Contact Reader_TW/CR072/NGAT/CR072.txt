@@ -54,6 +54,7 @@ MSG:Insert CT card (Decline, V2CC0140900V4.3d) card...
 EXR:
 EXR:
 EXR:
+EXR:
 
 TID:60-11 Contact Authenticate Transaction_w LCD
 CMD:60 11 00 00 78

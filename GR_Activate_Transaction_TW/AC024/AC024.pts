@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-16507
+45838
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -201,7 +201,7 @@ If result <> 0 Then
    if platformcheck = 7 then
       r9 = DL.WaitForSequence("02 23", 1, 5000)
    elseif platformcheck = 6 then
-      r9 = DL.WaitForSequence("02 23 EMV", 1, 1500)
+      r9 = DL.WaitForSequence("02 23 EMV", 1, 5000)
    end if
    dl.pause 1000
 

@@ -53,7 +53,7 @@ if (Result):
 					rx = 0
 				if lcdtype == 0:
 					RetOfStep = DL.SendCommand('AT Transaction w/o LCD')
-					rx = 2
+					rx = 3
 			if i == 2:
 				if lcdtype == 1:
 					RetOfStep = DL.SendCommand('Get Transaction Result w/ LCD')

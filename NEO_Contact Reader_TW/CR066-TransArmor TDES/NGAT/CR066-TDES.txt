@@ -28,4 +28,5 @@ EXR:
 MSG:Click OK --> Swipe card (ISO4909, 3T)...
 EXR:
 EXR:
+EXR:
 TIMEOUT:12000

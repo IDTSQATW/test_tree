@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-379
+7216
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -185,15 +185,21 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+   enccheck = msgbox ("Is reader encryption ON (w/ keys) status?", vbyesno) 
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- Get Transaction Result (03-40)"
   DL.SendSequence " Get Transaction Result (03-40)"
+       if enccheck = 6 then 
+           result = DL.WaitForSequence("Wallet Response 2", 1, 2000)
+           ReverseResult(result)
+       else
    if readerType <> "NEO2" then result = DL.WaitForSequence("Wallet Response w/ tag9f39", 1, 10000)
    if readerType = "NEO2" then 
       result = DL.WaitForSequence("Wallet Response 2", 1, 2000)
       ReverseResult(result)
    end if
+       end if
 End If
 '------------------------------------------------------------
 If result <> 0 Then

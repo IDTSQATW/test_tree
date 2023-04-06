@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-55885
+5907
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -82,7 +82,7 @@ End Sub
 ' -  
 '------------------------------------------------------------
 DL.OpenProject ProjectName & ".ptp"
-DL.StartCommunication
+'DL.StartCommunication
 DL.ClearCommWindows 
 DL.StartLogging "DOCKLIGHT_LOG",False, "H"
 ', false, true

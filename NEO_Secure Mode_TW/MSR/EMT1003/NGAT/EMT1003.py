@@ -42,19 +42,19 @@ if (Result):
 if (Result):
 	if lcdtype == 1:
 		Result = DL.SendCommand('Activate Transaction -- ISO4909 (3T) w/ LCD')
-    if lcdtype == 0:
-        if readertype == 1:
-            Result = DL.SendCommand('Activate Transaction -- ISO4909 (3T) w/o LCD (NEOII/ III)')
-        if readertype == 0:
-            Result = DL.SendCommand('Activate Transaction -- ISO4909 (3T) w/o LCD (NEOI)')
+	if lcdtype == 0:
+		if readertype == 1:
+			Result = DL.SendCommand('Activate Transaction -- ISO4909 (3T) w/o LCD (NEOII/ III)')
+		if readertype == 0:
+			Result = DL.SendCommand('Activate Transaction -- ISO4909 (3T) w/o LCD (NEOI)')
 	if (Result):
 		if lcdtype == 1:  
 			rx = 0
-        if lcdtype == 0:
-           if readertype == 1:     #NEOII and upward project
-                rx = 2	
-           if readertype == 0:     #NEOI project
-                rx = 0	   
+		if lcdtype == 0:
+			if readertype == 1:     #NEOII and upward project
+				rx = 2	
+			if readertype == 0:     #NEOI project
+				rx = 0	   
 		Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 00 ** E8 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 37 00 28 69 86 B6")
 		sResult=DL.Get_RXResponse(rx)
 		if Result == True and sResult!=None and sResult!="":

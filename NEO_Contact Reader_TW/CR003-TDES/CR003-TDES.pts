@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-22667
+54614
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -278,6 +278,7 @@ If result <> 0 Then
    end if
 End If
 end if
+dl.pause 800
 
 DL.AddComment vbCrLf
 PrintMyResult(result)

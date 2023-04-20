@@ -9,38 +9,38 @@ Key='0123456789abcdeffedcba9876543210'
 MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 
-# Encryption Type -- TransArmor TDES
-if (Result):
-	RetOfStep = DL.SendCommand('C7-A2 TDES DUKPT manage_TransArmor TDES, data key')
-	time.sleep(1)
+# # Encryption Type -- TransArmor TDES
+# if (Result):
+	# RetOfStep = DL.SendCommand('C7-A2 TDES DUKPT manage_TransArmor TDES, data key')
+	# time.sleep(1)
 	
-# Check data encryption TYPE is TDES	
-if (Result):
-	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 02 00 00 00 00")	
+# # Check data encryption TYPE is TDES	
+# if (Result):
+	# RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+	# if (RetOfStep):
+		# Result = Result and DL.Check_RXResponse("C7 00 00 06 00 02 00 00 00 00")	
 
-# Check reader is VP3350 or not
-modeltype = DL.ShowMessageBox("", "Is this VP3350?", 0)
-if modeltype == 1:
-	DL.SetWindowText("Green", "*** This is VP3350 ***")
-	RetOfStep = DL.SendCommand('0105 do not use LCD')
-	if (RetOfStep):
-		Result = DL.Check_RXResponse("01 00 00 00")
-else:
-	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
+# # Check reader is VP3350 or not
+# modeltype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+# if modeltype == 1:
+	# DL.SetWindowText("Green", "*** This is VP3350 ***")
+	# RetOfStep = DL.SendCommand('0105 do not use LCD')
+	# if (RetOfStep):
+		# Result = DL.Check_RXResponse("01 00 00 00")
+# else:
+	# DL.SetWindowText("Green", "*** non-VP3350 reader ***")
 		
-# Burst mode OFF		
-if (Result):
-	RetOfStep = DL.SendCommand('Burst mode Off')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")	
+# # Burst mode OFF		
+# if (Result):
+	# RetOfStep = DL.SendCommand('Burst mode Off')
+	# if (RetOfStep):
+		# Result = Result and DL.Check_RXResponse("04 00 00 00")	
 		
-# Poll on Demand		
-if (Result):
-	RetOfStep = DL.SendCommand('Poll on Demand')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("01 00")	
+# # Poll on Demand		
+# if (Result):
+	# RetOfStep = DL.SendCommand('Poll on Demand')
+	# if (RetOfStep):
+		# Result = Result and DL.Check_RXResponse("01 00")	
 
 # cmd 02-40, swipe Discover card
 if (Result):
@@ -84,7 +84,7 @@ if (Result):
 					if Result != True:
 						DL.SetWindowText("red", "TR1plaintextdata: FAIL")
 				
-if modeltype == 1:
-	RetOfStep = DL.SendCommand('0105 default (VP3350)')
-	if (RetOfStep):
-		Result = DL.Check_RXResponse("01 00 00 00")
+# if modeltype == 1:
+	# RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	# if (RetOfStep):
+		# Result = DL.Check_RXResponse("01 00 00 00")

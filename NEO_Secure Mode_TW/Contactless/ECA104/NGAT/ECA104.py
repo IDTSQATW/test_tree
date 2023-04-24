@@ -15,14 +15,14 @@ rx = 0
 
 # Set group A0
 if (Result):
-	RetOfStep = DL.SendCommand('SSet group A0')
+	RetOfStep = DL.SendCommand('Set group A0')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("04 00 00 00")		
 
 # CL test
 if (Result):
 	RetOfStep = DL.SendCommand('02-40 (enable CL only)')
-	rx = 4 # for VP3350
+	rx = 3 # for VP3350
 	if (RetOfStep):
 		DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E3 ** DF EE 12")
 		alldata = DL.Get_RXResponse(rx)
@@ -54,3 +54,6 @@ if (Result):
 			DL.SetWindowText("Red", "Tag 9F39: FAIL")
 		if DL.Check_RXResponse(rx, "DFEE26 02 E301") == False: 
 			DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+            
+	RetOfStep = DL.SendCommand('03-03 w/o LCD')
+	time.sleep(3)

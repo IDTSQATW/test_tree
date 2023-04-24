@@ -446,7 +446,7 @@ COMMENT
 RECEIVE
 17
 Activate transaction response - Androidpay (NEO2)
-56 69 56 4F 74 65 63 68 32 00 02 23 ?? ?? ?? DF EE 12
+56 69 56 4F 74 65 63 68 32 00 02 23 ?? ?? ?? ## ## ## ## ## ## DF EE 12
 -1
 1
 COMMENT 

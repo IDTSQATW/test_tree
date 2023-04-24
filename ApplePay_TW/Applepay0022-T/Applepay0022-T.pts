@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-29763
+42970
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -192,21 +192,21 @@ If result <> 0 Then
    if readerType <> "NEO2" then       
       result1 = DL.WaitForSequence("0240_AMEX_2212", 1, 5000)
    else
-      result1 = DL.WaitForSequence("0240_AMEX_2212 (NEO2)", 1, 5000)
+      result1 = DL.WaitForSequence("0240_AMEX_2212 (NEO2)", 1, 8000)
    end if
 
    if readerType <> "NEO2" then 
-      result2 = DL.WaitForSequence("dfee26", 1, 3000)
+      result2 = DL.WaitForSequence("dfee26", 1, 5000)
    else
-      result2 = DL.WaitForSequence("dfee26 (NEO2)", 1, 3000)
+      result2 = DL.WaitForSequence("dfee26 (NEO2)", 1, 5000)
    end if
 
-   result5 = DL.WaitForSequence("9f39", 1, 3000)
+   result5 = DL.WaitForSequence("9f39", 1, 5000)
 
    if readerType <> "NEO2" then  
-     result6 = DL.WaitForSequence("df30", 1, 3000)
+     result6 = DL.WaitForSequence("df30", 1, 5000)
    else
-      result6 = DL.WaitForSequence("df30 (NEO2)", 1, 3000)
+      result6 = DL.WaitForSequence("df30 (NEO2)", 1, 5000)
    end if
    
    if result1 = 0 or result2 = 0 or result5 = 0 or result6 = 0 then

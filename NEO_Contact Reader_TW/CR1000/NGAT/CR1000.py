@@ -111,7 +111,7 @@ if (Result):
 # CT test
 if (Result):
 	RetOfStep = DL.SendCommand('60-10')		
-	rx6010 = 9 #for VP3350
+	rx6010 = 5 #for VP3350
 	if (RetOfStep):
 		alldata = DL.Get_RXResponse(rx6010)			
 		CTresultcode = DL.GetTLV(alldata,"DFEE25")
@@ -138,7 +138,7 @@ if (Result):
 			DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
 		if  CTresultcode == "0010":
 			RetOfStep = DL.SendCommand('60-11')
-			rx6011 = 4 #for VP3350
+			rx6011 = 2 #for VP3350
 			if (RetOfStep):
 				alldata = DL.Get_RXResponse(rx6011)
 				CTresultcode = DL.GetTLV(alldata,"DFEE25")	

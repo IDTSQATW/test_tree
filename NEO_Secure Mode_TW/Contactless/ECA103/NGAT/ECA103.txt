@@ -8,7 +8,8 @@ EXR:
 
 TID:02-40 (enable CL only)
 CMD:02 40 0A 9F 02 06 00 00 00 00 10 00 DF EF 37 01 02
-MSG:Tap AMEX XP4...
+MSG:Tap Amex Card 86...
+EXR:
 EXR:
 EXR:
 EXR:

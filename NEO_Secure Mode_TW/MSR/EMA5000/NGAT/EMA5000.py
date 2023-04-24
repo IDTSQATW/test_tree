@@ -87,7 +87,7 @@ if (Result):
 # MSR test
 if (Result):
 	RetOfStep = DL.SendCommand('02-40 (enable MSR only)')
-	rx = 1 # for VP3350
+	rx = 2 # for VP3350
 	if (RetOfStep):
 		sResult=DL.Get_RXResponse(rx)
 		if sResult!=None and sResult!="":

@@ -14,6 +14,7 @@ EXR:
 EXR:
 EXR:
 EXR:
+EXR:
 TIMEOUT:120000
 
 TID:02-40 (enable MSR only)

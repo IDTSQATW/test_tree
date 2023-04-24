@@ -16,7 +16,7 @@ rx = 0
 # CL test
 if (Result):
 	RetOfStep = DL.SendCommand('02-40 (enable CL only)')
-	rx = 4 # for VP3350
+	rx = 5 # for VP3350
 	if (RetOfStep):
 		DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E3 ** DF EE 12")
 		alldata = DL.Get_RXResponse(rx)

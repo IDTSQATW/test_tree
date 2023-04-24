@@ -153,7 +153,7 @@ rx = 0
 # CL test
 if (Result):
 	RetOfStep = DL.SendCommand('02-40 (enable CL only)')
-	rx = 4 # for VP3350
+	rx = 5 # for VP3350
 	if (RetOfStep):
 		alldata = DL.Get_RXResponse(rx)
 		ksn = DL.GetTLV(alldata,"DFEE12")	

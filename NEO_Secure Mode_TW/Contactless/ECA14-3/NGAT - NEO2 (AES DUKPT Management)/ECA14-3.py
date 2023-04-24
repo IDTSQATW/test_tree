@@ -154,7 +154,7 @@ if (Result):
 					if i == 1:
 						Result = DL.Check_RXResponse('36 AA AA AA AA AA A0 1D AA AA AA AA AA AA AA AA AA AA')
 					if i == 2:
-						Result = DL.Check_RXResponse('36 07 05 FF FF F0 00 1D 49 12 FF FF FF FF FF FF FF FF')	
+						Result = DL.Check_RXResponse('36 07 0F FF FF F0 00 1D 49 12 FF FF FF FF FF FF FF FF')	
 					if Result == True and DL.Check_RXResponse("57 A1 12"):
 						DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 					else:

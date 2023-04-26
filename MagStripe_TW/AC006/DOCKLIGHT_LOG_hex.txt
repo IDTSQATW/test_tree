@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2023/2/9 15:44:26.897 
+Docklight Log File (HEX) - Started 2023/4/26 09:47:38.029 
  TEST CASE: AC006
 
  --- Set POS COM PORT Settings
@@ -15,5 +15,5 @@ The reader does NOT support LCD. SKIP this case.
  Result = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2023/2/9 15:44:29.083 
+Docklight Log File (HEX) - Stopped 2023/4/26 09:47:40.773 
 

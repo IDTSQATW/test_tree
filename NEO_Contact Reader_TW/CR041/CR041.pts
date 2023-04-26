@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-62460
+41308
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -149,6 +149,8 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+lcdcheck = msgbox("Does the reader has LCD?", vbyesno)
+
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- 04-09"
@@ -214,22 +216,30 @@ If result <> 0 Then
       if readerType <> "NEO2" then 
          result = DL.WaitForSequence("USE CHIP READER", 1, 10000)
       else
-         result = msgbox("Does LCD show 'USE CHIP READER'?", vbyesno)
-         if result = 7 then result = 0
+         if lcdcheck = 6 then 
+			result = msgbox("Does LCD show 'USE CHIP READER'?", vbyesno)
+			if result = 7 then result = 0
+         elseif lcdcheck = 7 then 
+			result = DL.WaitForSequence("USE CHIP READER", 1, 10000)
+         end if
       end if      
 
       if result <> 0 then
          msgbox "Click OK --> Insert card that can NOT be powered on IC chip (Some products may have 3 retry times)", vbokonly  
 
          if readerType <> "NEO2" then 
-	     result = DL.WaitForSequence("USE MAGSTRIPE", 1, 10000)
+			result = DL.WaitForSequence("USE MAGSTRIPE", 1, 10000)
             if result <> 0 then 
-	        result = msgbox("Do u insert card 3 times?", vbyesno)
+				result = msgbox("Do u insert card 3 times?", vbyesno)
                if result = 7 then result = 0
             end if
          else
-            result = msgbox("Does LCD show 'USE MAGSTRIPE'?", vbyesno)
-            if result = 7 then result = 0
+			 if lcdcheck = 6 then 
+				result = msgbox("Does LCD show 'USE MAGSTRIPE'?", vbyesno)
+				if result = 7 then result = 0
+			 elseif lcdcheck = 7 then 
+				result = DL.WaitForSequence("USE MAGSTRIPE", 1, 10000)
+			 end if
          end if
 
          if result <> 0 then

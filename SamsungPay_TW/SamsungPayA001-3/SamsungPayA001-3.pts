@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-29311
+19814
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -264,7 +264,13 @@ if result <> 0 then
          dl.addcomment "Get DUKPT Key Encryption Type = AES"
          dl.sendsequence "Get account DUKPT encryption type (C7-33)"
          result = dl.waitforsequence("Check encryption - AES", 1, 2000)
-         dl.pause 200
+         if result = 0 then
+            dl.resetreceivecounter
+            dl.addcomment "Get DUKPT DEK Attribution based on KeySlot (C7-A3)"
+            dl.sendsequence "Get DUKPT DEK Attribution based on KeySlot (C7-A3)"
+            result = dl.waitforsequence("C7-A3 resp", 1, 2000)
+         end if
+
          if result <> 0 then
             dl.resetreceivecounter
             dl.addcomment vbcrlf

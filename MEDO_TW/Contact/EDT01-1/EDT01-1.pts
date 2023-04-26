@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-39785
+5327
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -239,11 +239,12 @@ If result <> 0 Then
          if readerType <> "NEO2" then result3 = DL.WaitForSequence("DFEF4C-4D " & i, 1, 2000)
          if readerType = "NEO2" then
             if i = 1 or i = 3 or i = 5 then
-               check = DL.WaitForSequence("DFEF4C-4D (NEO2)", 1, 2000)
-               if check = 1 then 
-                  result3 = 0
-               else
+               check1 = DL.WaitForSequence("DFEF4C-4D (NEO2)", 1, 2000)
+                                   check2 = DL.WaitForSequence("DFEF4C-4D (NEO3)", 1, 2000)
+               if check1 = 0 or check2 = 1 then 
                   result3 = 1
+               else
+                  result3 = 0
                end if
             else
                result3 = DL.WaitForSequence("DFEF4C-4D " & i, 1, 2000)

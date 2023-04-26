@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-12018
+62337
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -159,23 +159,20 @@ If result <> 0 Then
       msgbox "Click OK, swipe EMV Test Card (T=0)", vbokonly
       dl.pause 5000
 
-      if readerType = "GR" or readerType = "NEO1" then 
+      if readerType <> "NEO2" then 
          ledcheck = msgbox ("LED 0 is still steady ON? (if has no LED 0, select YES directly)", vbyesno)
-      elseif readerType = "NEO2" or readerType = "USAT" then 
+      elseif readerType = "NEO2" then 
              ledcheck = msgbox ("ICC LED is still ON?", vbyesno)
       else
          ledcheck = msgbox ("LED 0 is still steady ON? (if has no LED 0, select YES directly)", vbyesno)
       end if
 
       if ledcheck = 6 then
-
-         if readerType = "GR" or readerType = "NEO1" then 
+         if readerType <> "NEO2" then 
             result = DL.WaitForSequence("USE CHIP READER", 1, 5000)
-         elseif readerType = "NEO2" or readerType = "USAT" then 
-                result = msgbox("Does LCD show 'USE CHIP READER'?", vbyesno)
-                if result = 7 then result = 0
-         else
-            result = DL.WaitForSequence("USE CHIP READER", 1, 5000)
+         elseif readerType = "NEO2" then 
+				msgcheck = msgbox("Does reader have LCD and show msg 'USE CHIP READER'?", vbyesno)
+				if msgcheck = 7 then result = DL.WaitForSequence("USE CHIP READER", 1, 3000)
          end if
 
          if result <> 0 then

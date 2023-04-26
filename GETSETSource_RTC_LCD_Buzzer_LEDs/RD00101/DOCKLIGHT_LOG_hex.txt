@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2023/4/14 15:35:01.750 
+Docklight Log File (HEX) - Started 2023/4/24 14:44:07.700 
  TEST CASE: RD00101
 
  --- Set POS COM PORT Settings
@@ -7,10 +7,22 @@ Docklight Log File (HEX) - Started 2023/4/14 15:35:01.750
  Set POS COM PORT - COMPLETE
 
 
-2023/4/14 15:35:04.344 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 05 00 00 A3 F9  
+2023/4/24 14:44:09.693 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 05 00 00 A3 F9  
 User selected 'No'
 
 
+2023/4/24 14:44:09.707 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 02 19 05 88 A9  
 
-Docklight Log File (HEX) - Stopped 2023/4/14 15:35:06.261 
+
+2023/4/24 14:44:09.707 [RX] - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2023/4/24 14:44:09.817 
 

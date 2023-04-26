@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-25555
+37992
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -178,7 +178,7 @@ If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Burst mode Off"
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then DL.SendSequence "burst mode off"
+   if readerType <> "NEO2" then DL.SendSequence "burst mode off"
    if readerType = "NEO2" then DL.SendSequence "burst mode off (NEO2)"
    result = DL.WaitForSequence("burst off", 1, 2000)
    dl.pause 500
@@ -186,7 +186,7 @@ else
    countf = countf + 1
 End If
 
-if readerType = "NEO2" or readerType = "USAT" then
+if readerType = "NEO2" then
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
@@ -223,10 +223,10 @@ If result <> 0 Then
    if i = 5 then DL.AddComment "--- 04-00-----DFEF4B = 68 T1+T3+PAN"
    if i = 6 then DL.AddComment "--- 04-00-----DFEF4B = 58 T2+T3+PAN"
    if i = 7 then DL.AddComment "--- 04-00-----DFEF4B = 78 T1+T2+T3+PAN"
-   if readerType = "GR" or readerType = "NEO1" then DL.SendSequence "04-00-----DFEF4B " & i
-   if readerType = "NEO2" or readerType = "USAT" then DL.SendSequence "04-00-----DFEF4B " & i & " (NEO2)"
-   if readerType = "GR" or readerType = "NEO1" then result = DL.WaitForSequence("burst off", 1, 10000)
-   if readerType = "NEO2" or readerType = "USAT" then result = DL.WaitForSequence("60 00", 1, 10000)
+   if readerType <> "NEO2" then DL.SendSequence "04-00-----DFEF4B " & i
+   if readerType = "NEO2" then DL.SendSequence "04-00-----DFEF4B " & i & " (NEO2)"
+   if readerType <> "NEO2" then result = DL.WaitForSequence("burst off", 1, 10000)
+   if readerType = "NEO2" then result = DL.WaitForSequence("60 00", 1, 10000)
 
    If result <> 0 Then
       dl.resetreceivecounter

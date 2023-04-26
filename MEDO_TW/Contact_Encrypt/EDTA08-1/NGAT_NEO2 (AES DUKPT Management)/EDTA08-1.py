@@ -88,7 +88,7 @@ if (Result):
 			rx = 1
 		if lcdtype == 0:
 			RetOfStep = DL.SendCommand('Activate Transaction_w/o LCD')	
-			rx6010 = 7 #for VP3350	
+			rx6010 = 5 #for VP3350	
 		if (RetOfStep):
 			Result = DL.Check_RXResponse("60 63 00 00")
 			alldata = DL.Get_RXResponse(rx6010)
@@ -207,7 +207,7 @@ if (Result):
 					rx = 1
 				if lcdtype == 0:
 					RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction_w/o LCD')
-					rx = 3
+					rx = 2
 				if (RetOfStep):
 					Result = DL.Check_RXResponse("60 63 00 00")
 					alldata = DL.Get_RXResponse(rx)

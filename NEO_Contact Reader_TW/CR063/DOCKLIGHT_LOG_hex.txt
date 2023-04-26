@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2022/6/16 11:19:38.571 
+Docklight Log File (HEX) - Started 2023/4/25 16:22:07.594 
  TEST CASE: CR063
 
  --- Set POS COM PORT Settings
@@ -6,7 +6,12 @@ Docklight Log File (HEX) - Started 2022/6/16 11:19:38.571
  POS operating on COM90 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
+ Please use H/W VP4880E to verify cmd 61-03...
+ 
+---------- END OF TEST ----------
+
+ Result = FAILED
 
 
-Docklight Log File (HEX) - Stopped 2022/6/16 11:19:38.827 
+Docklight Log File (HEX) - Stopped 2023/4/25 16:22:12.123 
 

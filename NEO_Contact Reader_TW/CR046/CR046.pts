@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-44827
+48583
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -216,8 +216,8 @@ If result <> 0 Then
       if readerType <> "NEO2" then 
          result = DL.WaitForSequence("USE MAGSTRIPE", 1, 15000)
       else
-         result = msgbox("Does LCD show 'USE MAGSTRIPE'?", vbyesno)
-         if result = 7 then result = 0
+         msgcheck = msgbox("Does reader have LCD and show msg 'USE MAGSTRIPE'?", vbyesno)
+         if msgcheck = 7 then result = DL.WaitForSequence("USE MAGSTRIPE", 1, 3000)
       end if
 
       dl.pause 1000

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-8109
+28148
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -225,19 +225,19 @@ If result <> 0 Then
    DL.SendSequence "02-40 (10 sec) (NEO2-MSR only)"
    result = DL.WaitForSequence("02 00", 1, 10000)
    dl.pause 1000
-   lcdcheck = msgbox ("Does LCD msg/ Yellow LED (NEO1 may use other LED) indicate this transaction for MSR ONLY?", vbyesno)
+   lcdcheck = msgbox ("Does LCD/ LED indicate this transaction for MSR ONLY?", vbyesno)
    if lcdcheck = 7 then result = 0
 End If
 
 If result <> 0 Then
-   msgbox "Click OK -> swipe card -> tap card", vbokonly
+   msgbox "Click OK -> swipe MSR only card -> tap card", vbokonly
    dl.resetreceivecounter
    DL.AddComment vbcrlf
    DL.AddComment "--- 02-40 (10 sec) (NEO2-CL only)"
    DL.SendSequence "02-40 (10 sec) (NEO2-CL only)"
    result = DL.WaitForSequence("02 23", 1, 10000)
    dl.pause 1000
-   lcdcheck = msgbox ("Does LCD msg/ LED 0 indicate this transaction for CL ONLY?", vbyesno)
+   lcdcheck = msgbox ("Does LCD/ LED indicate this transaction for CL ONLY?", vbyesno)
    if lcdcheck = 7 then result = 0
 End If
 
@@ -263,7 +263,7 @@ If result <> 0 Then
          dl.pause 1000
       end if
    end if
-   lcdcheck = msgbox ("Does LCD msg/ CT LED (NEO1 may use other LED) indicate this transaction for CT ONLY?", vbyesno)
+   lcdcheck = msgbox ("Does LCD/ LED indicate this transaction for CT ONLY?", vbyesno)
    if lcdcheck = 7 then result = 0
 End If
 '------------------------------------------------------------

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-54438
+12996
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -224,11 +224,8 @@ if readerType <> "NEO2" or keycheck = 6 then
       dl.addcomment vbcrlf
       DL.AddComment "--- Dis-able Data Encryption (C7-36)"
       DL.SendSequence "Dis-able Data Encryption (C7-36)"
-      if readerType <> "NEO2" then 
-         result = DL.WaitForSequence("c7-36 resp 0C", 1, 5000)
-      else
-         result = DL.WaitForSequence("c7-36 resp 06", 1, 5000)
-      end if
+              result = DL.WaitForSequence("C7-xx ok resp", 1, 1500)
+              ReverseResult(result)
    End If
 
    If result <> 0 Then
@@ -318,7 +315,8 @@ if readerType <> "NEO2" or keycheck = 6 then
       dl.addcomment vbcrlf
       DL.AddComment "--- 03-00"
       DL.SendSequence "03-00"
-      result = DL.WaitForSequence("03 0C", 1, 3000)
+      result = DL.WaitForSequence("03 00", 1, 1500)
+      ReverseResult(result)
    End If
 end if
 

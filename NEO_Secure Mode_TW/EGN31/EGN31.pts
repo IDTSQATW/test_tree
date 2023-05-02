@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-38878
+40909
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -180,7 +180,7 @@ If result <> 0 Then
    dl.pause 300
 End If
 else
-   readercheck = msgbox("Does reader DEFAULT has no key & encryption off?", vbyesno)
+   readercheck = msgbox("Is reader DEFAULT encryption off?", vbyesno)
 end if
 '------------------------------------------------------------
 sub eraseflash()
@@ -211,11 +211,8 @@ sub enableenc0NOK()
        dl.addcomment vbcrlf
        DL.AddComment "--- C7-36 -- 00"
        DL.SendSequence "C7-36 -- 00"
-       if readerType <> "NEO2" then 
-          result = DL.WaitForSequence("c7 0c", 1, 1000)
-       else
-          result = DL.WaitForSequence("c7 06", 1, 1000)
-       end if
+       result = DL.WaitForSequence("c7-36 resp ok", 1, 1000)
+       ReverseResult(result)
     End If
 end sub
 
@@ -225,11 +222,8 @@ sub enableenc1()
        dl.addcomment vbcrlf
        DL.AddComment "--- C7-36 -- 01"
        DL.SendSequence "C7-36 -- 01"
-       if readerType <> "NEO2" then 
-          result = DL.WaitForSequence("c7 0c", 1, 1000)
-       else
-          result = DL.WaitForSequence("c7 05", 1, 1000)
-       end if
+       result = DL.WaitForSequence("c7-36 resp ok", 1, 1000)
+                ReverseResult(result)
     End If
 end sub
 
@@ -249,12 +243,8 @@ sub enableenc2NOK()
        dl.addcomment vbcrlf
        DL.AddComment "--- C7-36 -- 02"
        DL.SendSequence "C7-36 -- 02"
-       if readerType <> "NEO2" then 
-          result = DL.WaitForSequence("c7 0c", 1, 1000)
-       else
-          result = DL.WaitForSequence("c7 06", 1, 1000)
-       end if
-       dl.pause 300
+       result = DL.WaitForSequence("c7-36 resp ok", 1, 1000)
+       ReverseResult(result)
     End If
 end sub
 

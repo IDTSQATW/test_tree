@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-45532
+38497
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -264,8 +264,13 @@ if result <> 0 then
          dl.addcomment "Get DUKPT Key Encryption Type = AES"
          dl.sendsequence "Get account DUKPT encryption type (C7-33)"
          result = dl.waitforsequence("Check encryption - AES", 1, 2000)
-         dl.pause 200
-         if result <> 0 then
+         if result = 0 then
+            dl.resetreceivecounter
+            dl.addcomment "Get DUKPT DEK Attribution based on KeySlot (C7-A3)"
+            dl.sendsequence "Get DUKPT DEK Attribution based on KeySlot (C7-A3)"
+            result = dl.waitforsequence("C7-A3 resp", 1, 2000)
+         end if         
+                    if result <> 0 then
             dl.resetreceivecounter
             dl.addcomment vbcrlf
             dl.sendsequence "Get Data Encryption (C7-37)"
@@ -286,6 +291,7 @@ if result <> 0 then
       else
          RxStatus = DL.WaitForSequence("Activate transaction response - Androidpay (NEO2)", 1, 10000)
       end if
+      dl.pause 1000
       If RxStatus = 0 then
          DL.AddComment "Androidpay 02-40 RX does not return expected data"
          Err0BCounter = Err0BCounter + 1

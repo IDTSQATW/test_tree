@@ -20,11 +20,23 @@ if readertype == 1:
 else:
 	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
 
+# Enable encryption (02)
+if (Result):
+	RetOfStep = DL.SendCommand('Enable Encryption (02)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("C7 00 00 00")
+
 # Get Data Encryption (C7-37)
 if (Result):
 	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 01 02")
+        
+# Check data encryption TYPE is TDES	
+if (Result):
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
 
 # group 80, support MSD only
 if (Result):
@@ -46,7 +58,7 @@ if (Result):
 if (Result):
 	RetOfStep = DL.SendCommand('Activate Transaction')
 	if (RetOfStep):
-		DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** B1 ** DF EE 12")
+		DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** 71 ** DF EE 12")
 		alldata = DL.Get_RXResponse(0)
 		ksn = DL.GetTLV(alldata,"DFEE12")	
 		
@@ -54,7 +66,7 @@ if (Result):
 		encDF812A = DL.GetTLV(tagFF8106,"DF812A", 0)
 		decDF812A = DL.DecryptDLL(0,1, strKey, ksn, encDF812A)
 		encDF812B = DL.GetTLV(tagFF8106,"DF812B", 0)
-		decDF812B = DL.DecryptDLL(0,1, strKey, ksn, encDF812B)		
+		decDF812B = DL.DecryptDLL(0,1, strKey, ksn, encDF812B)
 			
 		tagFF8105 = DL.GetTLV(alldata,"FF8105")
 		mask56 = DL.GetTLV(tagFF8105,"56", 0)
@@ -62,7 +74,7 @@ if (Result):
 		dec56 = DL.DecryptDLL(0,1, strKey, ksn, enc56)	
 		mask9F6B = DL.GetTLV(tagFF8105,"9F6B", 0)
 		enc9F6B = DL.GetTLV(tagFF8105,"9F6B", 1)
-		dec9F6B = DL.DecryptDLL(0,1, strKey, ksn, enc9F6B)	
+		dec9F6B = DL.DecryptDLL(0,1, strKey, ksn, enc9F6B)
 			
 	# Tag DF812A/ DF812B (only need enc data)
 		Result = DL.Check_StringAB(decDF812A, 'DF 81 2A 0D 30 30 30 30 30 30 30 30 30 30 30 30 30')
@@ -118,7 +130,7 @@ if (Result):
 		else:
 			DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 		
-		if DL.Check_RXResponse("DFEE26 02 B100"): 
+		if DL.Check_RXResponse("DFEE26 02 7100"): 
 			DL.SetWindowText("blue", "Tag DFEE26: PASS")
 		else:
 			DL.SetWindowText("Red", "Tag DFEE26: FAIL")			

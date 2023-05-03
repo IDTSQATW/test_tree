@@ -8,7 +8,7 @@ Result= True
 Key='0123456789abcdeffedcba9876543210'
 MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
-strKey = '0123456789ABCDEFFEDCBA9876543210'
+strKey = 'FEDCBA9876543210F1F1F1F1F1F1F1F1'
 
 # Check project has LCD or not
 lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
@@ -25,11 +25,11 @@ if (Result):
 		if Result == False:
 			DL.SetWindowText("Red", "Please ENABLE data encryption (02)...")
 
-# Check data encryption TYPE is TDES	
+# Check data encryption TYPE is AES	
 if (Result):
 	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
+		Result = Result and DL.Check_RXResponse("C7 00 00 06 01 02 00 00 00 00")
 
 # First Response Control (0x63) = enable
 if (Result):
@@ -68,7 +68,7 @@ if (Result):
 		if lcdtype == 1:
 			alldata = DL.Get_RXResponse(1)
 		if lcdtype == 0:
-			alldata = DL.Get_RXResponse(5)			
+			alldata = DL.Get_RXResponse(4)			
 		CTresultcode = DL.GetTLV(alldata,"DFEE25")
 		if (Result):
 			Result = DL.Check_StringAB(alldata, '56 69 56 4F 74 65 63 68 32 00 60 00')
@@ -77,11 +77,11 @@ if (Result):
 		
 				mask57 = DL.GetTLV(alldata,"57", 0)
 				enc57 = DL.GetTLV(alldata,"57", 1)
-				dec57 = DL.DecryptDLL(0,1, strKey, ksn, enc57)	
+				dec57 = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc57)	
 		
 				mask5A = DL.GetTLV(alldata,"5A", 0)
 				enc5A = DL.GetTLV(alldata,"5A", 1)
-				dec5A = DL.DecryptDLL(0,1, strKey, ksn, enc5A)	
+				dec5A = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc5A)	
 		
 				Tag9F39 = DL.GetTLV(alldata,"9F39")
 				TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
@@ -135,7 +135,7 @@ if (Result):
 				if DL.Check_StringAB(TagFFEE01, 'DFEE300101') == False:
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-				if DL.Check_StringAB(TagDFEE26, '6000') == False:
+				if DL.Check_StringAB(TagDFEE26, '6201') == False:
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 
 		# cmd 60-11					
@@ -275,13 +275,13 @@ if (Result):
 						if DL.Check_StringAB(TagFFEE01, 'DFEE300101') == False:
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-						if DL.Check_StringAB(TagDFEE26, '6000') == False:
+						if DL.Check_StringAB(TagDFEE26, '6201') == False:
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 
 						# cmd 60-13
 						RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result, for 60-11')
 						if (RetOfStep):
-							DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** 60 ** 9F 10 07 06 01 1A 03 90 00 00 9F 26 08 ** 9F 27 01 80 9F 36 02 00 01 9F 37 04 ** 9F 02 06 00 00 00 00 02 00 9F 4D 00 9F 13 00 95 05 ** 9B 02 ** 9F 03 06 00 00 00 00 00 00 9F 34 03 5F 03 02 9F 39 01 05")
+							DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** 62 ** 9F 10 07 06 01 1A 03 90 00 00 9F 26 08 ** 9F 27 01 80 9F 36 02 00 01 9F 37 04 ** 9F 02 06 00 00 00 00 02 00 9F 4D 00 9F 13 00 95 05 ** 9B 02 ** 9F 03 06 00 00 00 00 00 00 9F 34 03 5F 03 02 9F 39 01 05")
 						
 				# cmd 60-12
 				if  CTresultcode == "0004":
@@ -350,10 +350,10 @@ if (Result):
 								if DL.Check_StringAB(TagFFEE01, 'DFEE300101') == False:
 									DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-								if DL.Check_StringAB(TagDFEE26, '6000') == False:
+								if DL.Check_StringAB(TagDFEE26, '6201') == False:
 									DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 									
 								# cmd 60-13
 								RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result, for 60-12')
 								if (RetOfStep):
-									DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** 60 ** 9F 10 07 06 01 1A 03 60 00 00 9F 26 08 ** 9F 27 01 40 9F 36 02 00 01 9F 37 04 ** 9F 02 06 00 00 00 00 02 00 9F 4D 00 9F 13 00 95 05 ** 9B 02 ** 9F 03 06 00 00 00 00 00 00 9F 34 03 5F 03 02 99 00 9F 5B 00 9F 39 01 05")				
+									DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** 62 ** 9F 10 07 06 01 1A 03 60 00 00 9F 26 08 ** 9F 27 01 40 9F 36 02 00 01 9F 37 04 ** 9F 02 06 00 00 00 00 02 00 9F 4D 00 9F 13 00 95 05 ** 9B 02 ** 9F 03 06 00 00 00 00 00 00 9F 34 03 5F 03 02 99 00 9F 5B 00 9F 39 01 05")				

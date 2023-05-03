@@ -10,13 +10,13 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
-# Enable encryption (02)
+# Enable encryption (03)
 if (Result):
 	RetOfStep = DL.SendCommand('Enable Encryption (02)')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 00")
 
-# Encryption Type -- TDES
+# Encryption Type -- AES
 if (Result):
 	RetOfStep = DL.SendCommand('Encryption Type -- TDES')
 	if (RetOfStep):

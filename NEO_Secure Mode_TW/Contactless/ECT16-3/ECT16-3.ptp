@@ -824,7 +824,7 @@ COMMENT
 RECEIVE
 59
 Tag 5A - mask
-5A A1 08 51 28 CC CC CC CC ?? ?? 5A C1
+5A A1 08 ?? ?? CC CC CC CC ?? ?? 5A C1
 -1
 1
 COMMENT 
@@ -848,7 +848,7 @@ COMMENT
 RECEIVE
 61
 Tag 57 - mask
-57 A1 10 51 28 CC CC CC CC ?? ?? D1 80 36 22 CC CC CC CC 57 C1
+57 A1 ?? ?? ?? CC CC CC CC ?? ?? ?? ?? ?? ?? CC CC CC CC ## 57 C1
 -1
 1
 COMMENT 

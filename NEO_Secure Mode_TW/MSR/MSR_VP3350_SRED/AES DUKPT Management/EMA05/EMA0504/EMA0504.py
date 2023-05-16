@@ -8,6 +8,7 @@ Result= True
 Key='0123456789abcdeffedcba9876543210'
 MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
+strKey ='FEDCBA9876543210F1F1F1F1F1F1F1F1'
 
 # Check reader is VP3350 or not
 lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
@@ -43,7 +44,7 @@ if (Result):
 
 # cmd 02-40, swipe Discover card
 if (Result):
-	for j in range (1, 2):
+	for j in range (1, 3):
 		if j == 1:
 			RetOfStep = DL.SendCommand('Poll on Demand')
 			if (RetOfStep):
@@ -102,7 +103,7 @@ if (Result):
 						# if i == 1:
 							# Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 3F 4F 28 6B 97 00")
 						if i == 2:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 44 28 00 A3 9B")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 5F 44 28 00 B3 9B")     #NEO3-6099
 						# if i == 3:
 							# Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 86 1F 48 28 00 93 00")
 						# if i == 4:
@@ -120,14 +121,14 @@ if (Result):
 						# if i == 10:
 							# Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 3F 4D 27 69 93 87")
 					if j == 2:
-						Result = DL.Check_StringAB(DL.Get_RXResponse(1),"56 69 56 4F 74 65 63 68 32 00 03 00")
+						Result = DL.Check_RXResponse(1,"56 69 56 4F 74 65 63 68 32 00 03 00")
 						if (Result):
-							Result = DL.Check_StringAB(DL.Get_RXResponse(1),"EA ** DF EE 25 02 00 11 DF EE 23")
+							Result = DL.Check_RXResponse(1,"EA ** DF EE 25 02 00 11 DF EE 23")
 							if (Result):
 								# if i == 1:
 									# Result = DL.Check_StringAB(DL.Get_RXResponse(1),"83 3F 4F 28 6B 97 00")
 								if i == 2:
-									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 1F 44 28 00 A3 9B")
+									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 5F 44 28 00 B3 9B")
 								# if i == 3:
 									# Result = DL.Check_StringAB(DL.Get_RXResponse(1),"86 1F 48 28 00 93 00")
 								# if i == 4:
@@ -174,17 +175,11 @@ if (Result):
 								DL.SetWindowText("blue", "KSN:")
 								KSN=DL.Get_KSN_CardData()
 								if len(TRK1)> 0:
-									DL.SetWindowText("blue", "Track 1:")
-									TRK1DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK1)
-									TRK1DecryptData = TRK1DecryptData[0:((objectMSR[0].msr_track1Length)*2)]
+									TRK1DecryptData = DL.AES_DUPKT_EMVData_Decipher(KSN, strKey, TRK1)
 								if len(TRK2)> 0:
-									DL.SetWindowText("blue", "Track 2:")
-									TRK2DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK2)
-									TRK2DecryptData = TRK2DecryptData[0:((objectMSR[0].msr_track2Length)*2)]
+									TRK2DecryptData = DL.AES_DUPKT_EMVData_Decipher(KSN, strKey, TRK2)
 								if len(TRK3) > 0:
-									DL.SetWindowText("blue", "Track 3:")
-									TRK3DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK3)
-									TRK3DecryptData = TRK3DecryptData[0:((objectMSR[0].msr_track3Length)*2)]
+									TRK3DecryptData = DL.AES_DUPKT_EMVData_Decipher(KSN, strKey, TRK3)
 							
 								Tag9F39 = DL.GetTLV(sResult,"9F39")
 								TagFFEE01 = DL.GetTLV(sResult,"FFEE01")

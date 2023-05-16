@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-15806
+55383
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -259,7 +259,7 @@ else
 End If
 '------------------------------------------------------------
 If result <> 0 Then
-   a1 = MsgBox("Click OK and then Tap any MChip", VBOKOnly)
+   a1 = MsgBox("Click OK and then Tap any MChip (support EMV)", VBOKOnly)
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-40 Activate Transaction"

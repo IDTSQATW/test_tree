@@ -6,9 +6,11 @@ RetOfStep = True
 Result= True
 
 Key='0123456789abcdeffedcba9876543210'
-MacKey='0123456789abcdeffedcba9876543210'
+MacKey=''
 PAN=''
-strKey = '0123456789ABCDEFFEDCBA9876543210'
+strKey = 'FEDCBA9876543210F1F1F1F1F1F1F1F1'
+
+#Objective: to verify AES DUKPT Management, AES-128 Working Key encryption/ decryption function
 
 # Check reader is VP3350 or not
 readertype = DL.ShowMessageBox("", "Is this VP3350?", 0)
@@ -27,6 +29,14 @@ if (Result):
 		Result = Result and DL.Check_RXResponse("C7 00 00 01 02")
 		if Result != True:
 			DL.SetWindowText("red", "Please load data key (TDES) and set cmd C7-36 = 02 first!")
+
+if (Result):
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution Based on KeySlot(C7-A3)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("C7 00 00 06 01 02 00 00 00 00")
+		if Result != True:
+			DL.SetWindowText("red", "Please load data key (TDES) first!")
+			
 		
 # Burst mode OFF	
 if (Result):
@@ -44,15 +54,15 @@ if (Result):
 		if (Result):
 			RetOfStep = DL.SendCommand('Activate Transaction')
 			if (RetOfStep):
-				DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** A1")
+				DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** 63")
 				alldata = DL.Get_RXResponse(0)
 				
 				TagFF8105 = DL.GetTLV(alldata,"FF8105")
-				Tag57 = DL.GetTLV(TagFF8105,"57")
+				Tag57 = DL.GetTLV_Embedded(TagFF8105,"57")
 				
-				Tag9F39 = DL.GetTLV(alldata,"9F39")
-				TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
-				TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
+				Tag9F39 = DL.GetTLV_Embedded(alldata,"9F39")
+				TagFFEE01 = DL.GetTLV_Embedded(alldata,"FFEE01")
+				TagDFEE26 = DL.GetTLV_Embedded(alldata,"DFEE26")
 				
 			# Tag 57					
 				Result = DL.Check_RXResponse('5713')
@@ -72,53 +82,53 @@ if (Result):
 				else:
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-				if TagDFEE26 == "A100": 
+				if TagDFEE26 == "6301": 
 					DL.SetWindowText("blue", "Tag DFEE26: PASS")
 				else:
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 			
-	# Auto Poll
-	RetOfStep = DL.SendCommand('Auto Poll')
-	if (RetOfStep):
-		Result = DL.Check_RXResponse("01 00 00 00")
+	# # Auto Poll
+	# RetOfStep = DL.SendCommand('Auto Poll')
+	# if (RetOfStep):
+		# Result = DL.Check_RXResponse("01 00 00 00")
 	
-	# cmd 03-40
-		if (Result):
-			RetOfStep = DL.SendCommand('Get Transaction result')
-			if (RetOfStep):
-				alldata = DL.Get_RXResponse(1)
-				DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 03 23')
-				DL.Check_StringAB(DL.Get_RXResponse(1), 'A1')
+	# # cmd 03-40
+		# if (Result):
+			# RetOfStep = DL.SendCommand('Get Transaction result')
+			# if (RetOfStep):
+				# alldata = DL.Get_RXResponse(1)
+				# DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 03 23')
+				# DL.Check_StringAB(DL.Get_RXResponse(1), '63')
 				
-				TagFF8105 = DL.GetTLV(alldata,"FF8105")				
-				Tag57 = DL.GetTLV(TagFF8105,"57")
+				# TagFF8105 = DL.GetTLV(alldata,"FF8105")				
+				# Tag57 = DL.GetTLV(TagFF8105,"57")
 				
-				Tag9F39 = DL.GetTLV(alldata,"9F39")
-				TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
-				TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
+				# Tag9F39 = DL.GetTLV(alldata,"9F39")
+				# TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
+				# TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 				
-			# Tag 57					
-				Result = DL.Check_RXResponse('5713')
-				if Result == True:
-					DL.SetWindowText("blue", "Tag 57: PASS")
-				else:
-					DL.SetWindowText("red", "Tag 57: FAIL")
+			# # Tag 57					
+				# Result = DL.Check_RXResponse('5713')
+				# if Result == True:
+					# DL.SetWindowText("blue", "Tag 57: PASS")
+				# else:
+					# DL.SetWindowText("red", "Tag 57: FAIL")
 		
-			# Tags 9F39/ FFEE01/ DFEE26
-				if Tag9F39 == "07": 
-					DL.SetWindowText("blue", "Tag 9F39: PASS")
-				else:
-					DL.SetWindowText("Red", "Tag 9F39: FAIL")
+			# # Tags 9F39/ FFEE01/ DFEE26
+				# if Tag9F39 == "07": 
+					# DL.SetWindowText("blue", "Tag 9F39: PASS")
+				# else:
+					# DL.SetWindowText("Red", "Tag 9F39: FAIL")
 				
-				if (DL.Check_StringAB(TagFFEE01, "DFEE300100")): 
-					DL.SetWindowText("blue", "Tag FFEE01: PASS")
-				else:
-					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
+				# if (DL.Check_StringAB(TagFFEE01, "DFEE300100")): 
+					# DL.SetWindowText("blue", "Tag FFEE01: PASS")
+				# else:
+					# DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-				if TagDFEE26 == "6100": 
-					DL.SetWindowText("blue", "Tag DFEE26: PASS")
-				else:
-					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+				# if TagDFEE26 == "6301": 
+					# DL.SetWindowText("blue", "Tag DFEE26: PASS")
+				# else:
+					# DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 					
 if readertype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')

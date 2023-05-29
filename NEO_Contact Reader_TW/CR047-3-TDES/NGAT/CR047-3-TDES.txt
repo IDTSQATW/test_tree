@@ -88,6 +88,7 @@ EXR: 60 63 00 00
 EXR:
 MSG:Waiting...
 EXR:
+EXR:
 TIMEOUT:120000
 
 TID:60-13 Contact Retrieve Transaction Result, for 60-12

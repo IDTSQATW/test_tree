@@ -135,50 +135,50 @@ if (Result):
 				if (RetOfStep):		
 					if j == 1:
 						if i == 1:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 3F 4F 28 6B 97 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 3F 4F 28 6B 97 00 02 16 00")
 						if i == 2:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 44 28 00 B3 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 44 28 00 B3 00 02 16 00")
 						if i == 3:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 48 28 00 B3 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 48 28 00 B3 00 02 16 00")
 						if i == 4:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 85 17 00 48 00 92 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 85 17 00 48 00 92 00 02 16 00")
 						if i == 5:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 81 3F 30 23 52 97 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 81 3F 30 23 52 97 00 02 16 00")
 						if i == 6:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 3D 26 00 93 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 3D 26 00 93 00 02 16 00")
 						if i == 7:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 0F 3B 00 00 91 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 0F 3B 00 00 91 00 02 16 00")
 						if i == 8:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 0F 3A 00 00 B1 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 0F 3A 00 00 B1 00 02 16 00")
 						if i == 9:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 0F 42 00 00 91 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 0F 42 00 00 91 00 02 16 00")
 						if i == 10:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 3F 4D 27 69 97 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 2A DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 3F 4D 27 69 97 00 02 16 00")
 					if j == 2:
 						Result = DL.Check_StringAB(DL.Get_RXResponse(1),"56 69 56 4F 74 65 63 68 32 00 03 00")
 						if (Result):
 							Result = DL.Check_StringAB(DL.Get_RXResponse(1),"2A DF EE 25 02 00 11 DF EE 23")
 							if (Result):
 								if i == 1:
-									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"83 3F 4F 28 6B 97 00")
+									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"83 3F 4F 28 6B 97 00 02 16 00")
 								if i == 2:
-									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 1F 44 28 00 B3 00")
+									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 1F 44 28 00 B3 00 02 16 00")
 								if i == 3:
-									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 1F 48 28 00 B3 00")
+									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 1F 48 28 00 B3 00 02 16 00")
 								if i == 4:
-									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"85 17 00 48 00 92 00")
+									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"85 17 00 48 00 92 00 02 16 00")
 								if i == 5:
-									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"81 3F 30 23 52 97 00")
+									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"81 3F 30 23 52 97 00 02 16 00")
 								if i == 6:
-									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 1F 3D 26 00 93 00")
+									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 1F 3D 26 00 93 00 02 16 00")
 								if i == 7:
-									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"83 0F 3B 00 00 91 00")
+									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"83 0F 3B 00 00 91 00 02 16 00")
 								if i == 8:
-									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 0F 3A 00 00 B1 00")
+									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 0F 3A 00 00 B1 00 02 16 00")
 								if i == 9:
-									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"83 0F 42 00 00 91 00")
+									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"83 0F 42 00 00 91 00 02 16 00")
 								if i == 10:
-									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 3F 4D 27 69 97 00")
+									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 3F 4D 27 69 97 00 02 16 00")
 					if j == 3:
 						if i == 1:
 							Result = DL.Check_RXResponse("01 00 0C 25 54 52 41 43 4B 31 37 36 37 36 37 36 30 37 30 37 30 37 37 36 37 36 37 36 30 37 30 37 30 37 37 36 37 36 37 36 30 37 30 37 30 37 37 36 37 36 37 36 30 37 30 37 30 37 37 36 37 36 37 36 30 37 30 37 30 37 37 36 37 36 37 36 30 37 30 37 3F 3B 32 31 32 31 32 31 32 31 32 31 37 36 37 36 37 36 30 37 30 37 30 37 37 36 37 36 37 36 37 36 32 31 32 31 32 31 32 3F 3B 33 33 33 33 33 33 33 33 33 33 37 36 37 36 37 36 30 37 30 37 30 37 37 36 37 36 37 36 33 33 33 33 33 33 33 33 33 33 37 36 37 36 37 36 30 37 30 37 30 37 37 36 37 36 37 36 33 33 33 33 33 33 33 33 33 33 37 36 37 36 37 36 30 37 30 37 30 37 37 36 37 36 37 36 33 33 33 33 33 33 33 33 33 33 37 36 37 36 37 36 30 37 30 37 3F 81 14")

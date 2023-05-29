@@ -17,7 +17,7 @@ if (Result):
 		Result = Result and DL.Check_RXResponse("C7 00 00 00")
 		
 # Check reader is VP3350 or not
-lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+lcdtype = 1 #DL.ShowMessageBox("", "Is this VP3350?", 0)
 if lcdtype == 1:
 	DL.SetWindowText("Green", "*** This is VP3350 ***")
 	RetOfStep = DL.SendCommand('0105 do not use LCD')

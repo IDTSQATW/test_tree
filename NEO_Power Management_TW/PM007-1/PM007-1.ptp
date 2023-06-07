@@ -49,7 +49,7 @@ CHECKSUM crc-ccitt
 SEND
 3
       Enter Low Power Mode (F0-03) stop = 0101
-56 69 56 4F 74 65 63 68 32 00 F0 03 00 02 00 01 00 00
+56 69 56 4F 74 65 63 68 32 00 F0 03 00 02 01 01 00 00
 0
 5
 CHECKSUM crc-ccitt
@@ -73,7 +73,7 @@ CHECKSUM crc-ccitt
 SEND
 6
       Enter Low Power Mode (F0-03) stop = 0100
-56 69 56 4F 74 65 63 68 32 00 F0 03 00 02 00 00 00 00
+56 69 56 4F 74 65 63 68 32 00 F0 03 00 02 01 00 00 00
 0
 5
 CHECKSUM crc-ccitt

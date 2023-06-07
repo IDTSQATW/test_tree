@@ -133,7 +133,7 @@ if (Result):
 							DL.SetWindowText("Red", "Track 3 Clear data: FAIL")
 									
 						# Verify specific tags
-						Result = DL.Check_StringAB(CardData, '83 3F 4F 28 6B 87 00')
+						Result = DL.Check_StringAB(CardData, '83 7F 4F 28 6B 97 00')
 						if Result == False:
 							DL.SetWindowText("Red", "Tag DFEE23: FAIL")
 							

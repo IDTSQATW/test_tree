@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-1293
+36191
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -166,7 +166,7 @@ End Function
       DL.AddComment "--- 04-0A"
       DL.SendSequence "04-0A" 
       result = DL.WaitForSequence("04 00", 1, 10000)
-      dl.pause 15000
+      dl.pause 22000
    End If
 '------------------------------------------------------------
 If result <> 0 then

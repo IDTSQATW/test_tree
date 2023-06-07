@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-53591
+21481
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -163,9 +163,9 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- 60-15 Contact Get ICS Identification"
    DL.SendSequence "60-15 Contact Get ICS Identification"
-   if defaultvalue = 1 then result = DL.WaitForSequence("60 00 (value 01)", 1, 2000)
-   if defaultvalue = 2 then result = DL.WaitForSequence("60 00 (value 02)", 1, 2000)
-   if defaultvalue = 4 then result = DL.WaitForSequence("60 00 (value 04)", 1, 2000)
+   if defaultvalue = 1 then result = DL.WaitForSequence("60 00 (value 01)", 1, 10000)
+   if defaultvalue = 2 then result = DL.WaitForSequence("60 00 (value 02)", 1, 10000)
+   if defaultvalue = 4 then result = DL.WaitForSequence("60 00 (value 04)", 1, 10000)
 End If
 '------------------------------------------------------------
 If result <> 0 Then

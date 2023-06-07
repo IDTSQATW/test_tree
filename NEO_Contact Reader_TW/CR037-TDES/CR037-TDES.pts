@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-55500
+46469
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -266,6 +266,14 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- 60-06_Terminal config_2C"
    DL.SendSequence "60-06_Terminal config_2C"
+   result = DL.WaitForSequence("60-xx 00 status", 1, 1200)
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-03"
+   DL.SendSequence "60-03"
    result = DL.WaitForSequence("60-xx 00 status", 1, 1200)
 End If
 

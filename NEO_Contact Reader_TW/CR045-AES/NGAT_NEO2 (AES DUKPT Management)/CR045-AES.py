@@ -99,7 +99,7 @@ if (Result):
 								TRK3DecryptData = DL.AES_DUPKT_EMVData_Decipher(KSN, strKey, TRK3)
 
 						TR2maskdata = ";4761********0010=2012****************?*"
-						TR2plaintextdata = "3B343736313733393030313031303031303D32303132313230303031323333393930303033313F32"
+						TR2plaintextdata = "3B343736313733393030313031303031303D32303132313230303031323333393930303033313F320000000000000000"
 						TagDFEE25 = DL.GetTLV(sResult,"DFEE25")
 						Tag9F39 = DL.GetTLV(sResult,"9F39")
 						TagFFEE01 = DL.GetTLV(sResult,"FFEE01")
@@ -118,7 +118,7 @@ if (Result):
 							DL.SetWindowText("Red", "Track 2 Decryption data: FAIL")
 									
 						# Verify specific tags
-						Result = DL.Check_StringAB(CardData, '80 17 00 28 00 82 92')
+						Result = DL.Check_StringAB(CardData, '80 57 00 28 00 92 92')
 						if Result == False:
 							DL.SetWindowText("Red", "Tag DFEE23: FAIL")
 							

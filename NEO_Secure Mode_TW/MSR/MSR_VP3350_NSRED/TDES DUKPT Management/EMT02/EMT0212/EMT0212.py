@@ -15,11 +15,21 @@ if (Result):
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 00")
 		
-# Encryption type -- TDES
-if (Result):
-	RetOfStep = DL.SendCommand('Encryption type -- TDES')
+# Check reader is VP3350 or not
+lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 00")
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
+
+# Check data encryption TYPE is TDES	
+if (Result):
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
 
 # Set/ Get MSR Secure Parameters		
 if (Result):
@@ -33,7 +43,7 @@ if (Result):
 		
 # cmd 02-40, swipe card
 if (Result):
-	for j in range (1, 4):
+	for j in range (1, 2):
 		if j == 1:
 			# Poll on Demand
 			RetOfStep = DL.SendCommand('Poll on Demand')
@@ -153,7 +163,7 @@ if (Result):
 								if i == 2:
 									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 1F 44 28 00 A3 00")
 								if i == 3:
-									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 1F 48 28 00 83 00")
+									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 1F 44 28 00 A3 00")
 								if i == 4:
 									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"85 17 00 48 00 82 00")
 								if i == 5:

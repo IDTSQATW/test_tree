@@ -43,7 +43,7 @@ if (Result):
 		
 # cmd 02-40, swipe card
 if (Result):
-	for j in range (1, 4):
+	for j in range (1, 2):
 		if j == 1:
 			# Poll on Demand
 			RetOfStep = DL.SendCommand('Poll on Demand')
@@ -163,7 +163,7 @@ if (Result):
 								if i == 2:
 									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 1F 44 28 00 A3 00")
 								if i == 3:
-									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 1F 48 28 00 83 00")
+									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 1F 48 28 00 A3 00")
 								if i == 4:
 									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"85 17 00 48 00 82 00")
 								if i == 5:

@@ -96,11 +96,11 @@ if (Result):
 				if lcdtype == 1:
 					rx = 3
 				if lcdtype == 0:
-					rx = 4					
-				Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')
-				if (Result):
-					Result = DL.Check_RXResponse(rx, '6A ** DF EE 25')
-				time.sleep(2)							
+					rx = 5					
+					Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')
+					if (Result):
+						Result = DL.Check_RXResponse(rx, '6A ** DF EE 25')
+				time.sleep(1)							
 			if readertype == 0:     # NEOI
 				rx = 5
 				Result = DL.Check_RXResponse(3, '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 13 1C 02 00 00 00 23 0F')
@@ -185,7 +185,7 @@ if (Result):
 								DL.SetWindowText("Red", "Track 2 Decryption data: FAIL")
 									
 							# Verify specific tags
-							if DL.Check_StringAB(CardData, '80 1F 44 28 00 A3 9B') == False:
+							if DL.Check_StringAB(CardData, '80 5F 44 28 00 B3 9B') == False:
 								DL.SetWindowText("Red", "Tag DFEE23: FAIL")
 								
 							if TagDFEE25 != "0007": 

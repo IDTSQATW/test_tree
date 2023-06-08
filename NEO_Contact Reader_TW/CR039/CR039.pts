@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-62061
+39465
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -161,7 +161,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    if readerType = "NEO2" then 
       DL.AddComment "--- 60-16 Set Terminal config_4C"
-      DL.SendSequence "60-06 (NEO2)"
+      DL.SendSequence "60-16 Set Terminal config_4C"
       result = DL.WaitForSequence("60-xx 00 status", 1, 5000)
    end if
 End If

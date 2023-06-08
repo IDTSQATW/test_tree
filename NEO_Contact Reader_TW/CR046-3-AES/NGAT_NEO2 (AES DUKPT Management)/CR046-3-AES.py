@@ -189,7 +189,7 @@ if (Result):
 								DL.SetWindowText("Red", "Track 2 Decryption data: FAIL")
 									
 							# Verify specific tags
-							if DL.Check_StringAB(CardData, '80 1F 44 28 00 A3 9B') == False:
+							if DL.Check_StringAB(CardData, '80 5F 44 28 00 B3 9B') == False:
 								DL.SetWindowText("Red", "Tag DFEE23: FAIL")
 								
 							if TagDFEE25 != "0007": 

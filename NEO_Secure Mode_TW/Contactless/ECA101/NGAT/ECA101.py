@@ -24,8 +24,8 @@ if (Result):
 		TagFF8105 = DL.GetTLV(alldata,"FF8105")
 		# 57
 		DL.SetWindowText("blue", "Tag 57 Mask/ Encryption data:")
-		mask57 = DL.GetTLV(TagFF8105,"57", 0)
-		enc57 = DL.GetTLV(TagFF8105,"57", 1)
+		mask57 = DL.GetTLV_Embedded(alldata,"57", 0)
+		enc57 = DL.GetTLV_Embedded(alldata,"57", 1)
 		DL.SetWindowText("blue", "Tag 57 Decryption data:")
 		dec57 = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc57)	
 		if DL.Check_RXResponse(rx, '57A111 5413CCCCCCCC0010D1412CCCCCCCCCCCCC') == False:
@@ -34,8 +34,8 @@ if (Result):
 			DL.SetWindowText("red", "Tag 57_Enc: FAIL")
 		# 5A
 		DL.SetWindowText("blue", "Tag 5A Mask/ Encryption data:")
-		mask5A = DL.GetTLV(TagFF8105,"5A", 0)
-		enc5A = DL.GetTLV(TagFF8105,"5A", 1)
+		mask5A = DL.GetTLV_Embedded(alldata,"5A", 0)
+		enc5A = DL.GetTLV_Embedded(alldata,"5A", 1)
 		DL.SetWindowText("blue", "Tag 5A Decryption data:")
 		dec5A = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc5A)	
 		if DL.Check_RXResponse(rx, '5AA108 5413CCCCCCCC0010') == False:

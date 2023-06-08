@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-19434
+47412
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -163,12 +163,10 @@ if result <> 0 then
    dl.addcomment vbcrlf
    dl.addcomment "--- Burst ON mode"
 
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+   if readerType <> "NEO2" then 
       dl.sendsequence "burst on"
    elseif readerType = "NEO2" then 
       dl.sendsequence "burst on (NEO2)"
-   else
-      dl.sendsequence "burst on"
    end if
 
    result = dl.waitforsequence("04 00", 1, 5000)
@@ -187,26 +185,23 @@ If result <> 0 Then
         if check = 6 then readerType = "NEO3"
 
       msgbox "Click OK, swipe VISA MSD card", vbokonly
-      if readerType <> "NEO2" then r1 = DL.WaitForSequence("60-10 00 11", 1, 10000)
+             dl.pause 1000
+      if readerType <> "NEO2" and readerType <> "NEO3" then r1 = DL.WaitForSequence("60-10 00 11", 1, 10000)
       if readerType = "NEO2" or readerType = "NEO3" then r1 = DL.WaitForSequence("60-10 00 11 (NEO2)", 1, 10000)
 
       r2 = DL.WaitForSequence("dfee26", 1, 2000)
       r3 = DL.WaitForSequence("9f39 90", 1, 2000)
 
-      if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then 
+      if readerType <> "NEO2" and readerType <> "NEO3" then 
          r4 = DL.WaitForSequence("df30", 1, 2000)
       elseif readerType = "NEO2" or readerType = "NEO3" then 
          r4 = DL.WaitForSequence("df30 (NEO2)", 1, 2000)
-      else
-         r4 = DL.WaitForSequence("df30", 1, 2000)
       end if
 
-      if readerType = "GR" or readerType = "NEO1" then 
+      if readerType <> "NEO2" and readerType <> "NEO3" then 
          r5 = DL.WaitForSequence("dfef4c-4d", 1, 2000)
-      elseif readerType = "NEO2" or readerType = "NEO3" or readerType = "USAT" then 
+      elseif readerType = "NEO2" or readerType = "NEO3" then 
           r5 = 1
-      else
-         r5 = DL.WaitForSequence("dfef4c-4d", 1, 2000)
       end if
 
       r6 = DL.WaitForSequence("burst data", 1, 2000)
@@ -222,27 +217,27 @@ If result <> 0 Then
    result = DL.WaitForSequence("60-xx 63 status", 1, 10000)
    if result <> 0 then
       msgbox "Click OK, insert card that can not be powered on ICC (fallback to MSR)", vbokonly
-      if readerType <> "NEO2" then result = dl.waitforsequence("USE MAGSTRIPE", 1, 10000)
+      if readerType <> "NEO2" and readerType <> "NEO3" then result = dl.waitforsequence("USE MAGSTRIPE", 1, 10000)
       if readerType = "NEO2" or readerType = "NEO3" then 
          msgcheck = msgbox("Does reader have LCD and show msg 'USE MAGSTRIPE'?", vbyesno)
          if msgcheck = 7 then result = DL.WaitForSequence("USE MAGSTRIPE", 1, 3000)
       end if
       if result <> 0 then
          msgbox "Click OK, remove card and then swipe VISA MSD card", vbokonly
-         if readerType <> "NEO2" or readerType <> "NEO3" then r1 = DL.WaitForSequence("60-10 00 07", 1, 10000)
+         if readerType <> "NEO2" and readerType <> "NEO3" then r1 = DL.WaitForSequence("60-10 00 07", 1, 10000)
          if readerType = "NEO2" then r1 = DL.WaitForSequence("60-10 00 11 (NEO2)", 1, 10000)
          if readerType = "NEO3" then r1 = DL.WaitForSequence("60-10 00 07 (NEO2)", 1, 10000)
 
          r2 = DL.WaitForSequence("dfee26", 1, 2000)
          r3 = DL.WaitForSequence("9f39 80", 1, 2000)
 
-         if readerType <> "NEO2" then 
+         if readerType <> "NEO2" and readerType <> "NEO3" then 
             r4 = DL.WaitForSequence("df30", 1, 2000)
          elseif readerType = "NEO2" or readerType = "NEO3" then 
             r4 = DL.WaitForSequence("df30 (NEO2)", 1, 2000)
          end if
 
-         if readerType <> "NEO2" then 
+         if readerType <> "NEO2" and readerType <> "NEO3" then 
             r5 = DL.WaitForSequence("dfef4c-4d", 1, 2000)
          elseif readerType = "NEO2" or readerType = "NEO3" then 
              r5 = 1

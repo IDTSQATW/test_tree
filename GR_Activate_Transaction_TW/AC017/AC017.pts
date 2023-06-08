@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-37475
+56269
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -91,7 +91,7 @@ DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " bau
 DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
 DL.Pause 1000
 
-DL.StartCommunication
+'DL.StartCommunication
 
 '------------------------------------------------------------
 'Result reporting (!!!!! DO NOT EDIT !!!!!)

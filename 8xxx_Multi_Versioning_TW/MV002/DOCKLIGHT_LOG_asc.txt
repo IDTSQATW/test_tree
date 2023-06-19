@@ -1,4 +1,4 @@
-Docklight Log File (ASCII) - Started 2023/4/24 14:45:37.834 
+Docklight Log File (ASCII) - Started 2023/6/15 14:28:53.221 
  TEST CASE: MV002
 
  --- Set POS COM PORT Settings
@@ -8,9 +8,9 @@ Docklight Log File (ASCII) - Started 2023/4/24 14:45:37.834
 
  --- Get Main Firmware Version *** NEO2
 
-2023/4/24 14:45:39.004 [TX] - ViVOtech2<NUL><HT>	<ETX><NUL><NUL>??
-2023/4/24 14:45:39.012 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL><NAK>??b<DC1> 
-VP3350 FW v1.00.T?y<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
+2023/6/15 14:28:54.529 [TX] - ViVOtech2<NUL><HT>	<ETX><NUL><NUL>??
+2023/6/15 14:28:54.538 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL><ETB>??b<DC3> 
+VP3350 FW v1.00.22T?R<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
 
  Result = PASSED
  
@@ -24,5 +24,5 @@ VP3350 FW v1.00.T?y<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><
 Please check ASCII screen, make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (ASCII) - Stopped 2023/4/24 14:45:40.395 
+Docklight Log File (ASCII) - Stopped 2023/6/15 14:28:55.667 
 

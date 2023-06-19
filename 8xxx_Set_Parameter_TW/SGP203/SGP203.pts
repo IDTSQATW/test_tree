@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-49618
+45758
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -178,6 +178,14 @@ If result <> 0 then
       DL.AddComment "--- C7-D7: DFEC10 = 07"
       DL.SendSequence "C7-D7: DFEC10 = 07" 
       result = DL.WaitForSequence("C7 00 no data", 1, 2000)
+   End If
+
+   If result <> 0 Then
+      DL.ResetReceiveCounter
+      dl.addcomment vbcrlf
+      DL.AddComment "--- 60-06, DFEC10 = 07"
+      DL.SendSequence "60-06, DFEC10 = 07" 
+      result = DL.WaitForSequence("60 05", 1, 2000)
    End If
    
    If result <> 0 Then

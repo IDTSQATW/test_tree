@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-46963
+53620
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -156,10 +156,13 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-
-
+readermodel = msgbox ("Is the reader VP3350?", vbyesno)
+readercheck = msgbox ("Can reader support cmd 02-01? (ex. NSRED)", vbyesno)
+if readercheck = 6 then
 '============================================================
 If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
   DL.AddComment "--- Poll On Demand"
   DL.SendSequence " Poll On Demand"
   result = DL.WaitForSequence("Good Response", 1, 10000)
@@ -167,25 +170,47 @@ End If
 
 '------------------------------------------------------------
 If result <> 0 Then
-   prompt = prompt & "Tap CL card --> NO beep sound?...After giving result, tap any card again."
-   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y / N")  
+   prompt = prompt & "Tap CL card --> NO beep sound?"
+   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y")  
    result = (confirm = "y" Or confirm = "Y")
 End If
 '------------------------------------------------------------
+AT()
 
 If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+  DL.AddComment "--- 02-40 (enable 3 interface ON)"
+  DL.SendSequence "02-40 (enable 3 interface ON)"
+  if readermodel = 6 then result = DL.WaitForSequence("61-01 57", 1, 3000)
+  DL.SendSequence "05-01"
+  dl.pause 2000
+End If
+
+AT()
+
+sub AT()
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   msgbox "Click OK --> tap CL card again", vbokonly
   DL.AddComment "--- Activate Transaction"
   DL.SendSequence " Activate Transaction"
-  result = DL.WaitForSequence("CL card Response", 1, 10000)
+  if readermodel = 6 then result = DL.WaitForSequence("61-01 55", 1, 3000)
+  if result <> 0 then result = DL.WaitForSequence("CL card Response", 1, 10000)
+  dl.pause 1000
 End If
+end sub
 '------------------------------------------------------------
 If result <> 0 Then
    prompt2 = prompt2 & "Did you hear it beep?"
-   confirm2 = InputBox(prompt2, "Enter (Y / y / N / n)", "Y / N")  
+   confirm2 = InputBox(prompt2, "Enter (Y / y / N / n)", "Y")  
    result = (confirm2 = "y" Or confirm2 = "Y")
 End If
-'------------------------------------------------------------
-
+'============================================================
+else
+   DL.AddComment vbcrlf & "The project did not have NSRED type, so it did not support cmd 02-01, skip test."
+end if
 
 DL.AddComment vbCrLf
 PrintMyResult(result)

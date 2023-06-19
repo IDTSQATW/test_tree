@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-48375
+41522
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -226,8 +226,8 @@ If result <> 0 Then
 
    if readerType <> "NEO2" then result1 = dl.waitforsequence("02-40 resp", 1, 1500)
       if result1 = 0 then result1 = dl.waitforsequence("02-40 resp-long PAN", 1, 1500)
-   if readerType = "NEO2" then result1 = dl.waitforsequence("02-40 resp (NEO2)", 1, 1500)
-      if result1 = 0 then result1 = dl.waitforsequence("02-40 resp (NEO2)-long PAN", 1, 1500)
+   if readerType = "NEO2" then result1 = dl.waitforsequence("02-40 resp (NEO2)", 1, 5000)
+      if result1 = 0 then result1 = dl.waitforsequence("02-40 resp (NEO2)-long PAN", 1, 5000)
 
    if readerType <> "NEO2" then result2 = dl.waitforsequence("tag df30", 1, 1000)
    if readerType = "NEO2" then result2 = dl.waitforsequence("tag DFEE30 (NEO2)", 1, 1000)

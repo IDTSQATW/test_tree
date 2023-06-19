@@ -42,7 +42,7 @@ if (Result):
 
 # cmd 02-40, swipe Discover card
 if (Result):
-	for j in range (1, 3):
+	for j in range (1, 2):
 		if j == 1:
 			RetOfStep = DL.SendCommand('Poll on Demand')
 			if (RetOfStep):

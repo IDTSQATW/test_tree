@@ -43,7 +43,7 @@ if (Result):
 		
 # cmd 02-40, swipe card
 if (Result):
-	for j in range (1, 4):
+	for j in range (1, 2):
 		if j == 1:
 			# Poll on Demand
 			RetOfStep = DL.SendCommand('Poll on Demand')
@@ -66,7 +66,7 @@ if (Result):
 				Result = DL.Check_RXResponse("04 00 00 00")
 					
 		if (Result):
-			for i in range (1, 11):
+			for i in range (4, 5):
 				if j == 1:
 					if i == 1:
 						RetOfStep = DL.SendCommand('Activate Transaction -- IDT')

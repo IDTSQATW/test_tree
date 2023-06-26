@@ -56,6 +56,7 @@ if (Result):
 		if (Result):
 			for i in range (1, 11):
 				if j == 1:
+					time.sleep(1)
 					if i == 1:
 						RetOfStep = DL.SendCommand('Activate Transaction -- IDT')
 					if i == 2:
@@ -332,7 +333,7 @@ if (Result):
 								# PAN = 12	
 								if i == 8:
 									# Transaction result verification
-									TR1maskdata = "%*4071****0469^DOW/JOHN ^1711***************************?*"
+									TR1maskdata = "%*40******0469^DOW/JOHN ^1711***************************?*"
 									TR1plaintextdata = "25423430373136363231303436395E444F572F4A4F484E205E313731313230313132373837313130303030303030303834393030303030303F39"
 									
 									Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)

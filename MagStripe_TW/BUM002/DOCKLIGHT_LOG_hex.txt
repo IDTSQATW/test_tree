@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2023/4/26 09:50:44.567 
+Docklight Log File (HEX) - Started 2023/6/21 13:40:35.747 
  TEST CASE: BUM002
 
  --- Set POS COM PORT Settings
@@ -15,5 +15,5 @@ The reader does NOT support LCD. SKIP this case.
  Result = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2023/4/26 09:50:48.670 
+Docklight Log File (HEX) - Stopped 2023/6/21 13:40:40.200 
 

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-13028
+6704
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -206,6 +206,7 @@ If result <> 0 Then
    result = DL.WaitForSequence("burst off", 1, 5000)
 end if
 
+for j = 1 to 2
 for i = 1 to 2     'for issue #NEO3-6582/ NEO3-6367
    If result <> 0 Then
       if i = 1 then MsgBox "Click OK --> Tap VISA card", vbokonly
@@ -230,13 +231,13 @@ for i = 1 to 2     'for issue #NEO3-6582/ NEO3-6367
    end if
 
    if result <> 0 and i = 2 then
-      i = 1
       dl.resetreceivecounter
       dl.addcomment vbcrlf
       DL.AddComment "--- 77-05"
       DL.SendSequence "77-05"
       dl.pause 20000
    end if
+next
 next
 
 end if

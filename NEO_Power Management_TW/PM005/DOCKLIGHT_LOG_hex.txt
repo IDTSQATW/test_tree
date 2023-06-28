@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2023/6/13 14:09:26.079 
+Docklight Log File (HEX) - Started 2023/6/27 14:14:11.176 
  TEST CASE: PM005
 
  --- Set POS COM PORT Settings
@@ -8,5 +8,5 @@ Docklight Log File (HEX) - Started 2023/6/13 14:09:26.079
 
 
 
-Docklight Log File (HEX) - Stopped 2023/6/13 14:09:26.447 
+Docklight Log File (HEX) - Stopped 2023/6/27 14:14:11.476 
 

@@ -52,7 +52,7 @@ if (Result):
 if (Result):
 	RetOfStep = DL.SendCommand('Activate Transaction')
 	if (RetOfStep):
-		DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** 63")
+		DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** 65")
 		alldata = DL.Get_RXResponse(0)
 
 		tagFF8105 = DL.GetTLV(alldata,"FF8105", 0)
@@ -76,7 +76,7 @@ if (Result):
 	# Tags 9F39/ FFEE01/ DFEE26	
 		if DL.Check_RXResponse("9F39 01 07") == False: 
 			DL.SetWindowText("Red", "Tag 9F39: FAIL")
-		if DL.Check_RXResponse("DFEE26 02 6301") == False: 
+		if DL.Check_RXResponse("DFEE26 02 6501") == False: 
 			DL.SetWindowText("Red", "Tag DFEE26: FAIL")			
 			
 if readertype == 1:

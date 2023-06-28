@@ -55,11 +55,11 @@ if (Result):
 				if i == 1:
 					rx = 0
 					alldata = DL.Get_RXResponse(rx)
-					DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 02 23 ** E3 ** DF EE 12')
+					DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 02 23 ** E5 ** DF EE 12')
 				if i == 2:
 					rx = 1
 					alldata = DL.Get_RXResponse(rx)	
-					DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 03 23 ** E3 ** DF EE 12')
+					DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 03 23 ** E5 ** DF EE 12')
 				
 				ksn = DL.GetTLV(alldata,"DFEE12")	
 				
@@ -102,7 +102,7 @@ if (Result):
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")
 				if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300100") == False: 
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-				if DL.Check_RXResponse(rx, "DFEE26 02 E301") == False: 
+				if DL.Check_RXResponse(rx, "DFEE26 02 E501") == False: 
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")		
 				
 				RetOfStep = DL.SendCommand('03-03')

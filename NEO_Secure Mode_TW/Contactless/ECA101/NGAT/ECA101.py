@@ -18,7 +18,7 @@ if (Result):
 	RetOfStep = DL.SendCommand('02-40 (enable CL only)')
 	rx = 5 # for VP3350
 	if (RetOfStep):
-		DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E3 ** DF EE 12")
+		DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E5 ** DF EE 12")
 		alldata = DL.Get_RXResponse(rx)
 		ksn = DL.GetTLV(alldata,"DFEE12")	
 		TagFF8105 = DL.GetTLV(alldata,"FF8105")
@@ -46,5 +46,5 @@ if (Result):
 		# Tags 9F39/ DFEE26
 		if DL.Check_RXResponse(rx, "9F39 01 07") == False: 
 			DL.SetWindowText("Red", "Tag 9F39: FAIL")
-		if DL.Check_RXResponse(rx, "DFEE26 02 E301") == False: 
+		if DL.Check_RXResponse(rx, "DFEE26 02 E501") == False: 
 			DL.SetWindowText("Red", "Tag DFEE26: FAIL")

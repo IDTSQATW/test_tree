@@ -275,6 +275,18 @@ COMMENT Action Code "00" Pass
 
 RECEIVE
 4
+Read Group 1 Response (NEO2) 3
+56 69 56 4F 74 65 63 68 32 00 03 00 ?? ?? DF EE 2D 01 01 DF 81 1B 01 50 DF EE 37 01 03 9F 35 01 26
+-1
+1
+COMMENT Action Code "00" Pass
+0
+1
+0
+0
+
+RECEIVE
+5
 Read Group 2 Response
 56 69 56 4F 74 65 63 68 32 00 03 00 00 09 FF E4 01 02 5F 2A 02 01 02 AB 35
 -1
@@ -286,7 +298,7 @@ COMMENT Action Code "00" Pass
 0
 
 RECEIVE
-5
+6
 Read Group 2 Response (NEO2)
 56 69 56 4F 74 65 63 68 32 00 03 00 ?? ?? DF EE 2D 01 02 5F 2A 02 01 02
 -1
@@ -298,7 +310,7 @@ COMMENT Action Code "00" Pass
 0
 
 RECEIVE
-6
+7
 Read Group 3 Response
 56 69 56 4F 74 65 63 68 32 00 03 00 00 09 FF E4 01 03 9F 1B 02 09 01 3E BA
 -1
@@ -310,7 +322,7 @@ COMMENT Action Code "00" pass
 0
 
 RECEIVE
-7
+8
 Read Group 3 Response (NEO2)
 56 69 56 4F 74 65 63 68 32 00 03 00 ?? ?? DF EE 2D 01 03 9F 1B 02 09 01
 -1
@@ -322,7 +334,7 @@ COMMENT Action Code "00" pass
 0
 
 RECEIVE
-8
+9
 Read Group 4 Response
 56 69 56 4F 74 65 63 68 32 00 03 00 00 09 FF E4 01 04 9F 1A 02 08 40 EB 9B
 -1
@@ -334,7 +346,7 @@ COMMENT Action Code "00" Pass
 0
 
 RECEIVE
-9
+10
 Read Group 4 Response (NEO2)
 56 69 56 4F 74 65 63 68 32 00 03 00 ?? ?? DF EE 2D 01 04 9F 1A 02 08 40
 -1
@@ -346,7 +358,7 @@ COMMENT Action Code "00" Pass
 0
 
 RECEIVE
-10
+11
 Read Group 5 Response
 56 69 56 4F 74 65 63 68 32 00 03 00 00 0A FF E4 01 05 9F 33 03 01 02 08 B5 95
 -1
@@ -358,7 +370,7 @@ COMMENT Action Code "00" Pass
 0
 
 RECEIVE
-11
+12
 Read Group 5 Response (NEO2)
 56 69 56 4F 74 65 63 68 32 00 03 00 ?? ?? DF EE 2D 01 05 9F 33 03 01 02 08
 -1
@@ -370,7 +382,7 @@ COMMENT Action Code "00" Pass
 0
 
 RECEIVE
-12
+13
 Read Group 6 Response
 56 69 56 4F 74 65 63 68 32 00 03 00 00 08 FF E4 01 06 9F 35 01 26 21 EC
 -1
@@ -382,7 +394,7 @@ COMMENT Action Code "00" Pass
 0
 
 RECEIVE
-13
+14
 Read Group 6 Response (NEO2)
 56 69 56 4F 74 65 63 68 32 00 03 00 ?? ?? DF EE 2D 01 06 9F 35 01 26
 -1
@@ -394,7 +406,7 @@ COMMENT Action Code "00" Pass
 0
 
 RECEIVE
-14
+15
 Read Group 7 Response
 56 69 56 4F 74 65 63 68 32 00 03 00 00 0D FF E4 01 07 FF F1 06 01 02 03 04 05 06 04 04
 -1
@@ -406,7 +418,7 @@ COMMENT Action Code "00" Pass
 0
 
 RECEIVE
-15
+16
 Read Group 7 Response (NEO2)
 56 69 56 4F 74 65 63 68 32 00 03 00 ?? ?? DF EE 2D 01 07 DF EE 34 06 01 02 03 04 05 06
 -1

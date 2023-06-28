@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-16287
+64276
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -149,10 +149,10 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-for i = 1 to 1
+for i = 1 to 2
 '------------------------------------------------------------(Standby0 = 5 sec)
 if i = 1 then msgbox "Take Type D reader, plug-in USB cable in USB Female --> Click OK", vbokonly
-if i = 2 then msgbox "Take Type A reader, Plug-in USB cable in USB Female --> Click OK", vbokonly
+if i = 2 then msgbox "Take Type F reader, Plug-in USB cable in USB Female --> Click OK", vbokonly
 dl.addcomment vbcrlf & "==================================="
 DL.SendSequence "18-01 Ping"
 dl.pause 1000

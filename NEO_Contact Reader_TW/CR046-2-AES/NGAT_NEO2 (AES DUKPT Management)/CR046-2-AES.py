@@ -99,7 +99,7 @@ if (Result):
 					rx = 5					
 					Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')
 					if (Result):
-						Result = DL.Check_RXResponse(rx, '6A ** DF EE 25')
+						Result = DL.Check_RXResponse(rx, '6C ** DF EE 25')
 				time.sleep(1)							
 			if readertype == 0:     # NEOI
 				rx = 5
@@ -196,7 +196,7 @@ if (Result):
 							if readertype == 1:							
 								if TagFFEE01 != "DFEE30010C": 
 									DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-								if TagDFEE26 != "6A01": 
+								if TagDFEE26 != "6C01": 
 									DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 							if readertype == 0:
 								if TagFFEE01 != "DF30010C": 
@@ -212,7 +212,7 @@ if (Result):
 if readertype == 1:     # NEOII and upward project
 	RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')
 	if (RetOfStep):
-		Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** 6A ** 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
+		Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** 6C ** 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
 if readertype == 0:     # NEOI
 	RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')	
 	if (RetOfStep):

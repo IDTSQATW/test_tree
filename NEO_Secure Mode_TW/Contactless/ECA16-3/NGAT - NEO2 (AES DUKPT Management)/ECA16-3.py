@@ -44,7 +44,7 @@ if (Result):
 		RetOfStep = DL.SendCommand('Activate Transaction w/o LCD')	
 		rx = 5
 	if (RetOfStep):
-		DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E3 ** DF EE 12")
+		DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E5 ** DF EE 12")
 		alldata = DL.Get_RXResponse(rx)
 		ksn = DL.GetTLV(DL.Get_RXResponse(rx),"DFEE12")	
 
@@ -122,7 +122,7 @@ if (Result):
 		if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300100") == False: 
 			DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-		if DL.Check_RXResponse(rx, "DFEE26 02 E301") == False: 
+		if DL.Check_RXResponse(rx, "DFEE26 02 E501") == False: 
 			DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 			
 # Reset to default

@@ -65,7 +65,7 @@ if (Result):
 				rx = 3
 				Result = DL.Check_StringAB(DL.Get_RXResponse(rx), '56 69 56 4F 74 65 63 68 32 00 60 00')
 				if (Result):
-					Result = DL.Check_StringAB(DL.Get_RXResponse(rx), 'EA DF EE 25')		
+					Result = DL.Check_StringAB(DL.Get_RXResponse(rx), 'EC DF EE 25')		
 					sResult=DL.Get_RXResponse(rx)					
 			if (Result):	
 				if sResult!=None and sResult!="":
@@ -128,7 +128,7 @@ if (Result):
 							DL.SetWindowText("Red", "Tag 9F39: FAIL")
 						if TagFFEE01 != "DFEE30010C": 
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-						if TagDFEE26 != "EA01": 
+						if TagDFEE26 != "EC01": 
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 				else:
 					DL.SetWindowText("RED", "Parse Card Data Fail")
@@ -136,4 +136,4 @@ if (Result):
 # cmd 60-13
 RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')
 if (RetOfStep):
-	DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** EA ** 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
+	DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** EC ** 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")

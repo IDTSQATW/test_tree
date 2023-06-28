@@ -85,7 +85,7 @@ if (Result):
 				DL.SetWindowText("Red", "Tag 9F39: FAIL")	
 			if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False: 
 				DL.SetWindowText("Red", "Tag FFEE01: FAIL")		
-			if DL.Check_RXResponse(rx, "DFEE26 02 E201") == False: 
+			if DL.Check_RXResponse(rx, "DFEE26 02 E401") == False: 
 				DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 
 if (Result):
@@ -141,7 +141,7 @@ if (Result):
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")	
 				if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False: 
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")		
-				if DL.Check_RXResponse(rx, "DFEE26 02 E201") == False: 
+				if DL.Check_RXResponse(rx, "DFEE26 02 E401") == False: 
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 if  CTresultcode == "0010":
 	Result = True
@@ -163,7 +163,7 @@ if  CTresultcode == "0010":
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")	
 				if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False: 
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")		
-				if DL.Check_RXResponse(rx, "DFEE26 02 E201") == False: 
+				if DL.Check_RXResponse(rx, "DFEE26 02 E401") == False: 
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 if  CTresultcode == "0004":
 	Result = True
@@ -185,7 +185,7 @@ if  CTresultcode == "0004":
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")	
 				if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False: 
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")		
-				if DL.Check_RXResponse(rx, "DFEE26 02 E201") == False: 
+				if DL.Check_RXResponse(rx, "DFEE26 02 E401") == False: 
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 					
 # 4C config (FastEMV OFF) + cmd 60-10 (Normal)
@@ -248,7 +248,7 @@ if (Result):
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")	
 				if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False: 
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")		
-				if DL.Check_RXResponse(rx, "DFEE26 02 E201") == False: 
+				if DL.Check_RXResponse(rx, "DFEE26 02 E401") == False: 
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 if  CTresultcode == "0010":
 	Result = True
@@ -270,7 +270,7 @@ if  CTresultcode == "0010":
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")	
 				if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False: 
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")		
-				if DL.Check_RXResponse(rx, "DFEE26 02 E201") == False: 
+				if DL.Check_RXResponse(rx, "DFEE26 02 E401") == False: 
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 if  CTresultcode == "0004":
 	Result = True
@@ -292,7 +292,7 @@ if  CTresultcode == "0004":
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")	
 				if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False: 
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")		
-				if DL.Check_RXResponse(rx, "DFEE26 02 E201") == False: 
+				if DL.Check_RXResponse(rx, "DFEE26 02 E401") == False: 
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 
 if (Result):
@@ -323,5 +323,5 @@ if (Result):
 				DL.SetWindowText("Red", "Tag 9F39: FAIL")	
 			if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False: 
 				DL.SetWindowText("Red", "Tag FFEE01: FAIL")		
-			if DL.Check_RXResponse(rx, "DFEE26 02 E201") == False: 
+			if DL.Check_RXResponse(rx, "DFEE26 02 E401") == False: 
 				DL.SetWindowText("Red", "Tag DFEE26: FAIL")		

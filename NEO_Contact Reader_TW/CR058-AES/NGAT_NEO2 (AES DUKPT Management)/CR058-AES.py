@@ -114,7 +114,7 @@ if (Result):
 				if DL.Check_StringAB(TagFFEE01, 'DFEE300101') == False:
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-				if DL.Check_StringAB(TagDFEE26, 'E201') == False:
+				if DL.Check_StringAB(TagDFEE26, 'E401') == False:
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 
 		# cmd 60-11 Contact Authenticate Transaction (DFEF1F: 00 00)			
@@ -147,7 +147,7 @@ if (Result):
 						if DL.Check_StringAB(TagFFEE01, 'DFEE300101') == False:
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-						if DL.Check_StringAB(TagDFEE26, 'E201') == False:
+						if DL.Check_StringAB(TagDFEE26, 'E401') == False:
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 				
 		# cmd 60-12 Contact Apply Host Response (DFEF1F: 00 00)
@@ -180,7 +180,7 @@ if (Result):
 						if DL.Check_StringAB(TagFFEE01, 'DFEE300101') == False:
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-						if DL.Check_StringAB(TagDFEE26, 'E201') == False:
+						if DL.Check_StringAB(TagDFEE26, 'E401') == False:
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 
 ### CASE 3							
@@ -213,7 +213,7 @@ if (Result):
 				if DL.Check_StringAB(TagFFEE01, 'DFEE300101') == False:
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-				if DL.Check_StringAB(TagDFEE26, 'E201') == False:
+				if DL.Check_StringAB(TagDFEE26, 'E401') == False:
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")			
 
 		# cmd 60-11 Contact Authenticate Transaction (DFEF1F: 01 01 --1)		
@@ -259,7 +259,7 @@ if (Result):
 				if DL.Check_StringAB(TagFFEE01, 'DFEE300101') == False:
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-				if DL.Check_StringAB(TagDFEE26, 'E201') == False:
+				if DL.Check_StringAB(TagDFEE26, 'E401') == False:
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 					
 		# cmd 60-12 Contact Apply Host Response (DFEF1F: 01 01 --2)
@@ -291,7 +291,7 @@ if (Result):
 						if DL.Check_StringAB(TagFFEE01, 'DFEE300101') == False:
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-						if DL.Check_StringAB(TagDFEE26, 'E201') == False:
+						if DL.Check_StringAB(TagDFEE26, 'E401') == False:
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 
 ### CASE 5							
@@ -324,7 +324,7 @@ if (Result):
 				if DL.Check_StringAB(TagFFEE01, 'DFEE300101') == False:
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-				if DL.Check_StringAB(TagDFEE26, 'E201') == False:
+				if DL.Check_StringAB(TagDFEE26, 'E401') == False:
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 					
 		# cmd 60-12 Contact Apply Host Response (DFEF1F: 01 00)
@@ -357,5 +357,5 @@ if (Result):
 						if DL.Check_StringAB(TagFFEE01, 'DFEE300101') == False:
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-						if DL.Check_StringAB(TagDFEE26, 'E201') == False:
+						if DL.Check_StringAB(TagDFEE26, 'E401') == False:
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")

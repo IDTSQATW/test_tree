@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-27492
+46583
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -131,7 +131,6 @@ End Function
 'TEST BEGINS
 '------------------------------------------------------------
 
-' Under RUN mode: Press BT and hold wake up key > 1s, will enter Sleep mode
 ' Under Sleep mode: Press BT wake up key, will enter RUN mode
 ' Under Standby mode: Press BT wake up key, will enter RUN mode
 

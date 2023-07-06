@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-4775
+32914
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -253,8 +253,11 @@ idtech = 1
                 r = DL.WaitForSequence("02-40 case " & k, 1, 8000)
              end if
              elseif readerType = "NEO2" then
-                    if k = 1 or k = 2 or k = 8 or k = 9 or k = 10 or k = 16 or k = 17 or k = 18 then
+                    if k = 1 or k = 2 or k = 8 or k = 9 or k = 10 or k = 17 or k = 18 then
                        r = DL.WaitForSequence("02-40 case " & k & " (NEO2)", 1, 4000)
+                    elseif k = 16 then
+                       r = DL.WaitForSequence("02-40 case " & k & " (NEO2)", 1, 3000)
+                       if r = 0 then r = DL.WaitForSequence("02-40 case " & k & " (NEO2) 2", 1, 4000)
                     else
                        r = DL.WaitForSequence("02-40 case " & k, 1, 4000)
                     end if

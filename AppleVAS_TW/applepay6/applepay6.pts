@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-51435
+57052
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -346,8 +346,8 @@ DL.ClearCommWindows
 
    else
       DL.SendSequence "ACT - VAS URL Only Protocol (NEO2)", i, "D"
-   result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS URL response (NEO2)" , 1, 10000)
-
+   result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS URL response (NEO2)" , 1, 3000)
+   if result = 0 then result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS URL response (NEO2) 2" , 1, 3000)
    end if
    if result = 0 then 
       countf = countf + 1

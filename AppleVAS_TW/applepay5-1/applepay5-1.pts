@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-63302
+40096
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -346,7 +346,8 @@ DL.ClearCommWindows
    if readerType <> "NEO2" then
       result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS URL response" , 1, 10000)
    else
-      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS URL response (NEO2)" , 1, 10000)
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS URL response (NEO2)" , 1, 3000)
+      if result = 0 then result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS URL response (NEO2) 2" , 1, 3000)
    end if
       if result = 0 then 
       countf = countf + 1

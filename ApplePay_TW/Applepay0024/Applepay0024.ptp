@@ -306,7 +306,7 @@ COMMENT
 RECEIVE
 17
 ffee01 (NEO2)
-FF EE 01 ?? DF EE 30 01 00
+FF EE 01 ?? ## ## ## ## ## DF EE 30 01 00
 -1
 1
 COMMENT 

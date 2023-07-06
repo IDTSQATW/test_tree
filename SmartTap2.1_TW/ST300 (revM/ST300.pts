@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-59424
+29982
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -132,6 +132,14 @@ Sub PrintMyResult(ResultX)
        DL.AddComment "Result = FAILED"
     End If
 End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
 '------------------------------------------------------------
 'Debugging (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
@@ -142,6 +150,17 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+If result <> 0 Then
+   dl.pause 1000
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Check DUKPT Keys Extended (81-0C) AR"
+   DL.SendSequence "Check DUKPT Keys Extended (81-0C) AR"
+   result = DL.WaitForSequence("81-0C data key", 1, 3000)
+   ReverseResult(result)
+   if result = 0 then dl.addcomment vbcrlf & "Please remove data key and then restart test....."
+End If
+
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- Poll on demand"

@@ -56,6 +56,7 @@ if (Result):
 		if (Result):
 			for i in range (1, 11):
 				if j == 1:
+					time.sleep(1)
 					if i == 1:
 						RetOfStep = DL.SendCommand('Activate Transaction -- IDT')
 					if i == 2:
@@ -101,29 +102,29 @@ if (Result):
 				if (RetOfStep):		
 					if j == 1:
 						if i == 1:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 7F 4F 28 6B 92 AD 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EC DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 7F 4F 28 6B 92 AD 02 16 00")
 						if i == 2:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 5F 44 28 00 B3 9B 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EC DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 5F 44 28 00 B3 9B 02 16 00")
 						if i == 3:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 5F 48 28 00 B3 9B 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EC DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 5F 48 28 00 B3 9B 02 16 00")
 						if i == 4:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 85 57 00 48 00 92 00 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EC DF EE 25 02 00 11 DF EE 23 ** 02 ** 85 57 00 48 00 92 00 02 16 00")
 						if i == 5:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 81 7F 30 23 52 92 AD 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EC DF EE 25 02 00 11 DF EE 23 ** 02 ** 81 7F 30 23 52 92 AD 02 16 00")
 						if i == 6:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 5F 3D 26 00 93 9B 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EC DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 5F 3D 26 00 93 9B 02 16 00")
 						if i == 7:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 4F 3B 00 00 90 89 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EC DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 4F 3B 00 00 90 89 02 16 00")
 						if i == 8:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 4F 3A 00 00 B1 89 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EC DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 4F 3A 00 00 B1 89 02 16 00")
 						if i == 9:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 4F 42 00 00 90 89 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EC DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 4F 42 00 00 90 89 02 16 00")
 						if i == 10:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 7F 4D 27 69 97 BF 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EC DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 7F 4D 27 69 97 BF 02 16 00")
 					if j == 2:
 						Result = DL.Check_StringAB(DL.Get_RXResponse(1),"56 69 56 4F 74 65 63 68 32 00 03 00")
 						if (Result):
-							Result = DL.Check_StringAB(DL.Get_RXResponse(1),"EA DF EE 25 02 00 11 DF EE 23")
+							Result = DL.Check_StringAB(DL.Get_RXResponse(1),"EC DF EE 25 02 00 11 DF EE 23")
 							if (Result):
 								if i == 1:
 									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"83 7F 4F 28 6B 92 AD 02 16 00")
@@ -187,7 +188,7 @@ if (Result):
 									DL.SetWindowText("red", "Tag9F39: FAIL")							
 								if DL.Check_RXResponse(rx, 'FFEE01 ** DFEE30010C') == False:
 									DL.SetWindowText("red", "TagFFEE01: FAIL")	
-								if DL.Check_RXResponse(rx, 'DFEE26 02 EA01') == False:
+								if DL.Check_RXResponse(rx, 'DFEE26 02 EC01') == False:
 									DL.SetWindowText("red", "TagDFEE26: FAIL")	
 								
 								# IDT
@@ -326,7 +327,7 @@ if (Result):
 								# PAN = 12	
 								if i == 8:
 									# Transaction result verification
-									TR1maskdata = "%*4071****0469^DOW/JOHN ^1711***************************?*"
+									TR1maskdata = "%*40******0469^DOW/JOHN ^1711***************************?*"
 									TR1plaintextdata = "25423430373136363231303436395E444F572F4A4F484E205E313731313230313132373837313130303030303030303834393030303030303F39"
 									
 									Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)

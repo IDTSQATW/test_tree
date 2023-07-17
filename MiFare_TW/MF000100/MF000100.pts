@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-54277
+21276
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -123,18 +123,6 @@ Function ReverseResult(ResultParam)
 End Function
 
 Sub DL_OnSend()
-    ' For all Send Sequences with minimum 3 bytes length (one byte user data,
-    ' two bytes CRC, perform the following manipulation:
-    ' - Calculate a 16 bit crc value on the characters 1 .. (DL.OnSend_Size() - 2)
-    ' - Write the low byte to character no. DL.OnSend_GetSize()-1
-    ' - Write the high byte to character no. DL.OnSend_GetSize()
-    ' Example:
-    ' Send Sequence name: MyCommand
-    ' Send Sequence in HEX representation: 02 04 00 00 00 01 00 00
-    ' --> Data transmitted by Docklight:   02 04 00 00 00 01 31 F9
-    '     (with "31" as the low byte CRC, "F9" as the high byte)
-
-    ' Check if there is at least one byte of user data
     usDataLen = DL.OnSend_GetSize() - 2
     If usDataLen > 0 Then
         crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
@@ -149,12 +137,39 @@ Fail = 0
 Sub The_Test()
  DL.AddComment "---------- READ ALL BLOCKS ----------"
  For i = 0 to 63
+       if i = 0 then auth = 0
+       if i = auth then 
+          if auth = 0 then cmd = "Sector 0"
+          if i = 4 then cmd = "Sector 1"
+          if i = 8 then cmd = "Sector 2"
+          if i = 12 then cmd = "Sector 3"
+          if i = 16 then cmd = "Sector 4"
+          if i = 20 then cmd = "Sector 5"
+          if i = 24 then cmd = "Sector 6"
+          if i = 28 then cmd = "Sector 7"
+          if i = 32 then cmd = "Sector 8"
+          if i = 36 then cmd = "Sector 9"
+          if i = 40 then cmd = "Sector 10"
+          if i = 44 then cmd = "Sector 11"
+          if i = 48 then cmd = "Sector 12"
+          if i = 52 then cmd = "Sector 13"
+          if i = 56 then cmd = "Sector 14"
+          if i = 60 then cmd = "Sector 15"
+	   If result <> 0 Then
+	      DL.ResetReceiveCounter
+	      DL.AddComment vbCrLf & "Mifare auth - " & cmd & vbCrLf
+	      DL.SendSequence "Mifare auth - " & cmd
+	      result = DL.WaitForSequence("PT command (OK)", 1, 3000)
+	   End If
+          auth = auth + 4
+       end if
 	DL.AddComment vbCrLf & "--- Read Block #" & i & " ---" & vbCrLf
 	If i <= 9 Then
 		i = "00" & i
 	Else
 		i = "0" & i
 	End If
+      DL.AddComment vbCrLf
       DL.ResetReceiveCounter
 	DL.SendSequence "Read Block", i, "D"
 	result = DL.WaitForSequence("Read Block OK" , 1, 3000)
@@ -205,13 +220,6 @@ If result <> 0 Then
  DL.AddComment vbCrLf & "Poll for Token (10 sec)" & vbCrLf
  DL.SendSequence "Poll for Token (10 sec)"
  result = DL.WaitForSequence("Poll for Token (OK)", 1, 3000)
-End If
-
-If result <> 0 Then
- DL.ResetReceiveCounter
- DL.AddComment vbCrLf & "Mifare auth - Sector 1" & vbCrLf
- DL.SendSequence "Mifare auth - Sector 1"
- result = DL.WaitForSequence("PT command (OK)", 1, 3000)
 End If
 
 The_Test

@@ -10,6 +10,16 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey ='FEDCBA9876543210F1F1F1F1F1F1F1F1'
 
+# Check reader is VP3350 or not
+lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
+    
 # Enable encryption (02)
 if (Result):
 	RetOfStep = DL.SendCommand('Enable Encryption (02)')
@@ -52,6 +62,7 @@ if (Result):
 		if (Result):
 			for i in range (1, 11):
 				if j == 1:
+					time.sleep(1)
 					if i == 1:
 						RetOfStep = DL.SendCommand('Activate Transaction -- IDT')
 					if i == 2:
@@ -97,30 +108,30 @@ if (Result):
 				if (RetOfStep):		
 					if j == 1:
 						if i == 1:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6A DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 3F 4F 28 6B 97 00 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6C DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 7F 4F 28 6B 97 00 02 16 00")
 						if i == 2:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6A DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 44 28 00 B3 9B 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6C DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 5F 44 28 00 B3 9B 02 16 00")
 						if i == 3:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6A DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 48 28 00 B3 9B 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6C DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 5F 48 28 00 B3 9B 02 16 00")
 						if i == 4:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6A DF EE 25 02 00 11 DF EE 23 ** 02 ** 85 17 00 48 00 92 00 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6C DF EE 25 02 00 11 DF EE 23 ** 02 ** 85 57 00 48 00 92 00 02 16 00")
 						if i == 5:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6A DF EE 25 02 00 11 DF EE 23 ** 02 ** 81 3F 30 23 52 97 00 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6C DF EE 25 02 00 11 DF EE 23 ** 02 ** 81 7F 30 23 52 97 00 02 16 00")
 						if i == 6:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6A DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 3D 26 00 93 9B 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6C DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 5F 3D 26 00 93 9B 02 16 00")
 						if i == 7:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6A DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 0F 3B 00 00 91 00 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6C DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 4F 3B 00 00 91 00 02 16 00")
 						if i == 8:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6A DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 0F 3A 00 00 B1 89 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6C DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 4F 3A 00 00 B1 89 02 16 00")
 						if i == 9:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6A DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 0F 42 00 00 91 00 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6C DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 4F 42 00 00 91 00 02 16 00")
 						if i == 10:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6A DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 3F 4D 27 69 97 BF 02 16 00")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 6C DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 7F 4D 27 69 97 BF 02 16 00")
 					if j == 2:
 						time.sleep(1)
 						Result = DL.Check_StringAB(DL.Get_RXResponse(1),"56 69 56 4F 74 65 63 68 32 00 03 00")
 						if (Result):
-							Result = DL.Check_StringAB(DL.Get_RXResponse(1),"6A DF EE 25 02 00 11 DF EE 23")
+							Result = DL.Check_StringAB(DL.Get_RXResponse(1),"6C DF EE 25 02 00 11 DF EE 23")
 							if (Result):
 								if i == 1:
 									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"83 3F 4F 28 6B 97 00 02 16 00")
@@ -190,7 +201,7 @@ if (Result):
 								if Result != True:
 									DL.SetWindowText("red", "TagFFEE01: FAIL")
 										
-								Result = DL.Check_StringAB(TagDFEE26, '6A01')
+								Result = DL.Check_StringAB(TagDFEE26, '6C01')
 								if Result != True:
 									DL.SetWindowText("red", "TagDFEE26: FAIL")	
 									
@@ -330,7 +341,7 @@ if (Result):
 								# PAN = 12	
 								if i == 8:
 									# Transaction result verification
-									TR1maskdata = "%*4071****0469^DOW/JOHN ^1711***************************?*"
+									TR1maskdata = "%*40******0469^DOW/JOHN ^1711***************************?*"
 									TR1plaintextdata = "25423430373136363231303436395E444F572F4A4F484E205E313731313230313132373837313130303030303030303834393030303030303F39"
 									
 									Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)

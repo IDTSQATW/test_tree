@@ -103,7 +103,7 @@ if (Result):
 						# if i == 1:
 							# Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 3F 4F 28 6B 97 00")
 						if i == 2:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 5F 44 28 00 B3 9B")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EC ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 5F 44 28 00 B3 9B")
 						# if i == 3:
 							# Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 86 1F 48 28 00 93 00")
 						# if i == 4:
@@ -123,7 +123,7 @@ if (Result):
 					if j == 2:
 						Result = DL.Check_RXResponse(1,"56 69 56 4F 74 65 63 68 32 00 03 00")
 						if (Result):
-							Result = DL.Check_RXResponse(1,"EA ** DF EE 25 02 00 11 DF EE 23")
+							Result = DL.Check_RXResponse(1,"EC ** DF EE 25 02 00 11 DF EE 23")
 							if (Result):
 								# if i == 1:
 									# Result = DL.Check_StringAB(DL.Get_RXResponse(1),"83 3F 4F 28 6B 97 00")
@@ -192,7 +192,7 @@ if (Result):
 								Result = DL.Check_StringAB(TagFFEE01, 'DFEE30010C')
 								if Result != True:
 									DL.SetWindowText("red", "TagFFEE01: FAIL")	
-								Result = DL.Check_StringAB(TagDFEE26, 'EA01')
+								Result = DL.Check_StringAB(TagDFEE26, 'EC01')
 								if Result != True:
 									DL.SetWindowText("red", "TagDFEE26: FAIL")	
 								

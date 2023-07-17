@@ -163,7 +163,7 @@ COMMENT
 RECEIVE
 8
 df30 (NEO2)
-FF EE 01 ?? DF EE 30 01 00
+FF EE 01 ?? ## ## ## ## ## DF EE 30 01 00
 -1
 1
 COMMENT 

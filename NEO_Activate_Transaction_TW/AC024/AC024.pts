@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-14297
+26330
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -217,7 +217,7 @@ If result <> 0 Then
       end if
 
       if readerType <> "NEO2" then r3 = dl.waitforsequence("df30", 1, 1000)
-      if readerType = "NEO2" then r3 = 1
+      if readerType = "NEO2" then r3 = dl.waitforsequence("df30 (NEO2)", 1, 1000)
 
       r4 = dl.waitforsequence("84", 1, 1000)
       r5 = dl.waitforsequence("9f02", 1, 1000)

@@ -3,7 +3,7 @@ VERSION
 
 COMMSETTINGS
 0
-COM1
+COM90
 COM2
 115200
 2
@@ -38,321 +38,328 @@ Set Configuration Global On (NEO2) 02
 
 SEND
 2
+Set Configuration Global Off (NEO2)
+56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 7C 01 00 00 00
+0
+5
+
+SEND
+3
 CLT 02-40
 56 69 56 4F 74 65 63 68 32 00 02 40 00 0D 1E 9C 01 00 9F 02 06 00 00 00 00 15 00 00 C4
 0
 5
 
 SEND
-3
+4
 Pass-Through, Start
 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19
 0
 5
 
 SEND
-4
+5
 PT Atenna Control, Enable 
 56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 94 1F
 0
 5
 
 SEND
-5
+6
 PT Poll for Token 
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 FF 22 0C 1B
 0
 5
 
 SEND
-6
+7
 Pass-Through Mode, Stop 
 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38
 0
 5
 
 SEND
-7
+8
 PT Atenna Control, Disable 
 56 69 56 4F 74 65 63 68 32 00 28 01 00 01 00 84 3E
 0
 5
 
 SEND
-8
+9
   
 
 0
 5
 
 SEND
-9
+10
 MiFare Auth Sector 0, Block 1
 56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 01 01 FF FF FF FF FF FF 4B C8
 0
 5
 
 SEND
-10
+11
 MiFare  - Read Sector 0, Blocks 1 & 2
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 72 01 03 62
 0
 5
 
 SEND
-11
+12
 MiFare Auth Sector 4, Block 16
 56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 10 01 FF FF FF FF FF FF 31 AF
 0
 5
 
 SEND
-12
+13
 MiFare  - Read Sector 4, Blocks 16 to 18
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 73 10 00 00
 0
 5
 
 SEND
-13
+14
 MiFare Write Sector 0 Block 2 ('00 . . . 00')
 56 69 56 4F 74 65 63 68 32 00 2C 08 00 12 71 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 D5 76
 0
 5
 
 SEND
-14
+15
 MiFare Write Sector 0 Block 2 ('11 . . . 11')
 56 69 56 4F 74 65 63 68 32 00 2C 08 00 12 71 02 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 85 70
 0
 5
 
 SEND
-15
+16
  
 
 0
 5
 
 SEND
-16
+17
 MiFare 4k - Auth Sector 15, Block 60
 56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 3C 01 FF FF FF FF FF FF 5B 70
 0
 5
 
 SEND
-17
+18
 MiFare 4k - Read Sector 15, Blocks 60 to 63
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 74 3C 4E 3A
 0
 5
 
 SEND
-18
+19
 MiFare 4k - Read Sector 15, Max Blocks
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 7F 3C 92 C0
 0
 5
 
 SEND
-19
+20
  
 
 0
 5
 
 SEND
-20
+21
 MiFare 4k - Auth Sector 16, Block 64
 56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 40 01 FF FF FF FF FF FF FA CB
 0
 5
 
 SEND
-21
+22
 MiFare 4k - Auth Sector 31, Block 124
 56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 7C 01 FF FF FF FF FF FF AD A0
 0
 5
 
 SEND
-22
+23
 MirFare 4k -  Read Sector 38, 15 blocks 
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 3F 00 D3 68
 0
 5
 
 SEND
-23
+24
 Block 242
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 F2 81 84
 0
 5
 
 SEND
-24
+25
 -----------------------------------
 
 0
 5
 
 SEND
-25
+26
 Mifare Classic (CT = '03') Read Block 01
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 01 5B FD
 0
 5
 
 SEND
-26
+27
 Mifare Ultralight (CT = '04') Read Blcok 01
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 41 01 53 A4
 0
 5
 
 SEND
-27
+28
 Tag1 Static Get All Data
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 01 11 17 00
 0
 5
 
 SEND
-28
+29
 Tag1 Static Read a byte 01
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 12 01 7E F4
 0
 5
 
 SEND
-29
+30
 Tag1 Static Read a byte 02
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 12 02 4E 97
 0
 5
 
 SEND
-30
+31
 Tag1 Static Read a byte 0A
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 12 0A CF 9F
 0
 5
 
 SEND
-31
+32
 Tag1 Static Read a byte 09
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 12 09 FF FC
 0
 5
 
 SEND
-32
+33
 Tag1 Static Write a byte
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 03 13 09 F2 6C 29
 0
 5
 
 SEND
-33
+34
 Tag1 Static Write a byte NE
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 03 14 0A FF 6D 47
 0
 5
 
 SEND
-34
+35
 Tag1 Dynamic Read a segment
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 15 12 C5 31
 0
 5
 
 SEND
-35
+36
 Tag1 Dynamic Read 8 bytes
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 16 01 B2 30
 0
 5
 
 SEND
-36
+37
 Tag1 Dynamic Write 8 bytes
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 0A 17 01 00 01 02 03 04 05 06 07 86 0E
 0
 5
 
 SEND
-37
+38
 Tag1 Dynamic Write 8 bytes NE
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 0A 18 01 00 01 02 03 04 05 06 07 D0 BF
 0
 5
 
 SEND
-38
+39
 Tag2 Read Data(16 bytes)
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 21 09 AF 3A
 0
 5
 
 SEND
-39
+40
 Tag2 Write Data(4 bytes)
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 06 22 09 11 32 33 35 C3 3C
 0
 5
 
 SEND
-40
+41
 Tag2 Select sect
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 23 09 C9 58
 0
 5
 
 SEND
-41
+42
 Tag3 Read Data
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 07 41 01 09 00 01 80 08 F8 E5
 0
 5
 
 SEND
-42
+43
 Tag3 Write Data
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 17 42 01 09 00 01 80 08 31 32 33 34 35 36 37 38 31 32 33 34 35 36 37 38 D7 31
 0
 5
 
 SEND
-43
+44
 Tag4 Command
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 06 81 81 33 44 55 66 B7 9D
 0
 5
 
 SEND
-44
+45
 Pass-Through Mode Start/Stop (2C-01)0 = Stop Pass-Through
 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38
 0
 5
 
 SEND
-45
+46
 Poll tag 2
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 FF 22 0C 1B
 0
 5
 
 SEND
-46
+47
 Poll tag 3
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 FF 22 0C 1B
 0
 5
 
 SEND
-47
+48
 Poll tag 4
 56 69 56 4F 74 65 63 68 32 00 2C 40 00 02 FF 22 0C 1B
 0
@@ -601,7 +608,19 @@ COMMENT
 RECEIVE
 20
 02 50
-56 69 56 4F 74 65 63 68 32 00 02 50 ?? ?? 05 00 ?? ?? ?? ?? ?? ?? ?? ?? ??
+56 69 56 4F 74 65 63 68 32 00 02 50
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+21
+DFEE02
+DF EE 02 04 27 90 00 00
 -1
 1
 COMMENT 

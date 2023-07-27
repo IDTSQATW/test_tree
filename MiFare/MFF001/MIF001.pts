@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-8971
+20883
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -169,7 +169,14 @@ If result <> 0 Then
   result = DL.WaitForSequence("Mifare Read Success", 1, 10000)
 End If
 '============================================================
-
+If result <> 0 Then
+  DL.Pause 200
+  DL.ResetReceiveCounter
+  DL.AddComment "--- MiFare Auth Sector 60, Block 240"
+  DL.SendSequence " MiFare Auth Sector 60, Block 240"
+  result = DL.WaitForSequence("MiFare Auth Sector 1", 1, 10000)
+End If
+'============================================================
 If result <> 0 Then
   DL.Pause 200
   DL.ResetReceiveCounter

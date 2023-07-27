@@ -1,5 +1,5 @@
 VERSION
-8
+9
 
 COMMSETTINGS
 0
@@ -28,6 +28,7 @@ Ping Reader
 56 69 56 4F 74 65 63 68 32 00 18 01 00 B3 CD
 0
 5
+CHECKSUM 
 
 SEND
 1
@@ -35,6 +36,7 @@ Turn On Antenna
 56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 94 1F
 0
 5
+CHECKSUM 
 
 SEND
 2
@@ -42,6 +44,7 @@ Start PT Mode
 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19
 0
 5
+CHECKSUM 
 
 SEND
 3
@@ -49,6 +52,7 @@ Poll for Token
 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 00 B1 E4
 0
 5
+CHECKSUM 
 
 SEND
 4
@@ -56,6 +60,7 @@ Get PCD&PICC Parameters
 56 69 56 4F 74 65 63 68 32 00 2C 05 00 00 F7 6B
 0
 5
+CHECKSUM 
 
 SEND
 5
@@ -63,6 +68,7 @@ Authenticate Block 10h = 16d
 56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 10 01 FF FF FF FF FF FF 31 AF
 0
 5
+CHECKSUM 
 
 SEND
 6
@@ -70,6 +76,7 @@ Initialize Blocks
 56 69 56 4F 74 65 63 68 32 00 2C 08 00 32 33 10 87 19 00 00 78 E6 FF FF 87 19 00 00 00 FF 00 FF B7 1A 00 00 48 E5 FF FF B7 1A 00 00 00 FF 00 FF 88 19 00 00 77 E6 FF FF 88 19 00 00 00 FF 00 FF 00 00
 0
 5
+CHECKSUM 
 
 SEND
 7
@@ -77,6 +84,7 @@ Initialize Sector trailer for sector 04h
 56 69 56 4F 74 65 63 68 32 00 2C 08 00 12 31 13 FF FF FF FF FF FF FF 07 80 69 FF FF FF FF FF FF 49 B4
 0
 5
+CHECKSUM 
 
 SEND
 8
@@ -84,6 +92,7 @@ Read 3 Initialized Blocks
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 33 10 3F 8F
 0
 5
+CHECKSUM 
 
 SEND
 9
@@ -91,6 +100,7 @@ Decrement Block *Original - minus 1 @ block 16 with BACKUP
 56 69 56 4F 74 65 63 68 32 00 2C 0A 00 0A 32 10 04 01 00 00 00 12 01 10 83 5E
 0
 5
+CHECKSUM 
 
 SEND
 10
@@ -98,6 +108,7 @@ Increment Block *Original - plus 1 @ block 16 with BACKUP
 56 69 56 4F 74 65 63 68 32 00 2C 0A 00 0A B2 10 04 01 00 00 00 12 01 10 00 00
 0
 5
+CHECKSUM 
 
 SEND
 11
@@ -105,6 +116,7 @@ Increment Block - plus 2 @ block 17
 56 69 56 4F 74 65 63 68 32 00 2C 0A 00 07 B2 11 04 02 00 00 00 00 00
 0
 5
+CHECKSUM 
 
 SEND
 12
@@ -112,6 +124,7 @@ Decrement Block - minus 2 @ block 17
 56 69 56 4F 74 65 63 68 32 00 2C 0A 00 07 32 11 04 02 00 00 00 00 00
 0
 5
+CHECKSUM 
 
 SEND
 13
@@ -119,6 +132,7 @@ Read 3 Blocks again
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 33 10 3F 8F
 0
 5
+CHECKSUM 
 
 SEND
 14
@@ -126,6 +140,7 @@ Increment Block *
 56 69 56 4F 74 65 63 68 32 00 2C 0A 00 07 32 10 04 01 00 00 00 00 00
 0
 5
+CHECKSUM 
 
 SEND
 15
@@ -133,6 +148,7 @@ Decrement Block *Original - minus "19h 78h" @ block 16
 56 69 56 4F 74 65 63 68 32 00 2C 0A 00 0A 32 10 04 87 19 00 00 12 01 10 00 00
 0
 5
+CHECKSUM 
 
 SEND
 16
@@ -140,6 +156,7 @@ SEND
 
 0
 5
+CHECKSUM 
 
 SEND
 17
@@ -147,6 +164,7 @@ Decrement Block *Original - minus 1 @ block 16 without BACKUP - Define 1 send 1
 56 69 56 4F 74 65 63 68 32 00 2C 0A 00 07 31 10 04 01 00 00 00 00 00
 0
 5
+CHECKSUM 
 
 SEND
 18
@@ -154,6 +172,7 @@ Increment Block *Original - plus 1 @ block 16 without BACKUP - Define 1 send 1
 56 69 56 4F 74 65 63 68 32 00 2C 0A 00 07 B1 10 04 01 00 00 00 00 00
 0
 5
+CHECKSUM 
 
 SEND
 19
@@ -161,6 +180,7 @@ Decrement Block *Original - minus 1 @ block 16 without BACKUP - Define 2 send 1
 56 69 56 4F 74 65 63 68 32 00 2C 0A 00 07 32 10 04 01 00 00 00 00 00
 0
 5
+CHECKSUM 
 
 SEND
 20
@@ -168,6 +188,7 @@ Increment Block *Original - plus 1 @ block 16 without BACKUP - Define 2 send 1
 56 69 56 4F 74 65 63 68 32 00 2C 0A 00 07 B2 10 04 01 00 00 00 00 00
 0
 5
+CHECKSUM 
 
 SEND
 21
@@ -175,6 +196,7 @@ Decrement Block * with no Key
 56 69 56 4F 74 65 63 68 32 00 2C 0A 32 10 04 01 00 00 00 00 00
 0
 5
+CHECKSUM 
 
 SEND
 22
@@ -182,6 +204,7 @@ Decrement Block * with Key
 56 69 56 4F 74 65 63 68 32 00 2C 0A 32 10 0B 01 00 00 00 01 FF FF FF FF FF FF 00 00
 0
 5
+CHECKSUM 
 
 SEND
 23
@@ -189,6 +212,7 @@ Write Block #20
 56 69 56 4F 74 65 63 68 32 00 2C 08 00 12 71 14 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 0
 5
+CHECKSUM 
 
 SEND
 24
@@ -196,6 +220,7 @@ Read Block #20
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 71 14 00 00
 0
 5
+CHECKSUM 
 
 SEND
 25
@@ -203,6 +228,7 @@ Debit Operation
 56 69 56 4F 74 65 63 68 32 00 2C 0A 00 07 31 14 04 D0 07 00 00 00 00
 0
 5
+CHECKSUM 
 
 SEND
 26
@@ -210,6 +236,7 @@ Credit Operation
 56 69 56 4F 74 65 63 68 32 00 2C 0A 00 0E B1 14 0B 64 00 00 00 01 FF FF FF FF FF FF 00 00
 0
 5
+CHECKSUM 
 
 SEND
 27
@@ -217,6 +244,7 @@ Write Block #20 - Reverse
 56 69 56 4F 74 65 63 68 32 00 2C 08 00 12 71 14 27 10 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 0
 5
+CHECKSUM 
 
 SEND
 28
@@ -224,6 +252,7 @@ Initialize Blocks
 56 69 56 4F 74 65 63 68 32 00 2C 08 00 32 33 10 16 16 16 16 16 16 16 16 16 16 16 16 16 16 16 16 17 17 17 17 17 17 17 17 17 17 17 17 17 17 17 17 18 18 18 18 18 18 18 18 18 18 18 18 18 18 18 18 00 00
 0
 5
+CHECKSUM 
 
 SEND
 29
@@ -231,13 +260,15 @@ Overwrite backup block 18
 56 69 56 4F 74 65 63 68 32 00 2C 08 00 12 31 12 99 99 00 00 88 88 FF FF 99 99 00 00 00 FF 00 FF 00 00
 0
 5
+CHECKSUM 
 
 SEND
 30
 2c-06
-56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 01 01 FF FF FF FF FF FF 4B C8
+56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 10 01 FF FF FF FF FF FF 00 00
 0
 5
+CHECKSUM crc-ccitt
 
 RECEIVE
 0
@@ -250,6 +281,8 @@ COMMENT Turn On Antenna (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 1
@@ -262,6 +295,8 @@ COMMENT PT Command (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 2
@@ -274,6 +309,8 @@ COMMENT Poll for Token (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 3
@@ -286,6 +323,8 @@ COMMENT Get PCD&PICC Parameters (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 4
@@ -298,6 +337,8 @@ COMMENT Read Initialized Blocks (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 5
@@ -310,6 +351,8 @@ COMMENT Read Block Decremented (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 6
@@ -322,6 +365,8 @@ COMMENT BACKUP block updated (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 7
@@ -334,6 +379,8 @@ COMMENT Operation Blocks defined less than received ERROR message (FAILED)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 8
@@ -346,4 +393,6 @@ COMMENT Overwrite backup block 18 (OK)
 1
 0
 1
+CHECKSUM 
+0
 

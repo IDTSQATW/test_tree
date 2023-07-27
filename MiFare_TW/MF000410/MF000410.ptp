@@ -88,15 +88,15 @@ CHECKSUM
 
 SEND
 8
-Mifare auth - Sector 1
-56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 01 01 FF FF FF FF FF FF 4B C8
+Mifare auth - Sector 0
+56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 00 01 FF FF FF FF FF FF 00 00
 0
 5
-CHECKSUM 
+CHECKSUM crc-ccitt
 
 SEND
 9
-Mifare Auth - Sector 2
+Mifare Auth - Sector 1
 56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 04 01 FF FF FF FF FF FF 03 76
 0
 5
@@ -104,7 +104,7 @@ CHECKSUM
 
 SEND
 10
-Mifare Auth - Sector 3
+Mifare Auth - Sector 2
 56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 08 01 FF FF FF FF FF FF 12 C1
 0
 5
@@ -112,14 +112,22 @@ CHECKSUM
 
 SEND
 11
+Mifare Auth - Sector 4
+56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 10 01 FF FF FF FF FF FF 00 00
+0
+5
+CHECKSUM CRC-CCITT
+
+SEND
+12
 Mifare Auth - Sector 12
 56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 30 01 FF FF FF FF FF FF 00 00
 0
 5
-CHECKSUM crc-ccitt
+CHECKSUM CRC-CCITT
 
 SEND
-12
+13
 Read 15Blocks, starting Block #0
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 3F 00 68 D3
 0
@@ -127,7 +135,7 @@ Read 15Blocks, starting Block #0
 CHECKSUM 
 
 SEND
-13
+14
 Read 15Blocks, starting Block #16
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 3F 10 7A E2
 0
@@ -135,7 +143,7 @@ Read 15Blocks, starting Block #16
 CHECKSUM 
 
 SEND
-14
+15
 Read 15Blocks, starting Block #32
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 3F 20 4C B1
 0
@@ -143,7 +151,7 @@ Read 15Blocks, starting Block #32
 CHECKSUM 
 
 SEND
-15
+16
 Read 12Blocks, starting Block #48
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 3C 30 0B D3
 0
@@ -151,7 +159,7 @@ Read 12Blocks, starting Block #48
 CHECKSUM 
 
 SEND
-16
+17
 Mifare auth - Sector (INCORRECT)
 56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 01 01 AA AA AA AA AA AA 00 00
 0
@@ -159,7 +167,7 @@ Mifare auth - Sector (INCORRECT)
 CHECKSUM 
 
 SEND
-17
+18
 m) MiFare Read Block 0 to F
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 7F 00 65 1F
 0
@@ -167,7 +175,7 @@ m) MiFare Read Block 0 to F
 CHECKSUM 
 
 SEND
-18
+19
 n) MiFare Write Sector 0 Block 2 ('11 . . . 11')
 56 69 56 4F 74 65 63 68 32 00 2C 08 00 12 71 02 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 85 70
 0
@@ -175,7 +183,7 @@ n) MiFare Write Sector 0 Block 2 ('11 . . . 11')
 CHECKSUM 
 
 SEND
-19
+20
 o) MiFare Write Sector 0 Block 2 ('00 . . . 00')
 56 69 56 4F 74 65 63 68 32 00 2C 08 00 12 71 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 D5 76
 0
@@ -183,7 +191,7 @@ o) MiFare Write Sector 0 Block 2 ('00 . . . 00')
 CHECKSUM 
 
 SEND
-20
+21
 ----- Read blocks ----
 
 0
@@ -191,7 +199,7 @@ SEND
 CHECKSUM 
 
 SEND
-21
+22
 Read 1 Block, starting Block #0
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 00 4B DC
 0
@@ -199,7 +207,7 @@ Read 1 Block, starting Block #0
 CHECKSUM 
 
 SEND
-22
+23
 Read 1 Block, starting Block #1
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 01 00 00
 0
@@ -207,7 +215,7 @@ Read 1 Block, starting Block #1
 CHECKSUM 
 
 SEND
-23
+24
 Read 1 Block, starting Block #2
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 02 00 00
 0
@@ -215,7 +223,7 @@ Read 1 Block, starting Block #2
 CHECKSUM 
 
 SEND
-24
+25
 Read 1 Block, starting Block #3
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 03 00 00
 0
@@ -223,7 +231,7 @@ Read 1 Block, starting Block #3
 CHECKSUM 
 
 SEND
-25
+26
 Read 1 Block, starting Block #4
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 04 00 00
 0
@@ -231,7 +239,7 @@ Read 1 Block, starting Block #4
 CHECKSUM 
 
 SEND
-26
+27
 Read 1 Block, starting Block #5
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 05 00 00
 0
@@ -239,7 +247,7 @@ Read 1 Block, starting Block #5
 CHECKSUM 
 
 SEND
-27
+28
 Read 1 Block, starting Block #6
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 06 00 00
 0
@@ -247,7 +255,7 @@ Read 1 Block, starting Block #6
 CHECKSUM 
 
 SEND
-28
+29
 Read 1 Block, starting Block #7
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 07 00 00
 0
@@ -255,7 +263,7 @@ Read 1 Block, starting Block #7
 CHECKSUM 
 
 SEND
-29
+30
 Read 1 Block, starting Block #8
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 08 00 00
 0
@@ -263,7 +271,7 @@ Read 1 Block, starting Block #8
 CHECKSUM 
 
 SEND
-30
+31
 Read 1 Block, starting Block #9
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 09 00 00
 0
@@ -271,7 +279,7 @@ Read 1 Block, starting Block #9
 CHECKSUM 
 
 SEND
-31
+32
 Read 1 Block, starting Block #10
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 0A 00 00
 0
@@ -279,7 +287,7 @@ Read 1 Block, starting Block #10
 CHECKSUM 
 
 SEND
-32
+33
 Read 1 Block, starting Block #11
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 0B 00 00
 0
@@ -287,7 +295,7 @@ Read 1 Block, starting Block #11
 CHECKSUM 
 
 SEND
-33
+34
 Read 1 Block, starting Block #12
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 0C 00 00
 0
@@ -295,7 +303,7 @@ Read 1 Block, starting Block #12
 CHECKSUM 
 
 SEND
-34
+35
 Read 1 Block, starting Block #13
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 71 0D 00 00
 0
@@ -303,7 +311,7 @@ Read 1 Block, starting Block #13
 CHECKSUM 
 
 SEND
-35
+36
 Read 1 Block, starting Block #14
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 71 0E 00 00
 0
@@ -311,7 +319,7 @@ Read 1 Block, starting Block #14
 CHECKSUM 
 
 SEND
-36
+37
 Read 1 Block, starting Block #15
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 71 0F 00 00
 0
@@ -319,7 +327,7 @@ Read 1 Block, starting Block #15
 CHECKSUM 
 
 SEND
-37
+38
 Read 1 Block, starting Block #16
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 71 10 00 00
 0
@@ -327,7 +335,7 @@ Read 1 Block, starting Block #16
 CHECKSUM 
 
 SEND
-38
+39
 Read 1 Block, starting Block #17
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 71 11 00 00
 0
@@ -335,7 +343,7 @@ Read 1 Block, starting Block #17
 CHECKSUM 
 
 SEND
-39
+40
 Read 1 Block, starting Block #18
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 71 12 00 00
 0
@@ -343,7 +351,7 @@ Read 1 Block, starting Block #18
 CHECKSUM 
 
 SEND
-40
+41
 Read Block
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 ?? 00 00
 0

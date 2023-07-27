@@ -101,6 +101,7 @@ if(Robot == True):  DL.Robot_RemoveCard()
 if(False==Pro_SendCmd().RunCK(Pro_SendCmd().Run(C2C01[1][0],C2C01[1][1],30000,False,DL),C2C01[1][2],DL)):DL.warnings = DL.warnings +1
 
 #Check device memory not change after script
+time.sleep(1)
 if(10<DeviceType):
     if(False ==  Pro_SendCmd().RunCK(Pro_SendCmd().Run(C0930[0][0],C0930[0][1],5000,False,DL),strMemory,DL)): 
         DL.fails = DL.fails +1

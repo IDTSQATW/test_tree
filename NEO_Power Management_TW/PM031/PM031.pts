@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-14386
+36920
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -133,10 +133,6 @@ End Function
 
 ' Under Standby mode, Lightning plug into phone, will enter RUN mode
 ' Under Standby mode, IDG CMD from lightning, will enter RUN mode
-
-' Under Sleep mode, Lightning plug into phone, will enter RUN mode
-' Under Sleep mode, IDG CMD from lightning, will enter RUN mode
-
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 PrintMyResult(result)

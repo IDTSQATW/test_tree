@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-31629
+48444
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -225,8 +225,8 @@ If result <> 0 Then
       result6 = 1
    end if
 
-   result7 = dl.waitforsequence("Tag 56/ 9F6B", 1, 500)
-   if result7 = 0 then result7 = dl.waitforsequence("Tag 56/ 9F6B MC No.21", 1, 500)
+   result7 = dl.waitforsequence("Tag 56/ 9F6B", 1, 1500)
+   if result7 = 0 then result7 = dl.waitforsequence("Tag 56/ 9F6B MC No.21", 1, 1000)
 
    if readerType <> "NEO2" then result8 = dl.waitforsequence("Tag DF30", 1, 500)
    if readerType = "NEO2" then result8 = dl.waitforsequence("Tag DF30 (NEO2)", 1, 500)

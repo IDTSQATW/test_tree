@@ -15,6 +15,13 @@ COM2
 COMMDISPLAY
 0
 
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
 SEND
 0
 PT Start
@@ -66,195 +73,202 @@ SEND
 
 SEND
 7
+Mifare Auth - 
+56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 ?? 01 FF FF FF FF FF FF 00 00
+0
+5
+
+SEND
+8
 m) MiFare Read Block 0 to 5
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 34 00 B4 29
 0
 5
 
 SEND
-8
+9
 Mifare auth - Sector 1
 56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 01 01 FF FF FF FF FF FF 4B C8
 0
 5
 
 SEND
-9
+10
 Mifare Auth - Sector 2
 56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 04 01 FF FF FF FF FF FF 03 76
 0
 5
 
 SEND
-10
+11
 Mifare Auth - Sector 3
 56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 08 01 FF FF FF FF FF FF 12 C1
 0
 5
 
 SEND
-11
+12
 Mifare auth - Sector (INCORRECT)
 56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 01 01 AA AA AA AA AA AA 00 00
 0
 5
 
 SEND
-12
+13
 m) MiFare Read Block 0 to F
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 7F 00 65 1F
 0
 5
 
 SEND
-13
+14
 n) MiFare Write Sector 0 Block 2 ('11 . . . 11')
 56 69 56 4F 74 65 63 68 32 00 2C 08 00 12 71 02 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 85 70
 0
 5
 
 SEND
-14
+15
 o) MiFare Write Sector 0 Block 2 ('00 . . . 00')
 56 69 56 4F 74 65 63 68 32 00 2C 08 00 12 71 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 D5 76
 0
 5
 
 SEND
-15
+16
 Read 1 Block, starting Block #0
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 00 4B DC
 0
 5
 
 SEND
-16
+17
 Read 1 Block, starting Block #1
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 01 00 00
 0
 5
 
 SEND
-17
+18
 Read 1 Block, starting Block #2
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 02 00 00
 0
 5
 
 SEND
-18
+19
 Read 1 Block, starting Block #3
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 03 00 00
 0
 5
 
 SEND
-19
+20
 Read 1 Block, starting Block #4
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 04 00 00
 0
 5
 
 SEND
-20
+21
 Read 1 Block, starting Block #5
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 05 00 00
 0
 5
 
 SEND
-21
+22
 Read 1 Block, starting Block #6
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 06 00 00
 0
 5
 
 SEND
-22
+23
 Read 1 Block, starting Block #7
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 07 00 00
 0
 5
 
 SEND
-23
+24
 Read 1 Block, starting Block #8
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 08 00 00
 0
 5
 
 SEND
-24
+25
 Read 1 Block, starting Block #9
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 09 00 00
 0
 5
 
 SEND
-25
+26
 Read 1 Block, starting Block #10
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 0A 00 00
 0
 5
 
 SEND
-26
+27
 Read 1 Block, starting Block #11
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 0B 00 00
 0
 5
 
 SEND
-27
+28
 Read 1 Block, starting Block #12
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 0C 00 00
 0
 5
 
 SEND
-28
+29
 Read 1 Block, starting Block #13
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 71 0D 00 00
 0
 5
 
 SEND
-29
+30
 Read 1 Block, starting Block #14
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 71 0E 00 00
 0
 5
 
 SEND
-30
+31
 Read 1 Block, starting Block #15
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 71 0F 00 00
 0
 5
 
 SEND
-31
+32
 Read 1 Block, starting Block #16
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 71 10 00 00
 0
 5
 
 SEND
-32
+33
 Read 1 Block, starting Block #17
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 71 11 00 00
 0
 5
 
 SEND
-33
+34
 Read 1 Block, starting Block #18
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 71 12 00 00
 0
 5
 
 SEND
-34
+35
 Read Block
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 ?? 00 00
 0

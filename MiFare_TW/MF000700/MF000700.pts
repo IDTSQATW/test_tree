@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-6892
+50474
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -172,14 +172,15 @@ Sub Start_Test()
 PT_Start
 DL.AddComment "----- Authenticate with INVALID default Key A - Block 4 -----"
 DL.SendSequence "Authenticate with invalid default Key A - Block 4"
-result = DL.WaitForSequence("PT command (OK)", 1, 10000)
+result = DL.WaitForSequence("PT command (OK)", 1, 3000)
 PrintMyResult(result)
 DL.ResetReceiveCounter "MiFare Read Error Expected - (OK)"
 DL.ResetReceiveCounter "PT command (OK)"
 
+PT_Start
 DL.AddComment "----- Authenticate with VALID default Key A - Block 4 -----"
 DL.SendSequence "Authenticate with VALID default Key A - Block 4"
-result = DL.WaitForSequence("PT command (OK)", 1, 10000)
+result = DL.WaitForSequence("PT command (OK)", 1, 3000)
 PrintMyResult(result)
 DL.ResetReceiveCounter "PT command (OK)"
 

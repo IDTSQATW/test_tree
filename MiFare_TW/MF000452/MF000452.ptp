@@ -1,9 +1,9 @@
 VERSION
-8
+9
 
 COMMSETTINGS
 0
-COM1
+COM90
 COM2
 19200
 2
@@ -28,6 +28,7 @@ PT Start
 56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19
 0
 5
+CHECKSUM 
 
 SEND
 1
@@ -35,6 +36,7 @@ Antenna Enable
 56 69 56 4F 74 65 63 68 32 00 28 01 00 01 01 94 1F
 0
 5
+CHECKSUM 
 
 SEND
 2
@@ -42,6 +44,7 @@ Poll for Token (10 sec)
 56 69 56 4F 74 65 63 68 32 00 2C 02 00 02 0A 00 B1 E4
 0
 5
+CHECKSUM 
 
 SEND
 3
@@ -49,167 +52,207 @@ Mifare auth - Sector 1
 56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 01 01 FF FF FF FF FF FF 4B C8
 0
 5
+CHECKSUM 
 
 SEND
 4
+Mifare Auth - Sector 8
+56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 20 01 FF FF FF FF FF FF 12 C1
+0
+5
+CHECKSUM crc-ccitt
+
+SEND
+5
+Mifare Auth - Sector 15
+56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 3C 01 FF FF FF FF FF FF 12 C1
+0
+5
+CHECKSUM crc-ccitt
+
+SEND
+6
 MiFare Read 1 Block - Start at Block 0
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 71 00 00 00
 0
 5
+CHECKSUM 
 
 SEND
-5
+7
 MiFare Read 3 Block - Start at Block 0
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 73 00 00 00
 0
 5
+CHECKSUM 
 
 SEND
-6
+8
 MiFare Read 5 Block - Start at Block 0
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 75 00 00 00
 0
 5
+CHECKSUM 
 
 SEND
-7
+9
 MiFare Read 15 Block - Start at Block 0
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 7F 00 00 00
 0
 5
+CHECKSUM 
 
 SEND
-8
+10
 MiFare Read next 15 Block - Start at Block 19
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 7F 13 00 00
 0
 5
+CHECKSUM 
 
 SEND
-9
+11
 MiFare Read next 15 Block - Start at Block 39
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 7F 27 00 00
 0
 5
+CHECKSUM 
 
 SEND
-10
+12
 MiFare Read next 2 Block - Start at Block 59
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 72 3B 00 00
 0
 5
+CHECKSUM 
 
 SEND
-11
+13
 MiFare Read next 3 Block - Start at Block 59
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 73 3B 00 00
 0
 5
+CHECKSUM 
 
 SEND
-12
+14
 MiFare Read next 1 Block - Start at Block 59 (Neg)
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 71 3B 00 00
 0
 5
+CHECKSUM 
 
 SEND
-13
+15
 MiFare Read next 4 Block - Start at Block 59 (Neg)
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 74 3B 00 00
 0
 5
+CHECKSUM 
 
 SEND
-14
+16
 MiFare Read next 5 Block - Start at Block 59 (Neg)
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 75 3B 00 00
 0
 5
+CHECKSUM 
 
 SEND
-15
+17
 MiFare Read next 3 Block - Start at Block 60
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 73 3C 00 00
 0
 5
+CHECKSUM 
 
 SEND
-16
+18
 MiFare Read next 4 Block - Start at Block 60 (Neg)
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 74 3C 00 00
 0
 5
+CHECKSUM 
 
 SEND
-17
+19
 MiFare Read next 2 Block - Start at Block 61
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 72 3D 00 00
 0
 5
+CHECKSUM 
 
 SEND
-18
+20
 MiFare Read next 3 Block - Start at Block 61 (Neg)
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 73 3D 00 00
 0
 5
+CHECKSUM 
 
 SEND
-19
+21
 MiFare Read next 1 Block - Start at Block 62
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 71 3E 00 00
 0
 5
+CHECKSUM 
 
 SEND
-20
+22
 MiFare Read next 2 Block - Start at Block 62 (Neg)
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 72 3E 00 00
 0
 5
+CHECKSUM 
 
 SEND
-21
+23
 MiFare Read next 1 Block - Start at Block 63
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 71 3F 00 00
 0
 5
+CHECKSUM 
 
 SEND
-22
+24
 MiFare Read next 1 Block - Start at Block 63 (NEO2)
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 3F 00 00
 0
 5
+CHECKSUM CRC-CCITT
 
 SEND
-23
+25
 Read Block #59
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 71 3B C1 28
 0
 5
+CHECKSUM 
 
 SEND
-24
+26
 MiFare Read next 1 Block - Start at Block 35
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 71 23 00 00
 0
 5
+CHECKSUM 
 
 SEND
-25
+27
 MiFare Read next 1 Block - Start at Block 35 (NEO2)
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 23 00 00
 0
 5
+CHECKSUM CRC-CCITT
 
 SEND
-26
+28
 MiFare Read next 2 Block - Start at Block 63
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 72 3F 00 00
 0
 5
+CHECKSUM 
 
 RECEIVE
 0
@@ -222,6 +265,8 @@ COMMENT MiFare Read 1 Block - Start at Block 0 - (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 1
@@ -234,6 +279,8 @@ COMMENT MiFare Read 3 Block - Start at Block 0 - (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 2
@@ -246,6 +293,8 @@ COMMENT MiFare Read 5 Block - Start at Block 0 - (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 3
@@ -258,6 +307,8 @@ COMMENT MiFare Read 15 Block - Start at Block 0 - (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 4
@@ -270,6 +321,8 @@ COMMENT MiFare Read next 15 Block - Start at Block 19 - (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 5
@@ -282,6 +335,8 @@ COMMENT MiFare Read next 15 Block - Start at Block 39 - (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 6
@@ -294,6 +349,8 @@ COMMENT MiFare Read next 2 Block - Start at Block 59 - (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 7
@@ -306,6 +363,8 @@ COMMENT MiFare Read next 3 Block - Start at Block 59 or 60 - (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 8
@@ -318,6 +377,8 @@ COMMENT MiFare Read next 2 Block - Start at Block 61 - (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 9
@@ -330,6 +391,8 @@ COMMENT MiFare Read next 1 Block - Start at Block 62 - (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 10
@@ -342,6 +405,8 @@ COMMENT MiFare Read Error Expected - (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 11
@@ -354,6 +419,8 @@ COMMENT PT command (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 12
@@ -366,6 +433,8 @@ COMMENT Antenna Enable (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 13
@@ -378,6 +447,8 @@ COMMENT Poll for Token (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 14
@@ -390,6 +461,8 @@ COMMENT MiFare Read next 1 Block - Start at Block 63 (OK)
 1
 0
 1
+CHECKSUM 
+0
 
 RECEIVE
 15
@@ -402,4 +475,6 @@ COMMENT MiFare Read next 1 Block - Start at Block 35 (OK)
 1
 0
 1
+CHECKSUM 
+0
 

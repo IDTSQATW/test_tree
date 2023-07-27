@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-17928
+43717
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -76,6 +76,7 @@ Randomize
 errCnt = 0
 caseValid = 0
 result = 1
+auth = 0
 
 DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
 If authn Then '""
@@ -149,12 +150,27 @@ Fail = 0
 Sub The_Test()
  DL.AddComment "---------- READ ALL BLOCKS ----------"
  For i = 0 to 255
-	DL.AddComment vbCrLf & "--- Read Block #" & i & " ---" & vbCrLf
+       if i = 0 then auth = 0
+       if i = auth then 
+	If auth <= 9 Then
+		auth = "00" & auth 
+	Elseif auth > 9 And auth <= 99 Then
+		auth = "0" & auth 
+	End If
+	   If result <> 0 Then
+	      DL.ResetReceiveCounter
+	      DL.AddComment vbCrLf & "Mifare auth - " & i
+	      DL.SendSequence "Mifare Auth - ", auth, "D"
+	      result = DL.WaitForSequence("PT command (OK)", 1, 3000)
+	   End If
+          auth = auth + 4
+       end if
 	If i <= 9 Then
 		i = "00" & i
 	Elseif i > 9 And i <= 99 Then
 		i = "0" & i
 	End If
+	DL.AddComment vbCrLf & "--- Read Block #" & i & " ---" & vbCrLf
       DL.AddComment "i = " & i
       DL.ResetReceiveCounter
 	DL.SendSequence "Read Block", i, "D"

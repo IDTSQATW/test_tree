@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-34674
+55315
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -159,6 +159,22 @@ Found = 0
 
 
 For i = 1 to 255
+       if i = 1 then auth = 0
+       if i = auth or auth = 0 then 
+	If auth <= 9 Then
+		auth = "00" & auth 
+	Elseif auth > 9 And auth <= 99 Then
+		auth = "0" & auth 
+	End If
+	   If result <> 0 Then
+	      DL.ResetReceiveCounter
+	      DL.AddComment vbCrLf & "Mifare auth - " & i
+	      DL.SendSequence "Mifare Auth - ", auth, "D"
+	      result = DL.WaitForSequence("PT command (OK)", 1, 3000)
+	   End If
+          auth = auth + 4
+       end if
+
 	For index = 0 to 39
 		If i = j(index) Then
 			Found = 1

@@ -34,7 +34,7 @@ if (Result):
 
 # cmd 02-40, swipe card
 if (Result):
-	for i in range (1, 2):
+	for i in range (1, 8):
 		if i == 1:
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 1')
 			if (RetOfStep):

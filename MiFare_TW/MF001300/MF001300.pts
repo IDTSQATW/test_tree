@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-37867
+63449
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -149,13 +149,13 @@ PT_Start
 
 DL.AddComment "----- Authenticate with INVALID default Key A - Block 4 -----"
 DL.SendSequence "Authenticate with INVALID default Key A - Block 4"
-result = DL.WaitForSequence("PT command (OK)", 1, 10000)
+result = DL.WaitForSequence("PT command (OK)", 1, 3000)
 PrintMyResult(result)
 DL.ResetReceiveCounter
 
 DL.AddComment "----- Authenticate with INVALID default Key A - Block 32 -----"
 DL.SendSequence "Authenticate with INVALID default Key A - Block 32"
-result = DL.WaitForSequence("PT command (OK)", 1, 10000)
+result = DL.WaitForSequence("PT command (OK)", 1, 3000)
 PrintMyResult(result)
 DL.ResetReceiveCounter
 

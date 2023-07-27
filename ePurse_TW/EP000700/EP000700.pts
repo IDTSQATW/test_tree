@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-23268
+49392
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -201,13 +201,17 @@ FileOutput.CloseFile
 
 Sub TestEP000700()
 
-	DL.Pause 2000
+	DL.AddComment vbCrLf & "--- 2C-06 0x20" 
+	DL.SendSequence "2c-06 0x20"
+	dl.pause 500
 
 	DL.AddComment "--- 32 to 34: Initialize to default"
 	DL.SendSequence "32 to 34: Initialize to default"
 	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
 	PrintMyResult(result)
 	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.Pause 1000
 
 	DL.ResetReceiveCounter
 	DL.AddComment "--- 32 to 34: Read Blocks"
@@ -216,14 +220,14 @@ Sub TestEP000700()
        DL.ResetReceiveCounter
 	PrintMyResult(result)
 
-	DL.Pause 2000
-
 	DL.AddComment "--- 32 to 34: Initialize Blocks"
 	DL.SendSequence "32 to 34: Initialize Blocks"
 	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
 	PrintMyResult(result)
 	DL.ResetReceiveCounter "PT Command (OK)"
 	
+	DL.Pause 1000
+
 	DL.ResetReceiveCounter
 	
 	DL.AddComment "--- 32 to 34: Read Blocks"
@@ -238,6 +242,8 @@ Sub TestEP000700()
 	PrintMyResult(result)
 	DL.ResetReceiveCounter "PT Command (OK)"
 
+	DL.Pause 1000
+
 	DL.AddComment "--- 32 to 34: Read Blocks"
 	DL.SendSequence "32 to 34: Read Blocks"
 	result = DL.WaitForSequence ("32: Read Block - Subtract 2000 from 20H (OK)", 1, 5000)
@@ -248,13 +254,13 @@ End Sub
 
 Sub TestEP000700a()
 
-	DL.Pause 2000
-
 	DL.AddComment "--- 32 to 34: Initialize to default"
 	DL.SendSequence "32 to 34: Initialize to default"
 	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
 	PrintMyResult(result)
 	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.Pause 1000
 
 	DL.ResetReceiveCounter
 
@@ -264,13 +270,13 @@ Sub TestEP000700a()
        DL.ResetReceiveCounter
 	PrintMyResult(result)
 
-	DL.Pause 2000
-
 	DL.AddComment "--- 32 to 34: Initialize Blocks"
 	DL.SendSequence "32 to 34: Initialize Blocks"
 	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
 	PrintMyResult(result)
 	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.Pause 1000
 	
 	DL.AddComment "--- 32 to 34: Read Blocks"
 	DL.SendSequence "32 to 34: Read Blocks"
@@ -284,6 +290,8 @@ Sub TestEP000700a()
 	PrintMyResult(result)
 	DL.ResetReceiveCounter "PT Command (OK)"
 
+	DL.Pause 1000
+
 	DL.AddComment "--- 32 to 34: Read Blocks"
 	DL.SendSequence "32 to 34: Read Blocks"
 	result = DL.WaitForSequence ("32: Increment with specified Key A (OK)", 1, 5000)
@@ -293,13 +301,13 @@ End Sub
 
 Sub TestEP000700b()
 
-	DL.Pause 2000
-
 	DL.AddComment "--- 32 to 34: Initialize to default"
 	DL.SendSequence "32 to 34: Initialize to default"
 	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
 	PrintMyResult(result)
 	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.Pause 1000
 
 	DL.ResetReceiveCounter
 
@@ -308,13 +316,13 @@ Sub TestEP000700b()
 	result = DL.WaitForSequence ("32 to 34: Read Blocks - Initialize to default (OK)", 1, 5000)
 	PrintMyResult(result)
 
-	DL.Pause 2000
-
 	DL.AddComment "--- 32 to 34: Initialize Blocks"
 	DL.SendSequence "32 to 34: Initialize Blocks"
 	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
 	PrintMyResult(result)
 	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.Pause 1000
 	
 	DL.AddComment "--- 32 to 34: Read Blocks"
 	DL.SendSequence "32 to 34: Read Blocks"
@@ -327,6 +335,8 @@ Sub TestEP000700b()
 	PrintMyResult(result)
 	DL.ResetReceiveCounter "PT Command (OK)"
 
+	DL.Pause 1000
+
 	DL.AddComment "--- 32 to 34: Read Blocks"
 	DL.SendSequence "32 to 34: Read Blocks"
 	result = DL.WaitForSequence ("32: Decrement with specified Key A and BACKUP (OK)", 1, 5000)
@@ -335,13 +345,13 @@ End Sub
 
 Sub TestEP000700c()
 
-	DL.Pause 2000
-
 	DL.AddComment "--- 32 to 34: Initialize to default"
 	DL.SendSequence "32 to 34: Initialize to default"
 	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
 	PrintMyResult(result)
 	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.Pause 1000
 
 	DL.ResetReceiveCounter
 
@@ -351,27 +361,18 @@ Sub TestEP000700c()
        DL.ResetReceiveCounter
 	PrintMyResult(result)
 
-	DL.Pause 2000
-
 	DL.AddComment "--- 32 to 34: Initialize Blocks"
 	DL.SendSequence "32 to 34: Initialize Blocks"
 	result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
 	PrintMyResult(result)
 	DL.ResetReceiveCounter "PT Command (OK)"
+
+	DL.Pause 1000
 	
 	DL.AddComment "--- 32 to 34: Read Blocks"
 	DL.SendSequence "32 to 34: Read Blocks"
 	result = DL.WaitForSequence ("Read Initialized Blocks (OK)", 1, 5000)
        DL.ResetReceiveCounter
-
-	'DL.AddComment "--- 32: Decrement with specified Key A and BACKUP"
-	'DL.SendSequence "32: Decrement with specified Key A and BACKUP"
-	'result = DL.WaitForSequence ("PT Command (OK)", 1, 5000)
-	'DL.ResetReceiveCounter "PT Command (OK)"
-
-	'DL.AddComment "--- 32 to 34: Read Blocks"
-	'DL.SendSequence "32 to 34: Read Blocks"
-	'result = DL.WaitForSequence ("32: Decrement with specified Key A and BACKUP (OK)", 1, 5000)
 
 End Sub
 

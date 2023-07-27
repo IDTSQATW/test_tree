@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-12128
+48503
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -138,7 +138,6 @@ TheTest
 SetCardToDefault
 MsgBox "You MAY NOW REMOVE THE CARD.", VBOKOnly, "Test Step"
 
-
 '#------------------------
 '# Initialize the card
 '#------------------------
@@ -146,23 +145,31 @@ MsgBox "You MAY NOW REMOVE THE CARD.", VBOKOnly, "Test Step"
 Sub InitializeCard()
 PT_Setup
 
-MsgBox "Start Initialize Card...", VBOKOnly, "Test Step"
-DL.AddComment "----- MsgBox Start Initialize Card... -----"
+dl.addcomment vbcrlf & "Start Initialize Card..." & vbcrlf
+DL.AddComment "----- MsgBox Start Initialize Card... -----" & vbcrlf
+
 '# Authenticate card with FF FF FF FF FF FF
-MsgBox "You are about to authenticate Block 49 with valid Key A.", VBOKOnly, "Test Step"
-DL.SendSequence "Authenticate Block 49 - CORRECT2"
+dl.addcomment vbcrlf & "You are about to authenticate Block 54 with valid Key A." & vbcrlf
+DL.SendSequence "Authenticate Block 54 - CORRECT2"
 result = DL.WaitForSequence("PT Command (OK)", 1, 5000)
 PrintMyResult(result)
 DL.ResetReceiveCounter "PT Command (OK)"
 
 '# Write Key A, Block 55 - 11 22 33 44 55 66
-MsgBox "Writing Key A = 11 22 33 44 55 66 to card.", VBOKOnly, "Test Step"
+dl.addcomment vbcrlf & "Writing Key A = 11 22 33 44 55 66 to card." & vbcrlf
 DL.SendSequence "Write Key A, Block 55 - 11 22 33 44 55 66"
 result = DL.WaitForSequence("PT Command (OK)", 1, 5000)
 PrintMyResult(result)
 DL.ResetReceiveCounter "PT Command (OK)"
 
-MsgBox "Initialize Card - COMPLETE", VBOKOnly, "Test Step"
+'# Authenticate card with FF FF FF FF FF FF
+dl.addcomment vbcrlf & "You are about to authenticate Block 49 with valid Key A." & vbcrlf
+DL.SendSequence "Authenticate Block 49 - CORRECT2"
+result = DL.WaitForSequence("PT Command (OK)", 1, 5000)
+PrintMyResult(result)
+DL.ResetReceiveCounter "PT Command (OK)"
+
+dl.addcomment vbcrlf & "Initialize Card - COMPLETE" & vbcrlf
 
 End Sub
 '#--------------------------
@@ -171,30 +178,21 @@ Sub PT_Setup()
 	DL.AddComment "----- PT START -----"
 	DL.SendSequence "PT Start"
 	result = DL.WaitForSequence("PT Command (OK)", 1, 5000)
-	PrintMyResult(result)
 	DL.ResetReceiveCounter "PT Command (OK)"
 
 	DL.SendSequence "Antenna Enable"
 	result = DL.WaitForSequence("Antenna Enable (OK)", 1, 5000)
-	PrintMyResult(result)
 	DL.ResetReceiveCounter "Antenna Enable (OK)"
 
 	MsgBox "Press OK, then tap card", VBOKOnly, "Test Step"
 	DL.SendSequence "Poll for Token (10 sec)"
-	result = DL.WaitForSequence("Poll for Token (OK)", 1, 5000)
-	PrintMyResult(result)
+	dl.pause 1000
 	DL.ResetReceiveCounter "Poll for Token (OK)"
 End Sub
 
 Sub TheTest()
-PT_Setup
+'PT_Setup
 
-'DL.SendSequence "Authenticate Block 54 - CORRECT2"
-'result = DL.WaitForSequence("MiFare ERROR", 1, 5000)
-'PrintMyResult(result)
-'DL.ResetReceiveCounter "MiFare ERROR"
-
-'MsgBox "Test Case: MF0103.00" & vbCrLf & "You are about to attempt to read Block 54 (but should fail).", VBOKOnly, "Test Step"
 DL.AddComment "----- Read Block 49 -----"
 DL.SendSequence "Read Block 49"
 result = DL.WaitForSequence("Block Read (OK)", 1, 5000)
@@ -213,7 +211,8 @@ result = DL.WaitForSequence("Block Read (OK)", 1, 5000)
 PrintMyResult(result)
 DL.ResetReceiveCounter "Block Read (OK)"
 
-DL.AddComment "----- Authenticate Block 54 -----"
+DL.AddComment "----- Authenticate Block 54 -----" & vbcrlf
+
 DL.SendSequence "Authenticate Block 54 - CORRECT1"
 result = DL.WaitForSequence("PT Command (OK)", 1, 5000)
 PrintMyResult(result)
@@ -231,23 +230,24 @@ result = DL.WaitForSequence("Block Read (OK)", 1, 5000)
 PrintMyResult(result)
 DL.ResetReceiveCounter "Block Read (OK)"
 
-DL.AddComment "----- Authenticate Block 49 - CORRECT2 -----"
+DL.AddComment "----- Authenticate Block 49 - CORRECT2 -----" & vbcrlf
+
 DL.SendSequence "Authenticate Block 49 - CORRECT2"
 result = DL.WaitForSequence("PT Command (OK)", 1, 5000)
 PrintMyResult(result)
 DL.ResetReceiveCounter "PT Command (OK)"
 
-DL.AddComment "----- Read Block 56 -----"
-DL.SendSequence "Read Block 56"
-result = DL.WaitForSequence("Block Read (OK)", 1, 5000)
-PrintMyResult(result)
-DL.ResetReceiveCounter "Block Read (OK)"
+'DL.AddComment "----- Read Block 56 -----"
+'DL.SendSequence "Read Block 56"
+'result = DL.WaitForSequence("Block Read (OK)", 1, 5000)
+'PrintMyResult(result)
+'DL.ResetReceiveCounter "Block Read (OK)"
 
-DL.AddComment "----- Read Block 57 -----"
-DL.SendSequence "Read Block 57"
-result = DL.WaitForSequence("Block Read (OK)", 1, 5000)
-PrintMyResult(result)
-DL.ResetReceiveCounter "Block Read (OK)"
+'DL.AddComment "----- Read Block 57 -----"
+'DL.SendSequence "Read Block 57"
+'result = DL.WaitForSequence("Block Read (OK)", 1, 5000)
+'PrintMyResult(result)
+'DL.ResetReceiveCounter "Block Read (OK)"
 
 DL.AddComment "----- Read Block 49 -----"
 DL.SendSequence "Read Block 49"
@@ -267,7 +267,7 @@ result = DL.WaitForSequence("Block Read (OK)", 1, 5000)
 PrintMyResult(result)
 DL.ResetReceiveCounter "Block Read (OK)"
 
-MsgBox "TEST COMPLETE", VBOKOnly, "Message"
+dl.addcomment vbcrlf & "TEST COMPLETE" & vbcrlf
 
 End Sub
 
@@ -278,17 +278,17 @@ End Sub
 Sub SetCardToDefault()
 PT_Setup
 
-MsgBox "Start Set Card To Default...", VBOKOnly, "Test Step"
+dl.addcomment vbcrlf & "Start Set Card To Default..." & vbcrlf
 
 '# Authenticate card with 11 22 33 44 55 66
-MsgBox "You are about to authenticate Block 54 with valid Key A.", VBOKOnly, "Test Step"
+dl.addcomment vbcrlf & "You are about to authenticate Block 54 with valid Key A." & vbcrlf
 DL.SendSequence "Authenticate Block 54 - CORRECT1"
 result = DL.WaitForSequence("PT Command (OK)", 1, 5000)
 PrintMyResult(result)
 DL.ResetReceiveCounter "PT Command (OK)"
 
 '# Write Key A, Block 55 - FF FF FF FF FF FF
-MsgBox "Writing Key A = FF FF FF FF FF FF to card.", VBOKOnly, "Test Step"
+dl.addcomment vbcrlf & "Writing Key A = FF FF FF FF FF FF to card." & vbcrlf
 DL.SendSequence "Write Key A, Block 55 - FF FF FF FF FF FF"
 result = DL.WaitForSequence("PT Command (OK)", 1, 5000)
 PrintMyResult(result)
@@ -296,47 +296,13 @@ DL.ResetReceiveCounter "PT Command (OK)"
 DL.SendSequence "PT Stop"
 dl.pause 500
 
-MsgBox "Set Card To Default - COMPLETE", VBOKOnly, "Test Step"
+dl.addcomment vbcrlf & "Set Card To Default - COMPLETE" & vbcrlf
 
 End Sub
 
 '#---------------------------
-
-
-
-' ###############################################################
-' #               For ViVOPay Pass Through commands             #
-' ###############################################################
-'
-' ModbusCrcScript.pts 
-' Automatically calculating a two-byte CRC value for Send Sequences.
-' Date: 2006-09-15
-' Author: Heggelbacher
-' This example makes use of the DL.CalcChecksum() function available
-' in Docklight Scripting V1.7. It has been cross-checked against the
-' CRC reference algorithm listed in the MODBUS specification
-' "MODBUS over serial line specification and implementation guide V1.0"
-' (see www.modbus.org) 
-
 DL.StartCommunication
-' Endless loop until stopped by user
-'Do
-'    DL.Pause 1 ' (the pause reduces CPU load while idle)
-'Loop
-
 Sub DL_OnSend()
-    ' For all Send Sequences with minimum 3 bytes length (one byte user data,
-    ' two bytes CRC, perform the following manipulation:
-    ' - Calculate a 16 bit crc value on the characters 1 .. (DL.OnSend_Size() - 2)
-    ' - Write the low byte to character no. DL.OnSend_GetSize()-1
-    ' - Write the high byte to character no. DL.OnSend_GetSize()
-    ' Example:
-    ' Send Sequence name: MyCommand
-    ' Send Sequence in HEX representation: 02 04 00 00 00 01 00 00
-    ' --> Data transmitted by Docklight:   02 04 00 00 00 01 31 F9
-    '     (with "31" as the low byte CRC, "F9" as the high byte)
-
-    ' Check if there is at least one byte of user data
     usDataLen = DL.OnSend_GetSize() - 2
     If usDataLen > 0 Then
         crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
@@ -346,12 +312,9 @@ Sub DL_OnSend()
     End If
 End Sub
 
-
-DL.Pause 1500
 DL.AddComment vbCrLf
-PrintMyResult(result)
-
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
@@ -359,36 +322,36 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If 0 Then
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
-End If
+'If 0 Then
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
 
-If MasterResult = 1 Then
-	MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-	MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'	MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'	MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT FILE(!!!!! DO NOT EDIT !!!!!)

@@ -2,8 +2,7 @@ TID:Get DUKPT DEK Attribution based on KeySlot (C7-A3)
 CMD:C7 A3 01 00
 EXR:
 
-
-TTID:Enable Encryption (00)
+TID:Enable Encryption (00)
 CMD:C7 36 00
 EXR:C7 00 00 00
 

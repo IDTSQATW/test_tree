@@ -46,7 +46,7 @@ Poll for Token (10 sec)
 SEND
 3
 Authenticate with default Key A
-56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 31 01 FF FF FF FF FF FF 0D 14
+56 69 56 4F 74 65 63 68 32 00 2C 06 00 08 00 01 FF FF FF FF FF FF 00 00
 0
 5
 

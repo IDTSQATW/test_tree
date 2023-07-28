@@ -195,7 +195,8 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-40 ACT - VAS Only "
    if readerType <> "NEO2" then
-      DL.SendSequence "02-40 ACT - VAS Only", i, "D"
+      if readerType = "VP3300_liteon" then DL.SendSequence "02-40 ACT - VAS Only (Liteon)", i, "D"
+      if readerType = "GR"            then DL.SendSequence "02-40 ACT - VAS Only", i, "D"
    else
       DL.SendSequence "02-40 ACT - VAS Only (NEO2)", i, "D"
    end if
@@ -213,7 +214,8 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-40 ACT - VAS OR Pay "
    if readerType <> "NEO2" then
-      DL.SendSequence "02-40 ACT - VAS OR Pay", i, "D"
+      if readerType = "VP3300_liteon" then DL.SendSequence "02-40 ACT - VAS OR Pay (Liteon)", i, "D"
+      if readerType = "GR"            then DL.SendSequence "02-40 ACT - VAS OR Pay", i, "D"
    else
       DL.SendSequence "02-40 ACT - VAS OR Pay (NEO2)", i, "D"
    end if
@@ -228,7 +230,8 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-40 ACT - VAS AND Pay "
    if readerType <> "NEO2" then
-      DL.SendSequence "02-40 ACT - VAS AND Pay", i, "D"
+      if readerType = "VP3300_liteon" then DL.SendSequence "02-40 ACT - VAS AND Pay (Liteon)", i, "D"
+      if readerType = "GR"            then DL.SendSequence "02-40 ACT - VAS AND Pay", i, "D"
    else
       DL.SendSequence "02-40 ACT - VAS AND Pay (NEO2)", i, "D"
    end if
@@ -243,7 +246,8 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-40 ACT - Pay Only "
    if readerType <> "NEO2" then
-      DL.SendSequence "02-40 ACT - Pay Only", i, "D"
+      if readerType = "VP3300_liteon" then DL.SendSequence "02-40 ACT - Pay Only (Liteon)", i, "D"
+      if readerType = "GR"            then DL.SendSequence "02-40 ACT - Pay Only", i, "D"
    else
       DL.SendSequence "02-40 ACT - Pay Only (NEO2)", i, "D"
    end if
@@ -258,7 +262,8 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-01 ACT - VAS Only "
    if readerType <> "NEO2" then
-      DL.SendSequence "02-01 ACT - VAS Only", i, "D"
+      if readerType = "VP3300_liteon" then DL.SendSequence "02-01 ACT - VAS Only (Liteon)", i, "D"
+      if readerType = "GR"            then DL.SendSequence "02-01 ACT - VAS Only", i, "D"
    else
       DL.SendSequence "02-01 ACT - VAS Only (NEO2)", i, "D"
    end if
@@ -277,7 +282,8 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-01 ACT - VAS OR Pay "
    if readerType <> "NEO2" then
-      DL.SendSequence "02-01 ACT - VAS OR Pay", i, "D"
+      if readerType = "VP3300_liteon" then DL.SendSequence "02-01 ACT - VAS OR Pay (Liteon)", i, "D"
+      if readerType = "GR"            then DL.SendSequence "02-01 ACT - VAS OR Pay", i, "D"
    else
       DL.SendSequence "02-01 ACT - VAS OR Pay (NEO2)", i, "D"
    end if
@@ -292,7 +298,8 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-01 ACT - VAS AND Pay "
    if readerType <> "NEO2" then
-      DL.SendSequence "02-01 ACT - VAS AND Pay", i, "D"
+      if readerType = "VP3300_liteon" then DL.SendSequence "02-01 ACT - VAS AND Pay (Liteon)", i, "D"
+      if readerType = "GR"            then DL.SendSequence "02-01 ACT - VAS AND Pay", i, "D"
    else
       DL.SendSequence "02-01 ACT - VAS AND Pay (NEO2)", i, "D"
    end if
@@ -307,7 +314,8 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-01 ACT - Pay Only "
    if readerType <> "NEO2" then
-      DL.SendSequence "02-01 ACT - Pay Only", i, "D"
+      if readerType = "VP3300_liteon" then DL.SendSequence "02-01 ACT - Pay Only (Liteon)", i, "D"
+      if readerType = "GR"            then DL.SendSequence "02-01 ACT - Pay Only", i, "D"
    else
       DL.SendSequence "02-01 ACT - Pay Only (NEO2)", i, "D"
    end if

@@ -189,6 +189,19 @@ If result <> 0 Then
    DL.SendSequence "Set Merchant 4 - pass.com.apple.wallet.dev_Panera"
    result = DL.WaitForSequence("04 00", 1, 3000)
 End If
+
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Get FW ver (29-00)"
+   DL.SendSequence "Get FW ver (29-00)"
+   readercheck = DL.WaitForSequence("VP3300_liteon", 1, 5000)
+   if readercheck = 1 then 
+          readerType = "VP3300_liteon"
+          DL.AddComment "Reader for VP3300 Liteon"
+   end if       
+End If
 '============================================================
 '============================================================
 ' ApplePay
@@ -200,7 +213,10 @@ If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-40 ACT - VAS Only "
-   if readerType <> "NEO2" then DL.SendSequence "02-40 ACT - VAS Only"
+   if readerType <> "NEO2" then 
+      if readerType = "VP3300_liteon" then DL.SendSequence "02-40 ACT - VAS Only (Liteon)"
+      if readerType = "GR"            then DL.SendSequence "02-40 ACT - VAS Only"
+   end if
    if readerType = "NEO2" then DL.SendSequence "02-40 ACT - VAS Only (NEO2)"
    
    if readerType <> "NEO2" then result = DL.WaitForSequence("02-40 VAS fail response" , 1, 5000)
@@ -213,7 +229,10 @@ If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-40 ACT - VAS OR Pay "
-   if readerType <> "NEO2" then DL.SendSequence "02-40 ACT - VAS OR Pay"
+   if readerType <> "NEO2" then 
+      if readerType = "VP3300_liteon" then DL.SendSequence "02-40 ACT - VAS OR Pay (Liteon)" 
+      if readerType = "GR"            then DL.SendSequence "02-40 ACT - VAS OR Pay"
+   end if
    if readerType = "NEO2" then DL.SendSequence "02-40 ACT - VAS OR Pay (NEO2)"
    result = DL.WaitForSequence("02-40 ApplePay" , 1, 5000)
    if result <> 0 then 
@@ -228,7 +247,10 @@ If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-40 ACT - VAS AND Pay "
-   if readerType <> "NEO2" then DL.SendSequence "02-40 ACT - VAS AND Pay"
+   if readerType <> "NEO2" then 
+      if readerType = "VP3300_liteon" then DL.SendSequence "02-40 ACT - VAS AND Pay (Liteon)" 
+      if readerType = "GR"            then DL.SendSequence "02-40 ACT - VAS AND Pay"
+   end if
    if readerType = "NEO2" then DL.SendSequence "02-40 ACT - VAS AND Pay (NEO2)"
    result = DL.WaitForSequence("02-40 ApplePay" , 1, 5000)
    if result <> 0 then 
@@ -243,7 +265,10 @@ If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-40 ACT - Pay Only "
-   if readerType <> "NEO2" then DL.SendSequence "02-40 ACT - Pay Only"
+   if readerType <> "NEO2" then 
+      if readerType = "VP3300_liteon" then DL.SendSequence "02-40 ACT - Pay Only (Liteon)" 
+      if readerType = "GR"            then DL.SendSequence "02-40 ACT - Pay Only"
+   end if
    if readerType = "NEO2" then DL.SendSequence "02-40 ACT - Pay Only (NEO2)"
    result = DL.WaitForSequence("02-40 ApplePay" , 1, 5000)
    if result <> 0 then 

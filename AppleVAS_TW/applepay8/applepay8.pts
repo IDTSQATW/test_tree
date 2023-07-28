@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-59976
+4369
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -165,6 +165,19 @@ If result <> 0 Then
    DL.Pause 500
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
+   DL.AddComment "--- Get FW ver (29-00)"
+   DL.SendSequence "Get FW ver (29-00)"
+   readercheck = DL.WaitForSequence("VP3300_liteon", 1, 5000)
+   if readercheck = 1 then 
+          readerType = "VP3300_liteon"
+          DL.AddComment "Reader for VP3300 Liteon"
+   end if       
+End If
+
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
    DL.AddComment "--- Set Merchant 1 - Blank "
    DL.SendSequence "Set Merchant 1 - Blank"
    result = DL.WaitForSequence("Set Merchant blank response" , 1, 10000)
@@ -284,7 +297,8 @@ DL.ClearCommWindows
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT - VAS Only "
    if readerType <> "NEO2" then
-      DL.SendSequence "ACT - VAS Only", i, "D"
+      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - VAS Only (Liteon)", i, "D"
+      if readerType = "GR"            then DL.SendSequence "ACT - VAS Only", i, "D"
    result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
 
    else
@@ -306,7 +320,8 @@ DL.ClearCommWindows
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT - VAS OR Pay "
    if readerType <> "NEO2" then
-      DL.SendSequence "ACT - VAS OR Pay", i, "D"
+      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - VAS OR Pay (Liteon)", i, "D"
+      if readerType = "GR"            then DL.SendSequence "ACT - VAS OR Pay", i, "D"
    result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
 
    else
@@ -328,7 +343,8 @@ DL.ClearCommWindows
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT - VAS AND Pay "
    if readerType <> "NEO2" then
-      DL.SendSequence "ACT - VAS AND Pay", i, "D"
+      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - VAS AND Pay (Liteon)", i, "D"
+      if readerType = "GR"            then DL.SendSequence "ACT - VAS AND Pay", i, "D"
    result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
 
    else
@@ -350,7 +366,8 @@ DL.ClearCommWindows
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT - Pay Only "
    if readerType <> "NEO2" then
-      DL.SendSequence "ACT - Pay Only", i, "D"
+      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - Pay Only (Liteon)", i, "D"
+      if readerType = "GR"            then DL.SendSequence "ACT - Pay Only", i, "D"
    else
       DL.SendSequence "ACT - Pay Only (NEO2)", i, "D"
    end if
@@ -370,7 +387,8 @@ DL.ClearCommWindows
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT - VAS URL Only Protocol "
    if readerType <> "NEO2" then
-      DL.SendSequence "ACT - VAS URL Only Protocol", i, "D"
+      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - VAS URL Only Protocol (Liteon)", i, "D"
+      if readerType = "GR"            then DL.SendSequence "ACT - VAS URL Only Protocol", i, "D"
    result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS URL response" , 1, 10000)
 
    else
@@ -520,7 +538,8 @@ DL.ClearCommWindows
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT - VAS Only "
    if readerType <> "NEO2" then 
-      DL.SendSequence "ACT - VAS Only", i, "D"
+      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - VAS Only (Liteon)", i, "D" 
+      if readerType = "GR"            then DL.SendSequence "ACT - VAS Only", i, "D"
    result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
 
    else
@@ -542,7 +561,8 @@ DL.ClearCommWindows
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT - VAS OR Pay "
    if readerType <> "NEO2" then 
-      DL.SendSequence "ACT - VAS OR Pay", i, "D"
+      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - VAS OR Pay (Liteon)", i, "D" 
+      if readerType = "GR"            then DL.SendSequence "ACT - VAS OR Pay", i, "D"
    result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
 
    else
@@ -564,7 +584,8 @@ DL.ClearCommWindows
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT - VAS AND Pay "
    if readerType <> "NEO2" then 
-      DL.SendSequence "ACT - VAS AND Pay", i, "D"
+      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - VAS AND Pay (Liteon)", i, "D" 
+      if readerType = "GR"            then DL.SendSequence "ACT - VAS AND Pay", i, "D"
    result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
 
    else
@@ -586,7 +607,8 @@ DL.ClearCommWindows
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT - Pay Only "
    if readerType <> "NEO2" then 
-      DL.SendSequence "ACT - Pay Only", i, "D"
+      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - Pay Only (Liteon)", i, "D" 
+      if readerType = "GR"            then DL.SendSequence "ACT - Pay Only", i, "D"
    else
       DL.SendSequence "ACT - Pay Only (NEO2)", i, "D"
    end if
@@ -606,7 +628,8 @@ DL.ClearCommWindows
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT - VAS URL Only Protocol "
    if readerType <> "NEO2" then 
-      DL.SendSequence "ACT - VAS URL Only Protocol", i, "D"
+      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - VAS URL Only Protocol (Liteon)", i, "D"
+      if readerType = "GR"            then DL.SendSequence "ACT - VAS URL Only Protocol", i, "D"
    result = DL.WaitForSequence("2 IDTECH ENCRYPTION YES card VAS URL response" , 1, 10000)
 
    else

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-193
+36466
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -167,6 +167,20 @@ If result <> 0 Then
 End If
 end if
 '============================================================
+
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Get FW ver (29-00)"
+   DL.SendSequence "Get FW ver (29-00)"
+   readercheck = DL.WaitForSequence("VP3300_liteon", 1, 5000)
+   if readercheck = 1 then 
+          readerType = "VP3300_liteon"
+          DL.AddComment "Reader for VP3300 Liteon"
+   end if       
+End If
+
 If result <> 0 Then
    DL.Pause 500
    DL.ResetReceiveCounter
@@ -223,13 +237,18 @@ End If
 'Master card
 '============================================================
 '============================================================
+
+
 If result <> 0 Then
    MsgBox "Click OK --> Tap MasterCard paypass", VBOKOnly
 
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT - VAS Only *** " & readerType 
-   if readerType <> "NEO2" then DL.SendSequence "ACT - VAS Only"
+   if readerType <> "NEO2" then 
+      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - VAS Only (Liteon)" 
+      if readerType = "GR"            then DL.SendSequence "ACT - VAS Only"
+   end if
    if readerType = "NEO2" then DL.SendSequence "ACT - VAS Only (NEO2)"
    
    if readerType <> "NEO2" then result = DL.WaitForSequence("VAS fail response" , 1, 10000)
@@ -246,7 +265,10 @@ If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT - VAS OR Pay "
-   if readerType <> "NEO2" then DL.SendSequence "ACT - VAS OR Pay"
+   if readerType <> "NEO2" then 
+      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - VAS OR Pay (Liteon)" 
+      if readerType = "GR"            then DL.SendSequence "ACT - VAS OR Pay"
+   end if   
    if readerType = "NEO2" then DL.SendSequence "ACT - VAS OR Pay (NEO2)"
    
    result = DL.WaitForSequence("Master response", 1, 10000)
@@ -261,7 +283,10 @@ If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT - VAS AND Pay "
-   if readerType <> "NEO2" then DL.SendSequence "ACT - VAS AND Pay"
+   if readerType <> "NEO2" then 
+      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - VAS AND Pay (Liteon)" 
+      if readerType = "GR"            then DL.SendSequence "ACT - VAS AND Pay"
+   end if
    if readerType = "NEO2" then DL.SendSequence "ACT - VAS AND Pay (NEO2)"
    
    result = DL.WaitForSequence("Master response", 1, 10000)
@@ -276,7 +301,10 @@ If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT - Pay Only "
-   if readerType <> "NEO2" then DL.SendSequence "ACT - Pay Only"
+   if readerType <> "NEO2" then 
+      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - Pay Only (Liteon)" 
+      if readerType = "GR"            then DL.SendSequence "ACT - Pay Only"
+   end if
    if readerType = "NEO2" then DL.SendSequence "ACT - Pay Only (NEO2)"
    
    result = DL.WaitForSequence("Master response", 1, 10000)
@@ -291,7 +319,10 @@ If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT - VAS URL Only Protocol "
-   if readerType <> "NEO2" then DL.SendSequence "ACT - VAS URL Only Protocol"
+   if readerType <> "NEO2" then 
+      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - VAS URL Only Protocol (Liteon)" 
+      if readerType = "GR"            then DL.SendSequence "ACT - VAS URL Only Protocol"
+   end if
    if readerType = "NEO2" then DL.SendSequence "ACT - VAS URL Only Protocol (NEO2)"
    
    if readerType <> "NEO2" then result = DL.WaitForSequence("VAS fail response" , 1, 10000)

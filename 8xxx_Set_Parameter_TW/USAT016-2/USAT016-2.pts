@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-53873
+50109
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -246,6 +246,7 @@ for a = 1 to 6
 next
 end if
 
+if pollmode = 1 then
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
@@ -276,6 +277,7 @@ for a = 1 to 4
        ReverseResult(result)
     End If
 next
+end if
 end if
 
 If result <> 0 Then
@@ -327,6 +329,7 @@ for a = 1 to 6
 next
 end if
 
+if pollmode = 1 then
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
@@ -362,6 +365,7 @@ for a = 1 to 4
     End If
 next
 end if
+end if
 end sub
 '------------------------------------------------------------
 'Debugging (!!!!! DO NOT EDIT !!!!!)
@@ -374,6 +378,7 @@ End Function
 'TEST BEGINS
 '------------------------------------------------------------
 sredcheck = msgbox ("Is this SRED project?", vbyesno)
+pollmode = msgbox ("Does the project support auto poll mode?", vbyesno)
 if readerType <> "NEO2" then    
    DL.SendSequence "04-F0"
    result = DL.WaitForSequence("04 00", 1, 3000)

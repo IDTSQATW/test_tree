@@ -1,24 +1,9 @@
-Docklight Log File (HEX) - Started 2023/7/4 17:03:18.221 
+Docklight Log File (HEX) - Started 2023/8/3 10:10:27.334 
  TEST CASE: ST300
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 9600 baud...
- Set POS COM PORT - COMPLETE
-
- 
-
- --- Check DUKPT Keys Extended (81-0C) AR
-
-2023/7/4 17:03:20.527 [TX] - 56 69 56 4F 74 65 63 68 32 00 81 0C 00 00 0A BA 
-2023/7/4 17:03:21.302 [RX] - 56 69 56 4F 74 65 63 68 32 00 81 00 00 09 14 00 00 02 00 00  (data key) 52 00 00 72 D9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
-Please remove data key and then restart test.....
- 
-
- ---------- END OF TEST ----------
-
- Result = FAILED
 
 
-Docklight Log File (HEX) - Stopped 2023/7/4 17:03:21.394 
+Docklight Log File (HEX) - Stopped 2023/8/3 10:10:27.364 
 

@@ -50,7 +50,7 @@ if (Result):
 		if (Result):
 			RetOfStep = DL.SendCommand('Activate Transaction')
 			if (RetOfStep):
-				DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** E3 ** DF EE 12")
+				DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** E5 ** DF EE 12")
 				alldata = DL.Get_RXResponse(0)
 				ksn = DL.GetTLV(alldata,"DFEE12")	
 				
@@ -85,61 +85,62 @@ if (Result):
 				else:
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-				if TagDFEE26 == "E301": 
+				if TagDFEE26 == "E501": 
 					DL.SetWindowText("blue", "Tag DFEE26: PASS")
 				else:
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 			
-	# Auto Poll
-	RetOfStep = DL.SendCommand('Auto Poll')
-	if (RetOfStep):
-		Result = DL.Check_RXResponse("01 00 00 00")
-	
-	# cmd 03-40
-		if (Result):
-			RetOfStep = DL.SendCommand('Get Transaction result')
-			if (RetOfStep):
-				alldata = DL.Get_RXResponse(1)
-				DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 03 23')
-				DL.Check_StringAB(DL.Get_RXResponse(1), 'E3 ** DF EE 12')
-				ksn = DL.GetTLV(alldata,"DFEE12")	
-					
-				mask57 = DL.GetTLV_Embedded(alldata,"57", 0)
-				enc57 = DL.GetTLV_Embedded(alldata,"57", 1)
-				dec57 = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc57)
-					
-				Tag9F39 = DL.GetTLV_Embedded(alldata,"9F39")
-				TagFFEE01 = DL.GetTLV_Embedded(alldata,"FFEE01")
-				TagDFEE26 = DL.GetTLV_Embedded(alldata,"DFEE26")
-				
-			# Tag 57
-				if DL.Check_StringAB(alldata, "57 A1 13"):
-					DL.SetWindowText("blue", "Tag 57_Mask: PASS")
-				else:
-					DL.SetWindowText("red", "Tag 57_Mask: FAIL")
-					
-				Result = DL.Check_StringAB(dec57, '5713')
-				if Result == True and DL.Check_StringAB(alldata, "57 C1 20"):
-					DL.SetWindowText("blue", "Tag 57_Enc: PASS")
-				else:
-					DL.SetWindowText("red", "Tag 57_Enc: FAIL")
+	if lcdtype == 0:
+		# Auto Poll
+		RetOfStep = DL.SendCommand('Auto Poll')
+		if (RetOfStep):
+			Result = DL.Check_RXResponse("01 00 00 00")
 		
-			# Tags 9F39/ FFEE01/ DFEE26
-				if Tag9F39 == "07": 
-					DL.SetWindowText("blue", "Tag 9F39: PASS")
-				else:
-					DL.SetWindowText("Red", "Tag 9F39: FAIL")
-				
-				if (DL.Check_StringAB(TagFFEE01, "DFEE300100")): 
-					DL.SetWindowText("blue", "Tag FFEE01: PASS")
-				else:
-					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-				
-				if TagDFEE26 == "E301": 
-					DL.SetWindowText("blue", "Tag DFEE26: PASS")
-				else:
-					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
-                    
+		# cmd 03-40
+			if (Result):
+				RetOfStep = DL.SendCommand('Get Transaction result')
+				if (RetOfStep):
+					alldata = DL.Get_RXResponse(1)
+					DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 03 23')
+					DL.Check_StringAB(DL.Get_RXResponse(1), 'E3 ** DF EE 12')
+					ksn = DL.GetTLV(alldata,"DFEE12")	
+					
+					mask57 = DL.GetTLV_Embedded(alldata,"57", 0)
+					enc57 = DL.GetTLV_Embedded(alldata,"57", 1)
+					dec57 = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc57)
+					
+					Tag9F39 = DL.GetTLV_Embedded(alldata,"9F39")
+					TagFFEE01 = DL.GetTLV_Embedded(alldata,"FFEE01")
+					TagDFEE26 = DL.GetTLV_Embedded(alldata,"DFEE26")
+					
+				# Tag 57
+					if DL.Check_StringAB(alldata, "57 A1 13"):
+						DL.SetWindowText("blue", "Tag 57_Mask: PASS")
+					else:
+						DL.SetWindowText("red", "Tag 57_Mask: FAIL")
+						
+					Result = DL.Check_StringAB(dec57, '5713')
+					if Result == True and DL.Check_StringAB(alldata, "57 C1 20"):
+						DL.SetWindowText("blue", "Tag 57_Enc: PASS")
+					else:
+						DL.SetWindowText("red", "Tag 57_Enc: FAIL")
+					
+				# Tags 9F39/ FFEE01/ DFEE26
+					if Tag9F39 == "07": 
+						DL.SetWindowText("blue", "Tag 9F39: PASS")
+					else:
+						DL.SetWindowText("Red", "Tag 9F39: FAIL")
+						
+					if (DL.Check_StringAB(TagFFEE01, "DFEE300100")): 
+						DL.SetWindowText("blue", "Tag FFEE01: PASS")
+					else:
+						DL.SetWindowText("Red", "Tag FFEE01: FAIL")
+						
+					if TagDFEE26 == "E301": 
+						DL.SetWindowText("blue", "Tag DFEE26: PASS")
+					else:
+						DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+					
 if lcdtype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):

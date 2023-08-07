@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-4497
+10873
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -233,6 +233,7 @@ for a = 1 to 4
 next
 end if
 
+if pollmode = 1 then
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
@@ -259,6 +260,7 @@ for a = 1 to 2
        ReverseResult(result)
     End If
 next
+end if
 end if
 
 If result <> 0 Then
@@ -303,6 +305,7 @@ for a = 1 to 4
 next
 end if
 
+if pollmode = 1 then
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
@@ -330,6 +333,7 @@ for a = 1 to 2
     End If
 next
 end if
+end if
 end sub
 '------------------------------------------------------------
 'Debugging (!!!!! DO NOT EDIT !!!!!)
@@ -341,6 +345,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+pollmode = msgbox ("Does the project support auto poll mode?", vbyesno)
 if readerType = "GR" or readerType = "NEO1" then    
    DL.SendSequence "04-F0"
    result = DL.WaitForSequence("04 00", 1, 3000)
@@ -462,7 +467,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Get account DUKPT encryption type (C7-33)"
    DL.SendSequence "Get account DUKPT encryption type (C7-33)"
-   result = DL.WaitForSequence("get dukpt type 01", 1, 3000)
+   resultignore = DL.WaitForSequence("get dukpt type 01", 1, 1500)
    dl.pause 500
 End If
 

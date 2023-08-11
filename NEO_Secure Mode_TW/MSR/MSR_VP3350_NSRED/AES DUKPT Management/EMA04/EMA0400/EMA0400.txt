@@ -1,3 +1,14 @@
+TID:Get DUKPT DEK Attribution based on KeySlot (C7-A3)
+CMD:C7 A3 01 00
+EXR:
+
+TID:0105 do not use LCD
+CMD:01 05 11 05
+EXR:
+
+TID:0105 default (VP3350)
+CMD:01 05 19 05
+EXR:
 TID:Get Data Encryption Enable Flag (C7-37)
 CMD:C7 37
 EXR:C7 00 00 00

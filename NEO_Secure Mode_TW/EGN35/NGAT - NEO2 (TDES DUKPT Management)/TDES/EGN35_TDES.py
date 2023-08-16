@@ -47,6 +47,11 @@ if (Result):
 	RetOfStep = DL.SendCommand('Set group B0')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("04 00 00 00")	
+        
+if (Result):
+	RetOfStep = DL.SendCommand('DF7D = 02 (NEO2)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("04 00 00 00")
 
 # cmd 02-40, MSR/ CL/ CT				
 if (Result):	
@@ -90,7 +95,7 @@ if (Result):
 					CardData=DL.GetTLV(sResult,"DFEE23")
 					bresult = False
 					if CardData!=None and CardData!='':
-						objectMSR = DL.ParseCardData(CardData ,bresult,Key,MacKey)
+						objectMSR = DL.ParseCardData(CardData, Key)
 						EncryptType = DL.Get_EncryptionKeyType_CardData()
 						EncryptMode = DL.Get_EncryptionMode_CardData()
 						if objectMSR!=None:
@@ -111,15 +116,15 @@ if (Result):
 							if len(TRK1)> 0:
 								DL.SetWindowText("blue", "Track 1:")
 								TRK1DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK1)
-								TRK1DecryptData = TRK1DecryptData[0:((objectMSR[0].msr_track1Length)*2)]
+								#TRK1DecryptData = TRK1DecryptData[0:((objectMSR[0].msr_track1Length)*2)]
 							if len(TRK2)> 0:
 								DL.SetWindowText("blue", "Track 2:")
 								TRK2DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK2)
-								TRK2DecryptData = TRK2DecryptData[0:((objectMSR[0].msr_track2Length)*2)]
+								#TRK2DecryptData = TRK2DecryptData[0:((objectMSR[0].msr_track2Length)*2)]
 							if len(TRK3) > 0:
 								DL.SetWindowText("blue", "Track 3:")
 								TRK3DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK3)
-								TRK3DecryptData = TRK3DecryptData[0:((objectMSR[0].msr_track3Length)*2)]
+								#TRK3DecryptData = TRK3DecryptData[0:((objectMSR[0].msr_track3Length)*2)]
 										
 							# Verify specific tags
 							if DL.Check_RXResponse(rx, "9F39 ** 90") == False:

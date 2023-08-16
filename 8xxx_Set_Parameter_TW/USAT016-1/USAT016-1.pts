@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-59241
+39479
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -195,6 +195,7 @@ for a = 1 to 4
 next
 end if
 
+if pollmode = 6 then
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
@@ -231,6 +232,7 @@ If result <> 0 Then
    result = DL.WaitForSequence("01 00", 1, 3000)
    dl.pause 500
 End If
+end if
 
 if result <> 0 then
    dl.resetreceivecounter
@@ -265,6 +267,7 @@ for a = 1 to 4
 next
 end if
 
+if pollmode = 6 then
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
@@ -292,6 +295,7 @@ for a = 1 to 2
     End If
 next
 end if
+end if
 end sub
 '------------------------------------------------------------
 'Debugging (!!!!! DO NOT EDIT !!!!!)
@@ -303,6 +307,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+pollmode = msgbox ("Does reader support auto poll mode?", vbyesno)
 if readerType = "GR" or readerType = "NEO1" then 
    DL.SendSequence "04-F0"
    result = DL.WaitForSequence("04 00", 1, 3000)

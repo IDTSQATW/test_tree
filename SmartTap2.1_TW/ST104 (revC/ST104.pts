@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-1671
+7403
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -144,7 +144,7 @@ End Function
 'TEST BEGINS
 '------------------------------------------------------------
 platformcheck = msgbox ("Is this NEO3 project?", vbyesno)
-readercheck = msgbox ("Is this SRED project?", vbyesno)
+readercheck = msgbox ("Is data enryption ON?", vbyesno)
 
 if readerType <> "NEO2" then
 If result <> 0 Then

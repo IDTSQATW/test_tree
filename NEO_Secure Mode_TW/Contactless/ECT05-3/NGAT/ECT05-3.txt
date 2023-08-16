@@ -24,13 +24,13 @@ EXR:
 
 TID:Activate Transaction w/ LCD
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00
-MSG:Tap MChip card... (PAN = xxxx....8171)
+MSG:Tap CHIP Test Card...
 EXR:
 TIMEOUT:120000
 
 TID:Activate Transaction w/o LCD
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00
-MSG:Tap MChip card... (PAN = xxxx....8171)
+MSG:Tap CHIP Test Card...
 EXR:
 EXR:
 EXR:

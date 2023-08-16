@@ -57,7 +57,11 @@ if (Result):
 if (Result):
 	RetOfStep = DL.SendCommand('60-0A Contact Set CA Public Key')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("60 00 00 00")			
+		Result = Result and DL.Check_RXResponse("60 00 00 00")
+if (Result):
+	RetOfStep = DL.SendCommand('DF7D = 02 (NEO2)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("04 00 00 00")
 		
 # cmd 60-10, fallback to MSR, swipe card
 if (Result):

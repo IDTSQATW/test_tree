@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-11637
+30574
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -358,6 +358,17 @@ end_case = 18
    '------------------------------------------------------------
    next
 End If
+
+dl.resetreceivecounter
+dl.addcomment vbcrlf
+DL.AddComment "--- 02-40, swipe card"
+DL.SendSequence "02-40"
+r = DL.WaitForSequence("DFEE25 = 0011", 1, 4000)
+if r = 0 then 
+   countf = countf + 1
+   dl.addcomment vbcrlf & "***** FAIL *****"
+end if
+dl.pause 500
 
 if countf <> 0 then result = 0
 

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-13642
+38923
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -157,7 +157,7 @@ End Function
       dl.addcomment vbcrlf
       DL.AddComment "--- Check DUKPT Keys Extended (81-0C)"
       DL.SendSequence "Check DUKPT Keys Extended (81-0C)" 
-      result = DL.WaitForSequence("salt key exist", 1, 10000)
+      result = DL.WaitForSequence("salt key exist", 1, 3000)
    End If
 '------------------------------------------------------------
 If result <> 0 then
@@ -216,7 +216,7 @@ If result <> 0 then
    next
 '------------------------------------------------------------
 else
-   dl.addcomment vbcrlf & "No salt key, pls load it first..."
+   dl.addcomment vbcrlf & "No salt key, pls load it first...(ex. 31323334353637383930313233343536)"
 end if
 '------------------------------------------------------------
 DL.Pause 500

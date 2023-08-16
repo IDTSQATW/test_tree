@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-15994
+39445
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -370,7 +370,7 @@ Sub Initialize_Reader()
 
 	DL.AddComment vbCrLf & "--- Poll for Token" 
 	DL.SendSequence "Poll for Token"
-	result = DL.WaitForSequence ("Poll for Token (OK)", 1, 5000)
+	result = DL.WaitForSequence ("Poll for Token (OK)", 1, 2000)
 
 	DL.AddComment vbCrLf & "--- 2C-06" 
 	DL.SendSequence "2c-06"

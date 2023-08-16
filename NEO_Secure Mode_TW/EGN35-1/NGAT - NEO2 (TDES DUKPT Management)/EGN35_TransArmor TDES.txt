@@ -10,6 +10,10 @@ TID:0-use TDES to encrypt (C7-32)
 CMD:C7 32 00
 EXR:C7 00 00 00
 
+TID:DF7D = 02 (NEO2)
+CMD:04 00 DF EE 7D 01 02
+EXR:
+
 TID:2-use TransArmor TDES to encrypt (C7-32)
 CMD:C7 32 02
 EXR:C7 00 00 00

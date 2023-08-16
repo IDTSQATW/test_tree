@@ -39,6 +39,10 @@ if readertype == 1:	     # NEOII and upward project
 		RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 		if (RetOfStep):
 			Result = Result and DL.Check_RXResponse("C7 00 00 06 01 02 00 00 00 00")
+	if (Result):
+		RetOfStep = DL.SendCommand('DF7D = 02 (NEO2)')
+		if (RetOfStep):
+			Result = Result and DL.Check_RXResponse("04 00 00 00")
 else:     # NEOI	
 	# Encryption Type -- AES
 	if (Result):
@@ -119,9 +123,7 @@ if (Result):
 					CardData=DL.GetTLV(sResult,"DFEE23")
 					bresult = False
 					if CardData!=None and CardData!='':
-						objectMSR = DL.ParseCardData(CardData ,bresult,Key,MacKey)
-						EncryptType = DL.Get_EncryptionKeyType_CardData()
-						EncryptMode = DL.Get_EncryptionMode_CardData()
+						objectMSR = DL.ParseCardData(CardData, strKey)
 						if objectMSR!=None:
 							DL.SetWindowText("blue", "Track 1:")
 							Track1_CardData = DL.Get_TrackN_CardData(1)

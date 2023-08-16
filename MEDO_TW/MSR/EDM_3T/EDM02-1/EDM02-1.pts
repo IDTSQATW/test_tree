@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-4239
+6208
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -173,6 +173,18 @@ If result <> 0 Then
 else 
    countf = countf + 1
 End If
+
+if result <> 0 then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- DF7D" 
+   if readerType <> "NEO2" then 
+      'DL.SendSequence "DF7D = 01"
+   else
+      DL.SendSequence "DF7D = 02 (NEO2)"
+   end if
+   result = DL.WaitForSequence("04 00", 1, 3000)
+end if
 '------------------------------------------------------------End OFF
 If result <> 0 Then
    dl.resetreceivecounter
@@ -199,19 +211,7 @@ End If
 
 MSRtran()
 
-If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Auto Poll"
-   DL.SendSequence "Auto Poll"
-   result = DL.WaitForSequence("Poll Response", 1, 2000)
-   dl.pause 500
-   poll = 0
-else 
-   countf = countf + 1
-End If
 
-MSRtran()
 '------------------------------------------------------------Enc ON
 '------------------------------------------------------------
 If result <> 0 Then
@@ -239,19 +239,6 @@ End If
 
 MSRtran()
 
-If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Auto Poll"
-   DL.SendSequence "Auto Poll"
-   result = DL.WaitForSequence("Poll Response", 1, 2000)
-   dl.pause 500
-   poll = 0
-else 
-   countf = countf + 1
-End If
-
-MSRtran()
 '------------------------------------------------------------
 sub MSRtran()
 If result <> 0 Then

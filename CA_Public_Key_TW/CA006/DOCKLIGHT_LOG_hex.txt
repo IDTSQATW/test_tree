@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2023/7/31 11:02:09.951 
+Docklight Log File (HEX) - Started 2023/8/9 12:00:42.023 
  TEST CASE: CA006
 
  --- Set POS COM PORT Settings
@@ -8,8 +8,8 @@ Docklight Log File (HEX) - Started 2023/7/31 11:02:09.951
 
  --- Delete Group ID Failed as expected
 
-2023/7/31 11:02:11.380 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 05 00 05 DF EE 2D 01 00 40 51 
-2023/7/31 11:02:11.416 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 0C 00 00 DB 77  Status Code "00" Pass 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+2023/8/9 12:00:43.313 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 05 00 05 DF EE 2D 01 00 40 51 
+2023/8/9 12:00:43.348 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 0C 00 00 DB 77  Status Code "00" Pass 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  Result = PASSED
  ---------- END OF TEST ----------
@@ -19,5 +19,5 @@ Docklight Log File (HEX) - Started 2023/7/31 11:02:09.951
  MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2023/7/31 11:02:12.529 
+Docklight Log File (HEX) - Stopped 2023/8/9 12:00:44.454 
 

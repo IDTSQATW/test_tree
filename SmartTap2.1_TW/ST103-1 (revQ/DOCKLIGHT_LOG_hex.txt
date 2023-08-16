@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2023/7/5 16:13:23.222 
+Docklight Log File (HEX) - Started 2023/8/8 17:04:30.136 
  TEST CASE: ST103-1
 
  --- Set POS COM PORT Settings
@@ -15,5 +15,5 @@ Please check if u use correct test script. ex. NEO2 project should use NGAT tool
  Result = FAILED
 
 
-Docklight Log File (HEX) - Stopped 2023/7/5 16:13:24.490 
+Docklight Log File (HEX) - Stopped 2023/8/8 17:04:31.400 
 

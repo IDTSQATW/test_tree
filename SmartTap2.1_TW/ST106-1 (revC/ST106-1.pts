@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-11316
+50956
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -150,7 +150,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-readerchedk = msgbox ("Is this SRED project?", vbyesno)
+readerchedk = msgbox ("Is data encryption ON?", vbyesno)
 if readerType = "GR" or readerType = "NEO1" then
 If result <> 0 Then
    dl.resetreceivecounter

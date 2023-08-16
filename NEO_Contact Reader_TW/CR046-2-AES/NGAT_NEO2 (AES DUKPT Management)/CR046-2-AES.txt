@@ -6,6 +6,10 @@ TID:Get Data Encryption (C7-37)
 CMD:C7 37
 EXR:C7 00 00 00
 
+TID:DF7D = 02 (NEO2)
+CMD:04 00 DF EE 7D 01 02
+EXR:
+
 TID:Encryption Type -- AES
 CMD:C7 33
 EXR:C7 00 00 01 00

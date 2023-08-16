@@ -10,6 +10,10 @@ TID:Encryption type -- TDES
 CMD:C7 33
 EXR:
 
+TID:DF7D = 02 (NEO2)
+CMD:04 00 DF EE 7D 01 02
+EXR:
+
 TID:C7-30 Get Data Encryption Key Variant Type = Pin
 CMD:C7 30
 EXR:C7 00 00 01 01

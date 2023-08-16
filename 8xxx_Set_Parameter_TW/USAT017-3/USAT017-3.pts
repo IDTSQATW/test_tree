@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-10873
+65059
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -353,7 +353,7 @@ if readerType = "GR" or readerType = "NEO1" then
 else
    DL.SendSequence "04-0A"
    dl.pause 15000
-   enccheck = msgbox ("Does reader has data key (AES type)?", vbyesno)
+   enccheck = msgbox ("Does reader has data key?", vbyesno)
    if enccheck = 7 then result = 0
 end if
 '------------------------------------------------------------

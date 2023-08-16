@@ -76,26 +76,30 @@ if (Result):
 			DL.SetWindowText("red", "Tag DF812B_Enc: FAIL")
 	
 	# Tag 56
-		Result = DL.Check_StringAB(mask56, '2A 35 31 32 38 2A 2A 2A 2A 2A 2A 2A 2A 38 31 37 31 5E 20 2F 5E 31 38 30 33 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A')
-		if Result == True and DL.Check_RXResponse(rx, "** 56 A1 29 **"):
+		Result = DL.Check_RXResponse(rx, '56 A1 29 2A 35 31 32 38 2A 2A 2A 2A 2A 2A 2A 2A ** 5E 20 2F 5E 31 38 30 33 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A')
+		if Result == True:
 			DL.SetWindowText("blue", "Tag 56_Mask: PASS")
 		else:
 			DL.SetWindowText("red", "Tag 56_Mask: FAIL")
 			
-		Result = DL.Check_StringAB(dec56, '56 29 42 35 31 32 38 35 37 30 31 30 30 30 33 38 31 37 31 5E 20 2F 5E 31 38 30 33 36 32 32 30 30')
+		Result = DL.Check_StringAB(dec56, '56 29 42 35 31 32 38 35 37 30 31 30 30 30 33')
+		if Result == True:
+			Result = DL.Check_StringAB(dec56, '5E 20 2F 5E 31 38 30 33 36 32 32 30 30')
 		if Result == True and DL.Check_RXResponse(rx, "** 56 C1 **"):
 			DL.SetWindowText("blue", "Tag 56_Enc: PASS")
 		else:
 			DL.SetWindowText("red", "Tag 56_Enc: FAIL")
 			
 	# Tag 9F6B
-		Result = DL.Check_StringAB(mask9F6B, '51 28 CC CC CC CC 81 71 D1 80 3C CC CC CC CC CC CC CC CC')
-		if Result == True and DL.Check_RXResponse(rx, "** 9F 6B A1 13 **"):
+		Result = DL.Check_RXResponse(rx, '9F 6B A1 13 51 28 CC CC CC CC ** D1 80 3C CC CC CC CC CC CC CC CC')
+		if Result == True:
 			DL.SetWindowText("blue", "Tag 9F6B_Mask: PASS")
 		else:
 			DL.SetWindowText("red", "Tag 9F6B_Mask: FAIL")
 			
-		Result = DL.Check_StringAB(dec9F6B, '9F 6B 13 51 28 57 01 00 03 81 71 D1 80 36 22 00')
+		Result = DL.Check_StringAB(dec9F6B, '9F 6B 13 51 28 57 01 00 03')
+		if Result == True:
+			Result = DL.Check_StringAB(dec9F6B, 'D1 80 36 22 00')
 		if Result == True and DL.Check_RXResponse(rx, "** 9F 6B C1 **"):
 			DL.SetWindowText("blue", "Tag 9F6B_Enc: PASS")
 		else:

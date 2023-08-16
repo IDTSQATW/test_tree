@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-50109
+35818
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -411,7 +411,7 @@ If result <> 0 Then
    result = DL.WaitForSequence("04 00", 1, 3000)
 End If
 
-if readerType <> "NEO2" then 
+if readerType <> "NEO2" or sredcheck = 7 then 
    if result <> 0 then
       dl.resetreceivecounter
       dl.addcomment vbcrlf
@@ -440,7 +440,7 @@ if result <> 0 then
 end if
 end if
 
-if sredcheck = 7 then
+if readerType <> "NEO2" then
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-38334
+44139
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -147,6 +147,13 @@ Function ReverseResult(ResultParam)
       End If
 End Function
 
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
 '------------------------------------------------------------
 'Debugging (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
@@ -214,7 +221,12 @@ If result <> 0 Then
   else
      DL.SendSequence " ACT - VAS AND Pay (NEO2)"
   end if
-  result = DL.WaitForSequence("Payment AID tag 84 generic resp", 1, 32000)
+  dl.pause 1000
+  result = DL.WaitForSequence("Payment AID tag 84 generic resp", 1, 10000)
+  if result <> 0 then
+     result = DL.WaitForSequence("9F25 - Panera Bread", 1, 2000)
+     ReverseResult(result)
+  end if
 End If
 
 If result = 0 Or errFlg <> 0 Then

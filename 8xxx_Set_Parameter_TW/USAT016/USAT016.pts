@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-39834
+20645
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -242,6 +242,7 @@ sub yes7A()
        next
     end if
 
+    if pollmode = 6 then
     If result <> 0 Then
        dl.resetreceivecounter
        dl.addcomment vbcrlf
@@ -278,6 +279,7 @@ sub yes7A()
        result = DL.WaitForSequence("01 00", 1, 3000)
        dl.pause 1000
     End If
+    end if
 
     if result <> 0 then
        dl.resetreceivecounter
@@ -314,6 +316,7 @@ sub yes7A()
        next
     end if
 
+    if pollmode = 6 then
     If result <> 0 Then
        dl.resetreceivecounter
        dl.addcomment vbcrlf
@@ -345,6 +348,7 @@ sub yes7A()
            End If
        next
     end if
+    end if
 end sub
 '------------------------------------------------------------
 'Debugging (!!!!! DO NOT EDIT !!!!!)
@@ -356,7 +360,8 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-if readerType = "GR" or readerType = "NEO1" then 
+pollmode = msgbox ("Does reader support auto poll mode?", vbyesno)
+if readerType <> "NEO2" then 
    DL.SendSequence "04-F0"
    result = DL.WaitForSequence("04 00", 1, 3000)
    dl.pause 15000
@@ -418,17 +423,12 @@ If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Burst OFF mode"
-
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then 
+   if readerType <> "NEO2" then 
       DL.SendSequence "Burst OFF mode"
    elseif readerType = "NEO2" then 
       DL.SendSequence "Burst OFF mode (NEO2)"
-   else
-      DL.SendSequence "Burst OFF mode"
    end if
-
    result = DL.WaitForSequence("04 00", 1, 3000)
-
 End If
 
 yes7A()

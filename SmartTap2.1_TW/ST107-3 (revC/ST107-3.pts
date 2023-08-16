@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-18452
+22498
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -214,6 +214,12 @@ If result <> 0 Then
    result = DL.WaitForSequence("02 23", 1, 10000)
    dl.pause 1000
 End If
+
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 02-40 Payment Only"
+   DL.SendSequence "04-02 enable SmartTap AID (NEO2)"
+   dl.pause 500
 
 DL.AddComment vbCrLf
 '============================================================

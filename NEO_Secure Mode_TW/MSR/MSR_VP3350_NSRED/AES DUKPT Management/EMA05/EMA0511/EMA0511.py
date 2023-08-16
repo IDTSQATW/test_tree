@@ -10,6 +10,16 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey ='FEDCBA9876543210F1F1F1F1F1F1F1F1'
 
+# Check reader is VP3350 or not
+lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
+
 # Get Data Encryption Enable Flag (C7-37)
 if (Result):
 	RetOfStep = DL.SendCommand('Get Data Encryption Enable Flag (C7-37)')
@@ -61,7 +71,7 @@ if (Result):
 				if (RetOfStep):		
 					if j == 1:
 						if i == 2:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 44 28 00 B3 9B")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EC DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 5F 44 28 00 B3 9B")
 					if j == 2:
 						Result = DL.Check_StringAB(DL.Get_RXResponse(1),"56 69 56 4F 74 65 63 68 32 00 03 00")
 						if (Result):
@@ -116,7 +126,7 @@ if (Result):
 								Result = DL.Check_StringAB(TagFFEE01, 'DFEE30010C')
 								if Result != True:
 									DL.SetWindowText("red", "TagFFEE01: FAIL")	
-								Result = DL.Check_StringAB(TagDFEE26, 'EA01')
+								Result = DL.Check_StringAB(TagDFEE26, 'EC01')
 								if Result != True:
 									DL.SetWindowText("red", "TagDFEE26: FAIL")	
 																									

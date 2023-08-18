@@ -10,6 +10,13 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
+# Check reader support auto poll mode or not (note: NEO3 did not support auto poll mode)
+pollmode = DL.ShowMessageBox("", "Does the reader support auto poll mode?", 0)
+if pollmode == 1:
+	pollmode = 3 #support poll on demand and auto poll both
+else:
+    pollmode = 2 #support poll on demand mode only
+
 # Check project has LCD or not
 lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
 if lcdtype == 1:
@@ -31,30 +38,27 @@ if (Result):
 
 # cmd 02-40/ 03-40, tap card
 if (Result):
-	for i in range(1, 3):
-		if i == 1:
-			RetOfStep = DL.SendCommand('Poll on Demand')
-			if (RetOfStep):
-				Result = DL.Check_RXResponse("01 00 00 00")
-		if i == 2:
-			if lcdtype == 1:
+	for i in range(1, pollmode):
+		if i == 1: RetOfStep = DL.SendCommand('Poll on Demand')
+		if i == 2: 
+			if lcdtype == 1: #w/ LCD
 				RetOfStep = DL.SendCommand('Auto Poll w/ LCD')
 				rx = 0
-			if lcdtype == 0:
+			if lcdtype == 0: #w/o LCD
 				RetOfStep = DL.SendCommand('Auto Poll w/o LCD')
 				rx = 1
-			if (RetOfStep):
-				Result = DL.Check_RXResponse(rx, "01 00 00 00")
+		if (RetOfStep):
+			Result = DL.Check_RXResponse(rx, "01 00 00 00")
 		
 		if (Result):
-			if i == 1:
+			if i == 1: #Poll on demand mode
 				if lcdtype == 1:
 					RetOfStep = DL.SendCommand('AT Transaction w/ LCD')
 					rx = 0
 				if lcdtype == 0:
 					RetOfStep = DL.SendCommand('AT Transaction w/o LCD')
 					rx = 3
-			if i == 2:
+			if i == 2: #Auto poll mode
 				if lcdtype == 1:
 					RetOfStep = DL.SendCommand('Get Transaction Result w/ LCD')
 					rx = 1
@@ -62,13 +66,13 @@ if (Result):
 					RetOfStep = DL.SendCommand('Get Transaction Result w/o LCD')
 					rx = 1
 			if (RetOfStep):
-				if i == 1:
+				if i == 1: #Poll on demand mode
 					DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 02 23 ** E1 ** DF EE 12')
 					if lcdtype == 1:
 						alldata = DL.Get_RXResponse(rx)
 					if lcdtype == 0:
 						alldata = DL.GetTLV(DL.Get_RXResponse(rx),"FF8105")
-				if i == 2:
+				if i == 2: #Auto poll mode
 					alldata = DL.Get_RXResponse(rx)	
 					DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 03 23 ** E1 ** DF EE 12')
 				
@@ -86,8 +90,8 @@ if (Result):
 				enc5A = DL.GetTLV(alldata,"5A", 1)
 				dec5A = DL.DecryptDLL(0,1, strKey, ksn, enc5A)					
 
-			# Tag DFEF18
-				if lcdtype == 1:
+                # Tag DFEF18
+				if lcdtype == 1: #w/ LCD
 					Result = DL.Check_StringAB(maskDFEF18, '35 34 31 33 2A 2A 2A 2A 2A 2A 2A 2A 31 35 31 33 3D 30 35 31 32 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A')
 					if Result == True and DL.Check_StringAB(alldata, "DF EF 18 A1 22"):
 						DL.SetWindowText("blue", "Tag DFEF18_Mask: PASS")
@@ -100,7 +104,7 @@ if (Result):
 					else:
 						DL.SetWindowText("red", "Tag DFEF18_Enc: FAIL")
 									
-			# Tag 57
+                # Tag 57
 				Result = DL.Check_StringAB(mask57, '54 13 CC CC CC CC 15 13 D0 51 2C CC CC CC CC CC CC')
 				if Result == True and DL.Check_StringAB(alldata, "57 A1 11"):
 					DL.SetWindowText("blue", "Tag 57_Mask: PASS")
@@ -113,7 +117,7 @@ if (Result):
 				else:
 					DL.SetWindowText("red", "Tag 57_Enc: FAIL")
 					
-			# Tag 5A
+                # Tag 5A
 				Result = DL.Check_StringAB(mask5A, '54 13 CC CC CC CC 15 13')
 				if Result == True and DL.Check_StringAB(alldata, "5A A1 08"):
 					DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
@@ -126,7 +130,7 @@ if (Result):
 				else:
 					DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
 					
-			# Tags 9F39/ FFEE01/ DFEE26
+                # Tags 9F39/ FFEE01/ DFEE26
 				if DL.Check_RXResponse(rx, "9F39 01 07") == False: 
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")
 				
@@ -136,8 +140,6 @@ if (Result):
 				if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False: 
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 		
-				if lcdtype == 1:
-					RetOfStep = DL.SendCommand('03-03 w/ LCD')
-				if lcdtype == 0:
-					RetOfStep = DL.SendCommand('03-03 w/o LCD')	
+				if lcdtype == 1: DL.SendCommand('03-03 w/ LCD')
+				if lcdtype == 0: DL.SendCommand('03-03 w/o LCD')	
 				time.sleep(3)

@@ -130,20 +130,26 @@ if (Result):
 		if DL.Check_RXResponse("50 ** 4A434220437265646974"): 
 			DL.SetWindowText("blue", "Tag 50: PASS")
 		else:
+			DL.fails=DL.fails+1
 			DL.SetWindowText("Red", "Tag 50: FAIL")
 		
 		# Tag 57
 		if DL.Check_RXResponse('57 A1 13 35 40 CC CC CC CC 10 12 D4 91 2C CC CC CC CC CC CC CC CC '):
 			DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 		else:
+			DL.fails=DL.fails+1
 			DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 			
 		Result = DL.Check_StringAB(dec57, '57 13 35 40 82 99 99 42 10 12 D4 91 22 01 55 55 55 55 55 55 1F ')
 		if Result == True and DL.Check_RXResponse("57 C1"):
 			DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 		else:
+			DL.fails=DL.fails+1
 			DL.SetWindowText("red", "Tag 57_Enc: FAIL")
-	
+    else:
+        DL.fails=DL.fails+1
+        DL.SetWindowText("Red", "RX data is incorrect.")
+        
 # cmd 03-03
 if (Result):
 	DL.SetWindowText("black", "*** cmd 03-03, Approve")
@@ -157,3 +163,8 @@ if readertype == 1:
 	DL.SetWindowText("black", "*** 0105 default (VP3350)")
 	DL.SendIOCommand("IDG", "01 05 19 05", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")		
+    
+if(0 < (DL.fails + DL.warnings)):
+	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
+else:
+	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )

@@ -39,7 +39,9 @@ if (Result):
 # cmd 02-40/ 03-40, tap card
 if (Result):
 	for i in range(1, pollmode):
-		if i == 1: RetOfStep = DL.SendCommand('Poll on Demand')
+		if i == 1: 
+			DL.SendCommand('Poll on Demand')
+			Result = DL.Check_RXResponse("01 00 00 00")
 		if i == 2: 
 			if lcdtype == 1: #w/ LCD
 				RetOfStep = DL.SendCommand('Auto Poll w/ LCD')
@@ -47,8 +49,8 @@ if (Result):
 			if lcdtype == 0: #w/o LCD
 				RetOfStep = DL.SendCommand('Auto Poll w/o LCD')
 				rx = 1
-		if (RetOfStep):
-			Result = DL.Check_RXResponse(rx, "01 00 00 00")
+			if (RetOfStep):
+				Result = DL.Check_RXResponse(rx, "01 00 00 00")
 		
 		if (Result):
 			if i == 1: #Poll on demand mode

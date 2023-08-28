@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-14106
+32529
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -196,8 +196,8 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Get FW ver (29-00)"
    DL.SendSequence "Get FW ver (29-00)"
-   readercheck = DL.WaitForSequence("VP3300_liteon", 1, 5000)
-   if readercheck = 1 then 
+   liteoncheck = DL.WaitForSequence("VP3300_liteon", 1, 2000)
+   if liteoncheck = 1 then 
           readerType = "VP3300_liteon"
           DL.AddComment "Reader for VP3300 Liteon"
    end if       

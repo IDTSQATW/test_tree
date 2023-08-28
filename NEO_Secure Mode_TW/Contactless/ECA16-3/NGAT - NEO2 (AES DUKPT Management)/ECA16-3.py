@@ -7,7 +7,6 @@ Result= True
 
 Key='0123456789abcdeffedcba9876543210'
 MacKey='0123456789abcdeffedcba9876543210'
-PAN=''
 strKey = 'FEDCBA9876543210F1F1F1F1F1F1F1F1'
 
 # Check project has LCD or not
@@ -17,7 +16,7 @@ if lcdtype == 1:
 else:
 	DL.SetWindowText("Green", "*** The project has NO LCD ***")
 
-# Check data encryption TYPE is TDES	
+# Check data encryption TYPE is AES	
 if (Result):
 	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-60492
+18774
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -294,6 +294,7 @@ If result <> 0 Then
    end if
 End If
 
+dl.pause 500
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)

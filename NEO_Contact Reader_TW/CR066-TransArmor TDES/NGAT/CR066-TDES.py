@@ -52,7 +52,7 @@ if (Result):
 			CardData=DL.GetTLV(alldata,"DFEE23")
 			bresult = False
 			if CardData!=None and CardData!='':
-				objectMSR = DL.ParseCardData(CardData ,bresult,Key,MacKey)
+				objectMSR = DL.ParseCardData(CardData,Key)
 				EncryptType = DL.Get_EncryptionKeyType_CardData()
 				EncryptMode = DL.Get_EncryptionMode_CardData()
 				if objectMSR!=None:
@@ -73,16 +73,13 @@ if (Result):
 					if len(TRK1)> 0:
 						DL.SetWindowText("blue", "Track 1:")
 						TRK1DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK1)
-						TRK1DecryptData = TRK1DecryptData[0:((objectMSR[0].msr_track1Length)*2)]
 					if len(TRK2)> 0:
 						DL.SetWindowText("blue", "Track 2:")
 						TRK2DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK2)
-						TRK2DecryptData = TRK2DecryptData[0:((objectMSR[0].msr_track2Length)*2)]	
 					if len(TRK3) > 0:
 						DL.SetWindowText("blue", "Track 3:")
 						TRK3DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK3)
-						TRK3DecryptData = TRK3DecryptData[0:((objectMSR[0].msr_track3Length)*2)]				
-		
+
 					# Track 1
 					TR1maskdata = "%*4547********0000^LLIBRE ROBERT-GUILLERMO ^1102***************************?;4547********0000=1102***************?"	
 					TR1plaintextdata = "25 42 34 35 34 37 35 37 30 30 30 31 30 37 30 30 30 30 5E 4C 4C 49 42 52 45 20 52 4F 42 45 52 54 2D 47 55 49 4C 4C 45 52 4D 4F 20 5E 31 31 30 32 31 30 31 30 30 30 30 30 30 30 34 30 30 30 30 30 30 30 33 30 36 30 30 30 30 30 30 3F 3B 34 35 34 37 35 37 30 30 30 31 30 37 30 30 30 30 3D 31 31 30 32 31 30 31 30 30 30 30 30 33 30 36 30 30 30 30 3F"

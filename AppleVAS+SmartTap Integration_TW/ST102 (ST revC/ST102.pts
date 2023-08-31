@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-52310
+15909
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -143,7 +143,21 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-platformcheck = msgbox ("Is this SRED project (or Enc ON)?", vbyesno)
+platformcheck = msgbox ("Is this SRED project?", vbyesno)
+
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Get FW ver (29-00)"
+   DL.SendSequence "Get FW ver (29-00)"
+   readercheck = DL.WaitForSequence("VP3300_liteon", 1, 5000)
+   if readercheck = 1 then 
+          readerType = "VP3300_liteon"
+          DL.AddComment "Reader for VP3300 Liteon"
+   end if       
+End If
+
 
 If result <> 0 Then
    dl.resetreceivecounter
@@ -217,13 +231,25 @@ if result <> 0 then
        
        for b = 1 to 9
            if readerType <> "NEO2" then
-              if b = 1 then at = "02-" & a & " Apple VAS Only + ST Get VAS Only"
-              if b = 2 then at = "02-" & a & " Apple VAS Only + ST Secure Get VAS Only"
-              if b = 3 then at = "02-" & a & " Apple Pay Only + ST Pay Only"
-              if b = 4 then at = "02-" & a & " Apple VAS & Pay + ST Get VAS & Pay"
-              if b = 5 then at = "02-" & a & " Apple VAS & Pay + ST Secure Get VAS & Pay"
-              if b = 6 or b = 7 then at = "02-" & a & " Apple VAS or Pay + ST Get VAS or Pay"
-              if b = 8 or b = 9 then at = "02-" & a & " Apple VAS or Pay + ST Secure Get VAS or Pay"
+              
+              if readerType = "VP3300_liteon" then 
+                 if b = 1 then at = "02-" & a & " Apple VAS Only + ST Get VAS Only (Liteon)"
+                 if b = 2 then at = "02-" & a & " Apple VAS Only + ST Secure Get VAS Only (Liteon)"
+                 if b = 3 then at = "02-" & a & " Apple Pay Only + ST Pay Only (Liteon)"
+                 if b = 4 then at = "02-" & a & " Apple VAS & Pay + ST Get VAS & Pay (Liteon)"
+                 if b = 5 then at = "02-" & a & " Apple VAS & Pay + ST Secure Get VAS & Pay (Liteon)"
+                 if b = 6 or b = 7 then at = "02-" & a & " Apple VAS or Pay + ST Get VAS or Pay (Liteon)"
+                 if b = 8 or b = 9 then at = "02-" & a & " Apple VAS or Pay + ST Secure Get VAS or Pay (Liteon)"
+              else
+                 if b = 1 then at = "02-" & a & " Apple VAS Only + ST Get VAS Only"
+                 if b = 2 then at = "02-" & a & " Apple VAS Only + ST Secure Get VAS Only"
+                 if b = 3 then at = "02-" & a & " Apple Pay Only + ST Pay Only"
+                 if b = 4 then at = "02-" & a & " Apple VAS & Pay + ST Get VAS & Pay"
+                 if b = 5 then at = "02-" & a & " Apple VAS & Pay + ST Secure Get VAS & Pay"
+                 if b = 6 or b = 7 then at = "02-" & a & " Apple VAS or Pay + ST Get VAS or Pay"
+                 if b = 8 or b = 9 then at = "02-" & a & " Apple VAS or Pay + ST Secure Get VAS or Pay"
+              end if
+             
            else
               if b = 1 then at = "02-" & a & " Apple VAS Only + ST Get VAS Only (NEO2)"
               if b = 2 then at = "02-" & a & " Apple VAS Only + ST Secure Get VAS Only (NEO2)"

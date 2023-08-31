@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-15789
+22496
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -199,6 +199,22 @@ If result <> 0 Then
   DL.SendSequence "Get Merchant 4 "
   result = DL.WaitForSequence("Get pass.com.apple.wallet.panera w/URL resp", 1, 10000)
 End If
+
+
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Get FW ver (29-00)"
+   DL.SendSequence "Get FW ver (29-00)"
+   readercheck = DL.WaitForSequence("VP3300_liteon", 1, 5000)
+   if readercheck = 1 then 
+          readerType = "VP3300_liteon"
+          DL.AddComment "Reader for VP3300 Liteon"
+   end if       
+End If
+
+
 '============================================================
 If result <> 0 Then
    prompt2 = "Click Ok and then present iPhone w/ pass for Panera Bread..."
@@ -210,7 +226,9 @@ If result <> 0 Then
   dl.addcomment vbcrlf
   DL.AddComment "--- ACT - VAS AND Pay"
   if readerType <> "NEO2" then
-     DL.SendSequence " ACT - VAS AND Pay"
+     if readerType = "VP3300_liteon" then DL.SendSequence " ACT - VAS AND Pay (Liteon)"
+     if readerType = "GR"            then DL.SendSequence " ACT - VAS AND Pay"
+           
   else
      DL.SendSequence " ACT - VAS AND Pay (NEO2)"
   end if

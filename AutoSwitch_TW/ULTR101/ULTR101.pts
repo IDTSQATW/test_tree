@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-32345
+63680
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -365,7 +365,7 @@ If result = 0 Then
 End If
 
 DL.SendSequence "Set Configuration Global Off (NEO2)"
-resultignore = DL.WaitForSequence("04 00", 1, 2000)
+resultignore = DL.WaitForSequence("04 00", 1, 3000)
 
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf

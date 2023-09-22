@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-57844
+61043
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -149,7 +149,7 @@ End If
 If result <> 0 Then
   DL.AddComment "--- Activate Transaction (02-40)"
   DL.SendSequence " Activate Transaction (02-40)"
-  result = DL.WaitForSequence("Time Out Response", 1, 14000)
+  result = DL.WaitForSequence("Time Out Response", 1, 12000)
 End If
 
 '------------------------------------------------------------

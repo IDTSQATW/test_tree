@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-980
+18113
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -186,7 +186,7 @@ end if
 '---------------------------------------------------------------------------
 If result <> 0 Then
    DL.ResetReceiveCounter
-   msgbox "Click OK --> Tap Applepay MasterCard_PAN=****1488", vbokonly
+   msgbox "Click OK --> Tap Applepay MasterCard", vbokonly
 
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT (02-01)"
@@ -221,7 +221,7 @@ If result <> 0 Then
    end if
 '-----------------------------------------------------------------------------
    DL.ResetReceiveCounter
-   msgbox "Click OK --> Tap Applepay MasterCard_PAN=****1488", vbokonly
+   msgbox "Click OK --> Tap Applepay MasterCard", vbokonly
 
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT (02-40)"

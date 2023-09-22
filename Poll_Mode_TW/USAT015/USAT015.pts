@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-64631
+58558
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -82,7 +82,7 @@ End Sub
 ' -  
 '------------------------------------------------------------
 DL.OpenProject ProjectName & ".ptp"
-DL.StartCommunication
+'DL.StartCommunication
 DL.ClearCommWindows 
 DL.StartLogging "DOCKLIGHT_LOG",False, "H"
 ', false, true
@@ -183,7 +183,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-01 10 sec timeout"
    DL.SendSequence "02-01 10 sec timeout"
-   result = DL.WaitForSequence("02 08", 1, 12000)
+   result = DL.WaitForSequence("02 08", 1, 12500)
    uicheck = msgbox ("LCD is still displaying 'Amount: $10.00' (or LED 0 is steady ON)?", vbyesno)
    if uicheck = 6 then result = 0
    dl.pause 500
@@ -215,7 +215,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-40 10 sec timeout"
    DL.SendSequence "02-40 10 sec timeout"
-   result = DL.WaitForSequence("02 08", 1, 12000)
+   result = DL.WaitForSequence("02 08", 1, 12500)
    uicheck = msgbox ("LCD is still displaying 'Amount: $10.00' (or LED 0 is steady ON)?", vbyesno)
    if uicheck = 6 then result = 0
    dl.pause 500

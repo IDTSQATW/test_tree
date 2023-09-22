@@ -185,12 +185,12 @@ End If
 if result <> 0 then     'IDG CMD can change to RUN (USB-C female)
    dl.resetreceivecounter
    dl.addcomment vbcrlf
-   ledcheck = msgbox ("Wait & Make sure LED1 did not blink --> click OK", vbokonly)
+   ledcheck = msgbox ("Wait & Make sure LED0 did not blink --> click OK", vbokonly)
    DL.AddComment "--- 18-01 Ping #IDG CMD can change to RUN (USB-C female)"
    DL.SendSequence "18-01 Ping"
    result = DL.WaitForSequence("18 00", 1, 3000)
    if result <> 0 then
-      ledcheck = msgbox ("Does LED1 blink?", vbyesno)
+      ledcheck = msgbox ("Does LED0 blink?", vbyesno)
       if ledcheck = 7 then result = 0
    end if
 End If
@@ -198,10 +198,10 @@ End If
 if result <> 0 then     'ICC Card Inserted can change to RUN
    dl.resetreceivecounter
    dl.addcomment vbcrlf
-   ledcheck = msgbox ("Wait & Make sure LED1 did not blink --> click OK", vbokonly)
+   ledcheck = msgbox ("Wait & Make sure LED0 did not blink --> click OK", vbokonly)
    DL.AddComment "--- ICC card inserted"
    msgbox "Click OK -> insert ICC card", vbokonly
-   ledcheck = msgbox ("Does LED1 blink?", vbyesno)
+   ledcheck = msgbox ("Does LED0 blink?", vbyesno)
    if ledcheck = 7 then result = 0
    msgbox "Remove card --> Click OK", vbokonly
    dl.addcomment vbcrlf & "## Done"
@@ -212,12 +212,12 @@ if result <> 0 then     'IDG CMD can change to RUN  (USB-C male)
    msgbox "Unplug USB cable from USB female, plug-in USB cable in USB Male --> Click OK", vbokonly
    dl.resetreceivecounter
    dl.addcomment vbcrlf
-   ledcheck = msgbox ("Wait & Make sure LED1 did not blink --> click OK", vbokonly)
+   ledcheck = msgbox ("Wait & Make sure LED0 did not blink --> click OK", vbokonly)
    DL.AddComment "--- 18-01 Ping #IDG CMD can change to RUN  (USB-C male)"
    DL.SendSequence "18-01 Ping"
    result = DL.WaitForSequence("18 00", 1, 3000)
    if result <> 0 then
-      ledcheck = msgbox ("Does LED1 blink?", vbyesno)
+      ledcheck = msgbox ("Does LED0 blink?", vbyesno)
       if ledcheck = 7 then result = 0
    end if
 End If
@@ -225,10 +225,10 @@ End If
 if result <> 0 then     'USB-C female plug-ing can change to RUN
    dl.resetreceivecounter
    dl.addcomment vbcrlf
-   ledcheck = msgbox ("Wait & Make sure LED1 did not blink --> click OK", vbokonly)
+   ledcheck = msgbox ("Wait & Make sure LED0 did not blink --> click OK", vbokonly)
    DL.AddComment "--- USB-C female plug-in"
    msgbox "Click OK -> plug-in USB cable in USB female", vbokonly
-   ledcheck = msgbox ("Does LED1 blink?", vbyesno)
+   ledcheck = msgbox ("Does LED0 blink?", vbyesno)
    if ledcheck = 7 then result = 0
    dl.addcomment vbcrlf & "## Done"
 End If

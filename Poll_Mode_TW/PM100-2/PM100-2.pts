@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-42053
+43288
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -218,7 +218,7 @@ End If
 end if
 '------------------------------------------------------------
 If result <> 0 Then
-   msgbox "Click OK --> Fallback to MSR (insert card that can not be powered on IC chip --> Swipe card", vbokonly)
+   msgbox "Click OK --> Fallback to MSR (insert card that can not be powered on IC chip) --> Swipe card", vbokonly
    dl.resetreceivecounter
    DL.AddComment vbcrlf
    DL.AddComment "--- 02-40 (10 sec) (NEO2-3 interface ON)"

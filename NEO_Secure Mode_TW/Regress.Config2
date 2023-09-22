@@ -3,7 +3,7 @@ OFF
 $Prompt - Test Case Steps
 ON
 $Prompt - COM Port
-COM90
+COM91
 $Prompt - Reader Baud Rate
 115200
 $Prompt - reader type: GR, AR, NC(Not care)

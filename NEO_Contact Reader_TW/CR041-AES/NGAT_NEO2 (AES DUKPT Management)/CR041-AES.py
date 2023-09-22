@@ -96,10 +96,10 @@ if (Result):
 					if (Result):
 						Result = DL.Check_RXResponse(5, '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 ** 03 00 ** 13 1C')
 						if (Result):
-							Result = DL.Check_RXResponse(6, '56 69 56 4F 74 65 63 68 32 00 60 00')
+							Result = DL.Check_RXResponse(8, '56 69 56 4F 74 65 63 68 32 00 60 00')
 							if (Result):
-								Result = DL.Check_RXResponse(6, 'EC ** DF EE 25')
-					sResult=DL.Get_RXResponse(6)
+								Result = DL.Check_RXResponse(8, 'EC ** DF EE 25')
+					sResult=DL.Get_RXResponse(8)
 			if readertype == 0:     # NEO1
 				Result = DL.Check_StringAB(DL.Get_RXResponse(2), '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 81 0E 1C 02 00 00 00 77 C8')
 				if (Result):
@@ -115,7 +115,7 @@ if (Result):
 					CardData=DL.GetTLV(sResult,"DFEE23")
 					bresult = False
 					if CardData!=None and CardData!='':
-						objectMSR = DL.ParseCardData(CardData ,bresult,Key,MacKey)
+						objectMSR = DL.ParseCardData(CardData, Key)
 						EncryptType = DL.Get_EncryptionKeyType_CardData()
 						EncryptMode = DL.Get_EncryptionMode_CardData()
 						if objectMSR!=None:

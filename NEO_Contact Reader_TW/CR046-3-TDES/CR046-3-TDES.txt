@@ -69,6 +69,8 @@ EXR:
 EXR:
 EXR:
 EXR:
+EXR:
+EXR:
 MSG: Insert card (once) that can not be powered on IC chip --> Remove card --> Swipe Discover card...(ANY)
 TIMEOUT:120000
 

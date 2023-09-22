@@ -3,7 +3,7 @@ VERSION
 
 COMMSETTINGS
 0
-COM1
+COM91
 COM2
 9600
 2
@@ -239,8 +239,27 @@ SEND
 0
 5
 
+SEND
+31
+C7-A3 (KeySlot 00)
+56 69 56 4F 74 65 63 68 32 00 C7 A3 00 02 01 00 B1 A5
+0
+5
+
 RECEIVE
 0
+C7-A3 resp
+56 69 56 4F 74 65 63 68 32 00 C7 00 00 06 01 02 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
 Erase all key successfully
 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03
 -1
@@ -252,7 +271,7 @@ COMMENT pass
 0
 
 RECEIVE
-1
+2
 Set MSR Secure Parameters
 56 69 56 4F 74 65 63 68 32 00 C7 00 00 00 86 6E
 -1
@@ -264,7 +283,7 @@ COMMENT pass
 0
 
 RECEIVE
-2
+3
 Get MSR Secure Parameters
 56 69 56 4F 74 65 63 68 32 00 C7 00 00 05 DF DE 04 01 08 ?? ??
 -1
@@ -276,7 +295,7 @@ COMMENT pass
 0
 
 RECEIVE
-3
+4
 Set Encrypted Output Data Parameter (Default) successfully
 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
 -1
@@ -288,7 +307,7 @@ COMMENT pass
 0
 
 RECEIVE
-4
+5
 Set encryption type successfully
 56 69 56 4F 74 65 63 68 32 00 C7 00 00 00 86 6E
 -1
@@ -300,7 +319,7 @@ COMMENT pass
 0
 
 RECEIVE
-5
+6
 Check encryption - TDES
 56 69 56 4F 74 65 63 68 32 00 C7 00 00 01 00 AC 7F
 -1
@@ -312,7 +331,7 @@ COMMENT pass
 0
 
 RECEIVE
-6
+7
 Check encryption - AES
 56 69 56 4F 74 65 63 68 32 00 C7 00 00 01 01 BC 5E
 -1
@@ -324,7 +343,7 @@ COMMENT pass
 0
 
 RECEIVE
-7
+8
 Load Plaintext Key successfully
 56 69 56 4F 74 65 63 68 32 00 80 00 00 00 B9 DF
 -1
@@ -336,7 +355,7 @@ COMMENT pass
 0
 
 RECEIVE
-8
+9
 Load DUKPT Key successfully
 56 69 56 4F 74 65 63 68 32 00 81 00 00 00 CF 6B
 -1
@@ -348,7 +367,7 @@ COMMENT pass
 0
 
 RECEIVE
-9
+10
 Data Encryption enable
 56 69 56 4F 74 65 63 68 32 00 C7 00 00 00 86 6E
 -1
@@ -360,7 +379,7 @@ COMMENT pass
 0
 
 RECEIVE
-10
+11
 Data Encryption - 01
 56 69 56 4F 74 65 63 68 32 00 C7 00 00 01 01 BC 5E
 -1
@@ -372,7 +391,7 @@ COMMENT
 0
 
 RECEIVE
-11
+12
 Data Encryption - 02
 56 69 56 4F 74 65 63 68 32 00 C7 00 00 01 02 8C 3D
 -1
@@ -384,7 +403,7 @@ COMMENT
 0
 
 RECEIVE
-12
+13
 Data Encryption - 03
 56 69 56 4F 74 65 63 68 32 00 C7 00 00 01 03 9C 1C
 -1
@@ -396,7 +415,7 @@ COMMENT
 0
 
 RECEIVE
-13
+14
 Poll mode response
 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53
 -1
@@ -408,7 +427,7 @@ COMMENT pass
 0
 
 RECEIVE
-14
+15
 Burst mode response
 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
 -1
@@ -420,7 +439,7 @@ COMMENT pass
 0
 
 RECEIVE
-15
+16
 -----Activate transaction response_AES
 
 -1
@@ -432,7 +451,7 @@ COMMENT Discover MagStripe card - pass
 0
 
 RECEIVE
-16
+17
 Activate transaction response - Samsungpay
 56 69 56 4F 74 65 63 68 32 00 02 23
 -1
@@ -444,7 +463,7 @@ COMMENT
 0
 
 RECEIVE
-17
+18
 Activate transaction response - Samsungpay (NEO2)
 56 69 56 4F 74 65 63 68 32 00 02 23
 -1
@@ -456,7 +475,7 @@ COMMENT
 0
 
 RECEIVE
-18
+19
 -----get transaction result response_AES
 
 -1
@@ -468,7 +487,7 @@ COMMENT
 0
 
 RECEIVE
-19
+20
 get transaction result response - Samsungpay
 56 69 56 4F 74 65 63 68 32 00 03 23
 -1
@@ -480,7 +499,7 @@ COMMENT
 0
 
 RECEIVE
-20
+21
 get transaction result response - Samsungpay (NEO2)
 56 69 56 4F 74 65 63 68 32 00 03 23
 -1

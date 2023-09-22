@@ -123,7 +123,7 @@ if (Result):
 								#TRK2DecryptData = TRK2DecryptData[0:((objectMSR[0].msr_track2Length)*2)]
 							if len(TRK3) > 0:
 								DL.SetWindowText("blue", "Track 3:")
-								TRK3DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK3)
+								TRK3DecryptData = DL.DecryptDLL(EncryptType, Key)
 								#TRK3DecryptData = TRK3DecryptData[0:((objectMSR[0].msr_track3Length)*2)]
 										
 							# Verify specific tags

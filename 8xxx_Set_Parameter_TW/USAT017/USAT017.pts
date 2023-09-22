@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-59160
+45549
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -341,7 +341,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-01"
    DL.SendSequence "02-01"
-   result = DL.WaitForSequence("02 08", 1, 12000)
+   result = DL.WaitForSequence("02 08", 1, 12500)
    dl.pause 500
 End If
 

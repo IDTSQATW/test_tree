@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-1800
+48135
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -210,35 +210,6 @@ else
 End If
 
 MSRtran()
-
-
-'------------------------------------------------------------Enc ON
-'------------------------------------------------------------
-If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Enable Enc (03)"
-   DL.SendSequence "c7-36 = 03"
-   result = DL.WaitForSequence("c7 00", 1, 2000)
-   dl.pause 500
-else 
-   countf = countf + 1
-End If
-
-If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Poll on Demand"
-   DL.SendSequence "Poll on Demand"
-   result = DL.WaitForSequence("Poll Response", 1, 2000)
-   dl.pause 500
-   poll = 1
-else 
-   countf = countf + 1
-End If
-
-MSRtran()
-
 '------------------------------------------------------------
 sub MSRtran()
 If result <> 0 Then

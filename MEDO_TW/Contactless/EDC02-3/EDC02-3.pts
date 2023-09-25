@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-40985
+1881
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -216,6 +216,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+autopollcheck = msgbox ("Does the reader support auto poll mode?", vbyesno)
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
@@ -249,8 +250,10 @@ If result <> 0 Then
    pollondemand()
    at()
 
-   autopoll()
-   at()
+   if autopollcheck = 6 then
+      autopoll()
+      at()
+   end if
    '------------------------------------------------------------
    next
 else 

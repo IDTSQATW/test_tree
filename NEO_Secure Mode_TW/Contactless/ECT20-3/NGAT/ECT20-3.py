@@ -26,6 +26,11 @@ if readertype == 1:
 		Result = DL.Check_RXResponse("01 00 00 00")
 else:
 	DL.SetWindowText("Green", "*** non-VP3350 reader ***")	
+    
+# Set Encryption Type -- TransArmor TDES
+if (Result):
+	RetOfStep = DL.SendCommand('C7-A2 TDES DUKPT manage_TransArmor TDES, data key')
+	time.sleep(1)
 
 # Check data encryption TYPE is TDES (TransArmor TDES)	
 if (Result):

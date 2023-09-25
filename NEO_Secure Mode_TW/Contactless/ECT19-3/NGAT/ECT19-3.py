@@ -18,6 +18,11 @@ if lcdtype == 1:
 	DL.SetWindowText("Green", "*** The project has LCD ***")
 else:
 	DL.SetWindowText("Green", "*** The project has NO LCD ***")
+    
+# Encryption Type -- TransArmor TDES
+if (Result):
+	RetOfStep = DL.SendCommand('C7-A2 TDES DUKPT manage_TransArmor TDES, data key')
+	time.sleep(1)
 
 # Check data encryption TYPE is TDES: TransArmor TDES	
 if (Result):

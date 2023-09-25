@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-48107
+48986
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -223,20 +223,6 @@ else
 End If
 
 CTtran()
-'------------------------------------------------------------
-'------------------------------------------------------------Enc ON
-'If result <> 0 Then
-'   dl.resetreceivecounter
-'   dl.addcomment vbcrlf
-'   DL.AddComment "--- Enable Enc (03)"
-'   DL.SendSequence "c7-36 = 03"
-'   result = DL.WaitForSequence("c7 00", 1, 2000)
-'   dl.pause 500
-'else 
-'   countf = countf + 1
-'End If
-
-'CTtran()
 '------------------------------------------------------------
 sub CTtran()
 If result <> 0 Then

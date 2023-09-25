@@ -17,6 +17,15 @@ if readertype == 1:
 	DL.SetWindowText("Green", "*** NEOII project ***")
 else:
 	DL.SetWindowText("Green", "*** NEOI project ***")
+    
+# Check if reader support auto poll mode or not
+pollmodetype = DL.ShowMessageBox("", "Does the reader support auto poll mode?", 0)
+if pollmodetype == 1:
+	DL.SetWindowText("Green", "*** The reader support auto poll mode ***")
+    pollmode = 3
+else:
+	DL.SetWindowText("Green", "*** The reader did NOT support auto poll mode ***")
+    pollmode = 2
 	
 # Check reader is VP3350 or not
 lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
@@ -113,7 +122,7 @@ if (Result):
 				time.sleep(1)
 		
 		if (Result):
-			for k in range (1, 3):
+			for k in range (1, pollmode):
 				if k == 1:
 					RetOfStep = DL.SendCommand('Poll on Demand')
 					if (RetOfStep):

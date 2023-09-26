@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-43704
+52045
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -139,6 +139,8 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+autopollcheck = msgbox ("Does the reader support auto poll mode?", vbyesno)
+
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
@@ -176,59 +178,21 @@ End If
 
 MSRtran()
 
-If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Auto Poll"
-   DL.SendSequence "Auto Poll"
-   result = DL.WaitForSequence("Poll Response", 1, 2000)
-   dl.pause 500
-   poll = 0
-else 
-   countf = countf + 1
-End If
+if autopollcheck = 6 then
+   If result <> 0 Then
+      dl.resetreceivecounter
+      dl.addcomment vbcrlf
+      DL.AddComment "--- Auto Poll"
+      DL.SendSequence "Auto Poll"
+      result = DL.WaitForSequence("Poll Response", 1, 2000)
+      dl.pause 500
+      poll = 0
+   else 
+      countf = countf + 1
+   End If
 
-MSRtran()
-'------------------------------------------------------------Enc ON
-'------------------------------------------------------------
-If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Enable Enc (03)"
-   DL.SendSequence "c7-36 = 03"
-   result = DL.WaitForSequence("c7 00", 1, 2000)
-   dl.pause 500
-else 
-   countf = countf + 1
-End If
-
-If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Poll on Demand"
-   DL.SendSequence "Poll on Demand"
-   result = DL.WaitForSequence("Poll Response", 1, 2000)
-   dl.pause 500
-   poll = 1
-else 
-   countf = countf + 1
-End If
-
-MSRtran()
-
-If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Auto Poll"
-   DL.SendSequence "Auto Poll"
-   result = DL.WaitForSequence("Poll Response", 1, 2000)
-   dl.pause 500
-   poll = 0
-else 
-   countf = countf + 1
-End If
-
-MSRtran()
+   MSRtran()
+end if
 '------------------------------------------------------------
 sub MSRtran()
 If result <> 0 Then
@@ -247,7 +211,7 @@ If result <> 0 Then
    result = DL.WaitForSequence("burst off", 1, 10000)
 
    if poll = 1 then
-      MsgBox "Click OK and then Swipe ISO4909", VBOKOnly
+      MsgBox "Click OK --> Swipe ISO4909", VBOKOnly
       dl.resetreceivecounter
       dl.addcomment vbcrlf
       DL.AddComment "--- 02-40 Activate Transaction"
@@ -258,7 +222,7 @@ If result <> 0 Then
          countf = countf + 1
       end if
    elseif poll = 0 then
-          MsgBox "Swipe ISO4909 and then click OK", VBOKOnly
+          MsgBox "Swipe ISO4909 --> Click OK", VBOKOnly
           dl.resetreceivecounter
           dl.addcomment vbcrlf
           DL.AddComment "--- 03-40 Get Transaction result"

@@ -122,9 +122,7 @@ if (Result):
 					CardData=DL.GetTLV(sResult,"DFEE23")
 					bresult = False
 					if CardData!=None and CardData!='':
-						objectMSR = DL.ParseCardData(CardData ,bresult,Key,MacKey)
-						EncryptType = DL.Get_EncryptionKeyType_CardData()
-						EncryptMode = DL.Get_EncryptionMode_CardData()
+						objectMSR = DL.ParseCardData(CardData, Key)
 						if objectMSR!=None:
 							DL.SetWindowText("blue", "Track 1:")
 							Track1_CardData = DL.Get_TrackN_CardData(1)
@@ -141,17 +139,11 @@ if (Result):
 							DL.SetWindowText("blue", "KSN:")
 							KSN=DL.Get_KSN_CardData()
 							if len(TRK1)> 0:
-								DL.SetWindowText("blue", "Track 1:")
 								TRK1DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK1)
-								TRK1DecryptData = TRK1DecryptData[0:((objectMSR[0].msr_track1Length)*2)]
 							if len(TRK2)> 0:
-								DL.SetWindowText("blue", "Track 2:")
 								TRK2DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK2)
-								TRK2DecryptData = TRK2DecryptData[0:((objectMSR[0].msr_track2Length)*2)]
 							if len(TRK3) > 0:
-								DL.SetWindowText("blue", "Track 3:")
 								TRK3DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK3)
-								TRK3DecryptData = TRK3DecryptData[0:((objectMSR[0].msr_track3Length)*2)]
 
 							TR1maskdata1 = "%*6510********"
 							TR1maskdata2 = "^CARD/IMAGE"
@@ -240,10 +232,14 @@ if readertype == 1:     # NEOII and upward project
 	RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** E8 ** 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
+        if Result == False:
+        	DL.fails=DL.fails+1	
 if readertype == 0:     # NEOI
 	RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')	
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 05 00 00 D6 C5")
+        if Result == False:
+        	DL.fails=DL.fails+1	        
 		
 if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))

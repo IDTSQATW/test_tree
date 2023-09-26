@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-20149
+12376
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -174,6 +174,8 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+autopollcheck = msgbox ("Does the reader support auto poll mode?", vbyesno)
+
 if result <> 0 then
    dl.resetreceivecounter
    dl.addcomment "--- Burst off"
@@ -220,6 +222,8 @@ if result <> 0 then
             end if
          end if
       End If
+
+      if autopollcheck = 6 then
       If result <> 0 Then
          dl.pause 2000
          autopoll()
@@ -244,6 +248,7 @@ if result <> 0 then
             end if
          end if
       End If
+      end if
    end if
 
    if cmdcheck = 2 or cmdcheck = 3 then      'support cmd 02-40 >> test 02-40 + 03-40
@@ -277,6 +282,8 @@ if result <> 0 then
             end if
          end if
       End If
+
+      if autopollcheck = 6 then
       If result <> 0 Then
          dl.pause 2000
          autopoll()
@@ -297,6 +304,7 @@ if result <> 0 then
             end if
          end if
       End If
+      end if
    end if
 end if
 '------------------------------------------------------------

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-47763
+47920
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -174,10 +174,12 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+autopollcheck = msgbox ("Does the reader support auto poll mode?", vbyesno)
+
 if result <> 0 then
    dl.resetreceivecounter
    dl.addcomment "--- Burst off"
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then dl.sendsequence "Burst off"
+   if readerType <> "NEO2" then dl.sendsequence "Burst off"
    if readerType = "NEO2" then dl.sendsequence "Burst off (NEO2)"
    result = dl.waitforsequence("04 00", 1, 2000)
 end if
@@ -191,7 +193,7 @@ if result <> 0 then
          dl.resetreceivecounter
          dl.addcomment vbcrlf
          DL.AddComment "--- DF7D = 00"
-         if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then DL.SendSequence "DF7D = 00"
+         if readerType <> "NEO2" then DL.SendSequence "DF7D = 00"
          if readerType = "NEO2" then DL.SendSequence "DF7D = 00 (NEO2)"
          result = dl.waitforsequence("04 00", 1, 3000)
       End If
@@ -206,27 +208,28 @@ if result <> 0 then
             MsgBox "Click OK --> Swipe AAMVA", VBOKOnly
             DL.SendSequence "02-01"
             if trackcheck = 1 then result = dl.waitforsequence("02-01 resp - HW 2T", 1, 6000)
-            if trackcheck = 2 and (readerType = "GR" or readerType = "NEO1") then result = dl.waitforsequence("02-01 resp - HW 3T", 1, 6000)
+            if trackcheck = 2 and (readerType <> "NEO2") then result = dl.waitforsequence("02-01 resp - HW 3T", 1, 6000)
             if trackcheck = 2 and (readerType = "NEO2") then result = dl.waitforsequence("02-01 resp - HW 3T (NEO2)", 1, 6000)
-            if trackcheck = 2 and (readerType = "USAT") then result = dl.waitforsequence("02-01 resp - HW 3T (VP6300_USAT)", 1, 6000)
          end if
       End If
-      If result <> 0 Then
-         dl.pause 2000
-         autopoll()
-         dl.pause 1000
-         if result <> 0 then
-            dl.resetreceivecounter
-            dl.addcomment vbcrlf
-            DL.AddComment "--- 03-00"
-            MsgBox "Swipe AAMVA --> Click OK", VBOKOnly
-            DL.SendSequence "03-00"
-            if trackcheck = 1 then result = dl.waitforsequence("03-00 resp - HW 2T", 1, 4000)
-            if trackcheck = 2 and (readerType = "GR" or readerType = "NEO1") then result = dl.waitforsequence("03-00 resp - HW 3T", 1, 4000)
-            if trackcheck = 2 and (readerType = "NEO2") then result = dl.waitforsequence("03-00 resp - HW 3T (NEO2)", 1, 4000)
-            if trackcheck = 2 and (readerType = "USAT") then result = dl.waitforsequence("03-00 resp - HW 3T (VP6300_USAT)", 1, 4000)
-         end if
-      End If
+
+      if autopollcheck = 6 then
+         If result <> 0 Then
+            dl.pause 2000
+            autopoll()
+            dl.pause 1000
+            if result <> 0 then
+               dl.resetreceivecounter
+               dl.addcomment vbcrlf
+               DL.AddComment "--- 03-00"
+               MsgBox "Swipe AAMVA --> Click OK", VBOKOnly
+               DL.SendSequence "03-00"
+               if trackcheck = 1 then result = dl.waitforsequence("03-00 resp - HW 2T", 1, 4000)
+               if trackcheck = 2 and (readerType <> "NEO2") then result = dl.waitforsequence("03-00 resp - HW 3T", 1, 4000)
+               if trackcheck = 2 and (readerType = "NEO2") then result = dl.waitforsequence("03-00 resp - HW 3T (NEO2)", 1, 4000)
+            end if
+         End If
+      end if
    end if
 
    if cmdcheck = 2 or cmdcheck = 3 then      'support cmd 02-40 >> test 02-40 + 03-40
@@ -234,7 +237,7 @@ if result <> 0 then
          dl.resetreceivecounter
          dl.addcomment vbcrlf
          DL.AddComment "--- DF7D = 01"
-         if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then DL.SendSequence "DF7D = 01"
+         if readerType <> "NEO2" then DL.SendSequence "DF7D = 01"
          if readerType = "NEO2" then DL.SendSequence "DF7D = 01 (NEO2)"
          result = dl.waitforsequence("04 00", 1, 3000)
       End If
@@ -250,27 +253,28 @@ if result <> 0 then
             MsgBox "Click OK --> Swipe AAMVA", VBOKOnly
             DL.SendSequence "02-40"
             if trackcheck = 1 then result = dl.waitforsequence("02-40 resp - HW 2T", 1, 6000)
-            if trackcheck = 2 and (readerType = "GR" or readerType = "NEO1") then result = dl.waitforsequence("02-40 resp - HW 3T", 1, 6000)
+            if trackcheck = 2 and (readerType <> "NEO2") then result = dl.waitforsequence("02-40 resp - HW 3T", 1, 6000)
             if trackcheck = 2 and (readerType = "NEO2") then result = dl.waitforsequence("02-40 resp - HW 3T (NEO2)", 1, 6000)
-            if trackcheck = 2 and (readerType = "USAT") then result = dl.waitforsequence("02-40 resp - HW 3T (VP6300_USAT)", 1, 6000)
          end if
       End If
-      If result <> 0 Then
-         dl.pause 2000
-         autopoll()
-         dl.pause 1000
-         if result <> 0 then
-            dl.resetreceivecounter
-            dl.addcomment vbcrlf
-            DL.AddComment "--- 03-40"
-            MsgBox "Swipe AAMVA --> Click OK", VBOKOnly
-            DL.SendSequence "03-40"
-            if trackcheck = 1 then result = dl.waitforsequence("03-40 resp - HW 2T", 1, 4000)
-            if trackcheck = 2 and (readerType = "GR" or readerType = "NEO1") then result = dl.waitforsequence("03-40 resp - HW 3T", 1, 4000)
-            if trackcheck = 2 and (readerType = "NEO2") then result = dl.waitforsequence("03-40 resp - HW 3T (NEO2)", 1, 4000)
-            if trackcheck = 2 and (readerType = "USAT") then result = dl.waitforsequence("03-40 resp - HW 3T (VP6300_USAT)", 1, 4000)
-         end if
-      End If
+
+      if autopollcheck = 6 then
+         If result <> 0 Then
+            dl.pause 2000
+            autopoll()
+            dl.pause 1000
+            if result <> 0 then
+               dl.resetreceivecounter
+               dl.addcomment vbcrlf
+               DL.AddComment "--- 03-40"
+               MsgBox "Swipe AAMVA --> Click OK", VBOKOnly
+               DL.SendSequence "03-40"
+               if trackcheck = 1 then result = dl.waitforsequence("03-40 resp - HW 2T", 1, 4000)
+               if trackcheck = 2 and (readerType <> "NEO2") then result = dl.waitforsequence("03-40 resp - HW 3T", 1, 4000)
+               if trackcheck = 2 and (readerType = "NEO2") then result = dl.waitforsequence("03-40 resp - HW 3T (NEO2)", 1, 4000)
+            end if
+         End If
+      end if
    end if
 end if
 '------------------------------------------------------------

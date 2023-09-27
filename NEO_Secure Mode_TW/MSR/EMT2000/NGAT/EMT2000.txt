@@ -40,6 +40,6 @@ EXR:
 
 TID:Activate Transaction
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
-MSG:Swipe Discover card...
+MSG:Swipe Discover card (PAN = xxxx....0026)
 EXR:
 TIMEOUT:120000

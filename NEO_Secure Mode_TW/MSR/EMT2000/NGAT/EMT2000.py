@@ -52,12 +52,10 @@ if (Result):
 	if (Result):
 		Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EC DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 4F 6A 00 00 A1 89 01 12")
 		sResult=DL.Get_RXResponse(0)
-		if Result == True:
+		if (Result):
 			CardData=DL.GetTLV(sResult,"DFEE23",0,1)
 			if CardData!=None and CardData!='':
 				objectMSR = DL.ParseCardData(CardData,Key)
-				EncryptType = DL.Get_EncryptionKeyType_CardData()
-				EncryptMode = DL.Get_EncryptionMode_CardData()
 				if objectMSR == True:     #Parse MSR data OK
 					if len(DL.Get_EncryptTrackN_CardData(1))> 0:
 						Track1_CardData = DL.Get_TrackN_CardData(1)
@@ -71,10 +69,13 @@ if (Result):
 								
 					# Verify specific tags
 					if DL.Check_RXResponse("9F39 01 90") == False:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "Tag9F39: FAIL")	
 					if DL.Check_RXResponse("FFEE01 ** DFEE30010C") == False:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "TagFFEE01: FAIL")	
 					if DL.Check_RXResponse("DFEE26 02 EC06") == False:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "TagDFEE26: FAIL")	
 
 					# Transaction result verification
@@ -83,12 +84,21 @@ if (Result):
 									
 					Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
 					if Result != True:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "TR1maskdata: FAIL")
 					Result = DL.Check_StringAB(TR1plaintextdata, TRK1DecryptData)
 					if Result != True:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "TR1plaintextdata: FAIL")
-				
+		else:
+			DL.fails=DL.fails+1
+
 if modeltype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("01 00 00 00")
+        
+if(0 < (DL.fails + DL.warnings)):
+	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
+else:
+	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )

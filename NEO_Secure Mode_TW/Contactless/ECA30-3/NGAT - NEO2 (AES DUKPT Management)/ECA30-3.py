@@ -32,7 +32,7 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** Get DUKPT DEK Attribution based on KeySlot (C7-A3)")
 	DL.SendIOCommand("IDG", "C7 A3 01 00", 3000, 1) 
-	Result = DL.Check_RXResponse("C7 00 00 06 01 02 00 00 00 00")	
+	Result = DL.Check_RXResponse("C7 00 00 06 01 02 00 00 00 00")
 
 # Set Configuration
 if (Result):

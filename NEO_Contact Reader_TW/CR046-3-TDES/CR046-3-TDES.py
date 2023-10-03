@@ -123,6 +123,8 @@ if (Result):
 					bresult = False
 					if CardData!=None and CardData!='':
 						objectMSR = DL.ParseCardData(CardData, Key)
+						EncryptType = DL.Get_EncryptionKeyType_CardData()
+						EncryptMode = DL.Get_EncryptionMode_CardData()
 						if objectMSR!=None:
 							DL.SetWindowText("blue", "Track 1:")
 							Track1_CardData = DL.Get_TrackN_CardData(1)

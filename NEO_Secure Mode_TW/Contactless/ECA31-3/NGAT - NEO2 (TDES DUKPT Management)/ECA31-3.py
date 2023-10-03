@@ -24,6 +24,12 @@ if (Result):
 	DL.SetWindowText("black", "*** Burst mode off")
 	DL.SendIOCommand("IDG", "04 00 DF EE 7E 01 00", 3000, 1) 
 	Result = DL.Check_RXResponse("04 00 00 00")	
+    
+# Check data encryption TYPE is TDES (AES)
+if (Result):
+	DL.SetWindowText("black", "*** Get DUKPT DEK Attribution based on KeySlot (C7-A3)")
+	DL.SendIOCommand("IDG", "C7 A3 01 00", 3000, 1) 
+	Result = DL.Check_RXResponse("C7 00 00 06 00 01 00 00 00 00")
 
 # Set Configuration
 if (Result):

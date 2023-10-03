@@ -119,8 +119,9 @@ if (Result):
 	
 # cmd 02-40
 if (Result):
-	DL.SetWindowText("black", "*** cmd 02-40, Please tap Card 58#-JCB_MagStripe card..........")
-	DL.SendIOCommand("IDG", "02 40 1E 9C 01 00 9F 02 06 00 00 00 00 15 00", 32000, 1) 
+	DL.SetWindowText("black", "*** cmd 02-40")
+	DL.SetWindowText("red", "[Please tap Card 58#-JCB_MagStripe card..........]")
+	DL.SendIOCommand("IDG", "02 40 1F 9F 02 06 00 00 00 00 10 00", 32000, 1) 
 	Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23")
 	if (Result):
 		alldata = DL.Get_RXResponse(0)
@@ -150,7 +151,10 @@ if (Result):
 		else:
 			DL.fails=DL.fails+1
 			DL.SetWindowText("red", "Tag 57_Enc: FAIL")
-	
+	else:
+		DL.fails=DL.fails+1
+		DL.SetWindowText("red", "RX status code: FAIL")
+        
 # cmd 03-03
 if (Result):
 	DL.SetWindowText("black", "*** cmd 03-03, Approve")

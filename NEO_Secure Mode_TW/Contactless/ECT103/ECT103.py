@@ -22,6 +22,7 @@ if (Result):
 	RetOfStep = DL.SendCommand('Set group A0')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("04 00 00 00")		
+        
 # CL test
 if (Result):
 	RetOfStep = DL.SendCommand('02-40 (enable CL only)')

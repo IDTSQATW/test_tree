@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-38686
+16676
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -166,12 +166,10 @@ If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Burst Mode On *** " & readerType 
-   if readerType = "GR" or readerType = "NEO1" then 
+   if readerType <> "NEO2" then 
       DL.SendSequence "Burst Mode On"
    elseif readerType = "NEO2" then 
       DL.SendSequence "Burst Mode On (NEO2)"
-   else
-      DL.SendSequence "Burst Mode On"
    end if
    result = DL.WaitForSequence("Configuration Change Response", 1, 3000)
    dl.pause 500
@@ -192,7 +190,7 @@ If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Burst Mode Applepay response"
-   msgbox "Click OK --> Tap ApplePay -- MasterCard (PAN = xxxx....1488)"
+   msgbox "Click OK --> Tap ApplePay (MasterCard)"
    result = DL.WaitForSequence("Burst ON_Applepay_MC_1471", 1, 5000)
    dl.pause 1000
 End If

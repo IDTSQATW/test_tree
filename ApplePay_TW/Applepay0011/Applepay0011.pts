@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-51119
+57860
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -197,7 +197,7 @@ If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Burst Mode Applepay response"
-   msgbox "Click OK --> Tap ApplePay -- VISA card"
+   msgbox "Click OK --> Tap ApplePay (VISA card)"
    dl.pause 2000
    result = DL.WaitForSequence("Burst ON_Applepay_VISA", 1, 2000)
    dl.pause 1000

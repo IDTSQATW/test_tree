@@ -72,15 +72,15 @@ if (Result):
                             if (Result):
                                 ksn = DL.GetTLV(alldata,"DFEE12")	
                                 
-                                tagFF8105 = DL.GetTLV(alldata,"FF8105")
-                                mask57 = DL.GetTLV(tagFF8105,"57", 0)
-                                enc57 = DL.GetTLV(tagFF8105,"57", 1)
+                                mask57 = DL.GetTLV_Embedded(alldata,"57", 0)
+                                enc57 = DL.GetTLV_Embedded(alldata,"57", 1)
                                 dec57 = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc57)
-                                mask5A = DL.GetTLV(tagFF8105,"5A", 0)
-                                enc5A = DL.GetTLV(tagFF8105,"5A", 1)
+                                
+                                mask5A = DL.GetTLV_Embedded(alldata,"5A", 0)
+                                enc5A = DL.GetTLV_Embedded(alldata,"5A", 1)
                                 dec5A = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc5A)
                                                 
-                            # Tag 57
+                                # Tag 57
                                 Result = DL.Check_StringAB(mask57, '54 13 CC CC CC CC 15 13 D0 51 2C CC CC CC CC CC CC')
                                 if Result == True and DL.Check_StringAB(alldata, "57 A1 11"):
                                     DL.SetWindowText("blue", "Tag 57_Mask: PASS")
@@ -95,7 +95,7 @@ if (Result):
                                     DL.fails=DL.fails+1
                                     DL.SetWindowText("red", "Tag 57_Enc: FAIL")
                                     
-                            # Tag 5A
+                                # Tag 5A
                                 Result = DL.Check_StringAB(mask5A, '54 13 CC CC CC CC 15 13')
                                 if Result == True and DL.Check_StringAB(alldata, "5A A1 08"):
                                     DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
@@ -110,7 +110,7 @@ if (Result):
                                     DL.fails=DL.fails+1
                                     DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
                                     
-                            # Tags 9F39/ FFEE01/ DFEE26
+                                # Tags 9F39/ FFEE01/ DFEE26
                                 if DL.Check_RXResponse(rx, "9F39 01 07") == False: 
                                     DL.fails=DL.fails+1
                                     DL.SetWindowText("Red", "Tag 9F39: FAIL")

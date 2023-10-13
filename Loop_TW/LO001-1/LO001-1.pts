@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-35987
+50103
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -62,7 +62,12 @@ Do Until FileInput.EndOfFile
   'Set Reader FW build
   result = FileInput.GetLine() 'by pass variable name
   result = FileInput.GetLine()      
-  fwBuild = result      
+  fwBuild = result
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  genFlag = result      
 Loop
 
 Sub StepPrompt(PromptString)

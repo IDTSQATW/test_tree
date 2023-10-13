@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-48698
+24746
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -109,7 +109,11 @@ If authn Then '""
 DL.AddComment "--- Set POS COM PORT Settings"
 DL.StopCommunication
 DL.AddComment "Set POS COM PORT..."
-DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+if POSBaudRate(1) = 0 then 
+   DL.SetChannelSettings(COM_Port(1))
+else
+   DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+end if
 DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
 DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
 DL.Pause 1000
@@ -182,7 +186,7 @@ If result <> 0 Then
 End If
 
 If result <> 0 Then
-   prompt2 = prompt2 & "Click OK --> Tap MChip (for NEO3, tap MC No. 21 card)"
+   prompt2 = prompt2 & "Click OK --> Tap MChip or MC No.21 card)"
    result = MsgBox(prompt2, VBOKOnly, "Test Step")
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf

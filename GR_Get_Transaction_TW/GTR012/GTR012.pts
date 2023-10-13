@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-35145
+57258
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -108,7 +108,11 @@ If authn Then '""
 DL.AddComment "--- Set POS COM PORT Settings"
 DL.StopCommunication
 DL.AddComment "Set POS COM PORT..."
-DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+if POSBaudRate(1) = 0 then 
+   DL.SetChannelSettings(COM_Port(1))
+else
+   DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+end if
 DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
 DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
 DL.Pause 1000
@@ -181,12 +185,12 @@ If result <> 0 Then
    dl.pause 2000
 
    if readerType <> "NEO2" then r1 = DL.WaitForSequence("03-00 resp", 1, 6000)
-   if readerType = "NEO2" then r1 = DL.WaitForSequence("03-00 resp (NEO2)", 1, 6000)
+   if readerType = "NEO2" then r1 = DL.WaitForSequence("03-00 resp (NEO2)", 1, 4000)
 
    r2 = dl.waitforsequence("9f39", 1, 1000)
 
    if readerType <> "NEO2" then r3 = dl.waitforsequence("dfee26", 1, 1000)
-   if readerType = "NEO2" then r3 = dl.waitforsequence("dfee26 (VP6300_USAT)", 1, 1000)
+   if readerType = "NEO2" then r3 = dl.waitforsequence("dfee26 (NEO2)", 1, 1000)
 
    if readerType <> "NEO2" then r4 = dl.waitforsequence("df30", 1, 1000)
    if readerType = "NEO2" then r4 = dl.waitforsequence("df30 (NEO2)", 1, 1000)

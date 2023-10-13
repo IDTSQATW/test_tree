@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-23661
+60562
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -107,7 +107,11 @@ If authn Then '""
 DL.AddComment "--- Set POS COM PORT Settings"
 DL.StopCommunication
 DL.AddComment "Set POS COM PORT..."
-DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+if POSBaudRate(1) = 0 then 
+   DL.SetChannelSettings(COM_Port(1))
+else
+   DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+end if
 DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
 DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
 DL.Pause 1000
@@ -154,7 +158,6 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-platformcheck = msgbox ("Is this NEO3 project?", vbyesno)
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- Poll on Demand"
@@ -178,12 +181,8 @@ If result <> 0 Then
    DL.AddComment "--- 02-40 Activate Transaction"
    DL.SendSequence "02-40"
 
-   if platformcheck = 7 then
-      if readerType <> "NEO2" then r1 = DL.WaitForSequence("02-40 resp", 1, 6000)
-      if readerType = "NEO2" then r1 = DL.WaitForSequence("02-40 resp (NEO2)", 1, 6000)
-   elseif platformcheck = 6 then
-      r1 = DL.WaitForSequence("02-40 resp EMV", 1, 5000)
-   end if  
+   if readerType <> "NEO2" then r1 = DL.WaitForSequence("02-40 resp", 1, 6000)
+   if readerType = "NEO2" then r1 = DL.WaitForSequence("02-40 resp (NEO2)", 1, 6000)
 
    r2 = dl.waitforsequence("9f39", 1, 1000)
 
@@ -206,7 +205,10 @@ If result <> 0 Then
 
    r9 = dl.waitforsequence("tag 5A", 1, 1000)
 
-   if r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 or r6 = 0 or r7 = 0 or r8 = 0 or r9 = 0 then
+   r12 = dl.waitforsequence("Tag DFEF17", 1, 1500)
+   r13 = dl.waitforsequence("Tag DFEF18", 1, 1500)
+
+   if r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 or r6 = 0 or r7 = 0 or r8 = 0 or r9 = 0 or r12 = 1 or r13 = 1 then
       result = 0
       if r1 = 0 then dl.addcomment vbcrlf & "Card data: FAIL!"
       if r2 = 0 then dl.addcomment vbcrlf & "Tag 9F39: FAIL!"
@@ -217,6 +219,8 @@ If result <> 0 Then
       if r7 = 0 then dl.addcomment vbcrlf & "Tag 9F02: FAIL!"
       if r8 = 0 then dl.addcomment vbcrlf & "Tag 57: FAIL!"
       if r9 = 0 then dl.addcomment vbcrlf & "Tag 5A: FAIL!"
+      if r12 = 1 then dl.addcomment vbcrlf & "Tag DFEF17: Should NOT return this!"
+      if r13 = 1 then dl.addcomment vbcrlf & "Tag DFEF18: Should NOT return this!"
    else
       result = 1
    end if

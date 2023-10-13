@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-40381
+45235
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -107,7 +107,11 @@ If authn Then '""
 DL.AddComment "--- Set POS COM PORT Settings"
 DL.StopCommunication
 DL.AddComment "Set POS COM PORT..."
-DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+if POSBaudRate(1) = 0 then 
+   DL.SetChannelSettings(COM_Port(1))
+else
+   DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+end if
 DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
 DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
 DL.Pause 1000
@@ -150,7 +154,6 @@ Function MyDebug(DebugString)
       DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
       MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
 End Function
-
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
@@ -165,7 +168,7 @@ If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Burst Mode Off" 
-   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then DL.SendSequence " Burst Mode Off"
+   if readerType <> "NEO2" then DL.SendSequence " Burst Mode Off"
    if readerType = "NEO2" then DL.SendSequence " Burst Mode Off (NEO2)"
    result = DL.WaitForSequence("Set Parameter Response", 1, 10000)
 End If
@@ -182,9 +185,8 @@ If result <> 0 Then
    DL.SendSequence " Get Transaction Result (03-40)"
    DL.Pause 2000   
 
-   if readerType = "GR" or readerType = "NEO1" then result1 = DL.WaitForSequence("Card data", 1, 10000)
+   if readerType <> "NEO2" then result1 = DL.WaitForSequence("Card data", 1, 10000)
    if readerType = "NEO2" then result1 = DL.WaitForSequence("Card data (NEO2)", 1, 10000)
-   if readerType = "USAT" then result1 = DL.WaitForSequence("Card data (VP6300_USAT)", 1, 10000)
 
    if readerType <> "NEO2" then result2 = dl.waitforsequence("dfee26", 1, 500)
    if readerType = "NEO2" then result2 = dl.waitforsequence("dfee26 (NEO2)", 1, 500)
@@ -202,7 +204,10 @@ If result <> 0 Then
    if readerType <> "NEO2" then result6 = dl.waitforsequence("df30", 1, 500)
    if readerType = "NEO2" then result6 = dl.waitforsequence("df30 (NEO2)", 1, 500)
 
-   if result1 = 0 or result2 = 0 or result3 = 0 or result4 = 0 or result5 = 0 or result6 = 0 then
+   r12 = dl.waitforsequence("Tag DFEF17", 1, 1500)
+   r13 = dl.waitforsequence("Tag DFEF18", 1, 1500)
+
+   if result1 = 0 or result2 = 0 or result3 = 0 or result4 = 0 or result5 = 0 or result6 = 0 or r12 = 1 or r13 = 1 then
       result = 0
       if result1 = 0 then dl.addcomment vbcrlf & "Card data: FAIL!"
       if result2 = 0 then dl.addcomment vbcrlf & "Tag DFEE26: FAIL!"
@@ -210,6 +215,8 @@ If result <> 0 Then
       if result4 = 0 then dl.addcomment vbcrlf & "Tag DFEF4D: FAIL!"
       if result5 = 0 then dl.addcomment vbcrlf & "Tag 9F39: FAIL!"
       if result6 = 0 then dl.addcomment vbcrlf & "Tag DF30: FAIL!"
+      if r12 = 1 then dl.addcomment vbcrlf & "Tag DFEF17: Should NOT return this!"
+      if r13 = 1 then dl.addcomment vbcrlf & "Tag DFEF18: Should NOT return this!"
    end if
 End If
 

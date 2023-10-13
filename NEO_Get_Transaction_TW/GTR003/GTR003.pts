@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-15188
+10272
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -107,7 +107,11 @@ If authn Then '""
 DL.AddComment "--- Set POS COM PORT Settings"
 DL.StopCommunication
 DL.AddComment "Set POS COM PORT..."
-DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+if POSBaudRate(1) = 0 then 
+   DL.SetChannelSettings(COM_Port(1))
+else
+   DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+end if
 DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
 DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
 DL.Pause 1000
@@ -206,15 +210,21 @@ If result <> 0 Then
           result3 = 1
           result4 = 1
    end if
+
    result5 = dl.waitforsequence("9f02", 1, 500)
 
-   if result1 = 0 or result2 = 0 or result3 = 0 or result4 = 0 or result5 = 0 then
+   r12 = dl.waitforsequence("Tag DFEF17", 1, 1500)
+   r13 = dl.waitforsequence("Tag DFEF18", 1, 1500)
+
+   if result1 = 0 or result2 = 0 or result3 = 0 or result4 = 0 or result5 = 0 or r12 = 1 or r13 = 1 then
       result = 0
       if result1 = 0 then dl.addcomment vbcrlf & "Card data: FAIL!"
       if result2 = 0 then dl.addcomment vbcrlf & "Tag DFEE26: FAIL!"
       if result3 = 0 then dl.addcomment vbcrlf & "Tag DFEF4C: FAIL!"
       if result4 = 0 then dl.addcomment vbcrlf & "Tag DFEF4D: FAIL!"
       if result5 = 0 then dl.addcomment vbcrlf & "Tag 9F02: FAIL!"
+      if r12 = 1 then dl.addcomment vbcrlf & "Tag DFEF17: Should NOT return this!"
+      if r13 = 1 then dl.addcomment vbcrlf & "Tag DFEF18: Should NOT return this!"
    end if
 End If
 '============================================================

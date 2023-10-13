@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-51914
+58663
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -107,7 +107,11 @@ If authn Then '""
 DL.AddComment "--- Set POS COM PORT Settings"
 DL.StopCommunication
 DL.AddComment "Set POS COM PORT..."
-DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+if POSBaudRate(1) = 0 then 
+   DL.SetChannelSettings(COM_Port(1))
+else
+   DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+end if
 DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
 DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
 DL.Pause 1000
@@ -215,7 +219,7 @@ End If
 end if
 '============================================================
 If result <> 0 Then
-   prompt2 = prompt2 & "Tap MasterCard (MagStripe) card --> Click OK"
+   prompt2 = prompt2 & "Tap MasterCard paypass card (MagStripe) --> Click OK"
    result = MsgBox(prompt2, VBOKOnly, "Advanced PassThrough")
 End If
 
@@ -251,8 +255,11 @@ If result <> 0 Then
 
    result8 = dl.waitforsequence("9f02", 1, 500)
 
-   if result1 = 0 or result2 = 0 or result3 = 0 or result4 = 0 or result5 = 0 or result6 = 0 or result7 = 0 or result8 = 0 then
+   r9 = dl.waitforsequence("Tag DFEF17/ DFEF18", 1, 500)
+
+   if result1 = 0 or result2 = 0 or result3 = 0 or result4 = 0 or result5 = 0 or result6 = 0 or result7 = 0 or result8 = 0 or r9 = 0 then
       result = 0
+      rxcheck = "False"
       if result1 = 0 then dl.addcomment vbcrlf & "Card data: FAIL!"
       if result2 = 0 then dl.addcomment vbcrlf & "Tag DFEE26: FAIL!"
       if result3 = 0 then dl.addcomment vbcrlf & "Tag DFEF4C: FAIL!"
@@ -261,16 +268,18 @@ If result <> 0 Then
       if result6 = 0 then dl.addcomment vbcrlf & "Tag 56/ 9F6B: FAIL!"
       if result7 = 0 then dl.addcomment vbcrlf & "Tag DF30: FAIL!"
       if result8 = 0 then dl.addcomment vbcrlf & "Tag 9F02: FAIL!"
+      if r9 = 0 then dl.addcomment vbcrlf & "Tag DFEF17/ DFEF18: FAIL!"
    end if
 
    Tag_9A()     'CS-4225
    Tag_9F21()     'CS-4225
+
+   if rxcheck = "False" then result = 0
 End If
 '------------------------------------------------------------
 DL.AddComment vbCrLf
-PrintMyResult(result)
-
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
@@ -278,36 +287,36 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If 0 Then
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
-End If
+'If 0 Then
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
 
-If MasterResult = 1 Then
-      MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-      MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)

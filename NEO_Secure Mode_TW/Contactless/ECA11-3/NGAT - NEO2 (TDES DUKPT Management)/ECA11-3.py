@@ -48,11 +48,10 @@ if (Result):
 # tap card, cmd 03-40 
 if (Result):
 	RetOfStep = DL.SendCommand('Get Transaction Result')
-	time.sleep(4)
 	if (RetOfStep):
 		alldata = DL.Get_RXResponse(1)
 		DL.Check_RXResponse(1, '56 69 56 4F 74 65 63 68 32 00 03 23')
-		DL.Check_RXResponse(1, 'F1 ** DF EE 12')
+		DL.Check_RXResponse(1, 'F3 ** DF EE 12')
 		ksn = DL.GetTLV(alldata,"DFEE12")	
 		
 		tagFF8106 = DL.GetTLV(alldata,"FF8106")
@@ -119,7 +118,7 @@ if (Result):
 		if DL.Check_RXResponse(1, "FFEE01 ** DFEE300100") == False: 
 			DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-		if DL.Check_RXResponse(1, "DFEE26 02 F100") == False: 
+		if DL.Check_RXResponse(1, "DFEE26 02 F300") == False: 
 			DL.SetWindowText("Red", "Tag DFEE26: FAIL")			
 			
 # Reset to default

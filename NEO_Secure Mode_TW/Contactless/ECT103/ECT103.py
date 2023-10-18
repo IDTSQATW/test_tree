@@ -17,6 +17,9 @@ if (Result):
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
 
+# Check reader is VP3350 or not
+modeltype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+
 # Set group A0
 if (Result):
 	RetOfStep = DL.SendCommand('Set group A0')
@@ -25,8 +28,12 @@ if (Result):
         
 # CL test
 if (Result):
-	RetOfStep = DL.SendCommand('02-40 (enable CL only)')
-	rx = 5 # for VP3350
+    if modeltype == 1:
+        RetOfStep = DL.SendCommand('02-40 (enable CL only)')
+        rx = 5 # for VP3350
+    if modeltype == 0: 
+        RetOfStep = DL.SendCommand('02-40 (enable CL only) w/ LCD')
+        rx = 0 # for any project AT cmd did not return 61-01
 	if (RetOfStep):
 		DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E1 ** DF EE 12")
 		alldata = DL.Get_RXResponse(rx)

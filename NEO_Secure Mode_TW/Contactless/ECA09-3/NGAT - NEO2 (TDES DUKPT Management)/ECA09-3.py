@@ -43,10 +43,9 @@ if (Result):
 	if lcdtype == 0:
 		RetOfStep = DL.SendCommand('Get Transaction Result w/o LCD')
 		rx = 5
-	time.sleep(4)
 	if (RetOfStep):			
 		alldata = DL.Get_RXResponse(rx)
-		DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 03 23 ** F1 ** DF EE 12')			
+		DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 03 23 ** F3 ** DF EE 12')			
 		
 		ksn = DL.GetTLV(alldata,"DFEE12")	
 		
@@ -114,7 +113,7 @@ if (Result):
 		else:
 			DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 		
-		if DL.Check_RXResponse(rx, "DFEE26 02 F100"): 
+		if DL.Check_RXResponse(rx, "DFEE26 02 F300"): 
 			DL.SetWindowText("blue", "Tag DFEE26: PASS")
 		else:
 			DL.SetWindowText("Red", "Tag DFEE26: FAIL")

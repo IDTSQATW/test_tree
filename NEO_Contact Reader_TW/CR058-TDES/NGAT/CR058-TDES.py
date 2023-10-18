@@ -323,7 +323,7 @@ if (Result):
 		if  CTresultcode == "0004":
 			Result = True
 			if lcdtype == 1:
-				RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response (DFEF1F: 01 00)_w LCD')
+				RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response (DFEF1F: 01 00)_w/ LCD')
 			if lcdtype == 0:
 				RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response (DFEF1F: 01 00)_w/o LCD')	
 			if (RetOfStep):

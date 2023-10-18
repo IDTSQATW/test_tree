@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-60800
+18684
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -237,7 +237,7 @@ End If
 
 if countf <> 0 then result = 0
 DL.SendSequence "poll on demand"
-dl.pause 500
+dl.pause 800
 
 DL.AddComment vbCrLf
 '============================================================

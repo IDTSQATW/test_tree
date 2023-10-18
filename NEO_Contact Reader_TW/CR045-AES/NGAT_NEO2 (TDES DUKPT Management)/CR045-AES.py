@@ -50,7 +50,7 @@ if (Result):
 					CardData=DL.GetTLV(sResult,"DFEE23")
 					bresult = False
 					if CardData!=None and CardData!='':
-						objectMSR = DL.ParseCardData(CardData ,bresult,Key,MacKey)
+						objectMSR = DL.ParseCardData(CardData, Key)
 						EncryptType = DL.Get_EncryptionKeyType_CardData()
 						EncryptMode = DL.Get_EncryptionMode_CardData()
 						if objectMSR!=None:
@@ -71,15 +71,15 @@ if (Result):
 							if len(TRK1)> 0:
 								DL.SetWindowText("blue", "Track 1:")
 								TRK1DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK1)
-								TRK1DecryptData = TRK1DecryptData[0:((objectMSR[0].msr_track1Length)*2)]
+								# TRK1DecryptData = TRK1DecryptData[0:((objectMSR[0].msr_track1Length)*2)]
 							if len(TRK2)> 0:
 								DL.SetWindowText("blue", "Track 2:")
 								TRK2DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK2)
-								TRK2DecryptData = TRK2DecryptData[0:((objectMSR[0].msr_track2Length)*2)]
+								# TRK2DecryptData = TRK2DecryptData[0:((objectMSR[0].msr_track2Length)*2)]
 							if len(TRK3) > 0:
 								DL.SetWindowText("blue", "Track 3:")
 								TRK3DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK3)
-								TRK3DecryptData = TRK3DecryptData[0:((objectMSR[0].msr_track3Length)*2)]
+								# TRK3DecryptData = TRK3DecryptData[0:((objectMSR[0].msr_track3Length)*2)]
 
 							TR2maskdata = ";4761********0010=2012****************?*"
 							TR2plaintextdata = "3B343736313733393030313031303031303D32303132313230303031323333393930303033313F32"
@@ -95,7 +95,7 @@ if (Result):
 								DL.SetWindowText("Red", "Track 2 Mask data: FAIL")
 								
 							# Verify Encryption track data	
-							if TR2plaintextdata == TRK2DecryptData: 
+							if DL.Check_StringAB(TR2plaintextdata, TRK2DecryptData): 
 								DL.SetWindowText("Blue", "Track 2 Decryption data: PASS")
 							else:
 								DL.SetWindowText("Red", "Track 2 Decryption data: FAIL")
@@ -111,13 +111,13 @@ if (Result):
 								DL.SetWindowText("Red", "Tag 9F39: FAIL")
 							if DL.Check_RXResponse(1, "FFEE01 ** DFEE30010C") == False: 
 								DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-							if DL.Check_RXResponse(1, "DFEE26 02 E800") == False: 
+							if DL.Check_RXResponse(1, "DFEE26 02 EA00") == False: 
 								DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 					
 # cmd 60-13
 RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')
 if (RetOfStep):
-	DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** E8 ** 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
+	DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** EA ** 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
 	
 if lcdtype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')

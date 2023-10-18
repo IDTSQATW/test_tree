@@ -48,7 +48,7 @@ if (Result):
 		if lcdtype == 0:
 			alldata = DL.GetTLV(DL.Get_RXResponse(1),"FF8105")
 		DL.Check_RXResponse(1, '56 69 56 4F 74 65 63 68 32 00 03 23')
-		DL.Check_RXResponse(1, 'E1 ** DF EE 12')
+		DL.Check_RXResponse(1, 'E3 ** DF EE 12')
 		ksn = DL.GetTLV(DL.Get_RXResponse(1),"DFEE12")
 		
 		mask57 = DL.GetTLV(alldata,"57", 0)
@@ -92,7 +92,7 @@ if (Result):
 		if DL.Check_RXResponse(1, "FFEE01 ** DFEE300100") == False: 
 			DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-		if DL.Check_RXResponse(1, "DFEE26 02 E100") == False: 
+		if DL.Check_RXResponse(1, "DFEE26 02 E300") == False: 
 			DL.SetWindowText("Red", "Tag DFEE26: FAIL")				
 			
 if readertype == 1:

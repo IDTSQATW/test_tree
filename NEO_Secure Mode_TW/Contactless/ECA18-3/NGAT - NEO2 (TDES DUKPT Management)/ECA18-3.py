@@ -49,26 +49,22 @@ if (Result):
 				RetOfStep = DL.SendCommand('AT Transaction')
 			if i == 2:
 				RetOfStep = DL.SendCommand('Get Transaction Result')
-				time.sleep(2)
 			
 			if (RetOfStep):
 				if i == 1:
 					rx = 0
-					alldata = DL.Get_RXResponse(rx)
-					DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 02 23 ** E1 ** DF EE 12')
+					DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 02 23 ** E3 ** DF EE 12')
 				if i == 2:
 					rx = 1
-					alldata = DL.Get_RXResponse(rx)	
-					DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 03 23 ** E1 ** DF EE 12')
-				
+					DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 03 23 ** E3 ** DF EE 12')
+				alldata = DL.Get_RXResponse(rx)
 				ksn = DL.GetTLV(alldata,"DFEE12")	
 				
-				tagFF8105 = DL.GetTLV(alldata,"FF8105")
-				mask57 = DL.GetTLV(tagFF8105,"57", 0)
-				enc57 = DL.GetTLV(tagFF8105,"57", 1)
+				mask57 = DL.GetTLV_Embedded(alldata,"57", 0)
+				enc57 = DL.GetTLV_Embedded(alldata,"57", 1)
 				dec57 = DL.DecryptDLL(0,2, strKey, ksn, enc57)	
-				mask5A = DL.GetTLV(tagFF8105,"5A", 0)
-				enc5A = DL.GetTLV(tagFF8105,"5A", 1)
+				mask5A = DL.GetTLV_Embedded(alldata,"5A", 0)
+				enc5A = DL.GetTLV_Embedded(alldata,"5A", 1)
 				dec5A = DL.DecryptDLL(0,2, strKey, ksn, enc5A)
 								
 			# Tag 57
@@ -102,7 +98,7 @@ if (Result):
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")
 				if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300100") == False: 
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-				if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False: 
+				if DL.Check_RXResponse(rx, "DFEE26 02 E300") == False: 
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")		
 				
 				RetOfStep = DL.SendCommand('03-03')

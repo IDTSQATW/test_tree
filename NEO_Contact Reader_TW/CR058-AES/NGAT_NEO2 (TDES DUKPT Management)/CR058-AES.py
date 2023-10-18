@@ -95,7 +95,7 @@ if (Result):
 				if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False:
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 		
-				if DL.Check_RXResponse(rx, "DFEE26 02 E000") == False:
+				if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False:
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 
 		# cmd 60-11 Contact Authenticate Transaction (DFEF1F: 00 00)			
@@ -122,7 +122,7 @@ if (Result):
 						if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False:
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-						if DL.Check_RXResponse(rx, "DFEE26 02 E000") == False:
+						if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False:
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 				
 		# cmd 60-12 Contact Apply Host Response (DFEF1F: 00 00)
@@ -149,7 +149,7 @@ if (Result):
 						if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False:
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-						if DL.Check_RXResponse(rx, "DFEE26 02 E000") == False:
+						if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False:
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 
 ### CASE 3								
@@ -177,7 +177,7 @@ if (Result):
 				if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False:
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 		
-				if DL.Check_RXResponse(rx, "DFEE26 02 E000") == False:
+				if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False:
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")			
 
 		# cmd 60-11 Contact Authenticate Transaction (DFEF1F: 01 01 --1)		
@@ -217,7 +217,7 @@ if (Result):
 				if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False:
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 		
-				if DL.Check_RXResponse(rx, "DFEE26 02 E000") == False:
+				if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False:
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 					
 		# cmd 60-12 Contact Apply Host Response (DFEF1F: 01 01 --2)
@@ -244,7 +244,7 @@ if (Result):
 						if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False:
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-						if DL.Check_RXResponse(rx, "DFEE26 02 E000") == False:
+						if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False:
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 
 ### CASE 5								
@@ -272,7 +272,7 @@ if (Result):
 				if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False:
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 		
-				if DL.Check_RXResponse(rx, "DFEE26 02 E000") == False:
+				if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False:
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 					
 		# cmd 60-12 Contact Apply Host Response (DFEF1F: 01 00)
@@ -299,5 +299,5 @@ if (Result):
 						if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False:
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-						if DL.Check_RXResponse(rx, "DFEE26 02 E000") == False:
+						if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False:
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")

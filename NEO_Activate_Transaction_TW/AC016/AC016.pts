@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-59891
+8642
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -203,7 +203,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 If result <> 0 Then
-   msgbox "Click OK, tap MasterCard MChip card"
+   msgbox "Click OK, tap MasterCard EMV card"
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Activate Transaction (02-40)"

@@ -14,10 +14,10 @@ strKey = '0123456789ABCDEFFEDCBA9876543210'
 pollmodetype = DL.ShowMessageBox("", "Does the reader support auto poll mode?", 0)
 if pollmodetype == 1:
 	DL.SetWindowText("Green", "*** The reader support auto poll mode ***")
-    pollmode = 3
+	pollmode = 3
 else:
 	DL.SetWindowText("Green", "*** The reader did NOT support auto poll mode ***")
-    pollmode = 2
+	pollmode = 2
 	
 # Check reader is VP3350 or not
 modeltype = DL.ShowMessageBox("", "Is this VP3350?", 0)
@@ -48,37 +48,30 @@ if (Result):
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 1')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("04 00 00 00")		
-                time.sleep(1)				
 		if i == 2:
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 2')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("04 00 00 00")	
-				time.sleep(1)
 		if i == 3:
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 3')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("04 00 00 00")	
-				time.sleep(1)
 		if i == 4:
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 4')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("04 00 00 00")		
-				time.sleep(1)
 		if i == 5:
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 5')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("04 00 00 00")	
-				time.sleep(1)
 		if i == 6:
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 6')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("04 00 00 00")	
-				time.sleep(1)
 		if i == 7:
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 7')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("04 00 00 00")
-                time.sleep(1)				
 		
 		if (Result):
 			for k in range (1, pollmode):
@@ -93,7 +86,6 @@ if (Result):
 								Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 **")	
 								alldata=DL.Get_RXResponse(0)
 				if k == 2:
-					time.sleep(1)
 					RetOfStep = DL.SendCommand('Auto poll')
 					if (RetOfStep):
 						Result = DL.Check_RXResponse("01 00 00 00")

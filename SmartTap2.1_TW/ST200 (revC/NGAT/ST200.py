@@ -49,14 +49,13 @@ if (Result):
 			DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** E1 ** DF EE 12 0A")
 			alldata = DL.Get_RXResponse(0)
 			ksn = DL.GetTLV(alldata,"DFEE12")	
-			FF8105 = DL.GetTLV(alldata,"FF8105", 0)
 			
-			mask57 = DL.GetTLV(FF8105,"57", 0)
-			enc57 = DL.GetTLV(FF8105,"57", 1)
+			mask57 = DL.GetTLV_Embedded(alldata,"57", 0)
+			enc57 = DL.GetTLV_Embedded(alldata,"57", 1)
 			dec57 = DL.DecryptDLL(0,1, strKey, ksn, enc57)	
 			
-			mask5A = DL.GetTLV(FF8105,"5A", 0)
-			enc5A = DL.GetTLV(FF8105,"5A", 1)
+			mask5A = DL.GetTLV_Embedded(alldata,"5A", 0)
+			enc5A = DL.GetTLV_Embedded(alldata,"5A", 1)
 			dec5A = DL.DecryptDLL(0,1, strKey, ksn, enc5A)	
 			
 			# Tag 57

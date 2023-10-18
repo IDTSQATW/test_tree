@@ -152,9 +152,9 @@ if (Result):
 		else:
 			DL.fails=DL.fails+1
 			DL.SetWindowText("red", "Tag 57_Enc: FAIL")
-    else:
-        DL.fails=DL.fails+1
-        DL.SetWindowText("Red", "RX data is incorrect.")
+	else:
+		DL.fails=DL.fails+1
+		DL.SetWindowText("Red", "RX data is incorrect.")
         
 # cmd 03-03
 if (Result):

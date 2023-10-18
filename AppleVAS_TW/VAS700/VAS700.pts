@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-16914
+45514
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -285,7 +285,7 @@ If result <> 0 Then
    msgbox "Click OK --> Tap Nando's Card", vbokonly
    DL.AddComment "--- ACT - VAS Only"
    DL.SendSequence "ACT - VAS Only"
-   result = DL.WaitForSequence("9F 27 0E", 1, 3000)
+   result = DL.WaitForSequence("9F 27 0E", 1, 5000)
    ReverseResult(result)
    dl.pause 500
 End If
@@ -298,7 +298,7 @@ If result <> 0 Then
    msgbox "Click OK --> Tap Nando's Card", vbokonly
    DL.AddComment "--- ACT - VAS Only"
    DL.SendSequence "ACT - VAS Only"
-   result = DL.WaitForSequence("9F 27 0E", 1, 3000)
+   result = DL.WaitForSequence("9F 27 0E", 1, 5000)
    dl.pause 500
 End If
 end sub

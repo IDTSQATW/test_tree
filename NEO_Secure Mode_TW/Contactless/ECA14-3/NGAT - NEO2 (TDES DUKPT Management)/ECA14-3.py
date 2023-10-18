@@ -61,9 +61,9 @@ if (Result):
 			RetOfStep = DL.SendCommand('Activate Transaction')
 			if (RetOfStep):
 				if readermodel == 0:
-					DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** F1 ** DF EE 12")
+					DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** F3 ** DF EE 12")
 				if readermodel == 1:
-					DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** E1 ** DF EE 12")
+					DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** E3 ** DF EE 12")
 				alldata = DL.Get_RXResponse(0)
 				ksn = DL.GetTLV(alldata,"DFEE12")	
 				

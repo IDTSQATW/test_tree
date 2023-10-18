@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-32529
+24173
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -150,7 +150,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-readercheck = msgbox ("Is this SRED project?", vbyesno)
+readercheck = msgbox ("Is this SRED project (or Enc = ON)?", vbyesno)
 countf = 0
 
 If result <> 0 Then

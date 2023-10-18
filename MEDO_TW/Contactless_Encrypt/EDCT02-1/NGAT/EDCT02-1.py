@@ -14,10 +14,10 @@ strKey = '0123456789ABCDEFFEDCBA9876543210'
 pollmodetype = DL.ShowMessageBox("", "Does the reader support auto poll mode?", 0)
 if pollmodetype == 1:
 	DL.SetWindowText("Green", "*** The reader support auto poll mode ***")
-    pollmode = 3
+	pollmode = 3
 else:
 	DL.SetWindowText("Green", "*** The reader did NOT support auto poll mode ***")
-    pollmode = 2
+	pollmode = 2
 	
 # Check reader is VP3350 or not
 readertype = DL.ShowMessageBox("", "Is this VP3350?", 0)

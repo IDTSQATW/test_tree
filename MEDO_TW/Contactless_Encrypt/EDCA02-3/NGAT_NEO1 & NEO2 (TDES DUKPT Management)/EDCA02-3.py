@@ -123,7 +123,7 @@ if (Result):
 						time.sleep(1)
 						if (Result):
 							RetOfStep = DL.SendCommand('Get Transaction Result')
-							time.sleep(3)	
+							# time.sleep(3)	
 							if (RetOfStep):
 								alldata = DL.Get_RXResponse(1)
 								Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 03 23')

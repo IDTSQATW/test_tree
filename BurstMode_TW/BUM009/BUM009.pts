@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-6050
+48493
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -193,7 +193,7 @@ If result <> 0 Then
 End If
 
 If result <> 0 Then
-   prompt1 = prompt1 & "Click OK --> Tap AMEX Card"
+   prompt1 = prompt1 & "Click OK --> Tap AMEX XP4 card"
    result = MsgBox(prompt1, VBOKOnly, "Des GoTag Tests")
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf

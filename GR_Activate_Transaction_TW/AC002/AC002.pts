@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-57560
+9073
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -146,20 +146,17 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Cancel Transaction"
    DL.SendSequence " Cancel Transaction"
-   result = DL.WaitForSequence("Cancel Transaction Response", 1, 10000)
+   result = DL.WaitForSequence("Cancel Transaction Response", 1, 3000)
+   if result <> 0 then
+      check = msgbox("Does reader keep auto poll status / correct LCD msg?", vbyesno)
+      if check = 7 then result = 0
+   end if
 End If
-
-check = msgbox("Does reader keep auto poll status / correct LCD msg?", vbyesno)
-if check = 6 then
-   result = 1
-else
-   result = 0
-end if
 '------------------------------------------------------------
 dl.addcomment vbcrlf
 DL.AddComment "--- Poll on Demand"
 DL.SendSequence " Poll on Demand"
-dl.pause 2000
+dl.pause 800
 
 DL.AddComment vbCrLf
 PrintMyResult(result)

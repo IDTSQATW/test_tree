@@ -98,7 +98,7 @@ if (Result):
 						CardData=DL.GetTLV(sResult,"DFEE23")
 						bresult = False
 						if CardData!=None and CardData!='':
-							objectMSR = DL.ParseCardData(CardData ,bresult,Key,MacKey)
+							objectMSR = DL.ParseCardData(CardData, Key)
 							EncryptType = DL.Get_EncryptionKeyType_CardData()
 							EncryptMode = DL.Get_EncryptionMode_CardData()
 							if objectMSR!=None:
@@ -123,7 +123,7 @@ if (Result):
 								if len(TRK2)> 0:
 									DL.SetWindowText("blue", "Track 2:")
 									TRK2DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK2)
-									TRK2DecryptData = TRK2DecryptData[0:((objectMSR[0].msr_track2Length)*2)]
+									#TRK2DecryptData = TRK2DecryptData[0:((objectMSR[0].msr_track2Length)*2)]
 								if len(TRK3) > 0:
 									DL.SetWindowText("blue", "Track 3:")
 									TRK3DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK3)

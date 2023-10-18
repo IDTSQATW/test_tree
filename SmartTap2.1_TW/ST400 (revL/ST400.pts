@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-56116
+32328
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -289,7 +289,7 @@ End If
 dl.addcomment vbcrlf
 DL.AddComment "DFED49 = 00 --------------------------------"
 DL.SendSequence "DFED49 = 00"
-dl.pause 500
+dl.pause 800
 
 DL.AddComment vbCrLf
 '============================================================

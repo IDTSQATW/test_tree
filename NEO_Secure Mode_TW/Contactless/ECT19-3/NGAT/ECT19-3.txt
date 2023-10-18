@@ -18,6 +18,10 @@ TID:Encryption Type -- TransArmor TDES
 CMD:C7 33
 EXR:C7 00 00 01 02
 
+TID:C7-A2 TDES DUKPT manage_TransArmor TDES, data key
+CMD:C7 A2 01 00 00 02 00 00 00 00
+EXR:
+
 TID:Burst mode Off
 CMD:04 00 DF EE 7E 01 00
 EXR:04 00 00 00

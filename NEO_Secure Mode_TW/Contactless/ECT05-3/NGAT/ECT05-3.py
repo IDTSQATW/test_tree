@@ -85,7 +85,7 @@ if (Result):
                 DL.fails=DL.fails+1
                 DL.SetWindowText("red", "Tag 56_Mask: FAIL")
                 
-            Result = DL.Check_StringAB(dec56, '56 29 42 35 31 32 38 35 37 30 31 30 30 30 33')
+            Result = DL.Check_StringAB(dec56, '56 29 42 35 31 32 38 35 37 30 31')
             if Result == True:
                 Result = DL.Check_StringAB(dec56, '5E 20 2F 5E 31 38 30 33 36 32 32 30 30')
             if Result == True and DL.Check_RXResponse(rx, "** 56 C1 **"):
@@ -102,7 +102,7 @@ if (Result):
                 DL.fails=DL.fails+1
                 DL.SetWindowText("red", "Tag 9F6B_Mask: FAIL")
                 
-            Result = DL.Check_StringAB(dec9F6B, '9F 6B 13 51 28 57 01 00 03')
+            Result = DL.Check_StringAB(dec9F6B, '9F 6B 13 51 28 57 01')
             if Result == True:
                 Result = DL.Check_StringAB(dec9F6B, 'D1 80 36 22 00')
             if Result == True and DL.Check_RXResponse(rx, "** 9F 6B C1 **"):

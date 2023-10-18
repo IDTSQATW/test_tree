@@ -1,12 +1,21 @@
-Docklight Log File (HEX) - Started 2022/7/19 09:27:08.182 
+Docklight Log File (HEX) - Started 2023/10/17 11:54:31.064 
  TEST CASE: CR064-TDES
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 115200 baud...
+ POS operating on COM90 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
+ 
+
+ --- AT cmd: 02-40 *** NEO2
+
+2023/10/17 11:54:35.144 [TX] - 56 69 56 4F 74 65 63 68 32 00 02 40 00 15 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20 5E 34 
+2023/10/17 11:54:37.248 [RX] - 56 69 56 4F 74 65 63 68 32 00 02 A3 00 07 E0 DF EE 25 02 00 13 70 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+---------- END OF TEST ----------
+
+ Result = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2022/7/19 09:27:08.433 
+Docklight Log File (HEX) - Stopped 2023/10/17 11:54:39.507 
 

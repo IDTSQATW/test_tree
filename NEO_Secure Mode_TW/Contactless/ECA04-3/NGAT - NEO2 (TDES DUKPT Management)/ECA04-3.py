@@ -22,7 +22,6 @@ if (Result):
 	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 01 00 00 00 00")	
-		
 # Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
@@ -38,7 +37,7 @@ if (Result):
 		RetOfStep = DL.SendCommand('Activate Transaction w/o LCD')	
 		rx = 4
 	if (RetOfStep):
-		DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E1 ** DF EE 12")
+		DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E3 ** DF EE 12")
 		if lcdtype == 1:
 			alldata = DL.Get_RXResponse(rx)
 		if lcdtype == 0:
@@ -85,5 +84,5 @@ if (Result):
 		if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300100") == False: 
 			DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-		if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False: 
+		if DL.Check_RXResponse(rx, "DFEE26 02 E300") == False: 
 			DL.SetWindowText("Red", "Tag DFEE26: FAIL")

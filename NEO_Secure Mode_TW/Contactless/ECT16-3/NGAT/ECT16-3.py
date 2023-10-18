@@ -58,30 +58,26 @@ if (Result):
 	
 		if lcdtype == 1:
 		# Tag 5A
-			Result = DL.Check_StringAB(mask5A, '51 28 CC CC CC CC')
+			Result = DL.Check_StringAB(mask5A, '5413CCCCCCCC0010')
 			if Result == True and DL.Check_RXResponse(rx, "5A A1 08"):
 				DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
 			else:
 				DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
 				
-			Result = DL.Check_StringAB(dec5A, '5A 08 51 28 57 01 00 03')
+			Result = DL.Check_StringAB(dec5A, '5A085413330089600010000000000000')
 			if Result == True and DL.Check_RXResponse(rx, "5A C1 10"):
 				DL.SetWindowText("blue", "Tag 5A_Enc: PASS")
 			else:
 				DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
 				
 		# Tag 57
-			Result = DL.Check_StringAB(mask57, '51 28 CC CC CC CC')
-			if (Result):
-				Result = DL.Check_StringAB(mask57, 'D1 80 3C CC CC CC CC CC')
-			if Result == True and DL.Check_RXResponse(rx, "57 A1 10"):
+			Result = DL.Check_StringAB(mask57, '5413CCCCCCCC0010D1412CCCCCCCCCCCCC')
+			if Result == True and DL.Check_RXResponse(rx, "57 A1 11"):
 				DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 			else:
 				DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 				
-			Result = DL.Check_StringAB(dec57, '57 10 51 28 57 01 00 03')
-			if (Result):
-				Result = DL.Check_StringAB(dec57, 'D1 80 36 22')
+			Result = DL.Check_StringAB(dec57, '57115413330089600010D141220101234091720000000000')
 			if Result == True and DL.Check_RXResponse(rx, "57 C1 18"):
 				DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 			else:

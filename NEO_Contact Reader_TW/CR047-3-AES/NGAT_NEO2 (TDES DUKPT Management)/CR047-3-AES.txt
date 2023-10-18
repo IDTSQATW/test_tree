@@ -40,7 +40,7 @@ TID:60-13 Contact Retrieve Transaction Result, for 60-11
 CMD:60 13 9F 10 9F 26 9F 27 9F 36 9F 37 9F 02 9F 4D 9F 13 95 9B 9F 03 9F 34
 EXR:
 
-TID:60-12 Contact Apply Host Response_w LCD_w LCD
+TID:60-12 Contact Apply Host Response_w LCD
 CMD:60 12 01 8A 02 30 30 91 0A 11 22 33 44 55 66 77 88 30 30
 EXR: 60 63 00 00
 MSG:Waiting...

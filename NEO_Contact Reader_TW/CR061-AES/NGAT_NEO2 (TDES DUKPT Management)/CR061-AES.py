@@ -104,7 +104,7 @@ if (Result):
 							DL.SetWindowText("Red", "Tag 9F39: FAIL")
 						if DL.Check_RXResponse(1, "FFEE01 ** DFEE300101") == False: 
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")				
-						if DL.Check_RXResponse(1, "DFEE26 02 E000") == False: 
+						if DL.Check_RXResponse(1, "DFEE26 02 E100") == False: 
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 
 				# cmd 60-11					
@@ -123,7 +123,7 @@ if (Result):
 									DL.SetWindowText("Red", "Tag 9F39: FAIL")
 								if DL.Check_RXResponse(1, "FFEE01 ** DFEE300101") == False: 
 									DL.SetWindowText("Red", "Tag FFEE01: FAIL")				
-								if DL.Check_RXResponse(1, "DFEE26 02 E000") == False: 
+								if DL.Check_RXResponse(1, "DFEE26 02 E100") == False: 
 									DL.SetWindowText("Red", "Tag DFEE26: FAIL")									
 				# cmd 60-12
 				if  CTresultcode == "0004":
@@ -141,7 +141,7 @@ if (Result):
 									DL.SetWindowText("Red", "Tag 9F39: FAIL")
 								if DL.Check_RXResponse(1, "FFEE01 ** DFEE300101") == False: 
 									DL.SetWindowText("Red", "Tag FFEE01: FAIL")				
-								if DL.Check_RXResponse(1, "DFEE26 02 E000") == False: 
+								if DL.Check_RXResponse(1, "DFEE26 02 E100") == False: 
 									DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 
 if lcdtype == 1:

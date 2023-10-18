@@ -199,7 +199,7 @@ EXR:
 EXR:
 TIMEOUT:120000
 
-TID:60-12 Contact Apply Host Response (DFEF1F: 01 00)_w/ LCD
+TID:60-12 Contact Apply Host Response (DFEF1F: 01 00)_w LCD
 CMD:60 12 01 8A 02 30 30 91 0A 11 22 33 44 55 66 77 88 30 30
 EXR: 60 63 00 00
 MSG:Waiting...

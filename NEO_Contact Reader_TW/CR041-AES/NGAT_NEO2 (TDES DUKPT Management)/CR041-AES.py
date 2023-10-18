@@ -110,7 +110,7 @@ if (Result):
 					CardData=DL.GetTLV(sResult,"DFEE23")
 					bresult = False
 					if CardData!=None and CardData!='':
-						objectMSR = DL.ParseCardData(CardData ,bresult,Key,MacKey)
+						objectMSR = DL.ParseCardData(CardData, Key)
 						EncryptType = DL.Get_EncryptionKeyType_CardData()
 						EncryptMode = DL.Get_EncryptionMode_CardData()
 						if objectMSR!=None:
@@ -131,15 +131,15 @@ if (Result):
 							if len(TRK1)> 0:
 								DL.SetWindowText("blue", "Track 1:")
 								TRK1DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK1)
-								TRK1DecryptData = TRK1DecryptData[0:((objectMSR[0].msr_track1Length)*2)]
+								# TRK1DecryptData = TRK1DecryptData[0:((objectMSR[0].msr_track1Length)*2)]
 							if len(TRK2)> 0:
 								DL.SetWindowText("blue", "Track 2:")
 								TRK2DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK2)
-								TRK2DecryptData = TRK2DecryptData[0:((objectMSR[0].msr_track2Length)*2)]
+								# TRK2DecryptData = TRK2DecryptData[0:((objectMSR[0].msr_track2Length)*2)]
 							if len(TRK3) > 0:
 								DL.SetWindowText("blue", "Track 3:")
 								TRK3DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK3)
-								TRK3DecryptData = TRK3DecryptData[0:((objectMSR[0].msr_track3Length)*2)]
+								# TRK3DecryptData = TRK3DecryptData[0:((objectMSR[0].msr_track3Length)*2)]
 
 							TR1maskdata1 = "%*6510********"
 							TR1maskdata2 = "^CARD/IMAGE"
@@ -197,10 +197,10 @@ if (Result):
 								if TagFFEE01 != "DFEE30010C": 
 									DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 								if lcdtype == 1:	
-									if TagDFEE26 != "EA01": 
+									if TagDFEE26 != "EA00": 
 										DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 								if lcdtype == 0:	
-									if TagDFEE26 != "E800":
+									if TagDFEE26 != "EA00":
 										DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 							if readertype == 0:     # NEO1
 								if TagFFEE01 != "DF30010C": 

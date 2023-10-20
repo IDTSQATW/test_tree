@@ -1,21 +1,20 @@
-Docklight Log File (HEX) - Started 2022/2/16 16:15:22.399 
+Docklight Log File (HEX) - Started 2023/10/19 15:09:47.556 
  TEST CASE: VL018
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM1 @ 9600 baud...
+ POS operating on COM5 @ 0 baud...
  Set POS COM PORT - COMPLETE
 
+ --- Yellow LED control
 
-2022/2/16 16:15:34.975 [RX] - 56 69 56 4F 74 65 63 68 32 00 14 01 00 0D 4E 45 4F 20 32 2E 30 20 76 31 2E 30 30 9F 30  --- Yellow LED control
-
-2022/2/16 16:15:59.291 [TX] - 56 69 56 4F 74 65 63 68 32 00 F0 FA 00 00 39 DF 
-2022/2/16 16:15:59.319 [RX] - 56 69 56 4F 74 65 63 68 32 00 F0 00 00 00 FB AA  
+2023/10/19 15:10:00.462 [TX] - 56 69 56 4F 74 65 63 68 32 00 F0 FA 00 00 39 DF 
+2023/10/19 15:10:00.502 [RX] - 56 69 56 4F 74 65 63 68 32 00 F0 00 00 00 FB AA  
 
  ---------- END OF TEST ----------
 
  Result = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2022/2/16 16:16:01.021 
+Docklight Log File (HEX) - Stopped 2023/10/19 15:10:02.107 
 

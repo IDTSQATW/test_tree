@@ -117,7 +117,7 @@ if (Result):
 				else:
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-				if (DL.Check_StringAB(TagDFEE26, '2301')):
+				if (DL.Check_StringAB(TagDFEE26, '2300')):
 					DL.SetWindowText("blue", "Tag DFEE26: PASS")
 				else:
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")

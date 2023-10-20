@@ -181,60 +181,86 @@ if (Result):
 							if DL.Check_StringAB(Track1_CardData, TR1maskdata1) and DL.Check_StringAB(Track1_CardData, TR1maskdata2) and DL.Check_StringAB(Track1_CardData, TR1maskdata3) and DL.Check_StringAB(Track1_CardData, TR1maskdata4):
 								DL.SetWindowText("Blue", "Track 1 Mask data: PASS")
 							else:
+								DL.fails=DL.fails+1
 								DL.SetWindowText("Red", "Track 1 Mask data: FAIL")
 							if DL.Check_StringAB(Track2_CardData, TR2maskdata1) and DL.Check_StringAB(Track2_CardData, TR2maskdata2) and DL.Check_StringAB(Track2_CardData, TR2maskdata3):
 								DL.SetWindowText("Blue", "Track 2 Mask data: PASS")
 							else:
+								DL.fails=DL.fails+1
 								DL.SetWindowText("Red", "Track 2 Mask data: FAIL")
 								
 							# Verify Encryption track data	
 							if DL.Check_StringAB(TRK1DecryptData, TR1plaintextdata1) and DL.Check_StringAB(TRK1DecryptData, TR1plaintextdata2) and DL.Check_StringAB(TRK1DecryptData, TR1plaintextdata3): 
 								DL.SetWindowText("Blue", "Track 1 Decryption data: PASS")
 							else:
+								DL.fails=DL.fails+1
 								DL.SetWindowText("Red", "Track 1 Decryption data: FAIL")
 							if DL.Check_StringAB(TRK2DecryptData, TR2plaintextdata1) and DL.Check_StringAB(TRK2DecryptData, TR2plaintextdata2): 
 								DL.SetWindowText("Blue", "Track 2 Decryption data: PASS")
 							else:
+								DL.fails=DL.fails+1
 								DL.SetWindowText("Red", "Track 2 Decryption data: FAIL")
 										
 							# Verify specific tags
 							if DL.Check_StringAB(CardData, '80 1F 44 28 00 B3 9B') == False:
+								DL.fails=DL.fails+1
 								DL.SetWindowText("Red", "Tag DFEE23: FAIL")
-									
 							if DL.Check_RXResponse(rx, "DFEE25 02 0007") == False: 
+								DL.fails=DL.fails+1
 								DL.SetWindowText("Red", "Tag DFEE25: FAIL")
 							if DL.Check_RXResponse(rx, "9F39 01 80") == False: 
+								DL.fails=DL.fails+1
 								DL.SetWindowText("Red", "Tag 9F39: FAIL")
 								
 							if readertype == 1:      # NEOII and upward
 								if DL.Check_RXResponse(rx, "FFEE01 ** DFEE30010C") == False: 
+									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 								if modeltype == 1:      # For NEO3
 									if DL.Check_RXResponse(rx, "DFEE26 02 EA00") == False: 
+										DL.fails=DL.fails+1
 										DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 								if modeltype == 0:      # For NEO2
 									if DL.Check_RXResponse(rx, "DFEE26 02 EA00") == False: 
+										DL.fails=DL.fails+1
 										DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 							if readertype == 0:      # NEOI
 								if DL.Check_RXResponse(rx, "FFEE01 ** DF30010C") == False: 
+									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Tag FFEE01: FAIL")	
 								if DL.Check_RXResponse(rx, "DFEE26 01 CA") == False: 
+									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Tag DFEE26: FAIL")	
 								if DL.Check_RXResponse(rx, "DFEF4C 06 002700000000") == False: 
+									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Tag DFEF4C: FAIL")	
 								if DL.Check_StringAB(decDFEF4D, '3B36353130303030') == False:
+									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Tag DFEF4D: FAIL")
-					
+			else:
+				DL.fails=DL.fails+1
+
 # cmd 60-13
 if readertype == 1:      # NEOII and upward
 	RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')
 	if modeltype == 1:      # For NEO3
 		if (RetOfStep):
 			Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** EA ** 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")	
+			if Result == False:
+				DL.fails=DL.fails+1
 	if modeltype == 0:      # For NEO2
 		if (RetOfStep):
 			Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** EA 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
+			if Result == False:
+				DL.fails=DL.fails+1
 if readertype == 0:      # NEOI
 	RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')	
 	if (RetOfStep):
-		Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 05 00 00 D6 C5")								
+		Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 05 00 00 D6 C5")
+		if Result == False:
+			DL.fails=DL.fails+1
+
+if(0 < (DL.fails + DL.warnings)):
+	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
+else:
+	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )

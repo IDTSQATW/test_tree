@@ -26,11 +26,16 @@ if (Result):
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 00")
 
-# Set group 80 -- DF 81 1B = 80
+# Encryption Type -- TransArmor TDES
 if (Result):
-	RetOfStep = DL.SendCommand('Set group 80 -- DF 81 1B = 80')
+	RetOfStep = DL.SendCommand('C7-A2 TDES DUKPT manage_TransArmor TDES, data key')
+	time.sleep(1)
+	
+# Check data encryption TYPE is TDES	
+if (Result):
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")		
+		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 02 00 00 00 00")	
 		
 # Burst mode OFF & Poll on demand		
 if (Result):
@@ -41,37 +46,46 @@ if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("01 00 00 00")
-		
+
 # cmd 02-40, tap card
 if (Result):
 	RetOfStep = DL.SendCommand('Activate Transaction')
 	if (RetOfStep):
-		DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** A1")
-		alldata = DL.Get_RXResponse(0)
-
-		tagFF8105 = DL.GetTLV(alldata,"FF8105", 0)
-		mask5A = DL.GetTLV(tagFF8105,"5A", 0)
-		mask57 = DL.GetTLV(tagFF8105,"57", 0)
-
-	# Tag 5A
-		Result = DL.Check_StringAB(mask5A, '5A085413330089600010000000000000')
-		if Result == True:
-			DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
-		else:
-			DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
-				
+		DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** 65")
+		
+		alldata = DL.Get_RXResponse(0)	
+		Tag57 = DL.GetTLV(alldata,"57", 0)
+		Tag5A = DL.GetTLV(alldata,"5A", 0)
+		
 	# Tag 57
-		Result = DL.Check_StringAB(mask57, '57115413330089600010D141220101234091720000000000')
+		Result = DL.Check_RXResponse('57 13 47 61 73 90 01 01 00 10 D3 01 21 20 00 12 33 99 00 03 1F')
 		if Result == True:
 			DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 		else:
 			DL.SetWindowText("red", "Tag 57_Mask: FAIL")
-					
-	# Tags 9F39/ FFEE01/ DFEE26	
-		if DL.Check_RXResponse("9F39 01 07") == False: 
+
+	# Tag 5A
+		Result = DL.Check_RXResponse('5A 08 47 61 73 90 01 01 00 10')
+		if Result == True:
+			DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
+		else:
+			DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
+						
+	# Tags 9F39/ FFEE01/ DFEE26
+		if DL.Check_RXResponse("9F39 01 07"): 
+			DL.SetWindowText("blue", "Tag 9F39 = 07: PASS")
+		else:
 			DL.SetWindowText("Red", "Tag 9F39: FAIL")
-		if DL.Check_RXResponse("DFEE26 02 A100") == False: 
-			DL.SetWindowText("Red", "Tag DFEE26: FAIL")			
+		
+		if DL.Check_RXResponse("FFEE01 ** DFEE300100"): 
+			DL.SetWindowText("blue", "Tag FFEE01: PASS")
+		else:
+			DL.SetWindowText("Red", "Tag FFEE01: FAIL")
+		
+		if DL.Check_RXResponse("DFEE26 02 6506"): 
+			DL.SetWindowText("blue", "Tag DFEE26: PASS")
+		else:
+			DL.SetWindowText("Red", "Tag DFEE26: FAIL")				
 			
 if readertype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')

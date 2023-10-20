@@ -37,10 +37,9 @@ if (Result):
 	RetOfStep = DL.SendCommand('Activate Transaction')
 	if (RetOfStep):
 		DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** 63")
-		alldata = DL.Get_RXResponse(0)
+		alldata = DL.Get_RXResponse(0)	
 		
 		mask57 = DL.GetTLV(alldata,"57", 0)
-		
 		mask5A = DL.GetTLV(alldata,"5A", 0)
 		
 		Tag9F39 = DL.GetTLV(alldata,"9F39")
@@ -49,17 +48,17 @@ if (Result):
 		
 	# Tag 57
 		Result = DL.Check_StringAB(mask57, '47 61 73 90 01 01 00 10 D3 01 21 20 00 12 33 99 00 03 1F')
-		if Result == False:
-			DL.SetWindowText("red", "Tag 57: FAIL")
+		if Result == True:
+			DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 		else:
-			DL.SetWindowText("blue", "Tag 57: PASS")
+			DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 
 	# Tag 5A
 		Result = DL.Check_StringAB(mask5A, '47 61 73 90 01 01 00 10')
-		if Result == False:
-			DL.SetWindowText("red", "Tag 5A: FAIL")
+		if Result == True:
+			DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
 		else:
-			DL.SetWindowText("blue", "Tag 5A: PASS")
+			DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
 			
 	# Tags 9F39/ FFEE01/ DFEE26
 		if Tag9F39 == "07": 
@@ -72,7 +71,7 @@ if (Result):
 		else:
 			DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 		
-		if TagDFEE26 == "6301": 
+		if TagDFEE26 == "6300": 
 			DL.SetWindowText("blue", "Tag DFEE26: PASS")
 		else:
 			DL.SetWindowText("Red", "Tag DFEE26: FAIL")

@@ -20,12 +20,12 @@ EXR:01 00 00 00
 
 TID:Activate Transaction
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00
-MSG:Tap iPhone (ApplePay: VISA card -- PAN = xxxx........0492)...
+MSG:Tap iPhone (ApplePay: VISA card)...
 EXR:56 69 56 4F 74 65 63 68 32 00 02 23 ** F3
 TIMEOUT:120000
 
 TID:Get Transaction result
-DLG:Tap iPhone (ApplePay: VISA card -- PAN = xxxx........0492) --> Click OK
+DLG:Tap iPhone (ApplePay: VISA card) --> Click OK
 TIMEOUT:120000
 CMD:03 40
 EXR:

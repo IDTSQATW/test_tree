@@ -10,18 +10,28 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
+# Check reader is VP3350 or not
+readertype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if readertype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
+
 # Enable encryption (02)
 if (Result):
 	RetOfStep = DL.SendCommand('Enable Encryption (02)')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 00")
-
-# Encryption Type -- AES
+        
+# Check data encryption TYPE is AES	
 if (Result):
-	RetOfStep = DL.SendCommand('Encryption Type -- AES')
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 01")		
-		
+		Result = Result and DL.Check_RXResponse("C7 00 00 06 01 02 00 00 00 00")
+
 # Set group 80 -- DF 81 1B = 80
 if (Result):
 	RetOfStep = DL.SendCommand('Set group 80 -- DF 81 1B = 80')
@@ -37,51 +47,38 @@ if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("01 00 00 00")
-
+		
 # cmd 02-40, tap card
 if (Result):
 	RetOfStep = DL.SendCommand('Activate Transaction')
 	if (RetOfStep):
-		DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** 63")
+		DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** 65")
 		alldata = DL.Get_RXResponse(0)
 
-		tagFF8105 = DL.GetTLV(alldata,"FF8105", 0)
-		
-		mask5A = DL.GetTLV(tagFF8105,"5A", 0)
-		mask57 = DL.GetTLV(tagFF8105,"57", 0)
-		
-		Tag9F39 = DL.GetTLV(alldata,"9F39")
-		TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
-		TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
-	
+		mask5A = DL.GetTLV_Embedded(alldata,"5A", 0)
+		mask57 = DL.GetTLV_Embedded(alldata,"57", 0)
+
 	# Tag 5A
-		Result = DL.Check_StringAB(mask5A, '51 28 57 01 00 03')
+		Result = DL.Check_StringAB(mask5A, '5A085413330089600010000000000000')
 		if Result == True:
 			DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
 		else:
 			DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
-			
+				
 	# Tag 57
-		Result = DL.Check_StringAB(mask57, '51 28 57 01 00 03')
-		if (Result):
-			Result = DL.Check_StringAB(mask57, 'D1 80 36 22')
+		Result = DL.Check_StringAB(mask57, '57115413330089600010D141220101234091720000000000')
 		if Result == True:
 			DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 		else:
 			DL.SetWindowText("red", "Tag 57_Mask: FAIL")
-			
-	# Tags 9F39/ FFEE01/ DFEE26
-		if Tag9F39 == "07": 
-			DL.SetWindowText("blue", "Tag 9F39: PASS")
-		else:
+					
+	# Tags 9F39/ FFEE01/ DFEE26	
+		if DL.Check_RXResponse("9F39 01 07") == False: 
 			DL.SetWindowText("Red", "Tag 9F39: FAIL")
-		
-		if TagFFEE01 == "DFEE300100": 
-			DL.SetWindowText("blue", "Tag FFEE01: PASS")
-		else:
-			DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-		
-		if TagDFEE26 == "6301": 
-			DL.SetWindowText("blue", "Tag DFEE26: PASS")
-		else:
-			DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+		if DL.Check_RXResponse("DFEE26 02 6501") == False: 
+			DL.SetWindowText("Red", "Tag DFEE26: FAIL")			
+			
+if readertype == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")			

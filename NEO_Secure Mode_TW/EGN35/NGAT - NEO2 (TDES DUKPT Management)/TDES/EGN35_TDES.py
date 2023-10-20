@@ -116,15 +116,15 @@ if (Result):
 							if len(TRK1)> 0:
 								DL.SetWindowText("blue", "Track 1:")
 								TRK1DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK1)
-								#TRK1DecryptData = TRK1DecryptData[0:((objectMSR[0].msr_track1Length)*2)]
+								# TRK1DecryptData = TRK1DecryptData[0:((objectMSR[0].msr_track1Length)*2)]
 							if len(TRK2)> 0:
 								DL.SetWindowText("blue", "Track 2:")
 								TRK2DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK2)
-								#TRK2DecryptData = TRK2DecryptData[0:((objectMSR[0].msr_track2Length)*2)]
+								# TRK2DecryptData = TRK2DecryptData[0:((objectMSR[0].msr_track2Length)*2)]
 							if len(TRK3) > 0:
 								DL.SetWindowText("blue", "Track 3:")
 								TRK3DecryptData = DL.DecryptDLL(EncryptType, Key)
-								#TRK3DecryptData = TRK3DecryptData[0:((objectMSR[0].msr_track3Length)*2)]
+								# TRK3DecryptData = TRK3DecryptData[0:((objectMSR[0].msr_track3Length)*2)]
 										
 							# Verify specific tags
 							if DL.Check_RXResponse(rx, "9F39 ** 90") == False:
@@ -230,7 +230,7 @@ if (Result):
 							DL.SetWindowText("red", "Tag 56_Enc: FAIL")
 									
 						# Tag 57
-						r1 = DL.Check_RXResponse(rx, '57 A1 65 10 CC CC CC CC')
+						r1 = DL.Check_RXResponse(rx, '57 A1 13 65 10 CC CC CC CC')
 						r2 = DL.Check_RXResponse(rx, 'D1 71 2C CC CC CC CC CC')
 						if r1 == True and r2 == True:
 							DL.SetWindowText("blue", "Tag 57_Mask: PASS")

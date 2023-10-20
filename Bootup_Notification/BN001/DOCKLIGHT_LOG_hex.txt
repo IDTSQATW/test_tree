@@ -1,15 +1,23 @@
-Docklight Log File (HEX) - Started 2022/6/2 11:14:14.944 
+Docklight Log File (HEX) - Started 2023/10/19 16:16:54.869 
  TEST CASE: BN001
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 115200 baud...
+ POS operating on COM5 @ 0 baud...
  Set POS COM PORT - COMPLETE
 
  --- Bootup Notification On
 
-2022/6/2 11:14:16.286 [TX] - 56 69 56 4F 74 65 63 68 32 00 14 01 00 01 01 DA 13 
-2022/6/2 11:14:16.294 [RX] - 56 69 56 4F 74 65 63 68 32 00 14 0B 00 00 45 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2023/10/19 16:16:56.053 [TX] - 56 69 56 4F 74 65 63 68 32 00 14 01 00 01 01 DA 13 
+2023/10/19 16:16:56.143 [RX] - 56 69 56 4F 74 65 63 68 32 00 14 00 00 00 B5 B1 FF 4E 45 4F 20 32 2E 30 20 76 31 2E 30 30  
 
-Docklight Log File (HEX) - Stopped 2022/6/2 11:14:19.229 
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = PASSED
+
+
+Docklight Log File (HEX) - Stopped 2023/10/19 16:17:41.145 
 

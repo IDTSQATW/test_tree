@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-37590
+22736
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -319,7 +319,7 @@ If result <> 0 Then
    if readerType <> "NEO2" then r6 = DL.WaitForSequence("Tag DF30", 1, 2000)
    if readerType = "NEO2" then r6 = DL.WaitForSequence("Tag DF30 (NEO2)", 1, 2000)
    r7 = DL.WaitForSequence("Tag DFEF7B", 1, 2000)
-   if r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 or r6 = 0 or r7 = 0 then result = 0
+   if r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 or r6 = 0 or r7 = 0 then t1 = 0
    if r1 = 0 then DL.AddComment vbcrlf & "02-40 resp: FAIL"
    if r2 = 0 then DL.AddComment vbcrlf & "Tag FFEE06: FAIL"
    if r3 = 0 then DL.AddComment vbcrlf & "Tag DFEF4C/ DFEF4D_iPhone: FAIL"
@@ -327,7 +327,7 @@ If result <> 0 Then
    if r5 = 0 then DL.AddComment vbcrlf & "Tag 9F39: FAIL"
    if r6 = 0 then DL.AddComment vbcrlf & "Tag DF30: FAIL"
    if r7 = 0 then DL.AddComment vbcrlf & "Tag DFEF7B: FAIL"
-   if result = 0 then 
+   if t1 = 0 then 
       dl.addcomment vbcrlf & "** FAIL **"
       countf = 1
    end if
@@ -347,7 +347,7 @@ If result <> 0 Then
    if readerType <> "NEO2" then r6 = DL.WaitForSequence("Tag DF30", 1, 2000)
    if readerType = "NEO2" then r6 = DL.WaitForSequence("Tag DF30 (NEO2)", 1, 2000)
    r7 = DL.WaitForSequence("Tag DFEF7B", 1, 2000)
-   if r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 or r6 = 0 or r7 = 0 then result = 0
+   if r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 or r6 = 0 or r7 = 0 then t2 = 0
    if r1 = 0 then DL.AddComment vbcrlf & "02-40 resp: FAIL"
    if r2 = 0 then DL.AddComment vbcrlf & "Tag FFEE08: FAIL"
    if r3 = 0 then DL.AddComment vbcrlf & "Tag DFEF4C/ DFEF4D_Android phone: FAIL"
@@ -355,7 +355,7 @@ If result <> 0 Then
    if r5 = 0 then DL.AddComment vbcrlf & "Tag 9F39: FAIL"
    if r6 = 0 then DL.AddComment vbcrlf & "Tag DF30: FAIL"
    if r7 = 0 then DL.AddComment vbcrlf & "Tag DFEF7B: FAIL"
-   if result = 0 then 
+   if t2 = 0 then 
       dl.addcomment vbcrlf & "** FAIL **"
       countf = 1
    end if
@@ -374,10 +374,10 @@ If result <> 0 Then
        if readerType <> "NEO2" then r1 = DL.WaitForSequence("02 00", 1, 5000)
        if readerType = "NEO2" then r1 = DL.WaitForSequence("02 00 (NEO2)", 1, 5000)
        r2 = DL.WaitForSequence("Tag DFEF7B", 1, 2000)
-       if r1 = 0 or r2 = 0 then result = 0
+       if r1 = 0 or r2 = 0 then t3 = 0
        if r1 = 0 then DL.AddComment vbcrlf & "02 00: FAIL"
        if r2 = 0 then DL.AddComment vbcrlf & "Tag DFEF7B: FAIL"
-       if result = 0 then 
+       if t3 = 0 then 
           dl.addcomment vbcrlf & "** FAIL **"
           countf = 1
        end if
@@ -397,10 +397,10 @@ If result <> 0 Then
        if readerType <> "NEO2" then r1 = DL.WaitForSequence("02 00", 1, 5000)
        if readerType = "NEO2" then r1 = DL.WaitForSequence("02 00 (NEO2)", 1, 5000)
        r2 = DL.WaitForSequence("Tag DFEF7B", 1, 2000)
-       if r1 = 0 or r2 = 0 then result = 0
+       if r1 = 0 or r2 = 0 then t4 = 0
        if r1 = 0 then DL.AddComment vbcrlf & "02 00: FAIL"
        if r2 = 0 then DL.AddComment vbcrlf & "Tag DFEF7B: FAIL"
-       if result = 0 then 
+       if t4 = 0 then 
           dl.addcomment vbcrlf & "** FAIL **"
           countf = 1
        end if

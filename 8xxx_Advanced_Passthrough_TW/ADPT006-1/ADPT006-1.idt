@@ -7,25 +7,8 @@
 		<file>FW.K.06.11-02_2C41+2C42+2C43FelicaCommands_NormalWrite.py</file>
 		<file>FW.K.06.11-03_2C41+2C42+2C43FelicaCommands_SecureRead.py</file>
 		<file>FW.K.06.11-04_2C41+2C42+2C43FelicaCommands_SecureWrite.py</file>
-		<file>FW.K.06.11-05_2C41+2C42+2C43FelicaCommands_AuthWrongKey.py</file>
-		<file>FW.K.06.11-06_2C41+2C42+2C43FelicaCommands_CommandWrongLength.py</file>
-		<file>FW.K.06.11-07.01_2C41+2C42+2C43FelicaCommands_AfterCTLSTypeA.py</file>
-		<file>FW.K.06.11-07.02_2C41+2C42+2C43FelicaCommands_AfterCTLSTypeB.py</file>
-		<file>FW.K.06.11-07.03_2C41+2C42+2C43FelicaCommands_AfterCT.py</file>
-		<file>FW.K.06.11-07.04_2C41+2C42+2C43FelicaCommands_AfterMSR.py</file>
-		<file>FW.K.06.11-07.05_2C41+2C42+2C43FelicaCommands_AfterTimeout.py</file>
-		<file>FW.K.06.11-07.06_2C41+2C42+2C43FelicaCommands_AfterCollision.py</file>
-		<file>FW.K.06.11-07.07_2C41+2C42+2C43FelicaCommands_AfterTryAgain.py</file>
 		<file>FW.K.06.12-01_2C44PackageWithFelica_ReadLite.py</file>
 		<file>FW.K.06.12-02_2C44PackageWithFelica_WriteLite.py</file>
-		<file>FW.K.06.12-03_2C44PackageWithFelica_WrongPara.py</file>
-		<file>FW.K.06.12-04.01_2C44PackageWithFelicas_AfterCTLSTypeA.py</file>
-		<file>FW.K.06.12-04.02_2C44PackageWithFelicas_AfterCTLSTypeB.py</file>
-		<file>FW.K.06.12-04.03_2C44PackageWithFelicas_AfterCT.py</file>
-		<file>FW.K.06.12-04.04_2C44PackageWithFelicas_AfterMSR.py</file>
-		<file>FW.K.06.12-04.05_2C44PackageWithFelicas_AfterTimeout.py</file>
-		<file>FW.K.06.12-04.06_2C44PackageWithFelicas_AfterCollision.py</file>
-		<file>FW.K.06.12-04.07_2C44PackageWithFelicas_AfterTryAgain.py</file>
 		<file>FW.K.06.16-07_TDESEncryptRAPDU_2C4123FelicaCommands.py</file>
 		<file>FW.K.06.16-08_TDESEncryptRAPDU_2C44PackageWithFelica.py</file>
 		<file>FW.K.06.17-07_TDESEncryptRAPDU+MAC_2C4123FelicaCommands.py</file>

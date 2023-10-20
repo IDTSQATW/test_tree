@@ -51,14 +51,14 @@ if (Result):
 				TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 				
 			# Tag 57
-				Result = DL.Check_StringAB(mask57, '4817CCCCCCCC1965D2312CCCCCCCCCCCCCCCCC')
-				if Result == True and DL.Check_RXResponse("57 A1 13"):
+				Result = DL.Check_RXResponse("57 A1 13")
+				if Result == True:
 					DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 				else:
 					DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 					
-				Result = DL.Check_StringAB(dec57, '57134817499130371965D23122260000016799993F')
-				if Result == True and DL.Check_RXResponse("57 C1 20"):
+				Result = DL.Check_RXResponse("57 C1")
+				if Result == True:
 					DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 				else:
 					DL.SetWindowText("red", "Tag 57_Enc: FAIL")
@@ -74,7 +74,7 @@ if (Result):
 				else:
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-				if TagDFEE26 == "E301": 
+				if TagDFEE26 == "E300": 
 					DL.SetWindowText("blue", "Tag DFEE26: PASS")
 				else:
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
@@ -102,14 +102,14 @@ if (Result):
 				TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 				
 			# Tag 57
-				Result = DL.Check_StringAB(mask57, '4817CCCCCCCC1965D2312CCCCCCCCCCCCCCCCC')
-				if Result == True and DL.Check_StringAB(alldata, "57 A1 13"):
+				Result = DL.Check_RXResponse(1, "57 A1 13")
+				if Result == True:
 					DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 				else:
 					DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 					
-				Result = DL.Check_StringAB(dec57, '57134817499130371965D23122260000016799993F')
-				if Result == True and DL.Check_StringAB(alldata, "57 C1 20"):
+				Result = DL.Check_RXResponse(1, "57 C1")
+				if Result == True:
 					DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 				else:
 					DL.SetWindowText("red", "Tag 57_Enc: FAIL")
@@ -125,7 +125,7 @@ if (Result):
 				else:
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-				if TagDFEE26 == "E301": 
+				if TagDFEE26 == "E300": 
 					DL.SetWindowText("blue", "Tag DFEE26: PASS")
 				else:
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")

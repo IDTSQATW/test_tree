@@ -1,26 +1,24 @@
-Docklight Log File (HEX) - Started 2022/8/11 13:35:12.798 
+Docklight Log File (HEX) - Started 2023/10/19 11:54:34.850 
  TEST CASE: EGN34
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 115200 baud...
+ POS operating on COM90 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  
 
- --- C7-A2 (PIN variant)
+ --- C7-30 Get Data Encryption Key Variant Type
 
-2022/8/11 13:35:22.185 [TX] - 56 69 56 4F 74 65 63 68 32 00 C7 A2 00 08 01 00 00 00 01 00 00 00 23 67 
-2022/8/11 13:35:22.295 [RX] - 56 69 56 4F 74 65 63 68 32 00 63 02 00 00 56 69 56 4F 74 65 63 68 32 00 C7 00 00 00 86 6E 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
-*** NEO2 project please load data key first...
- 
+2023/10/19 11:54:38.022 [TX] - 56 69 56 4F 74 65 63 68 32 00 C7 30 00 00 CB 43 
+2023/10/19 11:54:38.032 [RX] - 56 69 56 4F 74 65 63 68 32 00 C7 00 00 01 01 BC 5E 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 ------------------------------------------------------------
 Note: NEO2 project must switch Key Variant Type (Data or Pin) by manual and then repeat to run this case
  
 ---------- END OF TEST ----------
 
- Result = FAILED
+ Result = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2022/8/11 13:35:23.264 
+Docklight Log File (HEX) - Stopped 2023/10/19 11:54:38.324 
 

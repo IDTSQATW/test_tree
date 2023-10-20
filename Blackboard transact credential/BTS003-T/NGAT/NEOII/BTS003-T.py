@@ -24,7 +24,7 @@ if (Result):
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 01 00")
 		if Result == False:
-			DL.SetWindowText("red", "Data key should be AES type...C7-33 = 01")
+			DL.SetWindowText("red", "Data key should be TDES type...C7-33 = 00")
 
 # (C7-6A) Get BlackBoard Private Key Hash
 if (Result):

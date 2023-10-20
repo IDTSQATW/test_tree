@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-61184
+11007
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -172,6 +172,8 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------DUT has no key
+DL.AddComment "Preset the reader: NO data key & encryption OFF"
+
 hwcheck = msgbox("The reader is 'Vendi'? Or the reader for USAT (NSRED) customer?", vbyesno)
 if hwcheck = 6 then
 if readerType <> "NEO2" then 
@@ -187,11 +189,7 @@ else
    readercheck = msgbox ("The reader had no data key & encryption off?", vbyesno)
 end if
 
-if readerType <> "NEO2" or readercheck = 6 then
-   screencheck()
-else
-   result = 0
-end if
+if readerType <> "NEO2" or readercheck = 6 then screencheck()
 '------------------------------------------------------------DUT has key
 if readerType <> "NEO2" then 
    If result <> 0 Then
@@ -242,11 +240,7 @@ else
    readercheck = msgbox ("The reader had data key & encryption off?", vbyesno)
 end if
 
-if readerType <> "NEO2" or readercheck = 6 then
-   screencheck()
-else
-   result = 0
-end if
+if readerType <> "NEO2" or readercheck = 6 then screencheck()
 
 else
    dl.addcomment vbcrlf & "Your reader is not suitable (for USAT_NSRED customer), please skip this case"

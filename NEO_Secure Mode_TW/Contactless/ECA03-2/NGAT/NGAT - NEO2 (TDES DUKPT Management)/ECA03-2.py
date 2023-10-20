@@ -46,18 +46,16 @@ if (Result):
 		alldata = DL.Get_RXResponse(0)
 		ksn = DL.GetTLV(alldata,"DFEE12")	
 		
-		tagFF8106 = DL.GetTLV(alldata,"FF8106")
-		encDF812A = DL.GetTLV(tagFF8106,"DF812A", 0)
+		encDF812A = DL.GetTLV_Embedded(alldata,"DF812A", 0)
 		decDF812A = DL.DecryptDLL(0,2, strKey, ksn, encDF812A)
-		encDF812B = DL.GetTLV(tagFF8106,"DF812B", 0)
+		encDF812B = DL.GetTLV_Embedded(alldata,"DF812B", 0)
 		decDF812B = DL.DecryptDLL(0,2, strKey, ksn, encDF812B)		
 		
-		tagFF8105 = DL.GetTLV(alldata,"FF8105")
-		mask56 = DL.GetTLV(tagFF8105,"56", 0)
-		enc56 = DL.GetTLV(tagFF8105,"56", 1)
+		mask56 = DL.GetTLV_Embedded(alldata,"56", 0)
+		enc56 = DL.GetTLV_Embedded(alldata,"56", 1)
 		dec56 = DL.DecryptDLL(0,2, strKey, ksn, enc56)	
-		mask9F6B = DL.GetTLV(tagFF8105,"9F6B", 0)
-		enc9F6B = DL.GetTLV(tagFF8105,"9F6B", 1)
+		mask9F6B = DL.GetTLV_Embedded(alldata,"9F6B", 0)
+		enc9F6B = DL.GetTLV_Embedded(alldata,"9F6B", 1)
 		dec9F6B = DL.DecryptDLL(0,2, strKey, ksn, enc9F6B)	
 		
 		Tag9F39 = DL.GetTLV(alldata,"9F39")
@@ -114,7 +112,7 @@ if (Result):
 		else:
 			DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 		
-		if TagDFEE26 == "7301": 
+		if TagDFEE26 == "7300": 
 			DL.SetWindowText("blue", "Tag DFEE26: PASS")
 		else:
 			DL.SetWindowText("Red", "Tag DFEE26: FAIL")

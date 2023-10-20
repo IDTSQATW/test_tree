@@ -98,7 +98,7 @@ if (Result):
 				TagDFEE26 = DL.GetTLV_Embedded(alldata,"DFEE26")
 				
 			# Tag 57					
-				Result = DL.Check_RXResponse('5713')
+				Result = DL.Check_RXResponse(1, '5713')
 				if Result == True:
 					DL.SetWindowText("blue", "Tag 57: PASS")
 				else:

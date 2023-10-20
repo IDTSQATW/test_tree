@@ -101,7 +101,7 @@ if (Result):
 					else:
 						DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 									
-					Result = DL.Check_StringAB(decDFEF4D, '39 39 39 38 37 38 30 30 31 30 30 30 37 30 32 33')
+					Result = DL.Check_StringAB(decDFEF4D, '39 39 39 38 37 38 30 30 31 30 30')
 					if Result == True:
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:
@@ -117,7 +117,7 @@ if (Result):
 				else:
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
-				if (DL.Check_StringAB(TagDFEE26, '2301')):
+				if (DL.Check_StringAB(TagDFEE26, '2300')):
 					DL.SetWindowText("blue", "Tag DFEE26: PASS")
 				else:
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")

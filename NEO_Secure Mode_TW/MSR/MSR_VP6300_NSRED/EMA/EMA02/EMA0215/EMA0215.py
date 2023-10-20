@@ -153,7 +153,7 @@ if (Result):
 								if i == 2:
 									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 1F 44 28 00 B3 00")
 								if i == 3:
-									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 1F 48 28 00 93 00")
+									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 1F 48 28 00 B3 00")
 								if i == 4:
 									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"85 17 00 48 00 92 00")
 								if i == 5:

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-141
+48817
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -153,7 +153,12 @@ End Function
 countf = 0
 
 DL.SendSequence "Set Poll Mode - Poll On Demand"
-DL.Pause 1000
+DL.Pause 800
+
+if readerType <> "NEO2" then
+DL.SendSequence "C7-32 = 01 = AES"
+DL.Pause 800
+end if
 
 If result <> 0 Then
    DL.ResetReceiveCounter

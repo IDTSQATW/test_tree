@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-28148
+57396
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -156,7 +156,8 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-readercheck = msgbox("Reader support tags DFEF37 & DFEF3C?", vbyesno)
+msrcheck = msgbox("Does reader support MSR?", vbyesno)
+readercheck = msgbox("Does reader support tags DFEF37 & DFEF3C?", vbyesno)
 if readercheck = 6 then
 '------------------------------------------------------------
 If result <> 0 Then
@@ -217,6 +218,7 @@ If result <> 0 Then
 End If
 end if
 '------------------------------------------------------------
+if msrcheck = 6 then 
 If result <> 0 Then
    msgbox "Click OK -> tap card -> Swipe card", vbokonly
    dl.resetreceivecounter
@@ -228,14 +230,24 @@ If result <> 0 Then
    lcdcheck = msgbox ("Does LCD/ LED indicate this transaction for MSR ONLY?", vbyesno)
    if lcdcheck = 7 then result = 0
 End If
+end if
 
 If result <> 0 Then
-   msgbox "Click OK -> swipe MSR only card -> tap card", vbokonly
+   if msrcheck = 6 then msgbox "Click OK -> swipe MSR only card -> tap card", vbokonly
+   if msrcheck = 7 then msgbox "Click OK -> Insert card -> remove card -> tap card", vbokonly
    dl.resetreceivecounter
    DL.AddComment vbcrlf
    DL.AddComment "--- 02-40 (10 sec) (NEO2-CL only)"
    DL.SendSequence "02-40 (10 sec) (NEO2-CL only)"
-   result = DL.WaitForSequence("02 23", 1, 10000)
+   result = DL.WaitForSequence("02 23", 1, 4000)
+   if result = 0 then
+      result = DL.WaitForSequence("02 A3", 1, 5000)
+      if result <> 0 then 
+         msgbox "Click OK -> Tap card", vbokonly
+         DL.SendSequence "02-40 (10 sec) (NEO2-CL only)"
+         result = DL.WaitForSequence("02 23", 1, 5000)
+      end if
+   end if
    dl.pause 1000
    lcdcheck = msgbox ("Does LCD/ LED indicate this transaction for CL ONLY?", vbyesno)
    if lcdcheck = 7 then result = 0
@@ -272,9 +284,9 @@ else
 end if
 
 DL.AddComment vbCrLf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)
 
-DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
@@ -282,34 +294,34 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
 
-If MasterResult = 1 Then
-      MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-      MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-34478
+26051
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -107,7 +107,12 @@ If authn Then '""
 DL.AddComment "--- Set POS COM PORT Settings"
 DL.StopCommunication
 DL.AddComment "Set POS COM PORT..."
-DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+if POSBaudRate(1) = 0 then 
+   DL.SetChannelSettings(COM_Port(1))
+else
+   DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+end if
+
 DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
 DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
 DL.Pause 1000
@@ -211,7 +216,7 @@ else
 end if
 '------------------------------------------------------------
 If result <> 0 Then
-   readercheck = msgbox("This is SRED reader?", vbyesno)
+   readercheck = msgbox("This is SRED reader (or Enc = ON)?", vbyesno)
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Get Data Encryption (C7-37)"
@@ -295,7 +300,10 @@ if result <> 0 then         'DFED3F = 01
       DL.AddComment "--- ACT - VAS Only"
       DL.SendSequence "ACT - VAS Only"
       result = DL.WaitForSequence("02 57 w/ KSN", 1, 5000)
-      if result <> 0 then result = DL.WaitForSequence("9F 27 C1 48", 1, 5000)
+      if result <> 0 then 
+         result = DL.WaitForSequence("9F 27 C1 48", 1, 2000)
+         if result = 0 then result = DL.WaitForSequence("9F 27 C1 50", 1, 3000)
+      end if
       dl.pause 500
    End If
 end if

@@ -155,6 +155,13 @@ SEND
 0
 5
 
+SEND
+19
+poll on demand
+56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34
+0
+5
+
 RECEIVE
 0
 erase key ok

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-6697
+59023
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -559,6 +559,9 @@ DL.ClearCommWindows
 End If
 end sub
 '------------------------------------------------------------
+DL.SendSequence "Poll on Demand"
+dl.pause 500
+
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)

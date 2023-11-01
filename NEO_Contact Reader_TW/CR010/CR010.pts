@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-64396
+33236
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -105,7 +105,11 @@ If authn Then '""
 DL.AddComment "--- Set POS COM PORT Settings"
 DL.StopCommunication
 DL.AddComment "Set POS COM PORT..."
-DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+if POSBaudRate(1) = 0 then 
+   DL.SetChannelSettings(COM_Port(1))
+else
+   DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+end if
 DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
 DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
 DL.Pause 1000

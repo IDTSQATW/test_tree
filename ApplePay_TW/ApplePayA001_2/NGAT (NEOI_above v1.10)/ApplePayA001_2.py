@@ -23,6 +23,8 @@ if (Result):
 	RetOfStep = DL.SendCommand('Encryption Type -- AES')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 01 01")		
+		if Result == False:
+			DL.SetWindowText("red", "Set encryption Type = AES first...")
 		
 # Burst mode OFF	
 if (Result):

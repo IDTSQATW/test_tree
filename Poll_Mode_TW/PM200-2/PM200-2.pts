@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-10734
+11052
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -156,6 +156,8 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+msrcheck = msgbox("Does the reader support MSR?", vbyesno)
+
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- 01-14 = 00"
@@ -280,6 +282,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 sub msr()
+if msrcheck = 6 then
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment vbcrlf
@@ -297,6 +300,7 @@ If result <> 0 Then
    result = DL.WaitForSequence("MSR_VISA MSD", 1, 10000)
    dl.pause 500
 End If
+end if
 end sub
 
 sub ct()

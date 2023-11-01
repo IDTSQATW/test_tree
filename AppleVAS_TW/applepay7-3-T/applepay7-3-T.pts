@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-24173
+44582
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -152,6 +152,11 @@ End Function
 '------------------------------------------------------------
 readercheck = msgbox ("Is this SRED project (or Enc = ON)?", vbyesno)
 countf = 0
+
+if readerType <> "NEO2" then
+DL.SendSequence "C7-32 = 00 = TDES"
+DL.Pause 800
+end if
 
 If result <> 0 Then
    DL.Pause 500

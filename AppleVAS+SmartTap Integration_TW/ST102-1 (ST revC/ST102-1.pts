@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-65167
+52004
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -108,7 +108,12 @@ If authn Then '""
 DL.AddComment "--- Set POS COM PORT Settings"
 DL.StopCommunication
 DL.AddComment "Set POS COM PORT..."
-DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+if POSBaudRate(1) = 0 then 
+   DL.SetChannelSettings(COM_Port(1))
+else
+   DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+end if
+
 DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
 DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
 DL.Pause 1000
@@ -203,6 +208,7 @@ if result <> 0 then
            end if
 
            if result <> 0 then
+              dl.pause 100
               if b <= 2 then msgbox "Click OK --> Tap iPhone (Card: Panera Bread)", vbokonly
               if b = 3 then msgbox "Click OK --> Tap iPhone (Card: Any bank card)", vbokonly
               if b = 4 or b = 5 then msgbox "Click OK --> Tap iPhone (Card: Any bank card AUTO SELECT Panera Bread)", vbokonly

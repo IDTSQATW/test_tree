@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-33149
+9242
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -151,6 +151,8 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+msrcheck = msgbox ("Does the reader support MSR?", vbyesno)
+
 if readerType <> "NEO2" then 
 If result <> 0 Then
    dl.resetreceivecounter
@@ -287,6 +289,7 @@ if result <> 0 then
 
          countf = 0
          result = 1
+         if msrcheck = 6 then
          For i = 1 to 3
              if result <> 0 then
                 msgbox "Click OK --> Swipe T=0 card", vbokonly
@@ -337,9 +340,11 @@ if result <> 0 then
             finalcount = 1
          end if
          DL.ClearCommWindows
+         end if
 
          countf = 0
          result = 1
+         if msrcheck = 6 then
          For i = 1 to 3
              if result <> 0 then
                 msgbox "Click OK --> Swipe T=0 card", vbokonly
@@ -373,6 +378,7 @@ if result <> 0 then
             finalcount = 1
          end if
          DL.ClearCommWindows
+         end if
       end if
       '------------------------------------------------------------ MSR
       if hwcheck = 3 then

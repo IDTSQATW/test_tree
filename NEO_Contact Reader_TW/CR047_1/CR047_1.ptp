@@ -147,7 +147,7 @@ RECEIVE
 FF FF ?? FF FF 00 FF FF FF FF FF FF
 -1
 1
-COMMENT <= No data key! (PASS)
+COMMENT 
 0
 1
 0
@@ -159,7 +159,7 @@ RECEIVE
 02 00 00
 -1
 1
-COMMENT <= Had data key! (FAIL)
+COMMENT 
 0
 1
 0

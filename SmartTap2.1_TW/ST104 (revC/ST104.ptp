@@ -5,7 +5,7 @@ COMMSETTINGS
 0
 COM1
 COM2
-115200
+0
 2
 0
 4
@@ -258,7 +258,7 @@ COMMENT
 RECEIVE
 6
 02-40 0a resp
-56 69 56 4F 74 65 63 68 32 00 02 57 ?? ?? 01 FF EE 08 ?? FF EE 1F 04 ?? ?? ?? ??
+56 69 56 4F 74 65 63 68 32 00 02 57 ?? ?? ?? FF EE 08 ?? FF EE 1F 04 ?? ?? ?? ??
 -1
 1
 COMMENT 

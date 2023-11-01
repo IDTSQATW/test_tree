@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-35590
+36264
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -210,6 +210,11 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+msrcheck = msgbox("Does the reader support MSR function?", vbyesno)
+
+DL.SendSequence "poll on demand"
+dl.pause 800
+
 if readerType <> "NEO2" then
    precondition()
    if result <> 0 then loadkey_D()
@@ -395,6 +400,7 @@ if result <> 0 then
    oldtagcheck()
 end if
 
+if msrcheck = 6 then
 if result <> 0 then
    msgbox "Click OK --> Swipe any MSR card", vbokonly
    DL.ResetReceiveCounter
@@ -404,6 +410,7 @@ if result <> 0 then
    dl.pause 2000
    dl.addcomment vbcrlf & "Waiting..."
    oldtagcheck()
+end if
 end if
 end if
 
@@ -418,6 +425,7 @@ if result <> 0 then
    oldtagcheck()
 end if
 
+if msrcheck = 6 then
 if result <> 0 then
    msgbox "Click OK --> Swipe any MSR card", vbokonly
    DL.ResetReceiveCounter
@@ -427,6 +435,7 @@ if result <> 0 then
    dl.pause 2000
    dl.addcomment vbcrlf & "Waiting..."
    oldtagcheck()
+end if
 end if
 
 if result <> 0 then
@@ -468,6 +477,7 @@ if result <> 0 then
    msgbox "Remove card --> Click OK", vbokonly
 end if
 
+if msrcheck = 6 then
 if result <> 0 then
    msgbox "Click OK --> Swipe MSR card (service code is NOT 2xx or 6xx)", vbokonly
    DL.ResetReceiveCounter
@@ -477,6 +487,7 @@ if result <> 0 then
    dl.pause 2000
    dl.addcomment vbcrlf & "Waiting..."
    oldtagcheck()
+end if
 end if
 '------------------------------------------------------------old 2-bute tags
 If result <> 0 Then
@@ -510,6 +521,7 @@ if result <> 0 then
    newtagcheck()
 end if
 
+if msrcheck = 6 then
 if result <> 0 then
    msgbox "Click OK --> Swipe any MSR card", vbokonly
    DL.ResetReceiveCounter
@@ -519,6 +531,7 @@ if result <> 0 then
    dl.pause 2000
    dl.addcomment vbcrlf & "Waiting..."
    newtagcheck()
+end if
 end if
 end if
 
@@ -533,6 +546,7 @@ if result <> 0 then
    newtagcheck()
 end if
 
+if msrcheck = 6 then
 if result <> 0 then
    msgbox "Click OK --> Swipe any MSR card", vbokonly
    DL.ResetReceiveCounter
@@ -542,6 +556,7 @@ if result <> 0 then
    dl.pause 2000
    dl.addcomment vbcrlf & "Waiting..."
    newtagcheck()
+end if
 end if
 
 if result <> 0 then
@@ -583,6 +598,7 @@ if result <> 0 then
    msgbox "Remove card --> Click OK", vbokonly
 end if
 
+if msrcheck = 6 then
 if result <> 0 then
    msgbox "Click OK --> Swipe MSR card (service code is not 2xx or 6xx)", vbokonly
    DL.ResetReceiveCounter
@@ -592,6 +608,7 @@ if result <> 0 then
    dl.pause 2000
    dl.addcomment vbcrlf & "Waiting..."
    newtagcheck()
+end if
 end if
 end sub
 '------------------------------------------------------------

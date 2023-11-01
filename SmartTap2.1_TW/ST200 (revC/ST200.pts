@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-42941
+62297
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -234,7 +234,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-if readerType = "GR" or readerType = "NEO1" then
+if readerType <> "NEO2" then
 '------------------------------------------------------------
 if result <> 0 then
    dl.resetreceivecounter

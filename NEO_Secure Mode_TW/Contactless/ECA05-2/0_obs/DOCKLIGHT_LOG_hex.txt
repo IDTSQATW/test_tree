@@ -1,0 +1,9 @@
+Docklight Log File (HEX) - Started 2023/11/1 10:30:59.700 
+ TEST CASE: ECA05-2
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+
+
+Docklight Log File (HEX) - Stopped 2023/11/1 10:30:59.861 
+

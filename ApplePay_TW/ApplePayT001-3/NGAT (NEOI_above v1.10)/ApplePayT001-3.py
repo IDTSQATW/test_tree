@@ -21,6 +21,8 @@ if (Result):
 	RetOfStep = DL.SendCommand('Encryption Type -- TDES')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 01 00")		
+		if Result == False:
+			DL.SetWindowText("red", "Set encryption Type = TDES first...")
 		
 # Burst mode OFF	
 if (Result):

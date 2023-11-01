@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-46801
+2644
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -146,6 +146,8 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+msrcheck = msgbox("Does the reader support MSR?", vbyesno)
+
 if readerType = "NEO2" then
 If result <> 0 Then
    dl.resetreceivecounter
@@ -363,6 +365,7 @@ end_case = 18
    next
 End If
 
+if msrcheck = 6 then
 dl.resetreceivecounter
 dl.addcomment vbcrlf
 msgbox "Click OK --> Swipe card", vbokonly
@@ -374,6 +377,7 @@ if r = 0 then
    dl.addcomment vbcrlf & "***** FAIL *****"
 end if
 dl.pause 500
+end if
 
 if countf <> 0 then result = 0
 

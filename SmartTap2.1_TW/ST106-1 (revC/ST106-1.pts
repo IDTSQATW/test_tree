@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-50956
+37052
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -151,15 +151,6 @@ End Function
 'TEST BEGINS
 '------------------------------------------------------------
 readerchedk = msgbox ("Is data encryption ON?", vbyesno)
-if readerType = "GR" or readerType = "NEO1" then
-If result <> 0 Then
-   dl.resetreceivecounter
-   DL.AddComment "--- 04-F0"
-   DL.SendSequence "04-F0"
-   result = DL.WaitForSequence("04-00 resp 00", 1, 15000)
-   dl.pause 15000
-End If
-end if
 
 If result <> 0 Then
    dl.resetreceivecounter
@@ -247,6 +238,7 @@ DL.AddComment vbCrLf
 
 DL.SendSequence "Poll on demand"
 dl.pause 500
+DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)
 

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-11052
+23042
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -157,6 +157,7 @@ End Function
 'TEST BEGINS
 '------------------------------------------------------------
 msrcheck = msgbox("Does the reader support MSR?", vbyesno)
+ctcheck = msgbox("Does the reader support CT?", vbyesno)
 
 If result <> 0 Then
    dl.resetreceivecounter
@@ -304,6 +305,7 @@ end if
 end sub
 
 sub ct()
+if ctcheck = 6 then
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment vbcrlf
@@ -313,6 +315,7 @@ If result <> 0 Then
    result = DL.WaitForSequence("CT_T=0", 1, 10000)
    dl.pause 500
 End If
+end if
 end sub
 
 sub cl()

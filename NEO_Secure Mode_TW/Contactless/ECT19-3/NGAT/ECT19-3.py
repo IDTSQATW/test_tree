@@ -40,14 +40,14 @@ if (Result):
 
 # cmd 02-40, tap card
 if (Result):
-	if lcdtype == 1:
-		RetOfStep = DL.SendCommand('Activate Transaction w/ LCD')
-		rx = 0
-	if lcdtype == 0:
-		RetOfStep = DL.SendCommand('Activate Transaction w/o LCD')	
-		rx = 5
-	if (RetOfStep):
-		Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E5 ** DF EE 12")
+    if lcdtype == 1:
+        RetOfStep = DL.SendCommand('Activate Transaction w/ LCD')
+        rx = 0
+    if lcdtype == 0:
+        RetOfStep = DL.SendCommand('Activate Transaction w/o LCD')	
+        rx = 5
+    if (RetOfStep):
+        Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E5 ** DF EE 12")
         if (Result):
             alldata = DL.Get_RXResponse(rx)
             ksn = DL.GetTLV(alldata,"DFEE12")	
@@ -108,6 +108,8 @@ if (Result):
                 DL.SetWindowText("Red", "Tag DFEE26: FAIL")
         else:
             DL.fails=DL.fails+1
+else:
+    DL.fails=DL.fails+1
             
 if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))

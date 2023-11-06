@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-49664
+5491
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -186,16 +186,12 @@ If result <> 0 Then
    DL.SendSequence "60-10"
    result = DL.WaitForSequence("60-xx 63 status", 1, 2000)
    if result <> 0 then
-      msgbox "Insert test card, and then click OK", vbokonly
-
-      if readerType = "GR" or readerType = "NEO1" then 
+      msgbox "Insert test card --> Click OK", vbokonly
+      if readerType <> "NEO2" then 
          result = DL.WaitForSequence("60-10 resp code 0010", 1, 20000)
-      elseif readerType = "NEO2" or readerType = "USAT" then 
-             result = DL.WaitForSequence("60-10 resp code 0010 (NEO2)", 1, 20000)
       else
-         result = DL.WaitForSequence("60-10 resp code 0010", 1, 20000)
+         result = DL.WaitForSequence("60-10 resp code 0010 (NEO2)", 1, 20000)
       end if
-
       dl.pause 2000
    end if
 End If
@@ -218,44 +214,54 @@ else
    resultignore = DL.WaitForSequence("05-xx 00 status", 1, 1500)
 End If
 
+' NEO3-5717: 3 interfaces transaction can not work anymore after the cmd 60-10 timeout (or cancel).
+If result <> 0 Then
+   dl.pause 500
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 02-40 (enable CL only)"
+   msgbox "Click OK --> Tap any card", vbokonly
+   DL.SendSequence "02-40 (enable CL only)"
+   result = DL.WaitForSequence("02 23", 1, 2000)
+   dl.pause 500
+End If
+
 DL.AddComment vbCrLf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)
 
-DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
-
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
-
-If MasterResult = 1 Then
-      MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-      MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)

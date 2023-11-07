@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-53485
+5140
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -233,6 +233,18 @@ if readerType <> "NEO2" then
    end if
 end if
 '------------------------------------------------------------
+If result <> 0 Then
+   for i = 1 to 15
+       if result <> 0 then
+          dl.resetreceivecounter
+          dl.addcomment vbcrlf
+          DL.AddComment "--- 60-03 Contact Set Application Data " & i
+          DL.SendSequence "60-03 " & i
+          result = DL.WaitForSequence("60 00", 1, 1200)
+       end if 
+   next
+end if
+
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf

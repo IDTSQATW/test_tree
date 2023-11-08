@@ -44,49 +44,63 @@ if (Result):
 		
 # cmd 02-40, tap card
 if (Result):
-	RetOfStep = DL.SendCommand('Activate Transaction')
-	if (RetOfStep):
-		DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** 65")
-		
-		alldata = DL.Get_RXResponse(0)	
-		Tag57 = DL.GetTLV(alldata,"57", 0)
-		Tag5A = DL.GetTLV(alldata,"5A", 0)
-	
-		alldata = DL.GetTLV(alldata,"FF8105")	
-		Tag57 = DL.GetTLV(alldata,"57", 0)
-		Tag5A = DL.GetTLV(alldata,"5A", 0)
-		
-	# Tag 57
-		Result = DL.Check_RXResponse('57 13 47 61 73 90 01 01 00 10 D3 01 21 20 00 12 33 99 00 03 1F')
-		if Result == False:
-			DL.SetWindowText("red", "Tag 57: FAIL")
-		else:
-			DL.SetWindowText("blue", "Tag 57: PASS")
+    RetOfStep = DL.SendCommand('Activate Transaction')
+    if (RetOfStep):
+        Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** 65")
+        if (Result):
+            alldata = DL.Get_RXResponse(0)	
+            Tag57 = DL.GetTLV(alldata,"57", 0)
+            Tag5A = DL.GetTLV(alldata,"5A", 0)
+        
+            alldata = DL.GetTLV(alldata,"FF8105")	
+            Tag57 = DL.GetTLV(alldata,"57", 0)
+            Tag5A = DL.GetTLV(alldata,"5A", 0)
+            
+        # Tag 57
+            Result = DL.Check_RXResponse('57 13 47 61 73 90 01 01 00 10 D3 01 21 20 00 12 33 99 00 03 1F')
+            if Result == False:
+                DL.fails=DL.fails+1
+                DL.SetWindowText("red", "Tag 57: FAIL")
+            else:
+                DL.SetWindowText("blue", "Tag 57: PASS")
 
-	# Tag 5A
-		Result = DL.Check_RXResponse('5A 08 47 61 73 90 01 01 00 10')
-		if Result == False:
-			DL.SetWindowText("red", "Tag 5A: FAIL")
-		else:
-			DL.SetWindowText("blue", "Tag 5A: PASS")
-			
-	# Tags 9F39/ FFEE01/ DFEE26
-		if DL.Check_RXResponse("9F39 01 07"): 
-			DL.SetWindowText("blue", "Tag 9F39: PASS")
-		else:
-			DL.SetWindowText("Red", "Tag 9F39: FAIL")
-		
-		if DL.Check_RXResponse("FFEE01 ** DFEE300100"): 
-			DL.SetWindowText("blue", "Tag FFEE01: PASS")
-		else:
-			DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-		
-		if DL.Check_RXResponse("DFEE26 02 6501"): 
-			DL.SetWindowText("blue", "Tag DFEE26: PASS")
-		else:
-			DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+        # Tag 5A
+            Result = DL.Check_RXResponse('5A 08 47 61 73 90 01 01 00 10')
+            if Result == False:
+                DL.fails=DL.fails+1
+                DL.SetWindowText("red", "Tag 5A: FAIL")
+            else:
+                DL.SetWindowText("blue", "Tag 5A: PASS")
+                
+        # Tags 9F39/ FFEE01/ DFEE26
+            if DL.Check_RXResponse("9F39 01 07"): 
+                DL.SetWindowText("blue", "Tag 9F39: PASS")
+            else:
+                DL.fails=DL.fails+1
+                DL.SetWindowText("Red", "Tag 9F39: FAIL")
+            
+            if DL.Check_RXResponse("FFEE01 ** DFEE300100"): 
+                DL.SetWindowText("blue", "Tag FFEE01: PASS")
+            else:
+                DL.fails=DL.fails+1
+                DL.SetWindowText("Red", "Tag FFEE01: FAIL")
+            
+            if DL.Check_RXResponse("DFEE26 02 6501"): 
+                DL.SetWindowText("blue", "Tag DFEE26: PASS")
+            else:
+                DL.fails=DL.fails+1
+                DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+        else:
+            DL.fails=DL.fails+1
+else:
+    DL.fails=DL.fails+1
 			
 if readertype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("01 00 00 00")			
+        
+if(0 < (DL.fails + DL.warnings)):
+	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
+else:
+	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )

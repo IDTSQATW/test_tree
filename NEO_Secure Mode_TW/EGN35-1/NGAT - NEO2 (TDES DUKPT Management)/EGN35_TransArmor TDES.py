@@ -128,10 +128,13 @@ if (Result):
 									
 							# Verify specific tags
 							if DL.Check_RXResponse(rx, "9F39 ** 90") == False:
+								DL.fails=DL.fails+1
 								DL.SetWindowText("red", "Tag9F39: FAIL")
 							if DL.Check_RXResponse(rx, "FFEE01 ** DFEE30010C") == False:	
+								DL.fails=DL.fails+1
 								DL.SetWindowText("red", "TagFFEE01: FAIL")	
 							if DL.Check_RXResponse(rx, "DFEE26 ** EC06") == False:	
+								DL.fails=DL.fails+1
 								DL.SetWindowText("red", "TagDFEE26: FAIL")
 																						
 							# Discover	
@@ -140,9 +143,11 @@ if (Result):
 											
 							Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
 							if Result != True:
+								DL.fails=DL.fails+1
 								DL.SetWindowText("red", "TR1maskdata: FAIL")
 							Result = DL.Check_StringAB(TR1plaintextdata, TRK1DecryptData)
 							if Result != True:
+								DL.fails=DL.fails+1
 								DL.SetWindowText("red", "TR1plaintextdata: FAIL")
 			# CL transaction
 			if i == 2 or i == 5:
@@ -176,6 +181,7 @@ if (Result):
 						if r1 == True and r2 == True and r3 == True and DL.Check_StringAB(alldata, "DF EF 17 A1"):
 							DL.SetWindowText("blue", "Tag DFEF17_Mask: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag DFEF17_Mask: FAIL")
 									
 						r2 = DL.Check_StringAB(decDFEF17, '25 42 36 35 31 30 30 30 30 30 30 30 30 30')
@@ -184,6 +190,7 @@ if (Result):
 						if r2 == True and r3 == True and r4 == True and DL.Check_StringAB(alldata, "DF EF 17 C1"):
 							DL.SetWindowText("blue", "Tag DFEF17_Enc: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag DFEF17_Enc: FAIL")
 
 						# Tag DFEF18
@@ -192,6 +199,7 @@ if (Result):
 						if r1 == True and r2 == True and DL.Check_StringAB(alldata, "DF EF 18 A1"):
 							DL.SetWindowText("blue", "Tag DFEF18_Mask: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag DFEF18_Mask: FAIL")
 									
 						r2 = DL.Check_StringAB(decDFEF18, '3B 36 35 31 30 30 30 30 30 30 30 30 30')
@@ -199,6 +207,7 @@ if (Result):
 						if r2 == True and r3 == True and DL.Check_StringAB(alldata, "DF EF 18 C1"):
 							DL.SetWindowText("blue", "Tag DFEF18_Enc: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag DFEF18_Enc: FAIL")
 									
 						# Tag 56
@@ -208,6 +217,7 @@ if (Result):
 						if r1 == True and r2 == True and r3 == True and DL.Check_StringAB(alldata, "56 A1"):
 							DL.SetWindowText("blue", "Tag 56_Mask: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag 56_Mask: FAIL")
 								
 						r2 = DL.Check_StringAB(dec56, '25 42 36 35 31 30 30 30 30 30 30 30 30 30')
@@ -216,6 +226,7 @@ if (Result):
 						if r2 == True and r3 == True and r4 == True and DL.Check_StringAB(alldata, "56 C1"):
 							DL.SetWindowText("blue", "Tag 56_Enc: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag 56_Enc: FAIL")
 									
 						# Tag 57
@@ -224,6 +235,7 @@ if (Result):
 						if r1 == True and r2 == True and DL.Check_StringAB(alldata, "57 A1"):
 							DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 									
 						r2 = DL.Check_StringAB(dec57, '3B363531303030303030303030')
@@ -231,14 +243,18 @@ if (Result):
 						if r2 == True and r3 == True and DL.Check_StringAB(alldata, "57 C1"):
 							DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag 57_Enc: FAIL")	
 									
 						# Tags 9F39/ FFEE01/ DFEE26
 						if DL.Check_RXResponse(rx, "9F39 ** 91") == False:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag 9F39: FAIL")
 						if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300100") == False:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 						if DL.Check_RXResponse(rx, "DFEE26 ** F506") == False:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")	
 					if readermodel == 1:	
 						DL.Check_RXResponse(rx, "E5 ** DF EE 12")
@@ -254,18 +270,22 @@ if (Result):
 						if r1 == True and DL.Check_RXResponse(rx, "57 A1 12"):
 							DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 							
 						Result = DL.Check_StringAB(dec57, '3B3336303730353030303030303030313D34393132313031303030303333323131323330313F')
 						if Result == True and DL.Check_RXResponse(rx, "57 C1 28"):
 							DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag 57_Enc: FAIL")
 							
 					# Tags 9F39/ FFEE01/ DFEE26
 						if DL.Check_RXResponse(rx, "9F39 01 07") == False: 
+							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag 9F39: FAIL")
 						if DL.Check_RXResponse(rx, "DFEE26 02 E506") == False: 
+							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")							
 			# CT transaction
 			if i == 3:						
@@ -290,12 +310,14 @@ if (Result):
 						if Result == True and DL.Check_StringAB(DL.Get_RXResponse(rx), '57 A1 11'):
 							DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 					
 						Result = DL.Check_StringAB(dec57, '34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30 3D 32 30 31 32 32 30 31 30 31 32 33 34 35 36 37 38 39')
 						if Result == True and DL.Check_StringAB(DL.Get_RXResponse(rx), '57 C1'):
 							DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag 57_Enc: FAIL")
 
 						# Tag 5A
@@ -303,28 +325,41 @@ if (Result):
 						if Result == True and DL.Check_StringAB(DL.Get_RXResponse(rx), '5A A1 08'):
 							DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
 					
 						Result = DL.Check_StringAB(dec5A, '34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30')
 						if Result == True and DL.Check_StringAB(DL.Get_RXResponse(rx), '5A C1'):
 							DL.SetWindowText("blue", "Tag 5A_Enc: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
 					
 						# Tags 9F39/ FFEE01/ DFEE26				
 						if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False: 
+							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
 						if DL.Check_RXResponse(rx, "DFEE26 ** E406") == False: 
+							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 						
 						DL.SendCommand('05-01')
-						time.sleep(2)
+						time.sleep(1)
+					else:
+						DL.fails=DL.fails+1
+else:
+	DL.fails=DL.fails+1
 
 RetOfStep = DL.SendCommand('Poll on Demand')
-time.sleep(2)
+time.sleep(1)
 
 if readermodel == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("01 00 00 00")
+        
+if(0 < (DL.fails + DL.warnings)):
+	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
+else:
+	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )

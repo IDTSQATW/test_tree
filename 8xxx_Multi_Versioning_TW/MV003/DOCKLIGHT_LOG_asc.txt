@@ -1,17 +1,17 @@
-Docklight Log File (ASCII) - Started 2023/10/11 16:38:11.756 
+Docklight Log File (ASCII) - Started 2023/11/10 15:04:17.146 
  TEST CASE: MV003
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 9600 baud...
+ POS operating on COM90 @ 115200 baud...
  Set POS COM PORT - COMPLETE
 
  --- Get Hardware Information 09-14
 
-2023/10/11 16:38:12.921 [TX] - ViVOtech2<NUL><HT>	<DC4><NUL><NUL>3<BS>
-2023/10/11 16:38:12.931 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL><NAK> 
-HW, VP6300<CR><LF>
-K81F Rev4??<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
+2023/11/10 15:04:18.303 [TX] - ViVOtech2<NUL><HT>	<DC4><NUL><NUL>3<BS>
+2023/11/10 15:04:18.317 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL><SUB> 
+HW,VP3300 USB-E<CR><LF>
+K21F Rev9??<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
 
  Result = PASSED
  
@@ -25,5 +25,5 @@ K81F Rev4??<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NU
 Please check ASCII screen, make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (ASCII) - Stopped 2023/10/11 16:38:13.535 
+Docklight Log File (ASCII) - Stopped 2023/11/10 15:04:18.936 
 

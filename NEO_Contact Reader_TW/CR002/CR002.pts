@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-5491
+35237
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -206,6 +206,7 @@ If result <> 0 Then
       ledcheck = msgbox ("Is reader idle status?", vbyesno)
       if ledcheck = 7 then result = 0
    end if
+   msgbox "Remove card --> Click OK", vbokonly
 else
    dl.resetreceivecounter
    dl.addcomment vbcrlf

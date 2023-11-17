@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-1872
+43421
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -215,11 +215,13 @@ If result <> 0 Then
    dl.pause 1000
 End If
 
+if readerType = "NEO2" then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- 04-02 enable SmartTap AID (NEO2)"
    DL.SendSequence "04-02 enable SmartTap AID (NEO2)"
    dl.pause 500
+end if
 
 DL.AddComment vbCrLf
 '============================================================

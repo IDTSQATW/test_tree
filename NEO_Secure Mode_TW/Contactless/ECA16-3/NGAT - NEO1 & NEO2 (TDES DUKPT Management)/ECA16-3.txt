@@ -10,6 +10,10 @@ TID:Encryption Type -- AES
 CMD:C7 33
 EXR:C7 00 00 01 01
 
+TID:Set Encryption Type = AES
+CMD:C7 32 01
+EXR:C7 00 00 01 01
+
 TID:Burst mode Off
 CMD:04 00 DFEE7E 01 00
 EXR:04 00 00 00

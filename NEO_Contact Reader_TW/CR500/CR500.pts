@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-52747
+46370
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -156,6 +156,7 @@ End Function
 'TEST BEGINS
 '------------------------------------------------------------
 if readerType <> "NEO2" then
+msrcheck = msgbox("Does reader support MSR?", vbyesno)
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- 04-00-----Burst OFF *** " & readerType
@@ -191,6 +192,7 @@ If result <> 0 Then
    result = DL.WaitForSequence("60 05", 1, 5000)
 End If
 '------------------------------------------------------------MSR->60-13
+if msrcheck = 6 then
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
@@ -226,6 +228,7 @@ If result <> 0 Then
    DL.SendSequence "60-13"
    result = DL.WaitForSequence("60 05", 1, 5000)
 End If
+end if
 else
    dl.addcomment vbcrlf & "*** NEO2 project did not support this...(should confirm w/ spec)" 
 end if

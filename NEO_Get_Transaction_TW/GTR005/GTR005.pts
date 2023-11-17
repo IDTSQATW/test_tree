@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-60667
+61105
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -250,8 +250,8 @@ If result <> 0 Then
 
    result9 = dl.waitforsequence("9f02", 1, 500)
 
-   r12 = dl.waitforsequence("Tag DFEF17", 1, 1500)
-   r13 = dl.waitforsequence("Tag DFEF18", 1, 1500)
+   r12 = dl.waitforsequence("Tag DFEF17", 1, 1200)
+   r13 = dl.waitforsequence("Tag DFEF18", 1, 1200)
 
    if result1 = 0 or result2 = 0 or result3 = 0 or result4 = 0 or result5 = 0 or result6 = 0 or result7 = 0 or result8 = 0 or result9 = 0 or r12 = 1 or r13 = 1 then
       result = 0

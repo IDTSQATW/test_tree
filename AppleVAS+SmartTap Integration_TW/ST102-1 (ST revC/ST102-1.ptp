@@ -440,6 +440,20 @@ CHECKSUM
 
 RECEIVE
 0
+VP3300_EXT
+56 50 33 33 30 30 20 45 58 54 20 4E 45 4F 20 76 31 2E
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+1
 VP3300_liteon
 56 69 56 4F 74 65 63 68 32 00 29 00 00 1A 56 50 33 33 30 30 20 55 53 42 20 4E 45 4F 20 76 31 2E ?? ?? 2E ?? ?? ?? 2E 35 ?? ??
 -1
@@ -453,7 +467,7 @@ CHECKSUM
 0
 
 RECEIVE
-1
+2
 01-01 resp 00
 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53
 -1
@@ -467,7 +481,7 @@ CHECKSUM
 0
 
 RECEIVE
-2
+3
 04-00 resp 00
 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
 -1
@@ -481,7 +495,7 @@ CHECKSUM
 0
 
 RECEIVE
-3
+4
 Vas only resp
 56 69 56 4F 74 65 63 68 32 00 02 57 ?? ?? ?? ?? ?? ?? ?? ?? ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
 -1
@@ -495,7 +509,7 @@ CHECKSUM
 0
 
 RECEIVE
-4
+5
 Pay only resp
 56 69 56 4F 74 65 63 68 32 00 02 23 ?? ?? ?? ?? ?? ?? ?? ?? ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
 -1
@@ -509,7 +523,7 @@ CHECKSUM
 0
 
 RECEIVE
-5
+6
 9F25 - Panera Bread
 9F 25 20 06 41 3B 95 7A 52 59 98 3B 60 8C FC 89 CF B1 DA B9 0C E7 05 AD 8E FF 78 E9 DE 12 2C CF 8D 2C BF
 -1
@@ -523,7 +537,7 @@ CHECKSUM
 0
 
 RECEIVE
-6
+7
 9F27 - Vas data generic resp
 9F 27 41
 -1
@@ -537,7 +551,7 @@ CHECKSUM
 0
 
 RECEIVE
-7
+8
 Payment AID tag 84 generic resp
 84 ?? A0 00 00 ?? ?? ## ## ## ## ## ##
 -1
@@ -551,7 +565,7 @@ CHECKSUM
 0
 
 RECEIVE
-8
+9
 02 0C
 56 69 56 4F 74 65 63 68 32 00 02 0C 00 00 ?? ??
 -1

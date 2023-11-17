@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-16347
+29203
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -195,7 +195,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Activate Transaction (02-40)"
    DL.SendSequence "Activate Transaction (02-40)"
-   dl.pause 500
+   dl.pause 1000
    
    if readerType <> "NEO2" then r1 = DL.WaitForSequence("02 23", 1, 5000)
    if readerType = "NEO2" then r1 = DL.WaitForSequence("02 23 (NEO2)", 1, 5000)
@@ -218,18 +218,18 @@ If result <> 0 Then
       r6 = 1
    end if
 
-   r7 = dl.waitforsequence("Tag 5A", 1, 2000)
+   r7 = dl.waitforsequence("Tag 5A", 1, 1200)
    if r7 = 0 then r7 = dl.waitforsequence("Tag 5A MC No.21", 1, 3000)
 
-   r8 = dl.waitforsequence("Tag 57", 1, 2000)
+   r8 = dl.waitforsequence("Tag 57", 1, 1200)
    if r8 = 0 then r8 = dl.waitforsequence("Tag 57 MC No.21", 1, 3000)
 
    r9 = dl.waitforsequence("9f02", 1, 3000)
    r10 = dl.waitforsequence("9A", 1, 3000)
    r11 = dl.waitforsequence("9F21", 1, 3000)
    
-   r12 = dl.waitforsequence("Tag DFEF17", 1, 1500)
-   r13 = dl.waitforsequence("Tag DFEF18", 1, 1500)
+   r12 = dl.waitforsequence("Tag DFEF17", 1, 1200)
+   r13 = dl.waitforsequence("Tag DFEF18", 1, 1200)
 
    if r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 or r6 = 0 or r7 = 0 or r8 = 0 or r9 = 0 or r10 = 0 or r11 = 0 or r12 = 1 or r13 = 1 then
       result = 0

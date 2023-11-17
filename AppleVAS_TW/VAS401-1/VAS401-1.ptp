@@ -108,6 +108,18 @@ Set Merchant 4 - pass.com.apple.wallet.dev_Panera
 
 RECEIVE
 0
+VP3300_EXT
+56 50 33 33 30 30 20 45 58 54 20 4E 45 4F 20 76 31 2E
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+1
 VP3300_liteon
 56 69 56 4F 74 65 63 68 32 00 29 00 00 1A 56 50 33 33 30 30 20 55 53 42 20 4E 45 4F 20 76 31 2E ?? ?? 2E ?? ?? ?? 2E 35 ?? ??
 -1
@@ -119,7 +131,7 @@ COMMENT
 0
 
 RECEIVE
-1
+2
 erase key ok
 56 69 56 4F 74 65 63 68 32 00 83 00 00 00 22 03
 -1
@@ -131,7 +143,7 @@ COMMENT
 0
 
 RECEIVE
-2
+3
 set dukpt type
 56 69 56 4F 74 65 63 68 32 00 C7 00 00 00 86 6E
 -1
@@ -143,7 +155,7 @@ COMMENT
 0
 
 RECEIVE
-3
+4
 get dukpt type
 56 69 56 4F 74 65 63 68 32 00 C7 00 00 01 01 BC 5E
 -1
@@ -155,7 +167,7 @@ COMMENT
 0
 
 RECEIVE
-4
+5
 enc on
 56 69 56 4F 74 65 63 68 32 00 C7 00 00 00 86 6E
 -1
@@ -167,7 +179,7 @@ COMMENT
 0
 
 RECEIVE
-5
+6
 burst off
 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
 -1
@@ -179,7 +191,7 @@ COMMENT
 0
 
 RECEIVE
-6
+7
 load kpk ok
 56 69 56 4F 74 65 63 68 32 00 80 00 00 00 B9 DF
 -1
@@ -191,7 +203,7 @@ COMMENT
 0
 
 RECEIVE
-7
+8
 dukpt ok
 56 69 56 4F 74 65 63 68 32 00 81 00 00 00 CF 6B
 -1
@@ -203,7 +215,7 @@ COMMENT
 0
 
 RECEIVE
-8
+9
 bc off ok
 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
 -1
@@ -215,7 +227,7 @@ COMMENT
 0
 
 RECEIVE
-9
+10
 Poll Response
 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53
 -1
@@ -227,7 +239,7 @@ COMMENT
 0
 
 RECEIVE
-10
+11
 02-01 resp
 56 69 56 4F 74 65 63 68 32 00 02 57
 -1
@@ -239,7 +251,7 @@ COMMENT
 0
 
 RECEIVE
-11
+12
 Tag DFEF7B
 DF EF 7B 01 01
 -1
@@ -251,7 +263,7 @@ COMMENT << Tag DFEF7B
 0
 
 RECEIVE
-12
+13
 Tag FFEE06
 FF EE 06 ## ## ?? 9A 03 ?? ?? ?? 9F 21 03 ?? ?? ?? 9F 25 20 06 41 3B 95 7A 52 59 98 3B 60 8C FC 89 CF B1 DA B9 0C E7 05 AD 8E FF 78 E9 DE 12 2C CF 8D 2C BF 9F 2A 00 9F 27 41 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ??
 -1

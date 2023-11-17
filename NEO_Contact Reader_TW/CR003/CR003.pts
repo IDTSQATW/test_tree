@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-50565
+60824
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -183,6 +183,7 @@ If result <> 0 Then
             result = DL.WaitForSequence("60-10 timeout2 (NEO2)", 1, 120000)
          end if
       end if
+      msgbox "Remove card --> Click OK", vbokonly
    end if
 End If
 

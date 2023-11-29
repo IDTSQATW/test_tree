@@ -87,12 +87,14 @@ if (Result):
 				if Result == True and DL.Check_StringAB(alldata, '57 A1 11'):
 					DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 				else:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 			
 				Result = DL.Check_StringAB(dec57, '3B 34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30 3D 32 30 31 32 32 30 31 30 31 32 33 34 35 36 37 38 39 3F')
 				if Result == True and DL.Check_StringAB(alldata, '57 C1 28'):
 					DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 				else:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("red", "Tag 57_Enc: FAIL")
 
 			# Tag 5A
@@ -100,23 +102,32 @@ if (Result):
 				if Result == True and DL.Check_StringAB(alldata, '5A A1 08'):
 					DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
 				else:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
 			
 				Result = DL.Check_StringAB(dec5A, '34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30')
 				if Result == True and DL.Check_StringAB(alldata, '5A C1 10'):
 					DL.SetWindowText("blue", "Tag 5A_Enc: PASS")
 				else:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
 					
 			# Tags 9F39/ FFEE01/ DFEE26
 				if Tag9F39 != "05": 
+					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")
 		
 				if TagFFEE01 != "DFEE300101": 
+					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 		
 				if TagDFEE26 != "E406": 
+					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+			else:
+				DL.fails=DL.fails+1
+else:
+	DL.fails=DL.fails+1
 
 # cmd 60-11					
 if  CTresultcode == "0010":
@@ -150,7 +161,9 @@ if  CTresultcode == "0010":
 		
 				if TagDFEE26 != "E406": 
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
-				
+else:
+	DL.fails=DL.fails+1
+                
 # cmd 60-12
 if  CTresultcode == "0004":
 	Result = True
@@ -183,4 +196,10 @@ if  CTresultcode == "0004":
 		
 				if TagDFEE26 != "E406": 
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
-			
+else:
+	DL.fails=DL.fails+1
+            
+if(0 < (DL.fails + DL.warnings)):
+	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
+else:
+	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )

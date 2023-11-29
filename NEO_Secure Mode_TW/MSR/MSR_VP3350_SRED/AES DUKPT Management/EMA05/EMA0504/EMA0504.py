@@ -188,33 +188,17 @@ if (Result):
 								# Verify specific tags
 								Result = DL.Check_StringAB(Tag9F39, '90')
 								if Result != True:
+									DL.fails=DL.fails+1
 									DL.SetWindowText("red", "Tag9F39: FAIL")							
 								Result = DL.Check_StringAB(TagFFEE01, 'DFEE30010C')
 								if Result != True:
+									DL.fails=DL.fails+1
 									DL.SetWindowText("red", "TagFFEE01: FAIL")	
 								Result = DL.Check_StringAB(TagDFEE26, 'EC01')
 								if Result != True:
+									DL.fails=DL.fails+1
 									DL.SetWindowText("red", "TagDFEE26: FAIL")	
 								
-								# IDT
-								# if i == 1:
-									# # Transaction result verification
-									# TR1plaintextdata = "%TRACK17676760707077676760707077676760707077676760707077676760707077676760707?C"
-									# TR2plaintextdata = ";2121212121767676070707767676762121212?0"
-									# TR3plaintextdata = ";33333333337676760707077676763333333333767676070707767676333333333376767607070776767633333333337676760707?2"
-									
-									# Result = DL.Check_StringAB(TR1plaintextdata, Track1_CardData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR1plaintextdata: FAIL")
-
-									# Result = DL.Check_StringAB(TR2plaintextdata, Track2_CardData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR2plaintextdata: FAIL")
-
-									# Result = DL.Check_StringAB(TR3plaintextdata, Track3_CardData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR3plaintextdata: FAIL")
-																											
 								# Discover	
 								if i == 2:
 									# Transaction result verification
@@ -225,150 +209,32 @@ if (Result):
 									
 									Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR1maskdata: FAIL")
 
 									Result = DL.Check_StringAB(TR2maskdata, Track2_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR2maskdata: FAIL")
 
 									Result = DL.Check_StringAB(TR1plaintextdata, TRK1DecryptData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR1plaintextdata: FAIL")
 										
 									Result = DL.Check_StringAB(TR2plaintextdata, TRK2DecryptData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR2plaintextdata: FAIL")
-									
-								# # JIS 1	
-								# if i == 3:
-									# # Transaction result verification
-									# TR1plaintextdata = "a90000000211111234567890122222333334444455555666667777788888999990000"
-									# TR2plaintextdata = ";4322061000872833=11082018864082510000?;"
-									
-									# Result = DL.Check_StringAB(TR1plaintextdata, Track1_CardData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR1plaintextdata: FAIL")
-
-									# Result = DL.Check_StringAB(TR2plaintextdata, Track2_CardData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR2plaintextdata: FAIL")
-
-								# # JIS 2	
-								# if i == 4:
-									# # Transaction result verification
-									# TR2plaintextdata = "a90000000211111234567890122222333334444455555666667777788888999990000"
-									
-									# Result = DL.Check_StringAB(TR2plaintextdata, Track2_CardData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR2plaintextdata: FAIL")
-
-								# # AAMVA
-								# if i == 5:
-									# # Transaction result verification
-									# TR1plaintextdata = "%NYNEW YORK^LEE$BRUCE$JR^655 N. BERRY ST., #K^?R"
-									# TR2plaintextdata = ";3555551111111111111=000919770303??"
-									# TR3plaintextdata = "%##92821-00440AABBBBBBBBBBTTTTF507125BRWBLK0123456789                CCCCCCSSSSS?%"
-									
-									# Result = DL.Check_StringAB(TR1plaintextdata, Track1_CardData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR1plaintextdata: FAIL")
-
-									# Result = DL.Check_StringAB(TR2plaintextdata, Track2_CardData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR2plaintextdata: FAIL")
-
-									# Result = DL.Check_StringAB(TR3plaintextdata, Track3_CardData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR3plaintextdata: FAIL")
-
-								# # Gift Card	
-								# if i == 6:
-									# # Transaction result verification
-									# TR1maskdata = "%*6006***********7147^07675009902$00000$        ^8012******?*"
-									# TR2maskdata = ";6006***********7147=8012***********?*"
-									# TR1plaintextdata = "2542363030363439313739373537353531373134375E30373637353030393930322430303030302420202020202020205E38303132313130544C363F5F"
-									# TR2plaintextdata = "3B363030363439313739373537353531373134373D3830313231313031353230383536363F3A"
-									
-									# Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR1maskdata: FAIL")
-
-									# Result = DL.Check_StringAB(TR2maskdata, Track2_CardData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR2maskdata: FAIL")
-
-									# Result = DL.Check_StringAB(TR1plaintextdata, TRK1DecryptData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR1plaintextdata: FAIL")
-										
-									# Result = DL.Check_StringAB(TR2plaintextdata, TRK2DecryptData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR2plaintextdata: FAIL")
-
-								# # PAN = 11	
-								# if i == 7:
-									# # Transaction result verification
-									# TR1plaintextdata = "%B40716621046^DOW/JOHN ^1711201127871100000000849000000? ??"
-									
-									# Result = DL.Check_StringAB(TR1plaintextdata, Track1_CardData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR1plaintextdata: FAIL")
-
-								# # PAN = 12	
-								# if i == 8:
-									# # Transaction result verification
-									# TR1maskdata = "%*4071****0469^DOW/JOHN ^1711***************************?*"
-									# TR1plaintextdata = "25423430373136363231303436395E444F572F4A4F484E205E313731313230313132373837313130303030303030303834393030303030303F39"
-									
-									# Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR1maskdata: FAIL")
-										
-									# Result = DL.Check_StringAB(TR1plaintextdata, TRK1DecryptData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR1plaintextdata: FAIL")
-
-								# # PAN = 20	
-								# if i == 9:
-									# # Transaction result verification
-									# TR1plaintextdata = "%B40716621046912345678^DOW/JOHN ^1711201127871100000000849000000?1"
-									
-									# Result = DL.Check_StringAB(TR1plaintextdata, Track1_CardData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR1plaintextdata: FAIL")
-
-								# # ISO 4909 (3T)	
-								# if i == 10:
-									# # Transaction result verification
-									# TR1maskdata = "%*4547********0000^LLIBRE ROBERT-GUILLERMO ^1102***************************?*"
-									# TR2maskdata = ";4547********0000=1102***************?*"
-									# TR1plaintextdata = "2542343534373537303030313037303030305E4C4C4942524520524F424552542D4755494C4C45524D4F205E313130323130313030303030303034303030303030303330363030303030303F2E"
-									# TR2plaintextdata = "3B343534373537303030313037303030303D313130323130313030303030333036303030303F38"
-									# TR3plaintextdata = "3B3031343534373537303030313037303030303D37393738303030303030303030303030303030333031393031383034303230303031313032343D33303235303030313134313430313035383539383D3D313D30303030303032363030303030303030303030303F35"
-									
-									# Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR1maskdata: FAIL")
-
-									# Result = DL.Check_StringAB(TR2maskdata, Track2_CardData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR2maskdata: FAIL")
-
-									# Result = DL.Check_StringAB(TR1plaintextdata, TRK1DecryptData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR1plaintextdata: FAIL")
-										
-									# Result = DL.Check_StringAB(TR2plaintextdata, TRK2DecryptData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR2plaintextdata: FAIL")
-										
-									# Result = DL.Check_StringAB(TR3plaintextdata, TRK3DecryptData)
-									# if Result != True:
-										# DL.SetWindowText("red", "TR3plaintextdata: FAIL")					
-						else:
-							DL.SetWindowText("RED", "Parse Card Data Fail")
+else:
+	DL.fails=DL.fails+1
 							
 if lcdtype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("01 00 00 00")							
+        
+if(0 < (DL.fails + DL.warnings)):
+	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
+else:
+	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )

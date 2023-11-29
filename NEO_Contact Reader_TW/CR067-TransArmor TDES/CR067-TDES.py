@@ -179,46 +179,57 @@ if (Result):
 								if DL.Check_StringAB(Track1_CardData, TR1maskdata1) and DL.Check_StringAB(Track1_CardData, TR1maskdata2) and DL.Check_StringAB(Track1_CardData, TR1maskdata3) and DL.Check_StringAB(Track1_CardData, TR1maskdata4) and DL.Check_StringAB(Track1_CardData, TR1maskdata5): 
 									DL.SetWindowText("Blue", "Track 1 Mask data: PASS")
 								else:
+									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Track 1 Mask data: FAIL")
 									
 								if TRK2 == None or TRK2 == "": 
 									DL.SetWindowText("Blue", "Track 2 Mask data: NONE")
 								else:
+									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Track 2 Mask data: FAIL")
 									
 								# Verify Encryption track data	
 								if DL.Check_StringAB(TRK1DecryptData, TR1plaintextdata1) and DL.Check_StringAB(TRK1DecryptData, TR1plaintextdata2) and DL.Check_StringAB(TRK1DecryptData, TR1plaintextdata3) and DL.Check_StringAB(TRK1DecryptData, TR1plaintextdata4) and DL.Check_StringAB(TRK1DecryptData, TR1plaintextdata5):
 									DL.SetWindowText("Blue", "Track 1 Decryption data: PASS")
 								else:
+									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Track 1 Decryption data: FAIL")
 									
 								if TRK2 == None or TRK2 == "":
 									DL.SetWindowText("Blue", "Track 2 Decryption data: NONE")
 								else:
+									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Track 2 Decryption data: FAIL")
 										
 							# Verify specific tags
 							if DL.Check_RXResponse(rx, '80 4F 6A 00 00 A1 89 01 12') == False:
+								DL.fails=DL.fails+1
 								DL.SetWindowText("Red", "Tag DFEE23: FAIL")
 								
 							if DL.Check_RXResponse(rx, "DFEE25 02 0007") == False: 
+								DL.fails=DL.fails+1
 								DL.SetWindowText("Red", "Tag DFEE25: FAIL")
 								
 							if DL.Check_RXResponse(rx, "9F39 01 80") == False: 
+								DL.fails=DL.fails+1
 								DL.SetWindowText("Red", "Tag 9F39: FAIL")
 								
 							if platformtype == 1:
 								if DL.Check_RXResponse(rx, "FFEE01 ** DFEE30010C") == False: 
+									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 							if platformtype == 0:
 								if DL.Check_RXResponse(rx, "FFEE01 ** DF30010C") == False: 
+									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Tag FFEE01: FAIL")	
 									
 							if DL.Check_RXResponse(rx, "DFEE26 02 EC06") == False: 
+								DL.fails=DL.fails+1
 								DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 								
 							if platformtype == 0:	
 								if DL.Check_RXResponse(rx, "DFEF4C 06 6A0000000000") == False: 
+									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Tag DFEF4C: FAIL")	
 								r1 = DL.Check_StringAB(decDFEF4D, '2542363531303030303030303030')
 								r2 = DL.Check_StringAB(decDFEF4D, '5E434152442F494D414745')
@@ -226,6 +237,14 @@ if (Result):
 								r4 = DL.Check_StringAB(decDFEF4D, '3F3B363531303030303030303030')
 								r5 = DL.Check_StringAB(decDFEF4D, '3D31373132323031')
 								if r1 == False or r2 == False or r3 == False or r4 == False or r5 == False:
+									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Tag DFEF4D: FAIL")		
-					else:
-						DL.SetWindowText("RED", "Parse Card Data Fail")				
+				else:
+					DL.fails=DL.fails+1
+else:
+	DL.fails=DL.fails+1
+                
+if(0 < (DL.fails + DL.warnings)):
+	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
+else:
+	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )

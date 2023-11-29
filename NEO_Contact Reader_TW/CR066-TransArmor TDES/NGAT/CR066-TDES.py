@@ -85,9 +85,11 @@ if (Result):
 									
 					Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
 					if Result != True:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "TR1maskdata: FAIL")
 					Result = DL.Check_StringAB(TR1plaintextdata, TRK1DecryptData)
 					if Result != True:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "TR1plaintextdata: FAIL")
 
 					TR3maskdata = ";**4547********0000=***********************************************************************************?"
@@ -95,19 +97,31 @@ if (Result):
 					
 					Result = DL.Check_StringAB(TR3maskdata, Track3_CardData)
 					if Result != True:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "TR3maskdata: FAIL")
 					Result = DL.Check_StringAB(TR3plaintextdata, TRK3DecryptData)
 					if Result != True:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "TR3plaintextdata: FAIL")										
 					# Tags DFEE25/ 9F39/ FFEE01/ DFEE26
 					if DL.Check_RXResponse(rx, "DFEE25 02 0011") == False: 
+						DL.fails=DL.fails+1
 						DL.SetWindowText("Red", "Tag DFEE25: FAIL")
 						
 					if DL.Check_RXResponse(rx, "9F39 01 90") == False: 
+						DL.fails=DL.fails+1
 						DL.SetWindowText("Red", "Tag 9F39: FAIL")
 		
 					if DL.Check_RXResponse(rx, "FFEE01 ** DFEE30010C") == False: 
+						DL.fails=DL.fails+1
 						DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-		
 					if DL.Check_RXResponse(rx, "DFEE26 02 EC06") == False: 
+						DL.fails=DL.fails+1
 						DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+else:
+	DL.fails=DL.fails+1
+                        
+if(0 < (DL.fails + DL.warnings)):
+	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
+else:
+	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )

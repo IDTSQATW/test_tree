@@ -103,7 +103,7 @@ if (Result):
 						# if i == 1:
 							# Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 3F 4F 28 6B 97 00")
 						if i == 2:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EC ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 5F 44 28 00 B3 9B")     #NEO3-6099
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EC ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 5F 44 28 00 A3 9B")     #NEO3-6099
 						# if i == 3:
 							# Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 86 1F 48 28 00 93 00")
 						# if i == 4:
@@ -128,7 +128,7 @@ if (Result):
 								# if i == 1:
 									# Result = DL.Check_StringAB(DL.Get_RXResponse(1),"83 3F 4F 28 6B 97 00")
 								if i == 2:
-									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 5F 44 28 00 B3 9B")
+									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 5F 44 28 00 A3 9B")
 								# if i == 3:
 									# Result = DL.Check_StringAB(DL.Get_RXResponse(1),"86 1F 48 28 00 93 00")
 								# if i == 4:

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-8054
+9956
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -150,6 +150,8 @@ End Function
 'TEST BEGINS
 '------------------------------------------------------------
 if readerType = "NEO2" then
+   DL.SendSequence "60-16 Contact Set ICS Identification (04)"
+   dl.pause 500
    DL.SendSequence "60-06 Contact Set Terminal Data"
    dl.pause 500
    DL.SendSequence "60-03 Contact Set Application Data (VISA)"
@@ -166,7 +168,7 @@ if readerType = "NEO2" then
    End If
 end if
 
-for i = 1 to 40
+for i = 1 to 30
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf

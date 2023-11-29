@@ -40,6 +40,12 @@ if (Result):
 	RetOfStep = DL.SendCommand('60-06 (NEO2)')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("60 00 00 00")	
+        
+# 60-03 Contact Set Application Data (VISA)
+if (Result):
+	RetOfStep = DL.SendCommand('60-03 Contact Set Application Data (VISA)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("60 00 00 00")	
 		
 # Burst mode OFF & Poll on demand		
 if (Result):

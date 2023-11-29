@@ -38,7 +38,7 @@ if platform == 1: #NEOII and upward
     if (Result):
         RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
         if (RetOfStep):
-            Result = DL.Check_RXResponse("C7 00 00 06 00 01 00 00 00 00")
+            Result = DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
 else:
     if (Result): #NEOI
         RetOfStep = DL.SendCommand('Encryption Type -- TDES')

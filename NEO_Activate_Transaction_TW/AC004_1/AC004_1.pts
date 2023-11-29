@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-43541
+11959
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -159,7 +159,7 @@ lcdcheck = msgbox("Does reader has LCD?", vbyesno)
 If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
-   DL.AddComment "--- Check if the reader has data key"
+   DL.AddComment "--- Check if the reader has data key (This case should remove data key)"
    if readerType <> "NEO2" then 
       DL.SendSequence "81-02"
       result = DL.WaitForSequence("81-02 data key", 1, 2000)

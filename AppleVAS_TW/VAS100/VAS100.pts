@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-55188
+50675
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -154,6 +154,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+autopollcheck = msgbox ("Does reader support Auto-Poll mode?", vbyesno)
 sub maintest()
     for k = 1 to 5
         if k = 1 then cmd = "ACT - VAS Only"
@@ -237,6 +238,7 @@ If result <> 0 Then
       if result <> 0 then maintest()
    end if
 
+   if autopollcheck = 6 then
    if result <> 0 then 
       DL.ResetReceiveCounter
       dl.addcomment vbcrlf 
@@ -245,6 +247,7 @@ If result <> 0 Then
       result = DL.WaitForSequence("01 00", 1, 3000)
       dl.pause 500
       if result <> 0 then maintest()
+   end if
    end if
 End If
 '------------------------------------------------------------

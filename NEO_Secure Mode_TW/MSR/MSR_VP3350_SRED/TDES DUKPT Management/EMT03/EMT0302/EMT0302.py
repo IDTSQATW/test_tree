@@ -153,7 +153,6 @@ if (Result):
 					if Result == True and sResult!=None and sResult!="":
 						sResult=sResult.replace(" ","")
 						CardData=DL.GetTLV(sResult,"DFEE23")
-						bresult = False
 						if CardData!=None and CardData!='':
 							objectMSR = DL.ParseCardData(CardData, Key)
 							EncryptType = DL.Get_EncryptionKeyType_CardData()
@@ -415,6 +414,10 @@ if (Result):
 					else:
 						DL.fails=DL.fails+1
 						DL.SetWindowText("RED", "** FAIL **")
+else:
+	DL.fails=DL.fails+1
+	DL.SetWindowText("RED", "** FAIL **")
+                        
 if lcdtype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):

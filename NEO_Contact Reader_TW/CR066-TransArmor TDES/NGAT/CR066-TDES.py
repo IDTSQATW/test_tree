@@ -50,7 +50,6 @@ if (Result):
 		if alldata!=None and alldata!="":
 			alldata=alldata.replace(" ","")
 			CardData=DL.GetTLV(alldata,"DFEE23")
-			bresult = False
 			if CardData!=None and CardData!='':
 				objectMSR = DL.ParseCardData(CardData,Key)
 				EncryptType = DL.Get_EncryptionKeyType_CardData()

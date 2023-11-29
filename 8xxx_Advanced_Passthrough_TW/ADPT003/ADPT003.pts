@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-62875
+55866
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -133,7 +133,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-PF = msgbox("Is this GR/ NEO2 project?", vbyesno)
+PF = msgbox("Is this GR/ NEO2+3 project?", vbyesno)
 
 if result <> 0 and PF = 7 then
    dl.resetreceivecounter

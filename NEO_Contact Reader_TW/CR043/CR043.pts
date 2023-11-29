@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-62337
+60645
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -156,9 +156,7 @@ If result <> 0 Then
    DL.SendSequence "60-10"
    result = DL.WaitForSequence("60-xx 63 status", 1, 2000)
    if result <> 0 then
-      msgbox "Click OK, swipe EMV Test Card (T=0)", vbokonly
-      dl.pause 5000
-
+      msgbox "Swipe EMV Test Card (T=0) --> Click OK", vbokonly
       if readerType <> "NEO2" then 
          ledcheck = msgbox ("LED 0 is still steady ON? (if has no LED 0, select YES directly)", vbyesno)
       elseif readerType = "NEO2" then 
@@ -171,12 +169,12 @@ If result <> 0 Then
          if readerType <> "NEO2" then 
             result = DL.WaitForSequence("USE CHIP READER", 1, 5000)
          elseif readerType = "NEO2" then 
-				msgcheck = msgbox("Does reader have LCD and show msg 'USE CHIP READER'?", vbyesno)
-				if msgcheck = 7 then result = DL.WaitForSequence("USE CHIP READER", 1, 3000)
+		  msgcheck = msgbox("Does reader have LCD & show msg 'USE CHIP READER'?", vbyesno)
+		  if msgcheck = 7 then result = DL.WaitForSequence("USE CHIP READER", 1, 3000)
          end if
 
          if result <> 0 then
-            msgbox "insert EMV Test Card (T=0), and then click OK", vbokonly
+            msgbox "Insert EMV Test Card (T=0) --> Click OK", vbokonly
             result = DL.WaitForSequence("60-10 resp code 0010", 1, 20000)
             if result <> 0 then
                ledcheck = msgbox ("LED 0 is flashing & tri-color LED (if have) is flashed Amber continuously?", vbyesno)

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-6704
+6758
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -19,7 +19,7 @@ ProjectName = "EC104" ' !!!!! EDIT THIS !!!!!
 '   - Assign Docklight COM port
 '   - Assign Docklight Baud Rate
 '------------------------------------------------------------
-FileInput.OpenFile prefix & "Regress.Config2"
+FileInput.OpenFile "..\..\..\Regress.Config2"
 Dim Prompting(1)
 Dim COM_Port(1)
 Dim POSBaudRate(1)

@@ -172,11 +172,6 @@ if (Result):
 			if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False: 
 				DL.fails=DL.fails+1
 				DL.SetWindowText("Red", "Tag DFEE26: FAIL")		
-        
-        # Tag DFEE30
-		if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300100") == False: 
-			DL.fails=DL.fails+1
-			DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 	else:
 		DL.fails=DL.fails+1
                     

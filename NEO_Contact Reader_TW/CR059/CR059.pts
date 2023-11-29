@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-26703
+48228
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -159,7 +159,13 @@ if readerType = "NEO2" then
    End If
 end if
 
-for k = 1 to 2
+autopollcheck = msgbox ("Does reader support Auto-Poll mode?", vbyesno)
+if autopollcheck = 6 then 
+   n = 2
+else
+   n = 1
+end if
+for k = 1 to n
     if k = 1 then cmd = "01-01-----Poll on Demand"
     if k = 2 then cmd = "01-01-----Auto Poll"
 

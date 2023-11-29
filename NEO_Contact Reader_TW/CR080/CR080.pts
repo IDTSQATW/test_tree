@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-5140
+48162
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -9,6 +9,7 @@ DL_SCRIPTVERSION
 Dim ProjectName
 ProjectName = "CR080" ' !!!!! EDIT THIS !!!!!
 ' Objective: to verify case SDK: V2CB0310801v4.2C (during testing, LCD need to select AID & Language)
+' Note: 2C
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"

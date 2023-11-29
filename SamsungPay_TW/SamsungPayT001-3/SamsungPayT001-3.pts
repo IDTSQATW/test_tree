@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-53045
+49729
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -238,6 +238,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+autopollcheck = msgbox ("Does reader support Auto-Poll mode?", vbyesno)
 readercheck = msgbox ("Is this NEO3 project?", vbyesno)
 if result <> 0 then
    dl.resetreceivecounter
@@ -297,6 +298,7 @@ end if
 '-------------------------------------------------------
 'Auto poll/ cmd 03-40
 '---------------------------------------------------------
+if autopollcheck = 6 then
 AUTOPOL()
 
 if result <> 0 then
@@ -317,6 +319,7 @@ if result <> 0 then
          Err0BCounter = Err0BCounter + 1
       End If
    end if
+end if
 end if
 '-----------------------------------------------------------
 If Err0BCounter <> 0 Then

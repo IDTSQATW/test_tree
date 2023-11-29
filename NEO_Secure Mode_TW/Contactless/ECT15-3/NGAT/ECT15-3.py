@@ -42,7 +42,7 @@ if (Result):
     if lcdtype == 0:
         RetOfStep = DL.SendCommand('Activate Transaction w/o LCD')		
     if (RetOfStep):
-            if lcdtype == 1:
+        if lcdtype == 1:
             rx = 0
             alldata = DL.Get_RXResponse(rx)
         if lcdtype == 0:

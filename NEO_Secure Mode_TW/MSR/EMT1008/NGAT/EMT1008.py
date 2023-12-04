@@ -12,6 +12,13 @@ strKey = '0123456789ABCDEFFEDCBA9876543210'
 
 # Objective: to verify 6 test Blackboard card that provided by USAtech
 
+# Check project type (NEOI or NEOII)
+readertype = DL.ShowMessageBox("", "Is this NEOII and upward project?", 0)
+if readertype == 1:
+	DL.SetWindowText("Green", "*** NEOII and upward project ***")
+else:
+	DL.SetWindowText("Green", "*** NEOI project ***")  
+
 # Check project has LCD or not
 lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
 if lcdtype == 1:
@@ -20,17 +27,12 @@ else:
 	DL.SetWindowText("Green", "*** The project has NO LCD ***")
 
 # Get DUKPT DEK Attribution based on KeySlot (C7-A3)
-if (Result):
-	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")	
-		
-# # Set MSR Secure Parameters (C7-38)
-# if (Result):
-	# RetOfStep = DL.SendCommand('Set MSR Secure Parameters (C7-38)')
-	# if (RetOfStep):
-		# Result = Result and DL.Check_RXResponse("C7 00 00 00")	
-		
+if readertype == 1:
+    if (Result):
+        RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+        if (RetOfStep):
+            Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")	
+			
 # Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
@@ -44,39 +46,65 @@ if (Result):
 			if lcdtype == 1:
 				RetOfStep = DL.SendCommand('Activate Transaction (Card: USAT Maintenance) w/ LCD')
 			if lcdtype == 0:
-				RetOfStep = DL.SendCommand('Activate Transaction (Card: USAT Maintenance) w/o LCD')
+				if readertype == 1:     #NEOII and upward project
+					RetOfStep = DL.SendCommand('Activate Transaction (Card: USAT Maintenance) w/o LCD')
+				else:     #NEOI project
+					RetOfStep = DL.SendCommand('Activate Transaction (Card: USAT Maintenance) w/ LCD')
 		if i == 2:
 			if lcdtype == 1:
 				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Valid card) w/ LCD')
 			if lcdtype == 0:
-				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Valid card) w/o LCD')
+				if readertype == 1:     #NEOII and upward project
+					RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Valid card) w/o LCD')
+				else:     #NEOI project
+					RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Valid card) w/ LCD')
 		if i == 3:
 			if lcdtype == 1:
 				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Invalid account) w/ LCD')
 			if lcdtype == 0:
-				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Invalid account) w/o LCD')
+				if readertype == 1:     #NEOII and upward project
+					RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Invalid account) w/o LCD')
+				else:     #NEOI project
+					RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Invalid account) w/ LCD')
 		if i == 4:
 			if lcdtype == 1:
 				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard -$0.00 balance) w/ LCD')
 			if lcdtype == 0:
-				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard -$0.00 balance) w/o LCD')
+				if readertype == 1:     #NEOII and upward project
+					RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard -$0.00 balance) w/o LCD')
+				else:     #NEOI project
+					RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard -$0.00 balance) w/ LCD')
 		if i == 5:
 			if lcdtype == 1:
 				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Expired) w/ LCD')
 			if lcdtype == 0:
-				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Expired) w/o LCD')
+				if readertype == 1:     #NEOII and upward project
+					RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Expired) w/o LCD')
+				else:     #NEOI project
+					RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-Expired) w/ LCD')
 		if i == 6:
 			if lcdtype == 1:
 				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-lost card) w/ LCD')		
 			if lcdtype == 0:
-				RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-lost card) w/o LCD')
+				if readertype == 1:     #NEOII and upward project
+					RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-lost card) w/o LCD')
+				else:     #NEOI project
+					RetOfStep = DL.SendCommand('Activate Transaction (Card: Blackboard-lost card) w/ LCD')
 				
 		if (RetOfStep):
 			if lcdtype == 1:
 				rx = 0
+				if readertype == 1:     #NEOII and upward project
+					Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 00 ** E8 ** DF EE 25 02 00 11 DF EE 23")
+				if readertype == 0:     #NEOI project
+					Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 00 ** C8 ** DF EE 25 02 00 11 DF EE 23")
 			if lcdtype == 0:
-				rx = 3	
-			Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 00 ** E8 ** DF EE 25 02 00 11 DF EE 23")	
+				if readertype == 1:     #NEOII and upward project
+					rx = 3	
+					Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 00 ** E8 ** DF EE 25 02 00 11 DF EE 23")	
+				if readertype == 0:     #NEOI project
+					rx = 0
+					Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 00 ** C8 ** DF EE 25 02 00 11 DF EE 23")
 			if (Result):
 				if i == 1:
 					Result = DL.Check_RXResponse(rx, "02 ** 80 1E 00 1F 00 82 92")
@@ -119,15 +147,12 @@ if (Result):
 								if len(TRK1)> 0:
 									DL.SetWindowText("blue", "Track 1:")
 									TRK1DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK1)
-									TRK1DecryptData = TRK1DecryptData[0:((objectMSR[0].msr_track1Length)*2)]
 								if len(TRK2)> 0:
 									DL.SetWindowText("blue", "Track 2:")
 									TRK2DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK2)
-									#TRK2DecryptData = TRK2DecryptData[0:((objectMSR[0].msr_track2Length)*2)]
 								if len(TRK3) > 0:
 									DL.SetWindowText("blue", "Track 3:")
 									TRK3DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK3)
-									TRK3DecryptData = TRK3DecryptData[0:((objectMSR[0].msr_track3Length)*2)]
 									
 					if i == 1:
 						TR2maskdata = ";6396**********1212=3712*****?*"

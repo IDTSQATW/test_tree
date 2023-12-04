@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-15616
+9334
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -176,16 +176,14 @@ else
    countf = countf + 1
 End If
 
+if readerType = "NEO2" then
 if result <> 0 then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- DF7D" 
-   if readerType <> "NEO2" then 
-      'DL.SendSequence "DF7D = 01"
-   else
-      DL.SendSequence "DF7D = 02 (NEO2)"
-   end if
+   DL.SendSequence "DF7D = 02 (NEO2)"
    result = DL.WaitForSequence("04 00", 1, 3000)
+end if
 end if
 '------------------------------------------------------------End OFF
 If result <> 0 Then

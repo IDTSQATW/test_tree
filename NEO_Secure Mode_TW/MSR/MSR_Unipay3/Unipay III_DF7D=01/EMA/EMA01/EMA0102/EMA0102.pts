@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-32720
+34099
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -518,7 +518,8 @@ DL.Pause 200
   DL.AddComment vbCrLf & vbCrLf & "--- JIS2"
   DL.Pause 100
   DL.AddComment vbCrLf & "---  Please swipe card"
-  RxStatus = DL.WaitForSequence("Burst mode response - JIS II", 1, 10000)
+  RxStatus = DL.WaitForSequence("Burst mode response - JIS II", 1, 3000)
+  if RxStatus = 0 then RxStatus = DL.WaitForSequence("Burst mode response - JIS II (new card)", 1, 10000)
   If RxStatus = 0 then
     DL.AddComment "JIS II card does not return expected data"
     Err0BCounter = Err0BCounter + 1

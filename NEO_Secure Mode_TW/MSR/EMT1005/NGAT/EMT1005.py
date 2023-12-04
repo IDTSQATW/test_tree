@@ -11,13 +11,6 @@ PAN=''
 
 # Objective: VENDI-324_After cmd 02-40 was timeout -> swiped card -> sent cmd 03-00, reader returned incorrect response frame format.
 
-# # Check project has LCD or not
-# lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
-# if lcdtype == 1:
-	# DL.SetWindowText("Green", "*** The project has LCD ***")
-# else:
-	# DL.SetWindowText("Green", "*** The project has NO LCD ***")
-	
 # Check reader is VP3350 or not
 modeltype = DL.ShowMessageBox("", "Is this VP3350?", 0)
 if modeltype == 1:
@@ -27,12 +20,6 @@ if modeltype == 1:
 		Result = DL.Check_RXResponse("01 00 00 00")
 else:
 	DL.SetWindowText("Green", "*** non-VP3350 reader ***")	
-
-# # Check data encryption TYPE is TDES	
-# if (Result):
-	# RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
-	# if (RetOfStep):
-		# Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
 		
 # Poll on demand	
 if (Result):
@@ -62,7 +49,7 @@ if (Result):
 			CardData=DL.GetTLV(sResult,"DFEE23")
 			bresult = False
 			if CardData!=None and CardData!='':
-				objectMSR = DL.ParseCardData(CardData ,bresult,Key,MacKey)
+				objectMSR = DL.ParseCardData(CardData, Key)
 				EncryptType = DL.Get_EncryptionKeyType_CardData()
 				EncryptMode = DL.Get_EncryptionMode_CardData()
 				if objectMSR!=None:
@@ -83,15 +70,12 @@ if (Result):
 					if len(TRK1)> 0:
 						DL.SetWindowText("blue", "Track 1:")
 						TRK1DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK1)
-						TRK1DecryptData = TRK1DecryptData[0:((objectMSR[0].msr_track1Length)*2)]
 					if len(TRK2)> 0:
 						DL.SetWindowText("blue", "Track 2:")
 						TRK2DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK2)
-						TRK2DecryptData = TRK2DecryptData[0:((objectMSR[0].msr_track2Length)*2)]
 					if len(TRK3) > 0:
 						DL.SetWindowText("blue", "Track 3:")
 						TRK3DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK3)
-						TRK3DecryptData = TRK3DecryptData[0:((objectMSR[0].msr_track3Length)*2)]
 							
 					Tag9F39 = DL.GetTLV(sResult,"9F39")
 					TagFFEE01 = DL.GetTLV(sResult,"FFEE01")

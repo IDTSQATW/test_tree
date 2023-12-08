@@ -156,7 +156,7 @@ if (Result):
 						CardData=DL.GetTLV(sResult,"DFEE23")
 						bresult = False
 						if CardData!=None and CardData!='':
-							objectMSR = DL.ParseCardData(CardData ,bresult,Key,MacKey)
+							objectMSR = DL.ParseCardData(CardData, Key)
 							EncryptType = DL.Get_EncryptionKeyType_CardData()
 							EncryptMode = DL.Get_EncryptionMode_CardData()
 							if objectMSR!=None:
@@ -226,6 +226,8 @@ if (Result):
 									if Result != True:
 										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR2plaintextdata: FAIL")
+					else:
+						DL.fails=DL.fails+1
 else:
 	DL.fails=DL.fails+1
 							

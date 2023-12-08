@@ -410,7 +410,7 @@ if (Result):
 									Result = DL.Check_StringAB(TR3plaintextdata, TRK3DecryptData)
 									if Result != True:
 										DL.fails=DL.fails+1
-										DL.SetWindowText("red", "TR3plaintextdata: FAIL")					
+										DL.SetWindowText("red", "TR3plaintextdata: FAIL")
 					else:
 						DL.fails=DL.fails+1
 else:

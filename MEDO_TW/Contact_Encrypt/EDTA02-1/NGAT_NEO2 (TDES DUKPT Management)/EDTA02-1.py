@@ -105,11 +105,13 @@ if (Result):
 						if TagDFEF4C == "" or TagDFEF4C == "000000000000":
 							DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 							
 						if encDFEF4D == "":
 							DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag DFEF4D: FAIL")
 				
 				#2 Tag DFEF4C-4D	
@@ -118,12 +120,14 @@ if (Result):
 						if Result == True:
 							DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 							
 						Result = DL.Check_StringAB(decDFEF4D, '3B 34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30 3D 32 30 31 32 32 30 31 30 31 32 33 34 35 36 37 38 39 3F')
 						if Result == True and DL.Check_StringAB(DL.Get_RXResponse(rx), 'DF EF 4D 30'):
 							DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag DFEF4D: FAIL")
 							
 				#3 Tag DFEF4C-4D	
@@ -131,11 +135,13 @@ if (Result):
 						if TagDFEF4C == "" or TagDFEF4C == "000000000000":
 							DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 							
 						if encDFEF4D == "":
 							DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag DFEF4D: FAIL")
 							
 				#4 Tag DFEF4C-4D	
@@ -144,12 +150,14 @@ if (Result):
 						if Result == True:
 							DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 							
 						Result = DL.Check_StringAB(decDFEF4D, '3B 34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30 3D 32 30 31 32 32 30 31 30 31 32 33 34 35 36 37 38 39 3F')
 						if Result == True and DL.Check_StringAB(DL.Get_RXResponse(rx), 'DF EF 4D 30'):
 							DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag DFEF4D: FAIL")
 							
 				#5 Tag DFEF4C-4D	
@@ -157,11 +165,13 @@ if (Result):
 						if TagDFEF4C == "" or TagDFEF4C == "000000000000":
 							DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 							
 						if encDFEF4D == "":
 							DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag DFEF4D: FAIL")
 
 				#6 Tag DFEF4C-4D	
@@ -170,12 +180,14 @@ if (Result):
 						if Result == True:
 							DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 							
 						Result = DL.Check_StringAB(decDFEF4D, '3B 34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30 3D 32 30 31 32 32 30 31 30 31 32 33 34 35 36 37 38 39 3F')
 						if Result == True and DL.Check_StringAB(DL.Get_RXResponse(rx), 'DF EF 4D 30'):
 							DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag DFEF4D: FAIL")
 
 				#7 Tag DFEF4C-4D	
@@ -184,12 +196,14 @@ if (Result):
 						if Result == True:
 							DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 							
 						Result = DL.Check_StringAB(decDFEF4D, '3B 34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30 3D 32 30 31 32 32 30 31 30 31 32 33 34 35 36 37 38 39 3F')
 						if Result == True and DL.Check_StringAB(DL.Get_RXResponse(rx), 'DF EF 4D 30'):
 							DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 						else:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag DFEF4D: FAIL")							
 			# cmd 60-11					
 			if  CTresultcode == "0010":
@@ -205,18 +219,33 @@ if (Result):
 					CTresultcode = DL.GetTLV(alldata,"DFEE25")	
 					if (Result):
 						Result = DL.Check_StringAB(DL.Get_RXResponse(rx), '56 69 56 4F 74 65 63 68 32 00 60 00')
+						if Result == False:
+							DL.fails=DL.fails+1
 								
-			# cmd 60-12
-			if  CTresultcode == "0004":
-				if lcdtype == 1:
-					RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response_w LCD')
-					rx = 1
-				if lcdtype == 0:
-					RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response_w/o LCD')
-					rx = 2			
-				if (RetOfStep):
-					Result = DL.Check_RXResponse("60 63 00 00")
-					alldata = DL.Get_RXResponse(rx)
-					CTresultcode = DL.GetTLV(alldata,"DFEE25")
-					if (Result):
-						Result = DL.Check_StringAB(DL.Get_RXResponse(rx), '56 69 56 4F 74 65 63 68 32 00 60 00')	
+					# cmd 60-12
+					if  CTresultcode == "0004":
+						if lcdtype == 1:
+							RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response_w LCD')
+							rx = 1
+						if lcdtype == 0:
+							RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response_w/o LCD')
+							rx = 2
+						if (RetOfStep):
+							Result = DL.Check_RXResponse("60 63 00 00")
+							alldata = DL.Get_RXResponse(rx)
+							CTresultcode = DL.GetTLV(alldata,"DFEE25")
+							if (Result):
+								Result = DL.Check_StringAB(DL.Get_RXResponse(rx), '56 69 56 4F 74 65 63 68 32 00 60 00')	
+								if Result == False:
+									DL.fails=DL.fails+1
+					else:
+						DL.fails=DL.fails+1
+			else:
+				DL.fails=DL.fails+1
+else:
+	DL.fails=DL.fails+1
+                        
+if(0 < (DL.fails + DL.warnings)):
+	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
+else:
+	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )

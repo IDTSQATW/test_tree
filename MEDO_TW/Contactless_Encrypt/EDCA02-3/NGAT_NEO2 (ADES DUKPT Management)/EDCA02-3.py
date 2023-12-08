@@ -126,6 +126,7 @@ if (Result):
 					if Result == True:
 						DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 					else:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 								
 					R1 = DL.Check_StringAB(decDFEF4D, '25 42 35 31 32 38 35 37 30 31 30 30 30 33 ')
@@ -133,6 +134,7 @@ if (Result):
 					if R1 == True and R2 == True and DL.Check_StringAB(alldata, 'DF EF 4D 30'):
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "Tag DFEF4D: FAIL")
 					
 				#2 Tag DFEF4C-4D	
@@ -141,6 +143,7 @@ if (Result):
 					if Result == True:
 						DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 					else:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 								
 					R1 = DL.Check_StringAB(decDFEF4D, '3B 35 31 32 38 35 37 30 31 30 30 30 33 ')
@@ -148,6 +151,7 @@ if (Result):
 					if R1 == True and R2 == True and DL.Check_StringAB(alldata, 'DF EF 4D 30'):
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "Tag DFEF4D: FAIL")
 								
 				#3 Tag DFEF4C-4D	
@@ -155,11 +159,13 @@ if (Result):
 					if TagDFEF4C == "" or TagDFEF4C == "000000000000":
 						DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 					else:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 							
 					if encDFEF4D == "":
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "Tag DFEF4D: FAIL")
 								
 				#4 Tag DFEF4C-4D	
@@ -168,6 +174,7 @@ if (Result):
 					if Result == True:
 						DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 					else:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 								
 					R1 = DL.Check_StringAB(decDFEF4D, '25 42 35 31 32 38 35 37 30 31 30 30 30 33')
@@ -178,6 +185,7 @@ if (Result):
 					if R1 == True and R2 == True and DL.Check_StringAB(alldata, 'DF EF 4D 60'):
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "Tag DFEF4D: FAIL")
 								
 				#5 Tag DFEF4C-4D	
@@ -186,6 +194,7 @@ if (Result):
 					if Result == True:
 						DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 					else:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 								
 					R1 = DL.Check_StringAB(decDFEF4D, '25 42 35 31 32 38 35 37 30 31 30 30 30 33')
@@ -193,6 +202,7 @@ if (Result):
 					if R1 == True and R2 == True and DL.Check_StringAB(alldata, 'DF EF 4D 30'):
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "Tag DFEF4D: FAIL")
 
 				#6 Tag DFEF4C-4D	
@@ -201,6 +211,7 @@ if (Result):
 					if Result == True:
 						DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 					else:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 								
 					R1 = DL.Check_StringAB(decDFEF4D, '3B 35 31 32 38 35 37 30 31 30 30 30 33')
@@ -208,6 +219,7 @@ if (Result):
 					if R1 == True and R2 == True and DL.Check_StringAB(alldata, 'DF EF 4D 30'):
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "Tag DFEF4D: FAIL")
 
 				#7 Tag DFEF4C-4D	
@@ -216,6 +228,7 @@ if (Result):
 					if Result == True:
 						DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 					else:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 								
 					R1 = DL.Check_StringAB(decDFEF4D, '25 42 35 31 32 38 35 37 30 31 30 30 30 33 ')
@@ -226,9 +239,17 @@ if (Result):
 					if R1 == True and R2 == True and DL.Check_StringAB(alldata, 'DF EF 4D 60'):
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "Tag DFEF4D: FAIL")
+else:
+	DL.fails=DL.fails+1
 						
 if readermodel == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("01 00 00 00")						
+        
+if(0 < (DL.fails + DL.warnings)):
+	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
+else:
+	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )

@@ -11,6 +11,13 @@ PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 rx = 0
 		
+# Auto poll support check
+autopollcheck = DL.ShowMessageBox("", "Does the project support Auto-Poll mode?", 0)
+if autopollcheck == 1: 
+    autopoll = 6
+else:
+    autopoll = 4
+        
 # Check project has LCD or not
 lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
 if lcdtype == 1:
@@ -55,7 +62,7 @@ if (Result):
 
 # cmd 02-40, MSR/ CL/ CT				
 if (Result):	
-	for i in range (1, 6):
+	for i in range (1, autopoll):
 		if i <= 3:
 			if i == 1:
 				RetOfStep = DL.SendCommand('Poll on Demand')
@@ -85,7 +92,7 @@ if (Result):
 					RetOfStep = DL.SendCommand('03-40, CL -- Discover w/ LCD')
 					rx = 1
 					time.sleep(1)
-				
+
 		if (RetOfStep):
 			# MSR transaction
 			if i == 1 or i == 4:
@@ -301,9 +308,8 @@ if (Result):
 						if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False: 
 							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
-							
 			# CT transaction
-			if i == 3:				
+			if i == 3:
 				Result = Result and DL.Check_RXResponse("60 63 00 00")
 				alldata = DL.Get_RXResponse(rx)
 				CTresultcode = DL.GetTLV(alldata,"DFEE25")

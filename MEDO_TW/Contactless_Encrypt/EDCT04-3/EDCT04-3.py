@@ -224,7 +224,7 @@ if (Result):
 					r2 = DL.Check_StringAB(decDFEF4D, '5E 20 2F 5E 31 38 30 33 36 32 32 30 30')
 					if r1 == True and r2 == True and DL.Check_StringAB(alldata, 'DF EF 4D 40'):
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
-					else
+					else:
 						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "Tag DFEF4D: FAIL")
 

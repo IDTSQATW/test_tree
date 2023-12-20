@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-11331
+58857
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -151,6 +151,8 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+autopollcheck = msgbox ("Does reader support Auto-Poll mode?", vbyesno)
+
 if result <> 0 then
    DL.AddComment "--- DF7D" 
    if readerType <> "NEO2" then 
@@ -183,6 +185,7 @@ end if
 
 at()
 '------------------------------------------------------------
+if autopollcheck = 6 then
 if result <> 0 then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
@@ -202,6 +205,7 @@ if result <> 0 then
 end if
 
 at()
+end if
 '------------------------------------------------------------
 sub at()
 if result <> 0 then

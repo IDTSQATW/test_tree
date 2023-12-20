@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2023/11/24 13:55:14.614 
+Docklight Log File (HEX) - Started 2023/12/12 11:55:53.103 
  TEST CASE: SBL010
 
  --- Set POS COM PORT Settings
@@ -6,7 +6,15 @@ Docklight Log File (HEX) - Started 2023/11/24 13:55:14.614
  POS operating on COM90 @ 115200 baud...
  Set POS COM PORT - COMPLETE
 
+ --- One beep with LED All On
+
+2023/12/12 11:55:54.383 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 02 00 04 FF 01 FF 01 F9 77 
+2023/12/12 11:55:54.397 [RX] - 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53  Passed 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+
+ Result = PASSED
+ ---------- END OF TEST ----------
 
 
-Docklight Log File (HEX) - Stopped 2023/11/24 13:55:15.083 
+
+Docklight Log File (HEX) - Stopped 2023/12/12 11:55:56.839 
 

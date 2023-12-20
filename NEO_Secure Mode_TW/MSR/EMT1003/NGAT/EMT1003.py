@@ -31,6 +31,10 @@ if readertype == 1:
         RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
         if (RetOfStep):
             Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
+    if (Result):
+        RetOfStep = DL.SendCommand('DF7D = 02 (NEO2)')
+        if (RetOfStep):
+            Result = Result and DL.Check_RXResponse("04 00 00 00")
 		
 # Poll on Demand		
 if (Result):

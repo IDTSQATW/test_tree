@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-43288
+38993
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -223,7 +223,7 @@ If result <> 0 Then
    DL.AddComment vbcrlf
    DL.AddComment "--- 02-40 (10 sec) (NEO2-3 interface ON)"
    DL.SendSequence "02-40 (10 sec) (NEO2-3 interface ON)"
-   result = DL.WaitForSequence("02 00", 1, 10000)
+   result = DL.WaitForSequence("02 00", 1, 20000)
    dl.pause 1000
    lcdcheck = msgbox ("Are LCD/ LED behaviors correct?", vbyesno)
    if lcdcheck = 7 then result = 0

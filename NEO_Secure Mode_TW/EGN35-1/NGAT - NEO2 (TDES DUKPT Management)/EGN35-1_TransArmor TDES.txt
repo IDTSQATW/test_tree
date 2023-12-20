@@ -26,6 +26,10 @@ TID:C7-30 Get Data Encryption Key Variant Type = Pin
 CMD:C7 30
 EXR:C7 00 00 01 01
 
+TID:C7-A2 TDES DUKPT manage_TransArmor TDES, PIN key
+CMD:C7 A2 01 00 00 02 01 00 00 00
+EXR:
+
 TID:First Response Control (0x63) = enable
 CMD:04 00 DFED59 01 00
 EXR:04 00 00 00

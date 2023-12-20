@@ -11,6 +11,13 @@ PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 rx = 0
 		
+# Auto poll support check
+autopollcheck = DL.ShowMessageBox("", "Does the project support Auto-Poll mode?", 0)
+if autopollcheck == 1: 
+    autopoll = 6
+else:
+    autopoll = 4
+        
 # Check project has LCD or not
 lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
 if lcdtype == 1:
@@ -32,9 +39,11 @@ else:
 if (Result):
 	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 02 01 00 00 00")
+		Result = DL.Check_RXResponse("C7 00 00 06 00 02 01 00 00 00")
 		if Result == False:
-			DL.SetWindowText("red", "Please set TDES DUKPT manage, TransArmor TDES, PIN key first.....")
+			RetOfStep = DL.SendCommand('C7-A2 TDES DUKPT manage_TransArmor TDES, PIN key')
+			if (RetOfStep):
+				Result = DL.Check_RXResponse("C7 00 00 00")	
 		
 # First Response Control (0x63) = enable
 if (Result):
@@ -53,9 +62,9 @@ if (Result):
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("04 00 00 00")
 
-# cmd 02-40, MSR/ CL/ CT				
+# cmd 02-40, MSR/ CL/ CT
 if (Result):	
-	for i in range (1, 6):
+	for i in range (1, autopoll):
 		if i <= 3:
 			if i == 1:
 				RetOfStep = DL.SendCommand('Poll on Demand')
@@ -69,13 +78,13 @@ if (Result):
 					RetOfStep = DL.SendCommand('02-40, CL -- Discover w/ LCD')
 				if i == 3:
 					time.sleep(1)
-					RetOfStep = DL.SendCommand('60-10, CT -- EMV Test Card V2 T=0 w/ LCD')	
+					RetOfStep = DL.SendCommand('60-10, CT -- EMV Test Card V2 T=0 w/ LCD')
 					rx = 1
 		if i >= 4:
 			if i == 4:
 				RetOfStep = DL.SendCommand('Auto Poll 1rx')
 				if (RetOfStep):
-					Result = DL.Check_RXResponse("01 00 00 00")		
+					Result = DL.Check_RXResponse("01 00 00 00")	
 			if (Result):
 				if i == 4:
 					RetOfStep = DL.SendCommand('03-40, MSR -- Discover w/ LCD')

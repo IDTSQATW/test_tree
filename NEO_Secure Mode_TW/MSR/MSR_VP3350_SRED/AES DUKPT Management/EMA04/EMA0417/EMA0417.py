@@ -54,7 +54,7 @@ if (Result):
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("01 00 00 00")		
 		if (Result):
-			for i in range (5, 6):
+			for i in range (1, 11):
 				if j == 1:
 					time.sleep(1)
 					if i == 1:

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-49967
+56080
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -176,6 +176,10 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+autopollcheck = msgbox ("Does reader support Auto-Poll mode?", vbyesno)
+if autopollcheck = 6 then pollmode = 4
+if autopollcheck = 7 then pollmode = 2
+
 if readerType <> "USAT" then
 readercheck = inputbox("How many tracks does the reader support?" & vbcrlf & vbcrlf & "1 -- 1 + 2" & vbcrlf & "2 -- 1 + 2 + 3", vbokonly, "2")
 '------------------------------------------------------------
@@ -202,7 +206,7 @@ for f = 0 to 1
     end if
 
     if result <> 0 then
-    for s = 1 to 4
+    for s = 1 to pollmode
         if s = 1 then 
            pollondemand()
            cmd = "02-01"

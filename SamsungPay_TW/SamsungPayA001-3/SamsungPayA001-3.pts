@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-19814
+54479
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -239,6 +239,8 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+autopollcheck = msgbox ("Does reader support Auto-Poll mode?", vbyesno)
+
 if result <> 0 then
    dl.resetreceivecounter
    DL.AddComment vbCrLf & vbCrLf & "--- Burst Off (04-00)"
@@ -302,6 +304,7 @@ end if
 '-------------------------------------------------------
 'Auto poll/ cmd 03-40
 '---------------------------------------------------------
+if autopollcheck = 6 then
 AUTOPOL()
 
 if result <> 0 then
@@ -323,6 +326,7 @@ if result <> 0 then
          Err0BCounter = Err0BCounter + 1
       End If
    end if
+end if
 end if
 '-----------------------------------------------------------
 If Err0BCounter <> 0 Then

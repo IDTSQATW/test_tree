@@ -82,7 +82,7 @@ if(0<DeviceType and 10>=DeviceType):DL.setText("BLACK", "<Kiosk>")
 if(10<DeviceType):DL.setText("BLACK", "<NEOII>")
 ##################################################
 
-
+time.sleep(1)
 # Test Part ######################################
 RobotAction = "ROBOT:CTLSCARD12"
 

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-48162
+22234
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -259,7 +259,7 @@ If result <> 0 Then
       dl.addcomment vbcrlf
       DL.AddComment "--- 61-01 (select AID)"
       DL.SendSequence "61-01 (select AID)"
-      dl.pause 400
+      dl.pause 1000
       dl.resetreceivecounter
       dl.addcomment vbcrlf
       DL.AddComment "--- 61-01 (select Language)"

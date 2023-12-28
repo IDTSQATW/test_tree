@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-6758
+41034
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -209,25 +209,45 @@ end if
 for j = 1 to 2
 for i = 1 to 2     'for issue #NEO3-6582/ NEO3-6367
    If result <> 0 Then
-      if i = 1 then MsgBox "Click OK --> Tap VISA card", vbokonly
-      if i = 2 then MsgBox "Click OK --> Tap VISA card but let reader read failed (2 beeps), try this situation about 3~5 cycles, and then tap card firmly", vbokonly
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- 02-40 w/ amount 101"
-      DL.SendSequence "02-40 w/ amount 101"
-      result = DL.WaitForSequence("02 0A", 1, 10000)
-      dl.pause 500
+      if i = 1 then 
+         MsgBox "Click OK --> Tap VISA card (** 5 times **)", vbokonly
+         k = 5
+      end if
+      if i = 2 then 
+         MsgBox "Click OK --> Tap VISA card but let reader read failed (2 beeps), try this situation about 3~5 cycles, and then tap card firmly (** twice**)", vbokonly
+         k = 2
+      end if
+      for n = 1 to k
+      If result <> 0 Then
+         dl.resetreceivecounter
+         dl.addcomment vbcrlf
+         DL.AddComment "--- 02-40 w/ amount 101"
+         DL.SendSequence "02-40 w/ amount 101"
+         result = DL.WaitForSequence("02 0A", 1, 10000)
+         dl.pause 500
+      end if
+      next
    end if
 
    If result <> 0 Then
-      if i = 1 then MsgBox "Click OK --> Tap MC card", vbokonly
-      if i = 2 then MsgBox "Click OK --> Tap MC card but let reader read failed (2 beeps), try this situation about 3~5 cycles, and then tap card firmly", vbokonly
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- 02-40 w/ amount 301"
-      DL.SendSequence "02-40 w/ amount 301"
-      result = DL.WaitForSequence("02 0A", 1, 10000)
-      dl.pause 500
+      if i = 1 then 
+         MsgBox "Click OK --> Tap MC card (** 5 times **)", vbokonly
+         k = 5
+      end if
+      if i = 2 then 
+         MsgBox "Click OK --> Tap MC card but let reader read failed (2 beeps), try this situation about 3~5 cycles, and then tap card firmly (** twice**)", vbokonly
+         k = 2
+      end if
+      for n = 1 to k
+      If result <> 0 Then
+         dl.resetreceivecounter
+         dl.addcomment vbcrlf
+         DL.AddComment "--- 02-40 w/ amount 301"
+         DL.SendSequence "02-40 w/ amount 301"
+         result = DL.WaitForSequence("02 0A", 1, 10000)
+         dl.pause 500
+      end if
+      next
    end if
 
    if result <> 0 and i = 2 then

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-60292
+37073
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -253,7 +253,7 @@ If result <> 0 Then
 
          if result <> 0 then
             msgbox "Remove card --> Click OK --> Swipe Discover card", vbokonly
-            dl.pause 1500
+            dl.pause 200
 
             if readerType <> "NEO2" then 
                r1 = DL.WaitForSequence("60-10 00 11", 1, 10000)

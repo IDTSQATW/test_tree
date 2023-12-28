@@ -1,4 +1,4 @@
-Docklight Log File (Decimal) - Started 2023/12/11 13:40:39.352 
+Docklight Log File (Decimal) - Started 2023/12/22 08:54:16.866 
  TEST CASE: MV003
 
  --- Set POS COM PORT Settings
@@ -8,8 +8,8 @@ Docklight Log File (Decimal) - Started 2023/12/11 13:40:39.352
 
  --- Get Hardware Information 09-14
 
-2023/12/11 13:40:40.510 [TX] - 086 105 086 079 116 101 099 104 050 000 009 020 000 000 051 008 
-2023/12/11 13:40:40.523 [RX] - 086 105 086 079 116 101 099 104 050 000 009 000 000 021  
+2023/12/22 08:54:18.005 [TX] - 086 105 086 079 116 101 099 104 050 000 009 020 000 000 051 008 
+2023/12/22 08:54:18.012 [RX] - 086 105 086 079 116 101 099 104 050 000 009 000 000 021  
 072 087 044 032 086 080 051 051 053 048 013 010 075 056 049 070 032 082 101 118 052 225 112 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000  
 
  Result = PASSED
@@ -24,5 +24,5 @@ Docklight Log File (Decimal) - Started 2023/12/11 13:40:39.352
 Please check ASCII screen, make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (Decimal) - Stopped 2023/12/11 13:40:41.113 
+Docklight Log File (Decimal) - Stopped 2023/12/22 08:54:18.627 
 

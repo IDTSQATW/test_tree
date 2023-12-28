@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-40630
+22230
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -276,6 +276,7 @@ If result <> 0 Then
    DL.AddComment "--- 60-11 Contact Authenticate Transaction"
    DL.SendSequence "60-11"
    result = DL.WaitForSequence("60-xx 63 status", 1, 1200)
+   dl.pause 1000
 End If
 
 If result <> 0 Then

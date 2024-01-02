@@ -55,7 +55,7 @@ if (Result):
             ksn = DL.GetTLV(alldata,"FFEE12")
         if (Result):
             FF8105 = DL.GetTLV(alldata,"FF8105", 0)
-            
+           
             # 57
             DL.SetWindowText("blue", "Tag 57 Mask/ Encryption data:")
             mask57 = DL.GetTLV(FF8105,"57", 0)
@@ -85,6 +85,12 @@ if (Result):
             if DL.Check_StringAB(dec5A, '5A08374245455400001F000000000000') == False:
                 DL.fails=DL.fails+1
                 DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
+                
+            # 9F06 (CS-4822)
+            AID = DL.Check_RXResponse(rx, "9F 06 06 A0 00 00 00 25 01")
+            if AID == False: 
+                DL.fails=DL.fails+1
+                DL.SetWindowText("red", "Tag AID: FAIL")
 
             # Tags 9F39/ DFEE26
             if DL.Check_RXResponse(rx, "9F39 01 07") == False: 

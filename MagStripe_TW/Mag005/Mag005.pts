@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-58857
+36470
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -11,6 +11,7 @@ ProjectName = "Mag005" ' !!!!! EDIT THIS !!!!!
 '+++
 ' This test case is to verify MSR w/ IDT std test card; for reader supports 3 tracks only.
 ' modify from mag001
+' CS-5248
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -223,6 +224,7 @@ if result <> 0 then
          else
             result = DL.WaitForSequence("IDT std card resp - HW3 (NEO2)", 1, 5000)
          end if
+         if result <> 0 then result = DL.WaitForSequence("9F02 (CS-4855)", 1, 1000)
       end if
 
       if hwcheck = 2 then
@@ -231,12 +233,15 @@ if result <> 0 then
          else
             result = DL.WaitForSequence("IDT std card resp - HW2 (NEO2)", 1, 5000)
          end if
+         if result <> 0 then result = DL.WaitForSequence("9F02 (CS-4855)", 1, 1000)
       end if
    End If
 
    if result <> 0 then
       lcdcheck = msgbox ("Does LED/ LCD have strange behavior?", vbyesno)
       if lcdcheck = 6 then result = 0
+      rxtimecheck = msgbox ("Is data output time unreasonable? (ex. slower)", vbyesno)
+      if rxtimecheck = 6 then result = 0
    end if
 end if
 end sub

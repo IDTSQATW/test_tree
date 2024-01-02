@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-9989
+47033
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -118,38 +118,42 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+msgbox "Place any CL card (can return 23 status code) on reader --> Click OK"
 
  For i = 1 to 10000
 
-   dl.addcomment vbcrlf & vbcrlf
-   DL.AddComment "//////////////    CL Transaction test # " & i & "  //////////////"
-
-   DL.SendSequence "18-01 Ping"
-   dl.pause 500
-
    If result <> 0 Then
+      dl.addcomment vbcrlf & vbcrlf
+      DL.AddComment "//////////////    CL Transaction test # " & i & "  //////////////"
+
+      DL.SendSequence "18-01 Ping"
+      dl.pause 500
+
       dl.resetreceivecounter
       dl.addcomment vbcrlf
       DL.AddComment "--- 02-40 ACT_CL only"
       DL.SendSequence "02-40 ACT_CL only"
-
-      DL.AddComment vbcrlf & vbcrlf & "--- 05-01 Cancel"
-      DL.SendSequence "05-01 Cancel"
-      result = DL.WaitForSequence("05 00", 1, 10000)
-    dl.pause 500
+      result = DL.WaitForSequence("02 23", 1, 5000)
+      if result = 0 then DL.AddComment  vbcrlf & "***** FAIL *****"
+      dl.pause 1000
+      
+      if result <> 0 then
+         DL.AddComment vbcrlf & vbcrlf & "--- 05-01 Cancel"
+         DL.SendSequence "05-01 Cancel"
+         dl.pause 800
+      end if
    End If
 
   Next
 
 
-   DL.AddComment "Stress test: Cancel ACT is completed"
+   DL.AddComment  vbcrlf & "Stress test: Cancel ACT is completed"
 
 
 '------------------------------------------------------------
 DL.AddComment vbCrLf
-PrintMyResult(result)
-
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""

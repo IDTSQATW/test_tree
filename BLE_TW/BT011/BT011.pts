@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-22649
+27530
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -186,6 +186,14 @@ End If
 if result <> 0 then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
+   DL.AddComment "--- 77-81 Set BT name (mindy), pwd 123456 -> 654321"
+   DL.SendSequence "77-81 Set BT name (mindy), pwd 123456 -> 654321"
+   result = DL.WaitForSequence("77-xx resp 00", 1, 3000)
+End If
+
+if result <> 0 then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
    DL.AddComment "--- 77-81 Set BT name over 26 bytes ***** should reject"
    DL.SendSequence "77-81 Set BT name over 26 bytes"
    result = DL.WaitForSequence("77-xx resp 00", 1, 1500)
@@ -216,6 +224,14 @@ if result <> 0 then
    DL.AddComment "--- 77-82 Get Bluetooth Name"
    DL.SendSequence "77-82 Get Bluetooth Name"
    result = DL.WaitForSequence("77-82 resp", 1, 3000)
+End If
+
+if result <> 0 then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- APP testing"
+   apptest = msgbox ("Use phone APP to connect w/ the reader via Blutooth (new name/ pwd: mindy/ 654321, are you successful?", vbyesno)
+   if apptest = 7 then result = 0
 End If
 '------------------------------------------------------------
 DL.AddComment vbCrLf

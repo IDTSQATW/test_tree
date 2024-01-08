@@ -1,14 +1,18 @@
 DL_SCRIPTVERSION
 1
-27490
+56911
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "PM031" ' !!!!! EDIT THIS !!!!!
-' Objective: to verify lightning male
+ProjectName = "PM032" ' !!!!! EDIT THIS !!!!!
+' Objective: 
+' F0-10 Set USB source advertisement configuration 
+' F0-11 Get USB source advertisement configuration
+' This configuration is saved in the flash and effect after next time female power reset.
+' Internal note: If the first 3 digits of SN between 100 to 336, return 0x05 incorrect parameter.
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -130,9 +134,22 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+'Internal note: For VP3350, if the first 3 digits of SN between 100 to 336, return 0x05 incorrect parameter.
 
-' Under Standby mode, Lightning plug into phone, will enter RUN mode
-' Under Standby mode, IDG CMD from lightning, will enter RUN mode
+1. Use F0-10 w/ data 00 set USB source advertisement as detected automatically.  
+1-1. Replug female VP3350 USB connecter.
+1-2. The reader connect w/ Apple device via Lightning-Male or USB-Male.
+1-2. CANNOT charge iPad mini via A-C cable with wall charger. 
+
+2. Use F0-10 w/ data 02 set USB source advertisement as 1.5A @ 5V.
+2-1. Replug female VP3350 USB connecter.
+2-2. The reader connect w/ Apple device via Lightning-Male or USB-Male.
+2-3. CAN charge iPad mini via A-C cable with wall charger.
+
+3. Use F0-10 w/ data 01 set USB source advertisement as default USB power.
+3-1. Replug female VP3350 USB connecter.
+3-2. The reader connect w/ Apple device via Lightning-Male or USB-Male.
+3-3. CANNOT charge iPad mini via A-C cable with wall charger.
 
 '------------------------------------------------------------
 DL.AddComment vbCrLf

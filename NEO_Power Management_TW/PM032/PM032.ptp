@@ -1,0 +1,112 @@
+VERSION
+9
+
+COMMSETTINGS
+0
+COM90
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+F0-10 w/ data 00 = Dynamic charging capability
+56 69 56 4F 74 65 63 68 32 00 F0 10 00 01 00 00 00
+0
+5
+CHECKSUM crc-ccitt
+
+SEND
+1
+F0-10 w/ data 01 = Minimum charging capability
+56 69 56 4F 74 65 63 68 32 00 F0 10 00 01 01 00 00
+0
+5
+CHECKSUM crc-ccitt
+
+SEND
+2
+F0-10 w/ data 02 = Maximum charging capability
+56 69 56 4F 74 65 63 68 32 00 F0 10 00 01 02 00 00
+0
+5
+CHECKSUM crc-ccitt
+
+SEND
+3
+F0-11 Get Charging Capability Configuration
+56 69 56 4F 74 65 63 68 32 00 F0 11 00 00 00 00
+0
+5
+CHECKSUM crc-ccitt
+
+RECEIVE
+0
+F0 00
+56 69 56 4F 74 65 63 68 32 00 F0 00 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+1
+F0-11 rx, data 00 
+56 69 56 4F 74 65 63 68 32 00 F0 00 00 01 00
+-1
+1
+COMMENT Dynamic charging capability
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+2
+F0-11 rx, data 01
+56 69 56 4F 74 65 63 68 32 00 F0 00 00 01 01
+-1
+1
+COMMENT Minimum charging capability
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+3
+F0-11 rx, data 02
+56 69 56 4F 74 65 63 68 32 00 F0 00 00 01 02
+-1
+1
+COMMENT Maximum charging capability
+0
+1
+0
+0
+CHECKSUM 
+0
+

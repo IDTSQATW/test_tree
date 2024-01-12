@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-36264
+46572
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -213,7 +213,17 @@ End Function
 msrcheck = msgbox("Does the reader support MSR function?", vbyesno)
 
 DL.SendSequence "poll on demand"
-dl.pause 800
+dl.pause 500
+
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 29-00"
+   DL.SendSequence "29-00"
+   dl.pause 200
+   neoold = DL.WaitForSequence("1.01", 1, 1500)
+   if neoold = 0 then neonew = DL.WaitForSequence("1.10", 1, 1500)
+End If
 
 if readerType <> "NEO2" then
    precondition()
@@ -310,8 +320,13 @@ sub newtagcheck()
             if r(1) = 1 then dl.addcomment vbcrlf & "DFEE67...FAIL!"
        r(2) = dl.waitforsequence("DFEE34" & i, 1, 200)
             if r(2) = 1 then dl.addcomment vbcrlf & "DFEE34...FAIL!"
-       r(3) = dl.waitforsequence("FFF2" & i, 1, 200)
-            if r(3) = 1 then dl.addcomment vbcrlf & "FFF2...FAIL!"
+       if neonew = 1 then
+          r(3) = dl.waitforsequence("FFF2" & i, 1, 200)
+          if r(3) = 1 then dl.addcomment vbcrlf & "FFF2...FAIL!"
+       elseif neoold = 1 then
+          r(3) = dl.waitforsequence("9F1E" & i, 1, 200)
+          if r(3) = 1 then dl.addcomment vbcrlf & "9F1E...FAIL!"
+       end if 
        r(4) = dl.waitforsequence("DFEE44" & i, 1, 200)
             if r(4) = 1 then dl.addcomment vbcrlf & "DFEE44...FAIL!"
        r(5) = dl.waitforsequence("DFEE35" & i, 1, 200)
@@ -385,6 +400,12 @@ if result <> 0 then
    DL.SendSequence "03-02"
    dl.pause 2000
    dl.addcomment vbcrlf & "Waiting..."
+   SN = DL.WaitForSequence("FFF2 null data", 1, 200)
+   if SN = 0 then SN = DL.WaitForSequence("9F1E null data", 1, 200)
+   if SN = 1 then 
+              countf = countf + 1
+      dl.addcomment vbcrlf & "SN = NULL...FAIL!"
+   end if
    oldtagcheck()
 end if
 
@@ -422,6 +443,12 @@ if result <> 0 then
    DL.SendSequence "02-40"
    dl.pause 2000
    dl.addcomment vbcrlf & "Waiting..."
+   SN = DL.WaitForSequence("FFF2 null data", 1, 200)
+   if SN = 0 then SN = DL.WaitForSequence("9F1E null data", 1, 200)
+   if SN = 1 then 
+      countf = countf + 1
+      dl.addcomment vbcrlf & "SN = NULL...FAIL!"
+   end if
    oldtagcheck()
 end if
 
@@ -506,6 +533,12 @@ if result <> 0 then
    DL.SendSequence "03-02"
    dl.pause 2000
    dl.addcomment vbcrlf & "Waiting..."
+   SN = DL.WaitForSequence("FFF2 null data", 1, 200)
+   if SN = 0 then SN = DL.WaitForSequence("9F1E null data", 1, 200)
+   if SN = 1 then 
+      countf = countf + 1
+      dl.addcomment vbcrlf & "SN = NULL...FAIL!"
+   end if
    newtagcheck()
 end if
 
@@ -543,6 +576,12 @@ if result <> 0 then
    DL.SendSequence "02-40"
    dl.pause 2000
    dl.addcomment vbcrlf & "Waiting..."
+   SN = DL.WaitForSequence("FFF2 null data", 1, 200)
+   if SN = 0 then SN = DL.WaitForSequence("9F1E null data", 1, 200)
+   if SN = 1 then 
+      countf = countf + 1
+      dl.addcomment vbcrlf & "SN = NULL...FAIL!"
+   end if
    newtagcheck()
 end if
 

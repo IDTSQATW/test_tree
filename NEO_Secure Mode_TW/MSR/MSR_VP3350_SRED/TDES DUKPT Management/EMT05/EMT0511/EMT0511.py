@@ -384,8 +384,6 @@ if (Result):
 									# Result = DL.Check_StringAB(TR3plaintextdata, TRK3DecryptData)
 									# if Result != True:
 										# DL.SetWindowText("red", "TR3plaintextdata: FAIL")					
-						else:
-							DL.SetWindowText("RED", "Parse Card Data Fail")
 					else:
 						DL.fails=DL.fails+1
             

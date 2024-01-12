@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-550
+12645
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -156,8 +156,17 @@ End Function
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
 DL.Pause 1000
 
-DL.SendSequence "Set Configuration Global On (NEO2)"
-result = DL.WaitForSequence("04 00", 1, 2000)
+if readerType <> "NEO2" then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.SendSequence "Set Configuration Global On"
+   result = DL.WaitForSequence("04 00", 1, 2000)
+else
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.SendSequence "Set Configuration Global On (NEO2)"
+   result = DL.WaitForSequence("04 00", 1, 2000)
+end if
 
 If result <> 0 Then
    msgbox "Place Mifare DESFire EV1 2K card on reader and then click OK", vbyesonly
@@ -310,8 +319,17 @@ If result = 0 Then
    dl.pause 1000
 End If
 
-DL.SendSequence "Set Configuration Global Off (NEO2)"
-resultignore = DL.WaitForSequence("04 00", 1, 2000)
+if readerType <> "NEO2" then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.SendSequence "Set Configuration Global Off"
+   resultignore = DL.WaitForSequence("04 00", 1, 2000)
+else
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.SendSequence "Set Configuration Global Off (NEO2)"
+   resultignore = DL.WaitForSequence("04 00", 1, 2000)
+end if
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 PrintMyResult(result)

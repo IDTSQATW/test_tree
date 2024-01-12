@@ -84,6 +84,7 @@ if (Result):
 					# Verify specific tags
 					Result = DL.Check_StringAB(Tag9F39, '90')
 					if Result != True:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "Tag9F39: FAIL")	
 																								
 					# Transaction result verification
@@ -92,15 +93,23 @@ if (Result):
 									
 					Result = DL.Check_StringAB(TR2maskdata, Track2_CardData)
 					if Result != True:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "TR2maskdata: FAIL")
 					Result = DL.Check_StringAB(TR2plaintextdata, TRK2DecryptData)
 					if Result != True:
+						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "TR2plaintextdata: FAIL")			
-									
-			else:
-				DL.SetWindowText("RED", "Parse Card Data Fail")
+		else:
+			DL.fails=DL.fails+1
+else:
+	DL.fails=DL.fails+1
 				
 if modeltype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("01 00 00 00")						
+        
+if(0 < (DL.fails + DL.warnings)):
+	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
+else:
+	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )

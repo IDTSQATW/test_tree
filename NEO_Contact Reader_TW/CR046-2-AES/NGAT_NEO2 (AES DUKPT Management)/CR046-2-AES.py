@@ -232,10 +232,14 @@ if readertype == 1:     # NEOII and upward project
 	RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** 6C ** 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
+		if Result == False:
+			DL.fails=DL.fails+1
 if readertype == 0:     # NEOI
 	RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')	
 	if (RetOfStep):
 		Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 60 05 00 00 D6 C5")
+		if Result == False:
+			DL.fails=DL.fails+1
         
 if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))

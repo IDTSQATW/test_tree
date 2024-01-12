@@ -58,12 +58,14 @@ if (Result):
             if Result == True and DL.Check_RXResponse(rx, "57 A1 13"):
                 DL.SetWindowText("blue", "Tag 57_Mask: PASS")
             else:
+                DL.fails=DL.fails+1
                 DL.SetWindowText("red", "Tag 57_Mask: FAIL")
                 
             Result = DL.Check_StringAB(dec57, '57 13 47 61 73 90 01 01 00 10 D3 01 21 20 00 12 33 99 00 03 1F')
             if Result == True and DL.Check_RXResponse(rx, "57 C1 20"):
                 DL.SetWindowText("blue", "Tag 57_Enc: PASS")
             else:
+                DL.fails=DL.fails+1
                 DL.SetWindowText("red", "Tag 57_Enc: FAIL")
 
         # Tag 5A
@@ -71,24 +73,29 @@ if (Result):
             if Result == True and DL.Check_RXResponse(rx, "5A A1 08"):
                 DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
             else:
+                DL.fails=DL.fails+1
                 DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
                 
             Result = DL.Check_StringAB(dec5A, '5A 08 47 61 73 90 01 01 00 10')
             if Result == True and DL.Check_RXResponse(rx, "5A C1 10"):
                 DL.SetWindowText("blue", "Tag 5A_Enc: PASS")
             else:
+                DL.fails=DL.fails+1
                 DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
                 
         # Tags 9F39/ FFEE01/ DFEE26
             if DL.Check_RXResponse(rx, "9F39 01 07") == False: 
+                DL.fails=DL.fails+1
                 DL.SetWindowText("Red", "Tag 9F39: FAIL")
                     
             if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300100") == False: 
+                DL.fails=DL.fails+1
                 DL.SetWindowText("Red", "Tag FFEE01: FAIL")
                     
             if DL.Check_RXResponse(rx, "DFEE26 02 E501") == False: 
+                DL.fails=DL.fails+1
                 DL.SetWindowText("Red", "Tag DFEE26: FAIL")
-                
+
 if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
 else:

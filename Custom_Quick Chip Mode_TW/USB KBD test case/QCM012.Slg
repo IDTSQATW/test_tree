@@ -72,3 +72,9 @@ ASCII: Otech2
 CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 9B FB 
 OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 
 ASCII: Otech2 ` 
+
+11:54:18: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\USB KBD test case\QCM012.txt
+Items: 45
+Load Case Succeed!
+

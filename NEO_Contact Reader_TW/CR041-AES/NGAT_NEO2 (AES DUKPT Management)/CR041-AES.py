@@ -168,45 +168,58 @@ if (Result):
 							if DL.Check_StringAB(Track1_CardData, TR1maskdata1) and DL.Check_StringAB(Track1_CardData, TR1maskdata2) and DL.Check_StringAB(Track1_CardData, TR1maskdata3) and DL.Check_StringAB(Track1_CardData, TR1maskdata4): 
 								DL.SetWindowText("Blue", "Track 1 Mask data: PASS")
 							else:
+								DL.fails=DL.fails+1
 								DL.SetWindowText("Red", "Track 1 Mask data: FAIL")
 								
 							if DL.Check_StringAB(Track2_CardData, TR2maskdata1) and DL.Check_StringAB(Track2_CardData, TR2maskdata2) and DL.Check_StringAB(Track2_CardData, TR2maskdata3):
 								DL.SetWindowText("Blue", "Track 2 Mask data: PASS")
 							else:
+								DL.fails=DL.fails+1
 								DL.SetWindowText("Red", "Track 2 Mask data: FAIL")
 								
 							# Verify Encryption track data	
 							if DL.Check_StringAB(TRK1DecryptData, TR1plaintextdata1) and DL.Check_StringAB(TRK1DecryptData, TR1plaintextdata2) and DL.Check_StringAB(TRK1DecryptData, TR1plaintextdata3):
 								DL.SetWindowText("Blue", "Track 1 Decryption data: PASS")
 							else:
+								DL.fails=DL.fails+1
 								DL.SetWindowText("Red", "Track 1 Decryption data: FAIL")
 								
 							if DL.Check_StringAB(TRK2DecryptData, TR2plaintextdata1) and DL.Check_StringAB(TRK2DecryptData, TR2plaintextdata2): 
 								DL.SetWindowText("Blue", "Track 2 Decryption data: PASS")
 							else:
+								DL.fails=DL.fails+1
 								DL.SetWindowText("Red", "Track 2 Decryption data: FAIL")
 									
 							# Verify specific tags
 							if DL.Check_StringAB(CardData, '80 5F 44 28 00 A3 9B') == False:
+								DL.fails=DL.fails+1
 								DL.SetWindowText("Red", "Tag DFEE23: FAIL")
 							if TagDFEE25 != "0007": 
+								DL.fails=DL.fails+1
 								DL.SetWindowText("Red", "Tag DFEE25: FAIL")
 							if Tag9F39 != "80": 
+								DL.fails=DL.fails+1
 								DL.SetWindowText("Red", "Tag 9F39: FAIL")
 								
 							if readertype == 1:
 								if TagFFEE01 != "DFEE30010C": 
+									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 								if TagDFEE26 != "EC01": 
+									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Tag DFEE26: FAIL")	
 							if readertype == 0:
 								if TagFFEE01 != "DF30010C": 
+									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Tag FFEE01: FAIL")	
 								if TagDFEE26 != "CA": 
+									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Tag DFEE26: FAIL")	
 								if TagDFEF4C != "002700000000": 
+									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Tag DFEF4C: FAIL")	
 								if DL.Check_StringAB(decDFEF4D, '3B36353130303030') == False:
+									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Tag DFEF4D: FAIL")		
 
 if readertype == 1:     # NEO2 or upward
@@ -215,5 +228,14 @@ if readertype == 1:     # NEO2 or upward
 	if (RetOfStep):
 		if lcdtype == 1:
 			Result = Result and DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** EA ** 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
+			if Result == False:
+				DL.fails=DL.fails+1
 		if lcdtype == 0:
-			Result = Result and DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** EC ** 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")			
+			Result = Result and DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** EC ** 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
+			if Result == False:
+				DL.fails=DL.fails+1
+
+if(0 < (DL.fails + DL.warnings)):
+	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
+else:
+	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )

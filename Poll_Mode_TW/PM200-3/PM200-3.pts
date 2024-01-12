@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-47581
+62344
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -374,7 +374,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 sub msr()
-if msrcheck = 6
+if msrcheck = 6 then
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment vbcrlf

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-54055
+59198
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -122,7 +122,7 @@ n = 10000
 msgbox "Insert T=0 test card, click ok", vbokonly
 
 For i = 1 to n
-
+    DL.ClearCommWindows
       dl.addcomment vbcrlf
       DL.AddComment "///////////   CT transaction # " & i &  "  /////////////"
 

@@ -60,6 +60,7 @@ if (Result):
 			if (Result):
 				DL.SetWindowText("blue", "FastEMV: PASS")
 			else:
+				DL.fails=DL.fails+1
 				DL.SetWindowText("red", "FastEMV: FAIL")
 				
 			Tag9F39 = DL.GetTLV(alldata,"9F39")
@@ -67,11 +68,16 @@ if (Result):
 			TagDFEE26 = DL.GetTLV(alldata,"DFEE26")				
 			
 			if Tag9F39 != "05": 
+				DL.fails=DL.fails+1
 				DL.SetWindowText("Red", "Tag 9F39: FAIL")
 			if TagFFEE01 != "DF300101": 
+				DL.fails=DL.fails+1
 				DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 			if TagDFEE26 != "C2": 
+				DL.fails=DL.fails+1
 				DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+else:
+	DL.fails=DL.fails+1
 
 if (Result):
 	RetOfStep = DL.SendCommand('3. 60-10 FastEMV OFF')
@@ -101,12 +107,14 @@ if (Result):
 				if Result == True and DL.Check_StringAB(DL.Get_RXResponse(1), '57 A1 11'):
 					DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 				else:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 			
 				Result = DL.Check_StringAB(dec57, '57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89')
 				if Result == True and DL.Check_StringAB(DL.Get_RXResponse(1), '57 C1 20'):
 					DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 				else:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("red", "Tag 57_Enc: FAIL")
 
 			# Tag 5A
@@ -114,64 +122,77 @@ if (Result):
 				if Result == True and DL.Check_StringAB(DL.Get_RXResponse(1), '5A A1 08'):
 					DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
 				else:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
 			
 				Result = DL.Check_StringAB(dec5A, '5A 08 47 61 73 90 01 01 00 10')
 				if Result == True and DL.Check_StringAB(DL.Get_RXResponse(1), '5A C1 10'):
 					DL.SetWindowText("blue", "Tag 5A_Enc: PASS")
 				else:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
 			
 			# Tags 9F39/ FFEE01/ DFEE26
 				if Tag9F39 != "05": 
+					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")	
 				if TagFFEE01 != "DF300101": 
+					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")		
 				if TagDFEE26 != "C2": 
+					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
-if  CTresultcode == "0010":
-	Result = True
-	RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("60 63 00 00")
-		alldata = DL.Get_RXResponse(1)
-		CTresultcode = DL.GetTLV(alldata,"DFEE25")	
-		if (Result):
-			Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
-			if (Result):		
-				Tag9F39 = DL.GetTLV(alldata,"9F39")
-				TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
-				TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
-					
-				# Tags 9F39/ FFEE01/ DFEE26
-				if Tag9F39 != "05": 
-					DL.SetWindowText("Red", "Tag 9F39: FAIL")		
-				if TagFFEE01 != "DF300101": 
-					DL.SetWindowText("Red", "Tag FFEE01: FAIL")		
-				if TagDFEE26 != "C2": 
-					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
-if  CTresultcode == "0004":
-	Result = True
-	RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("60 63 00 00")
-		alldata = DL.Get_RXResponse(1)
-		CTresultcode = DL.GetTLV(alldata,"DFEE25")
-		if (Result):
-			Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
-			if (Result):				
-				Tag9F39 = DL.GetTLV(alldata,"9F39")
-				TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
-				TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
-					
-				# Tags 9F39/ FFEE01/ DFEE26
-				if Tag9F39 != "05": 
-					DL.SetWindowText("Red", "Tag 9F39: FAIL")		
-				if TagFFEE01 != "DF300101": 
-					DL.SetWindowText("Red", "Tag FFEE01: FAIL")		
-				if TagDFEE26 != "C2": 
-					DL.SetWindowText("Red", "Tag DFEE26: FAIL")	
-					
+		if  CTresultcode == "0010":
+			Result = True
+			RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction')
+			if (RetOfStep):
+				Result = Result and DL.Check_RXResponse("60 63 00 00")
+				alldata = DL.Get_RXResponse(1)
+				CTresultcode = DL.GetTLV(alldata,"DFEE25")	
+				if (Result):
+					Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
+					if (Result):		
+						Tag9F39 = DL.GetTLV(alldata,"9F39")
+						TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
+						TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
+
+						# Tags 9F39/ FFEE01/ DFEE26
+						if Tag9F39 != "05": 
+							DL.fails=DL.fails+1
+							DL.SetWindowText("Red", "Tag 9F39: FAIL")		
+						if TagFFEE01 != "DF300101": 
+							DL.fails=DL.fails+1
+							DL.SetWindowText("Red", "Tag FFEE01: FAIL")		
+						if TagDFEE26 != "C2": 
+							DL.fails=DL.fails+1
+							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+				if CTresultcode == "0004":
+					Result = True
+					RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response')
+					if (RetOfStep):
+						Result = Result and DL.Check_RXResponse("60 63 00 00")
+						alldata = DL.Get_RXResponse(1)
+						CTresultcode = DL.GetTLV(alldata,"DFEE25")
+						if (Result):
+							Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
+							if (Result):				
+								Tag9F39 = DL.GetTLV(alldata,"9F39")
+								TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
+								TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
+
+								# Tags 9F39/ FFEE01/ DFEE26
+								if Tag9F39 != "05": 
+									DL.fails=DL.fails+1
+									DL.SetWindowText("Red", "Tag 9F39: FAIL")		
+								if TagFFEE01 != "DF300101": 
+									DL.fails=DL.fails+1
+									DL.SetWindowText("Red", "Tag FFEE01: FAIL")		
+								if TagDFEE26 != "C2": 
+									DL.fails=DL.fails+1
+									DL.SetWindowText("Red", "Tag DFEE26: FAIL")	
+else:
+	DL.fails=DL.fails+1
+
 # 4C config (FastEMV OFF) + cmd 60-10 (Normal)
 # 4C config 4C config (FastEMV OFF) + cmd 60-10 (FastEMV ON)
 if (Result):
@@ -207,12 +228,14 @@ if (Result):
 				if Result == True and DL.Check_StringAB(DL.Get_RXResponse(1), '57 A1 11'):
 					DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 				else:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 			
 				Result = DL.Check_StringAB(dec57, '57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89')
 				if Result == True and DL.Check_StringAB(DL.Get_RXResponse(1), '57 C1 20'):
 					DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 				else:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("red", "Tag 57_Enc: FAIL")
 
 			# Tag 5A
@@ -220,63 +243,76 @@ if (Result):
 				if Result == True and DL.Check_StringAB(DL.Get_RXResponse(1), '5A A1 08'):
 					DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
 				else:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
 			
 				Result = DL.Check_StringAB(dec5A, '5A 08 47 61 73 90 01 01 00 10')
 				if Result == True and DL.Check_StringAB(DL.Get_RXResponse(1), '5A C1 10'):
 					DL.SetWindowText("blue", "Tag 5A_Enc: PASS")
 				else:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
 			
 			# Tags 9F39/ FFEE01/ DFEE26
 				if Tag9F39 != "05": 
+					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")	
 				if TagFFEE01 != "DF300101": 
+					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")		
 				if TagDFEE26 != "C2": 
+					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
-if  CTresultcode == "0010":
-	Result = True
-	RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("60 63 00 00")
-		alldata = DL.Get_RXResponse(1)
-		CTresultcode = DL.GetTLV(alldata,"DFEE25")	
-		if (Result):
-			Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
-			if (Result):		
-				Tag9F39 = DL.GetTLV(alldata,"9F39")
-				TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
-				TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
-					
-				# Tags 9F39/ FFEE01/ DFEE26
-				if Tag9F39 != "05": 
-					DL.SetWindowText("Red", "Tag 9F39: FAIL")		
-				if TagFFEE01 != "DF300101": 
-					DL.SetWindowText("Red", "Tag FFEE01: FAIL")		
-				if TagDFEE26 != "C2": 
-					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
-if  CTresultcode == "0004":
-	Result = True
-	RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("60 63 00 00")
-		alldata = DL.Get_RXResponse(1)
-		CTresultcode = DL.GetTLV(alldata,"DFEE25")
-		if (Result):
-			Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
-			if (Result):				
-				Tag9F39 = DL.GetTLV(alldata,"9F39")
-				TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
-				TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
-					
-				# Tags 9F39/ FFEE01/ DFEE26
-				if Tag9F39 != "05": 
-					DL.SetWindowText("Red", "Tag 9F39: FAIL")		
-				if TagFFEE01 != "DF300101": 
-					DL.SetWindowText("Red", "Tag FFEE01: FAIL")		
-				if TagDFEE26 != "C2": 
-					DL.SetWindowText("Red", "Tag DFEE26: FAIL")	
+		if CTresultcode == "0010":
+			Result = True
+			RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction')
+			if (RetOfStep):
+				Result = Result and DL.Check_RXResponse("60 63 00 00")
+				alldata = DL.Get_RXResponse(1)
+				CTresultcode = DL.GetTLV(alldata,"DFEE25")	
+				if (Result):
+					Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
+					if (Result):		
+						Tag9F39 = DL.GetTLV(alldata,"9F39")
+						TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
+						TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
+
+						# Tags 9F39/ FFEE01/ DFEE26
+						if Tag9F39 != "05": 
+							DL.fails=DL.fails+1
+							DL.SetWindowText("Red", "Tag 9F39: FAIL")		
+						if TagFFEE01 != "DF300101": 
+							DL.fails=DL.fails+1
+							DL.SetWindowText("Red", "Tag FFEE01: FAIL")		
+						if TagDFEE26 != "C2": 
+							DL.fails=DL.fails+1
+							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+				if CTresultcode == "0004":
+					Result = True
+					RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response')
+					if (RetOfStep):
+						Result = Result and DL.Check_RXResponse("60 63 00 00")
+						alldata = DL.Get_RXResponse(1)
+						CTresultcode = DL.GetTLV(alldata,"DFEE25")
+						if (Result):
+							Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
+							if (Result):				
+								Tag9F39 = DL.GetTLV(alldata,"9F39")
+								TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
+								TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
+
+								# Tags 9F39/ FFEE01/ DFEE26
+								if Tag9F39 != "05": 
+									DL.fails=DL.fails+1
+									DL.SetWindowText("Red", "Tag 9F39: FAIL")		
+								if TagFFEE01 != "DF300101": 
+									DL.fails=DL.fails+1
+									DL.SetWindowText("Red", "Tag FFEE01: FAIL")		
+								if TagDFEE26 != "C2": 
+									DL.fails=DL.fails+1
+									DL.SetWindowText("Red", "Tag DFEE26: FAIL")	
+else:
+	DL.fails=DL.fails+1
 
 if (Result):
 	RetOfStep = DL.SendCommand('2. 60-10 FastEMV ON')
@@ -289,6 +325,7 @@ if (Result):
 			if (Result):
 				DL.SetWindowText("blue", "FastEMV: PASS")
 			else:
+				DL.fails=DL.fails+1
 				DL.SetWindowText("red", "FastEMV: FAIL")
 				
 			Tag9F39 = DL.GetTLV(alldata,"9F39")
@@ -296,8 +333,13 @@ if (Result):
 			TagDFEE26 = DL.GetTLV(alldata,"DFEE26")				
 			
 			if Tag9F39 != "05": 
+				DL.fails=DL.fails+1
 				DL.SetWindowText("Red", "Tag 9F39: FAIL")
 			if TagFFEE01 != "DF300101": 
+				DL.fails=DL.fails+1
 				DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 			if TagDFEE26 != "C2": 
+				DL.fails=DL.fails+1
 				DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+else:
+	DL.fails=DL.fails+1

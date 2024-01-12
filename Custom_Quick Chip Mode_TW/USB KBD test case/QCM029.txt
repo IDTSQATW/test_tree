@@ -11,7 +11,7 @@ EXR: 04 00
 
 --------------------
 >>> MSR transaction
-MESSAGE: Open PC "NotePad" -> tap any CL card 3 times -> notice the cursor position
+MESSAGE: Open "Notepad_win10.exe" -> tap any CL card 3 times -> notice the cursor position
 MESSAGECK: the cursor will be moved to the beginning of next line (CR) per tap
 
 --------------------
@@ -20,7 +20,7 @@ EXR: 04 00
 
 --------------------
 >>> MSR transaction
-MESSAGE: Open PC "NotePad" -> tap any CL card 3 times -> notice the cursor position
+MESSAGE: Open "Notepad_win10.exe" -> tap any CL card 3 times -> notice the cursor position
 MESSAGECK: the cursor will be skipped a new line and was moved to the beginning of the next line (CR + LF) per tap
 
 ===========================================
@@ -34,7 +34,7 @@ EXR: 04 00
 
 --------------------
 >>> MSR transaction
-MESSAGE: Open PC "NotePad" -> tap any CL card 3 times -> notice the cursor position
+MESSAGE: Open "Notepad_win10.exe" -> tap any CL card 3 times -> notice the cursor position
 MESSAGECK: the cursor will be moved to the beginning of next line (CR) per tap
 
 --------------------
@@ -43,7 +43,7 @@ EXR: 04 00
 
 --------------------
 >>> MSR transaction
-MESSAGE: Open PC "NotePad" -> tap any CL card 3 times -> notice the cursor position
+MESSAGE: Open "Notepad_win10.exe" -> tap any CL card 3 times -> notice the cursor position
 MESSAGECK: the cursor will be skipped a new line and was moved to the beginning of the next line (CR + LF) per tap
 
 ===========================================

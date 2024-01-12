@@ -50,6 +50,8 @@ if (Result):
 	RetOfStep = DL.SendCommand('60-10 w/ DFEF1F: 02 02 (error)')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("60 05 00 00")			
+else:
+	DL.fails=DL.fails+1
 
 ### CASE 2	
 # cmd 60-10 w/ DFEF1F: 00 00
@@ -86,12 +88,14 @@ if (Result):
 				if Result == True and DL.Check_StringAB(alldata, '57 A1 11'):
 					DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 				else:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 			
 				Result = DL.Check_StringAB(dec57, '57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89')
 				if Result == True and DL.Check_StringAB(alldata, '57 C1 20'):
 					DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 				else:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("red", "Tag 57_Enc: FAIL")
 
 			# Tag 5A
@@ -99,22 +103,28 @@ if (Result):
 				if Result == True and DL.Check_StringAB(alldata, '5A A1 08'):
 					DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
 				else:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
 			
 				Result = DL.Check_StringAB(dec5A, '5A 08 47 61 73 90 01 01 00 10')
 				if Result == True and DL.Check_StringAB(alldata, '5A C1 10'):
 					DL.SetWindowText("blue", "Tag 5A_Enc: PASS")
 				else:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
 			
 			# Tags 9F39/ FFEE01/ DFEE26
 				if DL.Check_StringAB(Tag9F39, '05') == True or DL.Check_StringAB(Tag9F39, '07') == True: 
-					DL.SetWindowText("blue", "Tag 9F39: PASS")
+				else:
+					DL.fails=DL.fails+1
+					DL.SetWindowText("Red", "Tag 9F39: FAIL")
 				
 				if DL.Check_StringAB(TagFFEE01, 'DFEE300101') == False:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
 				if DL.Check_StringAB(TagDFEE26, 'E401') == False:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 
 		# cmd 60-11 Contact Authenticate Transaction (DFEF1F: 00 00)			
@@ -142,12 +152,16 @@ if (Result):
 	
 						# Tags 9F39/ FFEE01/ DFEE26
 						if DL.Check_StringAB(Tag9F39, '05') == True or DL.Check_StringAB(Tag9F39, '07') == True: 
-							DL.SetWindowText("blue", "Tag 9F39: PASS")
+						else:
+							DL.fails=DL.fails+1
+							DL.SetWindowText("Red", "Tag 9F39: FAIL")
 				
 						if DL.Check_StringAB(TagFFEE01, 'DFEE300101') == False:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
 						if DL.Check_StringAB(TagDFEE26, 'E401') == False:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 				
 		# cmd 60-12 Contact Apply Host Response (DFEF1F: 00 00)
@@ -175,13 +189,19 @@ if (Result):
 					
 						# Tags 9F39/ FFEE01/ DFEE26
 						if DL.Check_StringAB(Tag9F39, '05') == True or DL.Check_StringAB(Tag9F39, '07') == True: 
-							DL.SetWindowText("blue", "Tag 9F39: PASS")
+						else:
+							DL.fails=DL.fails+1
+							DL.SetWindowText("Red", "Tag 9F39: FAIL")
 				
 						if DL.Check_StringAB(TagFFEE01, 'DFEE300101') == False:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
 						if DL.Check_StringAB(TagDFEE26, 'E401') == False:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+else:
+	DL.fails=DL.fails+1
 
 ### CASE 3							
 # cmd 60-10 w/ DFEF1F: 01 01 --1
@@ -208,12 +228,16 @@ if (Result):
 			
 				# Tags 9F39/ FFEE01/ DFEE26
 				if DL.Check_StringAB(Tag9F39, '05') == True or DL.Check_StringAB(Tag9F39, '07') == True: 
-					DL.SetWindowText("blue", "Tag 9F39: PASS")
+				else:
+					DL.fails=DL.fails+1
+					DL.SetWindowText("Red", "Tag 9F39: FAIL")
 				
 				if DL.Check_StringAB(TagFFEE01, 'DFEE300101') == False:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
 				if DL.Check_StringAB(TagDFEE26, 'E401') == False:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")			
 
 		# cmd 60-11 Contact Authenticate Transaction (DFEF1F: 01 01 --1)		
@@ -228,7 +252,9 @@ if (Result):
 					if lcdtype == 0:
 						DL.SendCommand('05-01_w/o LCD')	
 					time.sleep(2)	
-					
+else:
+	DL.fails=DL.fails+1
+
 ### CASE 4					
 # cmd 60-10 w/ DFEF1F: 01 01 --2
 if (Result):
@@ -254,12 +280,16 @@ if (Result):
 			
 				# Tags 9F39/ FFEE01/ DFEE26
 				if DL.Check_StringAB(Tag9F39, '05') == True or DL.Check_StringAB(Tag9F39, '07') == True: 
-					DL.SetWindowText("blue", "Tag 9F39: PASS")
-				
+				else:
+					DL.fails=DL.fails+1
+					DL.SetWindowText("Red", "Tag 9F39: FAIL")
+                    
 				if DL.Check_StringAB(TagFFEE01, 'DFEE300101') == False:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-				
+                    
 				if DL.Check_StringAB(TagDFEE26, 'E401') == False:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 					
 		# cmd 60-12 Contact Apply Host Response (DFEF1F: 01 01 --2)
@@ -286,13 +316,19 @@ if (Result):
 							
 						# Tags 9F39/ FFEE01/ DFEE26
 						if DL.Check_StringAB(Tag9F39, '05') == True or DL.Check_StringAB(Tag9F39, '07') == True: 
-							DL.SetWindowText("blue", "Tag 9F39: PASS")
+						else:
+							DL.fails=DL.fails+1
+							DL.SetWindowText("Red", "Tag 9F39: FAIL")
 				
 						if DL.Check_StringAB(TagFFEE01, 'DFEE300101') == False:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
 						if DL.Check_StringAB(TagDFEE26, 'E401') == False:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+else:
+	DL.fails=DL.fails+1
 
 ### CASE 5							
 # cmd 60-10 w/ DFEF1F: 01 00
@@ -319,12 +355,16 @@ if (Result):
 			
 				# Tags 9F39/ FFEE01/ DFEE26
 				if DL.Check_StringAB(Tag9F39, '05') == True or DL.Check_StringAB(Tag9F39, '07') == True: 
-					DL.SetWindowText("blue", "Tag 9F39: PASS")
+				else:
+					DL.fails=DL.fails+1
+					DL.SetWindowText("Red", "Tag 9F39: FAIL")
 				
 				if DL.Check_StringAB(TagFFEE01, 'DFEE300101') == False:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
 				if DL.Check_StringAB(TagDFEE26, 'E401') == False:
+					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 					
 		# cmd 60-12 Contact Apply Host Response (DFEF1F: 01 00)
@@ -352,10 +392,21 @@ if (Result):
 							
 						# Tags 9F39/ FFEE01/ DFEE26
 						if DL.Check_StringAB(Tag9F39, '05') == True or DL.Check_StringAB(Tag9F39, '07') == True: 
-							DL.SetWindowText("blue", "Tag 9F39: PASS")
+						else:
+							DL.fails=DL.fails+1
+							DL.SetWindowText("Red", "Tag 9F39: FAIL")
 				
 						if DL.Check_StringAB(TagFFEE01, 'DFEE300101') == False:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 				
 						if DL.Check_StringAB(TagDFEE26, 'E401') == False:
+							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+else:
+	DL.fails=DL.fails+1
+                            
+if(0 < (DL.fails + DL.warnings)):
+	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
+else:
+	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )

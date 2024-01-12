@@ -64,7 +64,7 @@ if (Result):
 				TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
 				TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 		
-                # Tag 57
+				# Tag 57
 				Result = DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D2 01 2C CC CC CC CC CC CC')
 				if Result == True and DL.Check_RXResponse(rx, '57 A1 11'):
 					DL.SetWindowText("blue", "Tag 57_Mask: PASS")
@@ -79,7 +79,7 @@ if (Result):
 					DL.fails=DL.fails+1
 					DL.SetWindowText("red", "Tag 57_Enc: FAIL")
 
-                # Tag 5A
+				# Tag 5A
 				Result = DL.Check_StringAB(mask5A, '47 61 CC CC CC CC 00 10')
 				if Result == True and DL.Check_RXResponse(rx, '5A A1 08'):
 					DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
@@ -94,7 +94,7 @@ if (Result):
 					DL.fails=DL.fails+1
 					DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
 			
-                # TagList (default)
+				# TagList (default)
 				Result = DL.Check_StringAB(alldata, '5F34')
 				if (Result):
 					Result = DL.Check_StringAB(alldata, '5F20')
@@ -137,248 +137,246 @@ if (Result):
 			else:
 				DL.fails=DL.fails+1
 
-        # cmd 60-11					
-        if  CTresultcode == "0010":
-            if lcdtype == 1:
-                RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction_w LCD')
-                rx = 1
-            if lcdtype == 0:
-                RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction_w/o LCD')
-                rx = 4
-            if (RetOfStep):
-                Result = DL.Check_RXResponse("60 63 00 00")
-                alldata = DL.Get_RXResponse(rx)
-                CTresultcode = DL.GetTLV(alldata,"DFEE25")	
-                if (Result):
-                    Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')
-                    if (Result):
-                        ksn = DL.GetTLV(alldata,"DFEE12")	
-                        
-                        Tag9F39 = DL.GetTLV(alldata,"9F39")
-                        TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
-                        TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
-                        
-                        # TagList (default)
-                        Result = DL.Check_RXResponse(rx, '4F')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '50')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '57')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '5A')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '82')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '84')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '8E')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9A')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '95')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '99')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9B')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9C')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '5F20')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '5F24')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '5F25')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '5F34')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '5F28')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '5F2A')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '5F2D')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F02')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F03')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F07')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F08')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F09')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F0D')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F0E')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F0F')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F0B')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F10')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F11')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F12')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F13')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F15')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F16')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F1A')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F1C')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F1E')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F20')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F21')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F24')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F26')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F27')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F33')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F34')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F35')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F36')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F37')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F53')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '9F5B')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, 'DF21')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, 'DFEE23')
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, 'DFEE51')
-                        if Result == False:
-                            DL.fails=DL.fails+1
-                            DL.SetWindowText("Red", "Default Tags List: FAIL")
-                    
-                        # Tags 9F39/ FFEE01/ DFEE26
-                        if DL.Check_RXResponse(rx, "9F390105") == False:
-                            DL.fails=DL.fails+1
-                            DL.SetWindowText("Red", "Tag 9F39: FAIL")
-                
-                        if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False: 
-                            DL.fails=DL.fails+1
-                            DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-                
-                        if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False: 
-                            DL.fails=DL.fails+1
-                            DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+		# cmd 60-11
+		if  CTresultcode == "0010":
+			if lcdtype == 1:
+				RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction_w LCD')
+				rx = 1
+			if lcdtype == 0:
+				RetOfStep = DL.SendCommand('60-11 Contact Authenticate Transaction_w/o LCD')
+				rx = 4
+			if (RetOfStep):
+				Result = DL.Check_RXResponse("60 63 00 00")
+				alldata = DL.Get_RXResponse(rx)
+				CTresultcode = DL.GetTLV(alldata,"DFEE25")	
+				if (Result):
+					Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')
+					if (Result):
+						ksn = DL.GetTLV(alldata,"DFEE12")	
+						Tag9F39 = DL.GetTLV(alldata,"9F39")
+						TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
+						TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
 
-                        # cmd 60-13
-                        RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result, for 60-11')
-                        if (RetOfStep):
-                            Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** E1 ** 9F 10 07 06 01 1A 03 90 00 00 9F 26 08 ** 9F 27 01 80 9F 36 02 00 01 9F 37 04 ** 9F 02 06 00 00 00 00 02 00 9F 4D 00 9F 13 00 95 05 ** 9B 02 C8 00 9F 03 06 00 00 00 00 00 00 9F 34 03 5F 03 02")
-                            if Result == False:
-                               DL.fails=DL.fails+1
-                               DL.SetWindowText("Red", "FAIL")
-                            
-                    else:
-                        DL.fails=DL.fails+1
-                        
-                # cmd 60-12
-                if  CTresultcode == "0004":
-                    if lcdtype == 1:
-                        RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response_w LCD')
-                        rx = 1
-                    if lcdtype == 0:
-                        RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response_w/o LCD')
-                        rx = 2	
-                    if (RetOfStep):
-                        Result = DL.Check_RXResponse("60 63 00 00")
-                        alldata = DL.Get_RXResponse(rx)
-                        CTresultcode = DL.GetTLV(alldata,"DFEE25")
-                        if (Result):
-                            Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')
-                            if (Result):
-                                ksn = DL.GetTLV(alldata,"DFEE12")
-                                
-                                Tag9F39 = DL.GetTLV(alldata,"9F39")
-                                TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
-                                TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
-                                
-                                # TagList (default)
-                                Result = DL.Check_RXResponse(rx, '9F 10 07 06 01 1A 03 60 00 00')
-                                if (Result):
-                                    Result = DL.Check_RXResponse(rx, '8A')
-                                if (Result):
-                                    Result = DL.Check_RXResponse(rx, '9F10')
-                                if (Result):
-                                    Result = DL.Check_RXResponse(rx, '9F26')
-                                if (Result):
-                                    Result = DL.Check_RXResponse(rx, '9F27')
-                                if (Result):
-                                    Result = DL.Check_RXResponse(rx, '9F36')
-                                if (Result):
-                                    Result = DL.Check_RXResponse(rx, '9F37')
-                                if (Result):
-                                    Result = DL.Check_RXResponse(rx, '9F02')
-                                if (Result):
-                                    Result = DL.Check_RXResponse(rx, '9F13')
-                                if (Result):
-                                    Result = DL.Check_RXResponse(rx, '95')
-                                if (Result):
-                                    Result = DL.Check_RXResponse(rx, '9B')
-                                if (Result):
-                                    Result = DL.Check_RXResponse(rx, '9F03')
-                                if (Result):
-                                    Result = DL.Check_RXResponse(rx, '9F34')
-                                if (Result):
-                                    Result = DL.Check_RXResponse(rx, 'DFEE51')
-                                if (Result):
-                                    Result = DL.Check_RXResponse(rx, '99')
-                                if (Result):
-                                    Result = DL.Check_RXResponse(rx, 'DF21')
-                                if (Result):
-                                    Result = DL.Check_RXResponse(rx, '9F53')
-                                if Result == False:
-                                    DL.fails=DL.fails+1
-                                    DL.SetWindowText("Red", "Default Tags List: FAIL")
-                                    
-                                # Tags 9F39/ FFEE01/ DFEE26
-                                if DL.Check_RXResponse(rx, "9F390105") == False:
-                                    DL.fails=DL.fails+1
-                                    DL.SetWindowText("Red", "Tag 9F39: FAIL")
-                        
-                                if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False: 
-                                    DL.fails=DL.fails+1
-                                    DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-                        
-                                if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False: 
-                                    DL.fails=DL.fails+1
-                                    DL.SetWindowText("Red", "Tag DFEE26: FAIL")
-                                    
-                                # cmd 60-13
-                                RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result, for 60-12')
-                                if (RetOfStep):
-                                    Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** E1 ** 9F 10 07 06 01 1A 03 60 00 00 9F 26 08 ** 9F 27 01 40 9F 36 02 00 01 9F 37 04 ** 9F 02 06 00 00 00 00 02 00 9F 4D 00 9F 13 00 95 05 ** 9B 02 F8 00 9F 03 06 00 00 00 00 00 00 9F 34 03 5F 03 02 99 00 9F 5B 00")
-                                    if Result == False:
-                                        DL.fails=DL.fails+1
-                                        DL.SetWindowText("Red", "FAIL")
+						# TagList (default)
+						Result = DL.Check_RXResponse(rx, '4F')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '50')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '57')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '5A')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '82')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '84')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '8E')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9A')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '95')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '99')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9B')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9C')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '5F20')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '5F24')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '5F25')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '5F34')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '5F28')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '5F2A')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '5F2D')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F02')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F03')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F07')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F08')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F09')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F0D')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F0E')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F0F')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F0B')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F10')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F11')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F12')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F13')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F15')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F16')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F1A')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F1C')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F1E')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F20')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F21')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F24')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F26')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F27')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F33')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F34')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F35')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F36')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F37')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F53')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '9F5B')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, 'DF21')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, 'DFEE23')
+						if (Result):
+							Result = DL.Check_RXResponse(rx, 'DFEE51')
+						if Result == False:
+							DL.fails=DL.fails+1
+							DL.SetWindowText("Red", "Default Tags List: FAIL")
 
-                                RetOfStep = DL.SendCommand('60-13 (#CS-4187)')
-                                if (RetOfStep):
-                                    Result = DL.Check_RXResponse("5F 20 0F 46 55 4C 4C 20 46 55 4E 43 54 49 4F 4E 41 4C")
-                                    if Result == False:
-                                        DL.fails=DL.fails+1
-                                        DL.SetWindowText("Red", "FAIL")
-                            else:
-                                DL.fails=DL.fails+1
-                    
+						# Tags 9F39/ FFEE01/ DFEE26
+						if DL.Check_RXResponse(rx, "9F390105") == False:
+							DL.fails=DL.fails+1
+							DL.SetWindowText("Red", "Tag 9F39: FAIL")
+
+						if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False: 
+							DL.fails=DL.fails+1
+							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
+
+						if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False: 
+							DL.fails=DL.fails+1
+							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+
+						# cmd 60-13
+						RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result, for 60-11')
+						if (RetOfStep):
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** E1 ** 9F 10 07 06 01 1A 03 90 00 00 9F 26 08 ** 9F 27 01 80 9F 36 02 00 01 9F 37 04 ** 9F 02 06 00 00 00 00 02 00 9F 4D 00 9F 13 00 95 05 ** 9B 02 C8 00 9F 03 06 00 00 00 00 00 00 9F 34 03 5F 03 02")
+							if Result == False:
+								DL.fails=DL.fails+1
+								DL.SetWindowText("Red", "FAIL")
+
+					else:
+						DL.fails=DL.fails+1
+
+				# cmd 60-12
+				if  CTresultcode == "0004":
+					if lcdtype == 1:
+						RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response_w LCD')
+						rx = 1
+					if lcdtype == 0:
+						RetOfStep = DL.SendCommand('60-12 Contact Apply Host Response_w/o LCD')
+						rx = 2	
+					if (RetOfStep):
+						Result = DL.Check_RXResponse("60 63 00 00")
+						alldata = DL.Get_RXResponse(rx)
+						CTresultcode = DL.GetTLV(alldata,"DFEE25")
+						if (Result):
+							Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')
+							if (Result):
+								ksn = DL.GetTLV(alldata,"DFEE12")
+								Tag9F39 = DL.GetTLV(alldata,"9F39")
+								TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
+								TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
+
+								# TagList (default)
+								Result = DL.Check_RXResponse(rx, '9F 10 07 06 01 1A 03 60 00 00')
+								if (Result):
+									Result = DL.Check_RXResponse(rx, '8A')
+								if (Result):
+									Result = DL.Check_RXResponse(rx, '9F10')
+								if (Result):
+									Result = DL.Check_RXResponse(rx, '9F26')
+								if (Result):
+									Result = DL.Check_RXResponse(rx, '9F27')
+								if (Result):
+									Result = DL.Check_RXResponse(rx, '9F36')
+								if (Result):
+									Result = DL.Check_RXResponse(rx, '9F37')
+								if (Result):
+									Result = DL.Check_RXResponse(rx, '9F02')
+								if (Result):
+									Result = DL.Check_RXResponse(rx, '9F13')
+								if (Result):
+									Result = DL.Check_RXResponse(rx, '95')
+								if (Result):
+									Result = DL.Check_RXResponse(rx, '9B')
+								if (Result):
+									Result = DL.Check_RXResponse(rx, '9F03')
+								if (Result):
+									Result = DL.Check_RXResponse(rx, '9F34')
+								if (Result):
+									Result = DL.Check_RXResponse(rx, 'DFEE51')
+								if (Result):
+									Result = DL.Check_RXResponse(rx, '99')
+								if (Result):
+									Result = DL.Check_RXResponse(rx, 'DF21')
+								if (Result):
+									Result = DL.Check_RXResponse(rx, '9F53')
+								if Result == False:
+									DL.fails=DL.fails+1
+									DL.SetWindowText("Red", "Default Tags List: FAIL")
+
+								# Tags 9F39/ FFEE01/ DFEE26
+								if DL.Check_RXResponse(rx, "9F390105") == False:
+									DL.fails=DL.fails+1
+									DL.SetWindowText("Red", "Tag 9F39: FAIL")
+
+								if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300101") == False: 
+									DL.fails=DL.fails+1
+									DL.SetWindowText("Red", "Tag FFEE01: FAIL")
+
+								if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False: 
+									DL.fails=DL.fails+1
+									DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+
+								# cmd 60-13
+								RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result, for 60-12')
+								if (RetOfStep):
+									Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** E1 ** 9F 10 07 06 01 1A 03 60 00 00 9F 26 08 ** 9F 27 01 40 9F 36 02 00 01 9F 37 04 ** 9F 02 06 00 00 00 00 02 00 9F 4D 00 9F 13 00 95 05 ** 9B 02 F8 00 9F 03 06 00 00 00 00 00 00 9F 34 03 5F 03 02 99 00 9F 5B 00")
+									if Result == False:
+										DL.fails=DL.fails+1
+										DL.SetWindowText("Red", "FAIL")
+
+								RetOfStep = DL.SendCommand('60-13 (#CS-4187)')
+								if (RetOfStep):
+									Result = DL.Check_RXResponse("5F 20 0F 46 55 4C 4C 20 46 55 4E 43 54 49 4F 4E 41 4C")
+									if Result == False:
+										DL.fails=DL.fails+1
+										DL.SetWindowText("Red", "FAIL")
+							else:
+								DL.fails=DL.fails+1
+
 if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
 else:

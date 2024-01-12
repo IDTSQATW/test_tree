@@ -87,3 +87,9 @@ KB Unit Swipe Card:
 MESSAGECK: data output speed correctly
 User Judgment Pass
 
+
+11:05:10: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\USB KBD test case\QCM003.txt
+Items: 42
+Load Case Succeed!
+

@@ -158,6 +158,7 @@ if (Result):
 							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 28 DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 0F 42 00 00 81 00")
 						if i == 10:
 							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** 28 DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 3F 4D 27 69 87 00")
+						sResult=DL.Get_RXResponse(0)
 					if j == 2:
 						Result = DL.Check_StringAB(DL.Get_RXResponse(1),"56 69 56 4F 74 65 63 68 32 00 03 00")
 						if (Result):
@@ -183,6 +184,7 @@ if (Result):
 									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"83 0F 42 00 00 81 00")
 								if i == 10:
 									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 3F 4D 27 69 87 00")
+						sResult=DL.Get_RXResponse(1)
 					if j == 3:
 						if i == 1:
 							Result = DL.Check_RXResponse("01 00 0C 25 54 52 41 43 4B 31 37 36 37 36 37 36 30 37 30 37 30 37 37 36 37 36 37 36 30 37 30 37 30 37 37 36 37 36 37 36 30 37 30 37 30 37 37 36 37 36 37 36 30 37 30 37 30 37 37 36 37 36 37 36 30 37 30 37 30 37 37 36 37 36 37 36 30 37 30 37 3F 3B 32 31 32 31 32 31 32 31 32 31 37 36 37 36 37 36 30 37 30 37 30 37 37 36 37 36 37 36 37 36 32 31 32 31 32 31 32 3F 3B 33 33 33 33 33 33 33 33 33 33 37 36 37 36 37 36 30 37 30 37 30 37 37 36 37 36 37 36 33 33 33 33 33 33 33 33 33 33 37 36 37 36 37 36 30 37 30 37 30 37 37 36 37 36 37 36 33 33 33 33 33 33 33 33 33 33 37 36 37 36 37 36 30 37 30 37 30 37 37 36 37 36 37 36 33 33 33 33 33 33 33 33 33 33 37 36 37 36 37 36 30 37 30 37 3F 81 14")
@@ -206,13 +208,9 @@ if (Result):
 							Result = DL.Check_RXResponse("01 00 0C 25 42 34 30 37 31 36 36 32 31 30 34 36 39 31 32 33 34 35 36 37 38 5E 44 4F 57 2F 4A 4F 48 4E 20 5E 31 37 31 31 32 30 31 31 32 37 38 37 31 31 30 30 30 30 30 30 30 30 38 34 39 30 30 30 30 30 30 3F 64 9D")
 						if i == 10:
 							Result = DL.Check_RXResponse("01 00 0C 25 42 34 35 34 37 35 37 30 30 30 31 30 37 30 30 30 30 5E 4C 4C 49 42 52 45 20 52 4F 42 45 52 54 2D 47 55 49 4C 4C 45 52 4D 4F 20 5E 31 31 30 32 31 30 31 30 30 30 30 30 30 30 34 30 30 30 30 30 30 30 33 30 36 30 30 30 30 30 30 3F 3B 34 35 34 37 35 37 30 30 30 31 30 37 30 30 30 30 3D 31 31 30 32 31 30 31 30 30 30 30 30 33 30 36 30 30 30 30 3F 3B 30 31 34 35 34 37 35 37 30 30 30 31 30 37 30 30 30 30 3D 37 39 37 38 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 33 30 31 39 30 31 38 30 34 30 32 30 30 30 31 31 30 32 34 3D 33 30 32 35 30 30 30 31 31 34 31 34 30 31 30 35 38 35 39 38 3D 3D 31 3D 30 30 30 30 30 30 32 36 30 30 30 30 30 30 30 30 30 30 30 30 3F BE 68")
-									
-					if j == 1:
-						sResult=DL.Get_RXResponse(0)
-					if j == 2:
-						sResult=DL.Get_RXResponse(1)
-					if j == 3:
 						sResult=""
+						if Result != True:
+							DL.fails=DL.fails+1
 						
 					if Result == True and sResult!=None and sResult!="":
 						sResult=sResult.replace(" ","")
@@ -254,12 +252,15 @@ if (Result):
 								# Verify specific tags
 								Result = DL.Check_StringAB(Tag9F39, '90')
 								if Result != True:
-									DL.SetWindowText("red", "Tag9F39: FAIL")							
+									DL.fails=DL.fails+1
+									DL.SetWindowText("red", "Tag9F39: FAIL")
 								Result = DL.Check_StringAB(TagFFEE01, 'DFEE30010C')
 								if Result != True:
+									DL.fails=DL.fails+1
 									DL.SetWindowText("red", "TagFFEE01: FAIL")	
 								Result = DL.Check_StringAB(TagDFEE26, '2800')
 								if Result != True:
+									DL.fails=DL.fails+1
 									DL.SetWindowText("red", "TagDFEE26: FAIL")	
 								
 								# IDT
@@ -271,14 +272,17 @@ if (Result):
 									
 									Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR1maskdata: FAIL")
 
 									Result = DL.Check_StringAB(TR2maskdata, Track2_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR2maskdata: FAIL")
 
 									Result = DL.Check_StringAB(TR3maskdata, Track3_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR3maskdata: FAIL")
 																											
 								# Discover	
@@ -289,10 +293,12 @@ if (Result):
 									
 									Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR1maskdata: FAIL")
 
 									Result = DL.Check_StringAB(TR2maskdata, Track2_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR2maskdata: FAIL")
 									
 								# JIS 1	
@@ -303,10 +309,12 @@ if (Result):
 									
 									Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR1maskdata: FAIL")
 
 									Result = DL.Check_StringAB(TR2maskdata, Track2_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR2maskdata: FAIL")
 
 								# JIS 2	
@@ -319,6 +327,7 @@ if (Result):
 									if Result != True:
 										Result = DL.Check_StringAB(TR2maskdata2, Track2_CardData)
 										if Result != True:
+											DL.fails=DL.fails+1
 											DL.SetWindowText("red", "TR2maskdata: FAIL")
 										else:
 											DL.SetWindowText("green", "JIS2 final verification result: PASS")
@@ -332,14 +341,17 @@ if (Result):
 									
 									Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR1maskdata: FAIL")
 
 									Result = DL.Check_StringAB(TR2maskdata, Track2_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR2maskdata: FAIL")
 
 									Result = DL.Check_StringAB(TR3maskdata, Track3_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR3maskdata: FAIL")
 
 								# Gift Card	
@@ -350,10 +362,12 @@ if (Result):
 									
 									Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR1maskdata: FAIL")
 
 									Result = DL.Check_StringAB(TR2maskdata, Track2_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR2maskdata: FAIL")
 
 								# PAN = 11	
@@ -363,6 +377,7 @@ if (Result):
 									
 									Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR1maskdata: FAIL")
 
 								# PAN = 12	
@@ -372,6 +387,7 @@ if (Result):
 									
 									Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR1maskdata: FAIL")
 
 								# PAN = 20	
@@ -381,6 +397,7 @@ if (Result):
 									
 									Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR1maskdata: FAIL")
 
 								# ISO 4909 (3T)	
@@ -392,16 +409,23 @@ if (Result):
 									
 									Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR1maskdata: FAIL")
 
 									Result = DL.Check_StringAB(TR2maskdata, Track2_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR2maskdata: FAIL")
 										
 									Result = DL.Check_StringAB(TR3maskdata, Track3_CardData)
 									if Result != True:
+										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR3maskdata: FAIL")
-							
+					else:
+						DL.fails=DL.fails+1
+		else:
+			DL.fails=DL.fails+1
+            
 if lcdtype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):

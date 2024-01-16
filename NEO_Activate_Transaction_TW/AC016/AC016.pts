@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-17408
+16591
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -9,6 +9,7 @@ DL_SCRIPTVERSION
 Dim ProjectName
 ProjectName = "AC016" ' !!!!! EDIT THIS !!!!!
 ' Objective: UniPay 3 JIRA -- #FUI-83 'Under auto poll mode and then sent cmd 02-01, reader returned nothing if tapped MasterCard MagStripe/ MChip card'
+' #FXT-779, Under auto poll mode, cmd 05-01 can not cancel the AT cmd.
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -193,7 +194,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Auto Poll"
    DL.SendSequence "Auto Poll"
-   result = DL.WaitForSequence("Poll Response", 1, 10000)
+   result = DL.WaitForSequence("Poll Response", 1, 3000)
    dl.pause 1000
 End If
 '------------------------------------------------------------
@@ -216,7 +217,22 @@ If result <> 0 Then
    result = DL.WaitForSequence("02 23", 1, 5000)
    dl.pause 1000
 End If
-
+'------------------------------------------------------------#FXT-779
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Activate Transaction (02-40)"
+   DL.SendSequence "Activate Transaction (02-40)"
+   dl.pause 1000
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 05-01"
+   DL.SendSequence "05-01"
+   result = DL.WaitForSequence("05 00", 1, 5000)
+   dl.pause 300
+End If
+'------------------------------------------------------------
+dl.addcomment vbcrlf
 DL.SendSequence "Poll on Demand"
 dl.pause 1500
 '------------------------------------------------------------

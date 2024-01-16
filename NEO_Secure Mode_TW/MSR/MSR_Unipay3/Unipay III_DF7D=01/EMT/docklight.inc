@@ -23,7 +23,7 @@ DL_SCRIPTVERSION
   msg6 = "ne"
   msg8 = "s "
   msg10 = "ate "
-  prefix = "..\..\" '"
+  prefix = "..\..\..\..\..\..\..\" '"
   suffix = "."
 '------------------------------------------------------------
 authnMsg = msg1&msg2&msg3&msg4&msg5&msg6&msg7&msg8&msg9

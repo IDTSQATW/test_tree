@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-36666
+23448
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -8,9 +8,10 @@ DL_SCRIPTVERSION
 '------------------------------------------------------------
 Dim ProjectName
 ProjectName = "AC014" ' !!!!! EDIT THIS !!!!!
-' Objective: for JIRA issue VENDI-161, NEO3-1478
+' Objective: for JIRA issue VENDI-161, NEO3-1478, FWE-2040 
 ' VENDI-161: Reader does not return V2 response message when it failed to read a card (ex. Mifare 1K/ 4K card) along w/ two short beeps
 ' NEO3-1478: [VP3350][ VP3350_FW_v1.00.068.2228.T_220711-1] PreSQA::Neo3: Reader may get "stuck"when an unsupported card is tapped
+' FWE-2040: [VP3300][1.10] ACT command can not detect Mifare 4K card
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -99,6 +100,8 @@ Randomize
 errCnt = 0
 caseValid = 0
 result = 1
+errorCounter1 = 0
+errorCounter2 = 0
 
 DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
 If authn Then '""
@@ -177,17 +180,80 @@ If result <> 0 Then
    result = DL.WaitForSequence("Poll Response", 1, 10000)
 End If
 '------------------------------------------------------------
-for i = 1 to 2
-If result <> 0 Then
-   msgbox "Click OK --> Tap Mifare 1K or 4K card", vbokonly
+for i = 1 to 14
+
+    if i = 1 then card = "Mifare 1K"
+    if i = 2 then card = "Mifare 1K"
+    if i = 3 then card = "Mifare 4k"
+    if i = 4 then card = "Mifare Plus 2K"
+    if i = 5 then card = "DesFire D40"
+    if i = 6 then card = "DesFire EV1 2K"
+    if i = 7 then card = "DesFire EV1 4K"
+    if i = 8 then card = "DesFire EV2 2K"
+    if i = 9 then card = "Ultralight 32 Byte"
+    if i = 10 then card = "Ultralight 64 Byte"
+    if i = 11 then card = "Ultralight"
+    if i = 12 then card = "Ultralight C"
+    if i = 13 then card = "Ultralight EV1"
+    if i = 14 then card = "NFC Tag 203"
+
+
+'If result <> 0 Then
+   msgbox "Click OK --> Tap" & card , vbokonly
    dl.resetreceivecounter
    dl.addcomment vbcrlf
-   DL.AddComment "--- Activate Transaction (02-40)"
+   DL.AddComment "--- Activate Transaction (02-40) & " & card
    DL.SendSequence "Activate Transaction (02-40)"
-   result = DL.WaitForSequence("02 0A", 1, 10000)
+   result1 = DL.WaitForSequence("02 0A", 1, 5000)
+        if result1 <> 0 Then
+           if i = 1 then result2  = DL.WaitForSequence("FFEE1F_Mifare_1k", 1, 5000)
+           if i = 2 then result2  = DL.WaitForSequence("FFEE1F_Mifare_1k", 1, 5000)
+           if i = 3 then result2  = DL.WaitForSequence("FFEE1F_Mifare_4k", 1, 5000)
+           if i = 4 then result2  = DL.WaitForSequence("FFEE1F_MifarePlus_2k", 1, 5000) 
+           if i = 5 then result2  = DL.WaitForSequence("FFEE1F_DesFireD40", 1, 5000)
+           if i = 6 then result2  = DL.WaitForSequence("FFEE1F_DesFireEV1_2k", 1, 5000) 
+           if i = 7 then result2  = DL.WaitForSequence("FFEE1F_DesFireEV1_4k", 1, 5000)
+           if i = 8 then result2  = DL.WaitForSequence("FFEE1F_DesFireEV2_2k", 1, 5000)
+           if i = 9 then result2  = DL.WaitForSequence("FFEE1F_Ultralight_32Byte", 1, 10000)
+           if i = 10 then result2 = DL.WaitForSequence("FFEE1F_Ultralight_64Byte", 1, 10000)
+           if i = 11 then result2 = DL.WaitForSequence("FFEE1F_Ultralight", 1, 10000)
+           if i = 12 then result2 = DL.WaitForSequence("FFEE1F_UltralightC", 1, 10000)
+           if i = 13 then result2 = DL.WaitForSequence("FFEE1F_UltralightEV1", 1, 10000)
+           if i = 14 then result2 = DL.WaitForSequence("FFEE1F_NFC_Tag203", 1, 10000)   
+        end if   
+
+                if result1 = 0 or result2  = 0 then result = 0
+
+       if result1 = 0 then 
+          DL.AddComment vbcrlf & "==> Status code incorrect"
+          errorCounter1 = errorCounter + 1
+       else
+          DL.AddComment vbcrlf & "==> Status code: PASS"
+       end if
+    
+       if result2 = 0 then 
+          DL.AddComment "==> Error code(FFEE1F) incorrect"
+          errorCounter2 = errorCounter + 1
+       else
+          DL.Addcomment "==> Error code(FFEE1F): PASS"
+       end if
    dl.pause 500
-End If
+'End If
 next
+
+DL.Addcomment vbCrLf & vbCrLf & "----------------------------------------------------------------------"
+
+If errorCounter1 <> 0 Then
+   DL.Addcommnet vbCrLf & vbCrLf & "Found " & errorCounter1 & " Status code error. Please check the log file for details."
+   result = 0
+End If
+
+If errorCounter1 <> 0 Then
+   DL.Addcommnet vbCrLf & vbCrLf & "Found " & errorCounter2 & " Status code error. Please check the log file for details."
+   result = 0
+End If
+
+
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 PrintMyResult(result)

@@ -1,14 +1,14 @@
 DL_SCRIPTVERSION
 1
-37623
+52615
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "LO008" ' !!!!! EDIT THIS !!!!!
-' Objective: stess test for CT transaction
+ProjectName = "RTC300" ' !!!!! EDIT THIS !!!!!
+' Objective: to verify cmd 25-06/ 25-07
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -60,6 +60,7 @@ End Sub
 ' -  
 '------------------------------------------------------------
 DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
 DL.ClearCommWindows 
 DL.StartLogging "DOCKLIGHT_LOG",False, "H"
 ', false, true
@@ -71,23 +72,36 @@ min=0
 Randomize
 errCnt = 0
 caseValid = 0
-
 result = 1
+Dim CheckTime
+Dim CheckTimeNow
+Dim MinTarget(240)
+Dim HourTarget(240)
+Dim MinNow
+m = 0
+
 
 DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
 If authn Then '""
+
 '------------------------------------------------------------
 'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
 DL.AddComment "--- Set POS COM PORT Settings"
 DL.StopCommunication
 DL.AddComment "Set POS COM PORT..."
-DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+if POSBaudRate(1) = 0 then 
+   DL.SetChannelSettings(COM_Port(1))
+else
+   DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+end if
+
 DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
 DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
 DL.Pause 1000
 
 DL.StartCommunication
+
 '------------------------------------------------------------
 'Result reporting (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
@@ -108,6 +122,15 @@ Sub PrintMyResult(ResultX)
             DL.AddComment "Result = FAILED"
       End If
 End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
 '------------------------------------------------------------
 'Debugging (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
@@ -115,67 +138,75 @@ Function MyDebug(DebugString)
       DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
       MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
 End Function
+
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-n = 10000
-msgbox "Insert T=0 test card, click ok", vbokonly
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & "--- 25-06 Get RTC Date and Time"
+  DL.SendSequence "25-06 Get RTC Date and Time"
+  result = DL.WaitForSequence("25-06 resp", 1, 10000)
+  DL.AddComment vbCrLf & "Target Self-Check time (H/M) = " & CheckTime 
+End If
 
-For i = 1 to n
-    DL.ClearCommWindows
-      dl.addcomment vbcrlf
-      DL.AddComment "///////////   CT transaction # " & i &  "  /////////////"
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & vbCrLf & "--- 25-07 Set 24-hr Self-Check Time " & "(" & CheckTime & ")"
+  DL.SendSequence "25-07 Set 24-hr Self-Check Time", CheckTime, "H"
+  result = DL.WaitForSequence("Set self-check time", 1, 10000)
+  if result <> 0 then 
+     DL.AddComment vbCrLf & vbCrLf & "The reader was rebooted (waited 30 sec)....."
+     dl.pause 30000
+  end if
+End If
 
-   If result <> 0 Then
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- 60-10 Start CT trans"
-      DL.SendSequence "60-10 Start CT trans"
-      result = DL.WaitForSequence("60 00 0010", 1, 5000)
-   End If
-   DL.pause 500
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & vbCrLf & "--- 25-07 Get 24-hr Self-Check Time"
+  DL.SendSequence "25-07 Get 24-hr Self-Check Time"
+  result = DL.WaitForSequence("Get self-check time", 1, 10000)
+End If
 
-   If result <> 0 Then
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- 60-11 CT Authenticate Trans"
-      DL.SendSequence "60-11 CT Authenticate Trans"
-      result = DL.WaitForSequence("60 00 0004", 1, 5000)
-   End If
-   DL.pause 500
+if result <> 0 then
+   msgbox "Make sure reader will reboot on time (Target Self-Check time)", vbokonly
+   n = 240
+   for i = 1 to n
+     DL.AddComment vbCrLf
+     DL.SendSequence "25-06 Get RTC Date and Time"
+     result = DL.WaitForSequence("25-06 resp", 1, 2000)
+     dl.pause 500
+     if int(MinNow) = int(MinTarget(0)) then i = n + 1
+   next
+   usercheck = msgbox ("Does reader reboot on time (Target Self-Check time)?", vbyesno)
+   if usercheck = 7 then result = 0
+end if
 
-   If result <> 0 Then
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- 60-12 CT complete Trans"
-      DL.SendSequence "60-12 CT complete Trans"
-      result = DL.WaitForSequence("60 00 0002", 1, 5000)
-   End If
-   DL.pause 500
+If result <> 0 Then
+  DL.ResetReceiveCounter
+  DL.AddComment vbCrLf & vbCrLf & "--- 25-07 Set 24-hr Self-Check Time (default)"
+  DL.SendSequence "25-07 Set 24-hr Self-Check Time (default)"
+  result = DL.WaitForSequence("Set self-check time", 1, 10000)
+End If
 
-   if result = 0 then i = n + 1
-Next
-
-DL.addcomment vbcrlf
-DL.AddComment "Stress test: CT ACT is completed"
-
-'------------------------------------------------------------
 DL.AddComment vbCrLf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)
 
-DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
+
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
 'DL.pause 1000
-
+'If 0 Then
 'If result = 0 then
 '  DL.AddComment Chr(13) & "Result = FAILED"
 'Else
 '  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
 'End If
 
 'If Prompting(0) = "ON" Then
@@ -205,12 +236,54 @@ End If '""
 'ElseIf MasterResult = 1 Then
 '	FileOutput.CreateFile "MR_PASS"
 'End If
-FileOutput.CreateFile "FINAL_VERDICT.txt"
 
-If MasterResult = 0 Then 
-	FileOutput.WriteLine "0|FAIL|NOK"
-ElseIf MasterResult = 1 Then
-	FileOutput.WriteLine "1|PASS|OK"
-End If
+'FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+'If MasterResult = 0 Then 
+'	FileOutput.WriteLine "0|FAIL|NOK"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.WriteLine "1|PASS|OK"
+'End If
 'FileOutput.WriteLine MasterResult
-FileOutput.CloseFile 
+'FileOutput.CloseFile 
+
+Sub DL_OnReceive()
+resultName = DL.OnReceive_GetName()
+
+Select Case resultName
+	Case "25-06 resp"
+		rx = DL.OnReceive_GetData("H")
+		MyArray = Split(rx , " ", -1, 1)
+		CheckTimeNow= MyArray(17) & " " & MyArray(18)
+              MinNow = MyArray(18)
+		DL.AddComment vbCrLf & vbCrLf & "Reader current time (H/M) = " & CheckTimeNow
+              if MyArray(18) = 58 then 
+                 MyArray(18) = 00
+              elseif MyArray(18) = 59 then
+                 MyArray(18) = 01
+              else
+                 MyArray(18) = int(MyArray(18)) + 2
+                 if MyArray(18) < 10 then MyArray(18) = "0" & MyArray(18)
+              end if
+		CheckTime = MyArray(17) & " " & MyArray(18)
+              HourTarget(m) = MyArray(17)
+              MinTarget(m) = MyArray(18)
+              m = m + 1
+	Case "Get self-check time"
+		rx = DL.OnReceive_GetData("H")
+		MyArray = Split(rx , " ", -1, 1)
+              CheckHour = MyArray(14)
+              CheckMin = MyArray(15)
+              if int(CheckHour) <> int(HourTarget(0)) or int(CheckMin) <> int(MinTarget(0)) then result = 0
+End Select
+End Sub
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub

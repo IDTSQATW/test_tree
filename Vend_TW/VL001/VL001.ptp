@@ -1,9 +1,9 @@
 VERSION
-8
+9
 
 COMMSETTINGS
 0
-COM1
+USBHID:ACD:4670:,1,63
 COM2
 0
 2
@@ -28,6 +28,7 @@ poll on demand
 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34
 0
 5
+CHECKSUM 
 
 SEND
 1
@@ -35,6 +36,7 @@ auto poll
 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 00 F6 24
 0
 5
+CHECKSUM 
 
 SEND
 2
@@ -42,6 +44,7 @@ Done/Swipe Buttons 01 01
 56 69 56 4F 74 65 63 68 32 00 F0 F4 00 03 01 01 10 E7 FB
 0
 5
+CHECKSUM 
 
 SEND
 3
@@ -49,6 +52,7 @@ Get Configuration
 56 69 56 4F 74 65 63 68 32 00 F0 F5 00 00 08 F3
 0
 5
+CHECKSUM 
 
 SEND
 4
@@ -56,6 +60,7 @@ lcd language english and french
 56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF FB 01 05 7D 0B
 0
 5
+CHECKSUM 
 
 SEND
 5
@@ -63,6 +68,7 @@ lcd language english and french (NEO2)
 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 38 01 05 00 00
 0
 5
+CHECKSUM 
 
 SEND
 6
@@ -70,6 +76,7 @@ lcd language english
 56 69 56 4F 74 65 63 68 32 00 04 00 00 04 FF FB 01 00 D8 5B
 0
 5
+CHECKSUM 
 
 SEND
 7
@@ -77,6 +84,7 @@ lcd language english (NEO2)
 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 38 01 00 00 00
 0
 5
+CHECKSUM crc-ccitt
 
 RECEIVE
 0
@@ -88,6 +96,8 @@ COMMENT "02" Error message should display for non-vend unit
 0
 1
 0
+0
+CHECKSUM 
 0
 
 RECEIVE
@@ -101,6 +111,8 @@ COMMENT
 1
 0
 0
+CHECKSUM 
+0
 
 RECEIVE
 2
@@ -112,6 +124,8 @@ COMMENT
 0
 1
 0
+0
+CHECKSUM 
 0
 
 RECEIVE
@@ -125,6 +139,8 @@ COMMENT
 1
 0
 0
+CHECKSUM 
+0
 
 RECEIVE
 4
@@ -136,5 +152,7 @@ COMMENT
 0
 1
 0
+0
+CHECKSUM 
 0
 

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-12645
+22159
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -9,6 +9,7 @@ DL_SCRIPTVERSION
 '------------------------------------------------------------
 Dim ProjectName
 ProjectName = "LO009" ' !!!!! EDIT THIS !!!!!
+'Objective: AutoSwitch function, for issue CS-4603
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"

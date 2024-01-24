@@ -1,14 +1,14 @@
 DL_SCRIPTVERSION
 1
-37623
+36687
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "LO008" ' !!!!! EDIT THIS !!!!!
-' Objective: stess test for CT transaction
+ProjectName = "CR032-2" ' !!!!! EDIT THIS !!!!!
+' Objective: cmd 2C-19, 2C-1A test
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -18,7 +18,7 @@ ProjectName = "LO008" ' !!!!! EDIT THIS !!!!!
 '   - Assign Docklight COM port
 '   - Assign Docklight Baud Rate
 '------------------------------------------------------------
-FileInput.OpenFile prefix & "Regress.Config"
+FileInput.OpenFile prefix & "Regress.Config2"
 Dim Prompting(1)
 Dim COM_Port(1)
 Dim POSBaudRate(1)
@@ -43,7 +43,31 @@ Do Until FileInput.EndOfFile
   result = FileInput.GetLine() 'by pass variable name
   result = FileInput.GetLine()      
   POSBaudRate(1) = result
-      
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result  
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  GF = result    
 Loop
 
 Sub StepPrompt(PromptString)
@@ -52,14 +76,13 @@ Sub StepPrompt(PromptString)
             MsgBox PromptString, VBOKOnly, "Test Step"
       Else
       End If
-      
 End Sub
-
 '------------------------------------------------------------
 ' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
 ' -  
 '------------------------------------------------------------
 DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
 DL.ClearCommWindows 
 DL.StartLogging "DOCKLIGHT_LOG",False, "H"
 ', false, true
@@ -82,7 +105,11 @@ If authn Then '""
 DL.AddComment "--- Set POS COM PORT Settings"
 DL.StopCommunication
 DL.AddComment "Set POS COM PORT..."
-DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+if POSBaudRate(1) = 0 then 
+   DL.SetChannelSettings(COM_Port(1))
+else
+   DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+end if
 DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
 DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
 DL.Pause 1000
@@ -108,6 +135,14 @@ Sub PrintMyResult(ResultX)
             DL.AddComment "Result = FAILED"
       End If
 End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
 '------------------------------------------------------------
 'Debugging (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
@@ -118,47 +153,51 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-n = 10000
-msgbox "Insert T=0 test card, click ok", vbokonly
+If result <> 0 Then
+   dl.resetreceivecounter
+   DL.AddComment "--- PassThrough-----START"
+   DL.SendSequence "*** Step 2: PassThrough-----START"
+   result = DL.WaitForSequence("2C-xx ok", 1, 2000)
+End If
 
-For i = 1 to n
-    DL.ClearCommWindows
-      dl.addcomment vbcrlf
-      DL.AddComment "///////////   CT transaction # " & i &  "  /////////////"
+If result <> 0 Then
+for i = 1 to 5
+    if i = 1 then cmd = "00"
+    if i = 2 then cmd = "01"
+    if i = 3 then cmd = "04"
+    if i = 4 then cmd = "07"
+    if i = 5 then cmd = "02 (default)"
+    if result <> 0 then
+       dl.resetreceivecounter
+       dl.addcomment vbcrlf
+       DL.AddComment "--- 2C-19 Set ICC Voltage Option = " & cmd
+       DL.SendSequence "2C-19 = " & cmd
+       if i = 1 then 
+          result = DL.WaitForSequence("2C 05", 1, 2000)
+       else
+          result = DL.WaitForSequence("2C 00", 1, 2000)
+       end if
+    end if
 
-   If result <> 0 Then
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- 60-10 Start CT trans"
-      DL.SendSequence "60-10 Start CT trans"
-      result = DL.WaitForSequence("60 00 0010", 1, 5000)
-   End If
-   DL.pause 500
+    if i > 1 then
+    if result <> 0 then
+       dl.resetreceivecounter
+       dl.addcomment vbcrlf
+       DL.AddComment "--- 2C-1A Get ICC Voltage Option"
+       DL.SendSequence "2C-1A Get ICC Voltage Option"
+       result = DL.WaitForSequence("2C-1A = " & cmd, 1, 2000)
+    end if
+    end if
+next
+End If
 
-   If result <> 0 Then
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- 60-11 CT Authenticate Trans"
-      DL.SendSequence "60-11 CT Authenticate Trans"
-      result = DL.WaitForSequence("60 00 0004", 1, 5000)
-   End If
-   DL.pause 500
-
-   If result <> 0 Then
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- 60-12 CT complete Trans"
-      DL.SendSequence "60-12 CT complete Trans"
-      result = DL.WaitForSequence("60 00 0002", 1, 5000)
-   End If
-   DL.pause 500
-
-   if result = 0 then i = n + 1
-Next
-
-DL.addcomment vbcrlf
-DL.AddComment "Stress test: CT ACT is completed"
-
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- PassThrough-----STOP"
+   DL.SendSequence "*** Step 6: PassThrough-----STOP"
+   result = DL.WaitForSequence("2C-xx ok", 1, 2000)
+End If
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 PrintMyResult(result)
@@ -170,32 +209,34 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-'DL.pause 1000
+DL.pause 1000
 
-'If result = 0 then
-'  DL.AddComment Chr(13) & "Result = FAILED"
-'Else
-'  DL.AddComment Chr(13) & "Result = PASSED"
-'End If
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
 
-'If Prompting(0) = "ON" Then
-'  If result = 0 then
-'    MsgBox "Result = FAILED", VBOKOnly, "Result"
-'  Else 
-'    MsgBox "Result = PASSED", VBOKOnly, "Result"
-'  End If
-'End If
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
-'If MasterResult = 1 Then
-'      MasterVerdict = "PASSED"
-'ElseIf MasterResult = 0 Then
-'      MasterVerdict = "FAILED"
-'End If
-'result = MasterResult
-'DL.AddComment vbCrLf
-'DL.AddComment "MASTER RESULT = " & MasterVerdict
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
@@ -205,6 +246,7 @@ End If '""
 'ElseIf MasterResult = 1 Then
 '	FileOutput.CreateFile "MR_PASS"
 'End If
+
 FileOutput.CreateFile "FINAL_VERDICT.txt"
 
 If MasterResult = 0 Then 

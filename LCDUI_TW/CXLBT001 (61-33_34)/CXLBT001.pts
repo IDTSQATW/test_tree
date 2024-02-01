@@ -1,13 +1,13 @@
 DL_SCRIPTVERSION
 1
-61807
+52453
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "QRC001" ' !!!!! EDIT THIS !!!!!
+ProjectName = "CXLBT001" ' !!!!! EDIT THIS !!!!!
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -129,73 +129,95 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+
+
+For i = 1 to 2
+
+   if i = 1 then cxlbtnOFF()
+   if i = 2 then cxlbtnON()
+
+next
+
+'------------------------------------------------------------
+sub cxlbtnON()
+
 result = 1
-'------------------------------------------------------------
 If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
-   DL.AddComment "--- QR Code Scan Start (61-41) - timeout 10 sec"
-   DL.SendSequence "QR Code Scan Start (61-41) - timeout 10 sec"
-   result1 = DL.WaitForSequence("Parameter not support", 1, 10000)
+   DL.AddComment "--- Cancel Button On (61-33)"
+   DL.SendSequence "Cancel Button On (61-33)"
+   result = DL.WaitForSequence("status OK", 1, 10000)
 End If
 
-'------------------------------------------------------------
 If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
-       msgbox "Click ok and wait 30 sec",vbokonly
-   DL.AddComment "--- QR Code Scan Start (61-41) - default"
-   DL.SendSequence "QR Code Scan Start (61-41) - default"
-   result1 = DL.WaitForSequence("Continue response", 1, 10000)
-
-DL.StopCommunication
-DL.StartCommunication
-
-   DL.pause 30000
-     if result1 <> 0 then 
-        result2 = DL.WaitForSequence("Timeout response", 1, 10000)
-     end if
-End If
-
-if result1 = 0 or result2 = 0 then result = 0
-
-if result <> 0 then
-   check = msgbox("Check if the timeout is returned in 30 sec?", vbyesno)
-   if check = 6 then
-      result = 1
-   else 
-      result = 0
-   end if
+   DL.AddComment "--- Get Cancel Button (61-34)"
+   DL.SendSequence "Get Cancel Button (61-34)"
+   result = DL.WaitForSequence("Cancel button ON", 1, 10000)
 end if
 
-'------------------------------------------------------------
 If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
-   msgbox "Click OK and wait 120 sec", vbokonly
-   DL.AddComment "--- QR Code Scan Start (61-41) - timeout 120 sec"
-   DL.SendSequence "QR Code Scan Start (61-41) - timeout 120 sec"
-   result1 = DL.WaitForSequence("Continue response", 1, 10000)
+   DL.AddComment "--- ACT (02-40)"
+   DL.SendSequence "ACT (02-40)"
 
-DL.StopCommunication
-DL.StartCommunication
+      check = msgbox("Do you see a 'Cancel' Button? ", vbyesno)
+              if check = 7 then 
+                 result = 0
+                 if result = 0 then DL.AddComment vbcrlf & " ==> Test result: Fail (Reader should show the Cancel Button)"
+              end if
 
-   DL.pause 121000
-     if result1 <> 0 then 
-        result2 = DL.WaitForSequence("Timeout response", 1, 10000)
-     end if
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Cancel (05-01)"
+   DL.SendSequence "Cancel (05-01)"
+   DL.pause 3000
+end if
+
+end sub
+
+
+'------------------------------------------------------------
+sub cxlbtnOFF()
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Cancel Button Off (61-33)"
+   DL.SendSequence "Cancel Button Off (61-33)"
+   result = DL.WaitForSequence("status OK", 1, 10000)
 End If
 
-if result1 = 0 or result2 = 0 then result = 0
-
-if result <> 0 then
-   check = msgbox("Check if the timeout is returned in 120 sec?", vbyesno)
-   if check = 6 then
-      result = 1
-   else 
-      result = 0
-   end if
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Get Cancel Button (61-34)"
+   DL.SendSequence "Get Cancel Button (61-34)"
+   result = DL.WaitForSequence("Cancel button OFF", 1, 10000)
 end if
+
+If result <> 0 Then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- ACT (02-40)"
+   DL.SendSequence "ACT (02-40)"
+
+      check = msgbox("Do you see a 'Cancel' Button? ", vbyesno)
+              if check = 6 then 
+                 result = 0
+                 if result = 0 then DL.AddComment vbcrlf & " ==> Test result: Fail (Reader should NOT show the Cancel Button)"
+              end if
+
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Cancel (05-01)"
+   DL.SendSequence "Cancel (05-01)"
+   DL.pause 3000
+end if
+
+end sub
+
+
 
 '------------------------------------------------------------
 dl.addcomment vbcrlf

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="Lib.idt" root=".">
+  <functions>
+    <file>2.1_6107ImageReadyNANDFlash.py</file>
+    <function name="Trans_Lib">
+      <file>ICCTransaction.py</file>
+      <file>Tran_Res.py</file>
+      <file>Tran_ResAuto.py</file>
+      <file>Tra_Type_1.py</file>
+      <file>__init__.py</file>
+    </function>
+    <function name="Utility_Lib">
+      <file>Pro_Encryption.py</file>
+      <file>Pro_Excuse.py</file>
+      <file>Pro_GetDevice.py</file>
+      <file>Pro_GetDRS.py</file>
+      <file>Pro_GlobalConfig.py</file>
+      <file>Pro_ISOCardData.py</file>
+      <file>Pro_KeyInjection.py</file>
+      <file>Pro_MSR.py</file>
+      <file>Pro_MSRData.py</file>
+      <file>Pro_PKI.py</file>
+      <file>Pro_PreFile.py</file>
+      <file>Pro_SendCmd.py</file>
+      <file>__init__.py</file>
+    </function>
+    <function name="83-33">
+      <file>2.1 6107ImageReadyNANDFlash.py</file>
+    </function>
+  </functions>
+</project>

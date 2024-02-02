@@ -134,6 +134,14 @@ SEND
 5
 CHECKSUM 
 
+SEND
+14
+83-32 Query File (dog.jpg)
+56 69 56 4F 74 65 63 68 32 00 83 32 00 09 00 64 6F 67 2E 6A 70 67 00 00 00
+0
+5
+CHECKSUM CRC-CCITT
+
 RECEIVE
 0
 61 00, id 0000
@@ -267,6 +275,20 @@ dog.jpg
 -1
 1
 COMMENT dog.jpg
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+10
+83-32 rx (exist)
+56 69 56 4F 74 65 63 68 32 00 83 00 ?? ?? 01
+-1
+1
+COMMENT file exist
 0
 1
 0

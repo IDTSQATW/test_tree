@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-32173
+16813
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -9,7 +9,7 @@ DL_SCRIPTVERSION
 Dim ProjectName
 ProjectName = "LCD003-1" ' !!!!! EDIT THIS !!!!!
 '+++
-' Objective: to test cmd 61-07, 61-08, 61-09, 61-12
+' Objective: to test cmd 61-07, 61-08, 61-09, 61-12, 61-06
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -182,6 +182,23 @@ if result <> 0 then
    if result <> 0 then
       usercheck = msgbox ("Do you see Large Button on screen top-left?", vbyesno)
       if usercheck = 7 then result = 0
+   end if
+
+   if result <> 0 then
+      dl.resetreceivecounter
+      dl.addcomment vbcrlf
+      DL.AddComment "--- 61-06 Get Button Event" 
+      DL.SendSequence "61-06 Get Button Event"
+      result = DL.WaitForSequence("61-06 rx (no button selected)", 1, 3000)
+   end if
+
+   if result <> 0 then
+      msgbox "Tap 'L Button1' once --> Click OK", vbokonly
+      dl.resetreceivecounter
+      dl.addcomment vbcrlf
+      DL.AddComment "--- 61-06 Get Button Event" 
+      DL.SendSequence "61-06 Get Button Event"
+      result = DL.WaitForSequence("61-06 rx (LButton clicked)", 1, 3000)
    end if
 end if
 

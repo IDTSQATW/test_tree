@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-9808
+47774
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -9,7 +9,7 @@ DL_SCRIPTVERSION
 Dim ProjectName
 ProjectName = "LCD003-8" ' !!!!! EDIT THIS !!!!!
 '+++
-' Objective: to test cmd 61-07, 61-08, 61-09, 83-24
+' Objective: to test cmd 61-07, 61-08, 61-09, 83-24, 83-22, 83-32
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -169,6 +169,14 @@ end if
 if result <> 0 then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
+   DL.AddComment "--- 83-32 Query File (dog.jpg)" 
+   DL.SendSequence "83-32 Query File (dog.jpg)"
+   result = DL.WaitForSequence("83-32 rx (exist)", 1, 3000)
+end if
+
+if result <> 0 then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
    DL.AddComment "--- 61-0A Create Screen1" 
    DL.SendSequence "61-0A Create Screen1"
    result = DL.WaitForSequence("61 00, id 0000", 1, 3000)
@@ -189,7 +197,7 @@ if result <> 0 then
    DL.SendSequence "61-07 Add Object (Image) to Screen1"
    result = DL.WaitForSequence("61-07 Image rx", 1, 3000)
    if result <> 0 then
-      usercheck = msgbox ("Do you see a dog on screen top-left?", vbyesno)
+      usercheck = msgbox ("Do you see a image (dog) on screen top-left?", vbyesno)
       if usercheck = 7 then result = 0
    end if
 end if

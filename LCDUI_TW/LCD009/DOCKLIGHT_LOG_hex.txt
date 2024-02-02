@@ -1,0 +1,23 @@
+Docklight Log File (HEX) - Started 2024/2/2 11:54:46.092 
+ TEST CASE: LCD009
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM90 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+ --- 83-35 List Directory on SD Card
+
+2024/2/2 11:54:47.386 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 35 00 04 31 30 00 00 A2 B5 
+2024/2/2 11:54:47.398 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 00 00 4A 36 38 00 33 00 62 6F 6F 6B 2E 61 76 69  book.avi 2C 62 31 2E 6D 6A 70 65 67 2C 6E 65 77 2E 6D 70 65 67 2C 6E 65 77 62 2E 6D 6A 70 65 67 2C 42 6C 75 65 43 6C 6F 74 68 2E 6D 6A 70 65 67 2C 52 65 64 43 6C 6F 74 68 2E 6D 6A 70 65 67 00 8D A6 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+
+SD Card did not save the target file name 'book.mjpeg', can not execute 'delete file' function...
+ 
+
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+
+
+Docklight Log File (HEX) - Stopped 2024/2/2 11:54:49.478 
+

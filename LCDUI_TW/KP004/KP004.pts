@@ -1,0 +1,333 @@
+DL_SCRIPTVERSION
+1
+4363
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "KP004" ' !!!!! EDIT THIS !!!!!
+'+++
+' Objective: to test cmd 62-03
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  genFlag = result
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+if POSBaudRate(1) = 0 then 
+   DL.SetChannelSettings(COM_Port(1))
+else
+   DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+end if
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+failcount = 0
+sub cancelcmd()
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 62-00 Cancel PIN or Key Entry" 
+   DL.SendSequence "62-00 Cancel PIN or Key Entry"
+   dl.pause 300
+end sub
+'------------------------------------------------------------Check screen default msg
+dl.resetreceivecounter
+DL.AddComment "--- msg 'SONIC'" 
+DL.SendSequence "62-03"
+result = DL.WaitForSequence("62 00 (ACK)", 1, 2000)
+if result <> 0 then uicheck = msgbox ("Do you see input screen w/ msg 'SONIC'?", vbyesno)
+if uicheck = 7 or result = 0 then 
+   dl.addcomment vbcrlf & "Input screen does not have correct msg 'SONIC' >>> FAIL!"
+   failcount = failcount + 1
+end if
+'------------------------------------------------------------Check 'X' button
+dl.resetreceivecounter
+dl.addcomment vbcrlf
+DL.AddComment "--- Press 'X' to end input screen"
+msgbox "Click OK --> press 'X' to end input screen", vbokonly
+result = DL.WaitForSequence("62 0A w/ 01 = Fail, Key Pad Cancel", 1, 5000)
+if result <> 0 then uicheck = msgbox ("Does LCD change back to welcome screen?", vbyesno)
+if uicheck = 7 or result = 0 then 
+   dl.addcomment vbcrlf & "Input screen button 'X' can not work >>> FAIL!"
+   failcount = failcount + 1
+   cancelcmd()      
+end if 
+'------------------------------------------------------------Check 3 min timeout function
+dl.resetreceivecounter
+dl.addcomment vbcrlf
+DL.AddComment "--- Timeout = 3 min" 
+DL.SendSequence "62-03"
+result = DL.WaitForSequence("62 00 (ACK)", 1, 2000)
+if result <> 0 then 
+   dl.addcomment vbcrlf & "Waiting for 3 min..."
+   dl.pause 60000
+   dl.addcomment vbcrlf & "1 min passed..."
+   dl.pause 60000
+   dl.addcomment vbcrlf & "2 min passed..."
+   dl.pause 60000
+   dl.addcomment vbcrlf & "3 min passed..."
+   dl.pause 200
+   uicheck = msgbox ("Does LCD change back to welcome screen?", vbyesno)
+end if
+if uicheck = 7 or result = 0 then 
+   dl.addcomment vbcrlf & "Input screen 3 min timeout setting can nor work >>> FAIL!"
+   failcount = failcount + 1
+   cancelcmd()
+end if
+'------------------------------------------------------------Check input PIN will become '*' and delete button function
+dl.resetreceivecounter
+dl.addcomment vbcrlf
+DL.AddComment "--- Input/ delete function"
+DL.SendSequence "62-03"
+result = DL.WaitForSequence("62 00 (ACK)", 1, 2000)
+if result <> 0 then 
+   msgbox "Click OK --> Try to input/ delete numeric key", vbokonly
+   uicheck = msgbox ("Do you see '*' if input numeric key & delete can work?", vbyesno)
+   if uicheck = 7 then 
+      dl.addcomment vbcrlf & "Input screen does not show '*' if input numeric key OR delete can not work >>> FAIL!"
+      failcount = failcount + 1
+   end if
+'------------------------------------------------------------Check if 20 sec passed, the screen will be cleared
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Per 20 Seconds, if the numeric length is not zero, the numeric is clear"
+   msgbox "Try to input any numeric --> Click OK", vbokonly
+   dl.addcomment vbcrlf & "Waiting for 20 sec..."
+   dl.pause 10000
+   dl.addcomment vbcrlf & "10 sec passed..."
+   dl.pause 10000
+   dl.addcomment vbcrlf & "20 sec passed..."
+   uicheck = msgbox ("Is the numeric you input cleared?", vbyesno)
+   if uicheck = 7 then 
+      dl.addcomment vbcrlf & "Per 20 sec, numeric does not be cleared >>> FAIL!"
+      failcount = failcount + 1
+   end if
+'------------------------------------------------------------Check PIN length is 1~16
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Numeric key Length is 1~16"
+   msgbox "Click OK --> Try to input 17 numeric", vbokonly
+   uicheck = msgbox ("Can you input 17 numeric?", vbyesno)
+   if uicheck = 6 then 
+      dl.addcomment vbcrlf & "Numeric length can input 17 >>> FAIL!"
+      failcount = failcount + 1
+   end if
+   msgbox "Click OK --> Try to input nothing and press 'O' to end input screen", vbokonly
+   uicheck = msgbox ("Can you end the input screen?", vbyesno)
+   if uicheck = 6 then 
+      dl.addcomment vbcrlf & "Numeric length can input nothing >>> FAIL!"
+      failcount = failcount + 1
+   end if
+'------------------------------------------------------------if user input '168'
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- User input '168'"
+   msgbox "Click OK --> Input numeric '168' and press 'O' to end input screen", vbokonly
+   result = DL.WaitForSequence("user input 168", 1, 10000)
+   if result = 0 then
+      dl.addcomment vbcrlf & "RX content is incorrect >>> FAIL!"
+      failcount = failcount + 1
+   end if
+else
+      failcount = failcount + 1
+end if
+'------------------------------------------------------------
+if failcount <> 0 then result = 0
+cancelcmd()
+'------------------------------------------------------------
+DL.AddComment vbCrLf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
+
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'DL.pause 1000
+
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub

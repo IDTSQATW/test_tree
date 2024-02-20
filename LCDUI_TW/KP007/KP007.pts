@@ -1,15 +1,15 @@
 DL_SCRIPTVERSION
 1
-31044
+14266
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "KP006" ' !!!!! EDIT THIS !!!!!
+ProjectName = "KP007" ' !!!!! EDIT THIS !!!!!
 '+++
-' Objective: to test cmd 62-05
+' Objective: to test cmd 62-06
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -158,22 +158,14 @@ sub cancelcmd()
    DL.SendSequence "62-00 Cancel PIN or Key Entry"
    dl.pause 300
 end sub
-'------------------------------------------------------------Check screen msg
-dl.resetreceivecounter
-DL.AddComment "--- msg 'Please Swipe Or Key Employee ID'" 
-DL.SendSequence "62-05"
-result = DL.WaitForSequence("62 00 (ACK)", 1, 2000)
-if result <> 0 then uicheck = msgbox ("Do you see input screen w/ msg (Line1) 'Please Swipe Or' & msg (Line2) 'Key Employee ID'?", vbyesno)
-if uicheck = 7 or result = 0 then 
-   dl.addcomment vbcrlf & "Input screen does not have correct msg 'Please Swipe Or Key Employee ID' >>> FAIL!"
-   failcount = failcount + 1
-end if
 '------------------------------------------------------------Check 'X' button
 dl.resetreceivecounter
 dl.addcomment vbcrlf
 DL.AddComment "--- Press 'X' to end input screen"
+DL.SendSequence "62-06 Display numeric"
+result = DL.WaitForSequence("62 63", 1, 2000)
 msgbox "Click OK --> press 'X' to end input screen", vbokonly
-result = DL.WaitForSequence("62 0A w/ 01 = Fail, Key Pad Cancel", 1, 5000)
+if result <> 0 then result = DL.WaitForSequence("62 0A w/ 01 = Fail, Key Pad Cancel", 1, 5000)
 if result <> 0 then uicheck = msgbox ("Does LCD change back to welcome screen?", vbyesno)
 if uicheck = 7 or result = 0 then 
    dl.addcomment vbcrlf & "Input screen button 'X' can not work >>> FAIL!"
@@ -184,8 +176,8 @@ end if
 dl.resetreceivecounter
 dl.addcomment vbcrlf
 DL.AddComment "--- Timeout = 3 min (default)" 
-DL.SendSequence "62-05"
-result = DL.WaitForSequence("62 00 (ACK)", 1, 2000)
+DL.SendSequence "62-06 Display numeric"
+result = DL.WaitForSequence("62 63", 1, 2000)
 if result <> 0 then 
    dl.addcomment vbcrlf & "Waiting for 3 min..."
    dl.pause 60000
@@ -207,7 +199,7 @@ end if
 dl.resetreceivecounter
 dl.addcomment vbcrlf
 DL.AddComment "--- Timeout = 3 sec" 
-DL.SendSequence "62-05 timeout = 3 sec"
+DL.SendSequence "62-06 timeout = 3 sec"
 result = DL.WaitForSequence("62 00 (ACK)", 1, 2000)
 if result <> 0 then 
    dl.addcomment vbcrlf & "Waiting for 3 sec..."
@@ -222,40 +214,25 @@ if uicheck = 7 or result = 0 then
    failcount = failcount + 1
    cancelcmd()
 end if
-'------------------------------------------------------------Check input will display plaintext>>'*' and delete button function
+'------------------------------------------------------------Check input will display plaintext (or '*') and delete button function
 dl.resetreceivecounter
 dl.addcomment vbcrlf
 DL.AddComment "--- Input/ delete function"
-DL.SendSequence "62-05"
-result = DL.WaitForSequence("62 00 (ACK)", 1, 2000)
+DL.SendSequence "62-06 Display numeric"
+result = DL.WaitForSequence("62 63", 1, 2000)
 if result <> 0 then 
    msgbox "Click OK --> Try to input/ delete numeric key", vbokonly
-   uicheck = msgbox ("Do you see plaintext data first and then change to '*' data if input numeric key & delete can work?", vbyesno)
+   uicheck = msgbox ("Do you see plaintext data if input numeric key & delete can work?", vbyesno)
    if uicheck = 7 then 
-      dl.addcomment vbcrlf & "Input screen does not show correct data if input numeric key OR delete can not work >>> FAIL!"
+      dl.addcomment vbcrlf & "Input screen does not show plaintext data if input numeric key OR delete can not work >>> FAIL!"
       failcount = failcount + 1
    end if
-'------------------------------------------------------------Check if 20 sec passed, the screen will be cleared
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Per 20 Seconds, if the numeric length is not zero, the numeric is clear"
-   msgbox "Try to input any numeric --> Click OK", vbokonly
-   dl.addcomment vbcrlf & "Waiting for 20 sec..."
-   dl.pause 10000
-   dl.addcomment vbcrlf & "10 sec passed..."
-   dl.pause 10000
-   dl.addcomment vbcrlf & "20 sec passed..."
-   uicheck = msgbox ("Is the numeric you input cleared?", vbyesno)
-   if uicheck = 7 then 
-      dl.addcomment vbcrlf & "Per 20 sec, numeric does not be cleared >>> FAIL!"
-      failcount = failcount + 1
-   end if
-'------------------------------------------------------------Check PIN length is 1~16
+   '------------------------------------------------------------Check PIN length is 1~20
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Numeric key Length is 1~16"
-   msgbox "Click OK --> Try to input 17 numeric", vbokonly
-   uicheck = msgbox ("Can you input 17 numeric?", vbyesno)
+   msgbox "Click OK --> Try to input 21 numeric", vbokonly
+   uicheck = msgbox ("Can you input 21 numeric?", vbyesno)
    if uicheck = 6 then 
       dl.addcomment vbcrlf & "Numeric length can input 9 >>> FAIL!"
       failcount = failcount + 1
@@ -266,7 +243,7 @@ if result <> 0 then
       dl.addcomment vbcrlf & "Numeric length can input nothing>>> FAIL!"
       failcount = failcount + 1
    end if
-'------------------------------------------------------------if user input '1681'
+   '------------------------------------------------------------if user input '1681'
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- User input '1681'"
@@ -279,15 +256,46 @@ if result <> 0 then
 else
       failcount = failcount + 1
 end if
-'------------------------------------------------------------if user swipe card
+'------------------------------------------------------------Check input will display plaintext (or '*') and delete button function
 dl.resetreceivecounter
 dl.addcomment vbcrlf
-DL.AddComment "--- User swipe MSR card"
-DL.SendSequence "62-05"
-result = DL.WaitForSequence("62 00 (ACK)", 1, 2000)
-if result <> 0 then
-   msgbox "Click OK --> Swipe card (ex. PAN=20 card)", vbokonly
-   result = DL.WaitForSequence("user swipe PAN = 20 card", 1, 10000)
+DL.AddComment "--- Input/ delete function"
+DL.SendSequence "62-06 Display '*'"
+result = DL.WaitForSequence("62 63", 1, 2000)
+if result <> 0 then 
+   msgbox "Click OK --> Try to input/ delete numeric key", vbokonly
+   uicheck = msgbox ("Do you see '*' data if input numeric key & delete can work?", vbyesno)
+   if uicheck = 7 then 
+      dl.addcomment vbcrlf & "Input screen does not show '*' data if input numeric key OR delete can not work >>> FAIL!"
+      failcount = failcount + 1
+   end if
+   '------------------------------------------------------------Check PIN length is 1~20
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Numeric key Length is 1~16"
+   msgbox "Click OK --> Try to input 21 numeric", vbokonly
+   uicheck = msgbox ("Can you input 21 numeric?", vbyesno)
+   if uicheck = 6 then 
+      dl.addcomment vbcrlf & "Numeric length can input 9 >>> FAIL!"
+      failcount = failcount + 1
+   end if
+   uicheck = msgbox ("Pre-Cleartext Display = 2 numeric & Post-Cleartext Display = 0 numberic?", vbyesno)
+   if uicheck = 7 then 
+      dl.addcomment vbcrlf & "Pre/ Post-Cleartext Display are incorrect >>> FAIL!"
+      failcount = failcount + 1
+   end if
+   msgbox "Click OK --> Try to input nothing and press 'O' to end input screen", vbokonly
+   uicheck = msgbox ("Can you end the input screen?", vbyesno)
+   if uicheck = 6 then 
+      dl.addcomment vbcrlf & "Numeric length can input nothing>>> FAIL!"
+      failcount = failcount + 1
+   end if
+   '------------------------------------------------------------if user input '1681'
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- User input '1681'"
+   msgbox "Click OK --> Input numeric '1681' and press 'O' to end input screen", vbokonly
+   result = DL.WaitForSequence("user input 1681", 1, 10000)
    if result = 0 then
       dl.addcomment vbcrlf & "RX content is incorrect >>> FAIL!"
       failcount = failcount + 1
@@ -295,6 +303,48 @@ if result <> 0 then
 else
       failcount = failcount + 1
 end if
+'------------------------------------------------------------Check display language
+for i = 1 to 6
+   if i = 1 then lan = "EN"
+   if i = 2 then lan = "JP"
+   if i = 3 then lan = "ES"     'Spanish'
+   if i = 4 then lan = "FR"
+   if i = 5 then lan = "ZH"     'Chinese'
+   if i = 6 then lan = "PT"     'Portuguese'
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Display Language = " & lan
+   DL.SendSequence "62-06 Language", lan
+   result = DL.WaitForSequence("62 63", 1, 2000)
+   if result <> 0 then uicheck = msgbox ("Display language = " & lan & "?", vbyesno)
+   if uicheck = 7 or result = 0 then 
+      dl.addcomment vbcrlf & "Display language <> " & lan & " >>> FAIL!"
+      failcount = failcount + 1
+   end if
+   cancelcmd()
+next
+'------------------------------------------------------------Check display language
+for i = 0 to 7
+   if i = 0 then SID = "Enter Phone Number"
+   if i = 1 then SID = "Enter IP Address"
+   if i = 2 then SID = "Enter Subnet Mask"
+   if i = 3 then SID = "Enter Default Gateway"
+   if i = 4 then SID = "Enter Odometer Reading/Mileage"
+   if i = 5 then SID = "Enter Employee ID"
+   if i = 6 then SID = "Enter Password for Default Factory Setting"
+   if i = 7 then SID = "Enter Email Address"
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Scenario ID = " & SID
+   DL.SendSequence "62-06 Scenario ID", "0" & i, "H"
+   result = DL.WaitForSequence("62 63", 1, 2000)
+   if result <> 0 then uicheck = msgbox ("UI msg = " & SID, vbyesno)
+   if uicheck = 7 or result = 0 then 
+      dl.addcomment vbcrlf & "UI msg <> " & SID & " >>> FAIL!"
+      failcount = failcount + 1
+   end if
+   cancelcmd()
+next
 '------------------------------------------------------------
 if failcount <> 0 then result = 0
 cancelcmd()

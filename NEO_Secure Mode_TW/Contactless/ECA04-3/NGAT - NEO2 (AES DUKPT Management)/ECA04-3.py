@@ -95,6 +95,8 @@ if (Result):
             if DL.Check_RXResponse(rx, "DFEE26 02 E501") == False: 
                 DL.fails=DL.fails+1
                 DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+        else:
+            DL.fails=DL.fails+1
 
 if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))

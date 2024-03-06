@@ -1,12 +1,43 @@
-Docklight Log File (HEX) - Started 2024/2/21 16:44:42.477 
+Docklight Log File (HEX) - Started 2024/2/22 13:44:56.066 
  TEST CASE: KP008-1
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 115200 baud...
+ POS operating on COM9 @ 115200 baud...
  Set POS COM PORT - COMPLETE
 
+ 
+
+ --- 83-41 Get PAN
+
+2024/2/22 13:44:57.502 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 41 00 04 00 00 1F 00 B0 7C  
+
+ --- 83-41 Get PAN (@ 2nd time)
+
+2024/2/22 13:45:02.588 [TX] - 56 69 56 4F 74 65 63 68 32 00 83 41 00 04 00 00 1F 00 B0 7C 
+2024/2/22 13:45:02.610 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 0B 00 00 D2 F2  
+
+ --- The PAN is < 12 digits
+ 
+
+ --- The PAN is > 19 digits
+ 
+
+ --- User press 'X' to cancel the input screen
+ 
 
 
-Docklight Log File (HEX) - Stopped 2024/2/21 16:44:42.910 
+2024/2/22 13:45:45.808 [TX] - 56 69 56 4F 74 65 63 68 32 00 05 01 00 00 92 EF 
+2024/2/22 13:45:45.875 [RX] - 56 69 56 4F 74 65 63 68 32 00 83 2C 00 00 D1 A4  
+
+
+2024/2/22 13:45:46.315 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 37 01 03 3F AD 
+2024/2/22 13:45:46.389 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  
+
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+
+
+Docklight Log File (HEX) - Stopped 2024/2/22 13:45:46.906 
 

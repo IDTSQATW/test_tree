@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-23448
+39888
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -164,6 +164,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+readercheck = msgbox ("Is this VP3300 reader?", vbyesno)
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- Burst Off *** " & readerType 
@@ -180,7 +181,9 @@ If result <> 0 Then
    result = DL.WaitForSequence("Poll Response", 1, 10000)
 End If
 '------------------------------------------------------------
-for i = 1 to 14
+if readercheck = 6 then n = 14
+if readercheck = 7 then n = 2
+for i = 1 to n
 
     if i = 1 then card = "Mifare 1K"
     if i = 2 then card = "Mifare 1K"
@@ -206,8 +209,12 @@ for i = 1 to 14
    DL.SendSequence "Activate Transaction (02-40)"
    result1 = DL.WaitForSequence("02 0A", 1, 5000)
         if result1 <> 0 Then
-           if i = 1 then result2  = DL.WaitForSequence("FFEE1F_Mifare_1k", 1, 5000)
-           if i = 2 then result2  = DL.WaitForSequence("FFEE1F_Mifare_1k", 1, 5000)
+           if readercheck = 6 then
+              if i = 1 then result2  = DL.WaitForSequence("FFEE1F_Mifare_1k", 1, 5000)
+              if i = 2 then result2  = DL.WaitForSequence("FFEE1F_Mifare_1k", 1, 5000)
+           elseif readercheck = 7 then
+              result2 = 1    
+           end if
            if i = 3 then result2  = DL.WaitForSequence("FFEE1F_Mifare_4k", 1, 5000)
            if i = 4 then result2  = DL.WaitForSequence("FFEE1F_MifarePlus_2k", 1, 5000) 
            if i = 5 then result2  = DL.WaitForSequence("FFEE1F_DesFireD40", 1, 5000)

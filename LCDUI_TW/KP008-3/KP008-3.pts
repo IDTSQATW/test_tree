@@ -1,13 +1,13 @@
 DL_SCRIPTVERSION
 1
-7870
+62752
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "KP008-2" ' !!!!! EDIT THIS !!!!!
+ProjectName = "KP008-3" ' !!!!! EDIT THIS !!!!!
 '+++
 ' Objective: to test cmd 83-41
 '------------------------------------------------------------

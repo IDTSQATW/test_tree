@@ -1,16 +1,16 @@
-Docklight Log File (HEX) - Started 2024/1/8 14:40:00.697 
+Docklight Log File (HEX) - Started 2024/3/5 10:09:11.898 
  TEST CASE: FV004
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 115200 baud...
+ POS operating on com90 @ 115200 baud...
  Set POS COM PORT - COMPLETE
 
  --- Get Bootloader Version
 
-2024/1/8 14:40:02.111 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 04 00 00 1E 7C 
-2024/1/8 14:40:02.119 [RX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 17  
-56 50 33 33 30 30 20 55 53 42 2D 42 4C 2D 56 33 2E 30 30 2E 30 31 38 64 DA 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+2024/3/5 10:09:13.201 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 04 00 00 1E 7C 
+2024/3/5 10:09:13.208 [RX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 15  
+4E 45 4F 33 20 42 6F 6F 74 6C 6F 61 64 65 72 20 56 31 2E 31 30 10 C3 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  Result = PASSED
  
@@ -24,5 +24,5 @@ Docklight Log File (HEX) - Started 2024/1/8 14:40:00.697
 Please check ASCII screen, make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (HEX) - Stopped 2024/1/8 14:40:02.421 
+Docklight Log File (HEX) - Stopped 2024/3/5 10:09:13.520 
 

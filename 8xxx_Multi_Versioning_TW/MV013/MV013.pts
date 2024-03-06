@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-33787
+24098
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -132,12 +132,10 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-If result <> 0 Then
-   DL.AddComment "--- 90-15 Set Model Number"
-   DL.SendSequence "90-15 Set Model Number"
-   result = DL.WaitForSequence("Positive Response", 1, 5000)
-   dl.pause 500
-End If
+'Refer to NEO3-9585
+'Step 0: let device work in De-activation state.
+'Step 1: Send 90-21 (Full Device Reset) (90-21 will create the related Folder & Files for TMS, and these Folder & Files can't be erased by 90-00 command.)
+'Step 2: Send 90-15 to set Model Number
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 PrintMyResult(result)

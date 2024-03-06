@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-12213
+29268
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -180,11 +180,15 @@ If result <> 0 Then
    dl.pause 500
 End If
 
+If result <> 0 Then
 dl.resetreceivecounter
+dl.addcomment vbcrlf
 dl.addcomment "--- Poll on demand"
 dl.sendsequence "Poll on Demand"
 result = dl.waitforsequence("Poll Response", 1, 2000)
+End If
 
+If result <> 0 Then
 cmdcheck = inputbox("The reader support:" & vbcrlf & vbcrlf & "1 -- cmd 02-01 only" & vbcrlf & "2 -- cmd 02-40 only" & vbcrlf & "3 -- cmd 02-01 & 02-40 both", vbokonly)
 
 trackcheck = inputbox("The reader support:" & vbcrlf & vbcrlf & "1 -- Track 1 + 2" & vbcrlf & "2 -- Track 1 + 2 + 3", vbokonly)
@@ -269,6 +273,7 @@ If result <> 0 Then
    if r4 = 0 then dl.addcomment vbcrlf & "Tag 9F39 => Incorrect!"
    if r5 = 0 then dl.addcomment vbcrlf & "Tag DFEE26 => Incorrect!"
 End If
+end if
 end if
 
 DL.AddComment vbCrLf

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-39970
+10963
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -114,7 +114,7 @@ PrintMyResult(result)
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 DL.AddComment vbCrLf
-dl.addcomment "///// NOTICE ///////////////////////////////////////////////////////////" & vbcrlf & vbcrlf & "Please check ASCII screen, make sure reader return correct data that meet spec!!"
+dl.addcomment "///// NOTICE ///////////////////////////////////////////////////////////" & vbcrlf & vbcrlf & "Please check ASCII screen, make sure reader return correct data that meet spec!!" & vbcrlf & "Note: notice if model number exist or not"
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""

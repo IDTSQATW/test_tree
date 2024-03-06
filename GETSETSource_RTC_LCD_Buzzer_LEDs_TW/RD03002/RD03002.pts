@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-4606
+52639
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -187,7 +187,7 @@ if readermodel = 6 then
    dl.addcomment vbcrlf
    DL.AddComment "--- Set source = 11 05 = Don't use LCD (VP3300 default)"
    DL.SendSequence "Set source = 11 05 = Don't use LCD (VP3300 default)"
-   result = DL.WaitForSequence("01 00", 1, 2000)
+   resultignore = DL.WaitForSequence("01 00", 1, 2000)
 end if
 else
    dl.addcomment vbcrlf & "The reader did not support this function, can skip it."

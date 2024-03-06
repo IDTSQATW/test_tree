@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-6991
+54176
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -38,13 +38,16 @@ For i = 1 to n
       result = DL.WaitForSequence("Reboot", 1, 5000)
    End If
 
-   dl.pause 10000
+   dl.pause 12000
 
    If result <> 0 Then
       dl.resetreceivecounter
       dl.addcomment vbcrlf
       DL.AddComment "--- 18-01 Ping"
+      for n = 1 to 4
       DL.SendSequence "18-01 Ping"
+      dl.pause 500
+      next
       result = DL.WaitForSequence("18 00", 1, 5000)
    end if
 

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-17320
+9507
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -164,23 +164,6 @@ End If
 DL.SendSequence "Set Configuration Global On (NEO2)"
 result = DL.WaitForSequence("04 00", 1, 2000)
 '------------------------------------------------------------
-atcmd = msgbox ("Does reader support cmd 02-01?", vbyesno)
-if atcmd = 6 then
-If result <> 0 Then
-   msgbox "Click OK --> Place Mifare DESFire virtual card (MIFARE 2GO Client Test App w/ MIFARE 2GO Accenture Card Bundle.json)", vbyesonly
-   DL.ResetReceiveCounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- 02-01 w/ tag DFEC20"
-   DL.SendSequence "02-01 w/ tag DFEC20"
-   result = DL.WaitForSequence("02-01 RX", 1, 4000)
-   if result <> 0 then result = DL.WaitForSequence("Tag DFEC0F = 03", 1, 4000)
-   if result <> 0 then underPTcmd()
-   msgbox "Remove card", vbyesonly
-End If
-end if
-
-atcmd = msgbox ("Does reader support cmd 02-40?", vbyesno)
-if atcmd = 6 then
 If result <> 0 Then
    msgbox "Click OK --> Place Mifare DESFire virtual card (iPhone 12 mini, PRESTO card)", vbyesonly
    DL.ResetReceiveCounter
@@ -193,7 +176,6 @@ If result <> 0 Then
    if result <> 0 then underPTcmd()
    msgbox "Remove card", vbyesonly
 End If
-end if
 '------------------------------------------------------------
 sub underPTcmd()
 If result <> 0 Then

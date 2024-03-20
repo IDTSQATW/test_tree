@@ -26,14 +26,23 @@ else:
     
 # Set/ Get MSR Secure Parameters		
 if (Result):
-	RetOfStep = DL.SendCommand('Set MSR Secure Parameters (10)')
+	if readertype == 1:	     # NEOII and upward project
+		RetOfStep = DL.SendCommand('Set MSR Secure Parameters (10)')
+	else:     # NEOI project
+		RetOfStep = DL.SendCommand('Set MSR Secure Parameters (10) (NEO1)')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 00")	
-if (Result):
-	RetOfStep = DL.SendCommand('Get MSR Secure Parameters')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 05 DF EF 04 01 10")
 
+if (Result):
+	if readertype == 1:     # NEOII and upward project
+		RetOfStep = DL.SendCommand('Get MSR Secure Parameters')
+		if (RetOfStep):
+			Result = Result and DL.Check_RXResponse("C7 00 00 05 DF EF 04 01 10")
+	else:     # NEOI project
+		RetOfStep = DL.SendCommand('Get MSR Secure Parameters (NEO1)')
+		if (RetOfStep):
+			Result = Result and DL.Check_RXResponse("C7 00 00 05 DFDE04 01 10")
+            
 # Check data encryption TYPE is TDES	
 if readertype == 1:	     # NEOII and upward project
 	# Get DUKPT DEK Attribution based on KeySlot (C7-A3)
@@ -239,7 +248,9 @@ if (Result):
 									DL.SetWindowText("Red", "Tag DFEF4D: FAIL")
 			else:
 				DL.fails=DL.fails+1
-                            
+else:
+	DL.fails=DL.fails+1
+
 # cmd 60-13
 if readertype == 1:     # NEOII and upward project
 	RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')

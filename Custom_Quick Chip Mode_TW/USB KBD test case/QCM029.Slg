@@ -1,9 +1,9 @@
 
-10:39:40: If Issue ?
+14:40:41: If Issue ?
 Pass Test
 [Issue Count: 0]
 
-10:39:40: >>[Do Scripts]>>
+14:40:41: >>[Do Scripts]>>
 
 Objective: to verify Tag DFEF6E (Carriage Return)
 ===========================================
@@ -17,7 +17,7 @@ OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE
 ASCII: Otech2   
 --------------------
 >>> MSR transaction
-MESSAGE: Open PC "NotePad" -> tap any CL card 3 times -> notice the cursor position
+MESSAGE: Open "Notepad_win10.exe" -> tap any CL card 3 times -> notice the cursor position
 MESSAGECK: the cursor will be moved to the beginning of next line (CR) per tap
 User Judgment Pass
 
@@ -27,7 +27,7 @@ OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE
 ASCII: Otech2   
 --------------------
 >>> MSR transaction
-MESSAGE: Open PC "NotePad" -> tap any CL card 3 times -> notice the cursor position
+MESSAGE: Open "Notepad_win10.exe" -> tap any CL card 3 times -> notice the cursor position
 MESSAGECK: the cursor will be skipped a new line and was moved to the beginning of the next line (CR + LF) per tap
 User Judgment Pass
 
@@ -42,7 +42,7 @@ OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE
 ASCII: Otech2   
 --------------------
 >>> MSR transaction
-MESSAGE: Open PC "NotePad" -> tap any CL card 3 times -> notice the cursor position
+MESSAGE: Open "Notepad_win10.exe" -> tap any CL card 3 times -> notice the cursor position
 MESSAGECK: the cursor will be moved to the beginning of next line (CR) per tap
 User Judgment Pass
 
@@ -52,7 +52,7 @@ OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE
 ASCII: Otech2   
 --------------------
 >>> MSR transaction
-MESSAGE: Open PC "NotePad" -> tap any CL card 3 times -> notice the cursor position
+MESSAGE: Open "Notepad_win10.exe" -> tap any CL card 3 times -> notice the cursor position
 MESSAGECK: the cursor will be skipped a new line and was moved to the beginning of the next line (CR + LF) per tap
 User Judgment Pass
 

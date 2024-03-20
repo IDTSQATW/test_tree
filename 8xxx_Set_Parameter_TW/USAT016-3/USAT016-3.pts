@@ -246,7 +246,7 @@ for a = 1 to 4
 next
 end if
 
-if pollmode = 1 then
+if pollmode = 6 then
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
@@ -318,7 +318,7 @@ for a = 1 to 4
 next
 end if
 
-if pollmode = 1 then
+if pollmode = 6 then
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf

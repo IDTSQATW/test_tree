@@ -1,9 +1,9 @@
 
-11:45:50: If Issue ?
+14:00:05: If Issue ?
 Pass Test
 [Issue Count: 0]
 
-11:45:50: >>[Do Scripts]>>
+14:00:05: >>[Do Scripts]>>
 
 Objective: set reader to Quick Chip mode = 03 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 03 = CT and MSR would be active.
 --------------------
@@ -47,10 +47,4 @@ ASCII: Otech2
 >>> Check USB connection type
 MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
 User Judgment Pass
-
-
-09:53:29: [Load Script File]
-Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (03=CT+MSR).txt
-Items: 27
-Load Case Succeed!
 

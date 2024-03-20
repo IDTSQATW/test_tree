@@ -75,7 +75,7 @@ if (Result):
 		Result = Result and DL.Check_RXResponse("60 00 00 00")	
 if readertype == 1:	
 	if (Result):
-		RetOfStep = DL.SendCommand('60-06 Contact Set Terminal Data')
+		RetOfStep = DL.SendCommand('60-06 Contact Set Terminal Data (NEOII)')
 		if (RetOfStep):
 			Result = Result and DL.Check_RXResponse("60 00 00 00")	
 else:

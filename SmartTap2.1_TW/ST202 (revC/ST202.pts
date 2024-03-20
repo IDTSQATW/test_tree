@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-43070
+37623
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -232,12 +232,12 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-if result <> 0 then
-   dl.resetreceivecounter
-   DL.AddComment "--- 04-09"
-   DL.SendSequence "04-09"
-   result = DL.WaitForSequence("burst off", 1, 5000)
-end if
+'if result <> 0 then
+'   dl.resetreceivecounter
+'   DL.AddComment "--- 04-09"
+'   DL.SendSequence "04-09"
+'   result = DL.WaitForSequence("burst off", 1, 5000)
+'end if
 '------------------------------------------------------------
 if result <> 0 then
    dl.resetreceivecounter

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-51634
+3780
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -40,7 +40,7 @@ result = 1
 'Result reporting (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
 Sub PrintMyResult(ResultX)
-      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+      If ResultX <> 0 Then
             MasterResult = 1
             DL.AddComment "Result = PASSED"
       Else

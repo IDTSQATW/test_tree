@@ -115,6 +115,7 @@ if (Result):
 			
 			# Tags 9F39/ FFEE01/ DFEE26
 				if DL.Check_StringAB(Tag9F39, '05') == True or DL.Check_StringAB(Tag9F39, '07') == True: 
+					DL.fails=DL.fails+0
 				else:
 					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")
@@ -152,6 +153,7 @@ if (Result):
 	
 						# Tags 9F39/ FFEE01/ DFEE26
 						if DL.Check_StringAB(Tag9F39, '05') == True or DL.Check_StringAB(Tag9F39, '07') == True: 
+							DL.fails=DL.fails+0
 						else:
 							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag 9F39: FAIL")
@@ -189,6 +191,7 @@ if (Result):
 					
 						# Tags 9F39/ FFEE01/ DFEE26
 						if DL.Check_StringAB(Tag9F39, '05') == True or DL.Check_StringAB(Tag9F39, '07') == True: 
+							DL.fails=DL.fails+0
 						else:
 							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag 9F39: FAIL")
@@ -228,6 +231,7 @@ if (Result):
 			
 				# Tags 9F39/ FFEE01/ DFEE26
 				if DL.Check_StringAB(Tag9F39, '05') == True or DL.Check_StringAB(Tag9F39, '07') == True: 
+					DL.fails=DL.fails+0
 				else:
 					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")
@@ -280,6 +284,7 @@ if (Result):
 			
 				# Tags 9F39/ FFEE01/ DFEE26
 				if DL.Check_StringAB(Tag9F39, '05') == True or DL.Check_StringAB(Tag9F39, '07') == True: 
+					DL.fails=DL.fails+0
 				else:
 					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")
@@ -316,6 +321,7 @@ if (Result):
 							
 						# Tags 9F39/ FFEE01/ DFEE26
 						if DL.Check_StringAB(Tag9F39, '05') == True or DL.Check_StringAB(Tag9F39, '07') == True: 
+							DL.fails=DL.fails+0
 						else:
 							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag 9F39: FAIL")
@@ -355,6 +361,7 @@ if (Result):
 			
 				# Tags 9F39/ FFEE01/ DFEE26
 				if DL.Check_StringAB(Tag9F39, '05') == True or DL.Check_StringAB(Tag9F39, '07') == True: 
+					DL.fails=DL.fails+0
 				else:
 					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")
@@ -392,6 +399,7 @@ if (Result):
 							
 						# Tags 9F39/ FFEE01/ DFEE26
 						if DL.Check_StringAB(Tag9F39, '05') == True or DL.Check_StringAB(Tag9F39, '07') == True: 
+							DL.fails=DL.fails+0
 						else:
 							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag 9F39: FAIL")

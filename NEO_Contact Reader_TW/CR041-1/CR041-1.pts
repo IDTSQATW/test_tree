@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-37073
+38918
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -216,6 +216,7 @@ If result <> 0 Then
 End If
 
 If result <> 0 Then
+   dl.pause 500
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    repower = 3
@@ -287,7 +288,8 @@ If result <> 0 Then
 End If
 end sub
 
-dl.pause 500
+DL.SendSequence "04-09"
+dl.pause 800
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)

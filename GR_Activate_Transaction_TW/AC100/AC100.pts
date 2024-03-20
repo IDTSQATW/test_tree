@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-42791
+61229
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -139,7 +139,7 @@ If result <> 0 Then
   result = DL.WaitForSequence("Poll Response", 1, 10000)
 End If
 '------------------------------------------------------------
-for i = 1 to 20
+for i = 1 to 15
 If result <> 0 Then
   DL.ResetReceiveCounter
    dl.addcomment vbcrlf

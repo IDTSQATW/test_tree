@@ -58,20 +58,29 @@ if (Result):
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("01 00 00 00")
 	
+# CT config
 if readertype == 0:	
-	# CT config		
 	if (Result):
 		RetOfStep = DL.SendCommand('60-06 Contact Set Terminal Data (NEOI)')
 		if (RetOfStep):
 			Result = DL.Check_RXResponse("60 00 00 00")		
+if readertype == 1:	
 	if (Result):
-		RetOfStep = DL.SendCommand('60-03 Contact Set Application Data (VISA)')
+		RetOfStep = DL.SendCommand('60-16 Contact Set ICS Identification (02)')
+		if (RetOfStep):
+			Result = DL.Check_RXResponse("60 00 00 00")
+	if (Result):
+		RetOfStep = DL.SendCommand('60-06 Contact Set Terminal Data (NEOII)')
 		if (RetOfStep):
 			Result = DL.Check_RXResponse("60 00 00 00")		
-	if (Result):
-		RetOfStep = DL.SendCommand('60-0A Contact Set CA Public Key')
-		if (RetOfStep):
-			Result = DL.Check_RXResponse("60 00 00 00")			
+if (Result):
+	RetOfStep = DL.SendCommand('60-03 Contact Set Application Data (VISA)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("60 00 00 00")		
+if (Result):
+	RetOfStep = DL.SendCommand('60-0A Contact Set CA Public Key')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("60 00 00 00")			
 
 # cmd 60-10, fallback to MSR, swipe card
 if (Result):

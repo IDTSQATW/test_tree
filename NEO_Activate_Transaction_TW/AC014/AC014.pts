@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-39888
+50967
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -184,7 +184,6 @@ End If
 if readercheck = 6 then n = 14
 if readercheck = 7 then n = 2
 for i = 1 to n
-
     if i = 1 then card = "Mifare 1K"
     if i = 2 then card = "Mifare 1K"
     if i = 3 then card = "Mifare 4k"
@@ -200,69 +199,64 @@ for i = 1 to n
     if i = 13 then card = "Ultralight EV1"
     if i = 14 then card = "NFC Tag 203"
 
-
-'If result <> 0 Then
    msgbox "Click OK --> Tap" & card , vbokonly
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Activate Transaction (02-40) & " & card
    DL.SendSequence "Activate Transaction (02-40)"
    result1 = DL.WaitForSequence("02 0A", 1, 5000)
-        if result1 <> 0 Then
-           if readercheck = 6 then
-              if i = 1 then result2  = DL.WaitForSequence("FFEE1F_Mifare_1k", 1, 5000)
-              if i = 2 then result2  = DL.WaitForSequence("FFEE1F_Mifare_1k", 1, 5000)
-           elseif readercheck = 7 then
-              result2 = 1    
-           end if
-           if i = 3 then result2  = DL.WaitForSequence("FFEE1F_Mifare_4k", 1, 5000)
-           if i = 4 then result2  = DL.WaitForSequence("FFEE1F_MifarePlus_2k", 1, 5000) 
-           if i = 5 then result2  = DL.WaitForSequence("FFEE1F_DesFireD40", 1, 5000)
-           if i = 6 then result2  = DL.WaitForSequence("FFEE1F_DesFireEV1_2k", 1, 5000) 
-           if i = 7 then result2  = DL.WaitForSequence("FFEE1F_DesFireEV1_4k", 1, 5000)
-           if i = 8 then result2  = DL.WaitForSequence("FFEE1F_DesFireEV2_2k", 1, 5000)
-           if i = 9 then result2  = DL.WaitForSequence("FFEE1F_Ultralight_32Byte", 1, 10000)
-           if i = 10 then result2 = DL.WaitForSequence("FFEE1F_Ultralight_64Byte", 1, 10000)
-           if i = 11 then result2 = DL.WaitForSequence("FFEE1F_Ultralight", 1, 10000)
-           if i = 12 then result2 = DL.WaitForSequence("FFEE1F_UltralightC", 1, 10000)
-           if i = 13 then result2 = DL.WaitForSequence("FFEE1F_UltralightEV1", 1, 10000)
-           if i = 14 then result2 = DL.WaitForSequence("FFEE1F_NFC_Tag203", 1, 10000)   
-        end if   
-
-                if result1 = 0 or result2  = 0 then result = 0
+   if readercheck = 6 then
+      if i = 1 then result2  = DL.WaitForSequence("FFEE1F_Mifare_1k", 1, 5000)
+      if i = 2 then result2  = DL.WaitForSequence("FFEE1F_Mifare_1k", 1, 5000)
+   elseif readercheck = 7 then
+          result2 = 1    
+   end if
+   if i = 3 then result2  = DL.WaitForSequence("FFEE1F_Mifare_4k", 1, 5000)
+   if i = 4 then result2  = DL.WaitForSequence("FFEE1F_MifarePlus_2k", 1, 5000) 
+   if i = 5 then result2  = DL.WaitForSequence("FFEE1F_DesFireD40", 1, 5000)
+   if i = 6 then result2  = DL.WaitForSequence("FFEE1F_DesFireEV1_2k", 1, 5000) 
+   if i = 7 then result2  = DL.WaitForSequence("FFEE1F_DesFireEV1_4k", 1, 5000)
+   if i = 8 then result2  = DL.WaitForSequence("FFEE1F_DesFireEV2_2k", 1, 5000)
+   if i = 9 then result2  = DL.WaitForSequence("FFEE1F_Ultralight_32Byte", 1, 10000)
+   if i = 10 then result2 = DL.WaitForSequence("FFEE1F_Ultralight_64Byte", 1, 10000)
+   if i = 11 then result2 = DL.WaitForSequence("FFEE1F_Ultralight", 1, 10000)
+   if i = 12 then result2 = DL.WaitForSequence("FFEE1F_UltralightC", 1, 10000)
+   if i = 13 then result2 = DL.WaitForSequence("FFEE1F_UltralightEV1", 1, 10000)
+   if i = 14 then result2 = DL.WaitForSequence("FFEE1F_NFC_Tag203", 1, 10000)   
+   
+   if result1 = 0 or result2  = 0 then result = 0
 
        if result1 = 0 then 
           DL.AddComment vbcrlf & "==> Status code incorrect"
-          errorCounter1 = errorCounter + 1
+          errorCounter1 = errorCounter1 + 1
        else
           DL.AddComment vbcrlf & "==> Status code: PASS"
        end if
     
        if result2 = 0 then 
           DL.AddComment "==> Error code(FFEE1F) incorrect"
-          errorCounter2 = errorCounter + 1
+          errorCounter2 = errorCounter2 + 1
        else
           DL.Addcomment "==> Error code(FFEE1F): PASS"
        end if
    dl.pause 500
-'End If
 next
 
 DL.Addcomment vbCrLf & vbCrLf & "----------------------------------------------------------------------"
 
 If errorCounter1 <> 0 Then
-   DL.Addcommnet vbCrLf & vbCrLf & "Found " & errorCounter1 & " Status code error. Please check the log file for details."
+   DL.Addcomment vbCrLf & vbCrLf & "Found " & errorCounter1 & " Status code error. Please check the log file for details."
    result = 0
 End If
 
-If errorCounter1 <> 0 Then
-   DL.Addcommnet vbCrLf & vbCrLf & "Found " & errorCounter2 & " Status code error. Please check the log file for details."
+If errorCounter2 <> 0 Then
+   DL.Addcomment vbCrLf & vbCrLf & "Found " & errorCounter2 & " FFEE1F data error. Please check the log file for details."
    result = 0
 End If
 
 
 '------------------------------------------------------------
-DL.AddComment vbCrLf
+DL.Addcomment vbCrLf
 PrintMyResult(result)
 
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf

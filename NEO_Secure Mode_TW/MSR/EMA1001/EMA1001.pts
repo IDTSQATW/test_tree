@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-5203
+1617
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -147,10 +147,27 @@ End Function
 '------------------------------------------------------------
 if result <> 0 then
    dl.resetreceivecounter
-   dl.addcomment vbcrlf
    DL.AddComment "--- Auto Poll" 
    DL.SendSequence "Auto Poll"
    result = DL.WaitForSequence("Poll Response", 1, 3000)
+end if
+
+if readerType <> "NEO2" then
+if result <> 0 then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- DF7D = 01" 
+   DL.SendSequence "DF7D = 01"
+   result = DL.WaitForSequence("04 00", 1, 3000)
+end if
+else
+if result <> 0 then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- DF7D = 02 (NEO2)" 
+   DL.SendSequence "DF7D = 02 (NEO2)"
+   result = DL.WaitForSequence("04 00", 1, 3000)
+end if
 end if
 
 at()

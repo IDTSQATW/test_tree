@@ -233,6 +233,8 @@ if (Result):
 							DL.SetWindowText("red", "TR2maskdata: FAIL")
 				else:
 					DL.fails=DL.fails+1
+			else:
+				DL.fails=DL.fails+1
 else:
 	DL.fails=DL.fails+1
                             

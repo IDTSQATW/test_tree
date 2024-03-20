@@ -220,7 +220,7 @@ if readertype == 1:
 if readertype == 0:
 	RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')	
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 05 00 00 D6 C5").
+		Result = Result and DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 05 00 00 D6 C5")
 		if Result == False:
 			DL.fails=DL.fails+1
             

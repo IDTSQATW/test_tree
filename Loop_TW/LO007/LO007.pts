@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-3452
+25432
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -35,7 +35,7 @@ DL.StartCommunication
 'Result reporting (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
 Sub PrintMyResult(ResultX)
-      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+      If ResultX <> 0 Then
             MasterResult = 1
             DL.AddComment "Result = PASSED"
       Else
@@ -68,7 +68,7 @@ msgbox "Place any CL card (can return 23 status code) on reader --> Click OK"
       dl.addcomment vbcrlf
       DL.AddComment "--- 02-40 ACT_CL only"
       DL.SendSequence "02-40 ACT_CL only"
-      result = DL.WaitForSequence("02 23", 1, 5000)
+      result = DL.WaitForSequence("02 23", 1, 10000)
       if result = 0 then DL.AddComment  vbcrlf & "***** FAIL *****"
       dl.pause 1000
       

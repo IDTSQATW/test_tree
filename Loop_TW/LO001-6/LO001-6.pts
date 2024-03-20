@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-20835
+63254
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -18,6 +18,16 @@ DL.ClearCommWindows
 DL.StartLogging "DOCKLIGHT_LOG",False, "H"
 ', false, true
 
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
 Dim prompt
 Dim confirm
 max=1
@@ -32,6 +42,7 @@ DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+pfcheck = msgbox ("Is this NEO1 project?", vbyesno)
 n = 10000
  For i = 1 to n
 
@@ -43,7 +54,8 @@ n = 10000
       dl.resetreceivecounter
       dl.addcomment vbcrlf
       DL.AddComment "--- 04-00 to change DFEE1D"
-      DL.SendSequence "04-00 to change DFEE1D"
+      if pfcheck = 6 then DL.SendSequence "04-00 to change FFEE1D (NEO1)"
+      if pfcheck = 7 then DL.SendSequence "04-00 to change DFEE1D"
       result = DL.WaitForSequence("04 00", 1, 5000)
       dl.pause 500
       
@@ -61,7 +73,8 @@ n = 10000
          dl.addcomment vbcrlf
          DL.AddComment "--- 03-02"
          DL.SendSequence "03-02"
-         result = DL.WaitForSequence("DFEE1D (default)", 1, 5000)
+         if pfcheck = 6 then result = DL.WaitForSequence("FFEE1D (default) (NEO1)", 1, 5000)
+         if pfcheck = 7 then result = DL.WaitForSequence("DFEE1D (default)", 1, 5000)
          dl.pause 500
       end if
       

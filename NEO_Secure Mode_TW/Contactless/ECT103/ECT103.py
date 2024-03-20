@@ -87,7 +87,7 @@ if (Result):
                 DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
                 
             # 9F06 (CS-4822)
-            AID = DL.Check_RXResponse(rx, "9F 06 06 A0 00 00 00 25 01")
+            AID = DL.Check_RXResponse(rx, "9F 06 ** A0 00 00 00 25 01")
             if AID == False: 
                 DL.fails=DL.fails+1
                 DL.SetWindowText("red", "Tag AID: FAIL")

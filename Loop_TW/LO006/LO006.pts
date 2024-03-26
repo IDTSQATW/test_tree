@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-54176
+21323
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -39,6 +39,9 @@ For i = 1 to n
    End If
 
    dl.pause 12000
+
+DL.StopCommunication
+DL.StartCommunication
 
    If result <> 0 Then
       dl.resetreceivecounter

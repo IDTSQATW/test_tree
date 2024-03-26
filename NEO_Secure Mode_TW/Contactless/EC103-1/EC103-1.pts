@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-33783
+63094
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -155,6 +155,9 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+DL.SendSequence "04-F0"     'default is enable even if 03-02 can not find the tag
+dl.pause 8000
+
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf

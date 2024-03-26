@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-36009
+11738
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -158,7 +158,6 @@ End Function
 sub ResetDefault()
 If result <> 0 Then
    dl.resetreceivecounter
-   dl.addcomment vbcrlf
    DL.AddComment "--- 04-09"
    DL.SendSequence "04-09"
    result = DL.WaitForSequence("burst off", 1, 5000)

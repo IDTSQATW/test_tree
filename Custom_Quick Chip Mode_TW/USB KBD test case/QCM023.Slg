@@ -1,9 +1,9 @@
 
-14:37:45: If Issue ?
+11:25:38: If Issue ?
 Pass Test
 [Issue Count: 0]
 
-14:37:45: >>[Do Scripts]>>
+11:25:38: >>[Do Scripts]>>
 
 Objective: check Cancel feature if Fallback to MSR or Fallback to CT transaction
 >>> Set CT terminal data = 5C (enable MSR fallback to CT function)
@@ -17,8 +17,6 @@ OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12
 ASCII: Otech2   
 >>> Fallback to CT transaction
 SWIPEKB: Click OK -> Swipe Discover card (LED 3 is ON (steady status))
-KB Unit Swipe Card:
-DFEF6102F220
 CMD: 56 69 56 4F 74 65 63 68 32 00 05 01 00 00 EF 92 
 OUT: 56 69 56 4F 74 65 63 68 32 00 05 00 00 00 D8 
 ASCII: Otech2   

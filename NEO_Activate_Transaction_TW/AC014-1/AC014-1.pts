@@ -1,0 +1,309 @@
+DL_SCRIPTVERSION
+1
+27220
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "AC014-1" ' !!!!! EDIT THIS !!!!!
+' Objective: for JIRA issue VENDI-161, NEO3-1478, FWE-2040 
+' VENDI-161: Reader does not return V2 response message when it failed to read a card (ex. Mifare 1K/ 4K card) along w/ two short beeps
+' NEO3-1478: [VP3350][ VP3350_FW_v1.00.068.2228.T_220711-1] PreSQA::Neo3: Reader may get "stuck"when an unsupported card is tapped
+' FWE-2040: [VP3300][1.10] ACT command can not detect Mifare 4K card
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  genFlag = result
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+result = 1
+errorCounter1 = 0
+errorCounter2 = 0
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+if POSBaudRate(1) = 0 then 
+   DL.SetChannelSettings(COM_Port(1))
+else
+   DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+end if
+
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+readercheck = msgbox ("Is this VP3300 reader?", vbyesno)
+If result <> 0 Then
+   dl.resetreceivecounter
+   DL.AddComment "--- Burst Off *** " & readerType 
+   if readerType <> "NEO2" then DL.SendSequence "Burst Off"
+   if readerType = "NEO2" then DL.SendSequence "Burst Off (NEO2)"
+   result = DL.WaitForSequence("Burst Mode Response", 1, 10000)
+End If
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Poll on Demand"
+   DL.SendSequence "Poll on Demand"
+   result = DL.WaitForSequence("Poll Response", 1, 10000)
+End If
+'------------------------------------------------------------
+for i = 1 to 14
+    if i = 1 then card = "Mifare 1K"
+    if i = 2 then card = "Mifare 1K"
+    if i = 3 then card = "Mifare 4k"
+    if i = 4 then card = "Mifare Plus 2K"
+    if i = 5 then card = "DesFire D40"
+    if i = 6 then card = "DesFire EV1 2K"
+    if i = 7 then card = "DesFire EV1 4K"
+    if i = 8 then card = "DesFire EV2 2K"
+    if i = 9 then card = "Ultralight 32 Byte"
+    if i = 10 then card = "Ultralight 64 Byte"
+    if i = 11 then card = "Ultralight"
+    if i = 12 then card = "Ultralight C"
+    if i = 13 then card = "Ultralight EV1"
+    if i = 14 then card = "NFC Tag 203"
+
+   msgbox "Click OK --> Tap" & card , vbokonly
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Activate Transaction (02-40) & " & card
+   DL.SendSequence "Activate Transaction (02-40)"
+   result1 = DL.WaitForSequence("02 00", 1, 5000)
+   result2  = DL.WaitForSequence("FFEE0E", 1, 5000)
+   
+   if result1 = 0 or result2  = 0 then result = 0
+
+       if result1 = 0 then 
+          DL.AddComment vbcrlf & "==> Status code incorrect"
+          errorCounter1 = errorCounter1 + 1
+       else
+          DL.AddComment vbcrlf & "==> Status code: PASS"
+       end if
+    
+       if result2 = 0 then 
+          DL.AddComment "==> Tagh FFEE0E incorrect"
+          errorCounter2 = errorCounter2 + 1
+       else
+          DL.Addcomment "==> Tagh FFEE0E: PASS"
+       end if
+   dl.pause 500
+next
+
+DL.Addcomment vbCrLf & vbCrLf & "----------------------------------------------------------------------"
+
+If errorCounter1 <> 0 Then
+   DL.Addcomment vbCrLf & vbCrLf & "Found " & errorCounter1 & " Status code error. Please check the log file for details."
+   result = 0
+End If
+
+If errorCounter2 <> 0 Then
+   DL.Addcomment vbCrLf & vbCrLf & "Found " & errorCounter2 & " FFEE0E data error. Please check the log file for details."
+   result = 0
+End If
+
+
+'------------------------------------------------------------
+DL.Addcomment vbCrLf
+PrintMyResult(result)
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.pause 1000
+
+If 0 Then
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+End If
+
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub

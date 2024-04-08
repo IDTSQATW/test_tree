@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-5402
+12293
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -171,7 +171,10 @@ If result <> 0 Then
 End If
 '============================================================
 if result <> 0 then
-   for i = 1 to 3
+   msrcheck = msgbox ("Does the reader support MSR?", vbyesno)
+   if msrcheck = 6 then n = 3
+   if msrcheck = 7 then n = 2
+   for i = 1 to n
        If result <> 0 Then
           if i = 1 then msgbox "Click OK --> Tap any bank card", vbokonly
           if i = 2 then msgbox "Click OK --> Tap Mifare Classic card", vbokonly

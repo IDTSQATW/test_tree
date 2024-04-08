@@ -26,7 +26,7 @@ else:
 	DL.SetWindowText("Green", "*** The project has NO LCD ***")	
 
 # Check the reader is TDES
-if readertype == 1:
+if readertype == 1: #NEO2
 	# Get DUKPT DEK Attribution based on KeySlot (C7-A3)
 	if (Result):
 		RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
@@ -36,7 +36,7 @@ if readertype == 1:
 		RetOfStep = DL.SendCommand('DF7D = 02 (NEO2)')
 		if (RetOfStep):
 			Result = Result and DL.Check_RXResponse("04 00 00 00")
-else:			
+else: #NEO1
 # Get Data Encryption (C7-37)
 	if (Result):
 		RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
@@ -59,12 +59,12 @@ if (Result):
 		Result = DL.Check_RXResponse("01 00 00 00")
 	
 # CT config
-if readertype == 0:	
+if readertype == 0: #NEO1	
 	if (Result):
 		RetOfStep = DL.SendCommand('60-06 Contact Set Terminal Data (NEOI)')
 		if (RetOfStep):
 			Result = DL.Check_RXResponse("60 00 00 00")		
-if readertype == 1:	
+if readertype == 1: #NEO2
 	if (Result):
 		RetOfStep = DL.SendCommand('60-16 Contact Set ICS Identification (02)')
 		if (RetOfStep):

@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2024/3/12 15:25:00.019 
+Docklight Log File (HEX) - Started 2024/3/28 11:18:45.019 
  TEST CASE: MV014
 
  --- Set POS COM PORT Settings
@@ -10,8 +10,18 @@ Docklight Log File (HEX) - Started 2024/3/12 15:25:00.019
 
  --- 09-15 Get System Info (Get K81 all available system info)
 
-2024/3/12 15:25:02.650 [TX] - 56 69 56 4F 74 65 63 68 32 00 09 15 00 01 3F 30 31 
-2024/3/12 15:25:02.667 [RX] - 56 69 56 4F 74 65 63 68 32 00 09 03 00 00 CE C0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024/3/28 11:18:47.982 [TX] - 56 69 56 4F 74 65 63 68 32 00 09 15 00 01 3F 30 31 
+2024/3/28 11:18:47.991 [RX] - 56 69 56 4F 74 65 63 68 32 00 09 00 00 2B  
+01 01 10 03 07 44 41 31 34 35 38 35 0C 09 53 54 32 35 52 33 39 31 36 0D 0D 48 31 37 38 2D 53 42 54 39 33 30 30 41 0F 03 EF 00 18 5D 42 00 00 00 00  
 
-Docklight Log File (HEX) - Stopped 2024/3/12 15:25:04.331 
+ ---------- END OF TEST ----------
+
+ 
+
+ ///// NOTICE ///////////////////////////////////////////////////////////
+
+Please check ASCII screen, make sure reader return correct data that meet spec!!
+
+
+Docklight Log File (HEX) - Stopped 2024/3/28 11:18:48.605 
 

@@ -111,10 +111,10 @@ if (Result):
 							if lcdcheck != 1:
 									DL.SetWindowText("red", "LCD msg: FAIL")
 							else:
-								RetOfStep = DL.SendCommand('LCD confirmed, OK')
 								if lcdtype == 1:
 									alldata = DL.Get_RXResponse(1)
 								if lcdtype == 0:	
+									RetOfStep = DL.SendCommand('LCD confirmed, OK')
 									alldata = DL.Get_RXResponse(2)
 								CTresultcode = DL.GetTLV(alldata,"DFEE25")
 								if (RetOfStep):

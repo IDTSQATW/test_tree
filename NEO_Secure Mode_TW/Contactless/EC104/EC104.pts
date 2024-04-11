@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-41034
+48278
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -225,6 +225,7 @@ for i = 1 to 2     'for issue #NEO3-6582/ NEO3-6367
          DL.SendSequence "02-40 w/ amount 101"
          result = DL.WaitForSequence("02 0A", 1, 10000)
          dl.pause 500
+         msgbox "Remove card --> Click OK", vbokonly
       end if
       next
    end if
@@ -246,6 +247,7 @@ for i = 1 to 2     'for issue #NEO3-6582/ NEO3-6367
          DL.SendSequence "02-40 w/ amount 301"
          result = DL.WaitForSequence("02 0A", 1, 10000)
          dl.pause 500
+         msgbox "Remove card --> Click OK", vbokonly
       end if
       next
    end if

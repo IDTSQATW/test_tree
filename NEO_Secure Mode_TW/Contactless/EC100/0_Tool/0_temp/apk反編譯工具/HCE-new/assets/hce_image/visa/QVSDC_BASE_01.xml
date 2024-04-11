@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2017 HCE Image (http://hceimage.org/).
+  -->
+
+<hce>
+    <metadata>
+        <name>QVSDC Base 01</name>
+        <version>0.0.2</version>
+        <author>pb</author>
+        <description>Visa payWave – qVSDC 2.1 (Visa application, forced ONLINE)</description>
+        <category>VISA</category>
+        <workflow>VPWQV21</workflow>
+    </metadata>
+    <ppse>
+        <tlv entity="constructed">
+            <type>6F</type>
+            <value>
+                <tlv>
+                    <type>84</type>
+                    <value>
+                        <data>325041592E5359532E4444463031</data>
+                    </value>
+                </tlv>
+                <tlv entity="constructed">
+                    <type>A5</type>
+                    <value>
+                        <tlv entity="constructed">
+                            <type>BF0C</type>
+                            <value>
+                                <tlv entity="constructed">
+                                    <type>61</type>
+                                    <value>
+                                        <tlv>
+                                            <type>4F</type>
+                                            <value>
+                                                <data>A0000000031010</data>
+                                            </value>
+                                        </tlv>
+                                        <tlv>
+                                            <type>50</type>
+                                            <value>
+                                                <data>51565344432042617365203031</data>
+                                            </value>
+                                        </tlv>
+                                    </value>
+                                </tlv>
+                            </value>
+                        </tlv>
+                    </value>
+                </tlv>
+            </value>
+        </tlv>
+    </ppse>
+    <applications>
+        <application aid="A0000000031010">
+            <tlv entity="constructed">
+                <type>6F</type>
+                <value>
+                    <tlv>
+                        <type>84</type>
+                        <value>
+                            <data>A0000000031010</data>
+                        </value>
+                    </tlv>
+                    <tlv entity="constructed">
+                        <type>A5</type>
+                        <value>
+                            <tlv>
+                                <type>50</type>
+                                <value>
+                                    <data>51565344432042617365203031</data>
+                                </value>
+                            </tlv>
+                            <tlv>
+                                <type>9F38</type>
+                                <value>
+                                    <data>9F66049F02069F03069F1A0295055F2A029A039C019F3704</data>
+                                </value>
+                            </tlv>
+                            <tlv>
+                                <type>9F12</type>
+                                <value>
+                                    <data>51565344432042617365203031</data>
+                                </value>
+                            </tlv>
+                            <tlv>
+                                <type>87</type>
+                                <value>
+                                    <data>01</data>
+                                </value>
+                            </tlv>
+                        </value>
+                    </tlv>
+                </value>
+            </tlv>
+            <gpo>
+                <tlv entity="constructed">
+                    <type>77</type>
+                    <value>
+                        <tlv>
+                            <type>82</type>
+                            <value>
+                                <data>2000</data>
+                            </value>
+                        </tlv>
+                        <tlv>
+                            <type>94</type>
+                            <value>
+                                <data>1801010110010200</data>
+                            </value>
+                        </tlv>
+                        <tlv>
+                            <type>57</type>
+                            <value>
+                                <data>4761739001010010D2212201191894441F</data>
+                            </value>
+                        </tlv>
+                        <tlv>
+                            <type>5F20</type>
+                            <value>
+                                <data>51565344432042617365203031</data>
+                            </value>
+                        </tlv>
+                        <tlv>
+                            <type>9F10</type>
+                            <value>
+                                <data>06010A03000000</data>
+                            </value>
+                        </tlv>
+                        <tlv>
+                            <type>9F27</type>
+                            <value>
+                                <data>80</data>
+                            </value>
+                        </tlv>
+                        <tlv>
+                            <type>9F36</type>
+                            <value>
+                                <data>0001</data>
+                            </value>
+                        </tlv>
+
+                    </value>
+                </tlv>
+            </gpo>
+            <records>
+                <record number="01" sfi="03">
+                    <tlv entity="constructed">
+                        <type>70</type>
+                        <value>
+                            <tlv>
+                                <type>5A</type>
+                                <value>
+                                    <data>4761739001010010</data>
+                                </value>
+                            </tlv>
+                            <tlv>
+                                <type>5F34</type>
+                                <value>
+                                    <data>01</data>
+                                </value>
+                            </tlv>
+                        </value>
+                    </tlv>
+                </record>
+                <record number="01" sfi="02">
+                    <tlv entity="constructed">
+                        <type>70</type>
+                        <value>
+                            <tlv>
+                                <type>90</type>
+                                <value>
+                                    <data>3C96F7658FBC29A202F19146BDE92166B0F6221BBCCB02E326710B9E229D16FAE9AD0C874C0685916E19F0E32693EE201BCE2359509A6D6572F8EC3FC373126B343F9CB8153D61B7EAB2D42DE19D56083185A03DD14C268D40DF0835C55EABFA38ED28BCE42CD0013DA94F800518B753C246EFFBA08FD2029BAD5DFCF0DAF07B7D801C465FFD252C70B92153B330D95DCA2FA1FAAE2D0168A4EA8B475CD805DC32AA964C17BFCD2CD5D0309AB0EA761B</data>
+                                </value>
+                            </tlv>
+                        </value>
+                    </tlv>
+                </record>
+                <record number="02" sfi="02">
+                    <tlv entity="constructed">
+                        <type>70</type>
+                        <value>
+                            <tlv>
+                                <type>9F32</type>
+                                <value>
+                                    <data>03</data>
+                                </value>
+                            </tlv>
+                            <tlv>
+                                <type>92</type>
+                                <value>
+                                    <data>50DA20DDA8953B693FED84366831BA1EEA97F78F792ACF8CB98FDF0149A7B78FDA1C4967</data>
+                                </value>
+                            </tlv>
+                            <tlv>
+                                <type>8F</type>
+                                <value>
+                                    <data>92</data>
+                                </value>
+                            </tlv>
+                            <tlv>
+                                <type>5F24</type>
+                                <value>
+                                    <data>221231</data>
+                                </value>
+                            </tlv>
+                            <tlv>
+                                <type>9F46</type>
+                                <value>
+                                    <data>28179F436D9C8120DFEEA093E1D61CA60B5CDF70C5B33244D05CB107A6CCC291E2BA5FB68E7D7003BBEDDAFF77BF9B7FE280C7C92DA5ABFD22CD3D80A04CF29B7EC50A1B3026BE6CAA5281FC9EB02429084BB174E6FAF65FC47A13AA37DEE4B649616A50FD91EAA19E5E5386CD10579DBBF045AA49A9FBF0D2222E8E59E532F3562B003DFAD458366E74A9D271E562B47C084EABD63F03522B2A76013F563E23BCEB8DFA7B3BFFD20748ECCBFD57E283</data>
+                                </value>
+                            </tlv>
+                            <tlv>
+                                <type>9F47</type>
+                                <value>
+                                    <data>03</data>
+                                </value>
+                            </tlv>
+                        </value>
+                    </tlv>
+                </record>
+            </records>
+            <authentication>
+                <imk>2315208C9110AD402315208C9110AD40</imk>
+            </authentication>
+        </application>
+    </applications>
+</hce>

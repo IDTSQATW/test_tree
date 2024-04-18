@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-52615
+33185
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -259,8 +259,10 @@ Select Case resultName
 		DL.AddComment vbCrLf & vbCrLf & "Reader current time (H/M) = " & CheckTimeNow
               if MyArray(18) = 58 then 
                  MyArray(18) = 00
+                 MyArray(17) = MyArray(17) + 1
               elseif MyArray(18) = 59 then
                  MyArray(18) = 01
+                 MyArray(17) = MyArray(17) + 1
               else
                  MyArray(18) = int(MyArray(18)) + 2
                  if MyArray(18) < 10 then MyArray(18) = "0" & MyArray(18)

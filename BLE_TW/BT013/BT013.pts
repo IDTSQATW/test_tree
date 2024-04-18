@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-48432
+49544
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -155,7 +155,7 @@ if result <> 0 then
    dl.addcomment vbcrlf
    DL.AddComment "--- 77-84 Set Bluetooth Parameters"
    DL.SendSequence "77-84 Set Bluetooth Parameters"
-   result = DL.WaitForSequence("77-84 resp", 1, 2000)
+   result = DL.WaitForSequence("77-84 resp", 1, 5000)
 End If
 '------------------------------------------------------------
 DL.AddComment vbCrLf

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-8483
+42679
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -186,7 +186,7 @@ If result <> 0 Then
 End If
 
 If result <> 0 Then
-   prompt2 = prompt2 & "Click OK --> Tap MChip or MC No.21 card"
+   prompt2 = prompt2 & "Click OK --> Tap (EMV) MChip or MC No.21 card"
    result = MsgBox(prompt2, VBOKOnly, "Test Step")
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf

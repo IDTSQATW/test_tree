@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-38918
+5108
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -288,6 +288,7 @@ If result <> 0 Then
 End If
 end sub
 
+dl.pause 300
 DL.SendSequence "04-09"
 dl.pause 800
 DL.AddComment vbCrLf

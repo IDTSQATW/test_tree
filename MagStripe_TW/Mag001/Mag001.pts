@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-41208
+13500
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -197,16 +197,13 @@ if result <> 0 then
    if readerType <> "NEO2" then result5 = dl.waitforsequence("tag dfee26", 1, 1000)
    if readerType = "NEO2" then result5 = dl.waitforsequence("tag dfee26 (NEO2)", 1, 1000)
 
-   result6 = dl.waitforsequence("9F02", 1, 1000)
-
-   if result1 = 0 or result2 = 0 or result3 <> 0 or result4 = 0 or result5 = 0 or result6 = 0 then
+   if result1 = 0 or result2 = 0 or result3 <> 0 or result4 = 0 or result5 = 0 then
       result = 0
       if result1 = 0 then dl.addcomment vbcrlf & "Card data => Incorrect!"
       if result2 = 0 then dl.addcomment vbcrlf & "Tag DF30 (NEO1) or DFEE30 (NEO2) => Incorrect!"
       if result3 <> 0 then dl.addcomment vbcrlf & "Tag 9F06 => Should not be returned!"
       if result4 = 0 then dl.addcomment vbcrlf & "Tag 9F39 => Incorrect!"
       if result5 = 0 then dl.addcomment vbcrlf & "Tag DFEE26 => Incorrect!"
-      if result6 = 0 then dl.addcomment vbcrlf & "Tag 9F02 => Incorrect!"
    end if
 end if
 

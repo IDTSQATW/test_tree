@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-60832
+14073
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -161,6 +161,15 @@ If result <> 0 Then
    DL.AddComment "--- Burst mode Off"
    DL.SendSequence "burst mode off"
    result = DL.WaitForSequence("04 00", 1, 2000)
+   dl.pause 500
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 90-12 (dki same) key = 1234567890123456"
+   DL.SendSequence "90-12 (dki same) key = 1234567890123456"
+   result = DL.WaitForSequence("90 00", 1, 2000)
    dl.pause 500
 End If
 '------------------------------------------------------------

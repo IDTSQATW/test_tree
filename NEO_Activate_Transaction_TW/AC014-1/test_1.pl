@@ -27,7 +27,7 @@ for(;;)						# forever loop
 
 }						# end forever
 
-`start /REALTIME docklight_scripting -r -m AC014.pts`;
+`start /REALTIME docklight_scripting -r -m AC014-1.pts`;
 
 # Main Code
 

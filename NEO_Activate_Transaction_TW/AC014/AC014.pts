@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-50967
+3629
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -181,29 +181,42 @@ If result <> 0 Then
    result = DL.WaitForSequence("Poll Response", 1, 10000)
 End If
 '------------------------------------------------------------
-if readercheck = 6 then n = 14
+if readercheck = 6 then n = 28
 if readercheck = 7 then n = 2
 for i = 1 to n
-    if i = 1 then card = "Mifare 1K"
-    if i = 2 then card = "Mifare 1K"
-    if i = 3 then card = "Mifare 4k"
-    if i = 4 then card = "Mifare Plus 2K"
-    if i = 5 then card = "DesFire D40"
-    if i = 6 then card = "DesFire EV1 2K"
-    if i = 7 then card = "DesFire EV1 4K"
-    if i = 8 then card = "DesFire EV2 2K"
-    if i = 9 then card = "Ultralight 32 Byte"
-    if i = 10 then card = "Ultralight 64 Byte"
-    if i = 11 then card = "Ultralight"
-    if i = 12 then card = "Ultralight C"
-    if i = 13 then card = "Ultralight EV1"
-    if i = 14 then card = "NFC Tag 203"
+    if i = 1 or i = 15 then card = "Mifare 1K"
+    if i = 2 or i = 16 then card = "Mifare 1K"
+    if i = 3 or i = 17 then card = "Mifare 4k"
+    if i = 4 or i = 18 then card = "Mifare Plus 2K"
+    if i = 5 or i = 19 then card = "DesFire D40"
+    if i = 6 or i = 20 then card = "DesFire EV1 2K"
+    if i = 7 or i = 21 then card = "DesFire EV1 4K"
+    if i = 8 or i = 22 then card = "DesFire EV2 2K"
+    if i = 9 or i = 23 then card = "Ultralight 32 Byte"
+    if i = 10 or i = 24 then card = "Ultralight 64 Byte"
+    if i = 11 or i = 25 then card = "Ultralight"
+    if i = 12 or i = 26 then card = "Ultralight C"
+    if i = 13 or i = 27 then card = "Ultralight EV1"
+    if i = 14 or i = 28 then card = "NFC Tag 203"
+
+    if i = 15 then 
+       DL.SendSequence "77-05"
+       msgbox "[Nnotice] Reader was rebooted", vbokonly
+       dl.pause 2000
+    end if
 
    msgbox "Click OK --> Tap" & card , vbokonly
    dl.resetreceivecounter
    dl.addcomment vbcrlf
-   DL.AddComment "--- Activate Transaction (02-40) & " & card
-   DL.SendSequence "Activate Transaction (02-40)"
+   if i <= 14 then 
+      DL.AddComment "--- Activate Transaction (02-40)_w/ timeout, card = " & card
+      DL.SendSequence "Activate Transaction (02-40)"
+   end if
+   if i > 14 then 
+      DL.AddComment "--- Activate Transaction (02-40)_w/o timeout, card = " & card
+      DL.SendSequence "Activate Transaction (02-40): timeout 00"
+   end if
+
    result1 = DL.WaitForSequence("02 0A", 1, 5000)
    if readercheck = 6 then
       if i = 1 then result2  = DL.WaitForSequence("FFEE1F_Mifare_1k", 1, 5000)
@@ -253,13 +266,10 @@ If errorCounter2 <> 0 Then
    DL.Addcomment vbCrLf & vbCrLf & "Found " & errorCounter2 & " FFEE1F data error. Please check the log file for details."
    result = 0
 End If
-
-
 '------------------------------------------------------------
 DL.Addcomment vbCrLf
-PrintMyResult(result)
-
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
@@ -267,36 +277,35 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If 0 Then
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
-End If
+'If 0 Then
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
-
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
 
-If MasterResult = 1 Then
-      MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-      MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)

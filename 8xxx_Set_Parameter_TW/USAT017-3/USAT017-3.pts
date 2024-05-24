@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-46169
+61528
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -346,11 +346,7 @@ End Function
 'TEST BEGINS
 '------------------------------------------------------------
 pollmode = msgbox ("Does the project support auto poll mode?", vbyesno)
-if readerType = "GR" or readerType = "NEO1" then    
-   DL.SendSequence "04-F0"
-   result = DL.WaitForSequence("04 00", 1, 3000)
-   dl.pause 15000
-else
+if readerType = "NEO2" then    
    DL.SendSequence "04-0A"
    dl.pause 15000
    enccheck = msgbox ("Does reader has data key?", vbyesno)

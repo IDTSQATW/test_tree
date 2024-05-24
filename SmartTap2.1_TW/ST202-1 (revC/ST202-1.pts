@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-16132
+64510
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -160,16 +160,6 @@ Function MyDebug(DebugString)
 End Function
 '------------------------------------------------------------
 'TEST BEGINS
-'------------------------------------------------------------
-if readerType = "GR" or readerType = "NEO1" then
-if result <> 0 then
-   dl.resetreceivecounter
-   DL.AddComment "--- 04-F0"
-   DL.SendSequence "04-F0"
-   result = DL.WaitForSequence("burst off", 1, 2000)
-   dl.pause 15000
-end if
-end if
 '------------------------------------------------------------
 If result <> 0 Then
    dl.resetreceivecounter

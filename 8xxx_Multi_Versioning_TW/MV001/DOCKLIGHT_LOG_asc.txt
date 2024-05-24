@@ -1,4 +1,4 @@
-Docklight Log File (ASCII) - Started 2024/5/3 14:20:40.974 
+Docklight Log File (ASCII) - Started 2024/5/15 09:20:40.741 
  TEST CASE: MV001
 
  --- Set POS COM PORT Settings
@@ -8,9 +8,9 @@ Docklight Log File (ASCII) - Started 2024/5/3 14:20:40.974
 
  --- Get Product Type *** GR
 
-2024/5/3 14:20:42.275 [TX] - ViVOtech2<NUL><HT>	<SOH><NUL><NUL>??
-2024/5/3 14:20:42.285 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL><ACK>?`<ETX>U32 
-?<DC4><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
+2024/5/15 09:20:41.947 [TX] - ViVOtech2<NUL><HT>	<SOH><NUL><NUL>??
+2024/5/15 09:20:41.955 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL><ACK>?`<ETX>U31 
+?w<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
 
  Result = PASSED
  
@@ -24,5 +24,5 @@ Docklight Log File (ASCII) - Started 2024/5/3 14:20:40.974
 Please make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (ASCII) - Stopped 2024/5/3 14:20:42.907 
+Docklight Log File (ASCII) - Stopped 2024/5/15 09:20:42.617 
 

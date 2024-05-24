@@ -258,7 +258,7 @@ DL.SendSequence "","56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 D7 34","H"
 DL.ClearCommWindows
 If result <> 0 Then
    DL.AddComment "============================================================IDTECH ENCRYPTION YES card" & vbcrlf
-   DL.Pause 4000
+   dl.pause 1000
    prompt11 = prompt11 & "place iphone and choose IDTECH ENCRYPTION YES card after press ok."
    result = MsgBox(prompt11, VBOKOnly, "Apple pay")
 
@@ -280,7 +280,7 @@ If result <> 0 Then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt12 = prompt12 & "place iphone and choose IDTECH ENCRYPTION YES card after press ok."
    result = MsgBox(prompt12, VBOKOnly, "Apple pay")
 
@@ -302,7 +302,7 @@ If result <> 0 Then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt13 = prompt13 & "place iphone and choose IDTECH ENCRYPTION YES card after press ok."
    result = MsgBox(prompt13, VBOKOnly, "Apple pay")
 
@@ -324,7 +324,7 @@ If result <> 0 Then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt14 = prompt14 & "place iphone and choose IDTECH ENCRYPTION YES card after press ok."
    result = MsgBox(prompt14, VBOKOnly, "Apple pay")
 
@@ -344,7 +344,7 @@ If result <> 0 Then
    end if
 DL.ClearCommWindows
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt15 = prompt15 & "place iphone and choose IDTECH ENCRYPTION YES card after press ok."
    result = MsgBox(prompt15, VBOKOnly, "Apple pay")
 
@@ -366,7 +366,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt16 = prompt16 & "place iphone and choose IDTECH ENCRYPTION YES card after press ok."
 '   result = MsgBox(prompt16, VBOKOnly, "Apple pay")
 
@@ -380,7 +380,7 @@ DL.ClearCommWindows
 '      DL.AddComment vbcrlf & "** FAIL **"
 '   end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt17 = prompt17 & "place iphone and choose IDTECH ENCRYPTION YES card after press ok."
 '   result = MsgBox(prompt17, VBOKOnly, "Apple pay")
 
@@ -394,7 +394,7 @@ DL.ClearCommWindows
 '      DL.AddComment vbcrlf & "** FAIL **"
 '   end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt18 = prompt18 & "place iphone and choose IDTECH ENCRYPTION YES card after press ok."
 '   result = MsgBox(prompt18, VBOKOnly, "Apple pay")
 
@@ -408,7 +408,7 @@ DL.ClearCommWindows
 '      DL.AddComment vbcrlf & "** FAIL **"
 '   end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt19 = prompt19 & "place iphone and choose IDTECH ENCRYPTION YES card after press ok."
 '   result = MsgBox(prompt19, VBOKOnly, "Apple pay")
 
@@ -422,7 +422,7 @@ DL.ClearCommWindows
 '      DL.AddComment vbcrlf & "** FAIL **"
 '   end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt20 = prompt20 & "place iphone and choose IDTECH ENCRYPTION YES card after press ok."
 '   result = MsgBox(prompt20, VBOKOnly, "Apple pay")
 
@@ -438,7 +438,7 @@ DL.ClearCommWindows
 'DL.ClearCommWindows
 '============================================================
 if smarttap = 1 then
-   DL.Pause 4000
+   dl.pause 1000
    prompt50 = prompt50 & "place iphone and choose IDTECH ENCRYPTION YES card after press ok."
    result = MsgBox(prompt50, VBOKOnly, "Apple pay")
 
@@ -452,7 +452,7 @@ if smarttap = 1 then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt51 = prompt51 & "place iphone and choose IDTECH ENCRYPTION YES card after press ok."
    result = MsgBox(prompt51, VBOKOnly, "Apple pay")
 
@@ -466,7 +466,7 @@ if smarttap = 1 then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt52 = prompt52 & "place iphone and choose IDTECH ENCRYPTION YES card after press ok."
    result = MsgBox(prompt52, VBOKOnly, "Apple pay")
 
@@ -480,7 +480,7 @@ if smarttap = 1 then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt53 = prompt53 & "place iphone and choose IDTECH ENCRYPTION YES card after press ok."
    result = MsgBox(prompt53, VBOKOnly, "Apple pay")
 
@@ -494,7 +494,7 @@ if smarttap = 1 then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt54 = prompt54 & "place iphone and choose IDTECH ENCRYPTION YES card after press ok."
    result = MsgBox(prompt54, VBOKOnly, "Apple pay")
 
@@ -526,7 +526,7 @@ end if
 '============================================================
 DL.ClearCommWindows
    DL.AddComment "============================================================IDTECH BALANCE $100.00 card" & vbcrlf
-   DL.Pause 4000
+   dl.pause 1000
    prompt21 = prompt21 & "place iphone and choose IDTECH BALANCE $100.00 card after press ok."
    result = MsgBox(prompt21, VBOKOnly, "Apple pay")
 
@@ -548,7 +548,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt22 = prompt22 & "place iphone and choose IDTECH BALANCE $100.00 card after press ok."
    result = MsgBox(prompt22, VBOKOnly, "Apple pay")
 
@@ -570,7 +570,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt23 = prompt23 & "place iphone and choose IDTECH BALANCE $100.00 card after press ok."
    result = MsgBox(prompt23, VBOKOnly, "Apple pay")
 
@@ -592,7 +592,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt24 = prompt24 & "place iphone and choose IDTECH BALANCE $100.00 card after press ok."
    result = MsgBox(prompt24, VBOKOnly, "Apple pay")
 
@@ -612,7 +612,7 @@ DL.ClearCommWindows
    end if
 DL.ClearCommWindows
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt25 = prompt25 & "place iphone and choose IDTECH BALANCE $100.00 card after press ok."
    result = MsgBox(prompt25, VBOKOnly, "Apple pay")
 
@@ -634,7 +634,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt26 = prompt26 & "place iphone and choose IDTECH BALANCE $100.00 card after press ok."
    result = MsgBox(prompt26, VBOKOnly, "Apple pay")
 
@@ -656,7 +656,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt27 = prompt27 & "place iphone and choose IDTECH BALANCE $100.00 card after press ok."
    result = MsgBox(prompt27, VBOKOnly, "Apple pay")
 
@@ -678,7 +678,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt28 = prompt28 & "place iphone and choose IDTECH BALANCE $100.00 card after press ok."
    result = MsgBox(prompt28, VBOKOnly, "Apple pay")
 
@@ -700,7 +700,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt29 = prompt29 & "place iphone and choose IDTECH BALANCE $100.00 card after press ok."
    result = MsgBox(prompt29, VBOKOnly, "Apple pay")
 
@@ -722,7 +722,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt30 = prompt30 & "place iphone and choose IDTECH BALANCE $100.00 card after press ok."
    result = MsgBox(prompt30, VBOKOnly, "Apple pay")
 
@@ -746,7 +746,7 @@ DL.ClearCommWindows
 DL.ClearCommWindows
 '============================================================
 if smarttap = 1 then
-   DL.Pause 4000
+   dl.pause 1000
    prompt60 = prompt60 & "place iphone and choose IDTECH BALANCE $100.00 card after press ok."
    result = MsgBox(prompt60, VBOKOnly, "Apple pay")
 
@@ -760,7 +760,7 @@ if smarttap = 1 then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt61 = prompt61 & "place iphone and choose IDTECH BALANCE $100.00 card after press ok."
    result = MsgBox(prompt61, VBOKOnly, "Apple pay")
 
@@ -774,7 +774,7 @@ if smarttap = 1 then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt62 = prompt62 & "place iphone and choose IDTECH BALANCE $100.00 card after press ok."
    result = MsgBox(prompt62, VBOKOnly, "Apple pay")
 
@@ -788,7 +788,7 @@ if smarttap = 1 then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt63 = prompt63 & "place iphone and choose IDTECH BALANCE $100.00 card after press ok."
    result = MsgBox(prompt63, VBOKOnly, "Apple pay")
 
@@ -802,7 +802,7 @@ if smarttap = 1 then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt64 = prompt64 & "place iphone and choose IDTECH BALANCE $100.00 card after press ok."
    result = MsgBox(prompt64, VBOKOnly, "Apple pay")
 
@@ -834,7 +834,7 @@ end if
 '============================================================
 'DL.ClearCommWindows
 '   DL.AddComment "============================================================IDTECH ENCRYPTION NO card" & vbcrlf
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt31 = prompt31 & "place iphone and choose IDTECH ENCRYPTION NO card after press ok."
 '   result = MsgBox(prompt31, VBOKOnly, "Apple pay")
 
@@ -848,7 +848,7 @@ end if
 '      DL.AddComment vbcrlf & "** FAIL **"
 '   end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt32 = prompt32 & "place iphone and choose IDTECH ENCRYPTION NO card after press ok."
 '   result = MsgBox(prompt32, VBOKOnly, "Apple pay")
 
@@ -862,7 +862,7 @@ end if
 '      DL.AddComment vbcrlf & "** FAIL **"
 '   end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt33 = prompt33 & "place iphone and choose IDTECH ENCRYPTION NO card after press ok."
 '   result = MsgBox(prompt33, VBOKOnly, "Apple pay")
 
@@ -876,7 +876,7 @@ end if
 '      DL.AddComment vbcrlf & "** FAIL **"
 '   end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt34 = prompt34 & "place iphone and choose IDTECH ENCRYPTION NO card after press ok."
 '   result = MsgBox(prompt34, VBOKOnly, "Apple pay")
 
@@ -891,7 +891,7 @@ end if
 '   end if
 'DL.ClearCommWindows
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt35 = prompt35 & "place iphone and choose IDTECH ENCRYPTION NO card after press ok."
 '   result = MsgBox(prompt35, VBOKOnly, "Apple pay")
 
@@ -905,7 +905,7 @@ end if
 '      DL.AddComment vbcrlf & "** FAIL **"
 '   end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt36 = prompt36 & "place iphone and choose IDTECH ENCRYPTION NO card after press ok."
 '   result = MsgBox(prompt36, VBOKOnly, "Apple pay")
 
@@ -919,7 +919,7 @@ end if
 '      DL.AddComment vbcrlf & "** FAIL **"
 '   end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt37 = prompt37 & "place iphone and choose IDTECH ENCRYPTION NO card after press ok."
 '   result = MsgBox(prompt37, VBOKOnly, "Apple pay")
 
@@ -933,7 +933,7 @@ end if
 '      DL.AddComment vbcrlf & "** FAIL **"
 '   end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt38 = prompt38 & "place iphone and choose IDTECH ENCRYPTION NO card after press ok."
 '   result = MsgBox(prompt38, VBOKOnly, "Apple pay")
 
@@ -947,7 +947,7 @@ end if
 '      DL.AddComment vbcrlf & "** FAIL **"
 '   end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt39 = prompt39 & "place iphone and choose IDTECH ENCRYPTION NO card after press ok."
 '   result = MsgBox(prompt39, VBOKOnly, "Apple pay")
 
@@ -961,7 +961,7 @@ end if
 '      DL.AddComment vbcrlf & "** FAIL **"
 '   end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt40 = prompt40 & "place iphone and choose IDTECH ENCRYPTION NO card after press ok."
 '   result = MsgBox(prompt40, VBOKOnly, "Apple pay")
 
@@ -977,7 +977,7 @@ end if
 'DL.ClearCommWindows
 '============================================================
 if smarttap = 1 then
-   DL.Pause 4000
+   dl.pause 1000
    prompt70 = prompt70 & "place iphone and choose IDTECH ENCRYPTION NO card after press ok."
    result = MsgBox(prompt70, VBOKOnly, "Apple pay")
 
@@ -991,7 +991,7 @@ if smarttap = 1 then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt71 = prompt71 & "place iphone and choose IDTECH ENCRYPTION NO card after press ok."
    result = MsgBox(prompt71, VBOKOnly, "Apple pay")
 
@@ -1005,7 +1005,7 @@ if smarttap = 1 then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt72 = prompt72 & "place iphone and choose IDTECH ENCRYPTION NO card after press ok."
    result = MsgBox(prompt72, VBOKOnly, "Apple pay")
 
@@ -1019,7 +1019,7 @@ if smarttap = 1 then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt73 = prompt73 & "place iphone and choose IDTECH ENCRYPTION NO card after press ok."
    result = MsgBox(prompt73, VBOKOnly, "Apple pay")
 
@@ -1033,7 +1033,7 @@ if smarttap = 1 then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt74 = prompt74 & "place iphone and choose IDTECH ENCRYPTION NO card after press ok."
    result = MsgBox(prompt74, VBOKOnly, "Apple pay")
 

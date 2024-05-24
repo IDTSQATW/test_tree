@@ -269,7 +269,7 @@ End If
 If result <> 0 Then
 DL.ClearCommWindows
    DL.AddComment "============================================================Panera Bread card" & vbcrlf
-   DL.Pause 4000
+   dl.pause 1000
    prompt71 = prompt71 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt71, VBOKOnly, "Apple pay")
 
@@ -291,7 +291,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt72 = prompt72 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt72, VBOKOnly, "Apple pay")
 
@@ -313,7 +313,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt73 = prompt73 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt73, VBOKOnly, "Apple pay")
 
@@ -335,7 +335,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt74 = prompt74 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt74, VBOKOnly, "Apple pay")
 
@@ -355,7 +355,7 @@ DL.ClearCommWindows
    end if
 DL.ClearCommWindows
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt15 = prompt15 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt15, VBOKOnly, "Apple pay")
 
@@ -377,7 +377,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt16 = prompt16 & "place iphone and choose Panera Bread card after press ok."
 '   result = MsgBox(prompt16, VBOKOnly, "Apple pay")
 
@@ -391,7 +391,7 @@ DL.ClearCommWindows
 '      DL.AddComment vbcrlf & "** FAIL **"
 '   end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt17 = prompt17 & "place iphone and choose Panera Bread card after press ok."
 '   result = MsgBox(prompt17, VBOKOnly, "Apple pay")
 
@@ -405,7 +405,7 @@ DL.ClearCommWindows
 '      DL.AddComment vbcrlf & "** FAIL **"
 '   end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt18 = prompt18 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt18, VBOKOnly, "Apple pay")
 
@@ -427,7 +427,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt19 = prompt19 & "place iphone and choose Panera Bread card after press ok."
 '   result = MsgBox(prompt19, VBOKOnly, "Apple pay")
 
@@ -441,7 +441,7 @@ DL.ClearCommWindows
 '      DL.AddComment vbcrlf & "** FAIL **"
 '   end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt20 = prompt20 & "place iphone and choose Panera Bread card after press ok."
 '   result = MsgBox(prompt20, VBOKOnly, "Apple pay")
 
@@ -457,7 +457,7 @@ DL.ClearCommWindows
 'DL.ClearCommWindows
 '============================================================
 if smarttap = 1 then
-   DL.Pause 4000
+   dl.pause 1000
    prompt30 = prompt30 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt30, VBOKOnly, "Apple pay")
 
@@ -471,7 +471,7 @@ if smarttap = 1 then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt31 = prompt31 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt31, VBOKOnly, "Apple pay")
 
@@ -485,7 +485,7 @@ if smarttap = 1 then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt32 = prompt32 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt32, VBOKOnly, "Apple pay")
 
@@ -500,7 +500,7 @@ if smarttap = 1 then
    end if
 DL.ClearCommWindows
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt33 = prompt33 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt33, VBOKOnly, "Apple pay")
 
@@ -514,7 +514,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt34 = prompt34 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt34, VBOKOnly, "Apple pay")
 
@@ -546,7 +546,7 @@ if smarttap = 1 then
 '============================================================
 DL.ClearCommWindows
    DL.AddComment "============================================================Android Card1" & vbcrlf
-   DL.Pause 4000
+   dl.pause 1000
    prompt35 = prompt35 & "place Android Card1 after press ok."
    result = MsgBox(prompt35, VBOKOnly, "Apple pay")
 
@@ -560,7 +560,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt36 = prompt36 & "place Android Card1 after press ok."
    result = MsgBox(prompt36, VBOKOnly, "Apple pay")
 
@@ -574,7 +574,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt37 = prompt37 & "place Android Card1 after press ok."
    result = MsgBox(prompt37, VBOKOnly, "Apple pay")
 
@@ -589,7 +589,7 @@ DL.ClearCommWindows
    end if
 DL.ClearCommWindows
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt38 = prompt38 & "place Android Card1 after press ok."
    result = MsgBox(prompt38, VBOKOnly, "Apple pay")
 
@@ -603,7 +603,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt39 = prompt39 & "place Android Card1 after press ok."
    result = MsgBox(prompt39, VBOKOnly, "Apple pay")
 
@@ -669,7 +669,7 @@ DL.ClearCommWindows
 '============================================================
 DL.ClearCommWindows
    DL.AddComment "============================================================Panera Bread card" & vbcrlf
-   DL.Pause 4000
+   dl.pause 1000
    prompt61 = prompt61 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt61, VBOKOnly, "Apple pay")
 
@@ -691,7 +691,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt62 = prompt62 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt62, VBOKOnly, "Apple pay")
 
@@ -713,7 +713,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt63 = prompt63 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt63, VBOKOnly, "Apple pay")
 
@@ -735,7 +735,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt64 = prompt64 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt64, VBOKOnly, "Apple pay")
 
@@ -755,7 +755,7 @@ DL.ClearCommWindows
    end if
 DL.ClearCommWindows
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt75 = prompt75 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt75, VBOKOnly, "Apple pay")
 
@@ -777,7 +777,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt76 = prompt76 & "place iphone and choose Panera Bread card after press ok."
 '   result = MsgBox(prompt76, VBOKOnly, "Apple pay")
 
@@ -791,7 +791,7 @@ DL.ClearCommWindows
 '      DL.AddComment vbcrlf & "** FAIL **"
 '   end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt77 = prompt77 & "place iphone and choose Panera Bread card after press ok."
 '   result = MsgBox(prompt77, VBOKOnly, "Apple pay")
 
@@ -805,7 +805,7 @@ DL.ClearCommWindows
 '      DL.AddComment vbcrlf & "** FAIL **"
 '   end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt78 = prompt78 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt78, VBOKOnly, "Apple pay")
 
@@ -827,7 +827,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt79 = prompt79 & "place iphone and choose Panera Bread card after press ok."
 '   result = MsgBox(prompt79, VBOKOnly, "Apple pay")
 
@@ -841,7 +841,7 @@ DL.ClearCommWindows
 '      DL.AddComment vbcrlf & "** FAIL **"
 '   end if
 '============================================================
-'   DL.Pause 4000
+'   dl.pause 1000
 '   prompt80 = prompt80 & "place iphone and choose Panera Bread card after press ok."
 '   result = MsgBox(prompt80, VBOKOnly, "Apple pay")
 
@@ -857,7 +857,7 @@ DL.ClearCommWindows
 'DL.ClearCommWindows
 '============================================================
 if smarttap = 1 then
-   DL.Pause 4000
+   dl.pause 1000
    prompt40 = prompt40 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt40, VBOKOnly, "Apple pay")
 
@@ -871,7 +871,7 @@ if smarttap = 1 then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt41 = prompt41 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt41, VBOKOnly, "Apple pay")
 
@@ -885,7 +885,7 @@ if smarttap = 1 then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt42 = prompt42 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt42, VBOKOnly, "Apple pay")
 
@@ -900,7 +900,7 @@ if smarttap = 1 then
    end if
 DL.ClearCommWindows
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt43 = prompt43 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt43, VBOKOnly, "Apple pay")
 
@@ -914,7 +914,7 @@ DL.ClearCommWindows
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 4000
+   dl.pause 1000
    prompt44 = prompt44 & "place iphone and choose Panera Bread card after press ok."
    result = MsgBox(prompt44, VBOKOnly, "Apple pay")
 

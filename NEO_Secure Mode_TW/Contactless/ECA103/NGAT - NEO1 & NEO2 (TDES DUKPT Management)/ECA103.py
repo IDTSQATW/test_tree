@@ -51,12 +51,10 @@ if (Result):
             ksn = DL.GetTLV(alldata,"FFEE12")
             FF8105 = DL.GetTLV(alldata,"FF8105", 0)
         if (Result):
-            if platform == 0: #NEOI
-                alldata = FF8105
             # 57
             DL.SetWindowText("blue", "Tag 57 Mask/ Encryption data:")
-            mask57 = DL.GetTLV_Embedded(alldata,"57", 0)
-            enc57 = DL.GetTLV_Embedded(alldata,"57", 1)
+            mask57 = DL.GetTLV(alldata,"57", 0)
+            enc57 = DL.GetTLV(alldata,"57", 1)
             DL.SetWindowText("blue", "Tag 57 Decryption data:")
             dec57 = DL.DecryptDLL(0,2, strKey, ksn, enc57)	
             if platform == 1: #NEOII and upward
@@ -71,8 +69,8 @@ if (Result):
                 DL.SetWindowText("red", "Tag 57_Enc: FAIL")
             # 5A
             DL.SetWindowText("blue", "Tag 5A Mask/ Encryption data:")
-            mask5A = DL.GetTLV_Embedded(alldata,"5A", 0)
-            enc5A = DL.GetTLV_Embedded(alldata,"5A", 1)
+            mask5A = DL.GetTLV(alldata,"5A", 0)
+            enc5A = DL.GetTLV(alldata,"5A", 1)
             DL.SetWindowText("blue", "Tag 5A Decryption data:")
             dec5A = DL.DecryptDLL(0,2, strKey, ksn, enc5A)	
             if DL.Check_RXResponse(rx, '5AA108 3742CCCCCCC0001F') == False:

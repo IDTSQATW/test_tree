@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-55398
+54841
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -254,17 +254,6 @@ If result <> 0 Then
    DL.SendSequence "02-01"
    result = DL.WaitForSequence("02 0B", 1, 2000)
    dl.pause 500
-else 
-   countf = countf + 1
-End If
-'------------------------------------------------------------
-at()
-'------------------------------------------------------------
-If result <> 0 Then
-   precondition()
-   if result <> 0 then
-      loadkey_D()
-   end if
 else 
    countf = countf + 1
 End If

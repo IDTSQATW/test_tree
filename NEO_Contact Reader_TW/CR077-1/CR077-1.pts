@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-23851
+4464
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -222,6 +222,9 @@ End Function
 'TEST BEGINS
 '------------------------------------------------------------
 if readerType <> "NEO2" then
+
+DL.SendSequence "04-09"
+dl.pause 3000
 
 if result <> 0 then
    precondition()

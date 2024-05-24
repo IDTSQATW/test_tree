@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-6097
+54605
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -205,7 +205,7 @@ If result <> 0 Then
    result = DL.WaitForSequence("Set Merchant blank response", 1, 10000)
 else
    dl.addcomment vbcrlf & vbcrlf
-   DL.AddComment "*** Please load data key (AES type) and enabled encryption (03) by manual first..."
+   DL.AddComment "*** Please load data key (TDES type) and enabled encryption (03) by manual first..."
 End If
 
 If result <> 0 Then
@@ -234,18 +234,13 @@ End If
 '============================================================
 If result <> 0 Then
    DL.AddComment vbcrlf & "============================================================Panera Bread card" & vbcrlf
-   DL.Pause 2000
+   DL.Pause 1000
    MsgBox "Click OK --> Tap iPhone (Panera Bread card)", VBOKOnly
-
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf 
-   DL.AddComment "--- ACT - VAS Only *** " & readerType 
-   if readerType <> "NEO2" then 
-      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - VAS Only (Liteon)"
-	  if readerType = "GR"            then DL.SendSequence "ACT - VAS Only"
-   end if  
+   DL.AddComment "--- ACT - VAS Only"
+   if readerType <> "NEO2" then DL.SendSequence "ACT - VAS Only"
    if readerType = "NEO2" then DL.SendSequence "ACT - VAS Only (NEO2)"
-
    if readerType <> "NEO2" then result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
    if readerType = "NEO2" then 
       result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 3000)
@@ -255,19 +250,40 @@ If result <> 0 Then
       countf = countf + 1
       DL.AddComment vbcrlf & "** FAIL **"
    end if
-'============================================================
-   DL.Pause 3000
-   MsgBox "Click OK --> Tap iPhone (Panera Bread card)", VBOKOnly
 
+   if readerType = "VP3300_liteon" then
+      DL.Pause 1000
+      MsgBox "Click OK --> Tap iPhone (Panera Bread card)", VBOKOnly
+      DL.ResetReceiveCounter
+      dl.addcomment vbcrlf 
+      DL.AddComment "--- ACT - VAS Only *** DFEC40 = 01 (normal)"
+      DL.SendSequence "ACT - VAS Only (Liteon)"
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+      if result = 0 then 
+         countf = countf + 1
+         DL.AddComment vbcrlf & "** FAIL **"
+      end if
+
+      DL.Pause 1000
+      MsgBox "Click OK --> Tap iPhone (Panera Bread card)", VBOKOnly
+      DL.ResetReceiveCounter
+      dl.addcomment vbcrlf 
+      DL.AddComment "--- ACT - VAS Only *** DFEC40 = 00 (Payment Continue)"
+      DL.SendSequence "ACT - VAS Only (Liteon) 00"
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+      if result = 0 then 
+         countf = countf + 1
+         DL.AddComment vbcrlf & "** FAIL **"
+      end if
+   end if
+'============================================================
+   DL.Pause 1000
+   MsgBox "Click OK --> Tap iPhone (Panera Bread card)", VBOKOnly
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT - VAS OR Pay "
-   if readerType <> "NEO2" then 
-      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - VAS OR Pay (Liteon)" 
-      if readerType = "GR"            then DL.SendSequence "ACT - VAS OR Pay"
-   end if
+   if readerType <> "NEO2" then DL.SendSequence "ACT - VAS OR Pay"
    if readerType = "NEO2" then DL.SendSequence "ACT - VAS OR Pay (NEO2)"
-   
    if readerType <> "NEO2" then result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
    if readerType = "NEO2" then 
       result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response (NEO2)" , 1, 3000)
@@ -277,15 +293,40 @@ If result <> 0 Then
       countf = countf + 1
       DL.AddComment vbcrlf & "** FAIL **"
    end if
-'============================================================
-   DL.Pause 3000
-   MsgBox "Click OK --> Tap iPhone (Panera Bread card)", VBOKOnly
 
+   if readerType = "VP3300_liteon" then
+      DL.Pause 1000
+      MsgBox "Click OK --> Tap iPhone (Panera Bread card)", VBOKOnly
+      DL.ResetReceiveCounter
+      dl.addcomment vbcrlf 
+      DL.AddComment "--- ACT - VAS OR Pay *** DFEC40 = 01 (normal)"
+      DL.SendSequence "ACT - VAS OR Pay (Liteon)"
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+      if result = 0 then 
+         countf = countf + 1
+         DL.AddComment vbcrlf & "** FAIL **"
+      end if
+
+      DL.Pause 1000
+      MsgBox "Click OK --> Tap iPhone (Panera Bread card)", VBOKOnly
+      DL.ResetReceiveCounter
+      dl.addcomment vbcrlf 
+      DL.AddComment "--- ACT - VAS OR Pay *** DFEC40 = 00 (Payment Continue)"
+      DL.SendSequence "ACT - VAS OR Pay (Liteon) 00"
+      result = DL.WaitForSequence("IDTECH ENCRYPTION YES card VAS response" , 1, 10000)
+      if result = 0 then 
+         countf = countf + 1
+         DL.AddComment vbcrlf & "** FAIL **"
+      end if
+   end if
+'============================================================
+   DL.Pause 1000
+   MsgBox "Click OK --> Tap iPhone (Panera Bread card)", VBOKOnly
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT - VAS AND Pay "
    if readerType <> "NEO2" then 
-      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - VAS AND Pay (Liteon)" 
+      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - VAS AND Pay (Liteon) DFEC40 = 01" 
       if readerType = "GR"            then DL.SendSequence "ACT - VAS AND Pay"
    end if
    if readerType = "NEO2" then DL.SendSequence "ACT - VAS AND Pay (NEO2)"
@@ -299,8 +340,34 @@ If result <> 0 Then
       countf = countf + 1
       DL.AddComment vbcrlf & "** FAIL **"
    end if
+
+   if readerType = "VP3300_liteon" then
+      DL.Pause 1000
+      MsgBox "Click OK --> Tap iPhone (Panera Bread card)", VBOKOnly
+      DL.ResetReceiveCounter
+      dl.addcomment vbcrlf 
+      DL.AddComment "--- ACT - VAS AND Pay ***  DFEC40 = 00 (Payment Continue)"
+      DL.SendSequence "ACT - VAS AND Pay (Liteon) DFEC40 = 00"
+      result = DL.WaitForSequence("request payment response" , 1, 10000)
+      if result = 0 then 
+         countf = countf + 1
+         DL.AddComment vbcrlf & "** FAIL **"
+      end if
+
+      DL.Pause 1000
+      MsgBox "Click OK --> Tap iPhone (Panera Bread card)", VBOKOnly
+      DL.ResetReceiveCounter
+      dl.addcomment vbcrlf 
+      DL.AddComment "--- ACT - VAS AND Pay ***  w/o DFEC40 (deafult = Payment Continue)"
+      DL.SendSequence "ACT - VAS AND Pay"
+      result = DL.WaitForSequence("request payment response" , 1, 10000)
+      if result = 0 then 
+         countf = countf + 1
+         DL.AddComment vbcrlf & "** FAIL **"
+      end if
+   end if
 '============================================================
-   DL.Pause 3000
+   DL.Pause 1000
    MsgBox "Click OK --> Tap iPhone (Panera Bread card)", VBOKOnly
 
    DL.ResetReceiveCounter
@@ -319,7 +386,7 @@ If result <> 0 Then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 3000
+   DL.Pause 1000
    MsgBox "Click OK --> Tap iPhone (Panera Bread card)", VBOKOnly
 
    DL.ResetReceiveCounter
@@ -400,7 +467,7 @@ If result <> 0 Then
 '============================================================
 '============================================================
    DL.AddComment vbcrlf & "============================================================Panera Bread card" & vbcrlf
-   DL.Pause 2000
+   DL.Pause 1000
    MsgBox "Click OK --> Tap iPhone (Panera Bread card)", VBOKOnly
 
    DL.ResetReceiveCounter
@@ -422,7 +489,7 @@ If result <> 0 Then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 3000
+   DL.Pause 1000
    MsgBox "Click OK --> Tap iPhone (Panera Bread card)", VBOKOnly
 
    DL.ResetReceiveCounter
@@ -444,14 +511,14 @@ If result <> 0 Then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 3000
+   DL.Pause 1000
    MsgBox "Click OK --> Tap iPhone (Panera Bread card)", VBOKOnly
 
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT - VAS AND Pay "
    if readerType <> "NEO2" then 
-      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - VAS AND Pay (Liteon)" 
+      if readerType = "VP3300_liteon" then DL.SendSequence "ACT - VAS AND Pay (Liteon) DFEC40 = 01" 
       if readerType = "GR"            then DL.SendSequence "ACT - VAS AND Pay"
    end if
    if readerType = "NEO2" then DL.SendSequence "ACT - VAS AND Pay (NEO2)"
@@ -466,7 +533,7 @@ If result <> 0 Then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 3000
+   DL.Pause 1000
    MsgBox "Click OK --> Tap iPhone (Panera Bread card)", VBOKOnly
 
    DL.ResetReceiveCounter
@@ -485,7 +552,7 @@ If result <> 0 Then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   DL.Pause 3000
+   DL.Pause 1000
    MsgBox "Click OK --> Tap iPhone (Panera Bread card)", VBOKOnly
 
    DL.ResetReceiveCounter

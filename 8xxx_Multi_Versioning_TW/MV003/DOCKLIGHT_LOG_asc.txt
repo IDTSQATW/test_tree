@@ -1,4 +1,4 @@
-Docklight Log File (ASCII) - Started 2024/5/3 14:25:35.397 
+Docklight Log File (ASCII) - Started 2024/5/15 09:22:13.532 
  TEST CASE: MV003
 
  --- Set POS COM PORT Settings
@@ -8,10 +8,10 @@ Docklight Log File (ASCII) - Started 2024/5/3 14:25:35.397
 
  --- Get Hardware Information 09-14
 
-2024/5/3 14:25:36.574 [TX] - ViVOtech2<NUL><HT>	<DC4><NUL><NUL>3<BS>
-2024/5/3 14:25:36.583 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL><SUB> 
-HW,VP3300 USB-E<CR><LF>
-K21F Rev9??<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
+2024/5/15 09:22:14.690 [TX] - ViVOtech2<NUL><HT>	<DC4><NUL><NUL>3<BS>
+2024/5/15 09:22:14.701 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL><CAN> 
+HW,VP3300 USB<CR><LF>
+K21F Rev9??<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
 
  Result = PASSED
  
@@ -25,5 +25,5 @@ K21F Rev9??<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NU
 Please check ASCII screen, make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (ASCII) - Stopped 2024/5/3 14:25:37.188 
+Docklight Log File (ASCII) - Stopped 2024/5/15 09:22:15.307 
 

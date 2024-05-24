@@ -27,3 +27,9 @@ SWIPEKB: Click OK --> Watch/ check screen for 30 sec --> Click OK
 MESSAGECK: Reader did NOT send strange data (ex. Bluetooth signal data)
 User Judgment Pass
 
+
+09:45:14: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\USB KBD test case\QCM001.txt
+Items: 16
+Load Case Succeed!
+

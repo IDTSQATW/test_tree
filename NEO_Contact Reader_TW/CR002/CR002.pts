@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-35237
+47209
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -223,7 +223,7 @@ If result <> 0 Then
    DL.AddComment "--- 02-40 (enable CL only)"
    msgbox "Click OK --> Tap any card", vbokonly
    DL.SendSequence "02-40 (enable CL only)"
-   result = DL.WaitForSequence("02 23", 1, 2000)
+   result = DL.WaitForSequence("02 23", 1, 5000)
    dl.pause 500
 End If
 

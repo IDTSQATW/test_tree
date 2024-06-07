@@ -11,6 +11,16 @@ PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 rx = 0
 
+# Check reader is VP3350 or not
+lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
+
 # Check platform
 platform = DL.ShowMessageBox("", "Is the project NEOII and upward?", 0)
 if platform == 1:
@@ -28,9 +38,6 @@ if (Result):
             if (RetOfStep):
                 Result = DL.Check_RXResponse("C7 00 00 01 00")
 
-# Check reader is VP3350 or not
-modeltype = DL.ShowMessageBox("", "Is this VP3350?", 0)
-
 # Set group A0
 if (Result):
 	RetOfStep = DL.SendCommand('Set group A0')
@@ -39,10 +46,10 @@ if (Result):
         
 # CL test
 if (Result):
-    if modeltype == 1:
+    if lcdtype == 1:
         RetOfStep = DL.SendCommand('02-40 (enable CL only)')
-        rx = 5 # for VP3350
-    if modeltype == 0: 
+        rx = 0 # for VP3350
+    if lcdtype == 0: 
         RetOfStep = DL.SendCommand('02-40 (enable CL only) w/ LCD')
         rx = 0 # for any project AT cmd did not return 61-01
     if (RetOfStep):
@@ -56,8 +63,8 @@ if (Result):
         if (Result):        
             # 57
             DL.SetWindowText("blue", "Tag 57 Mask/ Encryption data:")
-            mask57 = DL.GetTLV(alldata,"57", 0)
-            enc57 = DL.GetTLV(alldata,"57", 1)
+            mask57 = DL.GetTLV_Embedded(alldata,"57", 0)
+            enc57 = DL.GetTLV_Embedded(alldata,"57", 1)
             DL.SetWindowText("blue", "Tag 57 Decryption data:")
             dec57 = DL.DecryptDLL(0,1, strKey, ksn, enc57)	
             if platform == 1: # NEOII and upward
@@ -73,8 +80,8 @@ if (Result):
                 
             # 5A
             DL.SetWindowText("blue", "Tag 5A Mask/ Encryption data:")
-            mask5A = DL.GetTLV(alldata,"5A", 0)
-            enc5A = DL.GetTLV(alldata,"5A", 1)
+            mask5A = DL.GetTLV_Embedded(alldata,"5A", 0)
+            enc5A = DL.GetTLV_Embedded(alldata,"5A", 1)
             DL.SetWindowText("blue", "Tag 5A Decryption data:")
             dec5A = DL.DecryptDLL(0,1, strKey, ksn, enc5A)	
             if DL.Check_RXResponse(rx, '5AA1083742CCCCCCC0001F') == False:
@@ -105,6 +112,11 @@ if (Result):
             DL.fails=DL.fails+1
 else:
     DL.fails=DL.fails+1
+    
+if lcdtype == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")
 
 if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))

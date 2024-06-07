@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-9242
+54758
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -220,9 +220,9 @@ if result <> 0 then
                 DL.AddComment "--- Activate Transaction (02-40): Tap card"
                 DL.SendSequence "Activate Transaction (02-40) - 9F02"
                 if readerType <> "NEO2" then 
-                   result = DL.WaitForSequence("FFEE12", 1, 5000)
+                   result = DL.WaitForSequence("FFEE12", 1, 10000)
                 else
-                   result = DL.WaitForSequence("FFEE12 (NEO2)", 1, 5000)
+                   result = DL.WaitForSequence("FFEE12 (NEO2)", 1, 10000)
                 end if
                 dl.pause 2000
              else
@@ -250,9 +250,9 @@ if result <> 0 then
                 DL.AddComment "--- Contact Start Transaction (60-10)"
                 DL.SendSequence "60-10"
                 if readerType <> "NEO2" then 
-                   result = DL.WaitForSequence("FFEE12", 1, 5000)
+                   result = DL.WaitForSequence("FFEE12", 1, 10000)
                 else
-                   result = DL.WaitForSequence("FFEE12 (NEO2)", 1, 5000)
+                   result = DL.WaitForSequence("FFEE12 (NEO2)", 1, 10000)
                 end if
                 dl.pause 2000
                 if result <> 0 then
@@ -301,9 +301,9 @@ if result <> 0 then
                 if result <> 0 then
                    msgbox "Click OK --> Insert T=0 card", vbokonly
                    if readerType <> "NEO2" then 
-                      result = DL.WaitForSequence("FFEE12", 1, 5000)
+                      result = DL.WaitForSequence("FFEE12", 1, 10000)
                    else
-                      result = DL.WaitForSequence("FFEE12 (NEO2)", 1, 5000)
+                      result = DL.WaitForSequence("FFEE12 (NEO2)", 1, 10000)
                    end if
                    dl.pause 2000
                    if result <> 0 then
@@ -358,7 +358,7 @@ if result <> 0 then
                    if readerType <> "NEO2" then result = DL.WaitForSequence("USE MAGSTRIPE", 1, 10000)
                    if result <> 0 then
                       msgbox "Click OK --> Swipe T=0 card", vbokonly
-                      result = DL.WaitForSequence("msr-ksn", 1, 5000)
+                      result = DL.WaitForSequence("msr-ksn", 1, 10000)
                       dl.pause 5000
                    else
                       countf = countf + 1

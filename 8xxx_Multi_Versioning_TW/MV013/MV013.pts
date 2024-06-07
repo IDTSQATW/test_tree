@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-24098
+62293
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -137,9 +137,6 @@ End Function
 'Step 1: Send 90-21 (Full Device Reset) (90-21 will create the related Folder & Files for TMS, and these Folder & Files can't be erased by 90-00 command.)
 'Step 2: Send 90-15 to set Model Number
 '------------------------------------------------------------
-DL.AddComment vbCrLf
-PrintMyResult(result)
-
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 DL.AddComment vbCrLf

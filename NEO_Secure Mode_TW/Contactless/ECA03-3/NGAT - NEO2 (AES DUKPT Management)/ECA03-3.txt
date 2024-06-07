@@ -32,9 +32,12 @@ TID:Activate Transaction w/o LCD
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00
 MSG:Tap MasterCard paypass card card...
 EXR:
-EXR:
-EXR:
-EXR:
-EXR:
-EXR:
 TIMEOUT:120000
+
+TID:0105 do not use LCD
+CMD:01 05 11 05
+EXR:
+
+TID:0105 default (VP3350)
+CMD:01 05 19 05
+EXR:

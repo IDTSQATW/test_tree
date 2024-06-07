@@ -13,6 +13,16 @@ rx = 0
 
 #Objective: to verify AES DUKPT Management, AES-128 Working Key encryption/ decryption function
 
+# Check reader is VP3350 or not
+lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
+    
 # Set group A0
 if (Result):
 	RetOfStep = DL.SendCommand('Set group A0')
@@ -22,7 +32,7 @@ if (Result):
 # CL test
 if (Result):
     RetOfStep = DL.SendCommand('02-40 (enable CL only)')
-    rx = 5 # for VP3350
+    rx = 0 # for VP3350
     if (RetOfStep):
         Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E5 ** DF EE 12")
         if (Result):
@@ -65,6 +75,11 @@ if (Result):
             DL.fails=DL.fails+1
 else:
     DL.fails=DL.fails+1
+    
+if lcdtype == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")
 
 if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))

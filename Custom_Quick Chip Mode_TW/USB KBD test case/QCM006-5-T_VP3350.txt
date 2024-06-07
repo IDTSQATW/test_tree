@@ -1,0 +1,124 @@
+Objective: Encryption ON, CT (& Fallback to CT) test under Quick Chip Mode. (T=0/ Discover)
+
+--------------------
+>>> CT transaction
+SWIPEKB: Click OK --> Insert T=0 card (Press button "Quick Chip" to Decryption first then Press button "OK")
+EXR: DF EE 25 02 02 03
+EXR: DF EF 5D 11 47 61 CC CC CC CC 00 10 D2 01 22 01 CC CC CC CC CC
+EXR: 57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89
+EXR: DF EF 5B 08 47 61 CC CC CC CC 00 10
+EXR: 5A 08 47 61 73 90 01 01 00 10
+EXR: 9F 39 01 07
+EXR: 4F
+EXR: 50
+EXR: 82
+EXR: 84
+EXR: 8A
+EXR: 8C
+EXR: 8D
+EXR: 8E
+EXR: 95
+EXR: 99
+EXR: 9B
+EXR: 9C
+EXR: 5F20
+EXR: 5F24
+EXR: 5F25
+EXR: 5F28
+EXR: 5F2A
+EXR: 5F2D
+EXR: 5F34
+EXR: 5F57
+EXR: 9F02
+EXR: 9F03
+EXR: 9F10
+EXR: 9F13
+EXR: 9F20
+EXR: 9F26
+EXR: 9F27
+EXR: 9F34
+EXR: 9F36
+EXR: 9F37
+EXR: 9F38
+EXR: 9F4D
+EXR: 9F4F
+EXR: 9F53
+EXR: 9F5B
+EXR: DFEF57 18 56503333303020555342204E454F2076312E
+
+--------------------
+>>> Fallback to CT transaction
+SWIPEKB: Click OK --> Swipe Discover card (Replace serial number as HEX format first, Press button "MSR Dec" to Decryption then Press button "OK")
+EXR: 02
+EXR: 80 1F 44 28 00 A3 9B
+EXR: %*6510********0125^CARD/IMAGE 08             ^1712****************?
+EXR: ;6510********0125=1712****************?
+EXR: 62 99 49 01 2C 00 04 60
+EXR: 03
+EXR: %B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?
+EXR: ;6510000000000125=17122011000095000000?
+DFEF61028100
+
+--------------------
+>>> CT transaction
+SWIPEKB: Click OK --> Insert Discover card (Press button "Quick Chip" to Decryption first then Press button "OK")
+EXR: DF EE 12 0A 62 99 49 01 2C 00 04 60
+EXR: DF EE 25 02 02 03
+EXR: DF EF 5D 13
+EXR: 57 13
+EXR: DF EF 5B 08 
+EXR: 5A 08
+EXR: 9F 39 01 07
+EXR: 4F
+EXR: 50
+EXR: 82
+EXR: 84
+EXR: 8A
+EXR: 8C
+EXR: 8D
+EXR: 8E
+EXR: 95
+EXR: 99
+EXR: 9B
+EXR: 9C
+EXR: 5F20
+EXR: 5F24
+EXR: 5F25
+EXR: 5F28
+EXR: 5F2A
+EXR: 5F2D
+EXR: 5F34
+EXR: 5F57
+EXR: 9F02
+EXR: 9F03
+EXR: 9F10
+EXR: 9F13
+EXR: 9F20
+EXR: 9F26
+EXR: 9F27
+EXR: 9F34
+EXR: 9F36
+EXR: 9F37
+EXR: 9F38
+EXR: 9F4D
+EXR: 9F4F
+EXR: 9F53
+EXR: 9F5B
+EXR: DFEF57
+
+--------------------
+>>> Fallback to MSR transaction
+SWIPEKB: Click OK --> Insert IDT test card 3 times --> Remove card (Green LED 3 is flash ON) --> Swipe Discover card. (Replace serial number as HEX format first, Press button "MSR Dec" to Decryption then Press button "OK")
+EXR: DFEF6102F220
+EXR: DFEF6102F222
+EXR: DFEE25
+EXR: 9F390180
+EXR: 02
+EXR: 80 1F 44 28 00 A3 9B
+EXR: %*6510********0125^CARD/IMAGE 08             ^1712****************?
+EXR: ;6510********0125=1712****************?
+EXR: 62 99 49 01 2C 00 04 60
+EXR: 03
+EXR: %B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?
+EXR: ;6510000000000125=17122011000095000000?
+MESSAGECK: After inserted card 3 times, LED 3 was turned ON (flash status)

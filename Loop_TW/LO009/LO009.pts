@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-22159
+45048
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -292,6 +292,7 @@ If result <> 0 Then
    result = DL.WaitForSequence("read data resp", 1, 2000)
    dl.pause 300
 End If
+DL.ClearCommWindows 
 if result = 0 then i = n + 1
 next
 

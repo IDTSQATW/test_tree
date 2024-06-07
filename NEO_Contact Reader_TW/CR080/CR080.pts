@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-24136
+54013
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -225,9 +225,6 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-DL.SendSequence "04-09"
-dl.pause 3000
-
 if readerType <> "NEO2" then
    precondition()
    if result <> 0 then loadkey_D()

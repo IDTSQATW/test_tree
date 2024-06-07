@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-2437
+51954
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -183,7 +183,7 @@ if result <> 0 then
    dl.addcomment vbcrlf
    DL.AddComment "--- 60-13"
    DL.SendSequence "6013"
-   result = DL.WaitForSequence("60-13 resp", 1, 4000)
+   result = DL.WaitForSequence("60-13 resp", 1, 10000)
 end if
 
 if result <> 0 then
@@ -191,7 +191,7 @@ if result <> 0 then
    dl.addcomment vbcrlf
    DL.AddComment "--- 03-03"
    DL.SendSequence "0303"
-   result = DL.WaitForSequence("03-03 resp", 1, 4000)
+   resultignore = DL.WaitForSequence("03-03 resp", 1, 4000)
    if i = 1 then msgbox "Remove card --> Click OK", vbokonly
 end if
 next

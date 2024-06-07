@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-22152
+23077
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -267,14 +267,8 @@ If result <> 0 Then
          dl.addcomment vbcrlf & "Waiting for 2 min (timeout)..."
          if result <> 0 then result = DL.WaitForSequence("60 08", 1, 122000)
       else
-         if lcdcheck = 6 then 
-            dl.addcomment vbcrlf & "Waiting for 1 min (timeout)..."
-            if result <> 0 then result = DL.WaitForSequence("60 08 30 13", 1, 62000)
-         end if
-         if lcdcheck = 7 then 
-            dl.addcomment vbcrlf & "Waiting for 2 min (timeout)..."
-            if result <> 0 then result = DL.WaitForSequence("60 08 30 13", 1, 122000)
-         end if
+         dl.addcomment vbcrlf & "Waiting for 1 min (timeout)..."
+         if result <> 0 then result = DL.WaitForSequence("60 08 30 13", 1, 62000)
       end if
    end if
 End If

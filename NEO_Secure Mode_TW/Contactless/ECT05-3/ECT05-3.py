@@ -11,6 +11,16 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
+# Check reader is VP3350 or not
+lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
+    
 # Check platform
 platform = DL.ShowMessageBox("", "Is the project NEOII and upward?", 0)
 if platform == 1:
@@ -58,7 +68,7 @@ if (Result):
 	if lcdtype == 0:
 		if platform == 1: #NEOII and upward
 			RetOfStep = DL.SendCommand('Activate Transaction w/o LCD')	
-			rx = 5
+			rx = 0
 		if platform == 0: #NEOI
 			RetOfStep = DL.SendCommand('Activate Transaction w/o LCD (NEOI)')	
 			rx = 0
@@ -171,3 +181,8 @@ if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
 else:
 	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )
+    
+if lcdtype == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")

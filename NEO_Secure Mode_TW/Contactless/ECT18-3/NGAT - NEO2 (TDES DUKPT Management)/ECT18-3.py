@@ -10,6 +10,16 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
+# Check reader is VP3350 or not
+lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
+    
 # Check reader support auto poll mode or not (note: NEO3 did not support auto poll mode)
 pollmode = DL.ShowMessageBox("", "Does the reader support auto poll mode?", 0)
 if pollmode == 1:
@@ -48,7 +58,7 @@ if (Result):
 				rx = 0
 			if lcdtype == 0: #w/o LCD
 				RetOfStep = DL.SendCommand('Auto Poll w/o LCD')
-				rx = 1
+				rx = 0
 			if (RetOfStep):
 				Result = DL.Check_RXResponse(rx, "01 00 00 00")
 		
@@ -59,7 +69,7 @@ if (Result):
 					rx = 0
 				if lcdtype == 0:
 					RetOfStep = DL.SendCommand('AT Transaction w/o LCD')
-					rx = 3
+					rx = 0
 			if i == 2: #Auto poll mode
 				if lcdtype == 1:
 					RetOfStep = DL.SendCommand('Get Transaction Result w/ LCD')
@@ -158,3 +168,8 @@ if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
 else:
 	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )
+    
+if lcdtype == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")

@@ -7,12 +7,13 @@ CMD: 01 01 01
 CMD: 04 00 DF EF 6F 01 30
 EXR: 04 00 00 00
 
->>> Change to Poll On Demand
+>>> Change to QC
 CMD: 01 01 02
 
 SWIPEKB: click OK, then swipe IDT test card. (output delay time = 1200 us)
 MESSAGECK: data output speed correctly
 
+--------------------
 >>> Change to Poll On Demand
 CMD: 01 01 01
 
@@ -20,12 +21,12 @@ CMD: 01 01 01
 CMD: 04 00 DF EF 6F 01 31
 EXR: 04 00 00 00
 
->>> Change to Poll On Demand
+>>> Change to QC
 CMD: 01 01 02
 
 SWIPEKB: click OK, then swipe IDT test card. (output delay time = 2000 us)
 MESSAGECK: data output speed correctly
-
+--------------------
 >>> Change to Poll On Demand
 CMD: 01 01 01
 
@@ -33,12 +34,12 @@ CMD: 01 01 01
 CMD: 04 00 DF EF 6F 01 32
 EXR: 04 00 00 00
 
->>> Change to Poll On Demand
+>>> Change to QC
 CMD: 01 01 02
 
 SWIPEKB: click OK, then swipe IDT test card. (output delay time = 5000 us)
 MESSAGECK: data output speed correctly
-
+--------------------
 >>> Change to Poll On Demand
 CMD: 01 01 01
 
@@ -46,12 +47,12 @@ CMD: 01 01 01
 CMD: 04 00 DF EF 6F 01 33
 EXR: 04 00 00 00
 
->>> Change to Poll On Demand
+>>> Change to QC
 CMD: 01 01 02
 
 SWIPEKB: click OK, then swipe IDT test card. (output delay time = 10000 us)
 MESSAGECK: data output speed correctly
-
+--------------------
 >>> Change to Poll On Demand
 CMD: 01 01 01
 
@@ -59,12 +60,12 @@ CMD: 01 01 01
 CMD: 04 00 DF EF 6F 01 34
 EXR: 04 00 00 00
 
->>> Change to Poll On Demand
+>>> Change to QC
 CMD: 01 01 02
 
 SWIPEKB: click OK, then swipe IDT test card. (output delay time = 20000 us)
 MESSAGECK: data output speed correctly
-
+--------------------
 >>> Change to Poll On Demand
 CMD: 01 01 01
 
@@ -72,12 +73,12 @@ CMD: 01 01 01
 CMD: 04 00 DF EF 6F 01 35
 EXR: 04 00 00 00
 
->>> Change to Poll On Demand
+>>> Change to QC
 CMD: 01 01 02
 
 SWIPEKB: click OK, then swipe IDT test card. (output delay time = 50000 us)
 MESSAGECK: data output speed correctly
-
+--------------------
 >>> Change to Poll On Demand
 CMD: 01 01 01
 
@@ -85,20 +86,20 @@ CMD: 01 01 01
 CMD: 04 00 DF EF 6F 01 36
 EXR: 04 00 00 00
 
->>> Change to Poll On Demand
+>>> Change to QC
 CMD: 01 01 02
 
 SWIPEKB: click OK, then swipe IDT test card. (output delay time = 0 us) Note: some PC may be unsuitable for this setting.
 MESSAGECK: data output speed correctly
-
+--------------------
 >>> Change to Poll On Demand
 CMD: 01 01 01
---------------------
+
 >>> Tag DFEF6F = 30 (default, 1200 us)
 CMD: 04 00 DF EF 6F 01 30
 EXR: 04 00 00 00
 
->>> Change to Poll On Demand
+>>> Change to QC
 CMD: 01 01 02
 
 SWIPEKB: click OK, then swipe IDT test card. (output delay time = 1200 us)

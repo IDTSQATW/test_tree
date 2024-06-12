@@ -11,20 +11,3 @@ EXR: DFEF6102F220
 EXR: DFEF6102F222
 EXR: DF EE 25 02 00 08
 MESSAGECK: LED 3 is ON (flash status) if fallback to MSR reader, LED 3 is OFF if fallback timeout
-
---------------------
->>> Quick Chip mode = 03
-CMD: 01 01 03
-EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
- 
->>> Fallback to MSR transaction
-SWIPEKB: click OK -> Insert IDT teest card 3 times -> waited 60 sec fallback timeout.
-EXR: DFEF6102F220
-EXR: DFEF6102F222
-EXR: DF EE 25 02 00 08
-MESSAGECK: LED 3 is ON (flash status) if fallback to MSR reader, LED 3 is OFF if fallback timeout
-
---------------------
->>> Quick Chip mode = 02
-CMD: 01 01 02
-EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00

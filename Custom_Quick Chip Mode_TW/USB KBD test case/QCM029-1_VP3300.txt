@@ -1,0 +1,24 @@
+Objective: to verify Tag DFED4F (USB KB prefix)
+
+===========================================
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 01 00 00 00
+
+--------------------
+CMD: 04 00 DFED4F 05 2424242424
+EXR: 04 00
+
+--------------------
+>>> MSR transaction
+MESSAGE: Open PC "NotePad" -> Swipe/ Insert/ Tap any card -> notice the prefix of output
+MESSAGECK: the prefix of output display msg '$$$$$'
+
+===========================================
+CMD: 04 00 DFED4F 00
+EXR: 04 00
+
+--------------------
+>>> MSR transaction
+MESSAGE: Open PC "NotePad" -> Swipe/ Insert/ Tap any card -> notice the prefix of output
+MESSAGECK: the prefix of output display nothing

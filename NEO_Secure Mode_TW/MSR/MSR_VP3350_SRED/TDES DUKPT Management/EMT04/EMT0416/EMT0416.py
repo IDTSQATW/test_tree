@@ -416,7 +416,9 @@ if (Result):
 									if Result != True:
 										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR3plaintextdata: FAIL")
-							
+					else:
+						DL.fails=DL.fails+1
+                            
 if lcdtype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):

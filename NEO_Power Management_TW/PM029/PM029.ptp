@@ -46,10 +46,10 @@ F0-02 Get Battery Level = w/ data 01 Li Battery Voltage Value
 RECEIVE
 0
 f0-02 resp ok
-56 69 56 4F 74 65 63 68 32 00 F0 00 00 01 ?? ?? ??
+56 69 56 4F 74 65 63 68 32 00 F0 00 00 01 ??
 -1
 1
-COMMENT 
+COMMENT <<
 0
 1
 0

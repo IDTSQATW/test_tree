@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-2527
+17924
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -212,7 +212,7 @@ If result <> 0 Then
       if platformcheck = 6 then r2 = dl.waitforsequence("dfee26 (NEO3)", 1, 1000)
 
       if readerType <> "NEO2" then r3 = dl.waitforsequence("df30", 1, 1000)
-      if readerType = "NEO2" then r3 = dl.waitforsequence("df30 (NEO2)", 1, 1000)
+      if readerType = "NEO2" then r3 = 1
 
       if platformcheck = 7 then r4 = dl.waitforsequence("84 (ZIP)", 1, 1000)
       if platformcheck = 6 then r4 = dl.waitforsequence("84 (DPAS)", 1, 1000)

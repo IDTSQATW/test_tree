@@ -365,7 +365,9 @@ if (Result):
 				if DL.Check_StringAB(TagDFEE26, 'E000') == False:
 					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
-					
+			else:
+				DL.fails=DL.fails+1
+                
 		# cmd 60-12 Contact Apply Host Response (DFEF1F: 01 00)
 		if  CTresultcode == "0004":
 			Result = True
@@ -403,6 +405,12 @@ if (Result):
 						if DL.Check_StringAB(TagDFEE26, 'E000') == False:
 							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+					else:
+						DL.fails=DL.fails+1
+				else:
+					DL.fails=DL.fails+1
+		else:
+			DL.fails=DL.fails+1
 else:
 	DL.fails=DL.fails+1
 

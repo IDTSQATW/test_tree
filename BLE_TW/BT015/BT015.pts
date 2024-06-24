@@ -1,14 +1,17 @@
 DL_SCRIPTVERSION
 1
-52011
+44897
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "BT014" ' !!!!! EDIT THIS !!!!!
-'Objective: for issue #NEO3-7862: Model C device,send 7781 set the default bt name and password,then 7781 set bt name and password,return 0a,but then send 7782,bt name is just set name
+ProjectName = "BT015" ' !!!!! EDIT THIS !!!!!
+'Objective: 
+'get security option 7786 000100
+'set security disable 7786 000101 01
+'set security on 7786 000101 00
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -150,40 +153,106 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-sub btdefault()
+readercheck = msgbox ("Please make sure u test SRED reader now", vbokonly)
+
 if result <> 0 then
    dl.resetreceivecounter
-   dl.addcomment vbcrlf
    DL.AddComment "--- 77-81 (reset to default)"
    DL.SendSequence "77-81 (reset to default)"
    result = DL.WaitForSequence("77-xx resp 00", 1, 5000)
+   if result <> 0 then DL.SendSequence "77-05"
+   dl.pause 10000
 End If
-end sub
-
-for i = 1 to 10
-btdefault()
 
 if result <> 0 then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
-   DL.AddComment "--- 77-81 Set BT name (mindy), pwd 123456 -> 654321" & "    ** Cycle: " & i
-   DL.SendSequence "77-81 Set BT name (mindy), pwd 123456 -> 654321"
+   DL.AddComment "--- 77-86 Get security setting"
+   DL.SendSequence "77-86 Get security setting"
+   result = DL.WaitForSequence("77 00, 00 = enable", 1, 1500)
+End If
+
+if result <> 0 then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 77-86 Set security = enable"
+   DL.SendSequence "77-86 Set security = enable"
+   result = DL.WaitForSequence("77-xx resp 00", 1, 1500)
+   ReverseResult(result)
+End If
+
+if result <> 0 then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 77-86 Set security = disable"
+   DL.SendSequence "77-86 Set security = disable"
+   result = DL.WaitForSequence("77-xx resp 00", 1, 1500)
+   ReverseResult(result)
+End If
+
+'------------------------------------------------------------NSRED reader
+if result <> 0 then
+   readercheck = msgbox ("Please make sure u test NSRED reader now", vbokonly)
+   dl.resetreceivecounter
+   DL.AddComment "--- 77-81 (reset to default)"
+   DL.SendSequence "77-81 (reset to default)"
    result = DL.WaitForSequence("77-xx resp 00", 1, 5000)
+   if result <> 0 then DL.SendSequence "77-05"
+   dl.pause 10000
 End If
 
 if result <> 0 then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
-   DL.AddComment "--- 77-82 Get Bluetooth Name"
-   DL.SendSequence "77-82 Get Bluetooth Name"
-   result = DL.WaitForSequence("77-82 resp", 1, 3000)
+   DL.AddComment "--- 77-86 Get security setting"
+   DL.SendSequence "77-86 Get security setting"
+   result = DL.WaitForSequence("77 00, 01 = disable", 1, 1500)
 End If
-next
 
-btdefault()
+if result <> 0 then
+   dl.pause 500
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 77-86 Set security = enable"
+   DL.SendSequence "77-86 Set security = enable"
+   result = DL.WaitForSequence("77-xx resp 00", 1, 1500)
+   usercheck = msgbox ("Please use mobile phone to pair w/ the reader via Bluetooth, user MUST input pwd, right?", vbyesno)
+   if usercheck = 7 then result = 0
+End If
 
-dl.addcomment vbcrlf
+if result <> 0 then
+   dl.pause 500
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 77-86 Get security setting"
+   DL.SendSequence "77-86 Get security setting"
+   result = DL.WaitForSequence("77 00, 00 = enable", 1, 1500)
+End If
+
+if result <> 0 then
+   dl.pause 500
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 77-86 Set security = disable"
+   DL.SendSequence "77-86 Set security = disable"
+   result = DL.WaitForSequence("77-xx resp 00", 1, 1500)
+   usercheck = msgbox ("Please use mobile phone to pair w/ the reader via Bluetooth, user do NOT need to input pwd, right?", vbyesno)
+   if usercheck = 7 then result = 0
+End If
+
+if result <> 0 then
+   dl.pause 500
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 77-86 Get security setting"
+   DL.SendSequence "77-86 Get security setting"
+   result = DL.WaitForSequence("77 00, 01 = disable", 1, 1500)
+End If
+
+DL.SendSequence "77-81 (reset to default)"
+dl.pause 2000
 DL.SendSequence "77-05"
+dl.pause 2000
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf

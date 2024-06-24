@@ -79,6 +79,7 @@ if (Result):
 				enc5A = DL.GetTLV(alldata,"5A", 1)
 				dec5A = DL.DecryptDLL(0,1, strKey, ksn, enc5A)	
 		
+				Tag9F1E = DL.GetTLV(alldata,"9F1E")
 				Tag9F39 = DL.GetTLV(alldata,"9F39")
 				TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
 				TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
@@ -154,6 +155,10 @@ if (Result):
 				if DL.Check_StringAB(TagDFEE26, 'E000') == False:
 					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+                    
+				if DL.Check_StringAB(Tag9F1E, '54 65 72 6D 69 6E 61 6C') == True:
+					DL.fails=DL.fails+1
+					DL.SetWindowText("Red", "Tag 9F1E: FAIL")
 
 		# cmd 60-11					
 		if  CTresultcode == "0010":

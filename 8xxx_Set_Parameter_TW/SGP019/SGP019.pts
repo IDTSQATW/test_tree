@@ -1,14 +1,14 @@
 DL_SCRIPTVERSION
 1
-52011
+25918
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "BT014" ' !!!!! EDIT THIS !!!!!
-'Objective: for issue #NEO3-7862: Model C device,send 7781 set the default bt name and password,then 7781 set bt name and password,return 0a,but then send 7782,bt name is just set name
+ProjectName = "SGP019" ' !!!!! EDIT THIS !!!!!
+' Objextion: for issue NEO3-9150, [VP3350] Use extra IDG cmd to enable/disable stop transaction when interface disconnection
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -24,45 +24,45 @@ Dim COM_Port(1)
 Dim POSBaudRate(1)
 
 Do Until FileInput.EndOfFile
-   'Display Test Case Number and Description     
-   result = FileInput.GetLine() 'by pass variable name
-   result = FileInput.GetLine()
-   Prompting(0) = result
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
       
-   'Display Test Steps   
-   result = FileInput.GetLine() 'by pass variable name
-   result = FileInput.GetLine()      
-   Prompting(1) = result
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
 
-   'Set Docklight COM Port     
-   result = FileInput.GetLine() 'by pass variable name
-   result = FileInput.GetLine()      
-   COM_Port(1) = result
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
 
-   'Set Reader Baud Rate
-   result = FileInput.GetLine() 'by pass variable name
-   result = FileInput.GetLine()      
-   POSBaudRate(1) = result
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
 
-   'Set Reader Type
-   result = FileInput.GetLine() 'by pass variable name
-   result = FileInput.GetLine()      
-   readerType = result
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
 
-   'Set Reader Model
-   result = FileInput.GetLine() 'by pass variable name
-   result = FileInput.GetLine()      
-   readerModel = result
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
 
-   'Set Reader FW version
-   result = FileInput.GetLine() 'by pass variable name
-   result = FileInput.GetLine()      
-   fwVersion = result
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
 
-   'Set Reader FW build
-   result = FileInput.GetLine() 'by pass variable name
-   result = FileInput.GetLine()      
-   fwBuild = result   
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result
 
   'Set Reader General Flag
   result = FileInput.GetLine() 'by pass variable name
@@ -71,12 +71,14 @@ Do Until FileInput.EndOfFile
 Loop
 
 Sub StepPrompt(PromptString)
-    DL.AddComment PromptString
-    If Prompting(1) = "ON" Then
-       MsgBox PromptString, VBOKOnly, "Test Step"
-    Else
-    End If  
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
 End Sub
+
 '------------------------------------------------------------
 ' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
 ' -  
@@ -92,9 +94,6 @@ Dim confirm
 max=1
 min=0
 Randomize
-errCnt = 0
-caseValid = 0
-
 result = 1
 
 DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
@@ -112,6 +111,7 @@ DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
 DL.Pause 1000
 
 DL.StartCommunication
+
 '------------------------------------------------------------
 'Result reporting (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
@@ -124,13 +124,13 @@ Else
 End If
 
 Sub PrintMyResult(ResultX)
-    If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
-       MasterResult = 1
-       DL.AddComment "Result = PASSED"
-    Else
-       MasterResult = 0
-       DL.AddComment "Result = FAILED"
-    End If
+      If ResultX = 1 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
 End Sub
 
 Function ReverseResult(ResultParam)
@@ -140,50 +140,47 @@ Function ReverseResult(ResultParam)
             result = 1
       End If
 End Function
+
 '------------------------------------------------------------
 'Debugging (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
 Function MyDebug(DebugString)
-         DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
-         MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
 End Function
+
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-sub btdefault()
-if result <> 0 then
+If result <> 0 Then
+   msgbox "Please connect w/ VP3350 model B reader", vbokonly
    dl.resetreceivecounter
    dl.addcomment vbcrlf
-   DL.AddComment "--- 77-81 (reset to default)"
-   DL.SendSequence "77-81 (reset to default)"
-   result = DL.WaitForSequence("77-xx resp 00", 1, 5000)
+   DL.AddComment "--- 29-41 = ID from 40#"
+   DL.SendSequence "29-41 = ID from 40#"
+   result = DL.WaitForSequence("29 00 model b default", 1, 2000)
+   dl.pause 500
 End If
-end sub
 
-for i = 1 to 10
-btdefault()
-
-if result <> 0 then
+If result <> 0 Then
+   msgbox "Please connect w/ VP3350 model C reader", vbokonly
    dl.resetreceivecounter
    dl.addcomment vbcrlf
-   DL.AddComment "--- 77-81 Set BT name (mindy), pwd 123456 -> 654321" & "    ** Cycle: " & i
-   DL.SendSequence "77-81 Set BT name (mindy), pwd 123456 -> 654321"
-   result = DL.WaitForSequence("77-xx resp 00", 1, 5000)
+   DL.AddComment "--- 29-41 = ID from 40#"
+   DL.SendSequence "29-41 = ID from 40#"
+   result = DL.WaitForSequence("29 00 model c default", 1, 2000)
+   dl.pause 500
 End If
 
-if result <> 0 then
+If result <> 0 Then
+   msgbox "Please connect w/ VP3350 model F reader", vbokonly
    dl.resetreceivecounter
    dl.addcomment vbcrlf
-   DL.AddComment "--- 77-82 Get Bluetooth Name"
-   DL.SendSequence "77-82 Get Bluetooth Name"
-   result = DL.WaitForSequence("77-82 resp", 1, 3000)
+   DL.AddComment "--- 29-41 = ID from 40#"
+   DL.SendSequence "29-41 = ID from 40#"
+   result = DL.WaitForSequence("29 00 model f default", 1, 2000)
+   dl.pause 500
 End If
-next
-
-btdefault()
-
-dl.addcomment vbcrlf
-DL.SendSequence "77-05"
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
@@ -192,51 +189,66 @@ PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
+
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-'DL.pause 1000
+DL.pause 1000
 
-'If result = 0 then
-'   DL.AddComment Chr(13) & "Result = FAILED"
-'Else
-'   DL.AddComment Chr(13) & "Result = PASSED"
-'End If
+If 0 Then
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
+End If
 
-'If Prompting(0) = "ON" Then
-'   If result = 0 then
-'      MsgBox "Result = FAILED", VBOKOnly, "Result"
-'   Else 
-'      MsgBox "Result = PASSED", VBOKOnly, "Result"
-'   End If
-'End If
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
-'If MasterResult = 1 Then
-'   MasterVerdict = "PASSED"
-'ElseIf MasterResult = 0 Then
-'       MasterVerdict = "FAILED"
-'End If
-'result = MasterResult
-'DL.AddComment vbCrLf
-'DL.AddComment "MASTER RESULT = " & MasterVerdict
+
+If MasterResult = 1 Then
+      MasterVerdict = "PASSED"
+ElseIf MasterResult = 0 Then
+      MasterVerdict = "FAILED"
+End If
+result = MasterResult
+DL.AddComment vbCrLf
+DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
 'If MasterResult = 0 Then 
-'   FileOutput.CreateFile "MR_FAIL"
+'	FileOutput.CreateFile "MR_FAIL"
 'ElseIf MasterResult = 1 Then
-'	  FileOutput.CreateFile "MR_PASS"
+'	FileOutput.CreateFile "MR_PASS"
 'End If
 
 FileOutput.CreateFile "FINAL_VERDICT.txt"
 
 If MasterResult = 0 Then 
-   FileOutput.WriteLine "0|FAIL|NOK"
+	FileOutput.WriteLine "0|FAIL|NOK"
 ElseIf MasterResult = 1 Then
-       FileOutput.WriteLine "1|PASS|OK"
+	FileOutput.WriteLine "1|PASS|OK"
 End If
 'FileOutput.WriteLine MasterResult
-FileOutput.CloseFile
+FileOutput.CloseFile 
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub

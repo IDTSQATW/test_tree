@@ -55,3 +55,15 @@ COMMENT <<
 0
 0
 
+RECEIVE
+1
+f0-02 resp ok (V value)
+56 69 56 4F 74 65 63 68 32 00 F0 00 00 02 ?? ??
+-1
+1
+COMMENT <<
+0
+1
+0
+0
+

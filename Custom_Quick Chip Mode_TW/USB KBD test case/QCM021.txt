@@ -15,9 +15,9 @@ EXR: %TRACK176767607070776767607070776767607070776767607070776767607070776767607
 
 --------------------
 >>> CT transaction
-SWIPEKB: click OK -> INSERT Discover card.
-EXR: 57 13
-EXR: 5A 08
+SWIPEKB: click OK -> INSERT T=0 card.
+EXR: 57
+EXR: 5A 
 
 --------------------
 >>> CL transaction

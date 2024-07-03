@@ -2,62 +2,62 @@ Objective: Encryption ON, CL test under Quick Chip Mode. (Discover/ VISA MSD/ VI
 
 --------------------
 >>> CL transaction
-SWIPEKB: click OK, then tap Discover #84 card. (Press button "Quick Chip" to Decryption first then Press button "OK")
+SWIPEKB: click OK, then tap Discover #84 card. (Move tag FF8105+length to the end of output --> Press button "Quick Chip" to Decryption first then Press button "OK")
 EXR: DFEF5B 08 36 07 CC CC CC C0 00 1F
 EXR: 5A 08 36 07 05 00 00 00 00 1F
 EXR: DFEF5D12 36 07 CC CC CC C0 00 1D 49 12 CC CC CC CC CC CC CC CC
 EXR: 57 12 36 07 05 00 00 00 00 1D 49 12 10 10 00 03 32 11 23 01
 EXR: 9F 39 01 07
-EXR: DFEE2601E1
+EXR: DFEE2602e100
 EXR: DFEC1818446973636F766572204450415320322E302C2076312E3030
 EXR: DFEF57
 
 --------------------
 >>> CL transaction
-SWIPEKB: click OK, then tap INTERAC card. (Press button "Quick Chip" to Decryption first then Press button "OK")
+SWIPEKB: click OK, then tap INTERAC card. (Move tag FF8105+length to the end of output --> Press button "Quick Chip" to Decryption first then Press button "OK")
 EXR: E1
 EXR: DFEF5B085413CCCCCCCC1513
 EXR: 5A085413339000001513
 EXR: DFEF5D115413CCCCCCCC1513D0512CCCCCCCCCCCCC
 EXR: 57115413339000001513D05122200123456789
 EXR: 9F390107
-EXR: DFEE2601E1
+EXR: DFEE2602e100
 EXR: DFEC18 aaaa
 EXR: DFEF57
 
 --------------------
 >>> CL transaction
-SWIPEKB: click OK, then tap VISA qVSDC card. (Press button "Quick Chip" to Decryption first then Press button "OK")
+SWIPEKB: click OK, then tap VISA qVSDC card. (Move tag FF8105+length to the end of output --> Press button "Quick Chip" to Decryption first then Press button "OK")
 EXR: DFEF5B084761CCCCCCCC0010
 EXR: 5A084761739001010010
 EXR: DFEF5D134761CCCCCCCC0010D3012CCCCCCCCCCCCCCCCC
 EXR: 57134761739001010010D30121200012339900031F
 EXR: 9F390107
-EXR: DFEE2601E1
+EXR: DFEE2602e100
 EXR: DFEC1810564350532076322E322C2076312E3030
 EXR: DFEF57
 
 --------------------
 >>> CL transaction
-SWIPEKB: click OK, then tap MasterCard MC21 card.. (Move tag FF8105+length to the end of output --> Press button "Quick Chip" to Decryption first then Press button "OK")
+SWIPEKB: click OK, then tap MasterCard MC21 card. (Move tag FF8105+length to the end of output --> Press button "Quick Chip" to Decryption first then Press button "OK")
 EXR: DFEF5B 08 54 13 CC CC CC CC 00 10
 EXR: 5A 08 54 13 33 00 89 60 00 10
 EXR: DFEF5D 11 54 13 CC CC CC CC 00 10 D1 41 2C CC
 EXR: 57 11 54 13 33 00 89 60 00 10 D1 41 22 01
 EXR: 9F390107
-EXR: DFEE2601E1
+EXR: DFEE2602e100
 EXR: DFEC18174D61737465724361726420332E312E342C2076312E3030
 EXR: DFEF57
 
 --------------------
 >>> CL transaction
-SWIPEKB: click OK, then tap AMEX XP8 #86 card.
+SWIPEKB: click OK, then tap AMEX XP8 #86 card. (Move tag FF8105+length to the end of output --> Press button "Quick Chip" to Decryption first then Press button "OK")
 EXR: DFEF5D 13 37 CC CC CC CC C0 00 1D 14 10 CCC
 EXR: 57 13 37 42 45 45 54 00 00 1D 14 10
 EXR: DFEF5B 08 37 42 CC CC CC C0 00 1F
 EXR: 5A 08 37 42 45 45 54 00 00 1F
 EXR: 9F 39 01 07
-EXR: DF EE 26 01 11
+EXR: DFEE2602e100
 EXR: 84
 EXR: A0 00 00 00 25 01
 EXR: DFEC181A416D6578204578707265737350617920342E312C2076312E3030
@@ -65,26 +65,26 @@ EXR: DFEF57
 
 --------------------
 >>> CL transaction
-SWIPEKB: click OK, then tap JCB EMV card.
+SWIPEKB: click OK, then tap JCB O-48250 card.
 EXR: DFEF5D 13 35 69 CC CC CC CC 22 11 D2 11 2C CC
 EXR: 57 13 35 69 99 00 10 08 22 11 D2 11 22 01
 EXR: DFEF5B 08 35 69 CC CC CC CC 22 11
 EXR: 5A 08 35 69 99 00 10 08 22 11
 EXR: 9F 39 01 07
-EXR: DF EE 26 02 21 00
+EXR: DFEE2602e100
 EXR: 84 07 A0 00 00 00 65 10 10
 EXR: DFEC180F4A43422076312E362C2076312E3030
 EXR: DFEF57
 
 --------------------
 >>> CL transaction
-SWIPEKB: click OK, then tap CUP QUICS card.
+SWIPEKB: click OK, then tap CUP #69 card.
 EXR: DFEF5D 13 62 28 CC CC CC CC 11 17 D2 01 2C CC
 EXR: 57 13 62 28 00 01 00 00 11 17 D2 01 21 20
 EXR: DFEF5B 08 62 28 CC CC CC CC 11 17
 EXR: 5A 08 62 28 00 01 00 00 11 17
 EXR: 9F 39 01 07
-EXR: DF EE 26 02 21 00
+EXR: DFEE2602e100
 EXR: 84 10 A0 00 00 03 33 01 01 01 01 01 01 01 01 01 01 01
-EXR: DFEC18 aaaa
+EXR: DFEC181B515549435320312E302E32205549435320332E302C2076312E3030
 EXR: DFEF57

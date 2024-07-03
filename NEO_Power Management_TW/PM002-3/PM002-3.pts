@@ -1,13 +1,13 @@
 DL_SCRIPTVERSION
 1
-54617
+22957
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "PM002" ' !!!!! EDIT THIS !!!!!
+ProjectName = "PM002-3" ' !!!!! EDIT THIS !!!!!
 ' Objective: to verify NEO3-10573, [NEO3] Extend CMD(F0-04) Standby to Sleep time limitation from 3600 to 65535 seconds
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)

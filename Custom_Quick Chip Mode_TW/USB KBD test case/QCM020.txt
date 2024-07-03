@@ -9,23 +9,17 @@ EXR: 01 00 00 00
 >>> CL transaction
 SWIPEKB: click OK, then tap mobile phone (ApplePay -- any card)
 EXR: 84
-EXR: FF EE 01
-EXR: DF 30 01 00
 EXR: DFEC18
 EXR: DFEF57
 
 >>> CL transaction
 SWIPEKB: click OK, then tap mobile phone (AndroidPay -- any card)
 EXR: 84
-EXR: FF EE 01
-EXR: DF 30 01 00
 EXR: DFEC18
 EXR: DFEF57
 
 >>> CL transaction
 SWIPEKB: click OK, then tap mobile phone (SamsungPay -- any card)
 EXR: 84
-EXR: FF EE 01
-EXR: DF 30 01 00
 EXR: DFEC18
 EXR: DFEF57

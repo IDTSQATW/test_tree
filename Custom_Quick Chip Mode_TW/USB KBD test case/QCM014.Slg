@@ -1,37 +1,31 @@
 
-11:14:58: If Issue ?
-Pass Test
-[Issue Count: 0]
+11:26:14: If Issue ?
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\USB KBD test case\QCM014.txt
+Running Info>>
+[Issue Count: 1]
+[Wrong Items]
+>>>Error item ( 9 ).
+EXR: DFEF6102F220
 
-11:14:58: >>[Do Scripts]>>
+
+11:26:14: >>[Do Scripts]>>
 
 Objective: check Timeout feature if Fallback to MSR transaction
 --------------------
 >>> Quick Chip mode = 02
+Pack L = 17-5669564F74656368320001000000125300
 CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
-OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 
-ASCII: Otech2   
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
 >>> Fallback to MSR transaction
 SWIPEKB: click OK -> Insert IDT teest card 3 times -> waited 60 sec fallback timeout.
 KB Unit Swipe Card:
-DFEF6102F220DFEF6102F220DFEF6102F222DFEE25020008
+DFEF6102F220
+DFEF6102F220
+DFEF6102F222
+DFEF61023013
+
+Error! >>>> Expect OUT:EXR: DF EE 25 02 00 08
 MESSAGECK: LED 3 is ON (flash status) if fallback to MSR reader, LED 3 is OFF if fallback timeout
 User Judgment Pass
 
---------------------
->>> Quick Chip mode = 03
-CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 03 14 95 
-OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 
-ASCII: Otech2   
->>> Fallback to MSR transaction
-SWIPEKB: click OK -> Insert IDT teest card 3 times -> waited 60 sec fallback timeout.
-KB Unit Swipe Card:
-DFEF6102F220DFEF6102F220DFEF6102F222DFEE25020008
-MESSAGECK: LED 3 is ON (flash status) if fallback to MSR reader, LED 3 is OFF if fallback timeout
-User Judgment Pass
-
---------------------
->>> Quick Chip mode = 02
-CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
-OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 
-ASCII: Otech2   

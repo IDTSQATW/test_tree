@@ -51,3 +51,9 @@ OUT: NULL
 15:42:42: 
 >>[Stop Scripts]>>
 
+
+15:43:44: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\USB KBD test case\QCM003.txt
+Items: 42
+Load Case Succeed!
+

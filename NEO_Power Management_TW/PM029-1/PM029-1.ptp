@@ -1,0 +1,57 @@
+VERSION
+8
+
+COMMSETTINGS
+0
+COM90
+COM2
+9600
+2
+0
+4
+0
+0
+
+COMMDISPLAY
+0
+
+VERSATAP
+0
+
+CHANNELALIAS
+
+
+
+SEND
+0
+F0-02 Get Battery Level
+56 69 56 4F 74 65 63 68 32 00 F0 02 00 00 CA 95
+0
+5
+
+SEND
+1
+F0-02 Get Battery Level = w/ data 00 Coin Battery Voltage Value
+56 69 56 4F 74 65 63 68 32 00 F0 02 00 01 00 2D 2A
+0
+5
+
+SEND
+2
+F0-02 Get Battery Level = w/ data 01 Li Battery Voltage Value
+56 69 56 4F 74 65 63 68 32 00 F0 02 00 01 01 0C 3A
+0
+5
+
+RECEIVE
+0
+f0-02 resp ok
+56 69 56 4F 74 65 63 68 32 00 F0 00 00 01 ??
+-1
+1
+COMMENT <<
+0
+1
+0
+0
+

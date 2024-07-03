@@ -18,10 +18,13 @@ EXR: 03
 
 --------------------
 >>> MSR transaction
-SWIPEKB: click OK, then swipe JIS 1 card.
+SWIPEKB: click OK, then swipe JIS 1 card. (Press button "MSR Dec" to Decryption then Press button "OK")
 EXR: 02
-EXR: 86 1F 48 28 00 83 00
-EXR: ;a90000000211111234567890122222333334444455555666667777788888999990000?;4322061000872833=11082018864082510000?;
+EXR: 80 1F 48 28 00 A3 9B
+EXR: ;a900*************************************************************0000?
+EXR: ;4322********2833=1108****************?*
+EXR: 7F6139303030303030303231313131313233343536373839303132323232323333333333343434343435353535353636363636373737373738383838383939393939303030307F15
+EXR: 3B343332323036313030303837323833333D31313038323031383836343038323531303030303F3B
 EXR: 03
 
 --------------------
@@ -34,7 +37,7 @@ EXR: 03
 
 --------------------
 >>> MSR transaction
-SWIPEKB: click OK, then swipe VISA MSD card. (Replace serial number as HEX format first, Press button "MSR Dec" to Decryption then Press button "OK")
+SWIPEKB: click OK, then swipe VISA MSD card. (Press button "MSR Dec" to Decryption then Press button "OK")
 EXR: 02
 EXR: 80 17 00 28 00 8292
 EXR: ;4761********0010=2012****************?
@@ -43,9 +46,9 @@ EXR: 03
 
 --------------------
 >>> MSR transaction
-SWIPEKB: click OK, then swipe ISO 4909 (3T) card. (Replace serial number as HEX format first, Press button "MSR Dec" to Decryption then Press button "OK")
+SWIPEKB: click OK, then swipe ISO 4909 (3T) card. (Press button "MSR Dec" to Decryption then Press button "OK")
 EXR: 02
-EXR: 80 3F 4D 27 69 83 BF
+EXR: 80 3F 4D 27 69 87 BF
 EXR: %*4547********0000^LLIBRE ROBERT-GUILLERMO ^1102***************************?*;4547********0000=1102***************?*
 EXR: %B4547570001070000^LLIBRE ROBERT-GUILLERMO ^1102101000000040000000306000000?
 EXR: ;4547570001070000=1102101000003060000?

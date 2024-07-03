@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-27246
+50164
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -135,6 +135,22 @@ If result <> 0 Then
    DL.AddComment "--- F0-02 Get Battery Level"
    DL.SendSequence "F0-02 Get Battery Level"
    result = DL.WaitForSequence("f0-02 resp ok", 1, 5000)
+end if
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   DL.AddComment vbCrLf
+   DL.AddComment "--- F0-02 Get Battery Level = w/ data 00 Coin Battery Voltage Value"
+   DL.SendSequence "F0-02 Get Battery Level = w/ data 00 Coin Battery Voltage Value"
+   result = DL.WaitForSequence("f0-02 resp ok (V value)", 1, 5000)
+end if
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   DL.AddComment vbCrLf
+   DL.AddComment "--- F0-02 Get Battery Level = w/ data 01 Li Battery Voltage Value"
+   DL.SendSequence "F0-02 Get Battery Level = w/ data 01 Li Battery Voltage Value"
+   result = DL.WaitForSequence("f0-02 resp ok (V value)", 1, 5000)
 end if
 '------------------------------------------------------------
 DL.AddComment vbCrLf

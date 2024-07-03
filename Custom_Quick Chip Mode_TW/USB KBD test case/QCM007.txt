@@ -13,7 +13,7 @@ MESSAGECK: NO any output data
 --------------------
 >>> CT transaction
 SWIPEKB: click OK, then insert card (P/N: 80005206-002).
-EXR: DF EE 25 02 50 25
+EXR: DF EE 25 02 50
 
 --------------------
 >>> CL transaction

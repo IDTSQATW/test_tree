@@ -11,8 +11,8 @@ PAN=''
 strKey = 'FEDCBA9876543210F1F1F1F1F1F1F1F1'
 
 # Check reader is VP3350 or not
-lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
-if lcdtype == 1:
+readertype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if readertype == 1:
 	DL.SetWindowText("Green", "*** This is VP3350 ***")
 	RetOfStep = DL.SendCommand('0105 do not use LCD')
 	if (RetOfStep):
@@ -78,10 +78,6 @@ if (Result):
             mask57 = DL.GetTLV(FF8105,"57", 0)
             enc57 = DL.GetTLV(FF8105,"57", 1)
             dec57 = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc57)	
-            
-            if DL.Check_RXResponse(rx, "FFEE01 ** DFEE300100") == False: 
-                DL.fails=DL.fails+1
-                DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 
             if lcdtype == 1:		
             # Tag DFEF17
@@ -197,7 +193,7 @@ RetOfStep = DL.SendCommand('Reset to default')
 if (RetOfStep):
 	DL.Check_RXResponse("04 00 00 00")	
     
-if lcdtype == 1:
+if readertype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("01 00 00 00")

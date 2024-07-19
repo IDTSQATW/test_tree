@@ -86,12 +86,10 @@ if (Result):
                         TR1maskdata = "%*6510********0026^CARD/IMAGE 03             ^1712****************?"
                         TR1plaintextdata = "87654321B6510000000000026^CARD/IMAGE 03             ^17122011000021000000"
                                         
-                        Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
-                        if Result != True:
+                        if TR1maskdata != Track1_CardData:
                             DL.fails=DL.fails+1
                             DL.SetWindowText("red", "TR1maskdata: FAIL")
-                        Result = DL.Check_StringAB(TR1plaintextdata, TRK1DecryptData)
-                        if Result != True:
+                        if TR1plaintextdata != TRK1DecryptData:
                             DL.fails=DL.fails+1
                             DL.SetWindowText("red", "TR1plaintextdata: FAIL")
                             
@@ -99,12 +97,10 @@ if (Result):
                         TR2maskdata = ";6510********0026=1712****************?"
                         TR2plaintextdata = "876543216510000000000026=17122011000021000000"
                                         
-                        Result = DL.Check_StringAB(TR2maskdata, Track2_CardData)
-                        if Result != True:
+                        if TR2maskdata != Track2_CardData:
                             DL.fails=DL.fails+1
                             DL.SetWindowText("red", "TR2maskdata: FAIL")
-                        Result = DL.Check_StringAB(TR2plaintextdata, TRK2DecryptData)
-                        if Result != True:
+                        if TR2plaintextdata != TRK2DecryptData:
                             DL.fails=DL.fails+1
                             DL.SetWindowText("red", "TR2plaintextdata: FAIL")
             else:

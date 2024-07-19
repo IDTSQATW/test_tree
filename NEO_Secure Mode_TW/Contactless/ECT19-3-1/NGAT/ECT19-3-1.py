@@ -68,8 +68,7 @@ if (Result):
                     DL.fails=DL.fails+1
                     DL.SetWindowText("red", "Tag 57_Mask: FAIL")
                     
-                Result = DL.Check_StringAB(strD57, '876543214761739001010010=30121200012339900031')
-                if Result == True and DL.Check_RXResponse("57 C2 01 58"):
+                if (strD57 == '876543214761739001010010=30121200012339900031') and DL.Check_RXResponse("57 C2 01 58"):
                     DL.SetWindowText("blue", "Tag 57_Enc: PASS")
                 else:
                     DL.fails=DL.fails+1
@@ -83,8 +82,7 @@ if (Result):
                     DL.fails=DL.fails+1
                     DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
                     
-                Result = DL.Check_StringAB(strD5A, '876543214761739001010010')
-                if Result == True and DL.Check_RXResponse("5A C2 01 58"):
+                if (strD5A == '876543214761739001010010') and DL.Check_RXResponse("5A C2 01 58"):
                     DL.SetWindowText("blue", "Tag 5A_Enc: PASS")
                 else:
                     DL.fails=DL.fails+1

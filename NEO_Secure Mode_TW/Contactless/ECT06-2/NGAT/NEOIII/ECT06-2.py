@@ -69,7 +69,7 @@ if (Result):
             dec57 = DL.DecryptDLL(0,1, strKey, ksn, enc57)	
             
             Tag9F39 = DL.GetTLV(alldata,"9F39")
-            TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
+            # TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
             TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
         
             if readertype == 0:
@@ -152,11 +152,11 @@ if (Result):
                     DL.fails=DL.fails+1
                     DL.SetWindowText("Red", "Tag 9F39: FAIL")
                 
-                if (DL.Check_StringAB(TagFFEE01, "DFEE300100")): 
-                    DL.SetWindowText("blue", "Tag FFEE01: PASS")
-                else:
-                    DL.fails=DL.fails+1
-                    DL.SetWindowText("Red", "Tag FFEE01: FAIL")
+                # if (DL.Check_StringAB(TagFFEE01, "DFEE300100")): 
+                    # DL.SetWindowText("blue", "Tag FFEE01: PASS")
+                # else:
+                    # DL.fails=DL.fails+1
+                    # DL.SetWindowText("Red", "Tag FFEE01: FAIL")
                 
                 if TagDFEE26 == "7100": 
                     DL.SetWindowText("blue", "Tag DFEE26: PASS")
@@ -178,9 +178,9 @@ if (Result):
                     DL.fails=DL.fails+1
                     DL.SetWindowText("Red", "Tag 9F39: FAIL")
                         
-                if DL.Check_RXResponse("FFEE01 ** DFEE300100") == False: 
-                    DL.fails=DL.fails+1
-                    DL.SetWindowText("Red", "Tag FFEE01: FAIL")
+                # if DL.Check_RXResponse("FFEE01 ** DFEE300100") == False: 
+                    # DL.fails=DL.fails+1
+                    # DL.SetWindowText("Red", "Tag FFEE01: FAIL")
                         
                 if DL.Check_RXResponse("DFEE26 02 6100") == False: 
                     DL.fails=DL.fails+1

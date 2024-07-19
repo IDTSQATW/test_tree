@@ -86,32 +86,26 @@ if (Result):
                     TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
             
                 # Tag 57
-                    Result = DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D2 01 2C CC CC CC CC CC CC')
-                    if Result == True and DL.Check_StringAB(alldata, '57 A1 11'):
+                    if (mask57 == '4761CCCCCCCC0010D2012CCCCCCCCCCCCC') and DL.Check_StringAB(alldata, '57 A1 11'):
                         DL.SetWindowText("blue", "Tag 57_Mask: PASS")
                     else:
                         DL.fails=DL.fails+1
                         DL.SetWindowText("red", "Tag 57_Mask: FAIL")
                 
-                    DL.SetWindowText("blue", strD57)
-                    Result = DL.Check_StringAB(strD57, '876543214761739001010010=20122010123456789')
-                    if Result == True and DL.Check_StringAB(alldata, '57 C2 01 58'):
+                    if (strD57 == '876543214761739001010010=20122010123456789') and DL.Check_StringAB(alldata, '57 C2 01 58'):
                         DL.SetWindowText("blue", "Tag 57_Enc: PASS")
                     else:
                         DL.fails=DL.fails+1
                         DL.SetWindowText("red", "Tag 57_Enc: FAIL")
 
                 # Tag 5A
-                    Result = DL.Check_StringAB(mask5A, '47 61 CC CC CC CC 00 10')
-                    if Result == True and DL.Check_StringAB(alldata, '5A A1 08'):
+                    if (mask5A == '4761CCCCCCCC0010') and DL.Check_StringAB(alldata, '5A A1 08'):
                         DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
                     else:
                         DL.fails=DL.fails+1
                         DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
                 
-                    DL.SetWindowText("blue", strD5A)
-                    Result = DL.Check_StringAB(strD5A, '876543214761739001010010')
-                    if Result == True and DL.Check_StringAB(alldata, '5A C2 01 58'):
+                    if (strD5A == '876543214761739001010010') and DL.Check_StringAB(alldata, '5A C2 01 58'):
                         DL.SetWindowText("blue", "Tag 5A_Enc: PASS")
                     else:
                         DL.fails=DL.fails+1

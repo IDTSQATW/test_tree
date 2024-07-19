@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2024/6/21 13:33:50.897 
+Docklight Log File (HEX) - Started 2024/7/15 14:57:28.810 
  TEST CASE: SGP019
 
  --- Set POS COM PORT Settings
@@ -6,7 +6,20 @@ Docklight Log File (HEX) - Started 2024/6/21 13:33:50.897
  POS operating on COM90 @ 115200 baud...
  Set POS COM PORT - COMPLETE
 
+ 
+
+ --- 29-41 = ID from 40#
+
+2024/7/15 14:57:31.234 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 41 00 03 00 01 40 2D 44 
+2024/7/15 14:57:31.240 [RX] - 56 69 56 4F 74 65 63 68 32 00 29 06 00 00 12 7E 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+ 
+
+ MASTER RESULT = FAILED
 
 
-Docklight Log File (HEX) - Stopped 2024/6/21 13:33:51.247 
+Docklight Log File (HEX) - Stopped 2024/7/15 14:57:34.851 
 

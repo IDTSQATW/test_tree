@@ -4,7 +4,7 @@ Objective: Encryption ON, CT (& Fallback to CT) test under Quick Chip Mode. (T=0
 >>> CT transaction
 SWIPEKB: Click OK --> Insert T=0 card (Press button "Quick Chip" to Decryption first then Press button "OK")
 EXR: DF EE 25 02 00 03
-EXR: DF EF 5D 11 47 61 CC CC CC CC 00 10 D2 01 22 01 CC CC CC CC CC
+EXR: DF EF 5D 11 47 61 CC CC CC CC 00 10 D2 01 2C CC CC CC CC CC CC
 EXR: 57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89
 EXR: DF EF 5B 08 47 61 CC CC CC CC 00 10
 EXR: 5A 08 47 61 73 90 01 01 00 10

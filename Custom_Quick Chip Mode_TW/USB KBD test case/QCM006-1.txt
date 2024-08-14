@@ -4,11 +4,13 @@ Objective: Encryption OFF, MSR test under Quick Chip Mode. (IDT/ VISA MSD/ AAMVA
 >>> MSR transaction
 SWIPEKB: click OK, then swipe IDT test card.
 EXR: %TRACK17676760707077676760707077676760707077676760707077676760707077676760707?;2121212121767676070707767676762121212?;33333333337676760707077676763333333333767676070707767676333333333376767607070776767633333333337676760707?
+MESSAGECK: Track data ONLY, no other data ex. STX, card encode type, ETC, ...etc?
 
 --------------------
 >>> MSR transaction
 SWIPEKB: click OK, then swipe VISA MSD card.
 EXR: ;4761739001010010=20121200012339900031?
+MESSAGECK: Track data ONLY, no other data ex. STX, card encode type, ETC, ...etc?
 
 --------------------
 >>> MSR transaction

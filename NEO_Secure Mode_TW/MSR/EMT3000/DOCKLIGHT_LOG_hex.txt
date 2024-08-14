@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2024/7/11 13:51:16.142 
+Docklight Log File (HEX) - Started 2024/8/6 10:20:17.291 
  TEST CASE: EMT3000
 
  --- Set POS COM PORT Settings
@@ -8,5 +8,5 @@ Docklight Log File (HEX) - Started 2024/7/11 13:51:16.142
 
 
 
-Docklight Log File (HEX) - Stopped 2024/7/11 13:51:16.426 
+Docklight Log File (HEX) - Stopped 2024/8/6 10:20:17.347 
 

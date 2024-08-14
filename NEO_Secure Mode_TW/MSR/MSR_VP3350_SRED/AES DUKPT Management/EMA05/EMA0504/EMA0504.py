@@ -25,6 +25,10 @@ if (Result):
 	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 06 01 02 00 00 00 00")
+if (Result):
+	RetOfStep = DL.SendCommand('DF7D = 02 (NEO2)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("04 00 00 00")
 
 # Tag DFEE1D = 06 04 2A 0C 31
 if (Result):

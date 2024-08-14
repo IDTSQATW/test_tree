@@ -31,18 +31,30 @@ get all groups
 
 RECEIVE
 0
-Response Get All Groups
-56 69 56 4F 74 65 63 68 32 00 03 00
+0363
+56 69 56 4F 74 65 63 68 32 00 03 63 ?? ??
 -1
 1
-COMMENT << STATUS CODE
-0
+COMMENT << STATUS CODE 63
+1
 1
 0
 0
 
 RECEIVE
 1
+Response Get All Groups
+56 69 56 4F 74 65 63 68 32 00 03 00 ?? ??
+-1
+1
+COMMENT << STATUS CODE 00
+1
+1
+0
+0
+
+RECEIVE
+2
 group
 FF E4 01 ??
 -1
@@ -54,7 +66,7 @@ COMMENT Group
 0
 
 RECEIVE
-2
+3
 group (NEO2)
 DF EE 2D 01 ??
 -1

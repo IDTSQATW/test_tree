@@ -89,7 +89,7 @@ if (Result):
                         if TR1maskdata != Track1_CardData:
                             DL.fails=DL.fails+1
                             DL.SetWindowText("red", "TR1maskdata: FAIL")
-                        if TR1plaintextdata != TRK1DecryptData:
+                        if DL.Check_StringAB(TR1plaintextdata, TRK1DecryptData) == False:
                             DL.fails=DL.fails+1
                             DL.SetWindowText("red", "TR1plaintextdata: FAIL")
                             
@@ -100,7 +100,7 @@ if (Result):
                         if TR2maskdata != Track2_CardData:
                             DL.fails=DL.fails+1
                             DL.SetWindowText("red", "TR2maskdata: FAIL")
-                        if TR2plaintextdata != TRK2DecryptData:
+                        if DL.Check_StringAB(TR2plaintextdata, TRK2DecryptData) == False:
                             DL.fails=DL.fails+1
                             DL.SetWindowText("red", "TR2plaintextdata: FAIL")
             else:

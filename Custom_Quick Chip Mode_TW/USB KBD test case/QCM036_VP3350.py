@@ -60,9 +60,9 @@ if (Result):
     strCardData2 = DL.ReadKeyBoardCardData(10000)
     if(-1 != strCardData2.find('DFEE25')):
         DL.SetWindowText("red", "w/ DFEE25, FAIL")
+        DL.fails=DL.fails+1
     else:
         DL.SetWindowText("blue", "PASS")
-        DL.fails=DL.fails+1
 #-----------------------------------------------------------------
 # Poll on demand
 if (Result):

@@ -93,7 +93,7 @@ if (Result):
     strCardData2 = DL.ReadKeyBoardCardData(10000)
     if(-1 != strCardData2.find('DFEE25')):
         if(-1 != strCardData2.find('9F390180')):
-            if(-1 != strCardData2.find('DFEE236A%B6510000000000125^CARD/IMAGE08^17122011000095000000?;6510000000000125=17122011000095000000?')):
+            if(-1 != strCardData2.find('DFEE236A%B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?')):
                 DL.SetWindowText("blue", "PASS")
             else:
                 DL.SetWindowText("red", "DFEE23 FAIL")

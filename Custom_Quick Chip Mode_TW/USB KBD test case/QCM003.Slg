@@ -1,0 +1,22 @@
+
+10:44:31: 
+>>[Stop Scripts]>>
+
+
+10:44:32: >>[Do Scripts]>>
+
+Objective: set tag DFEF6F (output delay time) w/ data 30~36
+>>> Tag DFEF6F = 30 (default, 1200 us)
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EF 6F 01 30 2A D4 
+OUT: NULL
+Error! >>>> Expect OUT:EXR: 04 00 00 00
+SWIPEKB: click OK, then swipe IDT test card. (output delay time = 1200 us)
+MESSAGECK: data output speed correctly
+CMD: 04 00 DF EF 6F 01 30
+Error! >>>> User Judgment Fail:MESSAGECK: data output speed correctly
+
+>>> Tag DFEF6F = 31 (2000 us)
+>>[Stop Scripts]>>
+
+CMD:
+OUT: NULL

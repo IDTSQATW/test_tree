@@ -103,7 +103,7 @@ if (Result):
     
 # Set CT terminal data = 5C
 if (Result):
-	DL.SetWindowText("black", "*** Character delay time = 1200 us")
+	DL.SetWindowText("black", "*** Set CT terminal data = 5C")
 	DL.SendIOCommand("IDG", "60 06 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00", 3000, 1) 
 	Result = DL.Check_RXResponse("60 00 00 00")
     

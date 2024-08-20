@@ -12,35 +12,6 @@ strKey ='FEDCBA9876543210F1F1F1F1F1F1F1F1'
 
 # Objective: set tag DFEF6F (output delay time) w/ data 30~36
 
-# Poll on demand
-if (Result):
-	DL.SetWindowText("black", "*** Poll on demand")
-	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(6)
-
-# Set tag DFEF6F = 30 (default, 1200 us)
-if (Result):
-	DL.SetWindowText("black", "*** Character delay time = 1200 us")
-	DL.SendIOCommand("IDG", "04 00 DF EF 6F 01 30", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
-
-# QuickChip mode
-if (Result):
-	DL.SetWindowText("black", "*** QuickChip mode (02)")
-	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(10)
-    
-if (Result): 
-    DL.SetWindowText("black", "*** Swipe any card")
-    strCardData = DL.ReadKeyBoardCardData(20000)
-    speedcheck = DL.ShowMessageBox("", "Data output speed correctly?", 0)
-    if speedcheck == 1:
-        DL.SetWindowText("Green", "PASS")
-    else:
-        DL.SetWindowText("Red", "FAIL")
-        DL.fails=DL.fails+1
 #-----------------------------------------------------------------
 # Poll on demand
 if (Result):

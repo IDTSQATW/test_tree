@@ -27,8 +27,8 @@ if (Result):
 
 # QuickChip mode
 if (Result):
-	DL.SetWindowText("black", "*** QuickChip mode (02)")
-	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
+	DL.SetWindowText("black", "*** QuickChip mode (03)")
+	DL.SendIOCommand("IDG", "01 01 03", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
 
@@ -67,8 +67,8 @@ if (Result):
 
 # QuickChip mode
 if (Result):
-	DL.SetWindowText("black", "*** QuickChip mode (02)")
-	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
+	DL.SetWindowText("black", "*** QuickChip mode (03)")
+	DL.SendIOCommand("IDG", "01 01 03", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
     
@@ -130,16 +130,16 @@ if (Result):
 if (Result):       
     DL.SetWindowText("black", "*** Insert EMV T=0 card")
     strCardData = DL.ReadKeyBoardCardData(20000)
-    if(-1 != strCardData.find('dfed2006536c696d4344dfed2103110218dfed220a312e337c303432333138')):
+    if(-1 != strCardData.find('DFED2006536C696D4344DFED2103110218DFED220A312E337C303432333138')):
         DL.SetWindowText("blue", "PASS")
     else:
         DL.SetWindowText("red", "FAIL")
         DL.fails=DL.fails+1
         
     # for JIRA#CS-3869
-    DL.SetWindowText("black", "*** Tap MChip card")
+    DL.SetWindowText("black", "*** Tap any CL card")
     strCardData = DL.ReadKeyBoardCardData(20000)
-    if(-1 != strCardData.find('dfed2006536c696d4344dfed2103110218dfed220a312e337c303432333138')):
+    if(-1 != strCardData.find('DFED2006536C696D4344DFED2103110218DFED220A312E337C303432333138')):
         DL.SetWindowText("blue", "PASS")
     else:
         DL.SetWindowText("red", "FAIL")
@@ -160,8 +160,8 @@ if (Result):
 
 # QuickChip mode
 if (Result):
-	DL.SetWindowText("black", "*** QuickChip mode (02)")
-	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
+	DL.SetWindowText("black", "*** QuickChip mode (03)")
+	DL.SendIOCommand("IDG", "01 01 03", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
     
@@ -189,8 +189,8 @@ if (Result):
 
 # QuickChip mode
 if (Result):
-	DL.SetWindowText("black", "*** QuickChip mode (02)")
-	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
+	DL.SetWindowText("black", "*** QuickChip mode (03)")
+	DL.SendIOCommand("IDG", "01 01 03", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
 

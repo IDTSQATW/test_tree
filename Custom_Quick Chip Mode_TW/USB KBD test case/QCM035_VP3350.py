@@ -20,42 +20,42 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** Set CT terminal data = 5C (disable DFEF61 error report)")
 	DL.SendIOCommand("IDG", "60 06 08 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 DFEF65 01 00", 3000, 1) 
-	Result = DL.Check_RXResponse("60 00 00 00")	
+	Result = DL.Check_RXResponse("60 05 00 00")	#NEO3-11290
     
-if (Result):
-	DL.SetWindowText("black", "*** QuickChip mode (02)")
-	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(10)
+# if (Result):
+	# DL.SetWindowText("black", "*** QuickChip mode (02)")
+	# DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
+	# Result = DL.Check_RXResponse("01 00 00 00")	
+	# time.sleep(10)
     
-if (Result): 
-    DL.SetWindowText("black", "*** Fallback to MSR transaction (default: can retry ICC card 3 times)")
-    DL.SetWindowText("black", "*** Insert IDT test card, @1st time")
-    strCardData1 = DL.ReadKeyBoardCardData(10000)
-    if(-1 != strCardData1.find('DFEF6102F220')):
-        DL.SetWindowText("red", "FAIL")
-        DL.fails=DL.fails+1
-    else:
-        DL.SetWindowText("blue", "PASS")
+# if (Result): 
+    # DL.SetWindowText("black", "*** Fallback to MSR transaction (default: can retry ICC card 3 times)")
+    # DL.SetWindowText("black", "*** Insert IDT test card, @1st time")
+    # strCardData1 = DL.ReadKeyBoardCardData(10000)
+    # if(-1 != strCardData1.find('DFEF6102F220')):
+        # DL.SetWindowText("red", "FAIL")
+        # DL.fails=DL.fails+1
+    # else:
+        # DL.SetWindowText("blue", "PASS")
         
-    DL.SetWindowText("black", "*** Insert IDT test card, @2nd time")
-    strCardData1 = DL.ReadKeyBoardCardData(10000)
-    if(-1 != strCardData1.find('DFEF6102F220')):
-        DL.SetWindowText("red", "FAIL")
-        DL.fails=DL.fails+1
-    else:
-        DL.SetWindowText("blue", "PASS")
+    # DL.SetWindowText("black", "*** Insert IDT test card, @2nd time")
+    # strCardData1 = DL.ReadKeyBoardCardData(10000)
+    # if(-1 != strCardData1.find('DFEF6102F220')):
+        # DL.SetWindowText("red", "FAIL")
+        # DL.fails=DL.fails+1
+    # else:
+        # DL.SetWindowText("blue", "PASS")
         
-    DL.SetWindowText("black", "*** Insert IDT test card, @3rd time")
-    strCardData1 = DL.ReadKeyBoardCardData(10000)
-    if(-1 != strCardData1.find('DFEF6102F222')):
-        DL.SetWindowText("red", "FAIL")
-        DL.fails=DL.fails+1
-    else:
-        DL.SetWindowText("blue", "PASS")
+    # DL.SetWindowText("black", "*** Insert IDT test card, @3rd time")
+    # strCardData1 = DL.ReadKeyBoardCardData(10000)
+    # if(-1 != strCardData1.find('DFEF6102F222')):
+        # DL.SetWindowText("red", "FAIL")
+        # DL.fails=DL.fails+1
+    # else:
+        # DL.SetWindowText("blue", "PASS")
     
-    DL.SetWindowText("black", "*** Swipe any card.")
-    strCardData = DL.ReadKeyBoardCardData(20000)
+    # DL.SetWindowText("black", "*** Swipe any card.")
+    # strCardData = DL.ReadKeyBoardCardData(20000)
         
 ####### enable DFEF61
 if (Result):

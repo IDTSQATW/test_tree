@@ -65,11 +65,11 @@ EXR: DFEF57
 
 --------------------
 >>> CL transaction
-SWIPEKB: click OK, then tap JCB O-48250 card. (Move tag FF8105+length to the end of output --> Press button "Quick Chip" to Decryption first then Press button "OK")
-EXR: DFEF5D 13 35 69 CC CC CC CC 22 11 D2 11 2C CC
-EXR: 57 13 35 69 99 00 10 08 22 11 D2 11 22 01
-EXR: DFEF5B 08 35 69 CC CC CC CC 22 11
-EXR: 5A 08 35 69 99 00 10 08 22 11
+SWIPEKB: click OK, then tap JCB EMV card. (Move tag FF8105+length to the end of output --> Press button "Quick Chip" to Decryption first then Press button "OK")
+EXR: DFEF5D 13 35 40 CC CC CC CC 10 12 D4 91 2C CC CC CC CC CC CC CC CC
+EXR: 57 13 35 40 82 99 99 42 10 12 D4 91 22 01 55 55 55 55 55 55
+EXR: DFEF5B 08 35 40 CC CC CC CC 10 12
+EXR: 5A 08 3540829999421012
 EXR: 9F 39 01 07
 EXR: DFEE2602e100
 EXR: 84 07 A0 00 00 00 65 10 10

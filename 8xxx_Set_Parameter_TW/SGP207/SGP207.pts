@@ -1,0 +1,544 @@
+DL_SCRIPTVERSION
+1
+49709
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "SGP207" ' !!!!! EDIT THIS !!!!!
+' Objective: NEO3-11509, [PMT-423] VP3350 Standby Mode (Generic PN)
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  genFlag = result
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
+End Sub
+
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+      If ResultX = 1 And caseValid <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+failcount = 0
+usercheck = msgbox ("Does the reader support Bluetooth?", vbyesno)
+if usercheck = 6 then msgbox "Reader connect w/ SDK via Bluetooth first", vbokonly
+   '------------------------------------------------------------DFEE37 = 03
+   DL.ResetReceiveCounter
+   DL.AddComment "--- DFEE37 = 03"
+   DL.SendSequence "DFEE37 = 03"
+   result = DL.WaitForSequence("04 00", 1, 2000)
+   if result <> 0 then 
+      DL.SendSequence "77-05"
+      dl.pause 1000
+      DL.AddComment vbcrlf & "Rebooting........................."
+      dl.pause 9000
+
+      if usercheck = 6 then 
+         msgbox "Confirm that SDK reconnect w/ reader via Bluetooth --> Click OK", vbokonly
+         ledcheck = msgbox ("Run mode_LED1+3 blink, interval is 5s" & vbcrlf & "Standby mode_only LED3 blink, interval is 5s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      elseif usercheck = 7 then
+             ledcheck = msgbox ("Run mode_LED1 blink, interval is 5s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      end if
+      if ledcheck = 7 then 
+         Failcount = failcount + 1
+         DL.AddComment "** FAIL **"
+      end if
+   else
+      Failcount = failcount + 1
+      DL.AddComment "** FAIL **"
+   end if
+   '------------------------------------------------------------DFEE37 = 13
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf
+   DL.AddComment "--- DFEE37 = 13"
+   DL.SendSequence "DFEE37 = 13"
+   result = DL.WaitForSequence("04 00", 1, 2000)
+   if result <> 0 then 
+      DL.SendSequence "77-05"
+      dl.pause 1000
+      DL.AddComment vbcrlf & "Rebooting........................."
+      dl.pause 9000
+
+      if usercheck = 6 then 
+         msgbox "Confirm that SDK reconnect w/ reader via Bluetooth --> Click OK", vbokonly
+         ledcheck = msgbox ("Run mode_LED1+3 blink, interval is 1s" & vbcrlf & "Standby mode_LED1+3 blink, interval is 1s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      elseif usercheck = 7 then
+             ledcheck = msgbox ("Run mode_LED1 blink, interval is 1s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      end if
+      if ledcheck = 7 then 
+         Failcount = failcount + 1
+         DL.AddComment "** FAIL **"
+      end if
+   else
+      Failcount = failcount + 1
+      DL.AddComment "** FAIL **"
+   end if
+   '------------------------------------------------------------DFEE37 = 23
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf
+   DL.AddComment "--- DFEE37 = 23"
+   DL.SendSequence "DFEE37 = 23"
+   result = DL.WaitForSequence("04 00", 1, 2000)
+   if result <> 0 then 
+      DL.SendSequence "77-05"
+      dl.pause 1000
+      DL.AddComment vbcrlf & "Rebooting........................."
+      dl.pause 9000
+
+      if usercheck = 6 then 
+         msgbox "Confirm that SDK reconnect w/ reader via Bluetooth --> Click OK", vbokonly
+         ledcheck = msgbox ("Run mode_LED1+3 blink, interval is 2s" & vbcrlf & "Standby mode_LED1+3 blink, interval is 2s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      elseif usercheck = 7 then
+             ledcheck = msgbox ("Run mode_LED1 blink, interval is 2s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      end if
+      if ledcheck = 7 then 
+         Failcount = failcount + 1
+         DL.AddComment "** FAIL **"
+      end if
+   else
+      Failcount = failcount + 1
+      DL.AddComment "** FAIL **"
+   end if
+   '------------------------------------------------------------DFEE37 = 33
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf
+   DL.AddComment "--- DFEE37 = 33"
+   DL.SendSequence "DFEE37 = 33"
+   result = DL.WaitForSequence("04 00", 1, 2000)
+   if result <> 0 then 
+      DL.SendSequence "77-05"
+      dl.pause 1000
+      DL.AddComment vbcrlf & "Rebooting........................."
+      dl.pause 9000
+
+      if usercheck = 6 then 
+         msgbox "Confirm that SDK reconnect w/ reader via Bluetooth --> Click OK", vbokonly
+         ledcheck = msgbox ("Run mode_LED1+3 blink, interval is 3s" & vbcrlf & "Standby mode_LED1+3 blink, interval is 3s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      elseif usercheck = 7 then
+             ledcheck = msgbox ("Run mode_LED1 blink, interval is 3s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      end if
+      if ledcheck = 7 then 
+         Failcount = failcount + 1
+         DL.AddComment "** FAIL **"
+      end if
+   else
+      Failcount = failcount + 1
+      DL.AddComment "** FAIL **"
+   end if
+   '------------------------------------------------------------DFEE37 = 43
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf
+   DL.AddComment "--- DFEE37 = 43"
+   DL.SendSequence "DFEE37 = 43"
+   result = DL.WaitForSequence("04 00", 1, 2000)
+   if result <> 0 then 
+      DL.SendSequence "77-05"
+      dl.pause 1000
+      DL.AddComment vbcrlf & "Rebooting........................."
+      dl.pause 9000
+
+      if usercheck = 6 then 
+         msgbox "Confirm that SDK reconnect w/ reader via Bluetooth --> Click OK", vbokonly
+         ledcheck = msgbox ("Run mode_LED1+3 blink, interval is 4s" & vbcrlf & "Standby mode_LED1+3 blink, interval is 4s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      elseif usercheck = 7 then
+             ledcheck = msgbox ("Run mode_LED1 blink, interval is 4s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      end if
+      if ledcheck = 7 then 
+         Failcount = failcount + 1
+         DL.AddComment "** FAIL **"
+      end if
+   else
+      Failcount = failcount + 1
+      DL.AddComment "** FAIL **"
+   end if
+   '------------------------------------------------------------DFEE37 = 53
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf
+   DL.AddComment "--- DFEE37 = 53"
+   DL.SendSequence "DFEE37 = 53"
+   result = DL.WaitForSequence("04 00", 1, 2000)
+   if result <> 0 then 
+      DL.SendSequence "77-05"
+      dl.pause 1000
+      DL.AddComment vbcrlf & "Rebooting........................."
+      dl.pause 9000
+
+      if usercheck = 6 then 
+         msgbox "Confirm that SDK reconnect w/ reader via Bluetooth --> Click OK", vbokonly
+         ledcheck = msgbox ("Run mode_LED1+3 blink, interval is 5s" & vbcrlf & "Standby mode_LED1+3 blink, interval is 5s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      elseif usercheck = 7 then
+             ledcheck = msgbox ("Run mode_LED1 blink, interval is 5s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      end if
+      if ledcheck = 7 then 
+         Failcount = failcount + 1
+         DL.AddComment "** FAIL **"
+      end if
+   else
+      Failcount = failcount + 1
+      DL.AddComment "** FAIL **"
+   end if
+   '------------------------------------------------------------DFEE37 = 63
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf
+   DL.AddComment "--- DFEE37 = 63"
+   DL.SendSequence "DFEE37 = 63"
+   result = DL.WaitForSequence("04 00", 1, 2000)
+   if result <> 0 then 
+      DL.SendSequence "77-05"
+      dl.pause 1000
+      DL.AddComment vbcrlf & "Rebooting........................."
+      dl.pause 9000
+
+      if usercheck = 6 then 
+         msgbox "Confirm that SDK reconnect w/ reader via Bluetooth --> Click OK", vbokonly
+         ledcheck = msgbox ("Run mode_LED1+3 blink, interval is 1s" & vbcrlf & "Standby mode_only LED3 blink, interval is 1s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      elseif usercheck = 7 then
+             ledcheck = msgbox ("Run mode_LED1 blink, interval is 1s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      end if
+      if ledcheck = 7 then 
+         Failcount = failcount + 1
+         DL.AddComment "** FAIL **"
+      end if
+   else
+      Failcount = failcount + 1
+      DL.AddComment "** FAIL **"
+   end if
+   '------------------------------------------------------------DFEE37 = 73
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf
+   DL.AddComment "--- DFEE37 = 73"
+   DL.SendSequence "DFEE37 = 73"
+   result = DL.WaitForSequence("04 00", 1, 2000)
+   if result <> 0 then 
+      DL.SendSequence "77-05"
+      dl.pause 1000
+      DL.AddComment vbcrlf & "Rebooting........................."
+      dl.pause 9000
+
+      if usercheck = 6 then 
+         msgbox "Confirm that SDK reconnect w/ reader via Bluetooth --> Click OK", vbokonly
+         ledcheck = msgbox ("Run mode_LED1+3 blink, interval is 2s" & vbcrlf & "Standby mode_only LED3 blink, interval is 2s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      elseif usercheck = 7 then
+             ledcheck = msgbox ("Run mode_LED1 blink, interval is 2s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      end if
+      if ledcheck = 7 then 
+         Failcount = failcount + 1
+         DL.AddComment "** FAIL **"
+      end if
+   else
+      Failcount = failcount + 1
+      DL.AddComment "** FAIL **"
+   end if
+   '------------------------------------------------------------DFEE37 = 83
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf
+   DL.AddComment "--- DFEE37 = 83"
+   DL.SendSequence "DFEE37 = 83"
+   result = DL.WaitForSequence("04 00", 1, 2000)
+   if result <> 0 then 
+      DL.SendSequence "77-05"
+      dl.pause 1000
+      DL.AddComment vbcrlf & "Rebooting........................."
+      dl.pause 9000
+
+      if usercheck = 6 then 
+         msgbox "Confirm that SDK reconnect w/ reader via Bluetooth --> Click OK", vbokonly
+         ledcheck = msgbox ("Run mode_LED1+3 blink, interval is 3s" & vbcrlf & "Standby mode_only LED3 blink, interval is 3s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      elseif usercheck = 7 then
+             ledcheck = msgbox ("Run mode_LED1 blink, interval is 3s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      end if
+      if ledcheck = 7 then 
+         Failcount = failcount + 1
+         DL.AddComment "** FAIL **"
+      end if
+   else
+      Failcount = failcount + 1
+      DL.AddComment "** FAIL **"
+   end if
+   '------------------------------------------------------------DFEE37 = 93
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf
+   DL.AddComment "--- DFEE37 = 93"
+   DL.SendSequence "DFEE37 = 93"
+   result = DL.WaitForSequence("04 00", 1, 2000)
+   if result <> 0 then 
+      DL.SendSequence "77-05"
+      dl.pause 1000
+      DL.AddComment vbcrlf & "Rebooting........................."
+      dl.pause 9000
+
+      if usercheck = 6 then 
+         msgbox "Confirm that SDK reconnect w/ reader via Bluetooth --> Click OK", vbokonly
+         ledcheck = msgbox ("Run mode_LED1+3 blink, interval is 4s" & vbcrlf & "Standby mode_only LED3 blink, interval is 4s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      elseif usercheck = 7 then
+             ledcheck = msgbox ("Run mode_LED1 blink, interval is 4s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      end if
+      if ledcheck = 7 then 
+         Failcount = failcount + 1
+         DL.AddComment "** FAIL **"
+      end if
+   else
+      Failcount = failcount + 1
+      DL.AddComment "** FAIL **"
+   end if
+   '------------------------------------------------------------DFEE37 = A3
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf
+   DL.AddComment "--- DFEE37 = A3"
+   DL.SendSequence "DFEE37 = A3"
+   result = DL.WaitForSequence("04 00", 1, 2000)
+   if result <> 0 then 
+      DL.SendSequence "77-05"
+      dl.pause 1000
+      DL.AddComment vbcrlf & "Rebooting........................."
+      dl.pause 9000
+
+      if usercheck = 6 then 
+         msgbox "Confirm that SDK reconnect w/ reader via Bluetooth --> Click OK", vbokonly
+         ledcheck = msgbox ("Run mode_LED1+3 blink, interval is 5s" & vbcrlf & "Standby mode_only LED3 blink, interval is 5s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      elseif usercheck = 7 then
+             ledcheck = msgbox ("Run mode_LED1 blink, interval is 5s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      end if
+      if ledcheck = 7 then 
+         Failcount = failcount + 1
+         DL.AddComment "** FAIL **"
+      end if
+   else
+      Failcount = failcount + 1
+      DL.AddComment "** FAIL **"
+   end if
+   '------------------------------------------------------------DFEE37 = F3
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf
+   DL.AddComment "--- DFEE37 = F3"
+   DL.SendSequence "DFEE37 = F3"
+   result = DL.WaitForSequence("04 00", 1, 2000)
+   if result <> 0 then 
+      DL.SendSequence "77-05"
+      dl.pause 1000
+      DL.AddComment vbcrlf & "Rebooting........................."
+      dl.pause 9000
+
+      if usercheck = 6 then 
+         msgbox "Confirm that SDK reconnect w/ reader via Bluetooth --> Click OK", vbokonly
+         ledcheck = msgbox ("Run mode_LED1+3 solid on" & vbcrlf & "Standby mode_only LED3 blink, interval is 5s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      elseif usercheck = 7 then
+             ledcheck = msgbox ("Run mode_LED1 solid on" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      end if
+      if ledcheck = 7 then 
+         Failcount = failcount + 1
+         DL.AddComment "** FAIL **"
+      end if
+   else
+      Failcount = failcount + 1
+      DL.AddComment "** FAIL **"
+   end if
+'------------------------------------------------------------
+if failcount <> 0 then result = 0
+DL.AddComment vbCrLf
+DL.SendSequence "DFEE37 = 03"
+DL.Pause 500
+'------------------------------------------------------------
+DL.AddComment vbCrLf
+
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
+
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'DL.pause 1000
+
+'If 0 Then
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+'End If
+
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
+
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+	FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+	FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub

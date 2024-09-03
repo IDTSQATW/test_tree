@@ -1,13 +1,13 @@
 DL_SCRIPTVERSION
 1
-14256
+35888
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name 
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "PM033" ' !!!!! EDIT THIS !!!!!
+ProjectName = "PM034" ' !!!!! EDIT THIS !!!!!
 ' Objective: CS-5728, Bluetooth Button Press to Indicate Battery Level - NMI / Service Titan'------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"

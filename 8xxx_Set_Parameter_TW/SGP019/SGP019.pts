@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-25918
+15474
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -163,6 +163,42 @@ If result <> 0 Then
 End If
 
 If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 29-40 (disable all interface)"
+   DL.SendSequence "29-40 (disable all interface)"
+   result = DL.WaitForSequence("29 00", 1, 2000)
+   dl.pause 500
+End If
+
+If result <> 0 Then
+   usercheck = msgbox ("Reader USB-Female & Lightning connect w/ SDKs," & vbcrlf & vbcrlf & "case 1) start transaction via USB-Female >> USB-Female cable disconnected >> transaction must continue" & vbcrlf & "case 2) start transaction via Lightning >> Lighting disconnect >> transaction must continue" & vbcrlf & vbcrlf & "Cases are PASS?", vbyesno)
+   if usercheck = 7 then result = 0
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 04-0A"
+   DL.SendSequence "04-0A"
+   result = DL.WaitForSequence("04 00", 1, 5000)
+   dl.pause 10000
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 29-41 = ID from 40#"
+   DL.SendSequence "29-41 = ID from 40#"
+   result = DL.WaitForSequence("29 00 model b default", 1, 2000)
+   dl.pause 500
+else
+   dl.addcomment vbcrlf
+   DL.SendSequence "29-41 model b default"
+   dl.pause 500
+End If
+End If
+'------------------------------------------------------------
+If result <> 0 Then
    msgbox "Please connect w/ VP3350 model C reader", vbokonly
    dl.resetreceivecounter
    dl.addcomment vbcrlf
@@ -173,6 +209,42 @@ If result <> 0 Then
 End If
 
 If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 29-40 (disable all interface)"
+   DL.SendSequence "29-40 (disable all interface)"
+   result = DL.WaitForSequence("29 00", 1, 2000)
+   dl.pause 500
+End If
+
+If result <> 0 Then
+   usercheck = msgbox ("Reader USB-Female & Bluetooth connect w/ SDKs," & vbcrlf & vbcrlf & "case 1) start transaction via USB-Female >> USB-Female cable disconnected >> transaction must continue" & vbcrlf & "case 2) start transaction via Bluetooth >> Bluetoth disconnect >> transaction must continue" & vbcrlf & vbcrlf & "Cases are PASS?", vbyesno)
+   if usercheck = 7 then result = 0
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 04-0A"
+   DL.SendSequence "04-0A"
+   result = DL.WaitForSequence("04 00", 1, 5000)
+   dl.pause 10000
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 29-41 = ID from 40#"
+   DL.SendSequence "29-41 = ID from 40#"
+   result = DL.WaitForSequence("29 00 model c default", 1, 2000)
+   dl.pause 500
+else
+   dl.addcomment vbcrlf
+   DL.SendSequence "29-41 model c default"
+   dl.pause 500
+End If
+End If
+'------------------------------------------------------------
+If result <> 0 Then
    msgbox "Please connect w/ VP3350 model F reader", vbokonly
    dl.resetreceivecounter
    dl.addcomment vbcrlf
@@ -180,6 +252,42 @@ If result <> 0 Then
    DL.SendSequence "29-41 = ID from 40#"
    result = DL.WaitForSequence("29 00 model f default", 1, 2000)
    dl.pause 500
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 29-40 (disable all interface)"
+   DL.SendSequence "29-40 (disable all interface)"
+   result = DL.WaitForSequence("29 00", 1, 2000)
+   dl.pause 500
+End If
+
+If result <> 0 Then
+   usercheck = msgbox ("Reader USB-Male connect w/ iOS SDK," & vbcrlf & vbcrlf & "case 1) start transaction via USB-Male >> USB-Male disconnected >> transaction must continue" & vbcrlf & vbcrlf & "Case is PASS?", vbyesno)
+   if usercheck = 7 then result = 0
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 04-0A"
+   DL.SendSequence "04-0A"
+   result = DL.WaitForSequence("04 00", 1, 5000)
+   dl.pause 10000
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 29-41 = ID from 40#"
+   DL.SendSequence "29-41 = ID from 40#"
+   result = DL.WaitForSequence("29 00 model f default", 1, 2000)
+   dl.pause 500
+else
+   dl.addcomment vbcrlf
+   DL.SendSequence "29-41 model f default"
+   dl.pause 500
+End If
 End If
 '------------------------------------------------------------
 DL.AddComment vbCrLf

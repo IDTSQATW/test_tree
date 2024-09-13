@@ -9,15 +9,15 @@ MESSAGE: Disconnect w/ PC --> reset reader --> reconnect w/ PC --> Click OK
 CMD: 18 01
 EXR: 18 00
 
-SWIPEKB: Click OK --> Watch/ check screen for 30 sec --> Click OK
+SWIPEKB: Click OK --> Watch/ check screen for 5 min --> Click OK
 
-MESSAGECK: Reader did NOT send strange data (ex. Bluetooth signal data)
+MESSAGECK: Reader did NOT send strange data (ex. Bluetooth signal data, error code, ...etc.)
 
 ----------------------------------------
 >>> 03-02
 CMD: 03 02
 EXR: 03 00
 
-SWIPEKB: Click OK --> Watch/ check screen for 30 sec --> Click OK
+SWIPEKB: Click OK --> Watch/ check screen for 5 min --> Click OK
 
-MESSAGECK: Reader did NOT send strange data (ex. Bluetooth signal data)
+MESSAGECK: Reader did NOT send strange data (ex. Bluetooth signal data, error code, ...etc.)

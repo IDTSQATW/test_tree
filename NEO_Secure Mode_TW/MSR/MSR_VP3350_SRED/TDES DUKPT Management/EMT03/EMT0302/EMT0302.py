@@ -53,7 +53,7 @@ if (Result):
 		if (Result):
 			for i in range (1, 11):
 				if j == 1:
-					time.sleep(0.5)
+					time.sleep(1)
 					if i == 1:
 						RetOfStep = DL.SendCommand('Activate Transaction -- IDT')
 					if i == 2:

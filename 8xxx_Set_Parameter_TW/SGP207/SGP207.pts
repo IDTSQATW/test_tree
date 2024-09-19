@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-49709
+6635
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -168,7 +168,7 @@ if usercheck = 6 then msgbox "Reader connect w/ SDK via Bluetooth first", vbokon
 
       if usercheck = 6 then 
          msgbox "Confirm that SDK reconnect w/ reader via Bluetooth --> Click OK", vbokonly
-         ledcheck = msgbox ("Run mode_LED1+3 blink, interval is 5s" & vbcrlf & "Standby mode_only LED3 blink, interval is 5s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+         ledcheck = msgbox ("[Generic ver.]" & vbcrlf & "Run mode_LED1+3 blink, interval is 5s" & vbcrlf & "Standby mode_only LED3 blink, interval is 5s" & vbcrlf & vbcrlf & "[NMI ver.]" & vbcrlf & "Run mode_LED1+3 blink, interval is 1s" & vbcrlf & "Standby mode_only LED3 blink, interval is 5s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
       elseif usercheck = 7 then
              ledcheck = msgbox ("Run mode_LED1 blink, interval is 5s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
       end if

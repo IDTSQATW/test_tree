@@ -62,7 +62,7 @@ if(0<DeviceType and 10>=DeviceType):DL.setText("BLACK", "<Kiosk>")
 if(10<DeviceType):DL.setText("BLACK", "<NEOII>")
 ##################################################
 
-
+time.sleep(1)
 # Test Part ######################################
 RobotAction = "ROBOT:CTLSCARD12"
 
@@ -90,6 +90,7 @@ if(Robot == True):  DL.Robot_RemoveCard()
 
 if(False==Pro_SendCmd().RunCK(Pro_SendCmd().Run(C2C01[1][0],C2C01[1][1],30000,False,DL),C2C01[1][2],DL)):DL.warnings = DL.warnings +1
 
+time.sleep(1)
 #Check device memory not change after script
 if(10<DeviceType):
     if(False ==  Pro_SendCmd().RunCK(Pro_SendCmd().Run(C0930[0][0],C0930[0][1],5000,False,DL),strMemory,DL)): 

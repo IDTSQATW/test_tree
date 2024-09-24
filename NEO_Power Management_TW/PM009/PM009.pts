@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-30252
+2233
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -169,28 +169,6 @@ If result <> 0 Then
    result = DL.WaitForSequence("F0 00 - 3c3c", 1, 5000)
    dl.pause 500
 End If
-
-'--------------------------------------------------'reboot, check value again
-
-if result <> 0 then
-   msgbox "Power off/ on the reader by manual, then click OK", vbokonly
-   dl.pause 500
-
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- 18-01 Ping"
-   DL.SendSequence "18-01 Ping"
-   result = DL.WaitForSequence("18 00", 1, 2000)
-end if
-
-If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- F0-01 Get PMC Status"
-   DL.SendSequence "F0-01 Get PMC Status"
-   result = DL.WaitForSequence("F0 00 - 3c3c", 1, 5000)
-End If
-
 '--------------------------------------------------'Auto-power off, power on and then check value again
 
 If result <> 0 Then

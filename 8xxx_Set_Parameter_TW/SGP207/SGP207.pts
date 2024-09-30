@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-6635
+2730
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -471,6 +471,7 @@ if failcount <> 0 then result = 0
 DL.AddComment vbCrLf
 DL.SendSequence "DFEE37 = 03"
 DL.Pause 500
+DL.SendSequence "77-05"
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 

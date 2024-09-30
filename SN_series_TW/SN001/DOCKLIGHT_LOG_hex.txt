@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2024/9/23 16:52:56.242 
+Docklight Log File (HEX) - Started 2024/9/30 09:34:05.673 
  TEST CASE: SN001
 
  --- Set POS COM PORT Settings
@@ -8,10 +8,10 @@ Docklight Log File (HEX) - Started 2024/9/23 16:52:56.242
 
  --- Get Serial Number
 
-2024/9/23 16:52:57.547 [TX] - 56 69 56 4F 74 65 63 68 32 00 12 01 00 00 18 A5 
-2024/9/23 16:52:57.563 [RX] - 56 69 56 4F 74 65 63 68 32 00 12 00 00 0F  Accepted, Serial Number already set and data follows: 
+2024/9/30 09:34:06.962 [TX] - 56 69 56 4F 74 65 63 68 32 00 12 01 00 00 18 A5 
+2024/9/30 09:34:06.967 [RX] - 56 69 56 4F 74 65 63 68 32 00 63 02 00 00 56 69 56 4F 74 65 63 68 32 00 12 00 00 0F  Accepted, Serial Number already set and data follows: 
 
-2024/9/23 16:52:57.563 [RX] - 34 31 32 54 32 36 31 33 31 35 00 00 00 00 00 FB 6D 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+2024/9/30 09:34:06.967 [RX] - 34 32 37 54 33 31 31 33 32 31 00 00 00 00 00 2C 90 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  Result = PASSED
  ---------- END OF TEST ----------
@@ -21,5 +21,5 @@ Docklight Log File (HEX) - Started 2024/9/23 16:52:56.242
  MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2024/9/23 16:52:58.154 
+Docklight Log File (HEX) - Stopped 2024/9/30 09:34:07.571 
 

@@ -26,7 +26,7 @@ SEND
 0
 F0-02 Get Battery Level
 56 69 56 4F 74 65 63 68 32 00 F0 02 00 00 CA 95
-0
+1
 5
 
 SEND

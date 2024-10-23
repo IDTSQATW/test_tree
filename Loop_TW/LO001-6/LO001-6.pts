@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-46320
+47601
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -28,6 +28,14 @@ Sub PrintMyResult(ResultX)
       End If
 End Sub
 
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
 Dim prompt
 Dim confirm
 max=1
@@ -43,6 +51,8 @@ DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
 'TEST BEGINS
 '------------------------------------------------------------
 pfcheck = msgbox ("Is this NEO1 project?", vbyesno)
+neo3check = msgbox ("Is this NEO3 project?", vbyesno)
+
 n = 10000
  For i = 1 to n
 
@@ -54,8 +64,12 @@ n = 10000
       dl.resetreceivecounter
       dl.addcomment vbcrlf
       DL.AddComment "--- 04-00 to change DFEE1D"
-      if pfcheck = 6 then DL.SendSequence "04-00 to change FFEE1D (NEO1)"
-      if pfcheck = 7 then DL.SendSequence "04-00 to change DFEE1D"
+      if neo3check = 7 then
+         if pfcheck = 6 then DL.SendSequence "04-00 to change FFEE1D (NEO1)"
+         if pfcheck = 7 then DL.SendSequence "04-00 to change DFEE1D"
+      elseif neo3check  = 6 then
+             DL.SendSequence "C7-D7 to change DFEE1D (NEO3)"
+      end if
       result = DL.WaitForSequence("04 00", 1, 5000)
       dl.pause 500
       
@@ -80,8 +94,13 @@ n = 10000
          dl.addcomment vbcrlf
          DL.AddComment "--- 03-02"
          DL.SendSequence "03-02"
-         if pfcheck = 6 then result = DL.WaitForSequence("FFEE1D (default) (NEO1)", 1, 5000)
-         if pfcheck = 7 then result = DL.WaitForSequence("DFEE1D (default)", 1, 5000)
+         if neo3check = 7 then
+            if pfcheck = 6 then result = DL.WaitForSequence("FFEE1D (default) (NEO1)", 1, 5000)
+            if pfcheck = 7 then result = DL.WaitForSequence("DFEE1D (default)", 1, 5000)
+         elseif neo3check  = 6 then
+                result = DL.WaitForSequence("DFEE1D (NEO3)", 1, 1500)
+                ReverseResult(result)
+         end if
          dl.pause 500
       end if
       

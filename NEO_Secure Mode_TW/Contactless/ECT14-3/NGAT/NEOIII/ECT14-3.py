@@ -45,14 +45,24 @@ if (Result):
 # cmd 02-40, tap card
 if (Result):
     for i in range(1, 3):
-        if i == 1:
-            RetOfStep = DL.SendCommand('DFEE1D--02 02 21 0A 30')
-            if (RetOfStep):
-                Result = Result and DL.Check_RXResponse("04 00 00 00")	
-        if i == 2:
-            RetOfStep = DL.SendCommand('DFEE1D--06 04 7E 0F 31')
-            if (RetOfStep):
-                Result = Result and DL.Check_RXResponse("04 00 00 00")	
+        if readermodel == 1: #VP3350
+            if i == 1:
+                RetOfStep = DL.SendCommand('DFEE1D--02 02 21 0A 30 (NEO3)')
+                if (RetOfStep):
+                    Result = Result and DL.Check_RXResponse("C7 00 00 00")	
+            if i == 2:
+                RetOfStep = DL.SendCommand('DFEE1D--06 04 7E 0F 31 (NEO3)')
+                if (RetOfStep):
+                    Result = Result and DL.Check_RXResponse("C7 00 00 00")	
+        if readermodel == 0: #non-VP3350
+            if i == 1:
+                RetOfStep = DL.SendCommand('DFEE1D--02 02 21 0A 30')
+                if (RetOfStep):
+                    Result = Result and DL.Check_RXResponse("04 00 00 00")	
+            if i == 2:
+                RetOfStep = DL.SendCommand('DFEE1D--06 04 7E 0F 31')
+                if (RetOfStep):
+                    Result = Result and DL.Check_RXResponse("04 00 00 00")	
 				
         if (Result):	
             time.sleep(1)

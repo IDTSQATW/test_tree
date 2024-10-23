@@ -9,18 +9,37 @@ Key='0123456789abcdeffedcba9876543210'
 MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 
+# Check reader is VP3350 or not
+lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
+
+# Check data encryption TYPE is TDES	
+if (Result):
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
+if (Result):
+    RetOfStep = DL.SendCommand('DF7D = 02 (NEO2)')
+    if (RetOfStep):
+        Result = Result and DL.Check_RXResponse("04 00 00 00")
+        
 # Get Data Encryption Enable Flag (C7-37)
 if (Result):
 	RetOfStep = DL.SendCommand('Get Data Encryption Enable Flag (C7-37)')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
-		
 
 # Tag DFEE1D = 04 04 2A 0C 30
 if (Result):
 	RetOfStep = DL.SendCommand('Tag DFEE1D = 04 04 2A 0C 30')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")
+		Result = Result and DL.Check_RXResponse("C7 00 00 00")
 
 # Set/ Get MSR Secure Parameters		
 if (Result):
@@ -372,6 +391,11 @@ if (Result):
 									# if Result != True:
 										# DL.SetWindowText("red", "TR3plaintextdata: FAIL")					
 
+if lcdtype == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")
+        
 if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
 else:

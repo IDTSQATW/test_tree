@@ -123,7 +123,7 @@ if (Result):
 					if lcdtype == 1:
 						rx = 3
 					if lcdtype == 0:
-						rx = 7
+						rx = 8
 				Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')
 				sResult=DL.Get_RXResponse(rx)
 				if (Result):	

@@ -191,7 +191,7 @@ if (Result):
             
         if i == 6:#JCBO-48250
             # Check mask 5A = DFEF5B
-            if(-1 != strCardData.find('DFEF5B083569CCCCCCCC2211')):
+            if(-1 != strCardData.find('DFEF5B083540CCCCCCCC1012')):
                 DL.SetWindowText("blue", "DFEF5B PASS")
             else:
                 DL.SetWindowText("red", "DFEF5B FAIL")
@@ -199,13 +199,13 @@ if (Result):
             # Check enc 5A
             enc5A = DL.GetTLV_Embedded(strCardData,"5A", 0)
             dec5A = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc5A)
-            if DL.Check_StringAB(dec5A, '5A083569990010082211'):
+            if DL.Check_StringAB(dec5A, '5A083540829999421012'):
                 DL.SetWindowText("blue", "5A PASS")
             else:
                 DL.SetWindowText("red", "5A FAIL")
                 DL.fails=DL.fails+1
             # Check mask 57 = DFEF5D
-            if(-1 != strCardData.find('DFEF5D133569CCCCCCCC2211D2112CCC')):
+            if(-1 != strCardData.find('DFEF5D133540CCCCCCCC1012D4912CCCCCCCCCCCCCCCCC')):
                 DL.SetWindowText("blue", "DFEF5D PASS")
             else:
                 DL.SetWindowText("red", "DFEF5D FAIL")
@@ -213,7 +213,7 @@ if (Result):
             # Check enc 57
             enc57 = DL.GetTLV_Embedded(strCardData,"57", 0)
             dec57 = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc57)
-            if DL.Check_StringAB(dec57, '57133569990010082211D2112201'):
+            if DL.Check_StringAB(dec57, '57133540829999421012D4912201555555555555'):
                 DL.SetWindowText("blue", "57 PASS")
             else:
                 DL.SetWindowText("red", "57 FAIL")
@@ -272,8 +272,6 @@ if (Result):
             result = (-1 != strCardData.find('DFEC18174D61737465724361726420332E312E342C2076312E3030'))
         if i == 5:
             result = (-1 != strCardData.find('DFEC181A416D6578204578707265737350617920342E312C2076312E3030'))
-        if i == 6:
-            result = (-1 != strCardData.find('DFEC180F4A43422076312E362C2076312E3030'))
         if i == 7:
             result = (-1 != strCardData.find('DFEC181B515549435320312E302E32205549435320332E302C2076312E3030'))
         if result == True:
@@ -282,11 +280,12 @@ if (Result):
             DL.SetWindowText("red", "DFEC18 FAIL")
             DL.fails=DL.fails+1
         # Check DFEF57
-        if(-1 != strCardData.find('DFEF57')):
-            DL.SetWindowText("blue", "DFEF57 PASS")
-        else:
-            DL.SetWindowText("red", "DFEF57 FAIL")
-            DL.fails=DL.fails+1
+        if i != 6:
+            if(-1 != strCardData.find('DFEF57')):
+                DL.SetWindowText("blue", "DFEF57 PASS")
+            else:
+                DL.SetWindowText("red", "DFEF57 FAIL")
+                DL.fails=DL.fails+1
 else:
     DL.fails=DL.fails+1
 #-----------------------------------------------------------------

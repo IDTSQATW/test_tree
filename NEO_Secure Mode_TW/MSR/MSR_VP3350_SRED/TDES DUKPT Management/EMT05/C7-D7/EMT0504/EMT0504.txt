@@ -1,0 +1,167 @@
+TID:Get DUKPT DEK Attribution based on KeySlot (C7-A3)
+CMD:C7 A3 01 00
+EXR:
+
+TID:Tag DFEE1D = 06 04 2A 0C 31
+CMD:C7D7 00 0C 24 10 23 07 33 48 27 10 23 07 33 48 00 09 DFEE1D 05 06 04 2A 0C 31 01 00 93 55 FC D8 3E 95 CB 1E BA 83 A0 E9 65 71 47 1C 4B F8 5E 87 58 9B F1 4F D2 86 C0 6F A9 E7 36 0C 4A EB FD 68 2F 36 5D B4 48 5F 61 C6 45 DF 69 87 50 34 39 ED CD 88 BA 62 43 30 59 4C C1 33 D0 FB 92 56 22 40 E0 99 19 51 C3 1E F9 C8 F8 B2 3E 4F 4C 69 34 97 3C 53 2A 82 AE 4D 4F 5F 95 69 84 B8 BE CE 4B 27 97 E7 96 9B 3A FC 12 1C E9 ED 04 EC 6F 12 4B 5F 1C 53 C2 5A 82 FC 71 1C 3B F6 46 9E 40 9B 13 A4 1A 62 53 69 9B 69 A4 43 19 67 88 26 6D 19 14 A5 4D B3 60 21 F5 02 35 22 CC 55 F2 3D 42 E9 0A 08 B2 CC 4C D0 63 86 7B 30 09 2B 1A 0D 87 1A 2A 57 9A 71 4F 2C CD 6E F6 A0 CE F4 19 D5 DF B5 E5 2C 23 CB F4 E8 ED 4F 46 40 47 62 11 D0 78 49 51 35 9B 70 E4 10 55 CC AC 45 51 67 68 E1 79 13 8D 43 8D 8F D1 88 B2 43 18 7A 34 C3 01 24 06 0A 2A 89 18 CD 44 A4 53 83 A0 CA 4D 66 E7 D2
+EXR:04 00 00 00
+
+TID:Get Data Encryption Enable Flag (C7-37)
+CMD:C7 37
+EXR:C7 00 00 00
+
+TID:DF7D = 02 (NEO2)
+CMD:04 00 DF EE 7D 01 02
+EXR:
+
+TID:Encryption type -- TDES
+CMD:C7 33
+EXR:C7 00 00 01 00
+
+TID:Set MSR Secure Parameters (10)
+CMD:C7 38 DFEF04 01 10
+EXR:C7 00 00 00
+
+TID:Get MSR Secure Parameters
+CMD:C7 39 DFEF04
+EXR:C7 00 00 05 DFEF04 01 10
+
+TID:Burst mode Off
+CMD:04 00 DF EE 7E 01 00
+EXR:04 00 00 00
+
+TID:Poll on Demand
+CMD:01 01 01
+EXR:01 00 00 00
+
+TID:Auto Poll
+CMD:01 01 00
+EXR:01 00 00 00
+
+TID:0105 do not use LCD
+CMD:01 05 11 05
+EXR:
+
+TID:0105 default (VP3350)
+CMD:01 05 19 05
+EXR:
+
+TID:Activate Transaction -- IDT
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe IDT card...
+EXR:
+TIMEOUT:120000
+
+TID:Get Transaction Result -- IDT
+DLG:Swipe IDT card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+
+TID:Activate Transaction -- Discover
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe Discover card...
+EXR:56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 44 28 00 B3 83
+TIMEOUT:120000
+
+TID:Get Transaction Result -- Discover
+DLG:Swipe Discover card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+
+TID:Activate Transaction -- JIS 1
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe JIS 1 card...
+EXR:
+TIMEOUT:120000
+
+TID:Get Transaction Result -- JIS 1
+DLG:Swipe JIS 1 card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+
+TID:Activate Transaction -- JIS 2
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe JIS 2 card...
+EXR:
+TIMEOUT:120000
+
+TID:Get Transaction Result -- JIS 2
+DLG:Swipe JIS 2 card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+
+TID:Activate Transaction -- AAMVA
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe AAMVA card...
+EXR:
+TIMEOUT:120000
+
+TID:Get Transaction Result -- AAMVA
+DLG:Swipe AAMVA card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+
+TID:Activate Transaction -- Gift card
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe Gift card...
+EXR:
+TIMEOUT:120000
+
+TID:Get Transaction Result -- Gift card
+DLG:Swipe Gift card card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+
+TID:Activate Transaction -- PAN = 11
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe PAN = 11 card...
+EXR:
+TIMEOUT:120000
+
+TID:Get Transaction Result -- PAN = 11
+DLG:Swipe PAN = 11 card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+
+TID:Activate Transaction -- PAN = 12
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe PAN = 12 card...
+EXR:
+TIMEOUT:120000
+
+TID:Get Transaction Result -- PAN = 12
+DLG:Swipe PAN = 12 card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+
+TID:Activate Transaction -- PAN = 20
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe PAN = 20 card...
+EXR:
+TIMEOUT:120000
+
+TID:Get Transaction Result -- PAN = 20
+DLG:Swipe PAN = 20 card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:
+
+TID:Activate Transaction -- ISO4909 (3T)
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00
+MSG:Swipe ISO4909 (3T) card...
+EXR:
+TIMEOUT:120000
+
+TID:Get Transaction Result -- ISO4909 (3T)
+DLG:Swipe ISO4909 (3T) card -> Click OK...
+TIMEOUT:30000
+CMD: 03 40
+EXR:

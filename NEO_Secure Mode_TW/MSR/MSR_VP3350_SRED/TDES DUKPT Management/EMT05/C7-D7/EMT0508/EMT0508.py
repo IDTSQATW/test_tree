@@ -29,11 +29,11 @@ if (Result):
     if (RetOfStep):
         Result = Result and DL.Check_RXResponse("04 00 00 00")
 
-# Tag DFEE1D = 06 04 2A 0C 31
+# Tag DFEE1D = 04 04 7E 0C 31
 if (Result):
-	RetOfStep = DL.SendCommand('Tag DFEE1D = 06 04 2A 0C 31')
+	RetOfStep = DL.SendCommand('Tag DFEE1D = 04 04 7E 0C 31')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")
+		Result = Result and DL.Check_RXResponse("C7 00 00 00")
 
 # Set/ Get MSR Secure Parameters		
 if (Result):
@@ -106,7 +106,7 @@ if (Result):
 						# if i == 1:
 							# Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 83 3F 4F 28 6B 97 00")
 						if i == 2:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** E8 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 44 28 00 A3 9B")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** E8 DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 44 28 00 A3 9B")
 						# if i == 3:
 							# Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EA DF EE 25 02 00 11 DF EE 23 ** 02 ** 86 1F 48 28 00 93 00")
 						# if i == 4:
@@ -227,8 +227,8 @@ if (Result):
 								# Discover	
 								if i == 2:
 									# Transaction result verification
-									TR1maskdata = "%*651000******0026^CARD/IMAGE 03             ^1712****************?*"
-									TR2maskdata = ";651000******0026=1712****************?*"
+									TR1maskdata = "%~6510~~~~~~~~0026^CARD/IMAGE 03             ^1712~~~~~~~~~~~~~~~~?~"
+									TR2maskdata = ";6510~~~~~~~~0026=1712~~~~~~~~~~~~~~~~?~"
 									TR1plaintextdata = "2542363531303030303030303030303032365E434152442F494D414745203033202020202020202020202020205E31373132323031313030303032313030303030303F25"
 									TR2plaintextdata = "3B363531303030303030303030303032363D31373132323031313030303032313030303030303F3B"
 									
@@ -386,7 +386,8 @@ if (Result):
 if lcdtype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):
-		Result = DL.Check_RXResponse("01 00 00 00")							
+		Result = DL.Check_RXResponse("01 00 00 00")	
+        
 if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
 else:

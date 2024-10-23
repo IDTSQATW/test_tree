@@ -28,6 +28,7 @@ MSG:Swipe the specific card (has tracks 2+3 data only) EX. ISO 4909 only T2+T3
 EXR:
 EXR:
 EXR:
+EXR:
 TIMEOUT:120000
 
 TID:Activate Transaction -- ISO4909 (3T) w/o LCD (NEOI)

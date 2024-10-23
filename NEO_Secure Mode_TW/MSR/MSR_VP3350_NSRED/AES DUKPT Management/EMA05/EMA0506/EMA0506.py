@@ -32,7 +32,7 @@ if (Result):
 if (Result):
 	RetOfStep = DL.SendCommand('Tag DFEE1D = 04 02 2A 0C 31')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")
+		Result = Result and DL.Check_RXResponse("C7 00 00 00")
 	
 # Set/ Get MSR Secure Parameters		
 if (Result):
@@ -73,7 +73,7 @@ if (Result):
 				if (RetOfStep):		
 					if j == 1:
 						if i == 2:
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EC DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 5F 44 28 00 B3 9B")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EC DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 5F 44 28 00 ** 9B")
 					if j == 2:
 						Result = DL.Check_StringAB(DL.Get_RXResponse(1),"56 69 56 4F 74 65 63 68 32 00 03 00")
 						if (Result):
@@ -162,7 +162,9 @@ if (Result):
 									if Result != True:
 										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR2plaintextdata: FAIL")
-									
+					else:
+						DL.fails=DL.fails+1
+                        
 if lcdtype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-6878
+663
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -182,7 +182,7 @@ If result <> 0 Then
    DL.SendSequence "Retrieve Key Info (81-0C)"
    result = DL.WaitForSequence("81-00 rx", 1, 2000)
    if result <> 0 then result = DL.WaitForSequence("Retail MAC Key", 1, 2000)
-   if result = 0 then DL.AddComment vbcrlf & vbcrlf & "Please load Retail MAC key (via DKI) first....." & vbcrlf & "key = 1234567890123456 = 3132333435363738393031323334353620"
+   if result = 0 then DL.AddComment vbcrlf & vbcrlf & "Please load Retail MAC key (via DKI) first....." & vbcrlf & "key = 3132333435363738393031323334353620"
 End If
 '------------------------------------------------------------
 if result <> 0 then

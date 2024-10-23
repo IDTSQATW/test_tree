@@ -45,7 +45,7 @@ if (Result):
 		if lcdtype == 1:
 			rx = 1
 		if lcdtype == 0:
-			rx = 3
+			rx = 4
 		alldata = DL.Get_RXResponse(rx)
 		if alldata!=None and alldata!="":
 			alldata=alldata.replace(" ","")

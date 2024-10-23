@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-2730
+46704
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -457,6 +457,32 @@ if usercheck = 6 then msgbox "Reader connect w/ SDK via Bluetooth first", vbokon
          ledcheck = msgbox ("Run mode_LED1+3 solid on" & vbcrlf & "Standby mode_only LED3 blink, interval is 5s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
       elseif usercheck = 7 then
              ledcheck = msgbox ("Run mode_LED1 solid on" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      end if
+      if ledcheck = 7 then 
+         Failcount = failcount + 1
+         DL.AddComment "** FAIL **"
+      end if
+   else
+      Failcount = failcount + 1
+      DL.AddComment "** FAIL **"
+   end if
+   '------------------------------------------------------------DFEE37 = B3
+   DL.ResetReceiveCounter
+   DL.AddComment vbCrLf
+   DL.AddComment "--- DFEE37 = B3"
+   DL.SendSequence "DFEE37 = B3"
+   result = DL.WaitForSequence("04 00", 1, 2000)
+   if result <> 0 then 
+      DL.SendSequence "77-05"
+      dl.pause 1000
+      DL.AddComment vbcrlf & "Rebooting........................."
+      dl.pause 9000
+
+      if usercheck = 6 then 
+         msgbox "Confirm that SDK reconnect w/ reader via Bluetooth --> Click OK", vbokonly
+         ledcheck = msgbox ("Run mode_LED1+3 blink, interval is 1s" & vbcrlf & "Standby mode_LED1+3 blink, interval is 1s; blink 2 min then stop all LEDs" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
+      elseif usercheck = 7 then
+             ledcheck = msgbox ("Run mode_LED1 blink, interval is 1s" & vbcrlf & vbcrlf & "The behavior is correct?", vbyesno)
       end if
       if ledcheck = 7 then 
          Failcount = failcount + 1

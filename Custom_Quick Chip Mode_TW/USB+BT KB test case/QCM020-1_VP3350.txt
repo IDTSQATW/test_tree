@@ -1,0 +1,32 @@
+Objective: (Enc ON) CL transaction for ApplePay/ AndroidPay
+
+========================================
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 01 00 00 00
+MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+
+--------------------
+>>> CL transaction
+SWIPEKB: click OK, then tap mobile phone (ApplePay -- any card)
+EXR: DF EE 12 0A
+EXR: 84
+EXR: DFEC18
+EXR: DFEF57
+
+>>> CL transaction
+SWIPEKB: click OK, then tap mobile phone (AndroidPay -- any card)
+EXR: DF EE 12 0A
+EXR: 84
+EXR: DFEC18
+EXR: DFEF57
+
+>>> CL transaction
+SWIPEKB: click OK, then tap mobile phone (SamsungPay -- any card)
+EXR: DF EE 12 0A
+EXR: 84
+EXR: DFEC18
+EXR: DFEF57
+
+--------------------------------------------------------------------------------
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK

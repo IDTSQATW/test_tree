@@ -1,0 +1,205 @@
+Objective1: Encryption OFF, CT + Fallback to CT + Fallback to MSR test under Quick Chip Mode. (T=0/ Discover)
+Objective2: Output tags list should the same as Augusta
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+
+--------------------
+>>> CT transaction
+SWIPEKB: Click OK -> Insert T=0 card.
+EXR: DFEE2602 2000
+EXR: DF EE 25 02 00 03
+EXR: 57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89
+EXR: 5A 08 47 61 73 90 01 01 00 10
+EXR: 9F 39 01 05
+EXR: 4F
+EXR: 50
+EXR: 82
+EXR: 84
+EXR: 8A
+EXR: 8C
+EXR: 8D
+EXR: 8E
+EXR: 95
+EXR: 99
+EXR: 9B
+EXR: 9C
+EXR: 5F20
+EXR: 5F24
+EXR: 5F25
+EXR: 5F28
+EXR: 5F2A
+EXR: 5F2D
+EXR: 5F34
+EXR: 5F57
+EXR: 9F02
+EXR: 9F03
+EXR: 9F10
+EXR: 9F13
+EXR: 9F20
+EXR: 9F26
+EXR: 9F27
+EXR: 9F34
+EXR: 9F36
+EXR: 9F37
+EXR: 9F38
+EXR: 9F4D
+EXR: 9F4F
+EXR: 9F53
+EXR: 9F5B
+EXR: DFEF57
+EXR: DFEC181D454D5620436F6D6D6F6E2047656E2033204C322056312E33302E303339
+
+--------------------
+>>> Fallback to CT transaction (default: disable)
+SWIPEKB: Click OK -> Swipe Discover card (PAN = 6510000000000125).
+EXR: %B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?
+
+--------------------
+>>> Fallback to MSR transaction (default: can retry ICC card 3 times)
+SWIPEKB: Click OK -> Insert IDT test card 3 times -> Remove card (Green LED 3 is flash ON) -> Swipe Discover card.
+EXR: DFEF6102F220
+EXR: DFEF6102F222
+EXR: DF EE 25 02 0007
+EXR: 9F 39 01 80
+EXR: DFEE236A%B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?
+MESSAGECK: After inserted card, LED 3 was turned ON (flash status)
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+>>> Poll on demand
+CMD: 01 01 01
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+>>> Set transaction interface = CT+MSR
+CMD: 04 00 DF EF 37 01 05
+EXR: 04 00 00 00
+
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+
+--------------------
+>>> CT transaction
+SWIPEKB: Click OK -> Insert T=0 card.
+EXR: DF EE 25 02 00 03
+EXR: 57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89
+EXR: 5A 08 47 61 73 90 01 01 00 10
+EXR: 9F 39 01 05
+EXR: 4F
+EXR: 50
+EXR: 82
+EXR: 84
+EXR: 8A
+EXR: 8C
+EXR: 8D
+EXR: 8E
+EXR: 95
+EXR: 99
+EXR: 9B
+EXR: 9C
+EXR: 5F20
+EXR: 5F24
+EXR: 5F25
+EXR: 5F28
+EXR: 5F2A
+EXR: 5F2D
+EXR: 5F34
+EXR: 5F57
+EXR: 9F02
+EXR: 9F03
+EXR: 9F10
+EXR: 9F13
+EXR: 9F20
+EXR: 9F26
+EXR: 9F27
+EXR: 9F34
+EXR: 9F36
+EXR: 9F37
+EXR: 9F38
+EXR: 9F4D
+EXR: 9F4F
+EXR: 9F53
+EXR: 9F5B
+EXR: DFEF57
+EXR: DFEC181D454D5620436F6D6D6F6E2047656E2033204C322056312E33302E303339
+
+--------------------
+>>> Fallback to CT transaction (default: disable)
+SWIPEKB: Click OK -> Swipe Discover card (PAN = 6510000000000125).
+EXR: %B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?
+
+--------------------
+>>> Fallback to MSR transaction (default: can retry ICC card 3 times)
+SWIPEKB: Click OK -> Insert IDT test card 3 times -> Remove card (Green LED 3 is flash ON) -> Swipe Discover card.
+EXR: DFEF6102F220
+EXR: DFEF6102F222
+EXR: DF EE 25 02 0007
+EXR: 9F 39 01 80
+EXR: DFEE236A%B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?
+MESSAGECK: After inserted card, LED 3 was turned ON (flash status)
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+>>> Poll on demand
+CMD: 01 01 01
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+>>> Set transaction interface = CL+MSR
+CMD: 04 00 DF EF 37 01 03
+EXR: 04 00 00 00
+
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+
+--------------------
+>>> Fallback to CT transaction
+SWIPEKB: Click OK -> Swipe Discover card.
+EXR: %B65100000
+EXR: ^
+EXR: ^
+EXR: 201
+EXR: ?
+EXR: ;65100000
+EXR: =
+EXR: 201
+EXR: ?
+MESSAGECK: After swiped card, 4 Green LEDs flashed once
+
+--------------------
+>>> Fallback to MSR transaction
+SWIPEKB: Click OK -> Insert IDT test card -> Remove card (Green LED 3 is OFF) -> Swipe Discover card.
+EXR: %B65100000
+EXR: ^
+EXR: ^
+EXR: 201
+EXR: ?
+EXR: ;65100000
+EXR: =
+EXR: 201
+EXR: ?
+MESSAGECK: After inserted card, Green LED 3 did NOT be turned ON independently
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+>>> Poll on demand
+CMD: 01 01 01
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+>>> Set transaction interface = ALL
+CMD: 04 00 DF EF 37 01 07
+EXR: 04 00 00 00
+
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00

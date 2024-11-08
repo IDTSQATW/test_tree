@@ -30,98 +30,99 @@ if (Result):
 	DL.SetWindowText("black", "*** Get DUKPT DEK Attribution based on KeySlot (C7-A3)")
 	DL.SendIOCommand("IDG", "C7 A3 01 00", 3000, 1) 
 	Result = DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
-    
-# # Set Configuration
-# if (Result):
-	# DL.SetWindowText("black", "*** Set Configuration")
-	# DL.SendIOCommand("IDG", "04 00 DF EE 38 01 01 DF EE 44 02 FF FF DF EE 34 06 00 00 00 03 00 00 5F 2A 02 01 56 DF ED 5B 04 01 06 00 08 DF ED 5A 08 01 00 00 00 00 00 00 00 DF EE 0C 01 08 DF EE 6B 08 54 65 72 6D 30 30 30 30", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 00 00 00")	
 
-# # Set Configurable Group
-# if (Result):
-	# DL.SetWindowText("black", "*** Set Configurable Group")
-	# DL.SendIOCommand("IDG", "04 03 DF EE 2D 01 A0 DF 81 26 06 00 00 00 01 20 00 DF EE 34 06 00 00 00 03 00 00 9F 1B 04 00 00 3A 98 9F 66 04 37 00 40 80 9F 33 03 00 68 C8 9F 4E 14 42 61 6E 6B 54 65 73 74 20 20 20 20 20 20 20 20 20 20 30 31 9F 09 02 00 30 9F 1A 02 01 56 5F 2A 02 01 56 9F 16 0F 31 32 33 34 35 36 37 38 39 30 31 32 33 34 35 9F 35 01 25 9C 01 00 DF EE 6B 08 54 65 72 6D 30 30 30 30", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 00 00 00")
+if readertype == 0: #non-VP3350
+    # Set Configuration
+    if (Result):
+        DL.SetWindowText("black", "*** Set Configuration")
+        DL.SendIOCommand("IDG", "04 00 DF EE 38 01 01 DF EE 44 02 FF FF DF EE 34 06 00 00 00 03 00 00 5F 2A 02 01 56 DF ED 5B 04 01 06 00 08 DF ED 5A 08 01 00 00 00 00 00 00 00 DF EE 0C 01 08 DF EE 6B 08 54 65 72 6D 30 30 30 30", 3000, 1) 
+        Result = DL.Check_RXResponse("04 00 00 00")	
 
-# # Delete Configurable AID
-# if (Result):
-	# DL.SetWindowText("black", "*** Delete Configurable AID")
-	# DL.SendIOCommand("IDG", "04 04 9F 06 06 A0 00 00 00 25 01", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 ** 00 00")
+    # Set Configurable Group
+    if (Result):
+        DL.SetWindowText("black", "*** Set Configurable Group")
+        DL.SendIOCommand("IDG", "04 03 DF EE 2D 01 A0 DF 81 26 06 00 00 00 01 20 00 DF EE 34 06 00 00 00 03 00 00 9F 1B 04 00 00 3A 98 9F 66 04 37 00 40 80 9F 33 03 00 68 C8 9F 4E 14 42 61 6E 6B 54 65 73 74 20 20 20 20 20 20 20 20 20 20 30 31 9F 09 02 00 30 9F 1A 02 01 56 5F 2A 02 01 56 9F 16 0F 31 32 33 34 35 36 37 38 39 30 31 32 33 34 35 9F 35 01 25 9C 01 00 DF EE 6B 08 54 65 72 6D 30 30 30 30", 3000, 1) 
+        Result = DL.Check_RXResponse("04 00 00 00")
 
-# if (Result):
-	# DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 00 04 10 10", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 ** 00 00")
-	
-# if (Result):
-	# DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 00 04 30 60", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 ** 00 00")
-	
-# if (Result):
-	# DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 00 03 10 10", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 ** 00 00")
-	
-# if (Result):
-	# DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 00 03 20 10", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 ** 00 00")
-	
-# if (Result):
-	# DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 00 03 30 10", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 ** 00 00")
-	
-# if (Result):
-	# DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 00 65 10 10", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 ** 00 00")
-	
-# if (Result):
-	# DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 03 24 10 10", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 ** 00 00")
-	
-# if (Result):
-	# DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 02 77 10 10", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 ** 00 00")
-	
-# if (Result):
-	# DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 01 52 30 10", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 ** 00 00")
-	
-# if (Result):
-	# DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 00 03 80 10", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 ** 00 00")
-	
-# if (Result):
-	# DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 03 33 01 01", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 ** 00 00")
-	
-# if (Result):
-	# DL.SendIOCommand("IDG", "04 04 9F 06 08 A0 00 00 03 33 01 01 01", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 ** 00 00")
-	
-# if (Result):
-	# DL.SendIOCommand("IDG", "04 04 9F 06 08 A0 00 00 03 33 01 01 02", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 ** 00 00")
-	
-# if (Result):
-	# DL.SendIOCommand("IDG", "04 04 9F 06 09 A0 00 00 04 76 D0 00 01 11", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 ** 00 00")
-	
-# # Set Configurable AID
-# if (Result):
-	# DL.SetWindowText("black", "*** Set Configurable AID")
-	# DL.SendIOCommand("IDG", "04 02 DF EE 2D 01 A0 9F 06 07 A0 00 00 03 33 01 01 DF EE 4B 01 01 DF EE 4D 01 54 DF EE 2E 01 10 DF EE 54 0C 07 00 A0 07 01 A0 07 09 A0 07 20 A0 DF EE 59 01 07 DF EE 53 01 02", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 00 00 00")
-	
-# # Set Configurable AID
-# if (Result):
-	# DL.SetWindowText("black", "*** Set Configurable AID")
-	# DL.SendIOCommand("IDG", "04 02 DF EE 2D 01 A0 9F 06 08 A0 00 00 03 33 01 01 01 DF EE 4B 01 01 DF EE 4D 01 54 DF EE 2E 01 10 DF EE 54 0C 07 00 A0 07 01 A0 07 09 A0 07 20 A0 DF EE 59 01 07 DF EE 53 01 02", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 00 00 00")	
-	
-# # Set Configurable AID
-# if (Result):
-	# DL.SetWindowText("black", "*** Set Configurable AID")
-	# DL.SendIOCommand("IDG", "04 02 DF EE 2D 01 A0 9F 06 08 A0 00 00 03 33 01 01 02 DF EE 4B 01 01 DF EE 4D 01 54 DF EE 2E 01 10 DF EE 54 0C 07 00 A0 07 01 A0 07 09 A0 07 20 A0 DF EE 59 01 07 DF EE 53 01 02", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 00 00 00")	
+    # Delete Configurable AID
+    if (Result):
+        DL.SetWindowText("black", "*** Delete Configurable AID")
+        DL.SendIOCommand("IDG", "04 04 9F 06 06 A0 00 00 00 25 01", 3000, 1) 
+        Result = DL.Check_RXResponse("04 ** 00 00")
+
+    if (Result):
+        DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 00 04 10 10", 3000, 1) 
+        Result = DL.Check_RXResponse("04 ** 00 00")
+        
+    if (Result):
+        DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 00 04 30 60", 3000, 1) 
+        Result = DL.Check_RXResponse("04 ** 00 00")
+        
+    if (Result):
+        DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 00 03 10 10", 3000, 1) 
+        Result = DL.Check_RXResponse("04 ** 00 00")
+        
+    if (Result):
+        DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 00 03 20 10", 3000, 1) 
+        Result = DL.Check_RXResponse("04 ** 00 00")
+        
+    if (Result):
+        DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 00 03 30 10", 3000, 1) 
+        Result = DL.Check_RXResponse("04 ** 00 00")
+        
+    if (Result):
+        DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 00 65 10 10", 3000, 1) 
+        Result = DL.Check_RXResponse("04 ** 00 00")
+        
+    if (Result):
+        DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 03 24 10 10", 3000, 1) 
+        Result = DL.Check_RXResponse("04 ** 00 00")
+        
+    if (Result):
+        DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 02 77 10 10", 3000, 1) 
+        Result = DL.Check_RXResponse("04 ** 00 00")
+        
+    if (Result):
+        DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 01 52 30 10", 3000, 1) 
+        Result = DL.Check_RXResponse("04 ** 00 00")
+        
+    if (Result):
+        DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 00 03 80 10", 3000, 1) 
+        Result = DL.Check_RXResponse("04 ** 00 00")
+        
+    if (Result):
+        DL.SendIOCommand("IDG", "04 04 9F 06 07 A0 00 00 03 33 01 01", 3000, 1) 
+        Result = DL.Check_RXResponse("04 ** 00 00")
+        
+    if (Result):
+        DL.SendIOCommand("IDG", "04 04 9F 06 08 A0 00 00 03 33 01 01 01", 3000, 1) 
+        Result = DL.Check_RXResponse("04 ** 00 00")
+        
+    if (Result):
+        DL.SendIOCommand("IDG", "04 04 9F 06 08 A0 00 00 03 33 01 01 02", 3000, 1) 
+        Result = DL.Check_RXResponse("04 ** 00 00")
+        
+    if (Result):
+        DL.SendIOCommand("IDG", "04 04 9F 06 09 A0 00 00 04 76 D0 00 01 11", 3000, 1) 
+        Result = DL.Check_RXResponse("04 ** 00 00")
+        
+    # Set Configurable AID
+    if (Result):
+        DL.SetWindowText("black", "*** Set Configurable AID")
+        DL.SendIOCommand("IDG", "04 02 DF EE 2D 01 A0 9F 06 07 A0 00 00 03 33 01 01 DF EE 4B 01 01 DF EE 4D 01 54 DF EE 2E 01 10 DF EE 54 0C 07 00 A0 07 01 A0 07 09 A0 07 20 A0 DF EE 59 01 07 DF EE 53 01 02", 3000, 1) 
+        Result = DL.Check_RXResponse("04 00 00 00")
+        
+    # Set Configurable AID
+    if (Result):
+        DL.SetWindowText("black", "*** Set Configurable AID")
+        DL.SendIOCommand("IDG", "04 02 DF EE 2D 01 A0 9F 06 08 A0 00 00 03 33 01 01 01 DF EE 4B 01 01 DF EE 4D 01 54 DF EE 2E 01 10 DF EE 54 0C 07 00 A0 07 01 A0 07 09 A0 07 20 A0 DF EE 59 01 07 DF EE 53 01 02", 3000, 1) 
+        Result = DL.Check_RXResponse("04 00 00 00")	
+        
+    # Set Configurable AID
+    if (Result):
+        DL.SetWindowText("black", "*** Set Configurable AID")
+        DL.SendIOCommand("IDG", "04 02 DF EE 2D 01 A0 9F 06 08 A0 00 00 03 33 01 01 02 DF EE 4B 01 01 DF EE 4D 01 54 DF EE 2E 01 10 DF EE 54 0C 07 00 A0 07 01 A0 07 09 A0 07 20 A0 DF EE 59 01 07 DF EE 53 01 02", 3000, 1) 
+        Result = DL.Check_RXResponse("04 00 00 00")	
 	
 # Contact Set ICS Identification (60-16)
 if (Result):

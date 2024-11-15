@@ -1,14 +1,14 @@
 DL_SCRIPTVERSION
 1
-33549
+36366
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "PM100" ' !!!!! EDIT THIS !!!!!
-' Objective: to verify tags DFEF37 & DFEF3C
+ProjectName = "PM100-3" ' !!!!! EDIT THIS !!!!!
+' Objective: to verify NEO3-12119, "[VP3350] When DFEF37 is not configured, NEO3 product will enable CTLS/CT/MSR as default card interface"
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -156,12 +156,24 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+cmdcheck = msgbox("Does reader support cmd 02-01?", vbyesno)
+if cmdcheck = 6 then s = 1
+if cmdcheck = 7 then s = 2
 msrcheck = msgbox("Does reader support MSR?", vbyesno)
 readercheck = msgbox("Does reader support tags DFEF37 & DFEF3C?", vbyesno)
 if readercheck = 6 then
 '------------------------------------------------------------
 If result <> 0 Then
    dl.resetreceivecounter
+   DL.AddComment "--- 04-09"
+   DL.SendSequence "04-09"
+   result = DL.WaitForSequence("04 00", 1, 3000)
+   dl.pause 500
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   DL.AddComment vbcrlf
    DL.AddComment "--- Poll On Demand"
    DL.SendSequence " Poll On Demand"
    result = DL.WaitForSequence("01 00", 1, 3000)
@@ -181,9 +193,6 @@ If result <> 0 Then
    dl.pause 500
 End If
 
-ctconfig()
-
-sub ctconfig()
 if readerType = "NEO2" then
 If result <> 0 Then
    dl.resetreceivecounter
@@ -220,119 +229,62 @@ If result <> 0 Then
    result = DL.WaitForSequence("04 00", 1, 5000)
 End If
 end if
-end sub
 '------------------------------------------------------------
-for i = 1 to 2
-If i = 2 Then
-   dl.resetreceivecounter
-   DL.AddComment vbcrlf
-   DL.AddComment "--- 04-09"
-   DL.SendSequence "04-09"
-   result = DL.WaitForSequence("04 00", 1, 10000)
-   ctconfig()
-End If
-
+for i = s to 2
 if msrcheck = 6 then 
 If result <> 0 Then
-   msgbox "Click OK -> tap card -> Swipe card", vbokonly
+   msgbox "Click OK -> Swipe any card", vbokonly
    dl.resetreceivecounter
    DL.AddComment vbcrlf
-   if i = 1 then
-      DL.AddComment "--- 02-40 (10 sec) (NEO2-MSR only)"
-      DL.SendSequence "02-40 (10 sec) (NEO2-MSR only)"
+   if i = 1 then 
+      DL.AddComment "--- 02-01 w/o DFEF37"
+      DL.SendSequence "02-01 w/o DFEF37"
    elseif i = 2 then
-          If result <> 0 Then
-             DL.AddComment "--- DFEF37 = enable MSR only"
-             DL.SendSequence "DFEF37 = enable MSR only"
-             result = DL.WaitForSequence("04 00", 1, 10000)
-          End If
-          If result <> 0 Then
-             dl.resetreceivecounter
-             dl.addcomment vbcrlf
-             DL.AddComment "--- 02-40 w/o DFEF37"
-             DL.SendSequence "02-40 w/o DFEF37"
-          End If
+      DL.AddComment "--- 02-40 w/o DFEF37"
+      DL.SendSequence "02-40 w/o DFEF37"
    end if
    result = DL.WaitForSequence("02 00", 1, 10000)
    dl.pause 1000
-   lcdcheck = msgbox ("Does LCD/ LED indicate this transaction for MSR ONLY?", vbyesno)
-   if lcdcheck = 7 then result = 0
 End If
 end if
 
 If result <> 0 Then
-   if msrcheck = 6 then msgbox "Click OK -> swipe MSR only card -> tap card", vbokonly
-   if msrcheck = 7 then msgbox "Click OK -> Insert card -> remove card -> tap card", vbokonly
+   msgbox "Click OK -> Tap any card", vbokonly
    dl.resetreceivecounter
    DL.AddComment vbcrlf
-   if i = 1 then
-      DL.AddComment "--- 02-40 (10 sec) (NEO2-CL only)"
-      DL.SendSequence "02-40 (10 sec) (NEO2-CL only)"
-      result = DL.WaitForSequence("02 23", 1, 10000)
-      if result = 0 then
-         result = DL.WaitForSequence("02 A3", 1, 10000)
-         if result <> 0 then 
-            msgbox "Click OK -> Tap card", vbokonly
-            DL.SendSequence "02-40 (10 sec) (NEO2-CL only)"
-            result = DL.WaitForSequence("02 23", 1, 10000)
-            dl.pause 1000
-         end if
-      end if
+   if i = 1 then 
+      DL.AddComment "--- 02-01 w/o DFEF37"
+      DL.SendSequence "02-01 w/o DFEF37"
    elseif i = 2 then
-          If result <> 0 Then
-             DL.AddComment "--- DFEF37 = enable CL only"
-             DL.SendSequence "DFEF37 = enable CL only"
-             result = DL.WaitForSequence("04 00", 1, 10000)
-          End If
-          If result <> 0 Then
-             dl.resetreceivecounter
-             dl.addcomment vbcrlf
-             DL.AddComment "--- 02-40 w/o DFEF37"
-             DL.SendSequence "02-40 w/o DFEF37"
-          End If
+      DL.AddComment "--- 02-40 w/o DFEF37"
+      DL.SendSequence "02-40 w/o DFEF37"
    end if
-   lcdcheck = msgbox ("Does LCD/ LED indicate this transaction for CL ONLY?", vbyesno)
-   if lcdcheck = 7 then result = 0
+   result = DL.WaitForSequence("02 23", 1, 10000)
+   dl.pause 1000
 End If
 
 If result <> 0 Then
-   msgbox "Click OK -> tap card -> Insert card (EMV Test Card V2 T=0)", vbokonly
+   msgbox "Click OK -> Insert P/N:80005206-002 card", vbokonly
    dl.resetreceivecounter
    DL.AddComment vbcrlf
-   if i = 1 then
-      DL.AddComment "--- 02-40 (10 sec) (NEO2-CT only)"
-      DL.SendSequence "02-40 (10 sec) (NEO2-CT only)"
-      if readerType <> "NEO2" then
-         if result <> 0 then result = DL.WaitForSequence("60-10 rx", 1, 10000)
+   if i = 1 then 
+      DL.AddComment "--- 02-01 w/o DFEF37"
+      DL.SendSequence "02-01 w/o DFEF37"
+      dl.pause 4000
+      ctcheck = msgbox("Reader has no response?", vbyesno)
+      if ctcheck = 6 then 
+         DL.SendSequence "05-01"
+         dl.pause 500
+         msgbox "Remove card --> Click OK", vbokonly
       else
-         if result <> 0 then result = DL.WaitForSequence("60-10 rx (NEO2)", 1, 10000)
-      end if
+         result = 0
+      end if 
    elseif i = 2 then
-          If result <> 0 Then
-             DL.AddComment "--- DFEF37 = enable CT only"
-             DL.SendSequence "DFEF37 = enable CT only"
-             result = DL.WaitForSequence("04 00", 1, 10000)
-          End If
-          If result <> 0 Then
-             dl.resetreceivecounter
-             dl.addcomment vbcrlf
-             DL.AddComment "--- 02-40 w/o DFEF37"
-             DL.SendSequence "02-40 w/o DFEF37"
-          End If
-   end if
-   dl.pause 1000
-   if result <> 0 then
-      DL.SendSequence "60-11 CT Authenticate Transaction (NEO)"
-      if result <> 0 then result = DL.WaitForSequence("60-11 rx", 1, 10000)
+      DL.AddComment "--- 02-40 w/o DFEF37"
+      DL.SendSequence "02-40 w/o DFEF37"
+      result = DL.WaitForSequence("02 00", 1, 10000)
       dl.pause 1000
-      if result <> 0 then
-         DL.SendSequence "60-12 CT Apply Host Response (NEO)"
-         if result <> 0 then result = DL.WaitForSequence("60-12 rx", 1, 10000)
-         dl.pause 1000
-      end if
    end if
-   lcdcheck = msgbox ("Does LCD/ LED indicate this transaction for CT ONLY?", vbyesno)
-   if lcdcheck = 7 then result = 0
 End If
 next
 '------------------------------------------------------------

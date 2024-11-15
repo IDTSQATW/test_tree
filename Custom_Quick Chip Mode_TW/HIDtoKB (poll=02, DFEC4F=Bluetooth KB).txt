@@ -2,7 +2,7 @@ Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUS
 
 --------------------
 >>> Set output interface (BT)
-CMD: 04 00 DFEF80
+CMD: 04 00 DFEC4F 01 02
 EXR: 04 00 00 00
 	
 >>> Set transaction interface = ALL

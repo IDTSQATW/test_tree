@@ -1,0 +1,12 @@
+Objective: Battery life test (Bluetooth)
+
+1) Enable Low Power Card Detection Mode, check cmd F013 is 03 01 00
+
+CMD: F0 12 03 01 00
+EXR: F0 00
+
+2) 5 CL transactions per day (card: MasterCard MC21)
+
+3) Stay in standby mode when not in used
+
+4) Paas criterion: last for 7 days

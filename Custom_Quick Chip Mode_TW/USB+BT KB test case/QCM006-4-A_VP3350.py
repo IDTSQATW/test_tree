@@ -12,32 +12,32 @@ strKey ='FEDCBA9876543210F1F1F1F1F1F1F1F1'
 
 #Objective: Encryption ON, MSR test under Quick Chip Mode. (IDT/ VISA MSD/ AAMVA/ JIS 2/ ISO4909 3T)
 
-#Poll on demand
-# if (Result):
-	# DL.SetWindowText("black", "*** Poll on demand")
-	# DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
-	# Result = DL.Check_RXResponse("01 00 00 00")	
-	# time.sleep(6)
+# Poll on demand
+if (Result):
+	DL.SetWindowText("black", "*** Poll on demand")
+	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
+	Result = DL.Check_RXResponse("01 00 00 00")	
+	time.sleep(6)
     
-#Set DF7D = 02 (NEO2)
-# if (Result):
-	# DL.SetWindowText("black", "*** Set DF7D = 02 (NEO2)")
-	# DL.SendIOCommand("IDG", "04 00 DF EE 7D 01 02", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 00 00 00")	
+# Set DF7D = 02 (NEO2)
+if (Result):
+	DL.SetWindowText("black", "*** Set DF7D = 02 (NEO2)")
+	DL.SendIOCommand("IDG", "04 00 DF EE 7D 01 02", 3000, 1) 
+	Result = DL.Check_RXResponse("04 00 00 00")	
 
-#QuickChip mode
-# if (Result):
-	# DL.SetWindowText("black", "*** QuickChip mode (02)")
-	# DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	# Result = DL.Check_RXResponse("01 00 00 00")	
-	# time.sleep(10)
+# QuickChip mode
+if (Result):
+	DL.SetWindowText("black", "*** QuickChip mode (02)")
+	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
+	Result = DL.Check_RXResponse("01 00 00 00")	
+	time.sleep(10)
     
-#Get DUKPT DEK Attribution based on KeySlot (C7-A3)
-# if (Result):
-	# DL.SetWindowText("black", "*** Get DUKPT DEK Attribution based on KeySlot (C7-A3)")
-	# DL.SendIOCommand("IDG", "C7 A3 01 00", 3000, 1) 
-	# Result = DL.Check_RXResponse("C7 00 00 06 01 02 00 00 00 00")
-	# time.sleep(0.5)
+# Get DUKPT DEK Attribution based on KeySlot (C7-A3)
+if (Result):
+	DL.SetWindowText("black", "*** Get DUKPT DEK Attribution based on KeySlot (C7-A3)")
+	DL.SendIOCommand("IDG", "C7 A3 01 00", 3000, 1) 
+	Result = DL.Check_RXResponse("C7 00 00 06 01 02 00 00 00 00")
+	time.sleep(0.5)
 #-----------------------------------------------------------------
 if (Result):       
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")

@@ -1,13 +1,13 @@
 DL_SCRIPTVERSION
 1
-41223
+37215
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "EGN42" ' !!!!! EDIT THIS !!!!!
+ProjectName = "EGN42-5" ' !!!!! EDIT THIS !!!!!
 ' Objective: NEO3-11719, [NEO3] Automatic DEK Selection from RID
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
@@ -160,92 +160,100 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-   If result <> 0 Then
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- 81-0C Retrieve Key Info"
-      DL.SendSequence "81-0C Retrieve Key Info"
-      dl.pause 500
-      keyslot0 = DL.WaitForSequence("data key in slot 00", 1, 1000)
-      keyslot3 = DL.WaitForSequence("data key in slot 03", 1, 1000)
-      if keyslot0 <> 0 then
-         dl.resetreceivecounter
-         dl.addcomment vbcrlf
-         DL.AddComment "--- C7-A3 (KeySlot 00)"
-         DL.SendSequence "C7-A3 (KeySlot 00)"
-         tdescheck = DL.WaitForSequence("tdes", 1, 1000)
-      end if
-      if keyslot3 <> 0 then
-         dl.resetreceivecounter
-         dl.addcomment vbcrlf
-         DL.AddComment "--- C7-A3 (KeySlot 03)"
-         DL.SendSequence "C7-A3 (KeySlot 03)"
-         aescheck = DL.WaitForSequence("aes", 1, 1000)
-      end if
-      if keyslot0 = 0 or keyslot3 = 0 then result = 0
-   End If
+'###  ACT command (02-40, 02-01, 60-10, and 83-41); default DEK enabled, RID link to existence/ nonexistence keyslot
 
-if result <> 0 then
-for i = 1 to 3
-   if i <> 2 then
-   If result <> 0 Then
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- C7-A4 Set DEK KeySlot = 00 *** TDES DUKPT DEK: TDES"
-      DL.SendSequence "C7-A4 Set DEK KeySlot = 00"
-      result = DL.WaitForSequence("C7 00", 1, 2000)
-      dl.pause 200
-   End If
-   elseif i = 2 then
-   If result <> 0 Then
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- C7-A4 Set DEK KeySlot = 03 *** AES DUKPT DEK: AES-128"
-      DL.SendSequence "C7-A4 Set DEK KeySlot = 03"
-      result = DL.WaitForSequence("C7 00", 1, 2000)
-      dl.pause 200
-   End If
-   end if
+keycheck = msgbox ("KeySlot 0~3 have DEK? (1~3 KSN = 1111111111111111, 2222222222222222, 3333333333333333)", vbyesno)
 
-   If result <> 0 Then
-      msgbox "Click OK --> Tap ANY CL card", vbokonly
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- 02-40"
-      DL.SendSequence "02-40"
-      dl.pause 1000
-      if i <> 2 then
-         result = DL.WaitForSequence("KSN 10", 1, 4000)
-         if result <> 0 then result = DL.WaitForSequence("DFEE26 = TDES DUKPT DEK: TDES", 1, 4000)
-      elseif i = 2 then
-         result = DL.WaitForSequence("KSN 12", 1, 4000)
-         if result <> 0 then result = DL.WaitForSequence("DFEE26 = AES DUKPT DEK: AES-128", 1, 4000)
-      end if
-      dl.pause 500
-   End If
-next
-else
-   if keyslot0 = 0 then
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- C7-A2 TDES DUKPT manage_TDES, data key (KeySlot 00)"
-      DL.SendSequence "C7-A2 TDES DUKPT manage_TDES, data key (KeySlot 00)"
-      resultignore = DL.WaitForSequence("C7 00", 1, 2000)
-      dl.pause 200
-   end if
+if keycheck = 6 then
 
-   if keyslot3 = 0 then
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- C7-A2 AES DUKPT manage_AES-128, Data key both ways (KeySlot 3)"
-      DL.SendSequence "C7-A2 AES DUKPT manage_AES-128, Data key both ways (KeySlot 3)"
-      resultignore = DL.WaitForSequence("C7 00", 1, 2000)
-      dl.pause 200
-   end if
+If result <> 0 Then
+   dl.resetreceivecounter
    dl.addcomment vbcrlf
-   if tdescheck = 0 and aescheck = 0 then DL.AddComment "***** Please load DEK (TDES DUKPT: TDES) in KeySlot 00 & DEK (AES DUKPT: AES-128) in KeySlot 03 to reader first....."
-   if tdescheck = 0 and aescheck <> 0 then DL.AddComment "***** Please load DEK (TDES DUKPT: TDES) in KeySlot 00 to reader first....."
-   if tdescheck <> 0 and aescheck = 0 then DL.AddComment "***** Please load DEK (AES DUKPT: AES-128) in KeySlot 03 to reader first....."
+   DL.AddComment "--- step 2: C7-A9 Reset all Links between RID and all DEKs"
+   DL.SendSequence "step 2: C7-A9 Reset all Links between RID and all DEKs"
+   result = DL.WaitForSequence("C7 00", 1, 2000)
+   dl.pause 200
+End If
+
+'##### VISA, MC, eFTPOS RID link to keyslot 01
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- step 3: C7-AA Set Slot 01 DEK to RID Link (VISA, MC, eFTPOS)"
+   DL.SendSequence "step 3: C7-AA Set Slot 01 DEK to RID Link (VISA, MC, eFTPOS)"
+   result = DL.WaitForSequence("C7 00", 1, 2000)
+   dl.pause 200
+End If
+
+for i = 1 to 2
+
+if i = 1 then
+If result <> 0 Then
+   dl.resetreceivecounter
+   DL.AddComment "--- C7-A4 Set DEK KeySlot = 03, and Enable Default"
+   DL.SendSequence "C7-A4 Set DEK KeySlot = 03, and Enable Default"
+   result = DL.WaitForSequence("C7 00", 1, 2000)
+   dl.pause 200
+End If
+end if
+
+if i = 2 then
+If result <> 0 Then
+   dl.resetreceivecounter
+   DL.AddComment "--- C7-A4 Set DEK KeySlot = 08, and Enable Default"
+   DL.SendSequence "C7-A4 Set DEK KeySlot = 08, and Enable Default"
+   result = DL.WaitForSequence("C7 00", 1, 2000)
+   dl.pause 200
+End If
+end if
+
+If result <> 0 Then
+   msgbox "Click OK --> Tap Discover card", vbokonly
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 02-40 w/o DFEC0D (DEK Keyslot Selection)"
+   DL.SendSequence "02-40 w/o DFEC0D (DEK Keyslot Selection)"
+   if i = 1 then
+      result = DL.WaitForSequence("02 23", 1, 2000)
+      if result <> 0 then result = DL.WaitForSequence("KSN 3", 1, 2000)
+      dl.pause 500
+   end if
+   if i = 2 then result = DL.WaitForSequence("02 90", 1, 2000)
+End If
+
+If result <> 0 Then
+   msgbox "Click OK --> Tap Discover card", vbokonly
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 02-40 w/ DFEC0D = 01 (DEK Keyslot Selection)"
+   DL.SendSequence "02-40 w/ DFEC0D = 01 (DEK Keyslot Selection)"
+   if i = 1 then
+      result = DL.WaitForSequence("02 23", 1, 2000)
+      if result <> 0 then result = DL.WaitForSequence("KSN 3", 1, 2000)
+      dl.pause 500
+   end if
+   if i = 2 then result = DL.WaitForSequence("02 90", 1, 2000)
+End If
+
+If result <> 0 Then
+   msgbox "Click OK --> Tap Discover card", vbokonly
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 02-40 w/ DFEC0D = 02 (DEK Keyslot Selection)"
+   DL.SendSequence "02-40 w/ DFEC0D = 02 (DEK Keyslot Selection)"
+   if i = 1 then
+      result = DL.WaitForSequence("02 23", 1, 2000)
+      if result <> 0 then result = DL.WaitForSequence("KSN 3", 1, 2000)
+      dl.pause 500
+   end if
+   if i = 2 then result = DL.WaitForSequence("02 90", 1, 2000)
+End If
+
+next
+
+else
+   DL.AddComment "Pls let reader to load DEK in KeySlot 0~3, and then restart testing."
+   result = 0
 end if
 '------------------------------------------------------------
 DL.AddComment vbcrlf & "---------- END OF TEST ----------" & vbCrLf

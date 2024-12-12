@@ -12,31 +12,31 @@ strKey = '0123456789ABCDEFFEDCBA9876543210'
 
 # Objective: enable Low Power Card Detection Mode will not break 3 interfaces transaction.
 
-# # Poll on demand
-# if (Result):
-	# DL.SetWindowText("black", "*** Poll on demand")
-	# DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
-	# Result = DL.Check_RXResponse("01 00 00 00")	
-	# time.sleep(6)
+# Poll on demand
+if (Result):
+	DL.SetWindowText("black", "*** Poll on demand")
+	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
+	Result = DL.Check_RXResponse("01 00 00 00")	
+	time.sleep(6)
     
-# # Set DF7D = 02 (NEO2)
-# if (Result):
-	# DL.SetWindowText("black", "*** Set DF7D = 02 (NEO2)")
-	# DL.SendIOCommand("IDG", "04 00 DF EE 7D 01 02", 3000, 1) 
-	# Result = DL.Check_RXResponse("04 00 00 00")	
+# Set DF7D = 02 (NEO2)
+if (Result):
+	DL.SetWindowText("black", "*** Set DF7D = 02 (NEO2)")
+	DL.SendIOCommand("IDG", "04 00 DF EE 7D 01 02", 3000, 1) 
+	Result = DL.Check_RXResponse("04 00 00 00")	
 
-# # Enable Low Power Card Detection Mode
-# if (Result):
-	# DL.SetWindowText("black", "*** Enable Low Power Card Detection Mode")
-	# DL.SendIOCommand("IDG", "F0 12 03 01 00", 3000, 1) 
-	# Result = DL.Check_RXResponse("F0 00")
+# Enable Low Power Card Detection Mode
+if (Result):
+	DL.SetWindowText("black", "*** Enable Low Power Card Detection Mode")
+	DL.SendIOCommand("IDG", "F0 12 03 01 00", 3000, 1) 
+	Result = DL.Check_RXResponse("F0 00")
     
-# # QuickChip mode
-# if (Result):
-	# DL.SetWindowText("black", "*** QuickChip mode (02)")
-	# DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	# Result = DL.Check_RXResponse("01 00 00 00")	
-	# time.sleep(10)
+# QuickChip mode
+if (Result):
+	DL.SetWindowText("black", "*** QuickChip mode (02)")
+	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
+	Result = DL.Check_RXResponse("01 00 00 00")	
+	time.sleep(10)
 #-----------------------------------------------------------------
 if (Result):
     for i in range (1, 4):

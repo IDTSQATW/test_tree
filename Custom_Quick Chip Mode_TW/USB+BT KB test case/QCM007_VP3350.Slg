@@ -1,0 +1,45 @@
+
+13:20:51: If Issue ?
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\USB+BT KB test case\QCM007_VP3350.txt
+Running Info>>
+[Issue Count: 1]
+[Wrong Items]
+>>>Error item ( 9 ).
+>>> MSR transaction (#NEO3-10624)
+
+
+13:20:51: >>[Do Scripts]>>
+
+Objective: Encryption OFF, MSR/ CT/ CL transaction are failed under Quick Chip Mode.
+--------------------
+>>> Quick Chip mode = 02
+Pack L = 17-5669564F74656368320001000000125300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+User Judgment Pass
+
+--------------------
+>>> MSR transaction (#NEO3-10624)
+SWIPEKB: click OK, then swipe card w/ abnormal method (transaction is failed).
+KB Unit Swipe Card:
+dfef6102f2200d0d4446454636313032353032340d0d
+Error! >>>> Expect OUT:EXR: DFEF61025024
+--------------------
+>>> CT transaction
+SWIPEKB: click OK, then insert card (P/N: 80005206-002).
+KB Unit Swipe Card:
+dfee26022000dfee250250054f005a0050005700820084008a008e0095009a032411289b009c010099005f20005f24005f25005f28005f2a005f2d005f34009f02060000000004449f03009f07009f08009f09009f0b009f0d009f0e009f0f009f10009f11009f12009f13009f15009f16009f1a009f1c009f1e009f20009f21030519569f24009f26009f27009f33036028c89f34009f3501219f36009f37009f53009f5b009f390105df2100dfee2300dfee51005f57008c008d009f38009f4d009f4f00dfec181d454d5620436f6d6d6f6e2047656e2033204c322056312e33302e303339dfef57135650333335302046572076322e30302e383630ffee0105dfee3001010d0d
+--------------------
+>>> CL transaction
+SWIPEKB: click OK, then tap T=0 card.
+KB Unit Swipe Card:
+dfee26022100dfee020427900001df81290840f0f0f080f0ff00df8116161c020000000000000000000000000000000000000000ffee0105dfee300100dfec1c1e08070004ff001c02000000ff00000000000000000000000000000000ff000d0d
+MESSAGECK: hear beep twice
+User Judgment Pass
+
+--------------------
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+User Judgment Pass
+

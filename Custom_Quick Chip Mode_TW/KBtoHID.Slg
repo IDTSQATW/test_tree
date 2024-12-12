@@ -1,14 +1,9 @@
 
-11:27:44: If Issue ?
-Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\KBtoHID.txt
-Running Info>>
-[Issue Count: 1]
-[Wrong Items]
->>>Error item ( 7 ).
->>> Set transaction interface = ALL
+15:37:32: If Issue ?
+Pass Test
+[Issue Count: 0]
 
-
-11:27:44: >>[Do Scripts]>>
+15:37:32: >>[Do Scripts]>>
 
 Objective: Under Quick Chip mode, set reader to Poll on demand mode (USB/ KBD to USB/ HID)
 --------------------
@@ -17,10 +12,6 @@ Pack L = 17-5669564F74656368320001000000125300
 CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
 OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
 ASCII: Otech2    
->>> Set transaction interface = ALL
-CMD: 56 69 56 4F 74 65 63 68 32 00 04 0A 00 00 69 D7 
-OUT: NULL
-Error! >>>> Expect OUT:EXR: 04 00 00 00
 --------------------
 >>> Check USB connection type
 MESSAGECK: 1) Check USB connection type = HID; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again

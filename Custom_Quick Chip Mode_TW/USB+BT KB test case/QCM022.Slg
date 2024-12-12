@@ -1,0 +1,76 @@
+
+14:13:39: 
+>>[Stop Scripts]>>
+
+
+14:13:39: >>[Do Scripts]>>
+
+Objective: [JIRA] GRN-89 -- [Quick Chip Mode] Sometimes reader can not read CL card after swiped card.
+===================================
+>>> Quick Chip mode = 02
+Pack L = 17-5669564F74656368320001000000125300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+User Judgment Pass
+
+--------------------
+LOOP: 2
+Catch LOOP Test Demand
+LOOP: 2
+
+--------------------
+--------------------
+>>> MSR transaction
+SWIPEKB: click OK, then swipe VISA MSD card.
+KB Unit Swipe Card:
+3b343736313733393030313031303031303d32303132313230303031323333393930303033313f0d0d
+Error! >>>> Expect OUT:EXR: ;4761739001010010=20121200012339900031?
+>>> CL transaction
+SWIPEKB: click OK, then tap VISA qVSDC card.
+KB Unit Swipe Card:
+dfee26022100dfef4c06000000000000dfef4d00df81290830f0f0f0b0f0ff00df8116161bff0000130000000000000000200000000100000840ff81058201564f07a0000000031010500c56495341205445535420303157134761739001010010d30121200012339900031f5a084761739001010010820220208407a00000000310108f0151950500000000009601039a032411289c01005f24033012315f2a0208405f2d046573656e5f3401015f3601029f02060000000004449f03060000000000009f0607a00000000310109f090200029f1007060111039000009f1101019f120c50726566204e616d652030319f150200009f1a0208409f1b0400001f409f1e0834543136383430309f21030612479f2608aabbccddeeff11229f2701409f3303e008409f34033f00009f3501159f360200039f37043abdea589f3901079f400580000000009f4104000000269f4e1e0000000000000000000000000000000000000000000000000000000000009f66043000c0009f6907011122334420009f6c022000df8126060000
+--------------------
+--------------------
+LOOPEND:
+Catch ENDLOOP Test Point.
+LOOPEND:
+Number Loop: 2 
+
+--------------------
+--------------------
+>>> MSR transaction
+SWIPEKB: click OK, then swipe VISA MSD card.
+Error! >>>> Expect OUT:EXR: ;4761739001010010=20121200012339900031?
+>>> CL transaction
+SWIPEKB: click OK, then tap VISA qVSDC card.
+--------------------
+--------------------
+LOOPEND:
+Catch ENDLOOP Test Point.
+LOOPEND:
+Number Loop: 3 
+
+--------------------
+--------------------
+>>> MSR transaction
+SWIPEKB: click OK, then swipe VISA MSD card.
+Error! >>>> Expect OUT:EXR: ;4761739001010010=20121200012339900031?
+>>> CL transaction
+SWIPEKB: click OK, then tap VISA qVSDC card.
+--------------------
+--------------------
+LOOPEND:
+Catch ENDLOOP Test Point.
+LOOPEND:
+
+Finish Loop process !!!
+
+--------------------
+>>[Stop Scripts]>>
+
+
+14:13:39: 
+>>[Stop Scripts]>>
+

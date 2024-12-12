@@ -27,12 +27,13 @@ if (Result):
 			DL.SetWindowText("Red", "Please ENABLE data encryption (03)...")
         
 # Check reader is VP3350 or not
-readertype = DL.ShowMessageBox("", "Is this VP3350?", 0)
-if readertype == 1:
+readermodel = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if readermodel == 1:
 	DL.SetWindowText("Green", "*** This is VP3350 ***")
 	RetOfStep = DL.SendCommand('0105 do not use LCD')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("01 00 00 00")
+	readertype = DL.ShowMessageBox("", "Is this NSRED project?", 0)
 else:
 	DL.SetWindowText("Green", "*** non-VP3350 reader ***")		
 		
@@ -44,24 +45,25 @@ if (Result):
 
 if (Result):
 	for i in range(1, 3):
-		if readertype == 1: #VP3350
+		if readermodel == 1: #VP3350
 			if i == 1:
-				RetOfStep = DL.SendCommand('DFEE1D--02 02 21 0A 30 (NEO3)')
-				if (RetOfStep):
-					Result = DL.Check_RXResponse("C7 00 00 00")	
+				if readertype == 1: #NSRED
+					RetOfStep = DL.SendCommand('DFEE1D--02 02 21 0A 30 (NEO3)')
+					if (RetOfStep):
+						Result = DL.Check_RXResponse("C7 00 00 00")	
+				if readertype == 0: #SRED
+					RetOfStep = DL.SendCommand('DFEE1D--02 02 21 0A 30 (NEO3_SRED)')
+					if (RetOfStep):
+						Result = DL.Check_RXResponse("C7 00 00 00")	
 			if i == 2:
-				RetOfStep = DL.SendCommand('DFEE1D--06 04 7E 0F 31 (NEO3)')
-				if (RetOfStep):
-					Result = DL.Check_RXResponse("C7 00 00 00")	
-		if readertype == 0: #non-VP3350
-			if i == 1:
-				RetOfStep = DL.SendCommand('DFEE1D--02 02 21 0A 30')
-				if (RetOfStep):
-					Result = DL.Check_RXResponse("04 00 00 00")	
-			if i == 2:
-				RetOfStep = DL.SendCommand('DFEE1D--06 04 7E 0F 31')
-				if (RetOfStep):
-					Result = DL.Check_RXResponse("04 00 00 00")	
+				if readertype == 1: #NSRED
+					RetOfStep = DL.SendCommand('DFEE1D--06 04 7E 0F 31 (NEO3)')
+					if (RetOfStep):
+						Result = DL.Check_RXResponse("C7 00 00 00")	
+				if readertype == 0: #SRED
+					RetOfStep = DL.SendCommand('DFEE1D--06 04 7E 0F 31 (NEO3_SRED)')
+					if (RetOfStep):
+						Result = DL.Check_RXResponse("C7 00 00 00")	
 				
 		# cmd 60-10, insert card		
 		if (Result):
@@ -172,7 +174,7 @@ if (Result):
 									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 
-if readertype == 1:
+if readermodel == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("01 00 00 00")

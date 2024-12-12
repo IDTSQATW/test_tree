@@ -19,6 +19,12 @@ if readermodel == 1:
 else:
 	DL.SetWindowText("Green", "*** non-VP3350 reader ***")	
 
+# DF7D = 02
+if (Result):
+	RetOfStep = DL.SendCommand('DF7D = 02 (NEO2)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("04 00 00 00")
+
 # Burst mode OFF		
 if (Result):
 	RetOfStep = DL.SendCommand('Burst mode Off')

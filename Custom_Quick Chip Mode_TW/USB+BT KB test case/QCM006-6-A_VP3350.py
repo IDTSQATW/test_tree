@@ -33,7 +33,7 @@ if (Result):
         if i == 5:
             DL.SetWindowText("black", "*** Tap AMEX XP8 #86 card")
         if i == 6:
-            DL.SetWindowText("black", "*** Tap JCB O-48250 card")
+            DL.SetWindowText("black", "*** Tap JCB EMV card")
         if i == 7:
             DL.SetWindowText("black", "*** Tap CUP #69 card")
             

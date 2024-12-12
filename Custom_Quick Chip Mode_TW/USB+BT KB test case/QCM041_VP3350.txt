@@ -5,7 +5,6 @@ Objective: for JIRA#NEO3-11472
 >>> Quick Chip mode = 02
 CMD: 01 01 02
 EXR: 01 00 00 00
-MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
 
 ----------------------------------------
 >>> Get Config
@@ -13,6 +12,7 @@ CMD: 03 02
 EXR: DF ED 4A 02 00 06
 
 --------------------
+MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
 >>> CL transaction
 SWIPEKB: click OK, tap VISA qVSDC card, then leave card in the landing zone. (Move tag FF8105+length to the end of output --> Press button "Quick Chip" to Decryption first then Press button "OK")
 EXR: DFEF5B084761CCCCCCCC0010

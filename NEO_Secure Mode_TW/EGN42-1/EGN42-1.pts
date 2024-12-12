@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-42049
+55864
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -187,6 +187,7 @@ If result <> 0 Then
 End If
 
 If result <> 0 Then
+   msgbox "Click OK --> Tap VISA card", vbokonly
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- 02-40 w/o DFEC0D (DEK Keyslot Selection)"
@@ -221,6 +222,7 @@ End If
 '##### 4)
 If result <> 0 Then
    dl.resetreceivecounter
+   dl.addcomment vbcrlf
    DL.AddComment "--- C7-A4 Set DEK KeySlot = 08, and Enable Default"
    DL.SendSequence "C7-A4 Set DEK KeySlot = 08, and Enable Default"
    result = DL.WaitForSequence("C7 00", 1, 2000)

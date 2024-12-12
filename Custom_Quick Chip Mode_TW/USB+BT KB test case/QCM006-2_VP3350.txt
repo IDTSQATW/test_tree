@@ -75,6 +75,7 @@ MESSAGECK: Reader connect w/ PC via USB cable and then click OK
 >>> Poll on demand
 CMD: 01 01 01
 EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Waiting for the reader to reboot, Click OK if ready
 
 >>> Set transaction interface = CT+MSR
 CMD: 04 00 DF EF 37 01 05
@@ -151,6 +152,7 @@ MESSAGECK: Reader connect w/ PC via USB cable and then click OK
 >>> Poll on demand
 CMD: 01 01 01
 EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Waiting for the reader to reboot, Click OK if ready
 
 >>> Set transaction interface = CL+MSR
 CMD: 04 00 DF EF 37 01 03
@@ -195,6 +197,7 @@ MESSAGECK: Reader connect w/ PC via USB cable and then click OK
 >>> Poll on demand
 CMD: 01 01 01
 EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Waiting for the reader to reboot, Click OK if ready
 
 >>> Set transaction interface = ALL
 CMD: 04 00 DF EF 37 01 07

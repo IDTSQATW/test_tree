@@ -46,6 +46,7 @@ if (Result):
     else:
         DL.SetWindowText("red", "Time-out data FAIL")
         DL.fails=DL.fails+1
+        DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
         DL.SendIOCommand("IDG", "05 01", 3000, 1) 
     speedcheck = DL.ShowMessageBox("", "When fallback to chip reader, MSR reader did not work?", 0)
     if speedcheck == 1:
@@ -66,10 +67,10 @@ if (Result):
         DL.fails=DL.fails+1
 
     # 05-01
+    DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
     DL.SetWindowText("black", "*** Cancel the status")
     DL.SendIOCommand("IDG", "05 01", 3000, 1) 
     time.sleep(1)
-    DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
 #-----------------------------------------------------------------
 # Poll on demand
 if (Result):
@@ -103,6 +104,7 @@ if (Result):
     else:
         DL.SetWindowText("red", "Time-out data FAIL")
         DL.fails=DL.fails+1
+        DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
         DL.SendIOCommand("IDG", "05 01", 3000, 1) 
     speedcheck = DL.ShowMessageBox("", "When fallback to chip reader, MSR reader did not work?", 0)
     if speedcheck == 1:

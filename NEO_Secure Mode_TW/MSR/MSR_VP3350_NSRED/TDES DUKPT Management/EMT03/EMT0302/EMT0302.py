@@ -59,7 +59,7 @@ if (Result):
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("01 00 00 00")		
 		if (Result):
-			for i in range (1, 11):
+			for i in range (8, 9):
 				if j == 1:
 					if i == 1:
 						RetOfStep = DL.SendCommand('Activate Transaction -- IDT')

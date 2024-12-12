@@ -23,7 +23,7 @@ CMD:04 00 DF EE 7D 01 02
 EXR:
 
 TID:Activate Transaction -- ISO4909 (3T) w/o LCD (NEOII/ III)
-CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+CMD:02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20 DF EF 37 01 01
 MSG:Swipe the specific card (has tracks 2+3 data only) EX. ISO 4909 only T2+T3
 EXR:
 EXR:

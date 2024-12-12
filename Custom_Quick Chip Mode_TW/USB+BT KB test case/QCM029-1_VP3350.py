@@ -32,7 +32,7 @@ if (Result):
 	time.sleep(10)
     
 if (Result): 
-    DL.SetWindowText("black", "*** Swipe the card that service code is 2xx or 6xx")
+    DL.SetWindowText("black", "*** Swipe any card")
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     strCardData = DL.ReadKeyBoardCardData(20000)
     if(-1 != strCardData.find('$$$$$')):
@@ -79,7 +79,7 @@ if (Result):
 	time.sleep(10)
     
 if (Result): 
-    DL.SetWindowText("black", "*** Swipe the card that service code is 2xx or 6xx")
+    DL.SetWindowText("black", "*** Swipe any card")
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     strCardData = DL.ReadKeyBoardCardData(20000)
     if(-1 != strCardData.find('$$$$$')):

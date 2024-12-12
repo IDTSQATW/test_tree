@@ -121,7 +121,7 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** cmd 02-40")
 	DL.SetWindowText("red", "[Please tap Card 58#-JCB_MagStripe card..........]")
-	DL.SendIOCommand("IDG", "02 40 1F 9F 02 06 00 00 00 00 10 00", 32000, 1) 
+	DL.SendIOCommand("IDG", "02 40 1F 9F 02 06 00 00 00 00 10 00 DF EF 37 01 02", 32000, 1) 
 	Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23")
 	if (Result):
 		alldata = DL.Get_RXResponse(0)

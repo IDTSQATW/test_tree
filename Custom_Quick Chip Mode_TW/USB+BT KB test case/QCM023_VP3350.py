@@ -46,11 +46,12 @@ if (Result):
         DL.fails=DL.fails+1
     
     # 05-01
+    DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
     DL.SetWindowText("black", "*** Cancel the status")
     DL.SendIOCommand("IDG", "05 01", 3000, 1) 
     Result = DL.Check_RXResponse("05 00 00 00")	
     
-    speedcheck = DL.ShowMessageBox("", "LED 3 is OFF?", 0)
+    speedcheck = DL.ShowMessageBox("", "LED 4 is OFF?", 0)
     if speedcheck == 1:
         DL.SetWindowText("Green", "PASS")
     else:
@@ -60,6 +61,7 @@ if (Result):
 # Fallback to MSR transaction
 if (Result): 
     DL.SetWindowText("black", "*** Insert IDT test card, @1st time")
+    DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     strCardData1 = DL.ReadKeyBoardCardData(10000)
     DL.SetWindowText("black", "*** Insert IDT test card, @2nd time")
     strCardData1 = DL.ReadKeyBoardCardData(10000)
@@ -74,18 +76,18 @@ if (Result):
         DL.fails=DL.fails+1
     
     # 05-01
+    DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
     DL.SetWindowText("black", "*** Cancel the status")
     DL.SendIOCommand("IDG", "05 01", 3000, 1) 
     Result = DL.Check_RXResponse("05 00 00 00")	
     
-    speedcheck = DL.ShowMessageBox("", "LED 3 is OFF?", 0)
+    speedcheck = DL.ShowMessageBox("", "LED 4 is OFF?", 0)
     if speedcheck == 1:
         DL.SetWindowText("Green", "PASS")
     else:
         DL.SetWindowText("Red", "LED FAIL")
         DL.fails=DL.fails+1
-        
-DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
+
 #-----------------------------------------------------------------
 # Poll on demand
 if (Result):
@@ -120,11 +122,12 @@ if (Result):
         DL.fails=DL.fails+1
     
     # 05-01
+    DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
     DL.SetWindowText("black", "*** Cancel the status")
     DL.SendIOCommand("IDG", "05 01", 3000, 1) 
     Result = DL.Check_RXResponse("05 00 00 00")	
     
-    speedcheck = DL.ShowMessageBox("", "LED 3 is OFF?", 0)
+    speedcheck = DL.ShowMessageBox("", "LED 4 is OFF?", 0)
     if speedcheck == 1:
         DL.SetWindowText("Green", "PASS")
     else:
@@ -134,6 +137,7 @@ if (Result):
 # Fallback to MSR transaction
 if (Result): 
     DL.SetWindowText("black", "*** Insert IDT test card, @1st time")
+    DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     strCardData1 = DL.ReadKeyBoardCardData(10000)
     DL.SetWindowText("black", "*** Insert IDT test card, @2nd time")
     strCardData1 = DL.ReadKeyBoardCardData(10000)
@@ -148,18 +152,18 @@ if (Result):
         DL.fails=DL.fails+1
     
     # 05-01
+    DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
     DL.SetWindowText("black", "*** Cancel the status")
     DL.SendIOCommand("IDG", "05 01", 3000, 1) 
     Result = DL.Check_RXResponse("05 00 00 00")	
     
-    speedcheck = DL.ShowMessageBox("", "LED 3 is OFF?", 0)
+    speedcheck = DL.ShowMessageBox("", "LED 4 is OFF?", 0)
     if speedcheck == 1:
         DL.SetWindowText("Green", "PASS")
     else:
         DL.SetWindowText("Red", "LED FAIL")
         DL.fails=DL.fails+1
-        
-DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
+
 #-----------------------------------------------------------------
 # Poll on demand
 if (Result):

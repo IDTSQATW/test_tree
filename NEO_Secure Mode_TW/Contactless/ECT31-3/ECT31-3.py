@@ -146,7 +146,7 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** cmd 02-40")
 	DL.SetWindowText("red", "[Please tap CUP QUICS test card..........]")
-	DL.SendIOCommand("IDG", "02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20", 32000, 1) 
+	DL.SendIOCommand("IDG", "02 40 78 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20 DF EF 37 01 02", 32000, 1) 
 	Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** E1 ** DF EE 12")
 	if (Result):
 		alldata = DL.Get_RXResponse(0)

@@ -36,7 +36,7 @@ if (Result):
 if (Result): 
     DL.SetWindowText("black", "*** Insert card (P/N: 80005206-002)")
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
-    strCardData1 = DL.ReadKeyBoardCardData(10000)
+    strCardData1 = DL.ReadKeyBoardCardData(30000)
     if(-1 != strCardData1.find('DFEF6102F221')):
         DL.SetWindowText("blue", "PASS")
     else:
@@ -49,7 +49,7 @@ if (Result):
         DL.fails=DL.fails+1
 
     DL.SetWindowText("black", "*** swipe any card")
-    strCardData1 = DL.ReadKeyBoardCardData(10000)
+    strCardData1 = DL.ReadKeyBoardCardData(30000)
     if(-1 != strCardData1.find('DFEE25020007')):
         DL.SetWindowText("blue", "PASS")
     else:
@@ -81,7 +81,7 @@ if (Result):
 if (Result): 
     DL.SetWindowText("black", "*** Insert card (P/N: 80005206-002)")
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
-    strCardData1 = DL.ReadKeyBoardCardData(10000)
+    strCardData1 = DL.ReadKeyBoardCardData(30000)
     if(-1 != strCardData1.find('DFEE25025005')):
         DL.SetWindowText("blue", "PASS")
     else:

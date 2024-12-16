@@ -10,22 +10,38 @@ MacKey=''
 PAN=''
 strKey ='FEDCBA9876543210F1F1F1F1F1F1F1F1'
 
-if (Result):       
-    DL.SetWindowText("black", "*** Insert EMV T=0 card")
+if (Result):
+	DL.SetWindowText("black", "*** Poll on demand")
+	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
+	Result = DL.Check_RXResponse("01 00 00 00")	
+	time.sleep(6)
+    
+# DFED5A Byte 4 = 00 (default)
+if (Result):
+	DL.SetWindowText("black", "*** DFED5A Byte 4 = 00 (default)")
+	DL.SendIOCommand("IDG", "04 00 DFED5A 08 00 00 00 00 00 00 00 00", 3000, 1) 
+	Result = DL.Check_RXResponse("04 00 00 00")	
+
+# QuickChip mode
+if (Result):
+	DL.SetWindowText("black", "*** QuickChip mode (02)")
+	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
+	Result = DL.Check_RXResponse("01 00 00 00")	
+	time.sleep(10)
+
+# CT transaction
+if (Result): 
+    DL.SetWindowText("black", "*** Insert T=0 card")
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     strCardData = DL.ReadKeyBoardCardData(20000)
-    if(-1 != strCardData.find('DFED2006536C696D4344DFED2103110218DFED220A312E337C303432333138')):
-        DL.SetWindowText("blue", "PASS")
+    if(-1 != strCardData.find('DFEE25020003')):
+        DL.SetWindowText("blue", "DFEE25 PASS")
     else:
-        DL.SetWindowText("red", "FAIL")
+        DL.SetWindowText("red", "DFEE25 FAIL")
         DL.fails=DL.fails+1
         
-    # for JIRA#CS-3869
-    DL.SetWindowText("black", "*** Tap any CL card")
-    strCardData = DL.ReadKeyBoardCardData(20000)
-    if(-1 != strCardData.find('DFED2006536C696D4344DFED2103110218DFED220A312E337C303432333138')):
-        DL.SetWindowText("blue", "PASS")
-    else:
-        DL.SetWindowText("red", "FAIL")
+    speedcheck = DL.ShowMessageBox("", "Reader will beep 'DURING' outputting data?", 0)
+    if speedcheck != 1:
+        DL.SetWindowText("Red", "Buzzer FAIL")
         DL.fails=DL.fails+1
     DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)

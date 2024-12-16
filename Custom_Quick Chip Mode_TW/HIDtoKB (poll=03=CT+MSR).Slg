@@ -1,0 +1,66 @@
+
+13:48:13: If Issue ?
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=03=CT+MSR).txt
+Running Info>>
+[Issue Count: 4]
+[Wrong Items]
+>>>Error item ( 10 ).
+>>> Change to Quick Chip Mode
+
+>>>Error item ( 17 ).
+--------------------
+User Judgment Fail:MESSAGECK: CL interface = Disable
+
+>>>Error item ( 20 ).
+MESSAGECK: CL interface = Disable
+User Judgment Fail:MESSAGECK: can read MSR card
+
+>>>Error item ( 23 ).
+MESSAGECK: can read MSR card
+User Judgment Fail:MESSAGECK: can read CT card
+
+
+13:48:13: >>[Do Scripts]>>
+
+Objective: set reader to Quick Chip mode = 03 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 03 = CT and MSR would be active.
+--------------------
+>>> Set CT ICS Identification = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 05 8D 54 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Set CT terminal data = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 9B FB 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F74656368320001050000F9A300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 03 14 95 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 05 00 00 F9 A3 
+ASCII: Otech2    
+Error! >>>> Expect OUT:EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+--------------------
+>>> Check USB connection type
+MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
+User Judgment Pass
+
+--------------------
+>>> CL transaction
+SWIPEKB: Click OK --> Tap any card (No reaction) --> Press button "OK"
+MESSAGECK: CL interface = Disable
+--------------------
+Error! >>>> User Judgment Fail:MESSAGECK: CL interface = Disable
+
+>>> MSR transaction
+SWIPEKB: Click OK --> Swipe any card --> Press button "OK"
+MESSAGECK: can read MSR card
+MESSAGECK: CL interface = Disable
+Error! >>>> User Judgment Fail:MESSAGECK: can read MSR card
+
+>>> CL transaction
+SWIPEKB: Click OK --> Insert any card ----> Press button "OK"
+MESSAGECK: can read CT card
+MESSAGECK: can read MSR card
+Error! >>>> User Judgment Fail:MESSAGECK: can read CT card
+

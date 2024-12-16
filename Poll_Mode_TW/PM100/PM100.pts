@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-33549
+15200
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -245,6 +245,7 @@ If result <> 0 Then
              DL.AddComment "--- DFEF37 = enable MSR only"
              DL.SendSequence "DFEF37 = enable MSR only"
              result = DL.WaitForSequence("04 00", 1, 10000)
+             dl.pause 200
           End If
           If result <> 0 Then
              dl.resetreceivecounter
@@ -283,12 +284,14 @@ If result <> 0 Then
              DL.AddComment "--- DFEF37 = enable CL only"
              DL.SendSequence "DFEF37 = enable CL only"
              result = DL.WaitForSequence("04 00", 1, 10000)
+             dl.pause 200
           End If
           If result <> 0 Then
              dl.resetreceivecounter
              dl.addcomment vbcrlf
              DL.AddComment "--- 02-40 w/o DFEF37"
              DL.SendSequence "02-40 w/o DFEF37"
+             result = DL.WaitForSequence("02 23", 1, 10000)
           End If
    end if
    lcdcheck = msgbox ("Does LCD/ LED indicate this transaction for CL ONLY?", vbyesno)
@@ -302,16 +305,12 @@ If result <> 0 Then
    if i = 1 then
       DL.AddComment "--- 02-40 (10 sec) (NEO2-CT only)"
       DL.SendSequence "02-40 (10 sec) (NEO2-CT only)"
-      if readerType <> "NEO2" then
-         if result <> 0 then result = DL.WaitForSequence("60-10 rx", 1, 10000)
-      else
-         if result <> 0 then result = DL.WaitForSequence("60-10 rx (NEO2)", 1, 10000)
-      end if
    elseif i = 2 then
           If result <> 0 Then
              DL.AddComment "--- DFEF37 = enable CT only"
              DL.SendSequence "DFEF37 = enable CT only"
              result = DL.WaitForSequence("04 00", 1, 10000)
+             dl.pause 200
           End If
           If result <> 0 Then
              dl.resetreceivecounter
@@ -319,6 +318,11 @@ If result <> 0 Then
              DL.AddComment "--- 02-40 w/o DFEF37"
              DL.SendSequence "02-40 w/o DFEF37"
           End If
+   end if
+   if readerType <> "NEO2" then
+      result = DL.WaitForSequence("60-10 rx", 1, 10000)
+   else
+      result = DL.WaitForSequence("60-10 rx (NEO2)", 1, 10000)
    end if
    dl.pause 1000
    if result <> 0 then

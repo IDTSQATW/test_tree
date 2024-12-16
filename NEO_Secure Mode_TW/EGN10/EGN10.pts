@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-28507
+14087
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -197,6 +197,13 @@ if readercheck = 6 or readerType <> "NEO2" then     'confirmed that reader was d
          DL.AddComment "--- Get account DUKPT encryption type (C7-33) *** " & readerType 
          DL.SendSequence "Get account DUKPT encryption type (C7-33)"
          result = DL.WaitForSequence("c7 00 -- TDES", 1, 1200)
+         if result = 0 then
+            dl.resetreceivecounter
+            dl.addcomment vbcrlf
+            DL.AddComment "--- C7-A3 (KeySlot 00) *** " & readerType 
+            DL.SendSequence "C7-A3 (KeySlot 00)"
+            result = DL.WaitForSequence("C7 A3 = 00 00 00 00 00 00", 1, 1200)
+         end if
       End If
 
       If result <> 0 Then

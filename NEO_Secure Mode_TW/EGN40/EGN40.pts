@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-29460
+3756
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -149,8 +149,8 @@ End If
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
-   DL.AddComment "--- 81-0F Get Certificate (00 = ROOT_CA)"
-   DL.SendSequence "81-0F Get Certificate (00 = ROOT_CA)"
+   DL.AddComment "--- 81-0F Get Certificate (0A = DEVICE_CA)"
+   DL.SendSequence "81-0F Get Certificate (0A = DEVICE_CA)"
    result = DL.WaitForSequence("81 00", 1, 5000)
 End If
 '------------------------------------------------------------

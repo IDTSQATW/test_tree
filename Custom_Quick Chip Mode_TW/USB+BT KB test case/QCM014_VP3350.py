@@ -25,6 +25,9 @@ if (Result):
 	DL.SendIOCommand("IDG", "60 06 0a 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 DF EE 20 01 3C DF EE 21 01 0A DF EE 22 03 32 3C 3C", 3000, 1) 
 	Result = DL.Check_RXResponse("60 00 00 00")	
 
+
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 3D 0A 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 DF EE 20 01 3C DF EE 21 01 0A DF EE 22 03 32 3C 3C D7 69 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
 # QuickChip mode
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
@@ -66,6 +69,7 @@ if (Result):
     else:
         DL.SetWindowText("red", "Time-out data FAIL")
         DL.fails=DL.fails+1
+        DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
         DL.SendIOCommand("IDG", "05 01", 3000, 1) 
         
     speedcheck = DL.ShowMessageBox("", "LED 3 is ON (flash status) if fallback to MSR reader, LED 3 is OFF if fallback timeout?", 0)

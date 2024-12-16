@@ -18,11 +18,9 @@ SWIPEKB: Click OK --> Tap INTERAC card.
 EXR: 5A085413339000001513
 EXR: 57115413339000001513D
 
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK
 LOOP: 4
 CMD: 1801
 EXR: 18000000
 LOOPEND:
 MESSAGECK: Reader did NOT be reset automatically
-
---------------------
-MESSAGECK: Reader connect w/ PC via USB cable and then click OK

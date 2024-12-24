@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-923
+15138
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -135,10 +135,10 @@ End Function
 result = 1
 
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 3000
+DL.Pause 200
 
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 01 1D 19","H"
-DL.Pause 3000
+DL.Pause 200
 
 '------------------------------------------------------------
 'Prompt of test being run
@@ -157,7 +157,7 @@ If result <> 0 Then
   DL.SendSequence "Antenna Control - Disable RF Antenna"
   result = DL.WaitForSequence("Antenna Control - Disable RF Antenna (SUCCESS)", 1, 10000)
 End If
-DL.Pause 1500
+DL.Pause 200
 
 If result <> 0 Then
 	MyInput = MsgBox("Tap a test card and then click OK.", VBOKOnly, "Test Step")
@@ -174,12 +174,13 @@ If result <> 0 Then
 End If
 
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 3000
+DL.Pause 200
 
-PrintMyResult(result)
-DL.Pause 1000
+
+'DL.Pause 1000
 
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
@@ -187,35 +188,35 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If 0 Then
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
-End If
+'If 0 Then
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
 
-If MasterResult = 1 Then
-	MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-	MasterVerdict = "FAILED"
-End If
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'	MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'	MasterVerdict = "FAILED"
+'End If
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT FILE(!!!!! DO NOT EDIT !!!!!)

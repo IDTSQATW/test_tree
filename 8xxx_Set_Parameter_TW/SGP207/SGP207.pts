@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-46704
+41692
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -467,6 +467,11 @@ if usercheck = 6 then msgbox "Reader connect w/ SDK via Bluetooth first", vbokon
       DL.AddComment "** FAIL **"
    end if
    '------------------------------------------------------------DFEE37 = B3
+   DL.AddComment vbCrLf
+   DL.AddComment "--- F0-04 Set Low Power Consumption 04 = 0 sec"
+   DL.SendSequence "F0-04 Set Low Power Consumption 04 = 0 sec"
+   dl.pause 200
+
    DL.ResetReceiveCounter
    DL.AddComment vbCrLf
    DL.AddComment "--- DFEE37 = B3"
@@ -495,8 +500,11 @@ if usercheck = 6 then msgbox "Reader connect w/ SDK via Bluetooth first", vbokon
 '------------------------------------------------------------
 if failcount <> 0 then result = 0
 DL.AddComment vbCrLf
+DL.SendSequence "F0-04 Set Low Power Consumption 04 = 20 sec"
+dl.pause 200
+DL.AddComment vbCrLf
 DL.SendSequence "DFEE37 = 03"
-DL.Pause 500
+DL.Pause 200
 DL.SendSequence "77-05"
 '------------------------------------------------------------
 DL.AddComment vbCrLf

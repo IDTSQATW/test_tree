@@ -1,9 +1,9 @@
 
-11:44:25: 
+14:00:49: 
 >>[Stop Scripts]>>
 
 
-11:44:25: >>[Do Scripts]>>
+14:00:50: >>[Do Scripts]>>
 
 Objective1: Encryption OFF, CT + Fallback to CT + Fallback to MSR test under Quick Chip Mode. (T=0/ Discover)
 Objective2: Output tags list should the same as Augusta
@@ -21,46 +21,10 @@ User Judgment Pass
 >>> CT transaction
 SWIPEKB: Click OK -> Insert T=0 card.
 KB Unit Swipe Card:
-dfee26022000dfee250200039f530152dfec11207c374af7da062b65d3104e6d6bdb3a08fe944a2ca35c79b80ce7f17209a81638dfec181d454d5620436f6d6d6f6e2047656e2033204c322056312e33302e303339dfef57135650333335302046572076322e30302e383630ffee0105dfee3001010d0d
-Error! >>>> Expect OUT:EXR: 57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89
-Error! >>>> Expect OUT:EXR: 5A 08 47 61 73 90 01 01 00 10
-Error! >>>> Expect OUT:EXR: 9F 39 01 05
-Error! >>>> Expect OUT:EXR: 4F
-Error! >>>> Expect OUT:EXR: 82
-Error! >>>> Expect OUT:EXR: 84
-Error! >>>> Expect OUT:EXR: 8A
-Error! >>>> Expect OUT:EXR: 8C
-Error! >>>> Expect OUT:EXR: 8E
-Error! >>>> Expect OUT:EXR: 95
-Error! >>>> Expect OUT:EXR: 99
-Error! >>>> Expect OUT:EXR: 9C
-Error! >>>> Expect OUT:EXR: 5F20
-Error! >>>> Expect OUT:EXR: 5F24
-Error! >>>> Expect OUT:EXR: 5F25
-Error! >>>> Expect OUT:EXR: 5F28
-Error! >>>> Expect OUT:EXR: 5F2A
-Error! >>>> Expect OUT:EXR: 5F2D
-Error! >>>> Expect OUT:EXR: 5F34
-Error! >>>> Expect OUT:EXR: 5F57
-Error! >>>> Expect OUT:EXR: 9F02
-Error! >>>> Expect OUT:EXR: 9F03
-Error! >>>> Expect OUT:EXR: 9F10
-Error! >>>> Expect OUT:EXR: 9F13
-Error! >>>> Expect OUT:EXR: 9F20
-Error! >>>> Expect OUT:EXR: 9F26
-Error! >>>> Expect OUT:EXR: 9F27
-Error! >>>> Expect OUT:EXR: 9F34
-Error! >>>> Expect OUT:EXR: 9F36
-Error! >>>> Expect OUT:EXR: 9F37
-Error! >>>> Expect OUT:EXR: 9F38
-Error! >>>> Expect OUT:EXR: 9F4D
-Error! >>>> Expect OUT:EXR: 9F4F
-Error! >>>> Expect OUT:EXR: 9F5B
+dfee26022000dfee250200034f07a00000000310105a084761739001010010500a5649534143524544495457114761739001010010d2012201012345678982025c008407a00000000310108a025a338e0c00000000000000005f030000950542c00000009a032412139b02e0009c010099005f200f46554c4c2046554e4354494f4e414c5f24032012315f25039507015f280208405f2a0208405f2d086573656e667264655f3401019f02060000000004449f03060000000000009f0702ffc09f0802008c9f090200969f0b009f0d0500000000009f0e0500000000009f0f0500000000009f100706011a039000009f1101019f120d4352454449544f4445564953419f13009f15009f16009f1a0208409f1c009f1e0834543136383430309f20009f21030600209f24009f2608dd24d97da8f01ad59f2701809f33036028c89f34035f03029f3501219f360200019f3704503c38159f53009f5b009f390105df2100dfee2300dfee51005f5701008c1795059b029f02069f03069f1a025f2a029a039c019f37048d2f5f200f57119f1f165a085f34019f0e059f0f059f0d055f25035f24035f28029f07029f08025f30029f42028e0c8f019f38129f1a029f33039f40059f1b049f09029f35019f4d009f4f00dfec11207c374af7da062b65d3104e6d6bdb3a08fe944a2ca35c79b80ce7f17209a81638dfec181d454d5620436f6d6d6f6e2047656e2033204c322056312e33302e303339dfef57135650333335302046572076322e30302e383732ffee0105dfee300101
 --------------------
 >>> Fallback to CT transaction (default: disable)
 SWIPEKB: Click OK -> Swipe Discover card (PAN = 6510000000000125).
-KB Unit Swipe Card:
-2542363531303030303030303030303132355e434152442f494d414745203038202020202020202020202020205e31373132323031313030303039353030303030303f3b363531303030303030303030303132353d31373132323031313030303039353030303030303f0d0d
 Error! >>>> Expect OUT:EXR: %B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?
 --------------------
 >>> Fallback to MSR transaction (default: can retry ICC card 3 times)
@@ -71,49 +35,7 @@ Error! >>>> Expect OUT:EXR: DF EE 25 02 0007
 Error! >>>> Expect OUT:EXR: 9F 39 01 80
 Error! >>>> Expect OUT:EXR: DFEE236A%B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?
 MESSAGECK: After inserted card, LED 3 was turned ON (flash status)
-User Judgment Pass
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-MESSAGECK: Reader connect w/ PC via USB cable and then click OK
-User Judgment Pass
-
->>> Poll on demand
-CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
-OUT: NULL
-Error! >>>> Expect OUT:EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
-MESSAGECK: Waiting for the reader to reboot, Click OK if ready
-User Judgment Pass
-
->>> Set transaction interface = CT+MSR
-CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EF 37 01 05 BB 4D 
-OUT: NULL
-Error! >>>> Expect OUT:EXR: 04 00 00 00
->>> Quick Chip mode = 02
-Pack L = 17-5669564F74656368320001000000125300
-CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
-OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
-ASCII: Otech2    
-MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
-User Judgment Pass
-
---------------------
->>> CT transaction
-SWIPEKB: Click OK -> Insert T=0 card.
-Error! >>>> Expect OUT:EXR: DF EE 25 02 00 03
-Error! >>>> Expect OUT:EXR: 57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89
-Error! >>>> Expect OUT:EXR: 5A 08 47 61 73 90 01 01 00 10
-Error! >>>> Expect OUT:EXR: 9F 39 01 05
-Error! >>>> Expect OUT:EXR: 50
-Error! >>>> Expect OUT:EXR: 82
-Error! >>>> Expect OUT:EXR: 84
-Error! >>>> Expect OUT:EXR: 8A
-Error! >>>> Expect OUT:EXR: 8C
-Error! >>>> Expect OUT:EXR: 8D
-Error! >>>> Expect OUT:EXR: 8E
 >>[Stop Scripts]>>
 
-
-11:44:25: 
->>[Stop Scripts]>>
+User Judgment Pass
 

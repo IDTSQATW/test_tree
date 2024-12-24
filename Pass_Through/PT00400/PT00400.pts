@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-52498
+16206
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -112,7 +112,7 @@ End Sub
 result = 1
 
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 3000
+DL.Pause 200
 
 
 If result <> 0 Then
@@ -121,7 +121,7 @@ If result <> 0 Then
 	DL.SendSequence "Enable Pass Through"
 	result = DL.WaitForSequence("Pass-Through - START and STOP (OK)", 1, 10000)
 End If
-DL.Pause 1000
+DL.Pause 100
 
 If result <> 0 Then
 	DL.ResetReceiveCounter
@@ -130,23 +130,24 @@ If result <> 0 Then
 	DL.SendSequence "Poll for Token (10 Seconds)"
 	result = DL.WaitForSequence("Poll for Token (10 Seconds) (OK)", 1, 12000)
 End If
-DL.Pause 1000
+DL.Pause 100
 
 If result <> 0 Then
 	DL.ResetReceiveCounter
 	DL.SendSequence "Pass-Through - STOP"
 	result = DL.WaitForSequence("Pass-Through - START and STOP (OK)", 1, 10000)
 End If
-DL.Pause 1000
+DL.Pause 100
 
 
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 3000
+DL.Pause 200
 
-PrintMyResult(result)
-DL.Pause 1000
+
+'DL.Pause 1000
 
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
@@ -155,34 +156,34 @@ End If '""
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
 
-If MasterResult = 1 Then
-	MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-	MasterVerdict = "FAILED"
-End If
+'If MasterResult = 1 Then
+'	MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'	MasterVerdict = "FAILED"
+'End If
 
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If 0 Then
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
-End If
+'If 0 Then
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT FILE(!!!!! DO NOT EDIT !!!!!)

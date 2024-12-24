@@ -64,3 +64,9 @@ MESSAGECK: can read CT card
 MESSAGECK: can read MSR card
 Error! >>>> User Judgment Fail:MESSAGECK: can read CT card
 
+
+16:44:11: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=03=CT+MSR).txt
+Items: 24
+Load Case Succeed!
+

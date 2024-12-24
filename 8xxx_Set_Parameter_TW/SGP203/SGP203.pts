@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-45758
+34608
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -153,7 +153,10 @@ End Function
 'TEST BEGINS
 '------------------------------------------------------------
 dl.addcomment vbcrlf
-DL.AddComment "***** Sale key: 31323334353637383930313233343536 *****"
+DL.AddComment "***** Salt key: 31323334353637383930313233343536 *****"
+
+keycheck = msgbox ("Does the reader load specific salt key '31323334353637383930313233343536' before?", vbyesno)
+if keycheck = 6 then
 
    If result <> 0 Then
       DL.ResetReceiveCounter
@@ -230,6 +233,12 @@ If result <> 0 then
 '------------------------------------------------------------
 else
    dl.addcomment vbcrlf & "No salt key, pls load it first..."
+   result = 0
+end if
+'------------------------------------------------------------
+else
+   dl.addcomment vbcrlf & "Salt key was wrong one, pls load correct key first..."
+   result = 0
 end if
 '------------------------------------------------------------
 DL.Pause 500

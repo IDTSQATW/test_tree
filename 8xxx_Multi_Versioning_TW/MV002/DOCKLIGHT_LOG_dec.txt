@@ -1,4 +1,4 @@
-Docklight Log File (Decimal) - Started 2024/12/11 11:48:53.530 
+Docklight Log File (Decimal) - Started 2024/12/19 10:55:27.487 
  TEST CASE: MV002
 
  --- Set POS COM PORT Settings
@@ -8,8 +8,8 @@ Docklight Log File (Decimal) - Started 2024/12/11 11:48:53.530
 
  --- Get Main Firmware Version *** NEO2
 
-2024/12/11 11:48:54.700 [TX] - 086 105 086 079 116 101 099 104 050 000 009 003 000 000 192 206 
-2024/12/11 11:48:54.715 [RX] - 086 105 086 079 116 101 099 104 050 000 009 000 000 019 223 238 098 015  
+2024/12/19 10:55:28.649 [TX] - 086 105 086 079 116 101 099 104 050 000 009 003 000 000 192 206 
+2024/12/19 10:55:28.662 [RX] - 086 105 086 079 116 101 099 104 050 000 009 000 000 019 223 238 098 015  
 086 080 051 051 053 048 032 070 087 032 118 049 046 048 048 106 039 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000  
 
  Result = PASSED
@@ -24,5 +24,5 @@ Docklight Log File (Decimal) - Started 2024/12/11 11:48:53.530
 Please check ASCII screen, make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (Decimal) - Stopped 2024/12/11 11:48:55.830 
+Docklight Log File (Decimal) - Stopped 2024/12/19 10:55:29.762 
 

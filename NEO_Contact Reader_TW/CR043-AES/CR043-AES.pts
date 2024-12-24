@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-41783
+34437
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -230,14 +230,41 @@ end if
 '------------------------------------------------------------
 lcdcheck = msgbox("Does the reader have LCD?", vbyesno)
 
-if readerType = "GR" or readerType = "NEO1" or enctype = 6 then
+if readerType <> "NEO2" or enctype = 6 then
 
+TD = inputbox ("Which terminal data do u want to load?" & vbcrlf & "1 -- 2C" & vbcrlf & "2 -- 4C", vbokonly)
+if TD = 1 then 
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-16 Contact Set ICS Identification = 02"
+   DL.SendSequence "60-16 Contact Set ICS Identification (02 = Default)"
+   dl.pause 200
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-06 Contact Set Terminal Data: 2C"
+   DL.SendSequence "60-06 Contact Set Terminal Data 2C"
+   dl.pause 200
+elseif TD = 2 then 
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-16 Contact Set ICS Identification = 04"
+   DL.SendSequence "60-16 Contact Set ICS Identification (04)"
+   dl.pause 200
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-06 Contact Set Terminal Data: 4C"
+   DL.SendSequence "60-06 4C config"
+   dl.pause 200
+end if
+dl.addcomment vbcrlf
+DL.AddComment "--- 60-03 Contact Set Application Data (VISA)"
+DL.SendSequence "60-03 Contact Set Application Data (VISA)"
+dl.pause 200
+
+if readerType <> "NEO2" then 
 if result <> 0 then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Get Data Encryption (C7-37)"
    DL.SendSequence "Get Data Encryption (C7-37)"
    result = DL.WaitForSequence("C7-37 resp", 1, 2000)
+end if
 end if
 '------------------------------------------------------------
 If result <> 0 Then

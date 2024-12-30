@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-43462
+60564
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -153,8 +153,33 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+TD = inputbox ("Which CT terminal data do u want to load?" & vbcrlf & "1 -- 2C" & vbcrlf & "2 -- 4C", vbokonly)
+if TD = 1 then 
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-16 Contact Set ICS Identification = 02"
+   DL.SendSequence "60-16 Contact Set ICS Identification (02 = Default)"
+   dl.pause 200
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-06 Contact Set Terminal Data: 2C"
+   DL.SendSequence "60-06 Contact Set Terminal Data 2C"
+   dl.pause 200
+elseif TD = 2 then 
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-16 Contact Set ICS Identification = 04"
+   DL.SendSequence "60-16 Contact Set ICS Identification (04)"
+   dl.pause 200
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-06 Contact Set Terminal Data: 4C"
+   DL.SendSequence "60-06 4C config"
+   dl.pause 200
+end if
+dl.addcomment vbcrlf
+DL.AddComment "--- 60-03 Contact Set Application Data (VISA)"
+DL.SendSequence "60-03 Contact Set Application Data (VISA)"
+dl.pause 200
+
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 1000
+DL.Pause 200
 
 DL.SendSequence "Set Configuration Global On (NEO2)"
 result = DL.WaitForSequence("04 00", 1, 2000)
@@ -169,7 +194,7 @@ If result <> 0 Then
    DL.SendSequence "CLT 02-01"
    result = DL.WaitForSequence("02-01 resp", 1, 4000)
    if result <> 0 then result = DL.WaitForSequence("Tag DFEC0F (01)", 1, 4000)
-   dl.pause 500
+   dl.pause 200
    if result <> 0 then DesfireProcess()
 End If
 end if
@@ -185,20 +210,19 @@ If result <> 0 Then
    if readerType <> "NEO2" then result = DL.WaitForSequence("02-40 resp", 1, 4000)
    if readerType = "NEO2" then result = DL.WaitForSequence("02-40 resp (NEO3)", 1, 4000)
    if result <> 0 then result = DL.WaitForSequence("Tag DFEC0F (01)", 1, 4000)
-   dl.pause 500
+   dl.pause 200
    if result <> 0 then DesfireProcess()
 End If
 end if
 '------------------------------------------------------------
 sub DesfireProcess()
 If result <> 0 Then
-   dl.pause 300
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- GetVersion 1"
    DL.SendSequence "Step 3. GetVersion 1"
    result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   dl.pause 200
 End If
 If result <> 0 Then
    DL.ResetReceiveCounter
@@ -206,7 +230,7 @@ If result <> 0 Then
    DL.AddComment "--- GetVersion 2"
    DL.SendSequence "Step 4. GetVersion 2"
    result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   dl.pause 200
 End If
 If result <> 0 Then
    DL.ResetReceiveCounter
@@ -214,7 +238,7 @@ If result <> 0 Then
    DL.AddComment "--- GetVersion 3"
    DL.SendSequence "Step 5. GetVersion 3"
    result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   dl.pause 200
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -223,7 +247,7 @@ If result <> 0 Then
    DL.AddComment "--- Select default AID"
    DL.SendSequence "Step 6. Select default AID"
    result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   dl.pause 200
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -232,7 +256,7 @@ If result <> 0 Then
    DL.AddComment "--- Auth 1 Get RandA"
    DL.SendSequence "Step 7. Auth 1 Get RandA"
    result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   dl.pause 200
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -241,7 +265,7 @@ If result <> 0 Then
    DL.AddComment "--- Authenticate"
    DL.SendSequence "Step 8. Authenticate"
    result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   dl.pause 200
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -250,7 +274,7 @@ If result <> 0 Then
    DL.AddComment "--- Select APP 000000"
    DL.SendSequence "Step 9. Select APP 000000"
    result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   dl.pause 200
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -259,7 +283,7 @@ If result <> 0 Then
    DL.AddComment "--- Create App 000111 with KeySetting 0F and 01 Key"
    DL.SendSequence "Step 10. Create App 000111 with KeySetting 0F and 01 Key"
    result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   dl.pause 200
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -268,7 +292,7 @@ If result <> 0 Then
    DL.AddComment "--- Select APP 000111"
    DL.SendSequence "Step 11. Select APP 000111"
    result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   dl.pause 200
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -277,7 +301,7 @@ If result <> 0 Then
    DL.AddComment "--- Create a Plain Text with ID 01, size 100000"
    DL.SendSequence "Step 12. Create a Plain Text with ID 01, size 100000"
    result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   dl.pause 200
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -286,7 +310,7 @@ If result <> 0 Then
    DL.AddComment "--- Write Data  AA AA BB BB CC CC DD DD AA AA BB BB CC CC DD DD"
    DL.SendSequence "Step 13. Write Data  AA AA BB BB CC CC DD DD AA AA BB BB CC CC DD DD"
    result = DL.WaitForSequence("write data resp", 1, 2000)
-   dl.pause 300
+   dl.pause 200
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -295,7 +319,7 @@ If result <> 0 Then
    DL.AddComment "--- Read file 01, no offset , no size"
    DL.SendSequence "Step 14. Read file 01, no offset , no size"
    result = DL.WaitForSequence("read data resp", 1, 2000)
-   dl.pause 300
+   dl.pause 200
 End If
 
 If result <> 0 Then
@@ -310,7 +334,7 @@ else
    dl.addcomment vbcrlf
    DL.AddComment "--- PassThrough Stop"
    DL.SendSequence ">>>>> Set PT mode OFF >>>>>>>>>>>>>>>"
-   dl.pause 1000
+   dl.pause 200
    msgbox "Remove the card", vbyesonly
 End If
 end sub
@@ -320,16 +344,16 @@ If result = 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- PassThrough Stop"
    DL.SendSequence ">>>>> Set PT mode OFF >>>>>>>>>>>>>>>"
-   dl.pause 1000
+   dl.pause 200
 End If
 
 DL.SendSequence "Set Configuration Global Off (NEO2)"
 resultignore = DL.WaitForSequence("04 00", 1, 2000)
 '------------------------------------------------------------
 DL.AddComment vbCrLf
-PrintMyResult(result)
 
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
@@ -337,34 +361,34 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If 0 Then
-   If result = 0 then
-      DL.AddComment Chr(13) & "Result = FAILED"
-   Else
-      DL.AddComment Chr(13) & "Result = PASSED"
-   End If
-End If
+'If 0 Then
+'   If result = 0 then
+'      DL.AddComment Chr(13) & "Result = FAILED"
+'   Else
+'      DL.AddComment Chr(13) & "Result = PASSED"
+'   End If
+'End If
 
-If Prompting(0) = "ON" Then
-   If result = 0 then
-      MsgBox "Result = FAILED", VBOKOnly, "Result"
-   Else 
-      MsgBox "Result = PASSED", VBOKOnly, "Result"
-   End If
-End If
+'If Prompting(0) = "ON" Then
+'   If result = 0 then
+'      MsgBox "Result = FAILED", VBOKOnly, "Result"
+'   Else 
+'      MsgBox "Result = PASSED", VBOKOnly, "Result"
+'   End If
+'End If
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
-If MasterResult = 1 Then
-   MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-       MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'   MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'       MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)

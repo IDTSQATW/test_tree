@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-7510
+43956
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -320,7 +320,7 @@ If result <> 0 Then
       countf = countf + 1
       DL.AddComment vbcrlf & "** FAIL **"
    end if
-   dl.pause 1000
+   dl.pause 300
 '============================================================
    if countf <> 0 then
       result = 0

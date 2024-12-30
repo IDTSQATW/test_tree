@@ -40,7 +40,7 @@ if (Result):
 
 # CT transaction
 if (Result): 
-    DL.SetWindowText("black", "*** Insert EMV T=0 card")
+    DL.ShowMessageBox("Card", "*** Click OK --> Insert EMV T=0 card", 0)
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     strCardData = DL.ReadKeyBoardCardData(20000)
     if(-1 != strCardData.find('DFEF59')):
@@ -82,7 +82,7 @@ if (Result):
     
 # CT transaction
 if (Result): 
-    DL.SetWindowText("black", "*** Insert EMV T=0 card")
+    DL.ShowMessageBox("Card", "*** Click OK --> Insert EMV T=0 card", 0)
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     strCardData = DL.ReadKeyBoardCardData(20000)
     if(-1 != strCardData.find('57')):
@@ -144,7 +144,7 @@ if (Result):
 	time.sleep(10)
     
 if (Result):       
-    DL.SetWindowText("black", "*** Insert EMV T=0 card")
+    DL.ShowMessageBox("Card", "*** Click OK --> Insert EMV T=0 card", 0)
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     strCardData = DL.ReadKeyBoardCardData(20000)
     if(-1 != strCardData.find('DFED2006536C696D4344DFED2103110218DFED220A312E337C303432333138')):
@@ -154,7 +154,7 @@ if (Result):
         DL.fails=DL.fails+1
         
     # for JIRA#CS-3869
-    DL.SetWindowText("black", "*** Tap any CL card")
+    DL.ShowMessageBox("Card", "*** Click OK --> Tap any CL card", 0)
     strCardData = DL.ReadKeyBoardCardData(20000)
     if(-1 != strCardData.find('DFED2006536C696D4344DFED2103110218DFED220A312E337C303432333138')):
         DL.SetWindowText("blue", "PASS")
@@ -190,7 +190,7 @@ if (Result):
 	time.sleep(10)
     
 if (Result):       
-    DL.SetWindowText("black", "*** Insert EMV T=0 card")
+    DL.ShowMessageBox("Card", "*** Click OK --> Insert EMV T=0 card", 0)
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     strCardData = DL.ReadKeyBoardCardData(20000)
     if(-1 != strCardData.find('9F530150')):
@@ -221,7 +221,7 @@ if (Result):
 	time.sleep(10)
 
 if (Result):       
-    DL.SetWindowText("black", "*** Insert EMV T=0 card")
+    DL.ShowMessageBox("Card", "*** Click OK --> Insert EMV T=0 card", 0)
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     strCardData = DL.ReadKeyBoardCardData(20000)
     if(-1 != strCardData.find('9F530152')):
@@ -244,6 +244,12 @@ if (Result):
 	DL.SetWindowText("black", "*** Set transaction interface = ALL")
 	DL.SendIOCommand("IDG", "04 00 DF EF 37 01 07", 3000, 1) 
 	Result = DL.Check_RXResponse("04 00 00 00")	
+
+# Set transaction interface = ALL.
+if (Result):
+	DL.SetWindowText("black", "*** Set CT terminal data = 5C")
+	DL.SendIOCommand("IDG", "60 06 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00", 3000, 1) 
+	Result = DL.Check_RXResponse("60 00 00 00")	
 
 # QuickChip mode
 if (Result):

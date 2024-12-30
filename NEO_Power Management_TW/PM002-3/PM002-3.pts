@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-22957
+56651
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -153,9 +153,15 @@ End Function
 ' Check cmd F0-04 to set 65535 sec can work.
 '==========
 ' Customer steps:
+'case 1
 '1. Set standby timer 5s and sleep timer 3600 seconds.
 '2. Wait 5s device enter standby. 
-'3. Wait after 65s, insert the USB cable.  
+'3. Wait after 65s, insert the USB cable. (standby to run mode) 
+
+'cases 2
+'1. Set standby timer 5s and sleep timer 65535 seconds.
+'2. Wait 5s device enter standby. 
+'3. Wait after overnight (notice: < 18hr), insert the USB cable. (standby to run mode)
 
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 Else '""

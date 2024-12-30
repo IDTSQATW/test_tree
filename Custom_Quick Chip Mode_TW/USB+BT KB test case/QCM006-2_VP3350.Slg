@@ -1,9 +1,13 @@
 
-14:00:49: 
+15:46:16: 
 >>[Stop Scripts]>>
 
 
-14:00:50: >>[Do Scripts]>>
+15:46:16: 
+>>[Stop Scripts]>>
+
+
+15:46:16: >>[Do Scripts]>>
 
 Objective1: Encryption OFF, CT + Fallback to CT + Fallback to MSR test under Quick Chip Mode. (T=0/ Discover)
 Objective2: Output tags list should the same as Augusta
@@ -21,21 +25,162 @@ User Judgment Pass
 >>> CT transaction
 SWIPEKB: Click OK -> Insert T=0 card.
 KB Unit Swipe Card:
-dfee26022000dfee250200034f07a00000000310105a084761739001010010500a5649534143524544495457114761739001010010d2012201012345678982025c008407a00000000310108a025a338e0c00000000000000005f030000950542c00000009a032412139b02e0009c010099005f200f46554c4c2046554e4354494f4e414c5f24032012315f25039507015f280208405f2a0208405f2d086573656e667264655f3401019f02060000000004449f03060000000000009f0702ffc09f0802008c9f090200969f0b009f0d0500000000009f0e0500000000009f0f0500000000009f100706011a039000009f1101019f120d4352454449544f4445564953419f13009f15009f16009f1a0208409f1c009f1e0834543136383430309f20009f21030600209f24009f2608dd24d97da8f01ad59f2701809f33036028c89f34035f03029f3501219f360200019f3704503c38159f53009f5b009f390105df2100dfee2300dfee51005f5701008c1795059b029f02069f03069f1a025f2a029a039c019f37048d2f5f200f57119f1f165a085f34019f0e059f0f059f0d055f25035f24035f28029f07029f08025f30029f42028e0c8f019f38129f1a029f33039f40059f1b049f09029f35019f4d009f4f00dfec11207c374af7da062b65d3104e6d6bdb3a08fe944a2ca35c79b80ce7f17209a81638dfec181d454d5620436f6d6d6f6e2047656e2033204c322056312e33302e303339dfef57135650333335302046572076322e30302e383732ffee0105dfee300101
+dfee26022000dfee250200034f07a00000000310105a084761739001010010500a5649534143524544495457114761739001010010d2012201012345678982025c008407a00000000310108a025a338e0c00000000000000005f030000950542c00000009a032412279b02e0009c010099005f200f46554c4c2046554e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e00000201010014cf000038831400ffffffff050e0a000400010004000200388310000858fd0708010100fdca0000388310002c58fd0707010100f7ca00005aa51c00000000006857fd070ff01000f857fd07050404001ac10000388314005857fd07050e0a
+Error! >>>> Expect OUT:EXR: 9F 39 01 05
+Error! >>>> Expect OUT:EXR: 8C
+Error! >>>> Expect OUT:EXR: 8D
+Error! >>>> Expect OUT:EXR: 5F24
+Error! >>>> Expect OUT:EXR: 5F25
+Error! >>>> Expect OUT:EXR: 5F28
+Error! >>>> Expect OUT:EXR: 5F2A
+Error! >>>> Expect OUT:EXR: 5F2D
+Error! >>>> Expect OUT:EXR: 5F34
+Error! >>>> Expect OUT:EXR: 5F57
+Error! >>>> Expect OUT:EXR: 9F02
+Error! >>>> Expect OUT:EXR: 9F03
+Error! >>>> Expect OUT:EXR: 9F10
+Error! >>>> Expect OUT:EXR: 9F13
+Error! >>>> Expect OUT:EXR: 9F20
+Error! >>>> Expect OUT:EXR: 9F26
+Error! >>>> Expect OUT:EXR: 9F27
+Error! >>>> Expect OUT:EXR: 9F34
+Error! >>>> Expect OUT:EXR: 9F36
+Error! >>>> Expect OUT:EXR: 9F37
+Error! >>>> Expect OUT:EXR: 9F38
+Error! >>>> Expect OUT:EXR: 9F4D
+Error! >>>> Expect OUT:EXR: 9F4F
+Error! >>>> Expect OUT:EXR: 9F53
+Error! >>>> Expect OUT:EXR: 9F5B
+Error! >>>> Expect OUT:EXR: DFEF57
+Error! >>>> Expect OUT:EXR: DFEC181D454D5620436F6D6D6F6E2047656E2033204C322056312E33302E303339
 --------------------
 >>> Fallback to CT transaction (default: disable)
 SWIPEKB: Click OK -> Swipe Discover card (PAN = 6510000000000125).
+KB Unit Swipe Card:
+5b6510000000000125 card/image 08              17122011000095000000 ;6510000000000125=17122011000095000000 
 Error! >>>> Expect OUT:EXR: %B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?
 --------------------
 >>> Fallback to MSR transaction (default: can retry ICC card 3 times)
 SWIPEKB: Click OK -> Insert IDT test card 3 times -> Remove card (Green LED 3 is flash ON) -> Swipe Discover card.
-Error! >>>> Expect OUT:EXR: DFEF6102F220
+KB Unit Swipe Card:
+dfef6102f220dfef6102f220dfee250200079f390180dfee236a5b6510000000000125 card/image 08              17122011000095000000 ;6510000000000125=17122011000095000000 
 Error! >>>> Expect OUT:EXR: DFEF6102F222
-Error! >>>> Expect OUT:EXR: DF EE 25 02 0007
-Error! >>>> Expect OUT:EXR: 9F 39 01 80
 Error! >>>> Expect OUT:EXR: DFEE236A%B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?
 MESSAGECK: After inserted card, LED 3 was turned ON (flash status)
+User Judgment Pass
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+User Judgment Pass
+
+>>> Poll on demand
+Pack L = 43-5669564F7465636832002900001A5650333335302046572076322E30302E3838352E323435322E44AE3100
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
+OUT: 56 69 56 4F 74 65 63 68 32 00 29 00 00 1A 56 50 33 33 35 30 20 46 57 20 76 32 2E 30 30 2E 38 38 35 2E 32 34 35 32 2E 44 AE 31 
+ASCII: Otech2 )   VP3350 FW v2.00.885.2452.
+Error! >>>> Expect OUT:EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Waiting for the reader to reboot, Click OK if ready
+User Judgment Pass
+
+>>> Set transaction interface = CT+MSR
+Pack L = 17-5669564F74656368320004000000AE1600
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EF 37 01 05 BB 4D 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
+ASCII: Otech2    
+>>> Quick Chip mode = 02
+Pack L = 17-5669564F74656368320001000000125300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+User Judgment Pass
+
+--------------------
+>>> CT transaction
+SWIPEKB: Click OK -> Insert T=0 card.
+KB Unit Swipe Card:
+dfee26022000dfee250200034f07a00000000310105a084761739001010010500a5649534143524544495457114761739001010010d2012201012345678982025c008407a00000000310108a025a338e0c00000000000000005f030000950542c00000009a032412279b02e0009c010099005f200f46554c4c2046554e4354494f4e414c5f24032012315f25039507015f280208405f2a0208405f2d086573656e667264655f3401019f02060000000004449f03060000000000009f0702ffc09f0802008c9f090200969f0b009f0d0500000000009f0e0500000000009f0f0500000000009f100706011a039000009f1101019f120d4352454449544f4445564953419f13009f15009f16009f1a0208409f1c009f1e0834543136383430309f20009f21030741049f24009f2608b79b8d9ccd4c68409f2701809f33036028c89f34035f03029f3501219f360200019f3704ceac1b6a9f53009f5b009f390105df2100dfee2300dfee51005f5701008c1795059b029f02069f03069f1a025f2a029a039c019f37048d2f5f200f57119f1f165a085f34019f0e059f0f059f0d055f25035f24035f28029f07029f08025f30029f42028e0c8f019f38129f1a029f33039f40059f1b049f09029f35019f4d009f4f00dfec11207c374af7da062b65d3104e6d6bdb3a08fe944a2ca35c79b80ce7f17209a81638dfec181d454d5620436f6d6d6f6e2047656e2033204c322056312e33302e303339dfef57135650333335302046572076322e30302e383835ffee0105dfee300101
+--------------------
+>>> Fallback to CT transaction (default: disable)
+SWIPEKB: Click OK -> Swipe Discover card (PAN = 6510000000000125).
+KB Unit Swipe Card:
+5b6510000000000125 card/image 08              17122011000095000000 ;6510000000000125=17122011000095000000 
+Error! >>>> Expect OUT:EXR: %B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?
+--------------------
+>>> Fallback to MSR transaction (default: can retry ICC card 3 times)
+SWIPEKB: Click OK -> Insert IDT test card 3 times -> Remove card (Green LED 3 is flash ON) -> Swipe Discover card.
+KB Unit Swipe Card:
+dfef6102f220dfef6102f222dfee250200079f390180dfee236a5b6510000000000125 card/image 08              17122011000095000000 ;6510000000000125=17122011000095000000 
+Error! >>>> Expect OUT:EXR: DFEE236A%B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?
+MESSAGECK: After inserted card, LED 3 was turned ON (flash status)
+User Judgment Pass
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+User Judgment Pass
+
+>>> Poll on demand
+Pack L = 17-5669564F74656368320001000000125300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+MESSAGECK: Waiting for the reader to reboot, Click OK if ready
+User Judgment Pass
+
+>>> Set transaction interface = CL+MSR
+Pack L = 17-5669564F74656368320004000000AE1600
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EF 37 01 03 DB 8B 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
+ASCII: Otech2    
+>>> Quick Chip mode = 02
+Pack L = 17-5669564F74656368320001000000125300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+User Judgment Pass
+
+--------------------
+>>> Fallback to CT transaction
+SWIPEKB: Click OK -> Swipe Discover card.
+KB Unit Swipe Card:
+5b6510000000000125 card/image 08              17122011000095000000 ;6510000000000125=17122011000095000000 
+Error! >>>> Expect OUT:EXR: %B65100000
+Error! >>>> Expect OUT:EXR: ^
+Error! >>>> Expect OUT:EXR: ^
+Error! >>>> Expect OUT:EXR: ?
+Error! >>>> Expect OUT:EXR: ?
+MESSAGECK: After swiped card, 4 Green LEDs flashed once
+User Judgment Pass
+
+--------------------
+>>> Fallback to MSR transaction
+SWIPEKB: Click OK -> Insert IDT test card -> Remove card (Green LED 3 is OFF) -> Swipe Discover card.
+Error! >>>> Expect OUT:EXR: %B65100000
+Error! >>>> Expect OUT:EXR: ^
+Error! >>>> Expect OUT:EXR: ^
+Error! >>>> Expect OUT:EXR: ?
+Error! >>>> Expect OUT:EXR: ?
+MESSAGECK: After inserted card, Green LED 3 did NOT be turned ON independently
+EXR: =
+Error! >>>> User Judgment Fail:MESSAGECK: After inserted card, Green LED 3 did NOT be turned ON independently
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+MESSAGECK: After inserted card, Green LED 3 did NOT be turned ON independently
+Error! >>>> User Judgment Fail:MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+
+>>> Poll on demand
 >>[Stop Scripts]>>
 
-User Judgment Pass
+>>[Stop Scripts]>>
+
+CMD:
+OUT: NULL
+
+15:46:16: 
+>>[Stop Scripts]>>
 

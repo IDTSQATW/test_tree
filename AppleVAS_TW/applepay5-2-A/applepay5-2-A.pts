@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-48817
+11146
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -235,7 +235,7 @@ If result <> 0 Then
    if readerType = "NEO2" then DL.SendSequence "ACT - VAS URL Only Protocol (NEO2) - ECP 2.0"
    if readerType <> "NEO2" then result = DL.WaitForSequence("VAS fail response" , 1, 10000)
    if readerType = "NEO2" then 
-      result = DL.WaitForSequence("02 23" , 1, 3000)
+      result = DL.WaitForSequence("02 23" , 1, 1500)
       if result = 0 then result = DL.WaitForSequence("VAS fail response (NEO2)" , 1, 5000)
    end if
    if result = 0 then 

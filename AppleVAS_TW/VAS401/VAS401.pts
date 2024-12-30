@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-60951
+38910
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -235,6 +235,32 @@ End Function
 'TEST BEGINS
 '------------------------------------------------------------
 readercheck = msgbox ("Is this NEO3 project?", vbyesno)
+
+TD = inputbox ("Which CT terminal data do u want to load?" & vbcrlf & "1 -- 2C" & vbcrlf & "2 -- 4C", vbokonly)
+if TD = 1 then 
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-16 Contact Set ICS Identification = 02"
+   DL.SendSequence "60-16 Contact Set ICS Identification (02 = Default)"
+   dl.pause 200
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-06 Contact Set Terminal Data: 2C"
+   DL.SendSequence "60-06 Contact Set Terminal Data 2C"
+   dl.pause 200
+elseif TD = 2 then 
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-16 Contact Set ICS Identification = 04"
+   DL.SendSequence "60-16 Contact Set ICS Identification (04)"
+   dl.pause 200
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-06 Contact Set Terminal Data: 4C"
+   DL.SendSequence "60-06 4C config"
+   dl.pause 200
+end if
+dl.addcomment vbcrlf
+DL.AddComment "--- 60-03 Contact Set Application Data (VISA)"
+DL.SendSequence "60-03 Contact Set Application Data (VISA)"
+dl.pause 200
+
 if result <> 0 then
    dl.resetreceivecounter
    DL.AddComment "--- Get Data Encryption (C7-37)"
@@ -250,9 +276,9 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Get FW ver (29-00) "
    DL.SendSequence "Get FW ver (29-00)"
-   dl.pause 500
-   liteoncheck = DL.WaitForSequence("VP3300_liteon", 1, 600)
-   EXTcheck = DL.WaitForSequence("VP3300_EXT", 1, 600)
+   dl.pause 200
+   liteoncheck = DL.WaitForSequence("VP3300_liteon", 1, 500)
+   EXTcheck = DL.WaitForSequence("VP3300_EXT", 1, 500)
    if liteoncheck = 1 or EXTcheck = 1 then 
           readerType = "VP3300_liteon"
           DL.AddComment "Reader for VP3300 Liteon"

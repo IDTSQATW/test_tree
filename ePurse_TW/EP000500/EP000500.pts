@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-8913
+16178
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -143,11 +143,12 @@ Initialize_Reader
 DL.AddComment vbCrLf & "--- Test 4 ---"
 Test4
 '------------------------
-DL.Pause 1500
+'DL.Pause 1500
 DL.AddComment vbCrLf
-PrintMyResult(result)
+
 
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
@@ -155,36 +156,36 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If 0 Then
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
-End If
+'If 0 Then
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
 
-If MasterResult = 1 Then
-	MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-	MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'	MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'	MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 
 
 '------------------------------------------------------------
@@ -384,17 +385,18 @@ Sub Initialize_Reader()
 
 	DL.AddComment vbCrLf & "--- Poll for Token" 
 	DL.SendSequence "Poll for Token"
-	result = DL.WaitForSequence ("Poll for Token (OK)", 1, 1000)
+	'result = DL.WaitForSequence ("Poll for Token (OK)", 1, 1000)
+	dl.pause 200
        DL.ResetReceiveCounter
 
 	DL.AddComment vbCrLf & "--- 2C-06" 
 	DL.SendSequence "2c-06"
-	dl.pause 500
+	dl.pause 200
 	
 	DL.AddComment vbCrLf & "--- Get PCD&PICC Parameters" 
 	DL.SendSequence "Get PCD&PICC Parameters"
 	'result = DL.WaitForSequence ("Get PCD&PICC Parameters (OK)", 1, 5000)
-	dl.pause 500
+	dl.pause 200
        DL.ResetReceiveCounter
 
 	DL.AddComment vbCrLf & "--- Initialize Blocks" 

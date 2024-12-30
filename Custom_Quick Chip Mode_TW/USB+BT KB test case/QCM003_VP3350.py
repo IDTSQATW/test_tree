@@ -13,6 +13,9 @@ strKey ='FEDCBA9876543210F1F1F1F1F1F1F1F1'
 # Objective: set tag DFEF6F (output delay time) w/ data 30~36
 
 #-----------------------------------------------------------------
+# Check output interface
+ointerface = DL.ShowMessageBox("Check output interface", "Do u test Bluetooth output interface?", 0)
+    
 # Poll on demand
 if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
@@ -37,7 +40,10 @@ if (Result):
     DL.SetWindowText("black", "*** Swipe any card")
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     strCardData = DL.ReadKeyBoardCardData(20000)
-    speedcheck = DL.ShowMessageBox("", "Data output speed correctly?", 0)
+    if ointerface == 0: #USB KB
+        speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 2000 us)", 0)
+    if ointerface == 1: #Bluetooth KB
+        speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 10 ms, defalut speed)", 0)
     if speedcheck == 1:
         DL.SetWindowText("Green", "PASS")
     else:
@@ -69,7 +75,10 @@ if (Result):
     DL.SetWindowText("black", "*** Swipe any card")
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     strCardData = DL.ReadKeyBoardCardData(20000)
-    speedcheck = DL.ShowMessageBox("", "Data output speed correctly?", 0)
+    if ointerface == 0: 
+        speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 5000 us)", 0)
+    if ointerface == 1: #Bluetooth KB
+        speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 10 ms, defalut speed)", 0)
     if speedcheck == 1:
         DL.SetWindowText("Green", "PASS")
     else:
@@ -101,7 +110,7 @@ if (Result):
     DL.SetWindowText("black", "*** Swipe any card")
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     strCardData = DL.ReadKeyBoardCardData(20000)
-    speedcheck = DL.ShowMessageBox("", "Data output speed correctly?", 0)
+    speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 10000 us)", 0)
     if speedcheck == 1:
         DL.SetWindowText("Green", "PASS")
     else:
@@ -133,7 +142,7 @@ if (Result):
     DL.SetWindowText("black", "*** Swipe any card")
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     strCardData = DL.ReadKeyBoardCardData(20000)
-    speedcheck = DL.ShowMessageBox("", "Data output speed correctly?", 0)
+    speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 20000 us)", 0)
     if speedcheck == 1:
         DL.SetWindowText("Green", "PASS")
     else:
@@ -165,7 +174,7 @@ if (Result):
     DL.SetWindowText("black", "*** Swipe any card")
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     strCardData = DL.ReadKeyBoardCardData(20000)
-    speedcheck = DL.ShowMessageBox("", "Data output speed correctly?", 0)
+    speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 50000 us)", 0)
     if speedcheck == 1:
         DL.SetWindowText("Green", "PASS")
     else:
@@ -197,7 +206,10 @@ if (Result):
     DL.SetWindowText("black", "*** Swipe any card")
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     strCardData = DL.ReadKeyBoardCardData(20000)
-    speedcheck = DL.ShowMessageBox("", "Data output speed correctly?", 0)
+    if ointerface == 0:
+        speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 0 us)", 0)
+    if ointerface == 1: #Bluetooth KB
+        speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 10 ms, defalut speed)", 0)
     if speedcheck == 1:
         DL.SetWindowText("Green", "PASS")
     else:
@@ -229,7 +241,10 @@ if (Result):
     DL.SetWindowText("black", "*** Swipe any card")
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     strCardData = DL.ReadKeyBoardCardData(20000)
-    speedcheck = DL.ShowMessageBox("", "Data output speed correctly?", 0)
+    if ointerface == 0:
+        speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 1200 us)", 0)
+    if ointerface == 1: #Bluetooth KB
+        speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 10 ms, defalut speed)", 0)
     if speedcheck == 1:
         DL.SetWindowText("Green", "PASS")
     else:

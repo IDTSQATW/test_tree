@@ -1,13 +1,9 @@
 
-14:11:35: 
+14:58:19: 
 >>[Stop Scripts]>>
 
 
-14:11:36: 
->>[Stop Scripts]>>
-
-
-14:11:36: >>[Do Scripts]>>
+14:58:19: >>[Do Scripts]>>
 
 Objective: set tag DFEF6F (output delay time) w/ data 30~36
 >>> Tag DFEF6F = 30 (default, 1200 us)
@@ -22,11 +18,13 @@ Error! >>>> User Judgment Fail:MESSAGECK: data output speed correctly
 >>> Tag DFEF6F = 31 (2000 us)
 >>[Stop Scripts]>>
 
->>[Stop Scripts]>>
-
 CMD:
 OUT: NULL
 
-14:11:36: 
+14:58:19: 
+>>[Stop Scripts]>>
+
+
+14:58:19: 
 >>[Stop Scripts]>>
 

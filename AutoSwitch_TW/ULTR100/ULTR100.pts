@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-16523
+11862
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -162,8 +162,33 @@ j = 1
 k = 0
 result = 1
 
+TD = inputbox ("Which CT terminal data do u want to load?" & vbcrlf & "1 -- 2C" & vbcrlf & "2 -- 4C", vbokonly)
+if TD = 1 then 
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-16 Contact Set ICS Identification = 02"
+   DL.SendSequence "60-16 Contact Set ICS Identification (02 = Default)"
+   dl.pause 200
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-06 Contact Set Terminal Data: 2C"
+   DL.SendSequence "60-06 Contact Set Terminal Data 2C"
+   dl.pause 200
+elseif TD = 2 then 
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-16 Contact Set ICS Identification = 04"
+   DL.SendSequence "60-16 Contact Set ICS Identification (04)"
+   dl.pause 200
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 60-06 Contact Set Terminal Data: 4C"
+   DL.SendSequence "60-06 4C config"
+   dl.pause 200
+end if
+dl.addcomment vbcrlf
+DL.AddComment "--- 60-03 Contact Set Application Data (VISA)"
+DL.SendSequence "60-03 Contact Set Application Data (VISA)"
+dl.pause 200
+
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 1000
+DL.Pause 200
 
 DL.SendSequence "Set Configuration Global On (NEO2)"
 result = DL.WaitForSequence("04 00", 1, 2000)
@@ -195,7 +220,7 @@ If result <> 0 Then
    if readerType <> "NEO2" then result = DL.WaitForSequence("02-40 resp", 1, 4000)
    if readerType = "NEO2" then result = DL.WaitForSequence("02-40 resp (NEO3)", 1, 4000)
    if result <> 0 then result = DL.WaitForSequence("Tag DFEC0F (02)", 1, 4000)
-   dl.pause 500
+   dl.pause 200
    if result <> 0 then ReadBlock()
    if result <> 0 then WriteBlock()
 End If
@@ -308,7 +333,7 @@ If result = 0 Then
   DL.ResetReceiveCounter
   DL.AddComment "---PT Stop"
   DL.SendSequence "PT Stop"
-  dl.pause 1000
+  dl.pause 200
 End If
 
 DL.SendSequence "Set Configuration Global Off (NEO2)"

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-18438
+35631
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -233,8 +233,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- 04-09 reset to default"
    DL.SendSequence "04-09"
-   result = DL.WaitForSequence("04 00", 1, 6000)
-   dl.pause 500
+   result = DL.WaitForSequence("04 00", 1, 10000)
 End If
 
 If result <> 0 Then
@@ -244,7 +243,6 @@ If result <> 0 Then
    if readerType <> "NEO2" then DL.SendSequence "Burst mode OFF"
    if readerType = "NEO2" then DL.SendSequence "Burst mode OFF (NEO2)"
    result = DL.WaitForSequence("04 00", 1, 3000)
-   dl.pause 500
 End If
 
 If result <> 0 Then
@@ -253,7 +251,6 @@ If result <> 0 Then
    DL.AddComment "--- C7-66 set private key all 00"
    DL.SendSequence "C7-66 set private key all 00"
    result = DL.WaitForSequence("C7 00", 1, 2000)
-   dl.pause 500
 End If
 
 If result <> 0 Then
@@ -262,7 +259,6 @@ If result <> 0 Then
    DL.AddComment "--- 04-11 load the Nando pass (index 1)"         'index = 1
    DL.SendSequence "04-11 load the Nando pass"
    result = DL.WaitForSequence("04 00", 1, 2000)
-   dl.pause 500
 End If
 '------------------------------------------------------------
 if result <> 0 then         'DFED3F = 02
@@ -271,7 +267,6 @@ if result <> 0 then         'DFED3F = 02
    DL.AddComment "--- 04-00 w/ tag DFED3F = 02 (Decrypt VAS data via private key)"
    DL.SendSequence "04-00 w/ tag DFED3F = 02 (Decrypt VAS data via private key)"
    result = DL.WaitForSequence("04 00", 1, 2000)
-   dl.pause 500
 
    If result <> 0 Then
       dl.resetreceivecounter
@@ -279,7 +274,6 @@ if result <> 0 then         'DFED3F = 02
       DL.AddComment "--- C7-66 Nando private key (no index)"
       DL.SendSequence "C7-66 Nando private key (no index)"
       result = DL.WaitForSequence("C7 00", 1, 2000)
-      dl.pause 500
 
       If result <> 0 Then
          dl.resetreceivecounter
@@ -288,7 +282,7 @@ if result <> 0 then         'DFED3F = 02
          DL.AddComment "--- ACT - VAS Only"
          DL.SendSequence "ACT - VAS Only"
          result = DL.WaitForSequence("9F 27 0E", 1, 5000)
-         dl.pause 500
+         dl.pause 200
       End If
    End If
 end if

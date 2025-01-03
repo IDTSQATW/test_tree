@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-64276
+43759
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -207,7 +207,7 @@ if result <> 0 then     'ICC Card Inserted can change to RUN
    dl.addcomment vbcrlf & "## Done"
 End If
 
-if i = 2 then     'For type A reader
+if i = 2 then     'For type F reader only
 if result <> 0 then     'IDG CMD can change to RUN  (USB-C male)
    msgbox "Unplug USB cable from USB female, plug-in USB cable in USB Male --> Click OK", vbokonly
    dl.resetreceivecounter
@@ -235,8 +235,8 @@ End If
 end if
 
 dl.addcomment vbcrlf & ">>>>>>>>>>>>>>>>>> set to default >>>>>>>>>>>>>>>>>>"
-DL.SendSequence "F0-04 Set Low Power Consumption 02 = 0 sec"
-dl.pause 1500
+DL.SendSequence "04-0A"
+dl.pause 2000
 dl.addcomment vbcrlf & ">>>>>>>>>>>>>>>>>> end >>>>>>>>>>>>>>>>>>"
 next
 '------------------------------------------------------------

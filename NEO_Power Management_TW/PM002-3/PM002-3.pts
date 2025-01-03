@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-56651
+32363
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -158,7 +158,7 @@ End Function
 '2. Wait 5s device enter standby. 
 '3. Wait after 65s, insert the USB cable. (standby to run mode) 
 
-'cases 2
+'cases 2 (NSRED reader)
 '1. Set standby timer 5s and sleep timer 65535 seconds.
 '2. Wait 5s device enter standby. 
 '3. Wait after overnight (notice: < 18hr), insert the USB cable. (standby to run mode)

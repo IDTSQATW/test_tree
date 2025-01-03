@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-27490
+41855
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -130,9 +130,11 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-
+' Under Standby mode, USB-Female is plugged into cable, will enter RUN mode
 ' Under Standby mode, Lightning plug into phone, will enter RUN mode
 ' Under Standby mode, IDG CMD from lightning, will enter RUN mode
+' Under Standby mode, ICC card insert, will enter RUN mode (w/ & w/o connect w/ phone)
+' Under Standby mode, (SRED) 24-hour self check, will enter RUN mode (w/ & w/o connect w/ phone)
 
 '------------------------------------------------------------
 DL.AddComment vbCrLf

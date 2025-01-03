@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-34107
+16485
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -177,7 +177,7 @@ if result <> 0 then
 end if
 
 if result <> 0 then
-   ledcheck = msgbox("Insert EMV test card T=0, reader become RUN mode?", vbyesno)
+   ledcheck = msgbox("Insert EMV test card T=0, reader become RUN mode?", vbyesno)     'insert card will let reader wake up to RUN mode.
    if ledcheck = 7 then result = 0
 end if
 
@@ -192,7 +192,7 @@ end if
 if result <> 0 then
    dl.addcomment vbcrlf & "Waiting for 25.5 sec..." 
    dl.pause 25500
-   ledcheck = msgbox("Reader is RUN mode?", vbyesno)
+   ledcheck = msgbox("Reader is RUN mode?", vbyesno)     'reader should be RUN mode always if enter PT mode
    if ledcheck = 7 then result = 0
 end if
 

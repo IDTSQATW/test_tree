@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-28387
+54496
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -186,6 +186,16 @@ If result <> 0 Then
    result = DL.WaitForSequence("C7 00", 1, 2000)
    dl.pause 200
 End If
+
+if readercheck = 6 then
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- C7-36 -- 03"
+   DL.SendSequence "C7-36 -- 03"
+   dl.pause 300
+End If
+end if
 
 If result <> 0 Then
    msgbox "Click OK --> Tap VISA card", vbokonly

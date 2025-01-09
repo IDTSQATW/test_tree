@@ -205,7 +205,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 sub AT()
-for i = 1 to 14
+for i = 1 to 17
     if i = 1 then card = "Mifare 1K"
     if i = 2 then card = "Mifare 1K"
     if i = 3 then card = "Mifare 4k"
@@ -220,6 +220,10 @@ for i = 1 to 14
     if i = 12 then card = "Ultralight C"
     if i = 13 then card = "Ultralight EV1"
     if i = 14 then card = "NFC Tag 203"
+    if i = 15 then card = "Mifare SmartMX 4k"
+    if i = 16 then card = "Mifare SmartMX 1k"
+    if i = 17 then card = "Felica card"
+
 
    msgbox "Click OK --> Tap" & card , vbokonly
    dl.resetreceivecounter

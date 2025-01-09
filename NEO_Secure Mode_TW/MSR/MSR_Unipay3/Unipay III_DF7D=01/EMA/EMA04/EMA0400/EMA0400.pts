@@ -243,303 +243,82 @@ end sub
   result = DL.WaitForSequence("Poll mode response", 1, 10000)
  End If
 '----------------------------------------------------------
+for i = 1 to 2
+
+
+if i = 1 then
+
+DL.ClearCommWindows
 'Poll on Demand + Burst mode Off
- POM()
-'----------------------------------------------------------
- DL.ClearCommWindows
- precondition()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "--- IDT"
-  DL.SendSequence "Activate Transaction (02-40) - 9F02"
-  RxStatus = DL.WaitForSequence("Activate transaction response - IDT", 1, 10000)
-  If RxStatus = 0 then
-    DL.AddComment "IDT Std MSR card does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If 
-Dl.pause 200
-'----------------------------------------------------------
- DL.ClearCommWindows
- precondition()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "--- Discover"
-  DL.SendSequence "Activate Transaction (02-40) - 9F02"
-  RxStatus = DL.WaitForSequence("Activate transaction response - Discover", 1, 10000)
-  If RxStatus = 0 then
-    DL.AddComment "Discover card does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If 
-Dl.pause 200
-'----------------------------------------------------------
- DL.ClearCommWindows
- precondition()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "--- JIS1"
-  DL.SendSequence "Activate Transaction (02-40) - 9F02"
-  RxStatus = DL.WaitForSequence("Activate transaction response - JIS I ", 1, 10000)
-  If RxStatus = 0 then
-    DL.AddComment "JIS I card does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If 
-Dl.pause 200
-'----------------------------------------------------------
- DL.ClearCommWindows
- precondition()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "--- JIS2"
-  DL.SendSequence "Activate Transaction (02-40) - 9F02"
-  RxStatus = DL.WaitForSequence("Activate transaction response - JIS II", 1, 10000)
-  If RxStatus = 0 then
-    DL.AddComment "JIS II card does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If 
-Dl.pause 200
-'----------------------------------------------------------
- DL.ClearCommWindows
- precondition()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "--- AAMVA"
-  DL.SendSequence "Activate Transaction (02-40) - 9F02"
-  RxStatus = DL.WaitForSequence("Activate transaction response - AAMVA", 1, 10000)
-  If RxStatus = 0 then
-    DL.AddComment "JIS II card does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If
-Dl.pause 200
-'----------------------------------------------------------
- DL.ClearCommWindows
- precondition()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "--- Gift card"
-  DL.SendSequence "Activate Transaction (02-40) - 9F02"
-  RxStatus = DL.WaitForSequence("Activate transaction response - Gift card", 1, 10000)
-  If RxStatus = 0 then
-    DL.AddComment "Gift card does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If
-Dl.pause 200
-'----------------------------------------------------------
- DL.ClearCommWindows
- precondition()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=11)"
-  DL.SendSequence "Activate Transaction (02-40) - 9F02"
-  RxStatus = DL.WaitForSequence("Activate transaction response - Real card (PAN=11)", 1, 10000)
-  If RxStatus = 0 then
-    DL.AddComment "Real card (PAN=11) does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If
-Dl.pause 200
-'----------------------------------------------------------
- DL.ClearCommWindows
- precondition()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=12)"
-  DL.SendSequence "Activate Transaction (02-40) - 9F02"
-  RxStatus = DL.WaitForSequence("Activate transaction response - Real card (PAN=12)", 1, 10000)
-  If RxStatus = 0 then
-    DL.AddComment "Real card (PAN=12) does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If
-Dl.pause 200
-'----------------------------------------------------------
- DL.ClearCommWindows
- precondition()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=20)"
-  DL.SendSequence "Activate Transaction (02-40) - 9F02"
-  RxStatus = DL.WaitForSequence("Activate transaction response - Real card (PAN=20)", 1, 10000)
-  If RxStatus = 0 then
-    DL.AddComment "Real card (PAN=20) does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If
-Dl.pause 200
-'----------------------------------------------------------
- DL.ClearCommWindows
- precondition()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "--- ISO4909"
-  DL.SendSequence "Activate Transaction (02-40) - 9F02"
-  RxStatus = DL.WaitForSequence("Activate transaction response - ISO4909", 1, 10000)
-  If RxStatus = 0 then
-    DL.AddComment "ISO4909 card does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If
-Dl.pause 200
+  POM()
+
+  for j= 1 to 10
+  
+    if j=1 then card = "IDT"
+    if j=2 then card = "Discover"
+    if j=3 then card = "JIS I"
+    if j=4 then card = "JIS II"
+    if j=5 then card = "AAMVA"
+    if j=6 then card = "Gift card"
+    if j=7 then card = "Real card (PAN=11)"
+    if j=8 then card = "Real card (PAN=12)"
+    if j=9 then card = "Real card (PAN=20)"
+    if j=10 then card = "ISO4909"
+
+
+      DL.ClearCommWindows
+      precondition()
+      DL.ClearCommWindows
+      dl.resetreceivecounter
+      DL.AddComment vbCrLf & vbCrLf & "--- " & card
+      DL.SendSequence "Activate Transaction (02-40) - 9F02"
+      RxStatus = DL.WaitForSequence("Activate transaction response - " & card, 1, 10000)
+      If RxStatus = 0 then
+         DL.AddComment "IDT Std MSR card does not return expected data"
+         Err0BCounter = Err0BCounter + 1
+      End If 
+      Dl.pause 200
+
+  next
+
+end if
 
 '-------------------------------------------------------
+if i = 2 then
+
+DL.ClearCommWindows
 'Auto poll + Burst mode OFF
-'---------------------------------------------------------
- DL.ClearCommWindows
-  POM()
-  precondition()
-  AUTOPOL()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "---  IDT"
-  DL.Pause 4000
-  DL.SendSequence "03-40------Get Transaction Result"
-  RxStatus = DL.WaitForSequence("get transaction result response - IDT", 1, 3000)
-  If RxStatus = 0 then
-    DL.AddComment "IDT card does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If
-Dl.pause 200
+ AUTOPOL()
 
-'----------------------------------------------------------
- DL.ClearCommWindows
-  POM()
-  precondition()
-  AUTOPOL()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "--- Discover"
-  DL.Pause 4000
-  DL.SendSequence "03-40------Get Transaction Result"
-  RxStatus = DL.WaitForSequence("get transaction result response - Discover", 1, 3000)
-  If RxStatus = 0 then
-    DL.AddComment "Discover card does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If
-Dl.pause 200
-'----------------------------------------------------------
- DL.ClearCommWindows
-  POM()
-  precondition()
-  AUTOPOL()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "--- JIS1"
-  DL.Pause 4000
-  DL.SendSequence "03-40------Get Transaction Result"
-  RxStatus = DL.WaitForSequence("get transaction result response - JIS I", 1, 3000)
-  If RxStatus = 0 then
-    DL.AddComment "JIS I card does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If
-Dl.pause 200
-'----------------------------------------------------------
- DL.ClearCommWindows
-  POM()
-  precondition()
-  AUTOPOL()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "--- JIS2"
-  DL.Pause 4000
-  DL.SendSequence "03-40------Get Transaction Result"
-  RxStatus = DL.WaitForSequence("get transaction result response - JIS II", 1, 3000)
-  If RxStatus = 0 then
-    DL.AddComment "JIS II card does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If
-Dl.pause 200
-'----------------------------------------------------------
- DL.ClearCommWindows
-  POM()
-  precondition()
-  AUTOPOL()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "--- AAMVA"
-  DL.Pause 4000
-  DL.SendSequence "03-40------Get Transaction Result"
-  RxStatus = DL.WaitForSequence("get transaction result response - AAMVA", 1, 3000)
-  If RxStatus = 0 then
-    DL.AddComment "AAMVA card does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If
-Dl.pause 200
-'----------------------------------------------------------
- DL.ClearCommWindows
-  POM()
-  precondition()
-  AUTOPOL()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "--- Gift card"
-  DL.Pause 4000
-  DL.SendSequence "03-40------Get Transaction Result"
-  RxStatus = DL.WaitForSequence("get transaction result response - Gift card", 1, 3000)
-  If RxStatus = 0 then
-    DL.AddComment "Gift card does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If
-Dl.pause 200
-'----------------------------------------------------------
- DL.ClearCommWindows
-  POM()
-  precondition()
-  AUTOPOL()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=11)"
-  DL.Pause 4000
-  DL.SendSequence "03-40------Get Transaction Result"
-  RxStatus = DL.WaitForSequence("get transaction result response - Real card (PAN=11)", 1, 3000)
-  If RxStatus = 0 then
-    DL.AddComment "Real card (PAN=11) does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If
-Dl.pause 200
-'----------------------------------------------------------
- DL.ClearCommWindows
-  POM()
-  precondition()
-  AUTOPOL()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=12)"
-  DL.Pause 4000
-  DL.SendSequence "03-40------Get Transaction Result"
-  RxStatus = DL.WaitForSequence("get transaction result response - Real card (PAN=12)", 1, 3000)
-  If RxStatus = 0 then
-    DL.AddComment "Real card (PAN=12) does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If
-Dl.pause 200
-'----------------------------------------------------------
- DL.ClearCommWindows
-  POM()
-  precondition()
-  AUTOPOL()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=20)"
-  DL.Pause 4000
-  DL.SendSequence "03-40------Get Transaction Result"
-  RxStatus = DL.WaitForSequence("get transaction result response - Real card (PAN=20)", 1, 3000)
-  If RxStatus = 0 then
-    DL.AddComment "Real card (PAN=20) does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If
-Dl.pause 200
+  for j= 1 to 10
+   if j=1 then card = "IDT"
+   if j=2 then card = "Discover"
+   if j=3 then card = "JIS I"
+   if j=4 then card = "JIS II"
+   if j=5 then card = "AAMVA"
+   if j=6 then card = "Gift card"
+   if j=7 then card = "Real card (PAN=11)"
+   if j=8 then card = "Real card (PAN=12)"
+   if j=9 then card = "Real card (PAN=20)"
+   if j=10 then card = "ISO4909"
 
-'----------------------------------------------------------
- DL.ClearCommWindows
-  POM()
-  precondition()
-  AUTOPOL()
- DL.ClearCommWindows
-  dl.resetreceivecounter
-  DL.AddComment vbCrLf & vbCrLf & "--- ISO4909"
-  DL.Pause 4000
-  DL.SendSequence "03-40------Get Transaction Result"
-  RxStatus = DL.WaitForSequence("get transaction result response - ISO4909", 1, 3000)
-  If RxStatus = 0 then
-    DL.AddComment "ISO4909 card does not return expected data"
-    Err0BCounter = Err0BCounter + 1
-  End If
-Dl.pause 200
+     DL.ClearCommWindows
+     precondition()
+     DL.ClearCommWindows
+     dl.resetreceivecounter
+     DL.AddComment vbCrLf & vbCrLf & "---  " & card
+     DL.Pause 4000
+     DL.SendSequence "03-40------Get Transaction Result"
+     RxStatus = DL.WaitForSequence("get transaction result response - " & card, 1, 3000)
+     If RxStatus = 0 then
+        DL.AddComment "IDT card does not return expected data"
+        Err0BCounter = Err0BCounter + 1
+     End If
+     Dl.pause 200
+   next
+
+end if
+NEXT
 
 '-----------------------------------------------------------
 

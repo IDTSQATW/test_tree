@@ -146,7 +146,8 @@ if (Result):
 						if TagDFEE26 != "E800": 
 							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
-					
+			else:
+				DL.fails=DL.fails+1
 # cmd 60-13
 RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')
 if (RetOfStep):

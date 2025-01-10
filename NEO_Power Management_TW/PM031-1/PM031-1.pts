@@ -1,13 +1,13 @@
 DL_SCRIPTVERSION
 1
-42108
+64524
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "PM031" ' !!!!! EDIT THIS !!!!!
+ProjectName = "PM031-1" ' !!!!! EDIT THIS !!!!!
 ' Objective: to verify USB male
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
@@ -130,11 +130,21 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-' 1) Reader USB-Male connect w/ mobile phone first.
+'[LPCD OFF]
+' 1) Reader USB-Male connect w/ mobile phone first. (iOS/ Android)
 ' 2) Wait the reader to enter wait mode:
 ' Case 1: IDG CMD from USB-male, reader will enter RUN mode.
 ' Case 2: ICC card insert, reader will enter RUN mode.
-
+'------------------------------------------------------------
+' 1) Reader USB-Female connect w/ mobile phone first. (Android)
+' 2) Wait the reader to enter wait mode:
+' Case 1: IDG CMD from USB-Female , reader will enter RUN mode.
+' Case 2: ICC card insert, reader will enter RUN mode.
+'------------------------------------------------------------
+'------------------------------------------------------------
+'[LPCD ON]
+' USB-Male connect w/ mobile phone first:
+' Under Standby mode, AT cmd, will enter RUN mode, (wait over 5 sec) can read MSR/ CL/ CT card.  (USB-Female w/ & w/o A/C cable)
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 PrintMyResult(result)

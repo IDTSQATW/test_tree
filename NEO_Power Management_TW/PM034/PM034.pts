@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-63404
+54250
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -130,12 +130,18 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+'[LPCD OFF]
 '1) In RUN mode: press the side button over 500ms, show the UI (to Indicate Battery Level -- Check by cmd F0-02) for 3 seconds, still RUN mode.
 '2) In Standby mode: press the side button, show the UI (to Indicate Battery Level) for 3 seconds, enter RUN mode.
 '3) In Sleep mode: press the side button, show the UI (to Indicate Battery Level) for 3 seconds, enter RUN mode.
 
 '4) In Sleep mode: swipe card, nothing happen.
 '5) In Sleep mode: insert card, enter RUN mode.
+'------------------------------------------------------------
+'------------------------------------------------------------
+'[LPCD ON (default value)]
+' Bluetooth connect w/ mobile phone first:
+' Under Standby mode, AT cmd, will enter RUN mode, (wait over 5 sec) can read MSR/ CL/ CT card.  (USB-Female w/ & w/o A/C cable)
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 PrintMyResult(result)

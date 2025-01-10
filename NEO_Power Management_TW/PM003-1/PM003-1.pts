@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-15152
+15035
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -235,7 +235,7 @@ If result <> 0 Then
    DL.AddComment "--- 02-40 Activate Transaction Command"
    DL.SendSequence "02-40"
    dl.pause 7000
-   ledcheck = msgbox("Reader is RUN mode?", vbyesno)
+   ledcheck = msgbox("Reader is RUN mode?", vbyesno)     'RUN mode always after sending AT cmd
    if ledcheck = 7 then
       result = 0
       dl.sendsequence "        05-01"

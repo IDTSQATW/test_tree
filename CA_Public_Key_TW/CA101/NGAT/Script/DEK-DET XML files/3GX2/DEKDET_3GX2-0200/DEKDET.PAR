@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MESSAGE>
+     <HEADER>
+          <FILE_NAME>DEKDET_3GX2-0200 v0.4</FILE_NAME>
+          <FILE_DATE>2012/03/16</FILE_DATE>
+          <TEMPLATE_VERSION>0.5</TEMPLATE_VERSION>
+          <GENERATED_BY>
+               <COMPANY_NAME>MASTERCARD</COMPANY_NAME>
+               <PRODUCT_NAME>R3TESTTOOLINQ</PRODUCT_NAME>
+               <PRODUCT_VERSION>1.0</PRODUCT_VERSION>
+               <OPERATOR_NAME>MVM</OPERATOR_NAME>
+          </GENERATED_BY>
+     </HEADER>
+     <BODY>
+          <EVT type="DEKRECEIVED">
+               <DEK>
+                    <DEKVALUE> FF 81 04 00 DF 81 06 05 DF 81 12 9F 02</DEKVALUE>
+                    <DEKPROPERTIES>
+                         <STATE> S3-4 </STATE>
+                    </DEKPROPERTIES>
+                    <DET>
+                         <DETVALUE> C7 04 10 11 12 13 9F 02 06 00 00 00 00 15 00 DF 81 10 01 01 </DETVALUE>
+                         <DETPROPERTIES>
+                              <STATE> S4 </STATE>
+                         </DETPROPERTIES>
+                    </DET>
+               </DEK>
+          </EVT>
+     </BODY>
+     <TRAILER>
+          <SIGNATURE>CA238612</SIGNATURE>
+     </TRAILER>
+</MESSAGE>

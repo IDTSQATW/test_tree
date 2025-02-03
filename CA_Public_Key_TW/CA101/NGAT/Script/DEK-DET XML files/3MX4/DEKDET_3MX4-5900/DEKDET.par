@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MESSAGE>
+     <HEADER>
+          <FILE_NAME>DEKDET_3MX4-5900 v0.1</FILE_NAME>
+          <FILE_DATE>2012/01/11</FILE_DATE>
+          <TEMPLATE_VERSION>0.5</TEMPLATE_VERSION>
+          <GENERATED_BY>
+               <COMPANY_NAME>MASTERCARD</COMPANY_NAME>
+               <PRODUCT_NAME>R3TESTTOOLINQ</PRODUCT_NAME>
+               <PRODUCT_VERSION>1.0</PRODUCT_VERSION>
+               <OPERATOR_NAME>MVM</OPERATOR_NAME>
+          </GENERATED_BY>
+     </HEADER>
+     <BODY>
+          <EVT type="DEKRECEIVED">
+               <DEK>
+                    <DEKVALUE> FF 81 04 0D 5F 53 01 10 9F 5E 00 9F 5D 03 01 01 00 DF 81 06 00</DEKVALUE>
+                    <DEKPROPERTIES>
+                         <STATE> S3-4 </STATE>
+                    </DEKPROPERTIES>
+                    <DET>
+                         <DETVALUE> DF 81 10 01 01</DETVALUE>
+                         <DETPROPERTIES>
+                              <STATE> S4 </STATE>
+                         </DETPROPERTIES>
+                    </DET>
+               </DEK>
+           </EVT>
+     </BODY>
+     <TRAILER>
+          <SIGNATURE>CA238612</SIGNATURE>
+     </TRAILER>
+</MESSAGE>

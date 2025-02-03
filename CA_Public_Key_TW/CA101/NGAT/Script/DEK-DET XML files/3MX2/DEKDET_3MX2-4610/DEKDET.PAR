@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MESSAGE>
+     <HEADER>
+          <FILE_NAME>DEKDET_3MX2-4610v0.3</FILE_NAME>
+          <FILE_DATE>2011/11/24</FILE_DATE>
+          <TEMPLATE_VERSION>0.5</TEMPLATE_VERSION>
+          <GENERATED_BY>
+               <COMPANY_NAME>MASTERCARD</COMPANY_NAME>
+               <PRODUCT_NAME>R3TESTTOOLINQ</PRODUCT_NAME>
+               <PRODUCT_VERSION>1.0</PRODUCT_VERSION>
+               <OPERATOR_NAME>MVM</OPERATOR_NAME>
+          </GENERATED_BY>
+     </HEADER>
+     <BODY>
+          <EVT type="DEKRECEIVED">
+               <DEK>
+                    <DEKVALUE> FF 81 04 0B 5A 09 41 33 39 00 00 01 51 31 4F DF 81 06 00</DEKVALUE>
+                    <DEKPROPERTIES>
+                         <STATE> S456-6 </STATE>
+                    </DEKPROPERTIES>
+                    <DET>
+                         <DETVALUE> 9F 02 06 00 00 00 00 00 12</DETVALUE>
+                         <DETPROPERTIES>
+                              <STATE> S6-9 </STATE>
+                         </DETPROPERTIES>
+                    </DET>
+<DET>
+                         <DETVALUE> 9F 03 06 00 00 00 00 00 00 </DETVALUE>
+                         <DETPROPERTIES>
+                              <STATE> S6-9 </STATE>
+                         </DETPROPERTIES>
+                    </DET>
+<DET>
+                         <DETVALUE> 9F 7C 14 11 22 33 44 55 66 88 99 AA BB CC DD EE FF F1 F2 F3 F4 F5 F6 </DETVALUE>
+                         <DETPROPERTIES>
+                              <STATE> S6-9 </STATE>
+                         </DETPROPERTIES>
+                    </DET>
+<DET>
+                         <DETVALUE> 5F 2A 02 06 50 </DETVALUE>
+                         <DETPROPERTIES>
+                              <STATE> S6-9 </STATE>
+                         </DETPROPERTIES>
+                    </DET>
+<DET>
+                         <DETVALUE> 5F 36 01 01</DETVALUE>
+                         <DETPROPERTIES>
+                              <STATE> S6-9 </STATE>
+                         </DETPROPERTIES>
+                    </DET>
+<DET>
+                         <DETVALUE> 9A 03 12 11 25 </DETVALUE>
+                         <DETPROPERTIES>
+                              <STATE> S6-9 </STATE>
+                         </DETPROPERTIES>
+                    </DET>
+<DET>
+                         <DETVALUE> 9F 21 03 11 59 02 </DETVALUE>
+                         <DETPROPERTIES>
+                              <STATE> S6-9 </STATE>
+                         </DETPROPERTIES>
+                    </DET>
+<DET>
+                         <DETVALUE> 9C 01 14 </DETVALUE>
+                         <DETPROPERTIES>
+                              <STATE> S6-9 </STATE>
+                         </DETPROPERTIES>
+                    </DET>
+<DET>
+                         <DETVALUE> DF 81 10 01 01</DETVALUE>
+                         <DETPROPERTIES>
+                              <STATE> S6-9 </STATE>
+                         </DETPROPERTIES>
+                    </DET>
+               </DEK>
+          </EVT>
+     </BODY>
+     <TRAILER>
+          <SIGNATURE>CA238612</SIGNATURE>
+     </TRAILER>
+</MESSAGE>

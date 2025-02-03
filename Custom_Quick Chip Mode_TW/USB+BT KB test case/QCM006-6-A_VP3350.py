@@ -37,7 +37,7 @@ if (Result):
         if i == 7:
             DL.SetWindowText("black", "*** Tap CUP #69 card")
             
-        strCardData = DL.ReadKeyBoardCardData(20000)
+        strCardData = DL.ReadKeyBoardCardData(60000)
         ksn = DL.GetTLV(strCardData, "DFEE12")
         
         if i == 1:#Discover #84

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MESSAGE>
+     <HEADER>
+            <FILE_NAME>DEKDET_3MX6-3100 v0.1</FILE_NAME>
+          <FILE_DATE>2011/01/05</FILE_DATE>
+          <TEMPLATE_VERSION>0.5</TEMPLATE_VERSION>
+          <GENERATED_BY>
+               <COMPANY_NAME>MASTERCARD</COMPANY_NAME>
+               <PRODUCT_NAME>R3TESTTOOLINQ</PRODUCT_NAME>
+               <PRODUCT_VERSION>1.0</PRODUCT_VERSION>
+               <OPERATOR_NAME>MVM</OPERATOR_NAME>
+          </GENERATED_BY>
+     </HEADER>
+     <BODY>
+          <EVT type="DEKRECEIVED">
+               <DEK>
+                    <DEKVALUE> FF 81 04 81 C5 9F 5E 09 54 13 33 90 00 00 15 13 01 9F 5D 03 01 01 00 9F 6F 01 80 9F 54 81 A0 00 FF 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F 10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F 10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F 10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F 10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F 10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F 10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F 10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F 10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F 10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 00 FF 9F 37 04 FF FF FF FF 9F 47 01 03 DF 81 06 00</DEKVALUE>
+                    <DEKPROPERTIES>
+                         <STATE> S3-4 </STATE>
+                    </DEKPROPERTIES>
+                    <DET>
+                         <DETVALUE>DF 81 10 01 01</DETVALUE>
+                         <DETPROPERTIES>
+                              <STATE> S4 </STATE>
+                         </DETPROPERTIES>
+                    </DET>
+               </DEK>
+          </EVT>
+     </BODY>
+     <TRAILER>
+          <SIGNATURE>CA238612</SIGNATURE>
+     </TRAILER>
+</MESSAGE>

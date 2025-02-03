@@ -1,9 +1,31 @@
 Objective: Encryption ON, CT (& Fallback to CT) test under Quick Chip Mode. (T=0/ Discover)
 
 --------------------------------------------------------------------------------
+>>> poll on demand = 01
+CMD: 01 01 01
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Wait for the reader bootup ready --> Click OK.
+
+>>> DF7D = 02 (NEO2)
+CMD: 04 00 DF EE 7D 01 02
+EXR: 04 00 00 00
+
+>>> Set CT ICS Identification = 4C.
+CMD: 60 16 04
+EXR: 60 00 00 00
+
+>>> Set CT terminal data = 4C.
+CMD: 6006 16009f33036008c89f3501259f40056000f05001df110101df260101df270100dfee1e08d09c20f0c20e16005f3601029f1a0208409f1e085465726d696e616c9f150212349f160f3030303030303030303030303030309f1c0838373635343332319f4e2231303732312057616c6b65722053742e20437970726573732c204341202c5553412edfee150101dfee160100dfee170105dfee180180dfee1f0180dfee1b083030303135313030dfee2203323c3cdf1008656e667265737a68
+EXR: 60 00 00 00
+
+>>> Set transaction interface = CT+MSR
+CMD: 04 00 DF EF 37 01 05
+EXR: 04 00 00 00
+
 >>> Quick Chip mode = 02
 CMD: 01 01 02
 EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Wait for the reader bootup ready --> Click OK.
 MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
 
 --------------------
@@ -82,3 +104,114 @@ MESSAGECK: After inserted card 3 times, LED 3 was turned ON (flash status)
 
 --------------------------------------------------------------------------------
 MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+--------------------------------------------------------------------------------
+
+>>> poll on demand = 01
+CMD: 01 01 01
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Wait for the reader bootup ready --> Click OK.
+
+>>> Set CT ICS Identification = 5C.
+CMD: 60 16 05
+EXR: 60 00 00 00
+
+>>> Set CT terminal data = 5C.
+CMD: 60 06 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00
+EXR: 60 00 00 00
+
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Wait for the reader bootup ready --> Click OK.
+MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+
+--------------------
+>>> CT transaction
+SWIPEKB: Click OK --> Insert T=0 card (Press button "Quick Chip" to Decryption first then Press button "OK")
+EXR: DF EE 25 02 00 03
+EXR: DF EF 5D 11 47 61 CC CC CC CC 00 10 D2 01 2C CC CC CC CC CC CC
+EXR: 57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89
+EXR: DF EF 5B 08 47 61 CC CC CC CC 00 10
+EXR: 5A 08 47 61 73 90 01 01 00 10
+EXR: 9F 39
+EXR: 4F
+EXR: 50
+EXR: 82
+EXR: 84
+EXR: 8A
+EXR: 8C
+EXR: 8D
+EXR: 8E
+EXR: 95
+EXR: 99
+EXR: 9B
+EXR: 9C
+EXR: 5F20
+EXR: 5F24
+EXR: 5F25
+EXR: 5F28
+EXR: 5F2A
+EXR: 5F2D
+EXR: 5F34
+EXR: 5F57
+EXR: 9F02
+EXR: 9F03
+EXR: 9F10
+EXR: 9F13
+EXR: 9F20
+EXR: 9F26
+EXR: 9F27
+EXR: 9F34
+EXR: 9F36
+EXR: 9F37
+EXR: 9F38
+EXR: 9F4D
+EXR: 9F4F
+EXR: 9F53
+EXR: 9F5B
+EXR: DFEF57
+EXR: DFEC181D454D5620436F6D6D6F6E2047656E2033204C322056312E33302E303339
+
+--------------------
+>>> Fallback to CT transaction
+SWIPEKB: Click OK --> Swipe Discover card (Replace serial number as HEX format first, Press button "MSR Dec" to Decryption then Press button "OK")
+EXR: 02
+EXR: 80 1F 44 28 00 A3 9B
+EXR: %*6510********0125^CARD/IMAGE 08             ^1712****************?
+EXR: ;6510********0125=1712****************?
+EXR: 03
+EXR: %B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?
+EXR: ;6510000000000125=17122011000095000000?
+
+--------------------
+>>> Fallback to MSR transaction
+SWIPEKB: Click OK --> Insert IDT test card 3 times --> Remove card (Green LED 3 is flash ON) --> Swipe Discover card. (Replace serial number as HEX format first, Press button "MSR Dec" to Decryption then Press button "OK")
+EXR: DFEF6102F220
+EXR: DFEF6102F222
+EXR: DFEE25
+EXR: 9F390180
+EXR: 02
+EXR: 80 1F 44 28 00 A3 9B
+EXR: %*6510********0125^CARD/IMAGE 08             ^1712****************?
+EXR: ;6510********0125=1712****************?
+EXR: 03
+EXR: %B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?
+EXR: ;6510000000000125=17122011000095000000?
+MESSAGECK: After inserted card 3 times, LED 3 was turned ON (flash status)
+
+--------------------------------------------------------------------------------
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+--------------------------------------------------------------------------------
+
+>>> poll on demand = 01
+CMD: 01 01 01
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Wait for the reader bootup ready --> Click OK.
+
+>>> Set transaction interface = ALL
+CMD: 04 00 DF EF 37 01 07
+EXR: 04 00 00 00
+
+>>> Change to Quick Chip Mode
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00

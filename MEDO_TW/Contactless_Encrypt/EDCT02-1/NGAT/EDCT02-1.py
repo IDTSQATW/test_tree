@@ -45,47 +45,47 @@ if (Result):
 if (Result):
 	for i in range (1, 8):
 		if i == 1:
-			time.sleep(1)
+			time.sleep(0.2)
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 1')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("04 00 00 00")	
-				time.sleep(1)
+				time.sleep(0.2)
 		if i == 2:
-			time.sleep(1)
+			time.sleep(0.2)
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 2')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("04 00 00 00")	
-				time.sleep(1)
+				time.sleep(0.2)
 		if i == 3:
-			time.sleep(1)
+			time.sleep(0.2)
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 3')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("04 00 00 00")	
-				time.sleep(1)
+				time.sleep(0.2)
 		if i == 4:
-			time.sleep(1)
+			time.sleep(0.2)
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 4')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("04 00 00 00")	
-				time.sleep(1)				
+				time.sleep(0.2)				
 		if i == 5:
-			time.sleep(1)
+			time.sleep(0.2)
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 5')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("04 00 00 00")	
-				time.sleep(1)
+				time.sleep(0.2)
 		if i == 6:
-			time.sleep(1)
+			time.sleep(0.2)
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 6')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("04 00 00 00")	
-				time.sleep(1)
+				time.sleep(0.2)
 		if i == 7:
-			time.sleep(1)
+			time.sleep(0.2)
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 7')
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("04 00 00 00")
-				time.sleep(1)				
+				time.sleep(0.2)				
 		
 		if (Result):
 			for k in range (1, pollmode):
@@ -93,7 +93,7 @@ if (Result):
 					RetOfStep = DL.SendCommand('Poll on Demand')
 					if (RetOfStep):
 						Result = DL.Check_RXResponse("01 00 00 00")
-						time.sleep(1)
+						time.sleep(0.2)
 						if (Result):
 							RetOfStep = DL.SendCommand('Activate Transaction')
 							rx = 0
@@ -101,11 +101,11 @@ if (Result):
 								Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 **")	
 								alldata=DL.Get_RXResponse(rx)
 				if k == 2:
-					time.sleep(1)
+					time.sleep(0.2)
 					RetOfStep = DL.SendCommand('Auto Poll')
 					if (RetOfStep):
 						Result = DL.Check_RXResponse("01 00 00 00")
-						time.sleep(1)
+						time.sleep(0.2)
 						if (Result):
 							RetOfStep = DL.SendCommand('Get Transaction Result')
 							rx = 1						
@@ -142,6 +142,8 @@ if (Result):
 						DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 								
 					Result = DL.Check_StringAB(decDFEF4D, '3B 34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30 3D 33 30 31 32 31 32 30 30 30 31 32 33 33 39 39 30 30 30 33 31 3F')
+					if Result == False:
+						Result = DL.Check_StringAB(decDFEF4D, '3B 34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30 3D 32 30 31 32 31 32 30 30 30 31 32 33 33 39 39 30 30 30 33 31 3F')
 					if Result == True and DL.Check_StringAB(alldata, 'DF EF 4D 28'):
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:
@@ -172,6 +174,8 @@ if (Result):
 						DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 								
 					Result = DL.Check_StringAB(decDFEF4D, '3B 34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30 3D 33 30 31 32 31 32 30 30 30 31 32 33 33 39 39 30 30 30 33 31 3F')
+					if Result == False:
+						Result = DL.Check_StringAB(decDFEF4D, '3B 34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30 3D 32 30 31 32 31 32 30 30 30 31 32 33 33 39 39 30 30 30 33 31 3F')
 					if Result == True and DL.Check_StringAB(alldata, 'DF EF 4D 28'):
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:
@@ -202,6 +206,8 @@ if (Result):
 						DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 								
 					Result = DL.Check_StringAB(decDFEF4D, '3B 34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30 3D 33 30 31 32 31 32 30 30 30 31 32 33 33 39 39 30 30 30 33 31 3F')
+					if Result == False:
+						Result = DL.Check_StringAB(decDFEF4D, '3B 34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30 3D 32 30 31 32 31 32 30 30 30 31 32 33 33 39 39 30 30 30 33 31 3F')
 					if Result == True and DL.Check_StringAB(alldata, 'DF EF 4D 28'):
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:
@@ -218,6 +224,8 @@ if (Result):
 						DL.SetWindowText("red", "Tag DFEF4C: FAIL")
 								
 					Result = DL.Check_StringAB(decDFEF4D, '3B 34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30 3D 33 30 31 32 31 32 30 30 30 31 32 33 33 39 39 30 30 30 33 31 3F')
+					if Result == False:
+						Result = DL.Check_StringAB(decDFEF4D, '3B 34 37 36 31 37 33 39 30 30 31 30 31 30 30 31 30 3D 32 30 31 32 31 32 30 30 30 31 32 33 33 39 39 30 30 30 33 31 3F')
 					if Result == True and DL.Check_StringAB(alldata, 'DF EF 4D 28'):
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:

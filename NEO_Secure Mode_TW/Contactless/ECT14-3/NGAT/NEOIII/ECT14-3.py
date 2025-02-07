@@ -48,23 +48,13 @@ if (Result):
     for i in range(1, 3):
         if readermodel == 1: #VP3350
             if i == 1:
-                if readertype == 1: #NSRED
-                    RetOfStep = DL.SendCommand('DFEE1D--02 02 21 0A 30 (NEO3)')
-                    if (RetOfStep):
-                        Result = Result and DL.Check_RXResponse("C7 00 00 00")	
-                if readertype == 0: #SRED
-                    RetOfStep = DL.SendCommand('DFEE1D--02 02 21 0A 30 (NEO3_SRED)')
-                    if (RetOfStep):
-                        Result = Result and DL.Check_RXResponse("C7 00 00 00")	
+                RetOfStep = DL.SendCommand('DFEE1D--02 02 21 0A 30 (NEO3)')
+                if (RetOfStep):
+                    Result = Result and DL.Check_RXResponse("C7 00 00 00")	
             if i == 2:
-                if readertype == 1: #NSRED
-                    RetOfStep = DL.SendCommand('DFEE1D--06 04 7E 0F 31 (NEO3)')
-                    if (RetOfStep):
-                        Result = Result and DL.Check_RXResponse("C7 00 00 00")	
-                if readertype == 0: #SRED
-                    RetOfStep = DL.SendCommand('DFEE1D--06 04 7E 0F 31 (NEO3_SRED)')
-                    if (RetOfStep):
-                        Result = Result and DL.Check_RXResponse("C7 00 00 00")	
+                RetOfStep = DL.SendCommand('DFEE1D--06 04 7E 0F 31 (NEO3)')
+                if (RetOfStep):
+                    Result = Result and DL.Check_RXResponse("C7 00 00 00")	
         if readermodel == 0: #non-VP3350
             if i == 1:
                 RetOfStep = DL.SendCommand('DFEE1D--02 02 21 0A 30')

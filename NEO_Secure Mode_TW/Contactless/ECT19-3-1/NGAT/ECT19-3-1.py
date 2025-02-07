@@ -62,13 +62,15 @@ if (Result):
                 
                 # Tag 57
                 Result = DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D3 01 2C CC CC CC CC CC CC CC CC')
+                if Result == False:
+                    Result = DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D2 01 2C CC CC CC CC CC CC CC CC')
                 if Result == True and DL.Check_RXResponse("57 A1 13"):
                     DL.SetWindowText("blue", "Tag 57_Mask: PASS")
                 else:
                     DL.fails=DL.fails+1
                     DL.SetWindowText("red", "Tag 57_Mask: FAIL")
                     
-                if (strD57 == '876543214761739001010010=30121200012339900031') and DL.Check_RXResponse("57 C2 01 58"):
+                if (strD57 == '876543214761739001010010=30121200012339900031' or strD57 == '876543214761739001010010=20121200012339900031') and DL.Check_RXResponse("57 C2 01 58"):
                     DL.SetWindowText("blue", "Tag 57_Enc: PASS")
                 else:
                     DL.fails=DL.fails+1

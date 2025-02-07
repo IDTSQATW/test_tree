@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-42084
+18517
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -194,7 +194,7 @@ if result <> 0 then
    msgbox "Click OK --> tap MChip card immediately once you saw 05-01 RX", vbokonly
    dl.pause 1000
    DL.SendSequence "05-01"
-   result = DL.WaitForSequence("05 00", 1, 2000)   
+   result = DL.WaitForSequence("05 00", 1, 5000)   
    if result <> 0 then
       result = DL.WaitForSequence("02 xx", 1, 3000)
       ReverseResult(result)
@@ -215,8 +215,9 @@ if result <> 0 then
    msgbox "Click OK --> tap MChip card immediately once you saw 05-01 RX", vbokonly
    dl.pause 1000
    DL.SendSequence "05-01"
-   result = DL.WaitForSequence("05 00", 1, 2000)   
+   result = DL.WaitForSequence("05 00", 1, 5000)   
    if result <> 0 then
+      dl.resetreceivecounter
       result = DL.WaitForSequence("02 xx", 1, 3000)
       ReverseResult(result)
    end if

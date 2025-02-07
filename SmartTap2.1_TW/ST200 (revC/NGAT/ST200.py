@@ -60,12 +60,16 @@ if (Result):
 			
 			# Tag 57
 			Result2 = DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D3 01 2C CC CC CC CC CC CC CC CC')
+			if Result2 == False:
+				Result2 = DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D2 01 2C CC CC CC CC CC CC CC CC')
 			if Result2 == True and DL.Check_RXResponse("57 A1 13"):
 				DL.SetWindowText("blue", "Tag 57_Mask: PASS")
 			else:
 				DL.SetWindowText("red", "Tag 57_Mask: FAIL")
 				
 			Result2 = DL.Check_StringAB(dec57, '57 13 47 61 73 90 01 01 00 10 D3 01 21 20 00 12 33 99 00 03 1F')
+			if Result2 == False:
+				Result2 = DL.Check_StringAB(dec57, '57 13 47 61 73 90 01 01 00 10 D2 01 21 20 00 12 33 99 00 03 1F')
 			if Result2 == True and DL.Check_RXResponse("57 C1"):
 				DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 			else:

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-1598
+51849
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -253,7 +253,7 @@ If result <> 0 Then
    DL.SendSequence "F0-01 Get PMC Status"
    result = DL.WaitForSequence("F0-01 ok resp", 1, 5000)
 End If
-
+'------------------------------------------------------------
 if result <> 0 then
    dl.addcomment vbcrlf & "Waiting for 6 sec..." 
    dl.pause 8000
@@ -265,6 +265,22 @@ if result <> 0 then
    if ledcheck = 7 then result = 0
 End If
 
+atformsr0240()
+ping()
+
+dl.pause 6000
+atformsr0240()
+ping()
+'------------------------------------------------------------
+sub atformsr0240()
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- DF7D = 01"
+   DL.SendSequence "DF7D = 01"
+   result = DL.WaitForSequence("04 00", 1, 3000)
+End If
+
 If result <> 0 Then
    dl.addcomment vbcrlf & "Waiting for 6 sec..." 
    dl.pause 7000
@@ -273,7 +289,7 @@ If result <> 0 Then
    DL.AddComment "--- 02-01 Activate Transaction Command"
    DL.SendSequence "        02-01"
    dl.pause 5500
-   ledcheck = msgbox("Reader is RUN mode?", vbyesno)
+   ledcheck = msgbox("Reader is RUN mode?", vbyesno)     'RUN mode always after sending AT cmd
    if ledcheck = 7 then
       result = 0
       dl.sendsequence "        05-01"
@@ -302,7 +318,9 @@ If result <> 0 Then
       result = DL.WaitForSequence("02 00", 1, 100000)
    end if
 End If
+end sub
 '------------------------------------------------------------
+sub ping()
 if result <> 0 then
    dl.addcomment vbcrlf & "Waiting for 6 sec..." 
    dl.pause 6000
@@ -353,7 +371,8 @@ If result <> 0 Then
    DL.SendSequence "18-01 Ping"
    result = DL.WaitForSequence("18 00", 1, 3000)
 End If
-
+end sub
+'------------------------------------------------------------
 DL.AddComment vbCrLf
 PrintMyResult(result)
 

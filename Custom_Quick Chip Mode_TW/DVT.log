@@ -12342,3 +12342,801 @@ Protocal:Pack ViVopay2
 CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
 OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
 ASCII: Otech2    
+
+11:10:38: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=02, DFEC4F=Bluetooth KB).txt
+Items: 35
+Load Case Succeed!
+
+
+11:10:46: >>[Do Scripts]>>
+
+Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
+--------------------
+>>> Set output interface (BT)
+Pack L = 17-0200000000030000000000000000000000
+CMD: 02 07 00 04 00 DF EC 4F 01 02 7B 21 03 
+OUT: 02 00 00 00 00 03 00 00 00 00 00 00 00 00 00 00 00 
+ASCII:            
+Error! >>>> Expect OUT:EXR: 04 00 00 00
+	
+>>> Set transaction interface = ALL
+Pack L = 17-0200000000030000000000000000000000
+CMD: 02 07 00 04 00 DF EF 37 01 07 05 11 03 
+OUT: 02 00 00 00 00 03 00 00 00 00 00 00 00 00 00 00 00 
+ASCII:            
+Error! >>>> Expect OUT:EXR: 04 00 00 00
+--------------------
+>>> Set CT ICS Identification = 2C.
+Pack L = 17-0200000000030000000000000000000000
+CMD: 02 03 00 60 16 02 74 78 03 
+OUT: 02 00 00 00 00 03 00 00 00 00 00 00 00 00 00 00 00 
+ASCII:            
+Error! >>>> Expect OUT:EXR: 60 00 00 00
+>>> Set CT terminal data = 2C.
+Pack L = 17-0200000000030000000000000000000000
+CMD: 02 2E 00 60 06 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 DC 20 D0 C4 1E 16 00 67 73 03 
+OUT: 02 00 00 00 00 03 00 00 00 00 00 00 00 00 00 00 00 
+ASCII:            
+Error! >>>> Expect OUT:EXR: 60 00 00 00
+>>> Change to Quick Chip Mode
+Pack L = 17-0200000000030000000000000000000000
+CMD: 02 03 00 01 01 02 02 04 03 
+OUT: 02 00 00 00 00 03 00 00 00 00 00 00 00 00 00 00 00 
+ASCII:            
+Error! >>>> Expect OUT:EXR: 56 69 56 4F 74 65 63 68 32 00 01 0A 00 00
+--------------------
+>>> Set CT ICS Identification = 5C.
+Pack L = 17-0200000000030000000000000000000000
+CMD: 02 03 00 60 16 05 73 7B 03 
+OUT: 02 00 00 00 00 03 00 00 00 00 00 00 00 00 00 00 00 
+ASCII:            
+Error! >>>> Expect OUT:EXR: 60 00 00 00
+>>> Change to Quick Chip Mode
+Pack L = 17-0200000000030000000000000000000000
+CMD: 02 03 00 01 01 02 02 04 03 
+OUT: 02 00 00 00 00 03 00 00 00 00 00 00 00 00 00 00 00 
+ASCII:            
+Error! >>>> Expect OUT:EXR: 56 69 56 4F 74 65 63 68 32 00 01 0A 00 00
+>>> Set CT terminal data = 5C.
+Pack L = 17-0200000000030000000000000000000000
+CMD: 02 2E 00 60 06 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 27 33 03 
+OUT: 02 00 00 00 00 03 00 00 00 00 00 00 00 00 00 00 00 
+ASCII:            
+Error! >>>> Expect OUT:EXR: 60 00 00 00
+>>> Change to Quick Chip Mode
+Pack L = 17-0200000000030000000000000000000000
+CMD: 02 03 00 01 01 02 02 04 03 
+OUT: 02 00 00 00 00 03 00 00 00 00 00 00 00 00 00 00 00 
+ASCII:            
+Error! >>>> Expect OUT:EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+--------------------
+>>> Check USB connection type
+MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
+User Judgment Pass
+
+
+11:10:51: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=02, DFEC4F=Bluetooth KB).txt
+Items: 35
+Load Case Succeed!
+
+
+11:10:56: >>[Do Scripts]>>
+
+Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
+--------------------
+>>> Set output interface (BT)
+Pack L = 17-5669564F7465636832000405000045E600
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EC 4F 01 02 21 DF 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 05 00 00 45 E6 
+ASCII: Otech2    
+Error! >>>> Expect OUT:EXR: 04 00 00 00
+	
+>>> Set transaction interface = ALL
+Pack L = 17-5669564F74656368320004000000AE1600
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EF 37 01 07 9B 0F 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
+ASCII: Otech2    
+--------------------
+>>> Set CT ICS Identification = 2C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 02 FD B3 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Set CT terminal data = 2C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 DC 20 D0 C4 1E 16 00 46 17 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F746563683200010A0000D59200
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 0A 00 00 D5 92 
+ASCII: Otech2    
+--------------------
+>>> Set CT ICS Identification = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 05 8D 54 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F746563683200010A0000D59200
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 0A 00 00 D5 92 
+ASCII: Otech2    
+>>> Set CT terminal data = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 9B FB 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F74656368320001000000125300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+--------------------
+>>> Check USB connection type
+MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
+User Judgment Pass
+
+
+11:11:18: [Send Command]
+
+Protocal:Pack ViVopay2
+
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+
+11:13:58: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=02, DFEC4F=USB KB).txt
+Items: 34
+Load Case Succeed!
+
+
+11:14:53: >>[Do Scripts]>>
+
+Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
+--------------------
+>>> Set output interface (USB)
+Pack L = 17-5669564F74656368320004000000AE1600
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EC 4F 01 01 11 BC 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
+ASCII: Otech2    
+>>> Set transaction interface = ALL
+Pack L = 17-5669564F74656368320004000000AE1600
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EF 37 01 07 9B 0F 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
+ASCII: Otech2    
+--------------------
+>>> Set CT ICS Identification = 2C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 02 FD B3 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Set CT terminal data = 2C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 DC 20 D0 C4 1E 16 00 46 17 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F746563683200010A0000D59200
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 0A 00 00 D5 92 
+ASCII: Otech2    
+--------------------
+>>> Set CT ICS Identification = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 05 8D 54 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F746563683200010A0000D59200
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 0A 00 00 D5 92 
+ASCII: Otech2    
+>>> Set CT terminal data = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 9B FB 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F74656368320001000000125300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+--------------------
+>>> Check USB connection type
+MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
+User Judgment Pass
+
+
+11:15:36: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\KBtoHID.txt
+Items: 8
+Load Case Succeed!
+
+
+11:15:39: >>[Do Scripts]>>
+
+Objective: Under Quick Chip mode, set reader to Poll on demand mode (USB/ KBD to USB/ HID)
+--------------------
+>>> Change to Poll On Demand
+Pack L = 17-5669564F74656368320001000000125300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+--------------------
+>>> Check USB connection type
+MESSAGECK: 1) Check USB connection type = HID; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
+User Judgment Pass
+
+
+11:16:25: [Load Script File]
+Upload Script File Wrong !
+
+11:17:03: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=02=CT+CL+MSR).txt
+Items: 27
+Load Case Succeed!
+
+
+11:17:52: >>[Do Scripts]>>
+
+Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
+--------------------
+>>> Set CT ICS Identification = 2C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 02 FD B3 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Set CT terminal data = 2C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 DC 20 D0 C4 1E 16 00 46 17 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F746563683200010A0000D59200
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 0A 00 00 D5 92 
+ASCII: Otech2    
+--------------------
+>>> Set CT ICS Identification = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 05 8D 54 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F746563683200010A0000D59200
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 0A 00 00 D5 92 
+ASCII: Otech2    
+>>> Set CT terminal data = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 9B FB 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F74656368320001000000125300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+--------------------
+>>> Check USB connection type
+MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
+User Judgment Pass
+
+
+11:18:02: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\KBtoHID.txt
+Items: 8
+Load Case Succeed!
+
+
+11:19:42: >>[Do Scripts]>>
+
+Objective: Under Quick Chip mode, set reader to Poll on demand mode (USB/ KBD to USB/ HID)
+--------------------
+>>> Change to Poll On Demand
+Pack L = 17-5669564F74656368320001000000125300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+--------------------
+>>> Check USB connection type
+MESSAGECK: 1) Check USB connection type = HID; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
+User Judgment Pass
+
+
+11:20:01: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=03=CT+MSR).txt
+Items: 24
+Load Case Succeed!
+
+
+11:20:29: >>[Do Scripts]>>
+
+Objective: set reader to Quick Chip mode = 03 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 03 = CT and MSR would be active.
+--------------------
+>>> Set CT ICS Identification = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 05 8D 54 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Set CT terminal data = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 9B FB 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F74656368320001050000F9A300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 03 14 95 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 05 00 00 F9 A3 
+ASCII: Otech2    
+Error! >>>> Expect OUT:EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+--------------------
+>>> Check USB connection type
+MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
+User Judgment Pass
+
+--------------------
+>>> CL transaction
+SWIPEKB: Click OK --> Tap any card (No reaction) --> Press button "OK"
+MESSAGECK: CL interface = Disable
+User Judgment Pass
+
+>>> MSR transaction
+SWIPEKB: Click OK --> Swipe any card --> Press button "OK"
+MESSAGECK: can read MSR card
+User Judgment Pass
+
+>>> CL transaction
+SWIPEKB: Click OK --> Insert any card ----> Press button "OK"
+MESSAGECK: can read CT card
+User Judgment Pass
+
+
+11:20:36: [Send Command]
+
+Protocal:Pack ViVopay2
+
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 03 14 95 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 05 00 00 F9 A3 
+ASCII: Otech2    
+
+11:20:42: [Send Command]
+
+Protocal:Pack ViVopay2
+
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 04 64 72 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 05 00 00 F9 A3 
+ASCII: Otech2    
+
+11:20:56: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=02, DFEF37=CL+MSR).txt
+Items: 24
+Load Case Succeed!
+
+
+11:21:45: >>[Do Scripts]>>
+
+Objective: set reader to Quick Chip mode = 04 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 04 = CL and MSR would be active.
+--------------------
+>>> Set CT ICS Identification = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 05 8D 54 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Set CT terminal data = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 9B FB 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Set transaction interface = CL+MSR
+Pack L = 17-5669564F74656368320004000000AE1600
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EF 37 01 03 DB 8B 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
+ASCII: Otech2    
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F74656368320001000000125300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+--------------------
+>>> CL transaction
+SWIPEKB: Click OK --> Insert any card (No reaction) ----> Press button "OK"
+MESSAGECK: CT interface = Disable
+User Judgment Pass
+
+>>> CL transaction
+SWIPEKB: Click OK --> Tap any card --> Press button "OK"
+KB Unit Swipe Card:
+DFEE2602E100DFEE120A11111111111111000001DFEF4C06000000000000DFEF4D00DF8116161E040000000000000000000000000000000000000000DF81290830F0F000B0F0FF00FF81061EDF8115060000000000FF9F42020978DF810B0100DF810E0100DF810F0100FF810582017E4F07A0000000041010500F505043204D43442030312020763230DFEF5D115413CCCCCCCC0010D1412CCCCCCCCCCCCC57C11885F2B4D2CEFCC79C48CAACE49E4604FB9F2EFB5FABBA28F1DFEF5B085413CCCCCCCC00105AC11066D5B1EC6932BA33792688F77DFEB5EB5F24031412315F25030401015F280200565F340101820259808407A00000000410108E0E000000000000000042035E031F03950524400000019A032502049B0200009C01009F01009F02060000000004449F0607A00000000410109F0702FF009F090200029F0D0500000000009F0E0500000000009F0F0500000000009F10120110A00009228000000000000000000000FF9F150211119F16009F1A0208409F1C009F1D086CFF0000000000009F1E0835543137303630359F21030320289F26080BA58F01309B368B9F2701809F2A01029F33030008089F34031F03029F3501229F36025F6B9F370426451DD69F3901079F400500000000009F4104000000019F4E009F5301009F6D020001DFEE76052440000001DF8116161B000000000000000000000000000000000000000000FFEE0105DFEE300100DFEE4C0103DFEC1C1E08030003FF001B00000000FF00000000000000000000000000000000FF00DFEC112027879A9A10234D2636B1C2D672637A1208EBE2DB6281779E656E7C2CB147D84DDFEC18174D61737465724361726420332E312E342C2076312E3030DFEF57135650333335302046572076312E30302E393234
+MESSAGECK: can read CL card
+User Judgment Pass
+
+>>> MSR transaction
+SWIPEKB: Click OK --> Swipe any card --> Press button "OK"
+KB Unit Swipe Card:
+020101833F4E276A8700%TRACK17676760707077676760707077676760707077676760707077676760707077676760707?;2121212121767676070707767676762121212?;33333333337676760707077676763333333333767676070707767676333333333376767607070776767633333333337676760707?33343554313730363035265E03
+MESSAGECK: can read MSR card
+User Judgment Pass
+
+
+11:21:56: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=02, DFEF37=CT+MSR).txt
+Items: 24
+Load Case Succeed!
+
+
+11:22:16: >>[Do Scripts]>>
+
+Objective: set reader to Quick Chip mode = 03 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 03 = CT and MSR would be active.
+--------------------
+>>> Set CT ICS Identification = 5C.
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 05 8D 54 
+OUT: NULL
+Error! >>>> Expect OUT:EXR: 60 00 00 00
+>>> Set CT terminal data = 5C.
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 9B FB 
+OUT: NULL
+Error! >>>> Expect OUT:EXR: 60 00 00 00
+>>> Set transaction interface = CT+MSR
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EF 37 01 05 BB 4D 
+OUT: NULL
+Error! >>>> Expect OUT:EXR: 04 00 00 00
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F74656368320001000000125300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+--------------------
+>>> CL transaction
+SWIPEKB: Click OK --> Tap any card (No reaction) --> Press button "OK"
+MESSAGECK: CL interface = Disable
+--------------------
+Error! >>>> User Judgment Fail:MESSAGECK: CL interface = Disable
+
+>>> MSR transaction
+SWIPEKB: Click OK --> Swipe any card --> Press button "OK"
+MESSAGECK: can read MSR card
+MESSAGECK: CL interface = Disable
+Error! >>>> User Judgment Fail:MESSAGECK: can read MSR card
+
+>>> CL transaction
+SWIPEKB: Click OK --> Insert any card ----> Press button "OK"
+MESSAGECK: can read CT card
+MESSAGECK: can read MSR card
+Error! >>>> User Judgment Fail:MESSAGECK: can read CT card
+
+
+11:22:20: [Send Command]
+
+Protocal:Pack ViVopay2
+
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+
+11:22:40: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=02, DFEF37=CT+MSR).txt
+Items: 24
+Load Case Succeed!
+
+
+11:23:23: >>[Do Scripts]>>
+
+Objective: set reader to Quick Chip mode = 03 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 03 = CT and MSR would be active.
+--------------------
+>>> Set CT ICS Identification = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 05 8D 54 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Set CT terminal data = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 9B FB 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Set transaction interface = CT+MSR
+Pack L = 17-5669564F74656368320004000000AE1600
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EF 37 01 05 BB 4D 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
+ASCII: Otech2    
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F74656368320001000000125300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+--------------------
+>>> CL transaction
+SWIPEKB: Click OK --> Tap any card (No reaction) --> Press button "OK"
+MESSAGECK: CL interface = Disable
+User Judgment Pass
+
+>>> MSR transaction
+SWIPEKB: Click OK --> Swipe any card --> Press button "OK"
+KB Unit Swipe Card:
+020101833F4E276A8700%TRACK17676760707077676760707077676760707077676760707077676760707077676760707?;2121212121767676070707767676762121212?;33333333337676760707077676763333333333767676070707767676333333333376767607070776767633333333337676760707?33343554313730363035265E03
+MESSAGECK: can read MSR card
+User Judgment Pass
+
+>>> CL transaction
+SWIPEKB: Click OK --> Insert any card ----> Press button "OK"
+KB Unit Swipe Card:
+DFEE2602E000DFEE250250054F005A0050005700820084008A008E0095009A032502049B009C010099005F20005F24005F25005F28005F2A005F2D005F34009F02060000000004449F03009F07009F08009F09009F0B009F0D009F0E009F0F009F10009F11009F12009F13009F15009F16009F1A009F1C009F1E009F20009F21030322339F24009F26009F27009F33036028C89F34009F3501219F36009F37009F53009F5B009F390105DF2100DFEE2300DFEE51005F57008C008D009F38009F4D009F4F00DFEC181D454D5620436F6D6D6F6E2047656E2033204C322056312E33302E303339DFEF57135650333335302046572076312E30302E393234FFEE0105DFEE300101
+MESSAGECK: can read CT card
+User Judgment Pass
+
+
+11:25:22: [Send Command]
+
+Protocal:Pack ViVopay2
+
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+
+11:48:41: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=02, DFEC4F=USB KB).txt
+Items: 34
+Load Case Succeed!
+
+
+11:48:47: >>[Do Scripts]>>
+
+Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
+--------------------
+>>> Set output interface (USB)
+Pack L = 17-5669564F74656368320004000000AE1600
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EC 4F 01 01 11 BC 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
+ASCII: Otech2    
+>>> Set transaction interface = ALL
+Pack L = 17-5669564F74656368320004000000AE1600
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EF 37 01 07 9B 0F 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
+ASCII: Otech2    
+--------------------
+>>> Set CT ICS Identification = 2C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 02 FD B3 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Set CT terminal data = 2C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 DC 20 D0 C4 1E 16 00 46 17 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F746563683200010A0000D59200
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 0A 00 00 D5 92 
+ASCII: Otech2    
+--------------------
+>>> Set CT ICS Identification = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 05 8D 54 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F746563683200010A0000D59200
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 0A 00 00 D5 92 
+ASCII: Otech2    
+>>> Set CT terminal data = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 9B FB 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F74656368320001000000125300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+--------------------
+>>> Check USB connection type
+MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
+User Judgment Pass
+
+
+11:49:16: [Load Script File]
+Upload Script File Wrong !
+
+11:54:24: [Send Command]
+
+Protocal:Pack ViVopay2
+
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+
+14:22:31: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=02, DFEC4F=USB KB).txt
+Items: 34
+Load Case Succeed!
+
+
+14:22:36: >>[Do Scripts]>>
+
+Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
+--------------------
+>>> Set output interface (USB)
+Pack L = 17-5669564F74656368320004000000AE1600
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EC 4F 01 01 11 BC 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
+ASCII: Otech2    
+>>> Set transaction interface = ALL
+Pack L = 17-5669564F74656368320004000000AE1600
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EF 37 01 07 9B 0F 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
+ASCII: Otech2    
+--------------------
+>>> Set CT ICS Identification = 2C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 02 FD B3 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Set CT terminal data = 2C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 DC 20 D0 C4 1E 16 00 46 17 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F746563683200010A0000D59200
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 0A 00 00 D5 92 
+ASCII: Otech2    
+--------------------
+>>> Set CT ICS Identification = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 05 8D 54 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F746563683200010A0000D59200
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 0A 00 00 D5 92 
+ASCII: Otech2    
+>>> Set CT terminal data = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 9B FB 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F74656368320001000000125300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+--------------------
+>>> Check USB connection type
+MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
+User Judgment Pass
+
+
+14:40:17: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=02, DFEC4F=USB KB).txt
+Items: 34
+Load Case Succeed!
+
+
+14:40:25: >>[Do Scripts]>>
+
+Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
+--------------------
+>>> Set output interface (USB)
+Pack L = 17-5669564F74656368320004000000AE1600
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EC 4F 01 01 11 BC 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
+ASCII: Otech2    
+>>> Set transaction interface = ALL
+Pack L = 17-5669564F74656368320004000000AE1600
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EF 37 01 07 9B 0F 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
+ASCII: Otech2    
+--------------------
+>>> Set CT ICS Identification = 2C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 02 FD B3 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Set CT terminal data = 2C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 DC 20 D0 C4 1E 16 00 46 17 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F746563683200010A0000D59200
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 0A 00 00 D5 92 
+ASCII: Otech2    
+--------------------
+>>> Set CT ICS Identification = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 05 8D 54 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F746563683200010A0000D59200
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 0A 00 00 D5 92 
+ASCII: Otech2    
+>>> Set CT terminal data = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 9B FB 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F74656368320001000000125300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+--------------------
+>>> Check USB connection type
+MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
+User Judgment Pass
+
+
+15:56:31: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=02, DFEC4F=USB KB).txt
+Items: 34
+Load Case Succeed!
+
+
+15:56:55: >>[Do Scripts]>>
+
+Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
+--------------------
+>>> Set output interface (USB)
+Pack L = 17-5669564F74656368320004000000AE1600
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EC 4F 01 01 11 BC 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
+ASCII: Otech2    
+>>> Set transaction interface = ALL
+Pack L = 17-5669564F74656368320004000000AE1600
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EF 37 01 07 9B 0F 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
+ASCII: Otech2    
+--------------------
+>>> Set CT ICS Identification = 2C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 02 FD B3 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Set CT terminal data = 2C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 DC 20 D0 C4 1E 16 00 46 17 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F746563683200010A0000D59200
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 0A 00 00 D5 92 
+ASCII: Otech2    
+--------------------
+>>> Set CT ICS Identification = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 05 8D 54 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F746563683200010A0000D59200
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 0A 00 00 D5 92 
+ASCII: Otech2    
+>>> Set CT terminal data = 5C.
+Pack L = 17-5669564F746563683200600000003D3500
+CMD: 56 69 56 4F 74 65 63 68 32 00 60 06 00 2C 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 9B FB 
+OUT: 56 69 56 4F 74 65 63 68 32 00 60 00 00 00 3D 35 
+ASCII: Otech2 `  
+>>> Change to Quick Chip Mode
+Pack L = 17-5669564F74656368320001000000125300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+--------------------
+>>> Check USB connection type
+MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
+User Judgment Pass
+

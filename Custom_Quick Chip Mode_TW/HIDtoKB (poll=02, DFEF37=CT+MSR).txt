@@ -1,6 +1,11 @@
 Objective: set reader to Quick Chip mode = 03 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 03 = CT and MSR would be active.
 
 --------------------
+>>> Change to Poll On Demand
+CMD: 01 01 01
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+--------------------
 >>> Set CT ICS Identification = 5C.
 CMD: 60 16 05
 EXR: 60 00 00 00

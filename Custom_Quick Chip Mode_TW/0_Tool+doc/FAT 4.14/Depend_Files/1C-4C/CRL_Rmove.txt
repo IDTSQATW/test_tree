@@ -1,0 +1,5 @@
+
+;command 1
+REMOVE_ALL_CRL 				; REMOVE_CRL
+END
+

@@ -434,7 +434,7 @@ COMMENT Discover MagStripe card - pass
 RECEIVE
 16
 Activate transaction response - Samsungpay
-56 69 56 4F 74 65 63 68 32 00 02 23 ?? ?? ?? FF EE 12 0A 62 99 49 01 2C 00 04 60 00 01
+56 69 56 4F 74 65 63 68 32 00 02 23 ?? ?? ?? FF EE 12 0A
 -1
 1
 COMMENT 

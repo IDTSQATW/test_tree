@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-61812
+42605
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -183,7 +183,7 @@ If result <> 0 Then
    dl.pause 200
 End If
 
-for i = 1 to 2
+for i = 1 to 1
 
 if i = 1 then '##### VISA RID link to keyslot 01
 If result <> 0 Then

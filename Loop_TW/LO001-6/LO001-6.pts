@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-47601
+49066
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -101,7 +101,7 @@ n = 10000
                 result = DL.WaitForSequence("DFEE1D (NEO3)", 1, 1500)
                 ReverseResult(result)
          end if
-         dl.pause 500
+         dl.pause 100
       end if
       
       if result = 0 then n = n + 1

@@ -301,6 +301,7 @@ MESSAGECK: After inserted card, LED 3 was turned ON (flash status)
 
 --------------------------------------------------------------------------------
 --------------------------------------------------change back to default setting
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK
 >>> Poll on demand
 CMD: 01 01 01
 EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00

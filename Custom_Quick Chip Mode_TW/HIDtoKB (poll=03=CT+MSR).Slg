@@ -1,5 +1,5 @@
 
-11:20:29: If Issue ?
+15:52:28: If Issue ?
 Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=03=CT+MSR).txt
 Running Info>>
 [Issue Count: 1]
@@ -8,7 +8,7 @@ Running Info>>
 >>> Change to Quick Chip Mode
 
 
-11:20:29: >>[Do Scripts]>>
+15:52:28: >>[Do Scripts]>>
 
 Objective: set reader to Quick Chip mode = 03 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 03 = CT and MSR would be active.
 --------------------

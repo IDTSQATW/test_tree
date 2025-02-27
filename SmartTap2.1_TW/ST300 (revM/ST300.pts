@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-26371
+40650
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -323,6 +323,9 @@ end_case = 14
 End If
 
 if countf <> 0 then result = 0
+
+DL.SendSequence "04-00 w/ tag DFED3F = 00"
+dl.pause 300
 
 DL.AddComment vbCrLf
 '============================================================

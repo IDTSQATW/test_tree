@@ -1,1 +1,10 @@
-DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
+>>> CL transaction
+SWIPEKB: click OK, then tap VISA #97 card. (Move tag FF8105+length to the end of output --> Press button "Quick Chip" to Decryption first then Press button "OK")
+EXR: DFEF5B074761CCCCCC0100
+EXR: 5A0747617390010100
+EXR: DFEF5D124761CCCCCC0100D2012CCCCCCCCCCCCCCCCC
+EXR: 571247617390010100D20121200012339900031F
+EXR: 9F390107
+EXR: DFEE2602e100
+EXR: DFEC1810564350532076322E322C2076312E3030
+EXR: DFEF57

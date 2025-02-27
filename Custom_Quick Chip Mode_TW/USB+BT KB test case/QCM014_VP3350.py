@@ -21,6 +21,11 @@ if (Result):
     
 # Set tags DFEE20/ DFEE22
 if (Result):
+	DL.SetWindowText("black", "*** Set CT ICS Identification = 5C")
+	DL.SendIOCommand("IDG", "60 16 05", 3000, 1) 
+	Result = DL.Check_RXResponse("60 00 00 00")	
+
+if (Result):
 	DL.SetWindowText("black", "*** Set tags DFEE20/ DFEE22")
 	DL.SendIOCommand("IDG", "60 06 0a 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00 DF EE 20 01 3C DF EE 21 01 0A DF EE 22 03 32 3C 3C", 3000, 1) 
 	Result = DL.Check_RXResponse("60 00 00 00")	

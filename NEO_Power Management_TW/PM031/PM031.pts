@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-63147
+35159
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -140,12 +140,12 @@ End Function
 '------------------------------------------------------------
 ' Change Standby mode timer = 00, timer can work. (w/ & w/o connect w/ phone)
 ' Change Standby mode timer = 30, timer can work. (w/ & w/o connect w/ phone)
-' Reboot the reader, timer setting will not be changed.
 '------------------------------------------------------------
 '------------------------------------------------------------
 '[LPCD ON]
 ' Lightning-Male connect w/ mobile phone first:
-' Under Standby mode, AT cmd, will enter RUN mode, (wait over 5 sec) can read MSR/ CL/ CT card.  (USB-Female w/ & w/o A/C cable)
+' 1) USB-Female w/o A/C cable, under Standby mode, AT cmd, will enter RUN mode, (wait over 5 sec) can read MSR/ CL/ CT card.
+' 2) USB-Female w/ A/C cable, under Run mode always, AT cmd, (wait over 5 sec) can read MSR/ CL/ CT card.
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 PrintMyResult(result)

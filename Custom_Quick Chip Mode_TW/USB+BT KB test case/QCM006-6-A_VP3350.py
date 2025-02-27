@@ -27,7 +27,7 @@ if (Result):
         if i == 2:
             DL.SetWindowText("black", "*** Tap INTERAC card")
         if i == 3:
-            DL.SetWindowText("black", "*** Tap VISA qVSDC card")
+            DL.SetWindowText("black", "*** Tap VISA #97 card")
         if i == 4:
             DL.SetWindowText("black", "*** Tap MasterCard MC21 card")
         if i == 5:
@@ -100,9 +100,9 @@ if (Result):
                 DL.SetWindowText("red", "57 FAIL")
                 DL.fails=DL.fails+1
         
-        if i == 3:#VISA qVSDC
+        if i == 3:#VISA #97 card
             # Check mask 5A = DFEF5B
-            if(-1 != strCardData.find('DFEF5B084761CCCCCCCC0010')):
+            if(-1 != strCardData.find('DFEF5B074761CCCCCC0100')):
                 DL.SetWindowText("blue", "DFEF5B PASS")
             else:
                 DL.SetWindowText("red", "DFEF5B FAIL")
@@ -110,13 +110,13 @@ if (Result):
             # Check enc 5A
             enc5A = DL.GetTLV_Embedded(strCardData,"5A", 0)
             dec5A = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc5A)
-            if DL.Check_StringAB(dec5A, '5A084761739001010010'):
+            if DL.Check_StringAB(dec5A, '5A0747617390010100'):
                 DL.SetWindowText("blue", "5A PASS")
             else:
                 DL.SetWindowText("red", "5A FAIL")
                 DL.fails=DL.fails+1
             # Check mask 57 = DFEF5D
-            if(-1 != strCardData.find('DFEF5D134761CCCCCCCC0010D3012CCCCCCCCCCCCCCCCC')):
+            if(-1 != strCardData.find('DFEF5D124761CCCCCC0100D2012CCCCCCCCCCCCCCCCC')):
                 DL.SetWindowText("blue", "DFEF5D PASS")
             else:
                 DL.SetWindowText("red", "DFEF5D FAIL")
@@ -124,7 +124,8 @@ if (Result):
             # Check enc 57
             enc57 = DL.GetTLV_Embedded(strCardData,"57", 0)
             dec57 = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc57)
-            if DL.Check_StringAB(dec57, '57134761739001010010D30121200012339900031F'):
+            Result = DL.Check_StringAB(dec57, '571247617390010100D20121200012339900031F')
+            if Result == True:
                 DL.SetWindowText("blue", "57 PASS")
             else:
                 DL.SetWindowText("red", "57 FAIL")

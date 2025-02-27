@@ -47,11 +47,11 @@ for j in range (1, 3):
             
         # Set CT terminal data = 4C (enable MSR fallback to CT function)
         if (Result):
-            DL.SetWindowText("black", "*** Set CT ICS Identification = 5C")
+            DL.SetWindowText("black", "*** Set CT ICS Identification = 4C")
             DL.SendIOCommand("IDG", "60 16 04", 3000, 1) 
             Result = DL.Check_RXResponse("60 00 00 00")	
         if (Result):
-            DL.SetWindowText("black", "*** Set CT terminal data = 5C (enable MSR fallback to CT function)")
+            DL.SetWindowText("black", "*** Set CT terminal data = 4C (enable MSR fallback to CT function)")
             DL.SendIOCommand("IDG", "60 06 08 00 9F 33 03 60 08 C8 9F 35 01 25 9F 40 05 60 00 F0 50 01 DF 11 01 01 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 F0 C2 0E 16 00 DFEF62 01 01", 3000, 1) 
             Result = DL.Check_RXResponse("60 00 00 00")	
 

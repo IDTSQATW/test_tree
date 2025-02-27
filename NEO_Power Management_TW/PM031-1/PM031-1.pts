@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-6299
+32817
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -130,6 +130,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+'Note: reader enable the wait mode fisrt.
 '[LPCD OFF]
 ' 1) Reader USB-Male connect w/ mobile phone first. (iOS/ Android)
 ' 2) Wait the reader to enter wait mode:

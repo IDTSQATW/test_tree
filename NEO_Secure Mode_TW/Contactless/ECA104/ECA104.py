@@ -34,7 +34,7 @@ else:
 if (Result):
 	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
+		Result = DL.Check_RXResponse("C7 00 00 06 01 02 00 00 00 00")
         if Result == False:
             RetOfStep = DL.SendCommand('Encryption Type -- TDES')
             if (RetOfStep):

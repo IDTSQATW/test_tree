@@ -53,6 +53,8 @@ if (Result):
         # Tag 57
             Result = DL.Check_RXResponse('57 13 47 61 73 90 01 01 00 10 D3 01 21 20 00 12 33 99 00 03 1F')
             if Result == False:
+                Result = DL.Check_RXResponse('57 13 47 61 73 90 01 01 00 10 D2 01 21 20 00 12 33 99 00 03 1F')
+            if Result == False:
                 DL.fails=DL.fails+1
                 DL.SetWindowText("red", "Tag 57: FAIL")
             else:

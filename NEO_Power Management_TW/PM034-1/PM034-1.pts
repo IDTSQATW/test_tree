@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-54986
+65374
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -131,8 +131,12 @@ End Function
 'TEST BEGINS
 '------------------------------------------------------------
 'SRED Reader connect w/ mobile phone via Bluetooth first.
-'1) In Standby mode: meet 24 hr self check (reboot), enter RUN mode, reader can reconnect w/ SDK.
-'2) In Sleep mode: meet 24 hr self check (reboot), enter RUN mode, reader can reconnect w/ SDK.
+
+'1) Note: change sleep mode as 1 hr.
+In Standby mode: meet 24 hr self check (reboot), enter RUN mode, reader can reconnect w/ SDK.
+
+'2) Note: change sleep mode as 20 sec.
+In Sleep mode: meet 24 hr self check (reboot), enter RUN mode, reader can reconnect w/ SDK.
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 PrintMyResult(result)

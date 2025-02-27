@@ -1,24 +1,32 @@
 Objective: DFED4A w/ default value 0x0006.Enable Quick chip mode, tap card and leave card in the landing zone.Reader is expected to return card data once.(PASS on VP3350 FW v1.00.755.2431.T)
 Objective: for JIRA#NEO3-11472
 
-----------------------------------------
->>> Quick Chip mode = 02
-CMD: 01 01 02
+--------------------
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+>>> Poll on demand mode = 01
+CMD: 01 01 01
 EXR: 01 00 00 00
+MESSAGECK: Wait for reader to boot up ready --> Click OK
 
 ----------------------------------------
 >>> Get Config
 CMD: 03 02
 EXR: DF ED 4A 02 00 06
 
+----------------------------------------
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 01 00 00 00
+MESSAGECK: Wait for reader to boot up ready --> Click OK
+
 --------------------
 MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
 >>> CL transaction
-SWIPEKB: click OK, tap VISA qVSDC card, then leave card in the landing zone. (Move tag FF8105+length to the end of output --> Press button "Quick Chip" to Decryption first then Press button "OK")
-EXR: DFEF5B084761CCCCCCCC0010
-EXR: 5A084761739001010010
-EXR: DFEF5D134761CCCCCCCC0010D3012CCCCCCCCCCCCCCCCC
-EXR: 57134761739001010010D30121200012339900031F
+SWIPEKB: click OK, tap VISA #97 card, then leave card in the landing zone. (Move tag FF8105+length to the end of output --> Press button "Quick Chip" to Decryption first then Press button "OK")
+EXR: DFEF5B074761CCCCCC0100
+EXR: 5A0747617390010100
+EXR: DFEF5D124761CCCCCC0100D2012CCCCCCCCCCCCCCCCC
+EXR: 571247617390010100D20121200012339900031F
 EXR: 9F390107
 EXR: DFEE2602e100
 EXR: DFEC1810564350532076322E322C2076312E3030

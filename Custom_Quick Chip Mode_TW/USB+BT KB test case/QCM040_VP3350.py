@@ -19,6 +19,12 @@ if (Result):
 	Result = DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(6)
     
+# Set transaction interface = CT+MSR
+if (Result):
+	DL.SetWindowText("black", "*** Set transaction interface = CT+MSR")
+	DL.SendIOCommand("IDG", "04 00 DF EF 37 01 05", 3000, 1) 
+	Result = DL.Check_RXResponse("04 00 00 00")	
+    
 # DFED5A Byte 4 = 02
 if (Result):
 	DL.SetWindowText("black", "*** DFED5A Byte 4 = 02")
@@ -85,6 +91,28 @@ if (Result):
         DL.SetWindowText("Red", "Buzzer FAIL")
         DL.fails=DL.fails+1
     DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
+    
+#-----------------------------------------------------------------Set to default
+# Poll on demand
+if (Result):
+	DL.SetWindowText("black", "*** Poll on demand")
+	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
+	Result = DL.Check_RXResponse("01 00 00 00")	
+	time.sleep(6)
+    
+# Set transaction interface = ALL
+if (Result):
+	DL.SetWindowText("black", "*** Set transaction interface = ALL")
+	DL.SendIOCommand("IDG", "04 00 DF EF 37 01 07", 3000, 1) 
+	Result = DL.Check_RXResponse("04 00 00 00")	
+
+# QuickChip mode
+if (Result):
+	DL.SetWindowText("black", "*** QuickChip mode (02)")
+	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
+	Result = DL.Check_RXResponse("01 00 00 00")	
+	time.sleep(10)
+
 #-----------------------------------------------------------------
 if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))

@@ -104,14 +104,6 @@ CHECKSUM
 
 SEND
 10
-F0-04 Set Low Power Consumption 03 = 30 sec
-56 69 56 4F 74 65 63 68 32 00 F0 04 00 03 03 00 1E C4 D6
-0
-5
-CHECKSUM 
-
-SEND
-11
 F0-04 Set Low Power Consumption 04 = 30 sec
 56 69 56 4F 74 65 63 68 32 00 F0 04 00 03 04 00 1E 54 53
 0
@@ -119,15 +111,7 @@ F0-04 Set Low Power Consumption 04 = 30 sec
 CHECKSUM 
 
 SEND
-12
-F0-05 Get Low Power Consumption Configuration
-56 69 56 4F 74 65 63 68 32 00 F0 05 00 00 5A 10
-0
-5
-CHECKSUM 
-
-SEND
-13
+11
 F0-04 Set Low Power Consumption 02 = 5 sec
 56 69 56 4F 74 65 63 68 32 00 F0 04 00 03 02 00 05 AE 42
 0
@@ -135,7 +119,7 @@ F0-04 Set Low Power Consumption 02 = 5 sec
 CHECKSUM 
 
 SEND
-14
+12
 F0-04 Set Low Power Consumption 02 = 0 sec
 56 69 56 4F 74 65 63 68 32 00 F0 04 00 03 02 00 00 0B 12
 0
@@ -143,15 +127,7 @@ F0-04 Set Low Power Consumption 02 = 0 sec
 CHECKSUM 
 
 SEND
-15
-F0-04 Set Low Power Consumption 03 = 0 sec
-56 69 56 4F 74 65 63 68 32 00 F0 04 00 03 03 00 00 3B 25
-0
-5
-CHECKSUM 
-
-SEND
-16
+13
 F0-04 Set Low Power Consumption 04 = 0 sec
 56 69 56 4F 74 65 63 68 32 00 F0 04 00 03 04 00 00 AB A0
 0
@@ -159,15 +135,7 @@ F0-04 Set Low Power Consumption 04 = 0 sec
 CHECKSUM 
 
 SEND
-17
-F0-04 Set Low Power Consumption 03 = 5 sec
-56 69 56 4F 74 65 63 68 32 00 F0 04 00 03 03 00 05 9E 75
-0
-5
-CHECKSUM 
-
-SEND
-18
+14
 F0-04 Set Low Power Consumption 04 = 20 sec
 56 69 56 4F 74 65 63 68 32 00 F0 04 00 03 04 00 14 1E F2
 0
@@ -175,9 +143,41 @@ F0-04 Set Low Power Consumption 04 = 20 sec
 CHECKSUM 
 
 SEND
-19
+15
 F0-04 Set Low Power Consumption 04 = 3 sec
 56 69 56 4F 74 65 63 68 32 00 F0 04 00 03 04 00 03 C8 90
+0
+5
+CHECKSUM 
+
+SEND
+16
+F0-05 Get Low Power Consumption Configuration
+56 69 56 4F 74 65 63 68 32 00 F0 05 00 00 5A 10
+0
+5
+CHECKSUM 
+
+SEND
+17
+F0-04 Set Low Power Consumption 03 = 0 sec
+56 69 56 4F 74 65 63 68 32 00 F0 04 00 03 03 00 00 3B 25
+0
+5
+CHECKSUM 
+
+SEND
+18
+F0-04 Set Low Power Consumption 03 = 30 sec
+56 69 56 4F 74 65 63 68 32 00 F0 04 00 03 03 00 1E C4 D6
+0
+5
+CHECKSUM 
+
+SEND
+19
+F0-04 Set Low Power Consumption 03 = 5 sec
+56 69 56 4F 74 65 63 68 32 00 F0 04 00 03 03 00 05 9E 75
 0
 5
 CHECKSUM 
@@ -201,7 +201,7 @@ CHECKSUM CRC-CCITT
 SEND
 22
 25-07 Set 24-hr Self-Check Time
-56 69 56 4F 74 65 63 68 32 00 25 07 00 02 07 42 00 00
+56 69 56 4F 74 65 63 68 32 00 25 07 00 02 01 39 00 00
 0
 5
 CHECKSUM CRC-CCITT
@@ -260,7 +260,7 @@ F0-12 disable LPCD mode
 56 69 56 4F 74 65 63 68 32 00 F0 12 00 01 00 00 00
 0
 5
-CHECKSUM crc-ccitt
+CHECKSUM CRC-CCITT
 
 RECEIVE
 0

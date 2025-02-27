@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-32363
+22730
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -149,8 +149,8 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-' Check cmd F0-04 to set 3600 sec can work.
-' Check cmd F0-04 to set 65535 sec can work.
+' Check cmd F0-04 to set sleep mode as 3600 sec can work.
+' Check cmd F0-04 to set sleep mode as 65535 sec can work.
 '==========
 ' Customer steps:
 'case 1

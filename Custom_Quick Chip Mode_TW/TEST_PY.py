@@ -10,6 +10,24 @@ MacKey=''
 PAN=''
 strKey ='FEDCBA9876543210F1F1F1F1F1F1F1F1'
 
+# CT transaction
+if (Result): 
+    DL.SetWindowText("black", "*** Insert T=0 card")
+    DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
+    strCardData = DL.ReadKeyBoardCardData(20000)
+    if(-1 != strCardData.find('DFEE25020003')):
+        DL.SetWindowText("blue", "DFEE25 PASS")
+    else:
+        DL.SetWindowText("red", "DFEE25 FAIL")
+        DL.fails=DL.fails+1
+        
+    speedcheck = DL.ShowMessageBox("", "Reader will beep 'AFTER' outputting data?", 0)
+    if speedcheck != 1:
+        DL.SetWindowText("Red", "Buzzer FAIL")
+        DL.fails=DL.fails+1
+    DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
+#-----------------------------------------------------------------
+# Poll on demand
 if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
@@ -45,3 +63,8 @@ if (Result):
         DL.SetWindowText("Red", "Buzzer FAIL")
         DL.fails=DL.fails+1
     DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
+#-----------------------------------------------------------------
+if(0 < (DL.fails + DL.warnings)):
+	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
+else:
+	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )

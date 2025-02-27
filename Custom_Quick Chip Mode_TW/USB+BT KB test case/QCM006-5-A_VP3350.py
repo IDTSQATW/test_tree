@@ -51,7 +51,7 @@ if (Result):
             if (Result):
                 DL.SetWindowText("black", "*** Set transaction interface = CT+MSR")
                 DL.SendIOCommand("IDG", "04 00 DF EF 37 01 05", 3000, 1) 
-                Result = DL.Check_RXResponse("04 00 00 000")
+                Result = DL.Check_RXResponse("04 00 00 00")
         if i == 2:     #test 5C
             # poll on demand = 01
             if (Result):
@@ -74,9 +74,9 @@ if (Result):
 
         # Quick Chip mode = 02
         if (Result):
-            DL.("black", "*** Quick Chip mode = 02")
+            DL.SetWindowText("black", "*** Quick Chip mode = 02")
             DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-            Result = DL.Check_RXResponse("01 00 00 000")
+            Result = DL.Check_RXResponse("01 00 00 00")
             DL.ShowMessageBox("Connection check", "Wait for the reader bootup ready --> Click OK.", 0)
             
             if (Result): 

@@ -86,6 +86,22 @@ F0-12 disable LPCD mode
 5
 CHECKSUM crc-ccitt
 
+SEND
+8
+F0-04 Set Low Power Consumption 02 = 10 sec
+56 69 56 4F 74 65 63 68 32 00 F0 04 00 03 02 00 0A 00 00
+0
+5
+CHECKSUM crc-ccitt
+
+SEND
+9
+F0-05 Get Low Power Consumption Configuration
+56 69 56 4F 74 65 63 68 32 00 F0 05 00 00 5A 10
+0
+5
+CHECKSUM 
+
 RECEIVE
 0
 25-06 resp

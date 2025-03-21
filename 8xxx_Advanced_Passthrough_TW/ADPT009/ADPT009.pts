@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-30652
+47296
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -9,7 +9,7 @@ DL_SCRIPTVERSION
 Dim ProjectName
 ProjectName = "ADPT009" ' !!!!! EDIT THIS !!!!!
 '+++
-' This script is for CS-5787
+' This script is for CS-5787 (TE-2829)
 '---
 
 '------------------------------------------------------------

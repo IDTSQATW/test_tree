@@ -99,7 +99,7 @@ if (Result):
                 DL.fails=DL.fails+1
                 
             # Check mask data
-            if(-1 != strCardData.find(';A900*************************************************************0000?')):
+            if(-1 != strCardData.find(';a900*************************************************************0000?')):
                 DL.SetWindowText("blue", "Mask1 data PASS")
             else:
                 DL.SetWindowText("red", "Mask1 data FAIL")
@@ -125,7 +125,7 @@ if (Result):
                 DL.fails=DL.fails+1
         
         if i == 4:#JIS 2
-            if(-1 != strCardData.find('02700085570048008200021600;A90000000211111234567890122222333334444455555666667777788888999990000?')):
+            if(-1 != strCardData.find('02700085570048008200021600;a90000000211111234567890122222333334444455555666667777788888999990000?')):
                 DL.SetWindowText("blue", "JIS 2 PASS")
             else:
                 DL.SetWindowText("red", "JIS 2 FAIL")

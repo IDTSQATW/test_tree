@@ -1,10 +1,22 @@
 Objective: Encryption OFF, MSR test under Quick Chip Mode. (IDT/ VISA MSD/ AAMVA/ JIS 2/ ISO4909 3T)
 
 --------------------------------------------------------------------------------
+>>> poll on demand = 01
+CMD: 01 01 01
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Wait for the reader bootup ready --> Click OK.
+
+>>> DF7D = 01 (NEO2)
+CMD: 04 00 DF EE 7D 01 01 
+EXR: 04 00 00 00
+
+--------------------------------------------------------------------------------
 >>> Quick Chip mode = 02
 CMD: 01 01 02
 EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
 MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+
+DF EE 7D 01 00 
 
 --------------------
 >>> MSR transaction

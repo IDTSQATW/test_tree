@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2025/2/20 15:31:27.819 
+Docklight Log File (HEX) - Started 2025/3/25 11:54:20.409 
  TEST CASE: MV009
 
  --- Set POS COM PORT Settings
@@ -8,8 +8,8 @@ Docklight Log File (HEX) - Started 2025/2/20 15:31:27.819
 
  --- Get Device VIP PID (09-16) *** NEO2
 
-2025/2/20 15:31:28.980 [TX] - 56 69 56 4F 74 65 63 68 32 00 09 16 00 00 53 66 
-2025/2/20 15:31:28.986 [RX] - 56 69 56 4F 74 65 63 68 32 00 09 00 00 04 0A CD 46 50 97 1F  
+2025/3/25 11:54:21.717 [TX] - 56 69 56 4F 74 65 63 68 32 00 09 16 00 00 53 66 
+2025/3/25 11:54:21.722 [RX] - 56 69 56 4F 74 65 63 68 32 00 09 00 00 04 0A CD 46 51 87 3E  
 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  Result = PASSED
@@ -24,5 +24,5 @@ Docklight Log File (HEX) - Started 2025/2/20 15:31:27.819
 Please make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (HEX) - Stopped 2025/2/20 15:31:29.573 
+Docklight Log File (HEX) - Stopped 2025/3/25 11:54:22.323 
 

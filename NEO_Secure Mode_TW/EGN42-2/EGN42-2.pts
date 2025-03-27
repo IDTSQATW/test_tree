@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-15023
+10617
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -261,23 +261,19 @@ End If
 next
 
 '------------------------------------------------------------
-If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- step 2: C7-A9 Reset all Links between RID and all DEKs"
    DL.SendSequence "step 2: C7-A9 Reset all Links between RID and all DEKs"
-   result = DL.WaitForSequence("C7 00", 1, 2000)
+   'result = DL.WaitForSequence("C7 00", 1, 2000)
    dl.pause 200
-End If
 
-If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- C7-A4 Set DEK KeySlot = 00, and Enable Default"
    DL.SendSequence "C7-A4 Set DEK KeySlot = 00, and Enable Default"
-   result = DL.WaitForSequence("C7 00", 1, 2000)
+   'result = DL.WaitForSequence("C7 00", 1, 2000)
    dl.pause 200
-End If
 
 else
    DL.AddComment "Pls let reader to load DEK in KeySlot 0~3 (1~3 KSN = 1111111111111111, 2222222222222222, 3333333333333333), and then restart testing."

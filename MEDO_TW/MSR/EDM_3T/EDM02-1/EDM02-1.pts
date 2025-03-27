@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-9334
+8168
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -285,9 +285,9 @@ If result <> 0 Then
    else 
       countf = countf + 1
    end if
-   dl.pause 500
+   dl.pause 100
    next
-   dl.pause 500
+   dl.pause 100
 End If
 end sub
 '------------------------------------------------------------

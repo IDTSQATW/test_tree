@@ -1,0 +1,77 @@
+
+11:41:47: If Issue ?
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\USB+BT KB test case\QCM015_VP3350.txt
+Running Info>>
+[Issue Count: 10]
+[Wrong Items]
+>>>Error item ( 4 ).
+>>> Quick Chip mode = 02
+
+>>>Error item ( 8 ).
+>>> MSR transaction
+
+>>>Error item ( 9 ).
+SWIPEKB: click OK -> Insert IDT test card 3 times -> swipe IDT test card
+
+>>>Error item ( 10 ).
+EXR: DFEF6102F220
+
+>>>Error item ( 11 ).
+EXR: DFEF6102F220
+User Judgment Fail:MESSAGECK: NO strange data at the end of output
+
+>>>Error item ( 15 ).
+>>> MSR transaction
+
+>>>Error item ( 16 ).
+SWIPEKB: click OK -> Insert IDT test card 3 times -> swipe IDT test card
+
+>>>Error item ( 17 ).
+EXR: DFEF6102F220
+
+>>>Error item ( 18 ).
+EXR: DFEF6102F220
+User Judgment Fail:MESSAGECK: NO strange data at the end of output
+
+>>>Error item ( 20 ).
+EXR: DFEE25020007
+User Judgment Fail:MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+
+
+11:41:47: >>[Do Scripts]>>
+
+Objective: [JIRA] GRN-65 >> [Quick Chip Mode] Encryption ON -> inserted IDT test card -> swiped IDT test card, reader returned strange data.
+--------------------
+>>> Quick Chip mode = 02
+Pack L = 43-5669564F7465636832002900001A5650333335302046572076312E30302E3936352E323531312E547AE700
+CMD: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+OUT: 56 69 56 4F 74 65 63 68 32 00 29 00 00 1A 56 50 33 33 35 30 20 46 57 20 76 31 2E 30 30 2E 39 36 35 2E 32 35 31 31 2E 54 7A E7 
+ASCII: Otech2 )   VP3350 FW v1.00.965.2511.
+Error! >>>> Expect OUT:EXR: 01 00 00 00
+MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+User Judgment Pass
+
+>>> MSR transaction
+SWIPEKB: click OK -> Insert IDT test card 3 times -> swipe IDT test card
+Error! >>>> Expect OUT:EXR: DFEF6102F220
+Error! >>>> Expect OUT:EXR: DFEF6102F222
+Error! >>>> Expect OUT:EXR: DFEE25020007
+MESSAGECK: NO strange data at the end of output
+EXR: DFEF6102F220
+Error! >>>> User Judgment Fail:MESSAGECK: NO strange data at the end of output
+
+--------------------
+>>> MSR transaction
+SWIPEKB: click OK -> Insert IDT test card 3 times -> swipe IDT test card
+Error! >>>> Expect OUT:EXR: DFEF6102F220
+Error! >>>> Expect OUT:EXR: DFEF6102F222
+Error! >>>> Expect OUT:EXR: DFEE25020007
+MESSAGECK: NO strange data at the end of output
+EXR: DFEF6102F220
+Error! >>>> User Judgment Fail:MESSAGECK: NO strange data at the end of output
+
+--------------------------------------------------------------------------------
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+EXR: DFEE25020007
+Error! >>>> User Judgment Fail:MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-1211
+60303
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -135,6 +135,7 @@ End Function
 'TEST BEGINS
 '------------------------------------------------------------
 'Internal note: For VP3350, if the first 3 digits of SN between 100 to 336, return 0x05 incorrect parameter.
+'Test reader: VP3350 type B/ F.
 
 '1. Use F0-10 w/ data 00 set USB source advertisement as detected automatically.  
 '1-1. Replug female VP3350 USB connecter.

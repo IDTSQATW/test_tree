@@ -6,13 +6,9 @@ CMD: 01 01 01
 EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
 
 --------------------
->>> Set CT ICS Identification = 5C.
-CMD: 60 16 05
-EXR: 60 00 00 00
-
->>> Set CT terminal data = 5C.
-CMD: 60 06 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00
-EXR: 60 00 00 00
+>>> Reset to default   (refer to NEO3-13332)
+CMD: 04 09
+EXR: 04 00 00 00
 
 >>> Set transaction interface = CL+MSR
 CMD: 04 00 DF EF 37 01 03

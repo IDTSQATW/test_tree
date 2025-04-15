@@ -8,7 +8,7 @@ MESSAGECK: Wait for the reader bootup ready --> Click OK.
 
 --------------------
 >>> Set output interface (Bluetooth), lower case
-CMD: 04 00 DFEC4F 08 0A 00 00 00 00 00 00 00
+CMD: 04 00 DFEC4F 08 12 00 00 00 00 00 00 00
 EXR: 04 00 00 00
 
 --------------------
@@ -19,7 +19,12 @@ MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
 
 --------------------
 >>> MSR transaction
-SWIPEKB: click OK, then swipe any card
+SWIPEKB: click OK, then swipe JIS1 card
+MESSAGECK: Whole RX data are lower case
+
+--------------------
+>>> MSR transaction
+SWIPEKB: click OK, then swipe ISO4909 card
 MESSAGECK: Whole RX data are lower case
 
 --------------------
@@ -40,7 +45,46 @@ EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
 MESSAGECK: Wait for the reader bootup ready --> Click OK.
 
 --------------------
->>> Set output interface (Bluetooth), upper case (default)
+>>> Set output interface (Bluetooth), upper case
+CMD: 04 00 DFEC4F 08 22 00 00 00 00 00 00 00
+EXR: 04 00 00 00
+
+--------------------
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 01 00 00 00
+MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+
+--------------------
+>>> MSR transaction
+SWIPEKB: click OK, then swipe JIS1 card
+MESSAGECK: Whole RX data are upper case
+
+--------------------
+>>> MSR transaction
+SWIPEKB: click OK, then swipe ISO4909 card
+MESSAGECK: Whole RX data are upper case
+
+--------------------
+>>> CT transaction
+SWIPEKB: click OK, then insert any card
+MESSAGECK: Whole RX data are upper case
+
+--------------------
+>>> CL transaction
+SWIPEKB: click OK, then tap any card.
+MESSAGECK: Whole RX data are upper case
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+>>> Change to Poll On Demand
+CMD: 01 01 01
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Wait for the reader bootup ready --> Click OK.
+
+--------------------
+>>> Set output interface (Bluetooth), mixed upper/ lower case (default)
 CMD: 04 00 DFEC4F 08 02 00 00 00 00 00 00 00
 EXR: 04 00 00 00
 

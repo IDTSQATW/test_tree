@@ -1,13 +1,13 @@
 DL_SCRIPTVERSION
 1
-3608
+23697
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name 
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "PM033" ' !!!!! EDIT THIS !!!!!
+ProjectName = "PM035" ' !!!!! EDIT THIS !!!!!
 ' Objective: TE-2850, battery life test
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)

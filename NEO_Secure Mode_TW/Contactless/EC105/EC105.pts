@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-23391
+39925
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -8,7 +8,8 @@ DL_SCRIPTVERSION
 '------------------------------------------------------------
 Dim ProjectName
 ProjectName = "EC105" ' !!!!! EDIT THIS !!!!!
-' Objective: NEO3-13021, [NEO3][K81] After set Discretionary WhiteList, ICC transaction need output DFED50 (Track 1 Discretionary Data)'------------------------------------------------------------
+' Objective: NEO3-13021, [NEO3][K81] After set Discretionary WhiteList, CL transaction need output DFED50 (Track 1 Discretionary Data)
+'------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
 ' - Set the following:

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-58430
+54032
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -253,7 +253,7 @@ End Function
 result = 1
 
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 3000
+DL.Pause 1000
 
 If result <> 0 Then
  DL.ResetReceiveCounter

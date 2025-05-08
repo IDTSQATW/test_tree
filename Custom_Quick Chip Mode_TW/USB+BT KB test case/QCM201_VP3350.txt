@@ -1,0 +1,10 @@
+Objective: VP3350 model F, USB-Female test w/ 3 interfaces.
+
+1) Switch to auto transaction mode.
+
+2) Model F reader USB-Female connect w/ PC.
+
+3) PC launch note APP.
+
+4) Run 3 interfaces transaction.
+=> can output data successfully.

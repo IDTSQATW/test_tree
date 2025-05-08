@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-35159
+11945
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -137,15 +137,21 @@ End Function
 ' Under Standby mode, IDG CMD from lightning, will enter RUN mode
 ' Under Standby mode, ICC card insert, will enter RUN mode (w/ & w/o connect w/ phone)
 ' Under Standby mode, (SRED) 24-hour self check, will enter RUN mode (w/ & w/o connect w/ phone)
+
+' ***** MUST change back to default 24-hr Self-Check Time *****
 '------------------------------------------------------------
-' Change Standby mode timer = 00, timer can work. (w/ & w/o connect w/ phone)
-' Change Standby mode timer = 30, timer can work. (w/ & w/o connect w/ phone)
+' Change Standby mode timer = 0 sec, timer can work. (w/ & w/o connect w/ phone)
+' Change Standby mode timer = 30 sec, timer can work. (w/ & w/o connect w/ phone)
+
+' ***** Change back default Standby mode timer *****
 '------------------------------------------------------------
 '------------------------------------------------------------
 '[LPCD ON]
 ' Lightning-Male connect w/ mobile phone first:
 ' 1) USB-Female w/o A/C cable, under Standby mode, AT cmd, will enter RUN mode, (wait over 5 sec) can read MSR/ CL/ CT card.
 ' 2) USB-Female w/ A/C cable, under Run mode always, AT cmd, (wait over 5 sec) can read MSR/ CL/ CT card.
+
+' ***** Change back to default LPCD value *****
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 PrintMyResult(result)

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-18238
+55959
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -137,6 +137,8 @@ End Function
 
 '2) Note: change sleep mode as 20 sec.
 'In Sleep mode: meet 24 hr self check (reboot), enter RUN mode, reader can reconnect w/ SDK.
+
+' ***** MUST change back to default 24-hr Self-Check Time *****
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 PrintMyResult(result)

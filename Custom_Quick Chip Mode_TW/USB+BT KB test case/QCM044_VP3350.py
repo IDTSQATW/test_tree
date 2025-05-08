@@ -172,10 +172,25 @@ if (Result):
             else:
                 DL.SetWindowText("red", "TRK3DecryptData FAIL")
                 DL.fails=DL.fails+1
-            
 else:
     DL.fails=DL.fails+1
     
+#-----------------------------------------------------------------
+# Poll on demand
+DL.SetWindowText("black", "*** Poll on demand")
+DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
+Result = DL.Check_RXResponse("01 00 00 00")	
+time.sleep(6)
+# Enable Low Power Card Detection Mode
+DL.SetWindowText("black", "*** Disable LPCD mode")
+DL.SendIOCommand("IDG", "F0 12 00", 3000, 1) 
+Result = DL.Check_RXResponse("F0 00")
+# QuickChip mode
+DL.SetWindowText("black", "*** QuickChip mode (02)")
+DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
+Result = DL.Check_RXResponse("01 00 00 00")	
+time.sleep(1)
+#-----------------------------------------------------------------
 DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
 #-----------------------------------------------------------------
 if(0 < (DL.fails + DL.warnings)):

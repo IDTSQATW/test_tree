@@ -125,7 +125,7 @@ if (Result):
                 DL.fails=DL.fails+1
         
         if i == 4:#JIS 2
-            if(-1 != strCardData.find('02700085570048008200021600;a90000000211111234567890122222333334444455555666667777788888999990000?')):
+            if(-1 != strCardData.find('02700085570048008200021600;123456789012345678901234567890123456789012345678901234567890123456789?')):
                 DL.SetWindowText("blue", "JIS 2 PASS")
             else:
                 DL.SetWindowText("red", "JIS 2 FAIL")

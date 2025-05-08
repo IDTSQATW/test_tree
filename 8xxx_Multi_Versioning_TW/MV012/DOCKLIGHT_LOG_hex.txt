@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2025/4/2 15:30:42.448 
+Docklight Log File (HEX) - Started 2025/4/25 13:34:10.101 
  TEST CASE: MV012
 
  --- Set POS COM PORT Settings
@@ -10,14 +10,14 @@ Docklight Log File (HEX) - Started 2025/4/2 15:30:42.448
 
  --- 29-0B Get Version of Secure Device Tree in K81
 
-2025/4/2 15:30:45.451 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 0B 00 01 00 46 C4 
-2025/4/2 15:30:45.456 [RX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 0F  
+2025/4/25 13:34:12.512 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 0B 00 01 00 46 C4 
+2025/4/25 13:34:12.517 [RX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 0F  
 56 50 33 33 35 30 5F 44 54 5F 53 45 43 5F 54 5C 7E 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  --- 29-0B Get Version of Project Device Tree in K81
 
-2025/4/2 15:30:45.967 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 0B 00 01 01 56 E5 
-2025/4/2 15:30:45.975 [RX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 13  
+2025/4/25 13:34:13.022 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 0B 00 01 01 56 E5 
+2025/4/25 13:34:13.033 [RX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 13  
 56 50 33 33 35 30 5F 44 54 5F 50 52 4A 5F 46 5F 56 32 32 7D 86 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  ---------- END OF TEST ----------
@@ -29,5 +29,5 @@ Docklight Log File (HEX) - Started 2025/4/2 15:30:42.448
 Please check ASCII screen, make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (HEX) - Stopped 2025/4/2 15:30:46.577 
+Docklight Log File (HEX) - Stopped 2025/4/25 13:34:13.607 
 

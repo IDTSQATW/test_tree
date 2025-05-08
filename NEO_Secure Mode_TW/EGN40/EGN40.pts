@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-3756
+50070
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -95,7 +95,7 @@ DL.StartCommunication
 'Result reporting (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
 MasterResult = 0
-If ProjectName <> "" And Prompting(1) = "ON " Then
+If ProjectName <> "" And Prompting(1) = "ON" Then
    caseValid = 1
 Else
    caseValid =(Int((max-min+1)*Rnd+min))
@@ -144,6 +144,7 @@ If result <> 0 Then
    DL.AddComment "--- 81-0E Get Certificate Info"
    DL.SendSequence "81-0E Get Certificate Info"
    result = DL.WaitForSequence("81 00", 1, 5000)
+   dl.pause 200
 End If
 
 If result <> 0 Then
@@ -152,6 +153,7 @@ If result <> 0 Then
    DL.AddComment "--- 81-0F Get Certificate (0A = DEVICE_CA)"
    DL.SendSequence "81-0F Get Certificate (0A = DEVICE_CA)"
    result = DL.WaitForSequence("81 00", 1, 5000)
+   dl.pause 200
 End If
 '------------------------------------------------------------
 DL.AddComment vbcrlf & "---------- END OF TEST ----------" & vbCrLf

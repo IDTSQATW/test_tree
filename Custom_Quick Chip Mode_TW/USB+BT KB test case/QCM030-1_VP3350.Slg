@@ -1,5 +1,5 @@
 
-10:23:59: If Issue ?
+15:53:38: If Issue ?
 Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\USB+BT KB test case\QCM030-1_VP3350.txt
 Running Info>>
 [Issue Count: 14]
@@ -49,7 +49,7 @@ EXR: 02
 EXR: 83 3F 4F 28 6B 87 00
 
 
-10:23:59: >>[Do Scripts]>>
+15:53:38: >>[Do Scripts]>>
 
 Objective: Verify tag DFEC17 (CS-3064)
 1) Set MSR White List (VISA MSD card)
@@ -102,10 +102,14 @@ Error! >>>> Expect OUT:EXR: %TRACK1767676070707767676070707767676070707767676070
 Error! >>>> Expect OUT:EXR: 03
 11) Use PKI-RKI tool, \SMFG\Start PCI Secure CMD\Clear Whitelist 91-14, reboot the reader
 
-10:24:00: 
+15:53:38: 
 >>[Stop Scripts]>>
 
 
-10:24:00: 
+15:53:38: 
+>>[Stop Scripts]>>
+
+
+15:53:39: 
 >>[Stop Scripts]>>
 

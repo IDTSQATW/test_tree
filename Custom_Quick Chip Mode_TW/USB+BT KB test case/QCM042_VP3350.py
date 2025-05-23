@@ -13,7 +13,7 @@ strKey ='FEDCBA9876543210F1F1F1F1F1F1F1F1'
 
 # Objective: Stress test (CL)
 #-----------------------------------------------------------------
-DL.ShowMessageBox("Connection check", "Must remain only 1 connection w/ PC, USB or Bluetooth", 0)
+#DL.ShowMessageBox("Connection check", "Must remain only 1 connection w/ PC, USB or Bluetooth", 0)
 #-----------------------------------------------------------------
 loop = 10000
 DL.ShowMessageBox("Precondition", "Click OK --> Place MasterCard MC21 card on the CL reader", 0)

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-46330
+55278
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -221,11 +221,11 @@ for i = 1 to 2     'for issue #NEO3-6582/ NEO3-6367
       If result <> 0 Then
          dl.resetreceivecounter
          dl.addcomment vbcrlf
-         DL.AddComment "--- 02-40 w/ amount 101"
+         DL.AddComment "--- 02-40 w/ amount 101" & ">>>>> cycle " & n
          DL.SendSequence "02-40 w/ amount 101"
          result = DL.WaitForSequence("02 0A", 1, 30000)
          dl.pause 500
-         msgbox "Remove card --> Click OK", vbokonly
+         msgbox "Remove card", vbokonly
       end if
       next
    end if
@@ -243,11 +243,11 @@ for i = 1 to 2     'for issue #NEO3-6582/ NEO3-6367
       If result <> 0 Then
          dl.resetreceivecounter
          dl.addcomment vbcrlf
-         DL.AddComment "--- 02-40 w/ amount 301"
+         DL.AddComment "--- 02-40 w/ amount 301" & ">>>>> cycle " & n
          DL.SendSequence "02-40 w/ amount 301"
          result = DL.WaitForSequence("02 0A", 1, 30000)
          dl.pause 500
-         msgbox "Remove card --> Click OK", vbokonly
+         msgbox "Remove card", vbokonly
       end if
       next
    end if

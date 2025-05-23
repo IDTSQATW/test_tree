@@ -1,10 +1,31 @@
->>> CL transaction
-SWIPEKB: click OK, then tap VISA #97 card. (Move tag FF8105+length to the end of output --> Press button "Quick Chip" to Decryption first then Press button "OK")
-EXR: DFEF5B074761CCCCCC0100
-EXR: 5A0747617390010100
-EXR: DFEF5D124761CCCCCC0100D2012CCCCCCCCCCCCCCCCC
-EXR: 571247617390010100D20121200012339900031F
-EXR: 9F390107
-EXR: DFEE2602e100
-EXR: DFEC1810564350532076322E322C2076312E3030
-EXR: DFEF57
+Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
+
+--------------------
+>>> Set output interface (BT)
+CMD: 04 00 DFEC4F 01 02
+EXR: 04 00 00 00
+
+>>> Set transaction interface = CT only
+CMD: 04 00 DF EF 37 01 04 DF EF 3C 03 01 00 60
+EXR: 04 00 00 00
+
+
+>>> Set CT ICS Identification = 5C.
+CMD: 60 16 05
+EXR: 60 00 00 00
+
+>>> 60-03 Contact Set Application Data (VISA)
+CMD: 60 03 07 00 A0 00 00 00 03 10 10 0F 00 9F 01 06 56 49 53 41 30 30 5F 57 01 00 5F 2A 02 08 40 9F 09 02 00 96 5F 36 01 02 9F 1B 04 00 00 3A 98 DF 25 03 9F 37 04 DF 28 03 9F 08 02 DF EE 15 01 01 DF 13 05 00 00 00 00 00 DF 14 05 00 00 00 00 00 DF 15 05 00 00 00 00 00 DF 18 01 00 DF 17 04 00 00 27 10 DF 19 01 00
+EXR: 60 00
+
+>>> Set CT terminal data = 5C.
+CMD: 60 06 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00
+EXR: 60 00 00 00
+
+>>> Change to Quick Chip Mode
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+--------------------
+>>> Check USB connection type
+MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again

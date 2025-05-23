@@ -33,3 +33,8 @@ EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
 --------------------
 >>> Check USB connection type
 MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
+
+--------------------
+>>> CL transaction
+SWIPEKB: Click OK --> run 3 interfaces transaction --> Press button "OK"
+MESSAGECK: 3 interfaces = Enable

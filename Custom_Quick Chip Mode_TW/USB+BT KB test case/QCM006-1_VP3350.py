@@ -12,6 +12,10 @@ strKey ='FEDCBA9876543210F1F1F1F1F1F1F1F1'
 
 #Objective: Encryption OFF, MSR test under Quick Chip Mode. (IDT/ VISA MSD/ AAMVA/ JIS 2/ ISO4909 3T)
 
+#-----------------------------------------------------------------
+# Check output interface
+ointerface = DL.ShowMessageBox("Check output interface", "Do u test Bluetooth output interface?", 0)
+
 # Poll on demand
 if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
@@ -22,7 +26,10 @@ if (Result):
 # AT Data Case Sensitivity = Default (Original from Card, upper/lower mixed)
 if (Result):
 	DL.SetWindowText("black", "*** Data Case Sensitivity = Default (Original from Card, upper/lower mixed)")
-	DL.SendIOCommand("IDG", "04 00 DFEC4F 08 01 00 00 00 00 00 00 00", 3000, 1) 
+	if ointerface == 0: #USB KB
+		DL.SendIOCommand("IDG", "04 00 DFEC4F 08 01 00 00 00 00 00 00 00", 3000, 1) 
+	if ointerface == 1: #Bluetooth KB
+		DL.SendIOCommand("IDG", "04 00 DFEC4F 08 02 00 00 00 00 00 00 00", 3000, 1) 
 	Result = DL.Check_RXResponse("04 00 00 00")	
     
 # DF7D = 01 (NEO2)

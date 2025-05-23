@@ -1,9 +1,9 @@
 
-15:47:46: If Issue ?
+13:58:08: If Issue ?
 Pass Test
 [Issue Count: 0]
 
-15:47:46: >>[Do Scripts]>>
+13:58:08: >>[Do Scripts]>>
 
 Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
 --------------------
@@ -46,5 +46,11 @@ ASCII: Otech2
 --------------------
 >>> Check USB connection type
 MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
+User Judgment Pass
+
+--------------------
+>>> CL transaction
+SWIPEKB: Click OK --> run 3 interfaces transaction --> Press button "OK"
+MESSAGECK: 3 interfaces = Enable
 User Judgment Pass
 

@@ -38,6 +38,7 @@ if (Result):
 #-----------------------------------------------------------------
 for j in range (1, 3):
     if j == 2:     #test 4C
+        DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
         # Poll on demand
         if (Result):
             DL.SetWindowText("black", "*** Poll on demand")

@@ -1,11 +1,16 @@
 
-16:34:48: If Issue ?
+15:01:10: If Issue ?
 Pass Test
 [Issue Count: 0]
 
-16:34:48: >>[Do Scripts]>>
+15:01:10: >>[Do Scripts]>>
 
 Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
+--------------------
+>>> Reader default setting
+MESSAGECK: Reader unpair w/ any Bluetooth peripherals --> Click OK. 
+User Judgment Pass
+
 --------------------
 >>> Set output interface (BT)
 Pack L = 17-5669564F74656368320004000000AE1600
@@ -60,6 +65,11 @@ Pack L = 17-5669564F74656368320001000000125300
 CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
 OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
 ASCII: Otech2    
+--------------------
+>>> Reader UI verify
+MESSAGECK: LED 1 is flash status 
+User Judgment Pass
+
 --------------------
 >>> Check USB connection type
 MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again

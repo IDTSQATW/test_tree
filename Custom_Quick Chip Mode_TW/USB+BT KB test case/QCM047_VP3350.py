@@ -38,13 +38,13 @@ if (Result):
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     for i in range (1, 6):
         if i == 1:
-            DL.SetWindowText("black", "*** Tap Mifare Classic card (UID = 7E BD BA E5")
+            DL.SetWindowText("black", "*** Tap Mifare Classic card (UID = 7E BD BA E5)")
         if i == 2:
-            DL.SetWindowText("black", "*** Tap Mifare DESFire card (UID = 04 9B 4C FA 22 2A 80")
+            DL.SetWindowText("black", "*** Tap Mifare DESFire card (UID = 04 9B 4C FA 22 2A 80)")
         if i == 3:
-            DL.SetWindowText("black", "*** Tap Mifare Ultralight card (UID = 04 C2 78 9A 63 1E 80")
+            DL.SetWindowText("black", "*** Tap Mifare Ultralight card (UID = 04 C2 78 9A 63 1E 80)")
         if i == 4:
-            DL.SetWindowText("black", "*** Tap Mifare Ultralight C card (UID = 04 2B 6E 9A 67 34 80")
+            DL.SetWindowText("black", "*** Tap Mifare Ultralight C card (UID = 04 2B 6E 9A 67 34 80)")
         if i == 5:
             DL.SetWindowText("black", "*** Tap Mifare DESFire Virtual card (Android MIFARE 2GO Client Test App w/ MIFARE 2GO Accenture Card Bundle.json)")
             

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-57692
+1839
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -136,22 +136,23 @@ End Function
 '------------------------------------------------------------
 'Internal note: For VP3350, if the first 3 digits of SN between 100 to 336, return 0x05 incorrect parameter.
 'Test reader: VP3350 type B/ F.
+'Test Apple device: iPad
+'Test A/C: Adapter w/ cable (separate)
 
 '3. Use F0-10 w/ data 01 set USB source advertisement as default USB power.
 '3-1. Replug female VP3350 USB connecter.
 '3-2. The reader connect w/ Apple device via Lightning-Male or USB-Male.
 '3-3. CANNOT charge iPad via A-C cable with wall charger. (can connect w/ SDK)
 
-'1. Use F0-10 w/ data 00 set USB source advertisement as detected automatically.  
-'1-1. Replug female VP3350 USB connecter.
-'1-2. The reader connect w/ Apple device via Lightning-Male or USB-Male.
-'1-2. CANNOT charge iPad via A-C cable with wall charger. (can connect w/ SDK)
-
-
 '2. Use F0-10 w/ data 02 set USB source advertisement as 1.5A @ 5V.
 '2-1. Replug female VP3350 USB connecter.
 '2-2. The reader connect w/ Apple device via Lightning-Male or USB-Male.
 '2-3. CAN charge iPad via A-C cable with wall charger. (can connect w/ SDK)
+
+'1. Use F0-10 w/ data 00 set USB source advertisement as detected automatically.  
+'1-1. Replug female VP3350 USB connecter.
+'1-2. The reader connect w/ Apple device via Lightning-Male or USB-Male.
+'1-2. CANNOT charge iPad via A-C cable with wall charger. (can connect w/ SDK)
 
 ' ***** Change back to default value *****
 '------------------------------------------------------------

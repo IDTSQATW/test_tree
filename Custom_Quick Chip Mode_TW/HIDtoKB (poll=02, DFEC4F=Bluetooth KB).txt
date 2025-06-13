@@ -1,6 +1,10 @@
 Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
 
 --------------------
+>>> Reader default setting
+MESSAGECK: Reader unpair w/ any Bluetooth peripherals --> Click OK. 
+
+--------------------
 >>> Set output interface (BT)
 CMD: 04 00 DFEC4F 08 02 00 00 00 00 00 00 00
 EXR: 04 00 00 00
@@ -42,6 +46,25 @@ EXR: 60 00 00 00
 >>> Change to Quick Chip Mode
 CMD: 01 01 02
 EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+--------------------
+>>> Reader UI verify (refer to spec)
+MESSAGECK: LED 1 is flash status
+
+--------------------
+>>> Reader PMC verify (refer to spec)
+MESSAGECK: Remove cable from the reader --> waited over 30 sec --> Click OK
+MESSAGECK: Reader enter sleep mode (LED 1 is off status)
+
+--------------------
+>>> Reader UI verify
+MESSAGECK: Power on the reader, pair & connect w/ PC via BLuetooth --> Click OK. 
+MESSAGECK: LED 1 is solid on status
+
+--------------------
+>>> Data transaction
+SWIPEKB: Click OK --> Run 3 interfaces transaction --> Press button "OK"
+MESSAGECK: 3 interfaces = Enable 
 
 --------------------
 >>> Check USB connection type

@@ -1,55 +1,9 @@
 
-15:53:38: If Issue ?
-Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\USB+BT KB test case\QCM030-1_VP3350.txt
-Running Info>>
-[Issue Count: 14]
-[Wrong Items]
->>>Error item ( 5 ).
-2) Set DFEC17 = 01 in group 0
-
->>>Error item ( 10 ).
-EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
-
->>>Error item ( 11 ).
-EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
-User Judgment Fail:MESSAGECK: Reader returned raw MSR data only (track data only)?
-
->>>Error item ( 13 ).
-MESSAGECK: Reader returned raw MSR data only (track data only)?
-
->>>Error item ( 14 ).
-MESSAGECK: Reader returned raw MSR data only (track data only)?
-User Judgment Fail:MESSAGECK: Reader returned raw MSR data only (track data only)?
-
->>>Error item ( 18 ).
-7) Set DFEC17 = 00 in group 0
-
->>>Error item ( 23 ).
-EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
-
->>>Error item ( 24 ).
-9) Swipe VISA MSD card
-
->>>Error item ( 25 ).
-EXR: 02
-
->>>Error item ( 26 ).
-EXR: 80 17 00 28 00 82 00
-
->>>Error item ( 29 ).
-10) Swipe IDT test card
-
->>>Error item ( 30 ).
-SWIPEKB: click OK, then swipe IDT test card.
-
->>>Error item ( 31 ).
-EXR: 02 
-
->>>Error item ( 32 ).
-EXR: 83 3F 4F 28 6B 87 00
+10:47:06: 
+>>[Stop Scripts]>>
 
 
-15:53:38: >>[Do Scripts]>>
+10:47:06: >>[Do Scripts]>>
 
 Objective: Verify tag DFEC17 (CS-3064)
 1) Set MSR White List (VISA MSD card)
@@ -92,24 +46,18 @@ ASCII: Otech2
 9) Swipe VISA MSD card
 Error! >>>> Expect OUT:EXR: 02
 Error! >>>> Expect OUT:EXR: 80 17 00 28 00 82 00
+>>[Stop Scripts]>>
+
 Error! >>>> Expect OUT:EXR: ;4761739001010010=20121200012339900031?
-Error! >>>> Expect OUT:EXR: 03
-10) Swipe IDT test card
-SWIPEKB: click OK, then swipe IDT test card.
-Error! >>>> Expect OUT:EXR: 02 
-Error! >>>> Expect OUT:EXR: 83 3F 4F 28 6B 87 00
-Error! >>>> Expect OUT:EXR: %TRACK17676760707077676760707077676760707077676760707077676760707077676760707?C;2121212121767676070707767676762121212?0;33333333337676760707077676763333333333767676070707767676333333333376767607070776767633333333337676760707?2
-Error! >>>> Expect OUT:EXR: 03
-11) Use PKI-RKI tool, \SMFG\Start PCI Secure CMD\Clear Whitelist 91-14, reboot the reader
 
-15:53:38: 
+10:47:06: 
 >>[Stop Scripts]>>
 
 
-15:53:38: 
+10:47:06: 
 >>[Stop Scripts]>>
 
 
-15:53:39: 
+10:47:06: 
 >>[Stop Scripts]>>
 

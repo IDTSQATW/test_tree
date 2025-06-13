@@ -43,7 +43,7 @@ if (Result):
     if ointerface == 0: #USB KB
         speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 2000 us)", 0)
     if ointerface == 1: #Bluetooth KB
-        speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 10 ms, defalut speed)", 0)
+        speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 2000 us)", 0)
     if speedcheck == 1:
         DL.SetWindowText("Green", "PASS")
     else:
@@ -78,7 +78,7 @@ if (Result):
     if ointerface == 0: 
         speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 5000 us)", 0)
     if ointerface == 1: #Bluetooth KB
-        speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 10 ms, defalut speed)", 0)
+        speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 5000 us)", 0)
     if speedcheck == 1:
         DL.SetWindowText("Green", "PASS")
     else:
@@ -209,7 +209,7 @@ if (Result):
     if ointerface == 0:
         speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 0 us)", 0)
     if ointerface == 1: #Bluetooth KB
-        speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 10 ms, defalut speed)", 0)
+        speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 1000 us)", 0)
     if speedcheck == 1:
         DL.SetWindowText("Green", "PASS")
     else:
@@ -244,7 +244,7 @@ if (Result):
     if ointerface == 0:
         speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 1200 us)", 0)
     if ointerface == 1: #Bluetooth KB
-        speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 10 ms, defalut speed)", 0)
+        speedcheck = DL.ShowMessageBox("", "Data output speed correctly? (Character delay time = 1000 us)", 0)
     if speedcheck == 1:
         DL.SetWindowText("Green", "PASS")
     else:

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-4461
+7354
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -139,10 +139,12 @@ End Function
 '5) In Sleep mode: insert card, enter RUN mode.
 '------------------------------------------------------------
 '------------------------------------------------------------
-'[LPCD ON (default value)]
+'[LPCD ON]
 ' Bluetooth connect w/ mobile phone first:
 ' 1) USB-Female w/o A/C cable, Under Standby mode, AT cmd, will enter RUN mode, (wait over 5 sec) can read MSR/ CL/ CT card.
 ' 2) USB-Female w/ A/C cable, Under RUN mode, AT cmd, (wait over 5 sec) can read MSR/ CL/ CT card.
+
+' ***** Change back to default LPCD value *****
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 PrintMyResult(result)

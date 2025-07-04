@@ -1,13 +1,9 @@
 
-14:45:22: 
+11:12:58: 
 >>[Stop Scripts]>>
 
 
-14:45:22: 
->>[Stop Scripts]>>
-
-
-14:45:22: >>[Do Scripts]>>
+11:12:59: >>[Do Scripts]>>
 
 Objective: 
 [JIRA] GRN-56 >> [Quick Chip Mode] Swiped card (service code = 201) -> waited for fallback transaction timeout, reader returned timeout status but LED 3 was still ON.
@@ -43,7 +39,8 @@ Error! >>>> User Judgment Fail:MESSAGECK: when fallback to chip reader, MSR read
 >>> JIRA#GRN-515
 SWIPEKB: click OK -> insert any MSR only card -> remove the card
 MESSAGECK: Reader did not output garbage data
-User Judgment Pass
+--------------------
+Error! >>>> User Judgment Fail:MESSAGECK: Reader did not output garbage data
 
 Pack L = 17-5669564F74656368320005000000D8A200
 CMD: 56 69 56 4F 74 65 63 68 32 00 05 01 00 00 EF 92 
@@ -61,13 +58,15 @@ Error! >>>> Expect OUT:EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
 SWIPEKB: click OK -> swipe Discover card -> waited 30 sec fallback timeout.
 Error! >>>> Expect OUT:EXR: DF EE 25 02 00 08
 MESSAGECK: LED 3 is ON (steady status) if fallback to chip reader, LED 3 is OFF if fallback timeout
-User Judgment Pass
+>>> Fallback to CT transaction
+Error! >>>> User Judgment Fail:MESSAGECK: LED 3 is ON (steady status) if fallback to chip reader, LED 3 is OFF if fallback timeout
 
 >>> Fallback to CT transaction
 SWIPEKB: click OK -> swipe Discover card -> swipe any MSR test card -> waited 30 sec fallback timeout.
 Error! >>>> Expect OUT:EXR: DF EE 25 02 00 08
 MESSAGECK: when fallback to chip reader, MSR reader did not work
-User Judgment Pass
+>>> Fallback to CT transaction
+Error! >>>> User Judgment Fail:MESSAGECK: when fallback to chip reader, MSR reader did not work
 
 --------------------
 >>> Quick Chip mode = 02
@@ -78,33 +77,5 @@ ASCII: Otech2
 >>> Set CT terminal data = 5C
 >>[Stop Scripts]>>
 
->>[Stop Scripts]>>
-
-CMD:
+CMD: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
 OUT: NULL
-
-14:45:22: 
->>[Stop Scripts]>>
-
-
-14:45:22: 
->>[Stop Scripts]>>
-
-
-14:45:22: 
->>[Stop Scripts]>>
-
-
-14:45:22: 
->>[Stop Scripts]>>
-
-
-14:45:22: 
->>[Stop Scripts]>>
-
-
-15:41:52: [Load Script File]
-Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\USB+BT KB test case\QCM012_VP3300.txt
-Items: 45
-Load Case Succeed!
-

@@ -102,6 +102,14 @@ F0-05 Get Low Power Consumption Configuration
 5
 CHECKSUM 
 
+SEND
+10
+F0-04 Set Low Power Consumption 02 = 0 sec
+56 69 56 4F 74 65 63 68 32 00 F0 04 00 03 02 00 00 00 00
+0
+5
+CHECKSUM CRC-CCITT
+
 RECEIVE
 0
 25-06 resp

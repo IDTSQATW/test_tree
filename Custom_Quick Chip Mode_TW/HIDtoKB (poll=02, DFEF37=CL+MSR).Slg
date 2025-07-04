@@ -1,9 +1,14 @@
 
-14:11:44: If Issue ?
-Pass Test
-[Issue Count: 0]
+15:23:24: If Issue ?
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=02, DFEF37=CL+MSR).txt
+Running Info>>
+[Issue Count: 1]
+[Wrong Items]
+>>>Error item ( 14 ).
+>>> Change to Quick Chip Mode
 
-14:11:44: >>[Do Scripts]>>
+
+15:23:24: >>[Do Scripts]>>
 
 Objective: set reader to Quick Chip mode = 04 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 04 = CL and MSR would be active.
 --------------------
@@ -24,10 +29,11 @@ CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EF 37 01 03 DB 8B
 OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
 ASCII: Otech2    
 >>> Change to Quick Chip Mode
-Pack L = 17-5669564F74656368320001000000125300
+Pack L = 17-5669564F746563683200010A0000D59200
 CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
-OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 0A 00 00 D5 92 
 ASCII: Otech2    
+Error! >>>> Expect OUT:EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
 --------------------
 >>> CL transaction
 SWIPEKB: Click OK --> Insert any card (No reaction) ----> Press button "OK"
@@ -36,15 +42,11 @@ User Judgment Pass
 
 >>> CL transaction
 SWIPEKB: Click OK --> Tap any card --> Press button "OK"
-KB Unit Swipe Card:
-DFEE26022100DFEE020427900001DF81290840F0F0F080F0FF00DF8116161C020000000000000000000000000000000000000000FFEE0105DFEE300100DFEC1C1E08070004FF001C02000000FF00000000000000000000000000000000FF00
 MESSAGECK: can read CL card
 User Judgment Pass
 
 >>> MSR transaction
 SWIPEKB: Click OK --> Swipe any card --> Press button "OK"
-KB Unit Swipe Card:
-%TRACK17676760707077676760707077676760707077676760707077676760707077676760707?;2121212121767676070707767676762121212?;33333333337676760707077676763333333333767676070707767676333333333376767607070776767633333333337676760707?
 MESSAGECK: can read MSR card
 User Judgment Pass
 

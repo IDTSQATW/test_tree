@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-20213
+2376
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -141,6 +141,8 @@ End Function
 ' 2) Wait the reader to enter wait mode:
 ' Case 1: IDG CMD from USB-Female , reader will enter RUN mode.
 ' Case 2: ICC card insert, reader will enter RUN mode.
+
+' ***** Change back to default wait mode value *****
 '------------------------------------------------------------
 '------------------------------------------------------------
 '[LPCD ON]

@@ -1,9 +1,14 @@
 
-15:01:10: If Issue ?
-Pass Test
-[Issue Count: 0]
+16:35:14: If Issue ?
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=02, DFEC4F=Bluetooth KB).txt
+Running Info>>
+[Issue Count: 1]
+[Wrong Items]
+>>>Error item ( 7 ).
+>>> Set output interface (BT)
 
-15:01:10: >>[Do Scripts]>>
+
+16:35:14: >>[Do Scripts]>>
 
 Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
 --------------------
@@ -13,10 +18,11 @@ User Judgment Pass
 
 --------------------
 >>> Set output interface (BT)
-Pack L = 17-5669564F74656368320004000000AE1600
+Pack L = 17-5669564F7465636832000405000045E600
 CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 0C DF EC 4F 08 02 00 00 00 00 00 00 00 3B C5 
-OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 05 00 00 45 E6 
 ASCII: Otech2    
+Error! >>>> Expect OUT:EXR: 04 00 00 00
 	
 >>> Set transaction interface = ALL
 Pack L = 17-5669564F74656368320004000000AE1600
@@ -66,8 +72,30 @@ CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4
 OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
 ASCII: Otech2    
 --------------------
+>>> Reader UI verify (refer to spec)
+MESSAGECK: LED 1 is flash status
+User Judgment Pass
+
+--------------------
+>>> Reader PMC verify (refer to spec)
+MESSAGECK: Remove cable from the reader --> waited over 30 sec --> Click OK
+User Judgment Pass
+
+MESSAGECK: Reader enter sleep mode (LED 1 is off status)
+User Judgment Pass
+
+--------------------
 >>> Reader UI verify
-MESSAGECK: LED 1 is flash status 
+MESSAGECK: Power on the reader, pair & connect w/ PC via BLuetooth --> Click OK. 
+User Judgment Pass
+
+MESSAGECK: LED 1 is solid on status
+User Judgment Pass
+
+--------------------
+>>> Data transaction
+SWIPEKB: Click OK --> Run 3 interfaces transaction --> Press button "OK"
+MESSAGECK: 3 interfaces = Enable 
 User Judgment Pass
 
 --------------------

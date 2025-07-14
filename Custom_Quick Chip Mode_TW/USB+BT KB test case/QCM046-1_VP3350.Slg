@@ -1,169 +1,32 @@
 
-16:55:02: If Issue ?
-Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\USB+BT KB test case\QCM046-1_VP3350.txt
-Running Info>>
-[Issue Count: 6]
-[Wrong Items]
->>>Error item ( 9 ).
->>> Set output interface (Bluetooth), lower case
-
->>>Error item ( 14 ).
->>> Quick Chip mode = 02
-User Judgment Fail:MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
-
->>>Error item ( 18 ).
---------------------
-User Judgment Fail:MESSAGECK: Whole RX data are lower case
-
->>>Error item ( 22 ).
---------------------
-User Judgment Fail:MESSAGECK: Whole RX data are lower case
-
->>>Error item ( 40 ).
->>> Set output interface (Bluetooth), upper case
-
->>>Error item ( 44 ).
->>> Quick Chip mode = 02
+10:17:53: 
+>>[Stop Scripts]>>
 
 
-16:55:02: >>[Do Scripts]>>
+10:17:53: >>[Do Scripts]>>
 
 Objective: Tag DFEC4F: upper or lower case
 --------------------
 >>> Change to Poll On Demand
-Pack L = 17-5669564F74656368320001000000125300
 CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
-OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
-ASCII: Otech2    
+OUT: NULL
+Error! >>>> Expect OUT:EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
 MESSAGECK: Wait for the reader bootup ready --> Click OK.
-User Judgment Pass
+>>> Change to Poll On Demand
+Error! >>>> User Judgment Fail:MESSAGECK: Wait for the reader bootup ready --> Click OK.
 
 --------------------
 >>> Set output interface (Bluetooth), lower case
-Pack L = 17-5669564F746563683200040600001CB600
 CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 0C DF EC 4F 08 12 00 00 00 00 00 00 00 06 71 
-OUT: 56 69 56 4F 74 65 63 68 32 00 04 06 00 00 1C B6 
-ASCII: Otech2    
-Error! >>>> Expect OUT:EXR: 04 00 00 00
---------------------
->>> Quick Chip mode = 02
-Pack L = 17-5669564F74656368320001000000125300
-CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
-OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
-ASCII: Otech2    
-MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
->>> Quick Chip mode = 02
-Error! >>>> User Judgment Fail:MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
-
---------------------
->>> MSR transaction
-SWIPEKB: click OK, then swipe JIS1 card
-MESSAGECK: Whole RX data are lower case
---------------------
-Error! >>>> User Judgment Fail:MESSAGECK: Whole RX data are lower case
-
---------------------
->>> MSR transaction
-SWIPEKB: click OK, then swipe ISO4909 card
-MESSAGECK: Whole RX data are lower case
---------------------
-Error! >>>> User Judgment Fail:MESSAGECK: Whole RX data are lower case
-
---------------------
->>> CT transaction
-SWIPEKB: click OK, then insert any card
-MESSAGECK: Whole RX data are lower case
-User Judgment Pass
-
---------------------
->>> CL transaction
-SWIPEKB: click OK, then tap any card.
-MESSAGECK: Whole RX data are lower case
-User Judgment Pass
-
---------------------
-MESSAGECK: Reader connect w/ PC via USB cable and then click OK
-User Judgment Pass
-
->>> Change to Poll On Demand
-Pack L = 17-5669564F74656368320001000000125300
-CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
-OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
-ASCII: Otech2    
-MESSAGECK: Wait for the reader bootup ready --> Click OK.
-User Judgment Pass
-
---------------------
->>> Set output interface (Bluetooth), upper case
-CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 0C DF EC 4F 08 22 00 00 00 00 00 00 00 40 AD 
 OUT: NULL
 Error! >>>> Expect OUT:EXR: 04 00 00 00
 --------------------
 >>> Quick Chip mode = 02
-CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+>>[Stop Scripts]>>
+
+CMD: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
 OUT: NULL
-Error! >>>> Expect OUT:EXR: 01 00 00 00
-MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
-User Judgment Pass
 
---------------------
->>> MSR transaction
-SWIPEKB: click OK, then swipe JIS1 card
-MESSAGECK: Whole RX data are upper case
-User Judgment Pass
-
---------------------
->>> MSR transaction
-SWIPEKB: click OK, then swipe ISO4909 card
-MESSAGECK: Whole RX data are upper case
-User Judgment Pass
-
---------------------
->>> CT transaction
-SWIPEKB: click OK, then insert any card
-MESSAGECK: Whole RX data are upper case
-User Judgment Pass
-
---------------------
->>> CL transaction
-SWIPEKB: click OK, then tap any card.
-MESSAGECK: Whole RX data are upper case
-User Judgment Pass
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-MESSAGECK: Reader connect w/ PC via USB cable and then click OK
-User Judgment Pass
-
->>> Change to Poll On Demand
-Pack L = 17-5669564F74656368320001000000125300
-CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
-OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
-ASCII: Otech2    
-MESSAGECK: Wait for the reader bootup ready --> Click OK.
-User Judgment Pass
-
---------------------
->>> Set output interface (Bluetooth), mixed upper/ lower case (default)
-Pack L = 17-5669564F74656368320004000000AE1600
-CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 0C DF EC 4F 08 02 00 00 00 00 00 00 00 3B C5 
-OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
-ASCII: Otech2    
---------------------
->>> Quick Chip mode = 02
-Pack L = 17-5669564F74656368320001000000125300
-CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
-OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
-ASCII: Otech2    
-
-16:55:03: 
->>[Stop Scripts]>>
-
-
-16:55:03: 
->>[Stop Scripts]>>
-
-
-16:55:03: 
+10:17:53: 
 >>[Stop Scripts]>>
 

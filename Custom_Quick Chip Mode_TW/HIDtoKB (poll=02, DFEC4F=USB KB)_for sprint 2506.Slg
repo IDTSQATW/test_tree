@@ -1,17 +1,23 @@
 
-09:51:42: If Issue ?
-Pass Test
-[Issue Count: 0]
+16:39:02: If Issue ?
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=02, DFEC4F=USB KB)_for sprint 2506.txt
+Running Info>>
+[Issue Count: 1]
+[Wrong Items]
+>>>Error item ( 4 ).
+>>> Set output interface (USB)
 
-09:51:42: >>[Do Scripts]>>
+
+16:39:02: >>[Do Scripts]>>
 
 Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
 --------------------
 >>> Set output interface (USB)
-Pack L = 17-5669564F74656368320004000000AE1600
+Pack L = 17-5669564F7465636832000405000045E600
 CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EC 4F 01 01 11 BC 
-OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 05 00 00 45 E6 
 ASCII: Otech2    
+Error! >>>> Expect OUT:EXR: 04 00 00 00
 >>> Set transaction interface = ALL
 Pack L = 17-5669564F74656368320004000000AE1600
 CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EF 37 01 07 9B 0F 

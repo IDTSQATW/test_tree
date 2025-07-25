@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-32604
+7280
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -206,7 +206,7 @@ for i = 1 to 17
    DL.AddComment "--- Activate Transaction (02-40) & " & card
    DL.SendSequence "Activate Transaction (02-40)"
    result1 = DL.WaitForSequence("02 00", 1, 5000)
-   result2  = DL.WaitForSequence("FFEE0E", 1, 5000)
+   result2  = DL.WaitForSequence("FFEE0E-" & i , 1, 5000)
    
    if result1 = 0 or result2  = 0 then result = 0
 

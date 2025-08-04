@@ -84,7 +84,7 @@ if (Result):
                 
                 ################# CT transaction #################
                 DL.SetWindowText("black", "*** Insert T=0 card")
-                strCardData = DL.ReadKeyBoardCardData(20000)
+                strCardData = DL.ReadKeyBoardCardData(60000)
                 ksn = DL.GetTLV(strCardData, "DFEE12")
                 
                 # Check mask 5A = DFEF5B

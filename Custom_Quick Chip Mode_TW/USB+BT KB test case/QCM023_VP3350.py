@@ -36,7 +36,7 @@ if (Result):
 if (Result): 
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     DL.SetWindowText("black", "*** Swipe the card that service code is 2xx or 6xx")
-    strCardData1 = DL.ReadKeyBoardCardData(10000)
+    strCardData1 = DL.ReadKeyBoardCardData(20000)
     
     speedcheck = DL.ShowMessageBox("", "When fallback to chip reader, LED 4 is ON (steady status)?", 0)
     if speedcheck == 1:
@@ -62,11 +62,11 @@ if (Result):
 if (Result): 
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     DL.SetWindowText("black", "*** Insert IDT test card, @1st time")
-    strCardData1 = DL.ReadKeyBoardCardData(10000)
+    strCardData1 = DL.ReadKeyBoardCardData(15000)
     DL.SetWindowText("black", "*** Insert IDT test card, @2nd time")
-    strCardData1 = DL.ReadKeyBoardCardData(10000)
+    strCardData1 = DL.ReadKeyBoardCardData(15000)
     DL.SetWindowText("black", "*** Insert IDT test card, @3rd time")
-    strCardData1 = DL.ReadKeyBoardCardData(10000)
+    strCardData1 = DL.ReadKeyBoardCardData(15000)
     
     speedcheck = DL.ShowMessageBox("", "When fallback to MSR reader, LED 4 is ON (flash status)?", 0)
     if speedcheck == 1:
@@ -113,7 +113,7 @@ if (Result):
 if (Result): 
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     DL.SetWindowText("black", "*** Swipe the card that service code is 2xx or 6xx")
-    strCardData1 = DL.ReadKeyBoardCardData(10000)
+    strCardData1 = DL.ReadKeyBoardCardData(20000)
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     speedcheck = DL.ShowMessageBox("", "When fallback to chip reader, LED 4 is ON (steady status)?", 0)
     if speedcheck == 1:
@@ -139,11 +139,11 @@ if (Result):
 if (Result): 
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     DL.SetWindowText("black", "*** Insert IDT test card, @1st time")
-    strCardData1 = DL.ReadKeyBoardCardData(10000)
+    strCardData1 = DL.ReadKeyBoardCardData(15000)
     DL.SetWindowText("black", "*** Insert IDT test card, @2nd time")
-    strCardData1 = DL.ReadKeyBoardCardData(10000)
+    strCardData1 = DL.ReadKeyBoardCardData(15000)
     DL.SetWindowText("black", "*** Insert IDT test card, @3rd time")
-    strCardData1 = DL.ReadKeyBoardCardData(10000)
+    strCardData1 = DL.ReadKeyBoardCardData(15000)
     
     speedcheck = DL.ShowMessageBox("", "When fallback to MSR reader, LED 4 is ON (flash status)?", 0)
     if speedcheck == 1:

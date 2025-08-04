@@ -3,13 +3,12 @@ Battery life test (Bluetooth)
 NEO3-12445, [VP3350][v2.00.860.2448.D] Under Auto Transaction mode, reader that enabled Bluetooth output interface 100% battery level decreased to 5% after idling it 38 min.
 
 --------------------
-1) Enable Low Power Card Detection Mode, check cmd F013 is 03 01 00
+1) Reader switch to AT mode.
 
-CMD: F0 12 03 01 00
-EXR: F0 00
+2) Wait for the reader battery is 100%, remove AC cable.
 
-2) 5 CL transactions per day (card: MasterCard MC21)
+3) Reader connect w/ mobile phone bia Bluetooth.
 
-3) Stay in standby mode when not in used
+4) 5 CL transactions per day (card: MasterCard MC21)
 
-4) Paas criterion: last for 3 days
+5) Paas criterion: last for 7 days

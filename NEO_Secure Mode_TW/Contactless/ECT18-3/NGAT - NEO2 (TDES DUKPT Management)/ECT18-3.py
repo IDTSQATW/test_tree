@@ -118,7 +118,7 @@ if (Result):
                     # Tag 57
                     Result1 = DL.Check_StringAB(mask57, '54 13 CC CC CC CC 15 13 D')
                     Result2 = DL.Check_StringAB(mask57, '1 2C CC CC CC CC CC CC')
-                    if Result == True and DL.Check_StringAB(alldata, "57 A1 11"):
+                    if Result1 == True and Result2 == True and DL.Check_StringAB(alldata, "57 A1 11"):
                         DL.SetWindowText("blue", "Tag 57_Mask: PASS")
                     else:
                         DL.fails=DL.fails+1

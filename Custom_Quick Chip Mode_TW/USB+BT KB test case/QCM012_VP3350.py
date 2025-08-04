@@ -38,7 +38,7 @@ if (Result):
 if (Result): 
     DL.SetWindowText("black", "*** Swipe the card that service code is 2xx or 6xx")
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
-    strCardData1 = DL.ReadKeyBoardCardData(10000)
+    strCardData1 = DL.ReadKeyBoardCardData(30000)
     DL.SetWindowText("black", "*** Swipe any MSR card -> waited fallback timeout")
     strCardData2 = DL.ReadKeyBoardCardData(61000)
     if(-1 != strCardData2.find('DFEF61023013')):
@@ -96,7 +96,7 @@ if (Result):
 if (Result): 
     DL.SetWindowText("black", "*** Swipe the card that service code is 2xx or 6xx")
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
-    strCardData1 = DL.ReadKeyBoardCardData(10000)
+    strCardData1 = DL.ReadKeyBoardCardData(30000)
     DL.SetWindowText("black", "*** Swipe any MSR card -> waited fallback timeout")
     strCardData2 = DL.ReadKeyBoardCardData(61000)
     if(-1 != strCardData2.find('DFEF61023013')):

@@ -18,8 +18,8 @@ EXR: 60 00 00 00
 CMD: 6006 16009f33036008c89f3501259f40056000f05001df110101df260101df270100dfee1e08d09c20f0c20e16005f3601029f1a0208409f1e085465726d696e616c9f150212349f160f3030303030303030303030303030309f1c0838373635343332319f4e2231303732312057616c6b65722053742e20437970726573732c204341202c5553412edfee150101dfee160100dfee170105dfee180180dfee1f0180dfee1b083030303135313030dfee2203323c3cdf1008656e667265737a68
 EXR: 60 00 00 00
 
->>> Set transaction interface = CT+MSR
-CMD: 04 00 DF EF 37 01 05
+>>> Set transaction interface = ALL
+CMD: 04 00 DF EF 37 01 07
 EXR: 04 00 00 00
 
 >>> Quick Chip mode = 02
@@ -202,16 +202,3 @@ MESSAGECK: After inserted card 3 times, LED 3 was turned ON (flash status)
 --------------------------------------------------------------------------------
 MESSAGECK: Reader connect w/ PC via USB cable and then click OK
 --------------------------------------------------------------------------------
-
->>> poll on demand = 01
-CMD: 01 01 01
-EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
-MESSAGECK: Wait for the reader bootup ready --> Click OK.
-
->>> Set transaction interface = ALL
-CMD: 04 00 DF EF 37 01 07
-EXR: 04 00 00 00
-
->>> Change to Quick Chip Mode
-CMD: 01 01 02
-EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00

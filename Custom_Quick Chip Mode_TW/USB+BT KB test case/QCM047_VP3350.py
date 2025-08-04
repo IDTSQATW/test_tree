@@ -79,7 +79,7 @@ if (Result):
                 DL.fails=DL.fails+1
                 
         if i == 5:#Mifare DESFire Virtual card
-            if(-1 != strCardData.find('DFEC0F17036F12851014020C1122334455667700006141A95D9000')):
+            if(-1 != strCardData.find('DFEC0F0D0304002004')):
                 DL.SetWindowText("blue", "PASS")
             else:
                 DL.SetWindowText("red", "FAIL")

@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2025/7/2 15:12:34.564 
+Docklight Log File (HEX) - Started 2025/7/15 11:02:23.819 
  TEST CASE: FV004
 
  --- Set POS COM PORT Settings
@@ -8,9 +8,9 @@ Docklight Log File (HEX) - Started 2025/7/2 15:12:34.564
 
  --- Get Bootloader Version
 
-2025/7/2 15:12:35.864 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 04 00 00 1E 7C 
-2025/7/2 15:12:35.870 [RX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 15  
-4E 45 4F 33 20 42 6F 6F 74 6C 6F 61 64 65 72 20 56 31 2E 31 31 00 E2 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+2025/7/15 11:02:25.105 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 04 00 00 1E 7C 
+2025/7/15 11:02:25.109 [RX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 15  
+4E 45 4F 33 20 42 6F 6F 74 6C 6F 61 64 65 72 20 56 31 2E 31 32 30 81 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  Result = PASSED
  
@@ -24,5 +24,5 @@ Docklight Log File (HEX) - Started 2025/7/2 15:12:34.564
 Please check ASCII screen, make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (HEX) - Stopped 2025/7/2 15:12:36.158 
+Docklight Log File (HEX) - Stopped 2025/7/15 11:02:25.399 
 

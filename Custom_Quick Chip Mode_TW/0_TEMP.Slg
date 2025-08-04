@@ -1,21 +1,10 @@
 
-15:38:15: If Issue ?
+14:22:19: If Issue ?
 Pass Test
 [Issue Count: 0]
 
-15:38:15: >>[Do Scripts]>>
+14:22:19: >>[Do Scripts]>>
 
->>> Set output interface (BT)
-Pack L = 17-5669564F74656368320004000000AE1600
-CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 0C DF EC 4F 08 02 00 00 00 00 00 00 00 3B C5 
-OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
-ASCII: Otech2    
-	
->>>
-Pack L = 17-5669564F74656368320004000000AE1600
-CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EF 37 01 05 BB 4D 
-OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
-ASCII: Otech2    
 >>> Set CT ICS Identification = 5C.
 Pack L = 17-5669564F746563683200600000003D3500
 CMD: 56 69 56 4F 74 65 63 68 32 00 60 16 00 01 05 8D 54 
@@ -36,3 +25,9 @@ Pack L = 17-5669564F74656368320001000000125300
 CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
 OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
 ASCII: Otech2    
+
+14:22:43: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\0_TEMP.txt
+Items: 12
+Load Case Succeed!
+

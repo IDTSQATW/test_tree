@@ -27,7 +27,7 @@ for(;;)						# forever loop
 
 }						# end forever
 
-`docklight_scripting -r -m Type7_CEPAS5.pts`;
+`docklight_scripting -r -m Type7_CEPAS6.pts`;
 
 # Main Code
 

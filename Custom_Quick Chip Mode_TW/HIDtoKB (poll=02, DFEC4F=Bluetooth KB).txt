@@ -62,10 +62,5 @@ MESSAGECK: Power on the reader, pair & connect w/ PC via BLuetooth --> Click OK.
 MESSAGECK: LED 1 is solid on status
 
 --------------------
->>> Data transaction
-SWIPEKB: Click OK --> Run 3 interfaces transaction --> Press button "OK"
-MESSAGECK: 3 interfaces = Enable 
-
---------------------
 >>> Check USB connection type
 MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again

@@ -67,9 +67,9 @@ for j in range (1, 3):
     if (Result): 
         DL.SetWindowText("black", "*** Swipe the card that service code is 2xx or 6xx")
         DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
-        strCardData1 = DL.ReadKeyBoardCardData(10000)
+        strCardData1 = DL.ReadKeyBoardCardData(30000)
         DL.SetWindowText("black", "*** Insert EMV T=0 card")
-        strCardData2 = DL.ReadKeyBoardCardData(10000)
+        strCardData2 = DL.ReadKeyBoardCardData(30000)
         if(-1 != strCardData2.find('DFEE25020003')):
             if(-1 != strCardData2.find('57114761739001010010D20122010123456789')):
                 if(-1 != strCardData2.find('5A084761739001010010')):
@@ -114,18 +114,18 @@ for j in range (1, 3):
             DL.SetWindowText("red", "Error code FAIL")
             DL.fails=DL.fails+1
         DL.SetWindowText("black", "*** Insert IDT test card, @1st time")
-        strCardData1 = DL.ReadKeyBoardCardData(10000)
+        strCardData1 = DL.ReadKeyBoardCardData(15000)
         DL.SetWindowText("black", "*** Insert IDT test card, @2nd time")
-        strCardData1 = DL.ReadKeyBoardCardData(10000)
+        strCardData1 = DL.ReadKeyBoardCardData(15000)
         DL.SetWindowText("black", "*** Insert IDT test card, @3rd time")
-        strCardData1 = DL.ReadKeyBoardCardData(10000)
+        strCardData1 = DL.ReadKeyBoardCardData(15000)
         if(-1 != strCardData1.find('DFEF6102F222')):
             DL.SetWindowText("blue", "PASS")
         else:
             DL.SetWindowText("red", "Error code FAIL")
             DL.fails=DL.fails+1
         DL.SetWindowText("black", "*** Swipe Discover card")
-        strCardData2 = DL.ReadKeyBoardCardData(10000)
+        strCardData2 = DL.ReadKeyBoardCardData(15000)
         if(-1 != strCardData2.find('DFEE25')):
             if(-1 != strCardData2.find('9F390180')):
                 if(-1 != strCardData2.find('DFEE236A%B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?')):

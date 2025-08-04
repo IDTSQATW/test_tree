@@ -1,14 +1,13 @@
 DL_SCRIPTVERSION
 1
-64578
+65144
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "Type7_CEPAS5" ' !!!!! EDIT THIS !!!!!
-
+ProjectName = "Type7_CEPAS6" ' !!!!! EDIT THIS !!!!!
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"

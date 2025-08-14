@@ -1,9 +1,13 @@
 
-16:32:18: 
+11:09:50: 
 >>[Stop Scripts]>>
 
 
-16:32:18: >>[Do Scripts]>>
+11:09:50: 
+>>[Stop Scripts]>>
+
+
+11:09:50: >>[Do Scripts]>>
 
 Objective: Verify tag DFEC17 (CS-3064)
 1) Set MSR White List (VISA MSD card)
@@ -15,9 +19,39 @@ OUT: 56 69 56 4F 74 65 63 68 32 00 04 0B 00 00 5E E7
 ASCII: Otech2    
 Error! >>>> Expect OUT:EXR: 04 00 00 00
 3) Switch to Quick Chip mode (02) ___Note: reader should have CT AID and CT ICS Identification is 5C.
+Pack L = 17-5669564F74656368320001000000125300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+4) Swipe VISA MSD card
+Error! >>>> Expect OUT:EXR: ;4761739001010010=20121200012339900031?
+MESSAGECK: Reader returned raw MSR data only (track data only)?
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+Error! >>>> User Judgment Fail:MESSAGECK: Reader returned raw MSR data only (track data only)?
+
+5) Swipe IDT test card
+Error! >>>> Expect OUT:EXR: %TRACK17676760707077676760707077676760707077676760707077676760707077676760707?;2121212121767676070707767676762121212?;33333333337676760707077676763333333333767676070707767676333333333376767607070776767633333333337676760707?
+MESSAGECK: Reader returned raw MSR data only (track data only)?
+MESSAGECK: Reader returned raw MSR data only (track data only)?
+Error! >>>> User Judgment Fail:MESSAGECK: Reader returned raw MSR data only (track data only)?
+
+6) Switch to poll on demand mode
+7) Set DFEC17 = 00 in group 0
+Pack L = 17-5669564F746563683200040B00005EE700
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EC 17 01 00 F6 F2 
+OUT: 56 69 56 4F 74 65 63 68 32 00 04 0B 00 00 5E E7 
+ASCII: Otech2    
+Error! >>>> Expect OUT:EXR: 04 00 00 00
+8) Switch to Quick Chip mode (02)
 >>[Stop Scripts]>>
 
-Pack L = 17-5669564F746563683200010A0000D59200
+>>[Stop Scripts]>>
+
 CMD:
-OUT: 56 69 56 4F 74 65 63 68 32 00 01 0A 00 00 D5 92 
-ASCII: Otech2    
+OUT: NULL
+
+15:55:48: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\USB+BT KB test case\QCM030-1_VP3350.txt
+Items: 34
+Load Case Succeed!
+

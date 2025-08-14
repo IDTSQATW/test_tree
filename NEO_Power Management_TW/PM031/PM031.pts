@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-45938
+63117
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -143,8 +143,7 @@ End Function
 ' Change Standby mode timer = 0 sec, timer can work. (w/ & w/o connect w/ phone)
 
 ' ***** Change back default Standby mode timer *****
-'------------------------------------------------------------
-'------------------------------------------------------------
+'================================================================================
 '[LPCD ON]
 ' Lightning-Male connect w/ mobile phone first:
 ' 1) USB-Female w/o A/C cable, under Standby mode, AT cmd, will enter RUN mode, (wait over 5 sec) can read MSR/ CL/ CT card.

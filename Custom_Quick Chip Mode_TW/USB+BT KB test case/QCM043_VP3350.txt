@@ -1,6 +1,7 @@
 Objective: 
 Battery life test (Bluetooth)
 NEO3-12445, [VP3350][v2.00.860.2448.D] Under Auto Transaction mode, reader that enabled Bluetooth output interface 100% battery level decreased to 5% after idling it 38 min.
+NEO3-14987, [VP3350][v1.01.031.2531.T] Under Auto Transaction mode, reader that enabled Bluetooth output interface 100% battery level decreased to 75% after tapping the CL card 5 times.
 
 --------------------
 1) Reader switch to AT mode.
@@ -11,4 +12,4 @@ NEO3-12445, [VP3350][v2.00.860.2448.D] Under Auto Transaction mode, reader that 
 
 4) 5 CL transactions per day (card: MasterCard MC21)
 
-5) Paas criterion: last for 7 days
+5) Paas criterion: last for 3 days

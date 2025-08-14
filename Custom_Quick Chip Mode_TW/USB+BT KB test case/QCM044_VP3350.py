@@ -17,7 +17,7 @@ if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(6)
+	time.sleep(10)
     
 # Set DF7D = 02 (NEO2)
 if (Result):
@@ -188,7 +188,7 @@ DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and th
 DL.SetWindowText("black", "*** Poll on demand")
 DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 Result = DL.Check_RXResponse("01 00 00 00")	
-time.sleep(6)
+time.sleep(10)
 # Disable Low Power Card Detection Mode
 DL.SetWindowText("black", "*** Disable LPCD mode")
 DL.SendIOCommand("IDG", "F0 12 00", 3000, 1) 

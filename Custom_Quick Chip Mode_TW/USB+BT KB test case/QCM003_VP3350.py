@@ -21,7 +21,7 @@ if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(6)
+	time.sleep(10)
 
 # Set tag DFEF6F = 31 (2000 us)
 if (Result):
@@ -56,7 +56,7 @@ if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(6)
+	time.sleep(10)
 
 # Set tag DFEF6F = 32 (5000 us)
 if (Result):
@@ -91,7 +91,7 @@ if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(6)
+	time.sleep(10)
 
 # Set tag DFEF6F = 33 (10000 us)
 if (Result):
@@ -123,7 +123,7 @@ if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(6)
+	time.sleep(10)
 
 # Set tag DFEF6F = 34 (20000 us)
 if (Result):
@@ -155,7 +155,7 @@ if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(6)
+	time.sleep(10)
 
 # Set tag DFEF6F = 35 (50000 us)
 if (Result):
@@ -187,7 +187,7 @@ if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(6)
+	time.sleep(10)
 
 # Set tag DFEF6F = 36 (0 us)
 if (Result):
@@ -222,7 +222,7 @@ if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(6)
+	time.sleep(10)
 
 # Set tag DFEF6F = 30 (default, 1200 us)
 if (Result):

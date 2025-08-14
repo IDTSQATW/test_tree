@@ -1,3 +1,8 @@
 Objective: NEO3-13926_[VP3350][v1.00.1000.2517.T] Under Auto Transaction mode, USB output interface took 10 sec to output CL MC21 card data but Bluetooth output interface took 27 sec.
 
 1) Compare data output speed between USB and Bluetooth.
+
+Note: 
+ex. NEO3-13926, 
+USB-KB took around 10 sec
+BT-KB took around 12 sec

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-55278
+10886
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -265,7 +265,7 @@ end if
 
 dl.addcomment vbcrlf
 DL.SendSequence "04-09"
-dl.pause 5000
+dl.pause 3000
 '------------------------------------------------------------
 DL.AddComment vbcrlf & "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)

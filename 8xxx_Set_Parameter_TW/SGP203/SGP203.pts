@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-34608
+21317
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -202,7 +202,7 @@ If result <> 0 then
    for i = 1 to 3
       if i = 1 then action = "Tap MC No. 21"
       if i = 2 then action = "Swipe VISA MSD"
-      if i = 3 then action = "Insert"
+      if i = 3 then action = "Insert EMV Test"
    If result <> 0 and i <= 2 Then
       DL.ResetReceiveCounter
       dl.addcomment vbcrlf

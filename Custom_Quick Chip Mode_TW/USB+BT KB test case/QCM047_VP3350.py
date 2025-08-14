@@ -19,7 +19,7 @@ if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(6)
+	time.sleep(10)
     
 # cmd 04-00 to set tag DFEC20 (for DESFire virtual card)
 if (Result):

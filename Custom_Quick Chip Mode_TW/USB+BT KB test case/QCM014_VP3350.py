@@ -17,7 +17,7 @@ if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(6)
+	time.sleep(10)
     
 # Set tags DFEE20/ DFEE22
 if (Result):

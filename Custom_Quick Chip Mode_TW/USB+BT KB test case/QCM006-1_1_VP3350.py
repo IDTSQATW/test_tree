@@ -21,7 +21,7 @@ if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(6)
+	time.sleep(10)
     
 # Enable MSR Additional Tags (Pure and Fallback)
 if (Result):
@@ -127,11 +127,11 @@ if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(6)
+	time.sleep(10)
     
 # Disable MSR Additional Tags (Pure and Fallback)
 if (Result):
-	DL.SetWindowText("black", "*** MSR Additional Tags (Pure and Fallback) = Enable")
+	DL.SetWindowText("black", "*** MSR Additional Tags (Pure and Fallback) = Disable")
 	if ointerface == 0: #USB KB
 		DL.SendIOCommand("IDG", "04 00 DFEC4F 08 01 00 00 00 00 00 00 00", 3000, 1) 
 	if ointerface == 1: #Bluetooth KB

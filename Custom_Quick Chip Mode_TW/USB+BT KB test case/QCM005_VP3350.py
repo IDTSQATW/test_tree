@@ -17,7 +17,7 @@ if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(6)
+	time.sleep(10)
 
 # Set CT terminal data = 5C w/ tag DFEF59.
 if (Result):
@@ -42,7 +42,7 @@ if (Result):
 if (Result): 
     DL.ShowMessageBox("Card", "*** Click OK --> Insert EMV T=0 card", 0)
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
-    strCardData = DL.ReadKeyBoardCardData(20000)
+    strCardData = DL.ReadKeyBoardCardData(60000)
     if(-1 != strCardData.find('DFEF59')):
         DL.SetWindowText("red", "DFEF59 FAIL")
         DL.fails=DL.fails+1
@@ -65,7 +65,7 @@ if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(6)
+	time.sleep(10)
 
 # Set CT terminal data = 5C w/ tag DFEF5A.
 if (Result):
@@ -84,7 +84,7 @@ if (Result):
 if (Result): 
     DL.ShowMessageBox("Card", "*** Click OK --> Insert EMV T=0 card", 0)
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
-    strCardData = DL.ReadKeyBoardCardData(20000)
+    strCardData = DL.ReadKeyBoardCardData(60000)
     if(-1 != strCardData.find('57')):
         DL.SetWindowText("blue", "57 PASS")
     else:
@@ -116,7 +116,7 @@ if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(6)
+	time.sleep(10)
     
 # Set tags DFED20/ DFED21/ DFED22
 if (Result):
@@ -146,7 +146,7 @@ if (Result):
 if (Result):       
     DL.ShowMessageBox("Card", "*** Click OK --> Insert EMV T=0 card", 0)
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
-    strCardData = DL.ReadKeyBoardCardData(20000)
+    strCardData = DL.ReadKeyBoardCardData(60000)
     if(-1 != strCardData.find('DFED2006536C696D4344DFED2103110218DFED220A312E337C303432333138')):
         DL.SetWindowText("blue", "PASS")
     else:
@@ -155,7 +155,7 @@ if (Result):
         
     # for JIRA#CS-3869
     DL.ShowMessageBox("Card", "*** Click OK --> Tap any CL card", 0)
-    strCardData = DL.ReadKeyBoardCardData(20000)
+    strCardData = DL.ReadKeyBoardCardData(60000)
     if(-1 != strCardData.find('DFED2006536C696D4344DFED2103110218DFED220A312E337C303432333138')):
         DL.SetWindowText("blue", "PASS")
     else:
@@ -168,7 +168,7 @@ if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(6)
+	time.sleep(10)
     
 # Set CT terminal data = 5C w/ tag 9F53.
 if (Result):
@@ -192,7 +192,7 @@ if (Result):
 if (Result):       
     DL.ShowMessageBox("Card", "*** Click OK --> Insert EMV T=0 card", 0)
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
-    strCardData = DL.ReadKeyBoardCardData(20000)
+    strCardData = DL.ReadKeyBoardCardData(60000)
     if(-1 != strCardData.find('9F530150')):
         DL.SetWindowText("blue", "PASS")
     else:
@@ -205,7 +205,7 @@ if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(6)
+	time.sleep(10)
 
 # Set CT terminal data = 5C w/ tag 9F53.
 if (Result):
@@ -223,7 +223,7 @@ if (Result):
 if (Result):       
     DL.ShowMessageBox("Card", "*** Click OK --> Insert EMV T=0 card", 0)
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
-    strCardData = DL.ReadKeyBoardCardData(20000)
+    strCardData = DL.ReadKeyBoardCardData(60000)
     if(-1 != strCardData.find('9F530152')):
         DL.SetWindowText("blue", "PASS")
     else:
@@ -237,7 +237,7 @@ if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(6)
+	time.sleep(10)
 
 # Set transaction interface = ALL.
 if (Result):

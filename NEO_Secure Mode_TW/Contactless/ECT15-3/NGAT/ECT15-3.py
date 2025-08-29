@@ -44,7 +44,7 @@ if (Result):
     if (RetOfStep):
         if lcdtype == 1:
             rx = 0
-            alldata = DL.Get_RXResponse(rx)
+            alldata = DL.GetTLV(DL.Get_RXResponse(rx),"FF8105")
         if lcdtype == 0:
             rx = 5
             alldata = DL.GetTLV(DL.Get_RXResponse(rx),"FF8105")

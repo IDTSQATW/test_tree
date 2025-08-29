@@ -153,6 +153,14 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+       CheckPM = msgbox("If reader support Auto poll mode?", vbyesno)
+	   If CheckPM = 6 then j = 2
+	   If CheckPM = 7 then j = 1
+
+       For i = 1 to j
+	   
+       if i = 1 then 
+
        DL.ResetReceiveCounter
        DL.AddComment "--- Poll on demand"
        DL.SendSequence "poll on demand"
@@ -190,7 +198,10 @@ End Function
           dl.addcomment vbcrlf
           dl.addcomment "** Poll on demand: LED status FAIL **"
        end if
+	   end if
+       '------------------------------------------------------------
 
+       if i = 2 then
        DL.ResetReceiveCounter
        dl.addcomment vbcrlf
        DL.AddComment "--- Auto poll"
@@ -209,20 +220,26 @@ End Function
           dl.addcomment vbcrlf
           dl.addcomment "** Auto Poll: LED status FAIL **"
        end if
+	   end if
+	   
+	   Next
 
        if poll <> 0 then
           result = 0
        else
           result = 1
        end if
+
        '------------------------------------------------------------
-       DL.ResetReceiveCounter
+	   
+	   
+       'DL.ResetReceiveCounter
        dl.addcomment vbcrlf
        DL.AddComment "--- Poll on demand"
        DL.SendSequence "poll on demand"
        DL.WaitForSequence"poll ok resp"
        DL.Pause 500
-       DL.ResetReceiveCounter
+       'DL.ResetReceiveCounter
        dl.addcomment vbcrlf
        DL.AddComment "--- Set Default Parameters"
        if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then DL.SendSequence " Default set Parameters"

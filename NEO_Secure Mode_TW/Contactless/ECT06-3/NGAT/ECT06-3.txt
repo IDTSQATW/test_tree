@@ -32,8 +32,8 @@ EXR:
 
 TID:Activate Transaction w/ LCD
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00 DF EF 37 01 02
-MSG:Tap Discover card... (ANY)
-EXR:56 69 56 4F 74 65 63 68 32 00 02 23 ** F3
+MSG:Tap Discover card... (card#84)
+EXR:
 TIMEOUT:120000
 
 TID:Activate Transaction w/o LCD

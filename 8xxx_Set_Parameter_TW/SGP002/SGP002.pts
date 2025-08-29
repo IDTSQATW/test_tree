@@ -153,6 +153,12 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+CheckPM = msgbox("If reader support Autopoll?", vbyesno)
+if CheckPM = 6 then j = 2
+if CheckPM = 7 then j = 1
+
+For i = 1 to j
+   if i = 1 then
    If result <> 0 Then
       DL.ResetReceiveCounter
       dl.addcomment vbcrlf
@@ -194,7 +200,9 @@ End Function
       dl.addcomment vbcrlf
       dl.addcomment "** Poll on demand: LED status FAIL **"
    end if
+   end if
    '------------------------------------------------------------
+   if i = 2 then 
    If result <> 0 Then
       DL.ResetReceiveCounter
       dl.addcomment vbcrlf
@@ -215,6 +223,8 @@ End Function
       dl.addcomment vbcrlf
       dl.addcomment "** Auto poll: LED status FAIL **"
    end if
+   end if
+next
    '------------------------------------------------------------
    if poll <> 0 then
       result = 0

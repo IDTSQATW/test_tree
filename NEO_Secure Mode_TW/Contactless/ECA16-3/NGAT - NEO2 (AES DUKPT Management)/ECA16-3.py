@@ -10,8 +10,8 @@ MacKey='0123456789abcdeffedcba9876543210'
 strKey = 'FEDCBA9876543210F1F1F1F1F1F1F1F1'
 
 # Check reader is VP3350 or not
-lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
-if lcdtype == 1:
+readertype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if readertype == 1:
 	DL.SetWindowText("Green", "*** This is VP3350 ***")
 	RetOfStep = DL.SendCommand('0105 do not use LCD')
 	if (RetOfStep):
@@ -153,7 +153,7 @@ RetOfStep = DL.SendCommand('Reset to default')
 if (RetOfStep):
 	DL.Check_RXResponse("04 00 00 00")	
     
-if lcdtype == 1:
+if readertype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("01 00 00 00")

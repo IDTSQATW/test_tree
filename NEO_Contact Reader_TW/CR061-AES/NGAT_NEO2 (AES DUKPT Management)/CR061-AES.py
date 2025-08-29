@@ -36,6 +36,13 @@ if readermodel == 1:
 	readertype = DL.ShowMessageBox("", "Is this NSRED project?", 0)
 else:
 	DL.SetWindowText("Green", "*** non-VP3350 reader ***")		
+
+# Check reader has LCD
+lcdtype = DL.ShowMessageBox("", "If reader has LCD?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** Reader w/ LCD ***")
+else:
+	DL.SetWindowText("Green", "*** Reader w/o LCD ***")		
 		
 # Poll on demand		
 if (Result):
@@ -64,6 +71,15 @@ if (Result):
 					RetOfStep = DL.SendCommand('DFEE1D--06 04 7E 0F 31 (NEO3_SRED)')
 					if (RetOfStep):
 						Result = DL.Check_RXResponse("C7 00 00 00")	
+		if lcdtype == 1: # AP6800
+			if i == 1:
+				RetOfStep = DL.SendCommand('DFEE1D--02 02 21 0A 30 (NEO3_SRED)')
+				if (RetOfStep):
+						Result = DL.Check_RXResponse("C7 00 00 00")
+			if i == 2:
+				RetOfStep = DL.SendCommand('DFEE1D--06 04 7E 0F 31 (NEO3_SRED)')
+				if (RetOfStep):
+						Result = DL.Check_RXResponse("C7 00 00 00")
 				
 		# cmd 60-10, insert card		
 		if (Result):

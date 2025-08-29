@@ -154,6 +154,13 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------Poll on demand + UI scheme = 03
+       CheckPM = msgbox("If reader support Auto poll mode?", vbyesno)
+	   If CheckPM = 6 then j = 2
+	   If CheckPM = 7 then j = 1
+
+       For i = 1 to j
+	   
+       if i = 1 then 
        DL.ResetReceiveCounter
        dl.addcomment vbcrlf
        DL.AddComment "--- Poll on demand"
@@ -187,7 +194,10 @@ End Function
              dl.addcomment "======================="
           end if
        end if
+	   end if
        '------------------------------------------------------------Auto Poll + UI scheme = 03
+
+	   if i = 2 then
        DL.Pause 500
        DL.ResetReceiveCounter
        dl.addcomment vbcrlf
@@ -205,7 +215,13 @@ End Function
              dl.addcomment "======================="
           end if
        end if
+	   end if
+	   
+	   Next
+	   
        '------------------------------------------------------------04-09 (set config to default)
+	   ' Reader support 
+	   if j = 2 then
        If result <> 0 Then
           readercheck = msgbox("Is this reader VP6300, USAT F/W ver.?", vbyesno)
           DL.ResetReceiveCounter
@@ -229,6 +245,7 @@ End Function
              end if
           end if
        end if
+	   end if
 '------------------------------------------------------------
 DL.Pause 500
 DL.ResetReceiveCounter

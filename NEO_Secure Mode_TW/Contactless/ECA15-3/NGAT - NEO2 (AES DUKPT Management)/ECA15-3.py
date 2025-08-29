@@ -11,8 +11,8 @@ PAN=''
 strKey = 'FEDCBA9876543210F1F1F1F1F1F1F1F1'
 
 # Check reader is VP3350 or not
-lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
-if lcdtype == 1:
+readertype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if readertype == 1:
 	DL.SetWindowText("Green", "*** This is VP3350 ***")
 	RetOfStep = DL.SendCommand('0105 do not use LCD')
 	if (RetOfStep):
@@ -51,7 +51,7 @@ if (Result):
 		Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E5 ** DF EE 12")
         if (Result):
             if lcdtype == 1:
-                alldata = DL.Get_RXResponse(rx)
+                alldata = DL.GetTLV(DL.Get_RXResponse(rx),"FF8105")
             if lcdtype == 0:
                 alldata = DL.GetTLV(DL.Get_RXResponse(rx),"FF8105")	
                 
@@ -114,7 +114,7 @@ if (Result):
         else:
             DL.fails=DL.fails+1
             
-if lcdtype == 1:
+if readertype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("01 00 00 00")

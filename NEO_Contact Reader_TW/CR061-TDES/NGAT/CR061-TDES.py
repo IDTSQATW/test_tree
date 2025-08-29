@@ -58,13 +58,13 @@ if (Result):
 						Result = DL.Check_RXResponse("C7 00 00 00")	
 		if readermodel == 0: #non-VP3350
 			if i == 1:
-				RetOfStep = DL.SendCommand('DFEE1D--02 02 21 0A 30')
+				RetOfStep = DL.SendCommand('DFEE1D--02 02 21 0A 30 (NEO3_SRED)')
 				if (RetOfStep):
-					Result = DL.Check_RXResponse("04 00 00 00")	
+					Result = DL.Check_RXResponse("C7 00 00 00")	
 			if i == 2:
-				RetOfStep = DL.SendCommand('DFEE1D--06 04 7E 0F 31')
+				RetOfStep = DL.SendCommand('DFEE1D--06 04 7E 0F 31 (NEO3_SRED)')
 				if (RetOfStep):
-					Result = DL.Check_RXResponse("04 00 00 00")	
+					Result = DL.Check_RXResponse("C7 00 00 00")	
 				
 		# cmd 60-10, insert card		
 		if (Result):

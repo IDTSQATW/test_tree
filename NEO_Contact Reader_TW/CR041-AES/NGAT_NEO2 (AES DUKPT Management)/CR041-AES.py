@@ -98,7 +98,7 @@ if (Result):
 				if lcdtype == 1:
 					Result = DL.Check_StringAB(DL.Get_RXResponse(5), '56 69 56 4F 74 65 63 68 32 00 60 00')
 					if (Result):
-						Result = DL.Check_StringAB(DL.Get_RXResponse(5), 'E8 DF EE 25')
+						Result = DL.Check_StringAB(DL.Get_RXResponse(5), 'EC DF EE 25')
 					sResult=DL.Get_RXResponse(5)		
 				if lcdtype == 0:	
 					Result = DL.Check_RXResponse(3, '56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 ** 03 00 ** 0E 1C')
@@ -236,7 +236,7 @@ if readertype == 1:     # NEO2 or upward
 	RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')
 	if (RetOfStep):
 		if lcdtype == 1:
-			Result = Result and DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** EA ** 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
+			Result = Result and DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** EC ** 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
 			if Result == False:
 				DL.fails=DL.fails+1
 		if lcdtype == 0:

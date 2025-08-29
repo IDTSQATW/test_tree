@@ -241,7 +241,7 @@ if readertype == 1:     # NEO2 or upward
 	RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')
 	if (RetOfStep):
 		if lcdtype == 1:
-			Result = Result and DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** E8 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
+			Result = Result and DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** E8 ** 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
 			if Result == False:
 				DL.fails=DL.fails+1
 		if lcdtype == 0:

@@ -8,7 +8,7 @@ NEO3-14987, [VP3350][v1.01.031.2531.T] Under Auto Transaction mode, reader that 
 
 2) Wait for the reader battery is 100%, remove AC cable.
 
-3) Reader connect w/ mobile phone bia Bluetooth.
+3) Reader connect w/ mobile phone via Bluetooth.
 
 4) 5 CL transactions per day (card: MasterCard MC21)
 

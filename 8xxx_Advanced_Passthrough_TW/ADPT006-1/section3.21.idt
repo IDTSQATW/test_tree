@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="neoii_scriptts.idt" root=".">
+  <functions>
+    <function name="K_NFC">
+      <file>FW.K.01.03-01.05_0403SetGroup_SetEachGroupMaxlength.py</file>
+	</function>
+    <function name="Trans_Lib">
+      <file>ICCTransaction.py</file>
+      <file>Tran_Res.py</file>
+      <file>Tran_ResAuto.py</file>
+      <file>Tra_Type_1.py</file>
+      <file>Tra_Type_1x.py</file>
+    </function>
+    <function name="Utility_Lib">
+      <file>Pro_CfgCLSL2.py</file>
+      <file>Pro_CfgCTL2.py</file>
+      <file>Pro_Command.py</file>
+      <file>Pro_DecToHex.py</file>
+      <file>Pro_Encryption.py</file>
+      <file>Pro_Excuse.py</file>
+      <file>Pro_GetDevice.py</file>
+      <file>Pro_GetDRS.py</file>
+      <file>Pro_GlobalConfig.py</file>
+      <file>Pro_ISOCardData.py</file>
+      <file>Pro_KeyInjection.py</file>
+      <file>Pro_MSR.py</file>
+      <file>Pro_MSRData.py</file>
+      <file>Pro_PKI.py</file>
+      <file>Pro_PreFile.py</file>
+      <file>Pro_SendCmd.py</file>
+    </function>
+  </functions>
+</project>

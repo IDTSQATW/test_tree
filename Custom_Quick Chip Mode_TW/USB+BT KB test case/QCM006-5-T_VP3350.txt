@@ -89,7 +89,7 @@ EXR: ;6510000000000125=17122011000095000000?
 --------------------
 >>> Fallback to MSR transaction
 SWIPEKB: Click OK --> Insert IDT test card 3 times --> Remove card (Green LED 3 is flash ON) --> Swipe Discover card. (Replace serial number as HEX format first, Press button "MSR Dec" to Decryption then Press button "OK")
-EXR: DFEF6102F220
+EXR: DFEF6102F250
 EXR: DFEF6102F222
 EXR: DFEE25
 EXR: 9F390180
@@ -186,7 +186,7 @@ EXR: ;6510000000000125=17122011000095000000?
 --------------------
 >>> Fallback to MSR transaction
 SWIPEKB: Click OK --> Insert IDT test card 3 times --> Remove card (Green LED 3 is flash ON) --> Swipe Discover card. (Replace serial number as HEX format first, Press button "MSR Dec" to Decryption then Press button "OK")
-EXR: DFEF6102F220
+EXR: DFEF6102F250
 EXR: DFEF6102F222
 EXR: DFEE25
 EXR: 9F390180

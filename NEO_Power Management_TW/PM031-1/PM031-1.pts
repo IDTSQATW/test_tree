@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-2083
+12533
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -142,7 +142,6 @@ End Function
 ' Case 1: IDG CMD from USB-Female , reader will enter RUN mode.
 ' Case 2: ICC card insert, reader will enter RUN mode.
 
-' ***** Change back to default wait mode value *****
 '=================================================================================
 '[LPCD ON]
 ' 1) USB-Male connect w/ mobile phone first:
@@ -150,6 +149,7 @@ End Function
 ' Case 2: USB-Female w/ AC cable >> Under Wait mode, AT cmd, will enter RUN mode, (wait over 5 sec) can read MSR/ CL/ CT card.
 
 ' ***** Change back to default LPCD value *****
+' ***** Change back to default wait mode value *****
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 PrintMyResult(result)

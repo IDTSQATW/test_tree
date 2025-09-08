@@ -40,7 +40,7 @@ CHECKSUM
 
 SEND
 2
-      Enter Low Power Mode (F0-03) sleep = 0001
+      Enter Low Power Mode (F0-03) sleep(Standby) = 0001
 56 69 56 4F 74 65 63 68 32 00 F0 03 00 02 00 01 08 4B
 0
 5
@@ -48,7 +48,7 @@ CHECKSUM crc-ccitt
 
 SEND
 3
-      Enter Low Power Mode (F0-03) stop = 0101
+      Enter Low Power Mode (F0-03) stop(Sleep) = 0101
 56 69 56 4F 74 65 63 68 32 00 F0 03 00 02 01 01 00 00
 0
 5
@@ -64,7 +64,7 @@ CHECKSUM
 
 SEND
 5
-      Enter Low Power Mode (F0-03) sleep = 0000
+      Enter Low Power Mode (F0-03) sleep(Standby) = 0000
 56 69 56 4F 74 65 63 68 32 00 F0 03 00 02 00 00 29 5B
 0
 5
@@ -72,7 +72,7 @@ CHECKSUM crc-ccitt
 
 SEND
 6
-      Enter Low Power Mode (F0-03) stop = 0100
+      Enter Low Power Mode (F0-03) stop(Sleep) = 0100
 56 69 56 4F 74 65 63 68 32 00 F0 03 00 02 01 00 00 00
 0
 5

@@ -49,3 +49,9 @@ SWIPEKB: Click OK --> Insert any card ----> Press button "OK"
 MESSAGECK: can read CT card
 User Judgment Pass
 
+
+09:11:11: [Load Script File]
+Path_File:C:\vivotech\regress\regression\regress_test\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=03=CT+MSR).txt
+Items: 24
+Load Case Succeed!
+

@@ -74,7 +74,7 @@ if (Result):
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     DL.SetWindowText("black", "*** Insert IDT test card, @1st time")
     strCardData1 = DL.ReadKeyBoardCardData(10000)
-    if(-1 != strCardData1.find('DFEF6102F220')):
+    if(-1 != strCardData1.find('DFEF6102F250')):
         DL.SetWindowText("blue", "PASS")
     else:
         DL.SetWindowText("red", "FAIL")
@@ -82,7 +82,7 @@ if (Result):
         
     DL.SetWindowText("black", "*** Insert IDT test card, @2nd time")
     strCardData1 = DL.ReadKeyBoardCardData(10000)
-    if(-1 != strCardData1.find('DFEF6102F220')):
+    if(-1 != strCardData1.find('DFEF6102F250')):
         DL.SetWindowText("blue", "PASS")
     else:
         DL.SetWindowText("red", "FAIL")

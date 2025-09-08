@@ -8,7 +8,7 @@ MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
 
 >>> MSR transaction
 SWIPEKB: click OK -> Insert IDT test card 3 times -> swipe IDT test card
-EXR: DFEF6102F220
+EXR: DFEF6102F250
 EXR: DFEF6102F222
 EXR: DFEE25020007
 MESSAGECK: NO strange data at the end of output
@@ -16,7 +16,7 @@ MESSAGECK: NO strange data at the end of output
 --------------------
 >>> MSR transaction
 SWIPEKB: click OK -> Insert IDT test card 3 times -> swipe IDT test card
-EXR: DFEF6102F220
+EXR: DFEF6102F250
 EXR: DFEF6102F222
 EXR: DFEE25020007
 MESSAGECK: NO strange data at the end of output

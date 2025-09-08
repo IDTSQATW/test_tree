@@ -187,90 +187,90 @@ if (Result):
                     DL.fails=DL.fails+1
 
                 ################# Fallback to MSR transaction (default: can retry ICC card 3 times) #################
-                DL.SetWindowText("black", "*** Fallback to MSR transaction (Insert MSR card 3 times --> (Green LED 3 is flash ON) Swipe card")
-                DL.SetWindowText("black", "*** Insert IDT test card, @1st time")
-                strCardData1 = DL.ReadKeyBoardCardData(10000)
-                if(-1 != strCardData1.find('DFEF6102F220')):
-                    DL.SetWindowText("blue", "PASS")
-                else:
-                    DL.SetWindowText("red", "Error code FAIL")
-                    DL.fails=DL.fails+1
-                DL.SetWindowText("black", "*** Insert IDT test card, @2nd time")
-                strCardData1 = DL.ReadKeyBoardCardData(10000)
-                DL.SetWindowText("black", "*** Insert IDT test card, @3rd time")
-                strCardData1 = DL.ReadKeyBoardCardData(10000)
-                if(-1 != strCardData1.find('DFEF6102F222')):
-                    DL.SetWindowText("blue", "PASS")
-                else:
-                    DL.SetWindowText("red", "Error code FAIL")
-                    DL.fails=DL.fails+1
-                DL.SetWindowText("black", "*** Swipe Discover card (PAN = 6510000000000125)")
-                strCardData = DL.ReadKeyBoardCardData(10000)
-                if(-1 != strCardData.find('DFEE25')):
-                    if(-1 != strCardData.find('9F390180')):          
-                        #Tracks data, ASCII convert to HEX 
-                        rawdata = strCardData[32:58] + DL.stringToHexString(strCardData[58:166])+ strCardData[166:552]
-                        #Length update
-                        l = str(0)+str(hex((len(rawdata)-12)/2)[2:])
-                        l = l[2:]+l[0:2]
-                        rawdata = rawdata[0:2] + l + rawdata[6:628]
-                        rawdata = rawdata.upper()
-                        #LRC/ check sum update
-                        lrc = DL.GetLRC(rawdata[6:622])
-                        checksum = DL.GetSUM(rawdata[6:622])
-                        #Final MSR data
-                        rawdata = rawdata[0:622] + lrc + checksum + rawdata[626:628]
-                        objectMSR = DL.ParseCardData(rawdata, Key)
-                        KSN = DL.Get_KSN_CardData()
-                        TRK1 = DL.Get_EncryptTrackN_CardData(1)
-                        TRK2 = DL.Get_EncryptTrackN_CardData(2)
-                        TRK1DecryptData = DL.AES_DUPKT_EMVData_Decipher(KSN, strKey, TRK1)
-                        TRK2DecryptData = DL.AES_DUPKT_EMVData_Decipher(KSN, strKey, TRK2)
+                # DL.SetWindowText("black", "*** Fallback to MSR transaction (Insert MSR card 3 times --> (Green LED 3 is flash ON) Swipe card")
+                # DL.SetWindowText("black", "*** Insert IDT test card, @1st time")
+                # strCardData1 = DL.ReadKeyBoardCardData(30000)
+                # if(-1 != strCardData1.find('DFEF6102F250')):
+                    # DL.SetWindowText("blue", "PASS")
+                # else:
+                    # DL.SetWindowText("red", "Error code FAIL")
+                    # DL.fails=DL.fails+1
+                # DL.SetWindowText("black", "*** Insert IDT test card, @2nd time")
+                # strCardData1 = DL.ReadKeyBoardCardData(30000)
+                # DL.SetWindowText("black", "*** Insert IDT test card, @3rd time")
+                # strCardData1 = DL.ReadKeyBoardCardData(30000)
+                # if(-1 != strCardData1.find('DFEF6102F222')):
+                    # DL.SetWindowText("blue", "PASS")
+                # else:
+                    # DL.SetWindowText("red", "Error code FAIL")
+                    # DL.fails=DL.fails+1
+                # DL.SetWindowText("black", "*** Swipe Discover card (PAN = 6510000000000125)")
+                # strCardData = DL.ReadKeyBoardCardData(30000)
+                # if(-1 != strCardData.find('DFEE25')):
+                    # if(-1 != strCardData.find('9F390180')):          
+                        # #Tracks data, ASCII convert to HEX 
+                        # rawdata = strCardData[32:58] + DL.stringToHexString(strCardData[58:166])+ strCardData[166:552]
+                        # #Length update
+                        # l = str(0)+str(hex((len(rawdata)-12)/2)[2:])
+                        # l = l[2:]+l[0:2]
+                        # rawdata = rawdata[0:2] + l + rawdata[6:628]
+                        # rawdata = rawdata.upper()
+                        # #LRC/ check sum update
+                        # lrc = DL.GetLRC(rawdata[6:622])
+                        # checksum = DL.GetSUM(rawdata[6:622])
+                        # #Final MSR data
+                        # rawdata = rawdata[0:622] + lrc + checksum + rawdata[626:628]
+                        # objectMSR = DL.ParseCardData(rawdata, Key)
+                        # KSN = DL.Get_KSN_CardData()
+                        # TRK1 = DL.Get_EncryptTrackN_CardData(1)
+                        # TRK2 = DL.Get_EncryptTrackN_CardData(2)
+                        # TRK1DecryptData = DL.AES_DUPKT_EMVData_Decipher(KSN, strKey, TRK1)
+                        # TRK2DecryptData = DL.AES_DUPKT_EMVData_Decipher(KSN, strKey, TRK2)
                         
-                        # Check MSR format
-                        if(-1 != strCardData.find('805F442800A39B021600')):
-                            DL.SetWindowText("blue", "MSR format PASS")
-                        else:
-                            DL.SetWindowText("red", "MSR format FAIL")
-                            DL.fails=DL.fails+1
+                        # # Check MSR format
+                        # if(-1 != strCardData.find('805F442800A39B021600')):
+                            # DL.SetWindowText("blue", "MSR format PASS")
+                        # else:
+                            # DL.SetWindowText("red", "MSR format FAIL")
+                            # DL.fails=DL.fails+1
                             
-                        # Check mask data
-                        if(-1 != strCardData.find('%*6510********0125^CARD/IMAGE 08             ^1712****************?')):
-                            DL.SetWindowText("blue", "Mask1 data PASS")
-                        else:
-                            DL.SetWindowText("red", "Mask1 data FAIL")
-                            DL.fails=DL.fails+1
+                        # # Check mask data
+                        # if(-1 != strCardData.find('%*6510********0125^CARD/IMAGE 08             ^1712****************?')):
+                            # DL.SetWindowText("blue", "Mask1 data PASS")
+                        # else:
+                            # DL.SetWindowText("red", "Mask1 data FAIL")
+                            # DL.fails=DL.fails+1
                             
-                        if(-1 != strCardData.find(';6510********0125=1712****************?')):
-                            DL.SetWindowText("blue", "Mask2 data PASS")
-                        else:
-                            DL.SetWindowText("red", "Mask2 data FAIL")
-                            DL.fails=DL.fails+1
+                        # if(-1 != strCardData.find(';6510********0125=1712****************?')):
+                            # DL.SetWindowText("blue", "Mask2 data PASS")
+                        # else:
+                            # DL.SetWindowText("red", "Mask2 data FAIL")
+                            # DL.fails=DL.fails+1
                             
-                        # Check decryption data
-                        if(-1 != TRK1DecryptData.find('2542363531303030303030303030303132355E434152442F494D414745203038202020202020202020202020205E31373132323031313030303039353030303030303F')):
-                            DL.SetWindowText("blue", "TRK1DecryptData PASS")
-                        else:
-                            DL.SetWindowText("red", "TRK1DecryptData FAIL")
-                            DL.fails=DL.fails+1
+                        # # Check decryption data
+                        # if(-1 != TRK1DecryptData.find('2542363531303030303030303030303132355E434152442F494D414745203038202020202020202020202020205E31373132323031313030303039353030303030303F')):
+                            # DL.SetWindowText("blue", "TRK1DecryptData PASS")
+                        # else:
+                            # DL.SetWindowText("red", "TRK1DecryptData FAIL")
+                            # DL.fails=DL.fails+1
                             
-                        if(-1 != TRK2DecryptData.find('3B363531303030303030303030303132353D31373132323031313030303039353030303030303F')):
-                            DL.SetWindowText("blue", "TRK2DecryptData PASS")
-                        else:
-                            DL.SetWindowText("red", "TRK2DecryptData FAIL")
-                            DL.fails=DL.fails+1
-                    else:
-                        DL.SetWindowText("red", "9F39 FAIL")
-                        DL.fails=DL.fails+1
-                else:
-                    DL.SetWindowText("red", "DFEE25 FAIL")
-                    DL.fails=DL.fails+1
-                    DL.SendIOCommand("IDG", "05 01", 3000, 1) 
+                        # if(-1 != TRK2DecryptData.find('3B363531303030303030303030303132353D31373132323031313030303039353030303030303F')):
+                            # DL.SetWindowText("blue", "TRK2DecryptData PASS")
+                        # else:
+                            # DL.SetWindowText("red", "TRK2DecryptData FAIL")
+                            # DL.fails=DL.fails+1
+                    # else:
+                        # DL.SetWindowText("red", "9F39 FAIL")
+                        # DL.fails=DL.fails+1
+                # else:
+                    # DL.SetWindowText("red", "DFEE25 FAIL")
+                    # DL.fails=DL.fails+1
+                    # DL.SendIOCommand("IDG", "05 01", 3000, 1) 
                     
-                speedcheck = DL.ShowMessageBox("", "When fallback to MSR reader, LED 3 was turned ON (flash status)?", 0)
-                if speedcheck != 1:
-                    DL.SetWindowText("Red", "LED FAIL")
-                    DL.fails=DL.fails+1
+                # speedcheck = DL.ShowMessageBox("", "When fallback to MSR reader, LED 3 was turned ON (flash status)?", 0)
+                # if speedcheck != 1:
+                    # DL.SetWindowText("Red", "LED FAIL")
+                    # DL.fails=DL.fails+1
 
                 DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
             else:

@@ -36,7 +36,7 @@ if (Result):
 if (Result): 
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
     DL.SetWindowText("black", "*** Tap VISA card")
-    strCardData = DL.ReadKeyBoardCardData(20000)
+    strCardData = DL.ReadKeyBoardCardData(30000)
     if(-1 != strCardData.find('DFEC1535')) and (-1 != strCardData.find('7C312E31302E3033377C312E307C312E30347C342E302E327C312E377C3830313439313233205265762E41')):
         DL.SetWindowText("blue", "PASS")
     else:
@@ -45,7 +45,7 @@ if (Result):
         
 if (Result): 
     DL.SetWindowText("black", "*** Tap MC card")
-    strCardData = DL.ReadKeyBoardCardData(20000)
+    strCardData = DL.ReadKeyBoardCardData(30000)
     if(-1 != strCardData.find('DFEC1535')) and (-1 != strCardData.find('7C312E31302E3033377C312E307C312E30347C342E302E327C312E377C3830313439313233205265762E41')):
         DL.SetWindowText("blue", "PASS")
     else:
@@ -54,7 +54,7 @@ if (Result):
         
 if (Result): 
     DL.SetWindowText("black", "*** Tap Discover card")
-    strCardData = DL.ReadKeyBoardCardData(20000)
+    strCardData = DL.ReadKeyBoardCardData(30000)
     if(-1 != strCardData.find('DFEC1535')) and (-1 != strCardData.find('7C312E31302E3033377C312E307C312E30347C342E302E327C312E377C3830313439313233205265762E41')):
         DL.SetWindowText("blue", "PASS")
     else:

@@ -86,7 +86,7 @@ if (Result):
         if i == 2:#ISO 4909 (3T) (Fallback)
             DL.SetWindowText("black", "*** Insert ISO 4909 (3T) card, @1st time")
             strCardData1 = DL.ReadKeyBoardCardData(10000)
-            if(-1 != strCardData1.find('DFEF6102F220')):
+            if(-1 != strCardData1.find('DFEF6102F250')):
                 DL.SetWindowText("blue", "PASS")
             else:
                 DL.SetWindowText("red", "Error code FAIL")

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-40400
+46772
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -132,7 +132,7 @@ End Function
 '------------------------------------------------------------
 'Check if Battery 0%, reader was powered off.
 'Check if Battery can reach 100%:
-' 1) the value of cmd F0-02 is reasonable/ smooth until 100%.
+' 1) the value of cmd F0-02 is reasonable/ smooth until 100%. (confirm w/ EE how long can charge from 0%~100%)
 ' 2) the LEDs (indicate battery %) are correct until 100%. (tag DFED5A B3b0)
 '------------------------------------------------------------
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf

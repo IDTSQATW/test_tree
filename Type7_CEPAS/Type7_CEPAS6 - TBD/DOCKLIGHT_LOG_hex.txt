@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2025/7/15 10:39:43.553 
+Docklight Log File (HEX) - Started 2025/9/5 10:19:18.687 
  TEST CASE: Type7_CEPAS6
 
  --- Set POS COM PORT Settings
@@ -8,5 +8,5 @@ Docklight Log File (HEX) - Started 2025/7/15 10:39:43.553
 
 
 
-Docklight Log File (HEX) - Stopped 2025/7/15 10:39:43.658 
+Docklight Log File (HEX) - Stopped 2025/9/5 10:19:18.934 
 

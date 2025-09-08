@@ -80,7 +80,7 @@ EXR: %B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000
 --------------------
 >>> Fallback to MSR transaction (default: can retry ICC card 3 times)
 SWIPEKB: Click OK -> Insert IDT test card 3 times -> Remove card (Green LED 3 is flash ON) -> Swipe Discover card.
-EXR: DFEF6102F220
+EXR: DFEF6102F250
 EXR: DFEF6102F222
 EXR: DF EE 25 02 0007
 EXR: 9F 39 01 80
@@ -158,7 +158,7 @@ EXR: %B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000
 --------------------
 >>> Fallback to MSR transaction (default: can retry ICC card 3 times)
 SWIPEKB: Click OK -> Insert IDT test card 3 times -> Remove card (Green LED 3 is flash ON) -> Swipe Discover card.
-EXR: DFEF6102F220
+EXR: DFEF6102F250
 EXR: DFEF6102F222
 EXR: DF EE 25 02 0007
 EXR: 9F 39 01 80
@@ -292,7 +292,7 @@ EXR: %B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000
 --------------------
 >>> Fallback to MSR transaction (default: can retry ICC card 3 times)
 SWIPEKB: Click OK -> Insert IDT test card 3 times -> Remove card (Green LED 3 is flash ON) -> Swipe Discover card.
-EXR: DFEF6102F220
+EXR: DFEF6102F250
 EXR: DFEF6102F222
 EXR: DF EE 25 02 0007
 EXR: 9F 39 01 80

@@ -1,0 +1,312 @@
+DL_SCRIPTVERSION
+1
+23465
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "BTS011" ' !!!!! EDIT THIS !!!!!
+' Objective: Verify cmd C7-6A/ C7-69
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+   'Display Test Case Number and Description     
+   result = FileInput.GetLine() 'by pass variable name
+   result = FileInput.GetLine()
+   Prompting(0) = result
+      
+   'Display Test Steps   
+   result = FileInput.GetLine() 'by pass variable name
+   result = FileInput.GetLine()      
+   Prompting(1) = result
+
+   'Set Docklight COM Port     
+   result = FileInput.GetLine() 'by pass variable name
+   result = FileInput.GetLine()      
+   COM_Port(1) = result
+
+   'Set Reader Baud Rate
+   result = FileInput.GetLine() 'by pass variable name
+   result = FileInput.GetLine()      
+   POSBaudRate(1) = result
+
+   'Set Reader Type
+   result = FileInput.GetLine() 'by pass variable name
+   result = FileInput.GetLine()      
+   readerType = result
+
+   'Set Reader Model
+   result = FileInput.GetLine() 'by pass variable name
+   result = FileInput.GetLine()      
+   readerModel = result
+
+   'Set Reader FW version
+   result = FileInput.GetLine() 'by pass variable name
+   result = FileInput.GetLine()      
+   fwVersion = result
+
+   'Set Reader FW build
+   result = FileInput.GetLine() 'by pass variable name
+   result = FileInput.GetLine()      
+   fwBuild = result
+
+   'Set Reader General Flag
+   result = FileInput.GetLine() 'by pass variable name
+   result = FileInput.GetLine()      
+   fwGF = result
+Loop
+
+Sub StepPrompt(PromptString)
+    DL.AddComment PromptString
+    If Prompting(1) = "ON" Then
+       MsgBox PromptString, VBOKOnly, "Test Step"
+    Else
+    End If
+End Sub
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+countf = 0
+vivotech = 0
+idtech = 0
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+End If
+
+Sub PrintMyResult(ResultX)
+    If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+       MasterResult = 1
+       DL.AddComment "Result = PASSED"
+    Else
+       MasterResult = 0
+       DL.AddComment "Result = FAILED"
+    End If
+End Sub
+
+sub precondition()
+    dl.resetreceivecounter
+    dl.addcomment vbcrlf
+    dl.addcomment "Erase All Keys..."
+    dl.sendsequence "Erase All Key"
+    result = dl.waitforsequence("erase key ok", 1, 2000)
+    dl.pause 500
+    if result <> 0 then
+'       dl.resetreceivecounter
+'       dl.addcomment vbcrlf
+'       dl.addcomment "Set DUKPT Key Encryption Type..."
+'       dl.sendsequence "Set DUKPT Key Encryption Type - AES"
+'       result = dl.waitforsequence("set dukpt type", 1, 2000)
+'       dl.pause 500
+'       if result <> 0 then
+'          dl.resetreceivecounter
+'          dl.addcomment vbcrlf
+'          dl.addcomment "Get DUKPT Key Encryption Type..."
+'          dl.sendsequence "Get account DUKPT encryption type (C7-33)"
+'          result = dl.waitforsequence("get dukpt type", 1, 2000)
+'          dl.pause 500
+'          if result <> 0 then
+'             dl.addcomment vbcrlf & "OK!"
+'          else
+'             dl.addcomment vbcrlf & "Get DUKPT Key Encryption Type: FAIL!"
+'          end if
+'       else
+'          dl.addcomment vbcrlf & "Set DUKPT Key Encryption Type: FAIL!"
+'       end if
+    else
+       dl.addcomment vbcrlf & "Erase All Keys: FAIL!"
+    end if
+end sub
+
+sub loadkey_D()
+    dl.addcomment vbcrlf
+    dl.addcomment "Loading DUKPT key..."
+       dl.resetreceivecounter
+       dl.sendsequence "Load Plan Key 1"
+       result = dl.waitforsequence("load kpk ok", 1, 2000)
+       dl.pause 500
+       if result <> 0 then
+          dl.resetreceivecounter
+          dl.sendsequence "Load Plan Key 2"
+          result = dl.waitforsequence("load kpk ok", 1, 2000)
+          dl.pause 500
+          if result <> 0 then
+             dl.resetreceivecounter
+             dl.sendsequence "Load KPK"
+             result = dl.waitforsequence("load kpk ok", 1, 2000)
+             dl.pause 500
+             if result <> 0 then
+                dl.resetreceivecounter
+                dl.sendsequence "Load Account key"
+                result = dl.waitforsequence("dukpt ok", 1, 2000)
+                dl.pause 500
+                if result <> 0 then
+                   dl.addcomment vbcrlf & "OK!"
+                else
+                   dl.addcomment vbcrlf & "Load Account key: FAIL!"
+                end if
+             else
+                dl.addcomment vbcrlf & "Load KPK: FAIL!"
+             end if
+          else
+             dl.addcomment vbcrlf & "Load Plaintext KPK Component (the last): FAIL!"
+          end if
+       else
+          dl.addcomment vbcrlf & "Load Plaintext KPK Component (the 1st): FAIL!"
+       end if 
+end sub
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+         DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+         MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Reset Default (04-0A)"
+   DL.SendSequence "Reset Default (04-0A)"
+   result = DL.WaitForSequence("04 00", 1, 15000)
+   dl.pause 500
+End If
+
+msgbox "Click OK when reader bootup", vbokonly
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- (C7-6D) Retrieve Key Block Info"
+   DL.SendSequence "(C7-6D) Retrieve Key Block Info"
+   result = DL.WaitForSequence("C7 60", 1, 2000)
+   dl.pause 500
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- (C7-6D) Load Campus Card Key Block"
+   DL.SendSequence "(C7-6D) Load Campus Card Key Block"
+   result = DL.WaitForSequence("C7 00 00 2D", 1, 2000)
+   dl.pause 500
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- (C7-6D) Retrieve Key Block Info"
+   DL.SendSequence "(C7-6D) Retrieve Key Block Info"
+   result = DL.WaitForSequence("C7 00 00 2D", 1, 2000)
+   dl.pause 500
+End If
+
+'------------------------------------------------------------
+DL.AddComment vbCrLf
+'============================================================
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
+
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'DL.pause 1000
+'If result = 0 then
+'   DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'   DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+
+'If Prompting(0) = "ON" Then
+'   If result = 0 then
+'      MsgBox "Result = FAILED", VBOKOnly, "Result"
+'   Else 
+'      MsgBox "Result = PASSED", VBOKOnly, "Result"
+'   End If
+'End If
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+'If MasterResult = 1 Then
+'   MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'       MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+If MasterResult = 0 Then 
+   FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+       FileOutput.WriteLine "1|PASS|OK"
+End If
+FileOutput.CloseFile
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub

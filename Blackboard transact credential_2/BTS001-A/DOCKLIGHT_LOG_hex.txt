@@ -1,0 +1,25 @@
+Docklight Log File (HEX) - Started 2022/2/15 13:54:27.907 
+ TEST CASE: BTS001-A
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+Please preset...
+ 
+1) Erase keys and reload Admin/ Data (KSN = 629949012C0004600001) keys first.
+ 
+2) Set Key Encryption Type = AES.
+ 
+3) Set Encryption = off.
+ 
+
+ ---------- END OF TEST ----------
+
+ Result = FAILED
+
+
+Docklight Log File (HEX) - Stopped 2022/2/15 13:54:32.168 
+

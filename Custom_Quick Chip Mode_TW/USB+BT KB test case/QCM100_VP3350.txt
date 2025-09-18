@@ -1,6 +1,7 @@
 Objective: NEO3-12555_[VP3350][v1.00.872.2449.T] Under Auto Transaction mode, LED1 was turned off unexpectedly after connecting or disconnecting w/ a mobile phone via Bluetooth.
 
 [Case 1]
+===== w/ AC cable:
 1) Switch to auto transaction mode
 
 2) Mobile phone Bluetooth UI paired w/ the reader.
@@ -11,7 +12,12 @@ Objective: NEO3-12555_[VP3350][v1.00.872.2449.T] Under Auto Transaction mode, LE
 4) Close SDK, and disconnect w/ the reader via mobile phone Bluetooth UI.
 => Check LEDs/ buzzer behavior.
 
+===== w/o AC cable: 
+step 1~4
+
+--------------------------------------------------------------------
 [Case 2_NEO3-14429~30]
+===== w/ AC cable:
 1) Switch to auto transaction mode
 
 2) PC Bluetooth UI paired & connected w/ the reader.
@@ -22,3 +28,6 @@ Objective: NEO3-12555_[VP3350][v1.00.872.2449.T] Under Auto Transaction mode, LE
 
 4) Waited over 30 sec.
 => Check if reader enter sleep mode.
+
+===== w/o AC cable: 
+step 1~4

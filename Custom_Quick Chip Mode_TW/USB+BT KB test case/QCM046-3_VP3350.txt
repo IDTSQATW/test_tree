@@ -1,0 +1,87 @@
+Objective: Tag DFEC4F: bootup notification
+
+--------------------
+>>> 14-01 w/ data 01, 02, 03
+CMD: 14 01 01
+EXR: 14 05
+
+CMD: 14 01 02
+EXR: 14 05
+
+CMD: 14 01 03
+EXR: 14 00
+
+--------------------
+>>> Change to Poll On Demand
+CMD: 01 01 01
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Wait for the reader bootup ready --> Click OK.
+
+--------------------
+>>> Set output interface (Bluetooth), lower case, bootup output raw data.
+CMD: 04 00 DFEC4F 08 12 00 00 00 00 00 00 00
+EXR: 04 00 00 00
+
+--------------------
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 01 00 00 00
+
+SWIPEKB: Remain only 1 connection w/ PC (Bluetooth) and then click OK. Click OK after receiving data.
+EXR: dfed420a
+EXR: dfed180102
+EXR: dfef571a565033333530204657
+EXR: dfef6100
+
+EXR: dfed420a
+EXR: dfed180102
+MESSAGECK: Whole RX data are lower case
+
+--------------------
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+>>> Change to Poll On Demand
+CMD: 01 01 01
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Wait for the reader bootup ready --> Click OK.
+
+--------------------
+>>> Set output interface (Bluetooth), upper case, bootup output IDG R-Frame data.
+CMD: 04 00 DFEC4F 08 22 01 00 00 00 00 00 00
+EXR: 04 00 00 00
+
+--------------------
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 01 00 00 00
+SWIPEKB: Remain only 1 connection w/ PC (Bluetooth) and then click OK. Click OK after receiving data.
+EXR: 5669564f7465636832001401
+EXR: dfed420a
+EXR: dfed180102
+EXR: dfef571a565033333530204657
+EXR: dfef6100
+
+EXR: 5669564f74656368320014010013
+EXR: dfed420a
+EXR: dfed180102
+MESSAGECK: Whole RX data are upper case
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+>>> Change to Poll On Demand
+CMD: 01 01 01
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Wait for the reader bootup ready --> Click OK.
+
+>>> 14-01 w/ data 00 (Disable)
+CMD: 14 01 00
+EXR: 14 00
+
+>>> Set output interface (Bluetooth), mixed upper/ lower case (default)
+CMD: 04 00 DFEC4F 08 02 00 00 00 00 00 00 00
+EXR: 04 00 00 00
+
+--------------------
+>>> Quick Chip mode = 02
+CMD: 01 01 02
+EXR: 01 00 00 00

@@ -8,6 +8,10 @@ MESSAGECK: Reader unpair w/ any Bluetooth peripherals --> Click OK.
 >>> Set output interface (BT)
 CMD: 04 00 DFEC4F 08 02 00 00 00 00 00 00 00
 EXR: 04 00 00 00
+
+>>> 77-86 set sps + hid ble fw
+CMD: 77 86 00 05 01 01
+EXR: 77 00 00 00
 	
 >>> Set transaction interface = ALL
 CMD: 04 00 DF EF 37 01 07

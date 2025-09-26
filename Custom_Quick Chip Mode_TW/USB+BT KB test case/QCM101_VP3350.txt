@@ -6,3 +6,4 @@ Note:
 ex. NEO3-13926, 
 USB-KB took around 10 sec
 BT-KB took around 12 sec
+

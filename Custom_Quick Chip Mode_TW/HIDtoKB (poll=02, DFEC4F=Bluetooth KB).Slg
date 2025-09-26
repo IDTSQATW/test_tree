@@ -1,9 +1,9 @@
 
-13:40:15: If Issue ?
+16:16:59: If Issue ?
 Pass Test
 [Issue Count: 0]
 
-13:40:15: >>[Do Scripts]>>
+16:16:59: >>[Do Scripts]>>
 
 Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
 --------------------
@@ -17,6 +17,11 @@ Pack L = 17-5669564F74656368320004000000AE1600
 CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 0C DF EC 4F 08 02 00 00 00 00 00 00 00 3B C5 
 OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
 ASCII: Otech2    
+>>> 77-86 set sps + hid ble fw
+Pack L = 17-5669564F7465636832007700000077BF00
+CMD: 56 69 56 4F 74 65 63 68 32 00 77 86 00 04 00 05 01 01 8A AC 
+OUT: 56 69 56 4F 74 65 63 68 32 00 77 00 00 00 77 BF 
+ASCII: Otech2 w  
 	
 >>> Set transaction interface = ALL
 Pack L = 17-5669564F74656368320004000000AE1600

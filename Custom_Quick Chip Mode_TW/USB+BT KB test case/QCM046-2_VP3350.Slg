@@ -1,9 +1,14 @@
 
-13:30:31: If Issue ?
-Pass Test
-[Issue Count: 0]
+15:28:52: If Issue ?
+Path_File:C:\test_tree\Custom_Quick Chip Mode_TW\USB+BT KB test case\QCM046-2_VP3350.txt
+Running Info>>
+[Issue Count: 1]
+[Wrong Items]
+>>>Error item ( 75 ).
+>>> Quick Chip mode = 02
 
-13:30:31: >>[Do Scripts]>>
+
+15:28:52: >>[Do Scripts]>>
 
 Objective: Tag DFEC4F: bootup notification
 --------------------
@@ -26,7 +31,8 @@ Pack L = 17-5669564F74656368320001000000125300
 CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
 OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
 ASCII: Otech2    
-MESSAGECK: Wait for the reader bootup ready --> Click OK.
+SWIPEKB: Click OK --> Wait for the reader bootup ready & wait more then 15 sec --> Click OK
+MESSAGECK: Reader did not output any data
 User Judgment Pass
 
 --------------------
@@ -41,15 +47,17 @@ Pack L = 17-5669564F74656368320001000000125300
 CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
 OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
 ASCII: Otech2    
-SWIPEKB: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+SWIPEKB: Click OK and wait. Click OK after receiving data.
 KB Unit Swipe Card:
-dfed420a33343454313638343030dfed180102dfef571a5650333335302046572076322e30322e3033342e323533312e44dfef6100
+dfed420a33343454313638343030dfed180102dfef571a5650333335302046572076322e30322e3033352e323533312e44dfef6100
+
 MESSAGECK: Whole RX data are lower case
 User Judgment Pass
 
-SWIPEKB: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+SWIPEKB: Click OK and wait. Click OK after receiving data.
 KB Unit Swipe Card:
 dfed420a33343454313638343030dfed180102
+
 MESSAGECK: Whole RX data are lower case
 User Judgment Pass
 
@@ -77,15 +85,17 @@ Pack L = 17-5669564F74656368320001000000125300
 CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
 OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
 ASCII: Otech2    
-SWIPEKB: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+SWIPEKB: Click OK and wait. Click OK after receiving data.
 KB Unit Swipe Card:
-5669564F74656368320014010035DFED420A33343454313638343030DFED180102DFEF571A5650333335302046572076322E30322E3033342E323533312E44DFEF61002AC3
+5669564F74656368320014010035DFED420A33343454313638343030DFED180102DFEF571A5650333335302046572076322E30322E3033352E323533312E44DFEF610029B6
+
 MESSAGECK: Whole RX data are upper case
 User Judgment Pass
 
-SWIPEKB: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+SWIPEKB: Click OK and wait. Click OK after receiving data.
 KB Unit Swipe Card:
 5669564F74656368320014010013DFED420A33343454313638343030DFED1801028707
+
 MESSAGECK: Whole RX data are upper case
 User Judgment Pass
 
@@ -114,7 +124,8 @@ OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
 ASCII: Otech2    
 --------------------
 >>> Quick Chip mode = 02
-Pack L = 17-5669564F74656368320001000000125300
+Pack L = 33-5669564F746563683200610100100300000200454E030082231C02000020F06300
 CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
-OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
-ASCII: Otech2    
+OUT: 56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 82 23 1C 02 00 00 20 F0 63 
+ASCII: Otech2 a        EN  ‚#    
+Error! >>>> Expect OUT:EXR: 01 00 00 00

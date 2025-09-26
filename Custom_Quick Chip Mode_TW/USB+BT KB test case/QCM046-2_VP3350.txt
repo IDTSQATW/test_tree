@@ -15,7 +15,8 @@ EXR: 14 00
 >>> Change to Poll On Demand
 CMD: 01 01 01
 EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
-MESSAGECK: Wait for the reader bootup ready --> Click OK.
+SWIPEKB: Click OK --> Wait for the reader bootup ready & wait more then 15 sec --> Click OK
+MESSAGECK: Reader did not output any data
 
 --------------------
 >>> Set output interface (USB), lower case, bootup output raw data.
@@ -27,7 +28,7 @@ EXR: 04 00 00 00
 CMD: 01 01 02
 EXR: 01 00 00 00
 
-SWIPEKB: Remain only 1 connection w/ PC (USB) and then click OK. Click OK after receiving data.
+SWIPEKB: Click OK and wait. Click OK after receiving data.
 EXR: dfed420a
 EXR: dfed180102
 EXR: dfef571a565033333530204657
@@ -55,7 +56,7 @@ EXR: 04 00 00 00
 >>> Quick Chip mode = 02
 CMD: 01 01 02
 EXR: 01 00 00 00
-SWIPEKB: Remain only 1 connection w/ PC (USB) and then click OK. Click OK after receiving data.
+SWIPEKB: Click OK and wait. Click OK after receiving data.
 EXR: 5669564f7465636832001401
 EXR: dfed420a
 EXR: dfed180102

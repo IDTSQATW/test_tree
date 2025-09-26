@@ -23,25 +23,25 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** Set DF7D = 02 (NEO2)")
 	DL.SendIOCommand("IDG", "04 00 DF EE 7D 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")	
     
 # Set DFEE7F = 03 (NEO2)
 if (Result):
 	DL.SetWindowText("black", "*** Set DFEE7F = 03 (NEO2)")
 	DL.SendIOCommand("IDG", "04 00 DFEE7F 01 03", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")	
 
 # Enable Low Power Card Detection Mode
 if (Result):
 	DL.SetWindowText("black", "*** Enable Low Power Card Detection Mode")
 	DL.SendIOCommand("IDG", "F0 12 03 01 00", 3000, 1) 
-	Result = DL.Check_RXResponse("F0 00")
+	DL.Check_RXResponse("F0 00")
     
 # QuickChip mode
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
+	DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
 #-----------------------------------------------------------------
 if (Result):

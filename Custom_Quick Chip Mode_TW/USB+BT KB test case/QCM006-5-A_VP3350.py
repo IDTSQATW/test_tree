@@ -27,57 +27,57 @@ if (Result):
                 DL.SetWindowText("black", "*** poll on demand = 01")
                 DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
                 Result = DL.Check_RXResponse("01 00 00 00")
-                DL.ShowMessageBox("Connection check", "Wait for the reader bootup ready --> Click OK.", 0)
+                time.sleep(10)
 
             # DF7D = 02 (NEO2)
             if (Result):
                 DL.SetWindowText("black", "*** DF7D = 02 (NEO2)")
                 DL.SendIOCommand("IDG", "04 00 DF EE 7D 01 02", 3000, 1) 
-                Result = DL.Check_RXResponse("04 00 00 00")
+                DL.Check_RXResponse("04 00 00 00")
                 
             # Set CT ICS Identification = 4C
             if (Result):
                 DL.SetWindowText("black", "*** Set CT ICS Identification = 4C")
                 DL.SendIOCommand("IDG", "60 16 04", 3000, 1) 
-                Result = DL.Check_RXResponse("60 00 00 00")
+                DL.Check_RXResponse("60 00 00 00")
                 
             # Set CT terminal data = 4C
             if (Result):
                 DL.SetWindowText("black", "*** Set CT terminal data = 4C")
                 DL.SendIOCommand("IDG", "6006 16009f33036008c89f3501259f40056000f05001df110101df260101df270100dfee1e08d09c20f0c20e16005f3601029f1a0208409f1e085465726d696e616c9f150212349f160f3030303030303030303030303030309f1c0838373635343332319f4e2231303732312057616c6b65722053742e20437970726573732c204341202c5553412edfee150101dfee160100dfee170105dfee180180dfee1f0180dfee1b083030303135313030dfee2203323c3cdf1008656e667265737a68", 3000, 1) 
-                Result = DL.Check_RXResponse("60 00 00 00")
+                DL.Check_RXResponse("60 00 00 00")
                 
             # Set transaction interface = CT+MSR
             if (Result):
                 DL.SetWindowText("black", "*** Set transaction interface = CT+MSR")
                 DL.SendIOCommand("IDG", "04 00 DF EF 37 01 05", 3000, 1) 
-                Result = DL.Check_RXResponse("04 00 00 00")
+                DL.Check_RXResponse("04 00 00 00")
         if i == 2:     #test 5C
             # poll on demand = 01
             if (Result):
                 DL.SetWindowText("black", "*** poll on demand = 01")
                 DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
                 Result = DL.Check_RXResponse("01 00 00 00")
-                DL.ShowMessageBox("Connection check", "Wait for the reader bootup ready --> Click OK.", 0)
+                time.sleep(10)
                 
             # Set CT ICS Identification = 5C
             if (Result):
                 DL.SetWindowText("black", "*** Set CT ICS Identification = 5C")
                 DL.SendIOCommand("IDG", "60 16 05", 3000, 1) 
-                Result = DL.Check_RXResponse("60 00 00 00")
+                DL.Check_RXResponse("60 00 00 00")
                 
             # Set CT terminal data = 5C
             if (Result):
                 DL.SetWindowText("black", "*** Set CT terminal data = 5C")
                 DL.SendIOCommand("IDG", "60 06 07 00 9F 33 03 60 28 C8 9F 35 01 21 9F 40 05 F0 00 F0 A0 01 DF 11 01 00 DF 26 01 01 DF 27 01 00 DF EE 1E 08 D0 9C 20 D0 C4 1E 16 00", 3000, 1) 
-                Result = DL.Check_RXResponse("60 00 00 00")
+                DL.Check_RXResponse("60 00 00 00")
 
         # Quick Chip mode = 02
         if (Result):
             DL.SetWindowText("black", "*** Quick Chip mode = 02")
             DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-            Result = DL.Check_RXResponse("01 00 00 00")
-            DL.ShowMessageBox("Connection check", "Wait for the reader bootup ready --> Click OK.", 0)
+            DL.Check_RXResponse("01 00 00 00")
+            time.sleep(10)
             
             if (Result): 
                 DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
@@ -281,7 +281,7 @@ if (Result):
     # Change transaction interface to ALL
     DL.SetWindowText("black", "*** poll on demand = 01")
     DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
-    DL.ShowMessageBox("Connection check", "Wait for the reader bootup ready --> Click OK.", 0)
+    time.sleep(12)
     DL.SetWindowText("black", "*** Set transaction interface = ALL")
     DL.SendIOCommand("IDG", "04 00 DF EF 37 01 07", 3000, 1) 
     time.sleep(0.2)

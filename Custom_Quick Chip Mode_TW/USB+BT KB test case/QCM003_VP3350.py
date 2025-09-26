@@ -27,13 +27,13 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** Character delay time = 2000 us")
 	DL.SendIOCommand("IDG", "04 00 DF EF 6F 01 31", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")
 
 # QuickChip mode
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
+	DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
     
 if (Result): 
@@ -62,13 +62,13 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** Character delay time = 5000 us")
 	DL.SendIOCommand("IDG", "04 00 DF EF 6F 01 32", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
-
+	DL.Check_RXResponse("04 00 00 00")
+    
 # QuickChip mode
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
+	DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
     
 if (Result): 
@@ -97,13 +97,13 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** Character delay time = 10000 us")
 	DL.SendIOCommand("IDG", "04 00 DF EF 6F 01 33", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")
 
 # QuickChip mode
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
+	DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
     
 if (Result): 
@@ -129,13 +129,13 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** Character delay time = 20000 us")
 	DL.SendIOCommand("IDG", "04 00 DF EF 6F 01 34", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")
 
 # QuickChip mode
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
+	DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
     
 if (Result): 
@@ -161,13 +161,13 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** Character delay time = 50000 us")
 	DL.SendIOCommand("IDG", "04 00 DF EF 6F 01 35", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")
 
 # QuickChip mode
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
+	DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
     
 if (Result): 
@@ -193,13 +193,13 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** Character delay time = 0 us")
 	DL.SendIOCommand("IDG", "04 00 DF EF 6F 01 36", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")
 
 # QuickChip mode
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
+	DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
     
 if (Result): 
@@ -228,13 +228,13 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** Character delay time = 1200 us")
 	DL.SendIOCommand("IDG", "04 00 DF EF 6F 01 30", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")
 
 # QuickChip mode
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
+	DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
     
 if (Result): 

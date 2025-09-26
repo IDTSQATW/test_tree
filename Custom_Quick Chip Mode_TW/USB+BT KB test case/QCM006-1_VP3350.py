@@ -30,26 +30,26 @@ if (Result):
 		DL.SendIOCommand("IDG", "04 00 DFEC4F 08 01 00 00 00 00 00 00 00", 3000, 1) 
 	if ointerface == 1: #Bluetooth KB
 		DL.SendIOCommand("IDG", "04 00 DFEC4F 08 02 00 00 00 00 00 00 00", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")	
     
 # DF7D = 01 (NEO2)
 if (Result):
 	DL.SetWindowText("black", "*** DF7D = 01 (NEO2)")
 	DL.SendIOCommand("IDG", "04 00 DF EE 7D 01 01 ", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")	
     
 # Get Data Encryption (C7-37) = encryption OFF
 if (Result):
 	DL.SetWindowText("black", "*** Get Data Encryption (C7-37)")
 	DL.SendIOCommand("IDG", "C7 37", 3000, 1) 
-	Result = DL.Check_RXResponse("C7 00 00 01 00")
+	DL.Check_RXResponse("C7 00 00 01 00")
 	time.sleep(0.5)
 
 # QuickChip mode
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
+	DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
     
 #-----------------------------------------------------------------

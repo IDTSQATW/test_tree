@@ -22,13 +22,13 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** Set tag DFED4F = $$$$$")
 	DL.SendIOCommand("IDG", "04 00 DFED4F 05 2424242424", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")	
     
 # QuickChip mode
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
+	DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
     
 if (Result): 
@@ -69,13 +69,13 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** Set tag DFED4F = null")
 	DL.SendIOCommand("IDG", "04 00 DFED4F 00", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")	
     
 # QuickChip mode
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
+	DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
     
 if (Result): 

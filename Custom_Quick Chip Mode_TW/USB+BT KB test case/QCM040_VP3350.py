@@ -23,25 +23,26 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** Set transaction interface = CT+MSR")
 	DL.SendIOCommand("IDG", "04 00 DF EF 37 01 05", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")	
     
 # DFED5A Byte 4 = 02
 if (Result):
 	DL.SetWindowText("black", "*** DFED5A Byte 4 = 02")
 	DL.SendIOCommand("IDG", "04 00 DFED5A 08 00 00 00 02 00 00 00 00", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")	
 
 # QuickChip mode
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
+	DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
 
 # CT transaction
 if (Result): 
     DL.SetWindowText("black", "*** Insert T=0 card")
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
+    DL.SetWindowText("red", "/// Notice the sound when outputting data")
     strCardData = DL.ReadKeyBoardCardData(30000)
     if(-1 != strCardData.find('DFEE25020003')):
         DL.SetWindowText("blue", "DFEE25 PASS")
@@ -66,19 +67,20 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** DFED5A Byte 4 = 00 (default)")
 	DL.SendIOCommand("IDG", "04 00 DFED5A 08 00 00 00 00 00 00 00 00", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")	
 
 # QuickChip mode
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
+	DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
 
 # CT transaction
 if (Result): 
     DL.SetWindowText("black", "*** Insert T=0 card")
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
+    DL.SetWindowText("red", "/// Notice the sound when outputting data")
     strCardData = DL.ReadKeyBoardCardData(30000)
     if(-1 != strCardData.find('DFEE25020003')):
         DL.SetWindowText("blue", "DFEE25 PASS")
@@ -104,14 +106,14 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** Set transaction interface = ALL")
 	DL.SendIOCommand("IDG", "04 00 DF EF 37 01 07", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")	
 
 # QuickChip mode
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(2)
+	DL.Check_RXResponse("01 00 00 00")	
+	time.sleep(1)
 
 #-----------------------------------------------------------------
 if(0 < (DL.fails + DL.warnings)):

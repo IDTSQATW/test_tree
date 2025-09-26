@@ -23,13 +23,13 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** Set DF7D = 02 (NEO2)")
 	DL.SendIOCommand("IDG", "04 00 DF EE 7D 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")	
 
 # QuickChip mode
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
+	DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
     
 # Get DUKPT DEK Attribution based on KeySlot (C7-A3)

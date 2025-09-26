@@ -20,17 +20,17 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** Set tag DFEC14 = 01")
 	DL.SendIOCommand("IDG", "0400 DFEC14 01 01", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")	
     
 if (Result):
 	DL.SetWindowText("black", "*** Set tag DFEC15 data")
 	DL.SendIOCommand("IDG", "0400 DFEC15 2B 7C312E31302E3033377C312E307C312E30347C342E302E327C312E377C3830313439313233205265762E41", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")	
     
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
+	DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
     
 if (Result): 
@@ -72,12 +72,12 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** Set tag DFEC14 = 00")
 	DL.SendIOCommand("IDG", "0400 DFEC14 01 00", 3000, 1) 
-	Result = DL.Check_RXResponse("04 00 00 00")	
+	DL.Check_RXResponse("04 00 00 00")	
     
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	Result = DL.Check_RXResponse("01 00 00 00")	
+	DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
     
 if (Result): 

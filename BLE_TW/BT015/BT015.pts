@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-6988
+47142
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -194,6 +194,7 @@ End If
 if result <> 0 then
    readercheck = msgbox ("Please make sure u test NSRED reader now", vbokonly)
    dl.resetreceivecounter
+   dl.addcomment vbcrlf
    DL.AddComment "--- 77-81 (reset to default)"
    DL.SendSequence "77-81 (reset to default)"
    result = DL.WaitForSequence("77-xx resp 00", 1, 5000)
@@ -216,7 +217,7 @@ if result <> 0 then
    DL.AddComment "--- 77-86 Set security = enable"
    DL.SendSequence "77-86 Set security = enable"
    result = DL.WaitForSequence("77-xx resp 00", 1, 1500)
-   usercheck = msgbox ("Please use mobile phone to pair w/ the reader via Bluetooth, user MUST input pwd, right?", vbyesno)
+   if result <> 0 then usercheck = msgbox ("Please use mobile phone to pair w/ the reader via Bluetooth, user MUST input pwd, right?", vbyesno)
    if usercheck = 7 then result = 0
 End If
 
@@ -237,7 +238,7 @@ if result <> 0 then
    DL.AddComment "--- 77-86 Set security = disable"
    DL.SendSequence "77-86 Set security = disable"
    result = DL.WaitForSequence("77-xx resp 00", 1, 1500)
-   usercheck = msgbox ("Please use mobile phone to pair w/ the reader via Bluetooth, user do NOT need to input pwd, right?", vbyesno)
+   if result <> 0 then usercheck = msgbox ("Please use mobile phone to pair w/ the reader via Bluetooth, user do NOT need to input pwd, right?", vbyesno)
    if usercheck = 7 then result = 0
 End If
 

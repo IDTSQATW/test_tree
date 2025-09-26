@@ -26,7 +26,7 @@ step 1~4
 => Check if have: beep twice, 4 red LEDs on once
 => Check if LED 1 change to flash status
 
-4) Waited over 30 sec.
+4) Remove AC cable, waited over 30 sec.
 => Check if reader enter sleep mode.
 
 ===== w/o AC cable: 

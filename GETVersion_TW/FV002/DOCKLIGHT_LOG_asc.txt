@@ -1,4 +1,4 @@
-Docklight Log File (ASCII) - Started 2025/9/16 10:36:38.737 
+Docklight Log File (ASCII) - Started 2025/10/8 16:41:06.204 
  TEST CASE: FV002
 
  --- Set POS COM PORT Settings
@@ -8,8 +8,8 @@ Docklight Log File (ASCII) - Started 2025/9/16 10:36:38.737
 
  --- Get UID of MCU (29-17)
 
-2025/9/16 10:36:40.049 [TX] - ViVOtech2<NUL>)<ETB><NUL><NUL>-f
-2025/9/16 10:36:40.061 [RX] - ViVOtech2<NUL>)<NUL><NUL><DLE>??<NUL><NUL>??<NUL>1<NUL>,<NUL><CR>
+2025/10/8 16:41:07.501 [TX] - ViVOtech2<NUL>)<ETB><NUL><NUL>-f
+2025/10/8 16:41:07.511 [RX] - ViVOtech2<NUL>)<NUL><NUL><DLE>??<NUL><NUL>??<NUL>1<NUL>,<NUL><CR>
 gcNE?9<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
 
  ---------- END OF TEST ----------
@@ -17,5 +17,5 @@ gcNE?9<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><N
  Result = PASSED
 
 
-Docklight Log File (ASCII) - Stopped 2025/9/16 10:36:41.480 
+Docklight Log File (ASCII) - Stopped 2025/10/8 16:41:09.060 
 

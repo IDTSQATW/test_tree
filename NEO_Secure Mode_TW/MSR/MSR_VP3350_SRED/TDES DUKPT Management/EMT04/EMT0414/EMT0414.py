@@ -4,6 +4,7 @@ import sys
 import time
 RetOfStep = True
 Result= True
+DL.fails=0
 
 Key='0123456789abcdeffedcba9876543210'
 MacKey='0123456789abcdeffedcba9876543210'
@@ -413,7 +414,9 @@ if (Result):
 									if Result != True:
 										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR3plaintextdata: FAIL")
-							
+					else:
+						DL.fails=DL.fails+1
+    
 if lcdtype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):

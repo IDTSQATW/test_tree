@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-43201
+60571
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -221,11 +221,8 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   DL.AddComment "--- PCD Read Block 5"
   DL.SendSequence "PCD Read Block 5"
-  if readerType <> "NEO2" then
-     result = DL.WaitForSequence("2nd Invalid Read Response", 1, 10000)
-  else
-     result = DL.WaitForSequence("2nd Invalid Read Response (NEO2)", 1, 10000)
-  end if
+  result = DL.WaitForSequence("2nd Invalid Read Response", 1, 1000)
+  if result = 0 then result = DL.WaitForSequence("2nd Invalid Read Response (NEO2)", 1, 1000)
 End If
 '------------------------------------------------------------
 
@@ -234,11 +231,8 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   DL.AddComment "--- PCD Read Block 6"
   DL.SendSequence "PCD Read Block 6"
-  if readerType <> "NEO2" then
-     result = DL.WaitForSequence("2nd Invalid Read Response", 1, 10000)
-  else
-     result = DL.WaitForSequence("2nd Invalid Read Response (NEO2)", 1, 10000)
-  end if
+  result = DL.WaitForSequence("2nd Invalid Read Response", 1, 1000)
+  if result = 0 then result = DL.WaitForSequence("2nd Invalid Read Response (NEO2)", 1, 1000)
 End If
 '------------------------------------------------------------
 
@@ -247,11 +241,8 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   DL.AddComment "--- PCD Read Block 7"
   DL.SendSequence "PCD Read Block 7"
-  if readerType <> "NEO2" then
-     result = DL.WaitForSequence("2nd Invalid Read Response", 1, 10000)
-  else
-     result = DL.WaitForSequence("2nd Invalid Read Response (NEO2)", 1, 10000)
-  end if
+  result = DL.WaitForSequence("2nd Invalid Read Response", 1, 1000)
+  if result = 0 then result = DL.WaitForSequence("2nd Invalid Read Response (NEO2)", 1, 1000)
 End If
 '------------------------------------------------------------
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"

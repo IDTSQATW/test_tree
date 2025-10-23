@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-30483
+36321
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -284,11 +284,15 @@ End If
 
 If result <> 0 Then
    countf = 0
-   for i = 1 to 4
+   for i = 3 to 7
        if i = 1 then card = "Tap ApplePay w/ Blackboard card (AOU1264501 w/ Camden University card)"
        if i = 2 then card = "Tap GooglePay w/ Blackboard card (SQA160906001 w/ IDTech1 Customer card)"
        if i = 3 then card = "Tap Blackboard Mifare Classic card (226200599)"
        if i = 4 then card = "Tap Blackboard DESFire EV2 card (9998881234567891)"
+       if i = 5 then card = "Tap SWARTHMORE card"
+       if i = 6 then card = "Tap UID1:04 96 1F 2A AB 1D 90 card"
+       if i = 7 then card = "Tap UID2:04 96 8F 2A AB 1D 90 card"
+
        dl.addcomment vbcrlf & "========== " & card
 
        msgbox "Click OK --> " & card, vbyesno

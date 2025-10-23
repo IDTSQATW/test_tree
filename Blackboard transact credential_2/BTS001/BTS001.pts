@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-48055
+9296
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -214,9 +214,6 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------Pre-condition
-if readerType = "NEO2" then readercheck = msgbox("Does reader erase keys and reload Admin/ Data (KSN = 629949012C0004600001) keys first?", vbyesno)
-
-if readercheck = 6 or readerType <> "NEO2" then
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- Data Encrypt disable"
@@ -272,9 +269,9 @@ End If
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
-   DL.AddComment "--- (C7-6D) Load Campus Card Key Block / Retrieve Key Block Info"
-   DL.SendSequence "(C7-6D) Load Campus Card Key Block / Retrieve Key Block Info"
-   result = DL.WaitForSequence("C7 00 00", 1, 2000)
+   DL.AddComment "--- (C7-6D) Load Campus Card Key Block"
+   DL.SendSequence "(C7-6D) Load Campus Card Key Block"
+   result = DL.WaitForSequence("C7 00 00 2D", 1, 2000)
    dl.pause 500
 End If
 

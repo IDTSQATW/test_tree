@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-7237
+25510
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -214,9 +214,6 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------Pre-condition
-if readerType = "NEO2" then readercheck = msgbox("Did reader has transact keys already?", vbyesno)
-
-if readerType <> "NEO2" or readercheck = 6 then
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- Data Encrypt disable"

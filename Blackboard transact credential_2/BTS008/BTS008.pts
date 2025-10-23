@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-50081
+45953
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -280,6 +280,10 @@ End If
 
 If result <> 0 Then
    countf = 0
+   
+   for j = 2 to 2
+
+   if j = 1 then
    for i = 1 to 2
        if i = 1 then 
           if readerType <> "NEO2" then cmd = "02-40 w/ AppleVAS -- VAS or PAY"
@@ -314,7 +318,9 @@ If result <> 0 Then
           countf = 1
        end if
    next
+   end if
 
+   if j = 2 then 
    for i = 1 to 2
        if i = 1 then cmd = "02-40 w/ SmartTAP -- VAS or PAY"
        if i = 2 then cmd = "02-40 w/ SmartTAP -- VAS and PAY"
@@ -343,6 +349,9 @@ If result <> 0 Then
           dl.addcomment vbcrlf & "** FAIL **"
           countf = 1
        end if  
+   next
+   end if
+
    next
    if countf <> 0 then result = 0
 End If

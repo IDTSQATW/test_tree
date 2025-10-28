@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-30098
+26952
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -173,26 +173,8 @@ if readerType = "NEO2" then
    If result <> 0 Then
       dl.resetreceivecounter
       dl.addcomment vbcrlf
-      DL.AddComment "--- 60-16 Contact Set ICS Identification (04)"
-      DL.SendSequence "60-16 Contact Set ICS Identification (04)"
-      result = DL.WaitForSequence("60-xx 00 status", 1, 3000)
-      dl.pause 1000
-   End If
-
-   If result <> 0 Then
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
       DL.AddComment "--- 60-03 Contact Set Application Data (VISA)"
       DL.SendSequence "60-03 Contact Set Application Data (VISA)"
-      result = DL.WaitForSequence("60-xx 00 status", 1, 3000)
-      dl.pause 1000
-   End If
-
-   If result <> 0 Then
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- 60-06 4C config (NEO2)"
-      DL.SendSequence "60-06 4C config (NEO2)"
       result = DL.WaitForSequence("60-xx 00 status", 1, 3000)
       dl.pause 1000
    End If
@@ -205,6 +187,46 @@ if readerType = "NEO2" then
       result = DL.WaitForSequence("60-xx 00 status", 1, 3000)
       dl.pause 1000
    End If
+
+   lcdcheck = msgbox ("Does the reader have LCD?", vbyesno)
+
+   if lcdcheck = 6 then
+   If result <> 0 Then
+      dl.resetreceivecounter
+      dl.addcomment vbcrlf
+      DL.AddComment "--- 60-16 4C_Contact Set ICS Identification"
+      DL.SendSequence "60-16 Contact Set ICS Identification (04)"
+      result = DL.WaitForSequence("60-xx 00 status", 1, 3000)
+      dl.pause 1000
+   End If
+
+   If result <> 0 Then
+      dl.resetreceivecounter
+      dl.addcomment vbcrlf
+      DL.AddComment "--- 60-06 4C_Contact Set Terminal Data"
+      DL.SendSequence "60-06 4C config (NEO2)"
+      result = DL.WaitForSequence("60-xx 00 status", 1, 3000)
+      dl.pause 1000
+   End If
+   elseif lcdcheck = 7 then
+   If result <> 0 Then
+      dl.resetreceivecounter
+      dl.addcomment vbcrlf
+      DL.AddComment "--- 60-16 2C_Contact Set ICS Identification"
+      DL.SendSequence "60-16 2C_Contact Set ICS Identification"
+      result = DL.WaitForSequence("60-xx 00 status", 1, 3000)
+      dl.pause 1000
+   End If
+
+   If result <> 0 Then
+      dl.resetreceivecounter
+      dl.addcomment vbcrlf
+      DL.AddComment "--- 60-06 2C_Contact Set Terminal Data (9f39=05)"
+      DL.SendSequence "60-06 2C_Contact Set Terminal Data (9f39=05)"
+      result = DL.WaitForSequence("60-xx 00 status", 1, 3000)
+      dl.pause 1000
+   End If
+   end if
 end if
 
 If result <> 0 Then

@@ -1,4 +1,4 @@
-Docklight Log File (ASCII) - Started 2025/8/25 11:42:16.285 
+Docklight Log File (ASCII) - Started 2025/10/31 15:08:42.066 
  TEST CASE: MV008
 
  --- Set POS COM PORT Settings
@@ -10,16 +10,16 @@ Docklight Log File (ASCII) - Started 2025/8/25 11:42:16.285
 
  --- 29-0A_00 = Contact EMV L1 Kernel Checksum
 
-2025/8/25 11:42:17.449 [TX] - ViVOtech2<NUL>)<LF>
+2025/10/31 15:08:43.249 [TX] - ViVOtech2<NUL>)<LF>
 <NUL><SOH><NUL>p0
-2025/8/25 11:42:17.463 [RX] - ViVOtech2<NUL>)<NUL><NUL><EOT> 
+2025/10/31 15:08:43.258 [RX] - ViVOtech2<NUL>)<NUL><NUL><EOT> 
 <ETB>?jtt?<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
 
  --- 29-0A_01 = Contactless EMV L1 Kernel Checksum
 
-2025/8/25 11:42:17.974 [TX] - ViVOtech2<NUL>)<LF>
+2025/10/31 15:08:43.773 [TX] - ViVOtech2<NUL>)<LF>
 <NUL><SOH><SOH>Q 
-2025/8/25 11:42:17.984 [RX] - ViVOtech2<NUL>)<NUL><NUL><EOT> 
+2025/10/31 15:08:43.780 [RX] - ViVOtech2<NUL>)<NUL><NUL><EOT> 
 '?gc??<NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
 
  ---------- END OF TEST ----------
@@ -29,5 +29,5 @@ Docklight Log File (ASCII) - Started 2025/8/25 11:42:16.285
 
 
 
-Docklight Log File (ASCII) - Stopped 2025/8/25 11:42:18.574 
+Docklight Log File (ASCII) - Stopped 2025/10/31 15:08:44.383 
 

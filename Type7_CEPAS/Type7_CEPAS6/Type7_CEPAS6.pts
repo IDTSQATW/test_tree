@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-65144
+16124
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -8,6 +8,7 @@ DL_SCRIPTVERSION
 '------------------------------------------------------------
 Dim ProjectName
 ProjectName = "Type7_CEPAS6" ' !!!!! EDIT THIS !!!!!
+
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -131,29 +132,22 @@ Function MyDebug(DebugString)
       MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
 End Function
 
-Sub ReverseResult ()
-    If result <> 0 Then
-       result = 0
-    Else 
-       result = 1
-    End If
-End Sub
-
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
 result = 1
 
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 3000
+DL.Pause 1200
 '============================================================
 If result <> 0 Then
-   prompt2 = prompt2 & "Click OK and place type 7 card on the reader."
+   prompt2 = prompt2 & "Click OK and place ISO 14443 Type A card on the reader. ex. MC21"
    result = MsgBox(prompt2, VBOKOnly, "Advanced PassThrough")
 End If
 
 '------------------------------------------------------------
 If result <> 0 Then
+  DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "--- PT START"
   DL.SendSequence " PT START"
@@ -161,54 +155,60 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+  DL.AddComment vbCrLf
   DL.ResetReceiveCounter
-  DL.AddComment "---E P4T 02"
-  DL.SendSequence "E P4T 02"
+  DL.AddComment "--- 2C-0C ISO 14443 Type A Polling"
+  DL.SendSequence "2C-0C ISO 14443 Type A Polling"
   result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
-  dl.pause 1000
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+  DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "--- PPSE "
   DL.SendSequence " PPSE "
-  result = DL.WaitForSequence("Passthrough Good response", 1, 3000)
-  ReverseResult ()
+  result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
+  dl.pause 500
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+  DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "--- Select "
   DL.SendSequence " Select "
-  result = DL.WaitForSequence("Passthrough Good response", 1, 3000)
-  ReverseResult ()
+  result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
+  dl.pause 500
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+  DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "--- GPO "
   DL.SendSequence " GPO "
-  result = DL.WaitForSequence("Passthrough Good response", 1, 3000)
-  ReverseResult ()
+  result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
+  dl.pause 500
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+  DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "--- Read Record "
   DL.SendSequence " Read Record "
-  result = DL.WaitForSequence("Passthrough Good response", 1, 3000)
-  ReverseResult ()
+  result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
+  dl.pause 500
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+  DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "--- ccc"
   DL.SendSequence " ccc"
-  result = DL.WaitForSequence("Passthrough Good response", 1, 3000)
-  ReverseResult ()
+  result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
+  dl.pause 500
 End If
 '------------------------------------------------------------
 If result <> 0 Then
+  DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "--- PT STOP"
   DL.SendSequence " PT STOP"
@@ -217,7 +217,7 @@ End If
 
 '------------------------------------------------------------
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 3000
+DL.Pause 1000
 
 PrintMyResult(result)
 DL.Pause 1000

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-50052
+31463
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -162,6 +162,16 @@ End Function
 
 '------------------------------------------------------------
 'TEST BEGINS
+'------------------------------------------------------------
+if result <> 0 then
+   DL.AddComment "--- DF7D" 
+   if readerType <> "NEO2" then 
+      DL.SendSequence "DF7D = 01"
+   else
+      DL.SendSequence "DF7D = 02 (NEO2)"
+   end if
+   result = DL.WaitForSequence("burst off", 1, 3000)
+end if
 '------------------------------------------------------------
 If result <> 0 Then
    dl.resetreceivecounter

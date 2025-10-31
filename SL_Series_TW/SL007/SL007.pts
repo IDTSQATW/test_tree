@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-39344
+44475
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -418,7 +418,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
   if result = 1 Then
-     ans = msgbox("Do you See (Please Remove Card)", vbyesno)
+     ans = msgbox("Do you See (Remove Card)", vbyesno)
      if ans = 7 then
         count()
      end if
@@ -1106,12 +1106,404 @@ End If
      count()
    end if
 '------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 35"
+  DL.SendSequence " Index 35"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See ( )", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 36"
+  DL.SendSequence " Index 36"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See ( )", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 37"
+  DL.SendSequence " Index 37"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (Service Not Allowed)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 38"
+  DL.SendSequence " Index 38"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (PIN Try Limit Exceeded)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 39"
+  DL.SendSequence " Index 39"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See ( )", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 3A"
+  DL.SendSequence " Index 3A"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (Amount exceed transaction limit)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 3B"
+  DL.SendSequence " Index 3B"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (Processing Error)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 3C"
+  DL.SendSequence " Index 3C"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (Declined See Transit Auth)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 3D"
+  DL.SendSequence " Index 3D"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (PIN Error)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 3E"
+  DL.SendSequence " Index 3E"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (ABM Not Supported)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 3F"
+  DL.SendSequence " Index 3F"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (CARD EXPIRED)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 40"
+  DL.SendSequence " Index 40"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (Blacklist)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 41"
+  DL.SendSequence " Index 41"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See ( )", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 42"
+  DL.SendSequence " Index 42"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (CALL YOUR BANK)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 43"
+  DL.SendSequence " Index 43"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (Offline Approved)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 44"
+  DL.SendSequence " Index 44"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (Offline Approved Balance:)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 45"
+  DL.SendSequence " Index 45"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (Offline Declined)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 46"
+  DL.SendSequence " Index 46"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (Offline Declined Balance:)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 47"
+  DL.SendSequence " Index 47"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (ODA Performed, SDA success)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 48"
+  DL.SendSequence " Index 48"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (ODA Performed, fDDA Success)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 49"
+  DL.SendSequence " Index 49"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (ODA Performed, SDA Fail)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 4A"
+  DL.SendSequence " Index 4A"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (ODA Performed, fDDA Fail)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 4B"
+  DL.SendSequence " Index 4B"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (ODA Fail)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+
 if countf <> 0 then
    result = 0
 else
    result = 1
 end if
-'------------------------------------------------------------
+
 DL.AddComment vbCrLf
 PrintMyResult(result)
 

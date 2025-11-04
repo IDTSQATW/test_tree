@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-27020
+17592
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -998,7 +998,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
   if result = 1 Then
-     ans = msgbox("Do you See (Too Many Taps  Trop d’essais)", vbyesno)
+     ans = msgbox("Do you See (Too Many Taps Trop d'essais)", vbyesno)
      if ans = 7 then
         count()
      end if

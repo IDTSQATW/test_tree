@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-5153
+51806
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -173,11 +173,10 @@ If result <> 0 Then
    msgbox "Remove 2 cards --> Click OK --> Tap 1 card", vbyesonly
    DL.AddComment "--- cmd 02-40"
    DL.SendSequence "CLT 02-40"
-   dl.pause 3000
-   if readerType <> "NEO2" then result = DL.WaitForSequence("02-40 resp", 1, 5000)
-   if readerType = "NEO2" then result = DL.WaitForSequence("02-40 resp (NEO3)", 1, 5000)
-   if result <> 0 then result = DL.WaitForSequence("Tag DFEC0F (01) any", 1, 5000)
-   dl.pause 500
+   if readerType <> "NEO2" then result = DL.WaitForSequence("02-40 resp", 1, 6000)
+   if readerType = "NEO2" then result = DL.WaitForSequence("02-40 resp (NEO3)", 1, 6000)
+   if result <> 0 then result = DL.WaitForSequence("Tag DFEC0F (01) any", 1, 6000)
+   dl.pause 100
 End If
 '------------------------------------------------------------
 If result <> 0 Then

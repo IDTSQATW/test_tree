@@ -11,7 +11,7 @@ PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
 # Objective: 
-# NEO3-13694, [Amusement Connect] Auto Transaction - Return UID and Card Type for Mifare Tap
+# NEO3-14580 [KIOSKV FW v1.01.359.2525.T][AT][CS-6236]No UID returned for Mifare DESFire virtual card in Auto transaction mode
 # NEO3-14035, [VP3350][v2.00.012.2519.D] Under Auto Transaction mode, reader can not read the Mifare DESFire virtual card.
 
 # Poll on demand
@@ -79,7 +79,7 @@ if (Result):
                 DL.fails=DL.fails+1
                 
         if i == 5:#Mifare DESFire Virtual card
-            if(-1 != strCardData.find('DFEC0F0D0304002004')):
+            if(-1 != strCardData.find('DFEC0F17036F12851014020C1122334455667700006141A95D9000')):
                 DL.SetWindowText("blue", "PASS")
             else:
                 DL.SetWindowText("red", "FAIL")

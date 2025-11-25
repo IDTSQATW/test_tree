@@ -26,7 +26,7 @@ MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
 
 --------------------
 >>> MSR transaction
-SWIPEKB: click OK, then swipe ISO 4909 (3T) card. (Press button "MSR Dec" to Decryption then Press button "OK")
+SWIPEKB: click OK, then swipe ISO 4909 (3T) card. (Decrypt tags DFEE23 & DFEF4D then Press button "OK")
 EXR: DFEE23
 EXR: 02
 EXR: 80 3F 4D 27 69 87 BF
@@ -42,7 +42,7 @@ EXR: 25 42 34 35 34 37 35 37 30 30 30 31 30 37 30 30 30 30 5E 4C 4C 49 42 52 45 
 
 --------------------
 >>> Fallback MSR transaction
-SWIPEKB: click OK, insert MSR card 3 times, then swipe ISO 4909 (3T) card. (Press button "MSR Dec" to Decryption then Press button "OK")
+SWIPEKB: click OK, insert MSR card 3 times, then swipe ISO 4909 (3T) card. (Decrypt tags DFEE23 & DFEF4D then Press button "OK")
 EXR: DFEE23
 EXR: 02
 EXR: 80 3F 4D 27 69 87 BF

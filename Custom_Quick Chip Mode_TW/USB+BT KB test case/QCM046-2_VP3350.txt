@@ -12,11 +12,14 @@ CMD: 14 01 03
 EXR: 14 00
 
 --------------------
->>> Change to Poll On Demand
+>>> Change to Poll On Demand (NEO3-15497)
 CMD: 01 01 01
 EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
 SWIPEKB: Click OK --> Wait for the reader bootup ready & wait more then 15 sec --> Click OK
-MESSAGECK: Reader did not output any data
+EXR: dfed420a
+EXR: dfed180101
+EXR: dfef571a565033333530204657
+EXR: dfef6100
 
 --------------------
 >>> Set output interface (USB), lower case, bootup output raw data.

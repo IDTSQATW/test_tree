@@ -610,6 +610,13 @@ Index 4B
 0
 5
 
+SEND
+84
+Index 4C
+56 69 56 4F 74 65 63 68 32 00 01 02 00 04 4C 01 00 01 00 00
+0
+5
+
 RECEIVE
 0
 Chang Config

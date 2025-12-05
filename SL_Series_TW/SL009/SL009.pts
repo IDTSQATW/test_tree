@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-48425
+60785
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -84,7 +84,7 @@ End Sub
 ' -  
 '------------------------------------------------------------
 DL.OpenProject ProjectName & ".ptp"
-DL.StartCommunication
+'DL.StartCommunication
 DL.ClearCommWindows 
 DL.StartLogging "DOCKLIGHT_LOG",False, "H"
 ', false, true
@@ -998,7 +998,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
   if result = 1 Then
-     ans = msgbox("Do you See (Too Many Taps Trop dâ€™essais)", vbyesno)
+     ans = msgbox("Do you See (Too Many Taps Trop d?™essais)", vbyesno)
      if ans = 7 then
         count()
      end if
@@ -1414,6 +1414,24 @@ End If
      count()
    end if
 '------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 4C"
+  DL.SendSequence " Index 4C"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (Card Detect)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+
 
 if countf <> 0 then
    result = 0

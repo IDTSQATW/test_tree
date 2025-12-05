@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-57892
+8267
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -211,6 +211,12 @@ else
    result = 1
 end if
 
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   dl.addcomment "--- UI scheme: ViVOpay"
+   if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" or readerType = "USAT_SRED" then dl.sendsequence "vivopay ui"
+   if readerType = "NEO2" then dl.sendsequence "vivopay ui (NEO2)"
+   resultignore = dl.waitforsequence("ui ok resp", 1, 2000)
 dl.addcomment vbcrlf
 DL.AddComment "---------- END OF TEST ----------"
 DL.Pause 1000

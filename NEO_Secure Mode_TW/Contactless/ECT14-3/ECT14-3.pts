@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-27486
+60301
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -276,6 +276,7 @@ If result <> 0 Then
       r(2) = dl.waitforsequence("Tag 50", 1, 1000)
            if r(2) = 0 then dl.addcomment vbcrlf & "Tag 50...FAIL!"
       r(3) = dl.waitforsequence("Tag 57 - Enc dukpt", 1, 1000)
+           if r(3) = 0 then r(3) = dl.waitforsequence("Tag 57 - Enc dukpt 1", 1, 1000)
            if r(3) = 0 then dl.addcomment vbcrlf & "Tag 57 - Enc dukpt...FAIL!"
       r(4) = dl.waitforsequence("Tag 5A - Enc dukpt", 1, 1000)
            if r(4) = 0 then dl.addcomment vbcrlf & "Tag 5A - Enc dukpt...FAIL!"
@@ -332,8 +333,10 @@ If result <> 0 Then
       r(30) = dl.waitforsequence("Tag 5A - mask 1", 1, 1000)
            if r(30) = 0 then dl.addcomment vbcrlf & "Tag 5A - mask...FAIL!"
       r(31) = dl.waitforsequence("Track 1 - Enc dukpt", 1, 1000)
+           if r(31) = 0 then r(31) = dl.waitforsequence("Track 1 - Enc dukpt 1", 1, 1000)
            if r(31) = 0 then dl.addcomment vbcrlf & "Track 1 - Enc dukpt...FAIL!"
       r(32) = dl.waitforsequence("Track 2 - Enc dukpt", 1, 1000)
+           if r(32) = 0 then r(32) = dl.waitforsequence("Track 2 - Enc dukpt 1", 1, 1000)
            if r(32) = 0 then dl.addcomment vbcrlf & "Track 2 - Enc dukpt...FAIL!"
       r(33) = dl.waitforsequence("Tag DFEE26", 1, 1000)
            if r(33) = 0 then dl.addcomment vbcrlf & "Tag DFEE26...FAIL!"
@@ -387,6 +390,7 @@ If result <> 0 Then
       r(2) = dl.waitforsequence("Tag 50", 1, 1000)
            if r(2) = 0 then dl.addcomment vbcrlf & "Tag 50...FAIL!"
       r(3) = dl.waitforsequence("Tag 57 - Enc dukpt", 1, 1000)
+           if r(3) = 0 then r(3) = dl.waitforsequence("Tag 57 - Enc dukpt 1", 1, 1000)
            if r(3) = 0 then dl.addcomment vbcrlf & "Tag 57 - Enc dukpt...FAIL!"
       r(4) = dl.waitforsequence("Tag 5A - Enc dukpt", 1, 1000)
            if r(4) = 0 then dl.addcomment vbcrlf & "Tag 5A - Enc dukpt...FAIL!"
@@ -443,8 +447,10 @@ If result <> 0 Then
       r(30) = dl.waitforsequence("Tag 5A - mask 2", 1, 1000)
            if r(30) = 0 then dl.addcomment vbcrlf & "Tag 5A - mask...FAIL!"
       r(31) = dl.waitforsequence("Track 1 - Enc dukpt", 1, 1000)
+           if r(31) = 0 then r(31) = dl.waitforsequence("Track 1 - Enc dukpt 1", 1, 1000)
            if r(31) = 0 then dl.addcomment vbcrlf & "Track 1 - Enc dukpt...FAIL!"
       r(32) = dl.waitforsequence("Track 2 - Enc dukpt", 1, 1000)
+           if r(32) = 0 then r(32) = dl.waitforsequence("Track 2 - Enc dukpt 1", 1, 1000)
            if r(32) = 0 then dl.addcomment vbcrlf & "Track 2 - Enc dukpt...FAIL!"
       r(33) = dl.waitforsequence("Tag DFEE26", 1, 1000)
            if r(33) = 0 then dl.addcomment vbcrlf & "Tag DFEE26...FAIL!"

@@ -46,11 +46,11 @@ if platform == 1:
         if (RetOfStep):
             Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
 
-# group 80, support MSD only
-if (Result):
-	RetOfStep = DL.SendCommand('group 80, support MSD only')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")			
+    # group 80, support MSD only
+    if (Result):
+        RetOfStep = DL.SendCommand('group 80, support MSD only')
+        if (RetOfStep):
+            Result = Result and DL.Check_RXResponse("04 00 00 00")			
 		
 # Burst mode OFF & Poll on demand		
 if (Result):

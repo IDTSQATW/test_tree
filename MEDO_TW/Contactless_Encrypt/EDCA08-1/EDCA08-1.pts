@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-36329
+50100
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -326,7 +326,8 @@ If result <> 0 Then
       r(2) = dl.waitforsequence("Tag 50", 1, 1000)
            if r(2) = 0 then dl.addcomment vbcrlf & "Tag 50...FAIL!"
       r(3) = dl.waitforsequence("Tag 57 - Enc dukpt", 1, 1000)
-          if r(3) = 0 then dl.addcomment vbcrlf & "Tag 57...FAIL!"
+           if r(3) = 0 then r(3) = dl.waitforsequence("Tag 57 - Enc dukpt 1", 1, 1000)
+           if r(3) = 0 then dl.addcomment vbcrlf & "Tag 57...FAIL!"
       r(4) = dl.waitforsequence("Tag 5A - Enc dukpt", 1, 1000)
            if r(4) = 0 then dl.addcomment vbcrlf & "Tag 5A...FAIL!"
       r(5) = dl.waitforsequence("Tag 82", 1, 1000)
@@ -411,6 +412,7 @@ If result <> 0 Then
       r(36) = dl.waitforsequence("DFEF4C " & i, 1, 1000)
            if r(36) = 0 then dl.addcomment vbcrlf & "DFEF4C...FAIL!"
       r(37) = dl.waitforsequence("DFEF4D " & i, 1, 1000)
+           if r(37) = 0 then r(37) = dl.waitforsequence("DFEF4D " & i & " 1", 1, 300)
            if r(37) = 0 then dl.addcomment vbcrlf & "DFEF4D...FAIL!"
 
       countfail()

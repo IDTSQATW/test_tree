@@ -4,6 +4,7 @@ Objective: Under Quick Chip mode, set reader to Poll on demand mode (USB/ KBD to
 >>> Change to Poll On Demand
 CMD: 01 01 01
 EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Wait for the reader bootup ready --> Click OK.
 
 >>> Bluetooth change back to default.
 CMD: 77 81

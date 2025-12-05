@@ -94,7 +94,7 @@ DL.StartCommunication
 'Result reporting (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
 MasterResult = 0
-If ProjectName <> "" And Prompting(1) = "ON " Then
+If ProjectName <> "" And Prompting(1) = "ON" Then
    caseValid = 1
 Else
    caseValid =(Int((max-min+1)*Rnd+min))
@@ -367,7 +367,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "---  IDT"
-  DL.Pause 5000
+  DL.Pause 3000
   DL.SendSequence "03-00------Get Transaction Result"
   RxStatus = DL.WaitForSequence("get transaction result response - IDT", 1, 3000)
   If RxStatus = 0 then
@@ -378,7 +378,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "--- Discover"
-  DL.Pause 5000
+  DL.Pause 3000
   DL.SendSequence "03-00------Get Transaction Result"
   RxStatus = DL.WaitForSequence("get transaction result response - Discover", 1, 3000)
   If RxStatus = 0 then
@@ -389,7 +389,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "--- JIS1"
-  DL.Pause 5000
+  DL.Pause 3000
   DL.SendSequence "03-00------Get Transaction Result"
   RxStatus = DL.WaitForSequence("get transaction result response - JIS I", 1, 3000)
   If RxStatus = 0 then
@@ -400,7 +400,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "--- JIS2"
-  DL.Pause 5000
+  DL.Pause 3000
   DL.SendSequence "03-00------Get Transaction Result"
   RxStatus = DL.WaitForSequence("get transaction result response - JIS II", 1, 3000)
   If RxStatus = 0 then
@@ -411,7 +411,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "--- AAMVA"
-  DL.Pause 5000
+  DL.Pause 3000
   DL.SendSequence "03-00------Get Transaction Result"
   RxStatus = DL.WaitForSequence("get transaction result response - AAMVA", 1, 3000)
   If RxStatus = 0 then
@@ -422,7 +422,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "--- Gift card"
-  DL.Pause 5000
+  DL.Pause 3000
   DL.SendSequence "03-00------Get Transaction Result"
   RxStatus = DL.WaitForSequence("get transaction result response - Gift card", 1, 3000)
   If RxStatus = 0 then
@@ -433,7 +433,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=11)"
-  DL.Pause 5000
+  DL.Pause 3000
   DL.SendSequence "03-00------Get Transaction Result"
   RxStatus = DL.WaitForSequence("get transaction result response - Real card (PAN=11)", 1, 3000)
   If RxStatus = 0 then
@@ -444,7 +444,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=12)"
-  DL.Pause 5000
+  DL.Pause 3000
   DL.SendSequence "03-00------Get Transaction Result"
   RxStatus = DL.WaitForSequence("get transaction result response - Real card (PAN=12)", 1, 3000)
   If RxStatus = 0 then
@@ -455,7 +455,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=20)"
-  DL.Pause 5000
+  DL.Pause 3000
   DL.SendSequence "03-00------Get Transaction Result"
   RxStatus = DL.WaitForSequence("get transaction result response - Real card (PAN=20)", 1, 3000)
   If RxStatus = 0 then
@@ -466,7 +466,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "--- ISO4909"
-  DL.Pause 5000
+  DL.Pause 3000
   DL.SendSequence "03-00------Get Transaction Result"
   RxStatus = DL.WaitForSequence("get transaction result response - ISO4909", 1, 3000)
   If RxStatus = 0 then
@@ -481,9 +481,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "---  IDT"
-  DL.Pause 100
   DL.AddComment vbCrLf & "---  Please swipe card"
-  DL.Pause 3000
   RxStatus = DL.WaitForSequence("Burst mode response - IDT", 1, 3000)
   If RxStatus = 0 then
     DL.AddComment "IDT card does not return expected data"
@@ -493,9 +491,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "--- Discover"
-  DL.Pause 100
   DL.AddComment vbCrLf & "---  Please swipe card"
-  DL.Pause 3000
   RxStatus = DL.WaitForSequence("Burst mode response - Discover", 1, 3000)
   If RxStatus = 0 then
     DL.AddComment "Discover card does not return expected data"
@@ -505,9 +501,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "--- JIS1"
-  DL.Pause 100
   DL.AddComment vbCrLf & "---  Please swipe card"
-  DL.Pause 3000
   RxStatus = DL.WaitForSequence("Burst mode response - JIS I", 1, 3000)
   If RxStatus = 0 then
     DL.AddComment "JIS I card does not return expected data"
@@ -517,9 +511,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "--- JIS2"
-  DL.Pause 100
   DL.AddComment vbCrLf & "---  Please swipe card"
-  DL.Pause 3000
   RxStatus = DL.WaitForSequence("Burst mode response - JIS II", 1, 3000)
   If RxStatus = 0 then
     DL.AddComment "JIS II card does not return expected data"
@@ -529,9 +521,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "--- AAMVA"
-  DL.Pause 100
   DL.AddComment vbCrLf & "---  Please swipe card"
-  DL.Pause 3000
   RxStatus = DL.WaitForSequence("Burst mode response - AAMVA", 1, 3000)
   If RxStatus = 0 then
     DL.AddComment "AAMVA card does not return expected data"
@@ -541,9 +531,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "--- Gift card"
-  DL.Pause 100
   DL.AddComment vbCrLf & "---  Please swipe card"
-  DL.Pause 3000
   RxStatus = DL.WaitForSequence("Burst mode response - Gift card", 1, 3000)
   If RxStatus = 0 then
     DL.AddComment "Gift card does not return expected data"
@@ -553,9 +541,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=11)"
-  DL.Pause 100
   DL.AddComment vbCrLf & "---  Please swipe card"
-  DL.Pause 3000
   RxStatus = DL.WaitForSequence("Burst mode response - Real card (PAN=11)", 1, 3000)
   If RxStatus = 0 then
     DL.AddComment "Real card (PAN=11) does not return expected data"
@@ -565,9 +551,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=12)"
-  DL.Pause 100
   DL.AddComment vbCrLf & "---  Please swipe card"
-  DL.Pause 3000
   RxStatus = DL.WaitForSequence("Burst mode response - Real card (PAN=12)", 1, 3000)
   If RxStatus = 0 then
     DL.AddComment "Real card (PAN=12) does not return expected data"
@@ -577,9 +561,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "--- Real card (PAN=20)"
-  DL.Pause 100
   DL.AddComment vbCrLf & "---  Please swipe card"
-  DL.Pause 3000
   RxStatus = DL.WaitForSequence("Burst mode response - Real card (PAN=20)", 1, 3000)
   If RxStatus = 0 then
     DL.AddComment "Real card (PAN=20) does not return expected data"
@@ -589,9 +571,7 @@ end sub
  DL.ClearCommWindows
   dl.resetreceivecounter
   DL.AddComment vbCrLf & vbCrLf & "--- ISO4909"
-  DL.Pause 100
   DL.AddComment vbCrLf & "---  Please swipe card"
-  DL.Pause 3000
   RxStatus = DL.WaitForSequence("Burst mode response - ISO4909", 1, 3000)
   If RxStatus = 0 then
     DL.AddComment "ISO4909 card does not return expected data"

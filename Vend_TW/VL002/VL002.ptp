@@ -79,7 +79,7 @@ COMMENT
 RECEIVE
 1
 Swipe button
-56 69 56 4F 74 65 63 68 32 00 F0 00 00 03 00 01 10 5B CA 02 03 4B 0E
+56 69 56 4F 74 65 63 68 32 00 F0 00 00 03 00 01 10 5B CA
 -1
 1
 COMMENT 
@@ -90,6 +90,18 @@ COMMENT
 
 RECEIVE
 2
+Swipe button 1
+02 03 4B 0E
+-1
+1
+COMMENT 
+0
+1
+0
+0
+
+RECEIVE
+3
 Error Response
 56 69 56 4F 74 65 63 68 32 00 F0 02 00 00 95 CA
 -1
@@ -101,7 +113,7 @@ COMMENT "02" Error message should display for non-vend unit
 0
 
 RECEIVE
-3
+4
 lang ok resp
 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16
 -1

@@ -1,30 +1,32 @@
-Docklight Log File (HEX) - Started 2022/9/6 15:18:09.102 
+Docklight Log File (HEX) - Started 2025/12/5 10:33:46.263 
  TEST CASE: SN002
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 9600 baud...
+ POS operating on com90 @ 115200 baud...
  Set POS COM PORT - COMPLETE
 
  --- Set Serial Number
 
-2022/9/6 15:18:10.510 [TX] - 56 69 56 4F 74 65 63 68 32 00 12 02 00 0F 30 31 32 33 34 35 36 37 38 39 39 20 70 2F 4E E3 01 
-2022/9/6 15:18:10.517 [RX] - 56 69 56 4F 74 65 63 68 32 00 12 0B 00 00 62 D9  
+2025/12/5 10:33:47.579 [TX] - 56 69 56 4F 74 65 63 68 32 00 12 02 00 0F 30 31 32 33 34 35 36 37 38 39 39 20 70 2F 4E E3 01 
+2025/12/5 10:33:47.765 [RX] - 56 69 56 4F 74 65 63 68 32 00 12 00 00 00 92 28  SET SERIAL NUMBER Accepted
 
-2022/9/6 15:18:10.517 [RX] - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
-Serial Number already set.
+2025/12/5 10:33:47.765 [RX] - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
- This is a GR reader. Unit is already populated with SN #. Cannot write SN # to reader. Please clear SN # by reflashing FW or use other method and rerun test script.
+ --- Get serial number
 
- 
+2025/12/5 10:33:50.593 [TX] - 56 69 56 4F 74 65 63 68 32 00 12 01 00 00 18 A5 
+2025/12/5 10:33:50.603 [RX] - 56 69 56 4F 74 65 63 68 32 00 12 00 00 0F 30 31 32 33 34 35 36 37 38 39 39 20 70 2F 4E F1 A0  Serial Number already set, data follows: 
 
- Result = FAILED
+2025/12/5 10:33:50.603 [RX] - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+
+ Result = PASSED
  ---------- END OF TEST ----------
 
  
 
- MASTER RESULT = FAILED
+ MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2022/9/6 15:18:13.650 
+Docklight Log File (HEX) - Stopped 2025/12/5 10:33:52.209 
 

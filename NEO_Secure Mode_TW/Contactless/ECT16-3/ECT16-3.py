@@ -94,70 +94,38 @@ if (Result):
             enc57 = DL.GetTLV(tagFF8105,"57", 1)
             dec57 = DL.DecryptDLL(0,1, strKey, ksn, enc57)	
         
-            if lcdtype == 1:
             # Tag 5A
-                Result = DL.Check_StringAB(mask5A, '5413CCCCCCCC0010')
-                if Result == True and DL.Check_RXResponse(rx, "5A A1 08"):
-                    DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
-                else:
-                    DL.fails=DL.fails+1
-                    DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
+            Result = DL.Check_StringAB(mask5A, '5413CCCCCCCC0010')
+            if Result == True and DL.Check_RXResponse(rx, "5A A1 08"):
+                DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
+            else:
+                DL.fails=DL.fails+1
+                DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
                     
-                Result = DL.Check_StringAB(dec5A, '5A085413330089600010000000000000')
-                if Result == True and DL.Check_RXResponse(rx, "5A C1 10"):
-                    DL.SetWindowText("blue", "Tag 5A_Enc: PASS")
-                else:
-                    DL.fails=DL.fails+1
-                    DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
+            Result = DL.Check_StringAB(dec5A, '5A085413330089600010000000000000')
+            if Result == True and DL.Check_RXResponse(rx, "5A C1 10"):
+                DL.SetWindowText("blue", "Tag 5A_Enc: PASS")
+            else:
+                DL.fails=DL.fails+1
+                DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
                     
             # Tag 57
+            if platform == 0: #NEOI
+                Result = DL.Check_RXResponse(rx, '5413CCCCCCCC0010D1412201CCCCCCCCCC')
+            else: #NEOII and upward
                 Result = DL.Check_StringAB(mask57, '5413CCCCCCCC0010D1412CCCCCCCCCCCCC')
-                if Result == True and DL.Check_RXResponse(rx, "57 A1 11"):
-                    DL.SetWindowText("blue", "Tag 57_Mask: PASS")
-                else:
-                    DL.fails=DL.fails+1
-                    DL.SetWindowText("red", "Tag 57_Mask: FAIL")
+            if Result == True and DL.Check_RXResponse(rx, "57A111"):
+                DL.SetWindowText("blue", "Tag 57_Mask: PASS")
+            else:
+                DL.fails=DL.fails+1
+                DL.SetWindowText("red", "Tag 57_Mask: FAIL")
                     
-                Result = DL.Check_StringAB(dec57, '57115413330089600010D141220101234091720000000000')
-                if Result == True and DL.Check_RXResponse(rx, "57 C1 18"):
-                    DL.SetWindowText("blue", "Tag 57_Enc: PASS")
-                else:
-                    DL.fails=DL.fails+1
-                    DL.SetWindowText("red", "Tag 57_Enc: FAIL")
-            
-            if lcdtype == 0:
-            # Tag 5A
-                Result = DL.Check_StringAB(mask5A, '5413CCCCCCCC0010')
-                if Result == True and DL.Check_RXResponse(rx, "5A A1 08"):
-                    DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
-                else:
-                    DL.fails=DL.fails+1
-                    DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
-                    
-                Result = DL.Check_StringAB(dec5A, '5A085413330089600010000000000000')
-                if Result == True and DL.Check_RXResponse(rx, "5A C1 10"):
-                    DL.SetWindowText("blue", "Tag 5A_Enc: PASS")
-                else:
-                    DL.fails=DL.fails+1
-                    DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
-                    
-            # Tag 57
-                if platform == 0: #NEOI
-                    Result = DL.Check_RXResponse(rx, '5413CCCCCCCC0010D1412201CCCCCCCCCC')
-                else: #NEOII and upward
-                    Result = DL.Check_StringAB(mask57, '5413CCCCCCCC0010D1412CCCCCCCCCCCCC')
-                if Result == True and DL.Check_RXResponse(rx, "57A111"):
-                    DL.SetWindowText("blue", "Tag 57_Mask: PASS")
-                else:
-                    DL.fails=DL.fails+1
-                    DL.SetWindowText("red", "Tag 57_Mask: FAIL")
-                    
-                Result = DL.Check_StringAB(dec57, '57115413330089600010D141220101234091720000000000')
-                if Result == True and DL.Check_RXResponse(rx, "57 C1 18"):
-                    DL.SetWindowText("blue", "Tag 57_Enc: PASS")
-                else:
-                    DL.fails=DL.fails+1
-                    DL.SetWindowText("red", "Tag 57_Enc: FAIL")		
+            Result = DL.Check_StringAB(dec57, '57115413330089600010D141220101234091720000000000')
+            if Result == True and DL.Check_RXResponse(rx, "57 C1 18"):
+                DL.SetWindowText("blue", "Tag 57_Enc: PASS")
+            else:
+                DL.fails=DL.fails+1
+                DL.SetWindowText("red", "Tag 57_Enc: FAIL")		
                 
             # Tags 9F39/ FFEE01/ DFEE26	
             if DL.Check_RXResponse(rx, "9F39 01 07") == False: 

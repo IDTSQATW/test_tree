@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-25432
+53659
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -53,6 +53,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+readercheck = msgbox("Is this NEO1 reader?", vbyesno)
 msgbox "Place any CL card (can return 23 status code) on reader --> Click OK"
 
  For i = 1 to 10000
@@ -68,14 +69,21 @@ msgbox "Place any CL card (can return 23 status code) on reader --> Click OK"
       dl.addcomment vbcrlf
       DL.AddComment "--- 02-40 ACT_CL only"
       DL.SendSequence "02-40 ACT_CL only"
-      result = DL.WaitForSequence("02 23", 1, 10000)
+      if readercheck  = 6 then result = DL.WaitForSequence("02 00", 1, 10000)
+      if readercheck  = 7 then result = DL.WaitForSequence("02 23", 1, 10000)
       if result = 0 then DL.AddComment  vbcrlf & "***** FAIL *****"
       dl.pause 1000
       
       if result <> 0 then
          DL.AddComment vbcrlf & vbcrlf & "--- 05-01 Cancel"
          DL.SendSequence "05-01 Cancel"
-         dl.pause 800
+         dl.pause 1000
+         if readercheck = 6 then
+            DL.SendSequence "2C-01-----Pass Through ON"
+            dl.pause 200
+            DL.SendSequence "2C-01-----Pass Through OFF"
+            dl.pause 2000
+         end if
       end if
    End If
 

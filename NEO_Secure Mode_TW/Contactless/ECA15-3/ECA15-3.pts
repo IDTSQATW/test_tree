@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-43740
+16343
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -298,6 +298,7 @@ If result <> 0 Then
       r(2) = dl.waitforsequence("Tag 50", 1, 1000)
            if r(2) = 0 then dl.addcomment vbcrlf & "Tag 50...FAIL!"
       r(3) = dl.waitforsequence("Tag 57 - Enc dukpt", 1, 1000)
+           if r(3) = 0 then r(3) = dl.waitforsequence("Tag 57 - Enc dukpt 1", 1, 1000)
            if r(3) = 0 then dl.addcomment vbcrlf & "Tag 57 - Enc dukpt...FAIL!"
       r(4) = dl.waitforsequence("Tag 5A - Enc dukpt", 1, 1000)
            if r(4) = 0 then dl.addcomment vbcrlf & "Tag 5A - Enc dukpt...FAIL!"

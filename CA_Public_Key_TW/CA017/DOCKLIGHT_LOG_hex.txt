@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2025/11/14 15:58:24.357 
+Docklight Log File (HEX) - Started 2025/12/3 15:25:21.482 
  TEST CASE: CA017
 
  --- Set POS COM PORT Settings
@@ -6,18 +6,15 @@ Docklight Log File (HEX) - Started 2025/11/14 15:58:24.357
  POS operating on COM90 @ 115200 baud...
  Set POS COM PORT - COMPLETE
 
- --- Creation of Group Fails as Expected *** NEO2
+ --- Creation of Group Fails as Expected *** GR
 
-2025/11/14 15:58:25.663 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 02 00 14 DF EE 2D 01 01 9F 06 07 A0 21 43 71 13 10 10 DF EE 4C 01 01 BC 6F 
-2025/11/14 15:58:26.216 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16  Action Code "0D" Pass 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+2025/12/3 15:25:22.787 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 02 00 12 FF E4 01 01 9F 06 07 A0 21 43 71 13 10 10 FF E2 01 01 16 79 
+2025/12/3 15:25:22.803 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 0D 00 00 EC 47  Action Code "0D" Pass 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  Result = PASSED
  ---------- END OF TEST ----------
 
- 
-
- MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2025/11/14 15:58:27.342 
+Docklight Log File (HEX) - Stopped 2025/12/3 15:25:23.610 
 

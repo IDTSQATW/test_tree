@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-56706
+9582
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -1000,7 +1000,7 @@ If result <> 0 Then
 End If
 '------------------------------------------------------------
   if result = 1 Then
-     ans = msgbox("Do you See (Too Many Taps Trop dâ€™essais)", vbyesno)
+     ans = msgbox("Do you See (Too Many Taps Trop d?™essais)", vbyesno)
      if ans = 7 then
         count()
      end if
@@ -1409,6 +1409,23 @@ End If
 
   if result = 1 Then
      ans = msgbox("Do you See (ODA Fail)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 4C"
+  DL.SendSequence " Index 4C"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (Card Detect)", vbyesno)
      if ans = 7 then
         count()
      end if

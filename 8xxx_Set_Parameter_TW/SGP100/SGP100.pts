@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-46572
+21371
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -253,62 +253,62 @@ End If
 '------------------------------------------------------------
 sub oldtagcheck()
     if result <> 0 then
-       r(1) = dl.waitforsequence("FFF0" & i, 1, 200)
+       r(1) = dl.waitforsequence("FFF0" & i, 1, 100)
             if r(1) = 1 then dl.addcomment vbcrlf & "FFF0...FAIL!"
-       r(2) = dl.waitforsequence("FFF1" & i, 1, 200)
+       r(2) = dl.waitforsequence("FFF1" & i, 1, 100)
             if r(2) = 1 then dl.addcomment vbcrlf & "FFF1...FAIL!"
-       r(3) = dl.waitforsequence("FFF2" & i, 1, 200)
+       r(3) = dl.waitforsequence("FFF2" & i, 1, 100)
             if r(3) = 1 then dl.addcomment vbcrlf & "FFF2...FAIL!"
-       r(4) = dl.waitforsequence("FFF3" & i, 1, 200)
+       r(4) = dl.waitforsequence("FFF3" & i, 1, 100)
             if r(4) = 1 then dl.addcomment vbcrlf & "FFF3...FAIL!"
-       r(5) = dl.waitforsequence("FFF4" & i, 1, 200)
+       r(5) = dl.waitforsequence("FFF4" & i, 1, 100)
             if r(5) = 1 then dl.addcomment vbcrlf & "FFF4...FAIL!"
-       r(6) = dl.waitforsequence("FFF5" & i, 1, 200)
+       r(6) = dl.waitforsequence("FFF5" & i, 1, 100)
             if r(6) = 1 then dl.addcomment vbcrlf & "FFF5...FAIL!"
-       r(7) = dl.waitforsequence("FFF7" & i, 1, 200)
+       r(7) = dl.waitforsequence("FFF7" & i, 1, 100)
             if r(7) = 1 then dl.addcomment vbcrlf & "FFF7...FAIL!"
-       r(8) = dl.waitforsequence("FFF8" & i, 1, 200)
+       r(8) = dl.waitforsequence("FFF8" & i, 1, 100)
             if r(8) = 1 then dl.addcomment vbcrlf & "FFF8...FAIL!"
-       r(9) = dl.waitforsequence("FFF9" & i, 1, 200)
+       r(9) = dl.waitforsequence("FFF9" & i, 1, 100)
             if r(9) = 1 then dl.addcomment vbcrlf & "FFF9...FAIL!"
-       r(10) = dl.waitforsequence("FFFA" & i, 1, 200)
+       r(10) = dl.waitforsequence("FFFA" & i, 1, 100)
             if r(10) = 1 then dl.addcomment vbcrlf & "FFFA...FAIL!"
-       r(11) = dl.waitforsequence("FFFB" & i, 1, 200)
+       r(11) = dl.waitforsequence("FFFB" & i, 1, 100)
             if r(11) = 1 then dl.addcomment vbcrlf & "FFFB...FAIL!"
-       r(12) = dl.waitforsequence("FFFD" & i, 1, 200)
+       r(12) = dl.waitforsequence("FFFD" & i, 1, 100)
             if r(12) = 1 then dl.addcomment vbcrlf & "FFFD ...FAIL!"
-       r(13) = dl.waitforsequence("FFFE" & i, 1, 200)
+       r(13) = dl.waitforsequence("FFFE" & i, 1, 100)
             if r(13) = 1 then dl.addcomment vbcrlf & "FFFE...FAIL!"
-       r(14) = dl.waitforsequence("FFFF" & i, 1, 200)
+       r(14) = dl.waitforsequence("FFFF" & i, 1, 100)
             if r(14) = 1 then dl.addcomment vbcrlf & "FFFF...FAIL!"
-       r(15) = dl.waitforsequence("FFE0" & i, 1, 200)
+       r(15) = dl.waitforsequence("FFE0" & i, 1, 100)
             if r(15) = 1 then dl.addcomment vbcrlf & "FFE0...FAIL!"
-       r(16) = dl.waitforsequence("FFE1" & i, 1, 200)
+       r(16) = dl.waitforsequence("FFE1" & i, 1, 100)
             if r(16) = 1 then dl.addcomment vbcrlf & "FFE1...FAIL!"
-       r(17) = dl.waitforsequence("FFE2" & i, 1, 200)
+       r(17) = dl.waitforsequence("FFE2" & i, 1, 100)
             if r(17) = 1 then dl.addcomment vbcrlf & "FFE2...FAIL!"
-       r(18) = dl.waitforsequence("FFE3" & i, 1, 200)
+       r(18) = dl.waitforsequence("FFE3" & i, 1, 100)
             if r(18) = 1 then dl.addcomment vbcrlf & "FFE3...FAIL!"
-       r(19) = dl.waitforsequence("FFE4" & i, 1, 200)
+       r(19) = dl.waitforsequence("FFE4" & i, 1, 100)
             if r(19) = 1 then dl.addcomment vbcrlf & "FFE4...FAIL!"
-       r(20) = dl.waitforsequence("FFE5" & i, 1, 200)
+       r(20) = dl.waitforsequence("FFE5" & i, 1, 100)
             if r(20) = 1 then dl.addcomment vbcrlf & "FFE5...FAIL!"
-       r(21) = dl.waitforsequence("FFE6" & i, 1, 200)
+       r(21) = dl.waitforsequence("FFE6" & i, 1, 100)
             if r(21) = 1 then dl.addcomment vbcrlf & "FFE6...FAIL!"
-       r(22) = dl.waitforsequence("FFE8" & i, 1, 200)
+       r(22) = dl.waitforsequence("FFE8" & i, 1, 100)
             if r(22) = 1 then dl.addcomment vbcrlf & "FFE8...FAIL!"
-       r(23) = dl.waitforsequence("FFE9" & i, 1, 200)
+       r(23) = dl.waitforsequence("FFE9" & i, 1, 100)
             if r(23) = 1 then dl.addcomment vbcrlf & "FFE9...FAIL!"
-       r(24) = dl.waitforsequence("FFEA" & i, 1, 200)
+       r(24) = dl.waitforsequence("FFEA" & i, 1, 100)
             if r(24) = 1 then dl.addcomment vbcrlf & "FFEA...FAIL!"
-       r(25) = dl.waitforsequence("FFEE13" & i, 1, 200)
+       r(25) = dl.waitforsequence("FFEE13" & i, 1, 100)
             if r(25) = 1 then dl.addcomment vbcrlf & "FFEE13...FAIL!"
-       r(26) = dl.waitforsequence("FFEE14" & i, 1, 200)
+       r(26) = dl.waitforsequence("FFEE14" & i, 1, 100)
             if r(26) = 1 then dl.addcomment vbcrlf & "FFEE14...FAIL!"
-       r(27) = dl.waitforsequence("FFEE1F" & i, 1, 200)
+       r(27) = dl.waitforsequence("FFEE1F" & i, 1, 100)
             if r(27) = 1 then dl.addcomment vbcrlf & "FFEE1F...FAIL!"
-       r(28) = dl.waitforsequence("FFEE12" & i, 1, 200)
-            if r(28) = 1 then dl.addcomment vbcrlf & "FFEE12...FAIL!"
+       r(28) = dl.waitforsequence("FFEE12" & i, 1, 100)     
+          if r(28) = 1 then dl.addcomment vbcrlf & "FFEE12...FAIL!"
 
       countfail()
     end if
@@ -316,67 +316,67 @@ end sub
 
 sub newtagcheck()
     if result <> 0 then
-       r(1) = dl.waitforsequence("DFEE67" & i, 1, 200)
+       r(1) = dl.waitforsequence("DFEE67" & i, 1, 100)
             if r(1) = 1 then dl.addcomment vbcrlf & "DFEE67...FAIL!"
-       r(2) = dl.waitforsequence("DFEE34" & i, 1, 200)
+       r(2) = dl.waitforsequence("DFEE34" & i, 1, 100)
             if r(2) = 1 then dl.addcomment vbcrlf & "DFEE34...FAIL!"
        if neonew = 1 then
-          r(3) = dl.waitforsequence("FFF2" & i, 1, 200)
+          r(3) = dl.waitforsequence("FFF2" & i, 1, 100)
           if r(3) = 1 then dl.addcomment vbcrlf & "FFF2...FAIL!"
        elseif neoold = 1 then
-          r(3) = dl.waitforsequence("9F1E" & i, 1, 200)
+          r(3) = dl.waitforsequence("9F1E" & i, 1, 100)
           if r(3) = 1 then dl.addcomment vbcrlf & "9F1E...FAIL!"
        end if 
-       r(4) = dl.waitforsequence("DFEE44" & i, 1, 200)
+       r(4) = dl.waitforsequence("DFEE44" & i, 1, 100)
             if r(4) = 1 then dl.addcomment vbcrlf & "DFEE44...FAIL!"
-       r(5) = dl.waitforsequence("DFEE35" & i, 1, 200)
+       r(5) = dl.waitforsequence("DFEE35" & i, 1, 100)
             if r(5) = 1 then dl.addcomment vbcrlf & "DFEE35...FAIL!"
-       r(6) = dl.waitforsequence("DF8126" & i, 1, 200)
+       r(6) = dl.waitforsequence("DF8126" & i, 1, 100)
             if r(6) = 1 then dl.addcomment vbcrlf & "DF8126...FAIL!"
-       r(7) = dl.waitforsequence("DFEE7E" & i, 1, 200)
+       r(7) = dl.waitforsequence("DFEE7E" & i, 1, 100)
             if r(7) = 1 then dl.addcomment vbcrlf & "DFEE7E...FAIL!"
-       r(8) = dl.waitforsequence("DFEE37" & i, 1, 200)
+       r(8) = dl.waitforsequence("DFEE37" & i, 1, 100)
             if r(8) = 1 then dl.addcomment vbcrlf & "DFEE37...FAIL!"
-       r(9) = dl.waitforsequence("DFEE1C" & i, 1, 200)
+       r(9) = dl.waitforsequence("DFEE1C" & i, 1, 100)
             if r(9) = 1 then dl.addcomment vbcrlf & "DFEE1C...FAIL!"
-       r(10) = dl.waitforsequence("DFEF29" & i, 1, 200)
+       r(10) = dl.waitforsequence("DFEF29" & i, 1, 100)
             if r(10) = 1 then dl.addcomment vbcrlf & "DFEF29...FAIL!"
-       r(11) = dl.waitforsequence("DFEE38" & i, 1, 200)
+       r(11) = dl.waitforsequence("DFEE38" & i, 1, 100)
             if r(11) = 1 then dl.addcomment vbcrlf & "DFEE38...FAIL!"
-       r(12) = dl.waitforsequence("DF8122" & i, 1, 200)
+       r(12) = dl.waitforsequence("DF8122" & i, 1, 100)
             if r(12) = 1 then dl.addcomment vbcrlf & "DF8122...FAIL!"
-       r(13) = dl.waitforsequence("DF8120" & i, 1, 200)
+       r(13) = dl.waitforsequence("DF8120" & i, 1, 100)
             if r(13) = 1 then dl.addcomment vbcrlf & "DF8120...FAIL!"
-       r(14) = dl.waitforsequence("DF8121" & i, 1, 200)
+       r(14) = dl.waitforsequence("DF8121" & i, 1, 100)
             if r(14) = 1 then dl.addcomment vbcrlf & "DF8121...FAIL!"
-       r(15) = dl.waitforsequence("DFEE4A" & i, 1, 200)
+       r(15) = dl.waitforsequence("DFEE4A" & i, 1, 100)
             if r(15) = 1 then dl.addcomment vbcrlf & "DFEE4A...FAIL!"
-       r(16) = dl.waitforsequence("DFEE4B" & i, 1, 200)
+       r(16) = dl.waitforsequence("DFEE4B" & i, 1, 100)
             if r(16) = 1 then dl.addcomment vbcrlf & "DFEE4B...FAIL!"
-       r(17) = dl.waitforsequence("DFEE4C" & i, 1, 200)
+       r(17) = dl.waitforsequence("DFEE4C" & i, 1, 100)
             if r(17) = 1 then dl.addcomment vbcrlf & "DFEE4C...FAIL!"
-       r(18) = dl.waitforsequence("DFEE4D" & i, 1, 200)
+       r(18) = dl.waitforsequence("DFEE4D" & i, 1, 100)
             if r(18) = 1 then dl.addcomment vbcrlf & "DFEE4D...FAIL!"
-       r(19) = dl.waitforsequence("DFEE2D" & i, 1, 200)
+       r(19) = dl.waitforsequence("DFEE2D" & i, 1, 100)
             if r(19) = 1 then dl.addcomment vbcrlf & "DFEE2D...FAIL!"
-       r(20) = dl.waitforsequence("DFEE2E" & i, 1, 200)
+       r(20) = dl.waitforsequence("DFEE2E" & i, 1, 100)
             if r(20) = 1 then dl.addcomment vbcrlf & "DFEE2E...FAIL!"
-       r(21) = dl.waitforsequence("DFEE2F" & i, 1, 200)
+       r(21) = dl.waitforsequence("DFEE2F" & i, 1, 100)
             if r(21) = 1 then dl.addcomment vbcrlf & "DFEE2F...FAIL!"
-       r(22) = dl.waitforsequence("DFEE53" & i, 1, 200)
+       r(22) = dl.waitforsequence("DFEE53" & i, 1, 100)
             if r(22) = 1 then dl.addcomment vbcrlf & "DFEE53...FAIL!"
-       r(23) = dl.waitforsequence("DFEE54" & i, 1, 200)
+       r(23) = dl.waitforsequence("DFEE54" & i, 1, 100)
             if r(23) = 1 then dl.addcomment vbcrlf & "DFEE54...FAIL!"
-       r(24) = dl.waitforsequence("DFEE59" & i, 1, 200)
+       r(24) = dl.waitforsequence("DFEE59" & i, 1, 100)
             if r(24) = 1 then dl.addcomment vbcrlf & "DFEE59...FAIL!"
-       r(25) = dl.waitforsequence("DFEF17" & i, 1, 200)
+       r(25) = dl.waitforsequence("DFEF17" & i, 1, 100)
             if r(25) = 1 then dl.addcomment vbcrlf & "DFEF17...FAIL!"
-       r(26) = dl.waitforsequence("DFEF18" & i, 1, 200)
+       r(26) = dl.waitforsequence("DFEF18" & i, 1, 100)
             if r(26) = 1 then dl.addcomment vbcrlf & "DFEF18...FAIL!"
-       r(27) = dl.waitforsequence("DFEE02" & i, 1, 200)
+       r(27) = dl.waitforsequence("DFEE02" & i, 1, 100)
             if r(27) = 1 then dl.addcomment vbcrlf & "DFEE02...FAIL!"
-       r(28) = dl.waitforsequence("DFEE12" & i, 1, 200)
-            if r(28) = 1 then dl.addcomment vbcrlf & "DFEE12...FAIL!"
+       r(28) = dl.waitforsequence("DFEE12" & i, 1, 100) 
+          if r(28) = 1 then dl.addcomment vbcrlf & "DFEE12...FAIL!"
 
       countfail()
     end if
@@ -398,14 +398,18 @@ if result <> 0 then
    dl.addcomment vbcrlf
    DL.AddComment "--- 03-02"
    DL.SendSequence "03-02"
-   dl.pause 2000
+   dl.pause 1000
    dl.addcomment vbcrlf & "Waiting..."
-   SN = DL.WaitForSequence("FFF2 null data", 1, 200)
-   if SN = 0 then SN = DL.WaitForSequence("9F1E null data", 1, 200)
-   if SN = 1 then 
-              countf = countf + 1
-      dl.addcomment vbcrlf & "SN = NULL...FAIL!"
-   end if
+   oldtagcheck()
+end if
+
+if result <> 0 then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Get Groups 1 (03-06) "
+   DL.SendSequence "Get Groups 1 (03-06) "
+   dl.pause 1000
+   dl.addcomment vbcrlf & "Waiting..."
    oldtagcheck()
 end if
 
@@ -418,6 +422,12 @@ if result <> 0 then
    DL.SendSequence "02-01"
    dl.pause 2000
    dl.addcomment vbcrlf & "Waiting..."
+   SN = DL.WaitForSequence("FFF2 null data", 1, 200)
+   if SN = 0 then SN = DL.WaitForSequence("9F1E null data", 1, 200)
+   if SN = 1 then 
+              countf = countf + 1
+      dl.addcomment vbcrlf & "SN = NULL...FAIL!"
+   end if
    oldtagcheck()
 end if
 
@@ -473,6 +483,8 @@ if result <> 0 then
    DL.SendSequence "02-40"
    dl.pause 2000
    dl.addcomment vbcrlf & "Waiting..."
+       DL.SendSequence "05-01"
+   dl.pause 1000
    oldtagcheck()
 end if
 
@@ -484,6 +496,12 @@ if result <> 0 then
    DL.SendSequence "60-10"
    dl.pause 3000
    dl.addcomment vbcrlf & "Waiting..."
+   SN = DL.WaitForSequence("FFF2 null data", 1, 200)
+   if SN = 0 then SN = DL.WaitForSequence("9F1E null data", 1, 200)
+   if SN = 1 then 
+      countf = countf + 1
+      dl.addcomment vbcrlf & "SN = NULL...FAIL!"
+   end if
    oldtagcheck()
 
    DL.ResetReceiveCounter
@@ -492,6 +510,12 @@ if result <> 0 then
    DL.SendSequence "60-11"
    dl.pause 2000
    dl.addcomment vbcrlf & "Waiting..."
+   SN = DL.WaitForSequence("FFF2 null data", 1, 200)
+   if SN = 0 then SN = DL.WaitForSequence("9F1E null data", 1, 200)
+   if SN = 1 then 
+      countf = countf + 1
+      dl.addcomment vbcrlf & "SN = NULL...FAIL!"
+   end if
    oldtagcheck()
 
    DL.ResetReceiveCounter
@@ -500,6 +524,12 @@ if result <> 0 then
    DL.SendSequence "60-12"
    dl.pause 2000
    dl.addcomment vbcrlf & "Waiting..."
+   SN = DL.WaitForSequence("FFF2 null data", 1, 200)
+   if SN = 0 then SN = DL.WaitForSequence("9F1E null data", 1, 200)
+   if SN = 1 then 
+      countf = countf + 1
+      dl.addcomment vbcrlf & "SN = NULL...FAIL!"
+   end if
    oldtagcheck()
    msgbox "Remove card --> Click OK", vbokonly
 end if
@@ -531,14 +561,18 @@ if result <> 0 then
    dl.addcomment vbcrlf
    DL.AddComment "--- 03-02"
    DL.SendSequence "03-02"
-   dl.pause 2000
+   dl.pause 1000
    dl.addcomment vbcrlf & "Waiting..."
-   SN = DL.WaitForSequence("FFF2 null data", 1, 200)
-   if SN = 0 then SN = DL.WaitForSequence("9F1E null data", 1, 200)
-   if SN = 1 then 
-      countf = countf + 1
-      dl.addcomment vbcrlf & "SN = NULL...FAIL!"
-   end if
+   newtagcheck()
+end if
+
+if result <> 0 then
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Get Groups 1 (03-06) "
+   DL.SendSequence "Get Groups 1 (03-06) "
+   dl.pause 1000
+   dl.addcomment vbcrlf & "Waiting..."
    newtagcheck()
 end if
 
@@ -551,6 +585,12 @@ if result <> 0 then
    DL.SendSequence "02-01"
    dl.pause 2000
    dl.addcomment vbcrlf & "Waiting..."
+   SN = DL.WaitForSequence("FFF2 null data", 1, 200)
+   if SN = 0 then SN = DL.WaitForSequence("9F1E null data", 1, 200)
+   if SN = 1 then 
+              countf = countf + 1
+      dl.addcomment vbcrlf & "SN = NULL...FAIL!"
+   end if
    newtagcheck()
 end if
 
@@ -606,6 +646,8 @@ if result <> 0 then
    DL.SendSequence "02-40"
    dl.pause 2000
    dl.addcomment vbcrlf & "Waiting..."
+   DL.SendSequence "05-01"
+   dl.pause 1000
    newtagcheck()
 end if
 
@@ -617,6 +659,12 @@ if result <> 0 then
    DL.SendSequence "60-10"
    dl.pause 3000
    dl.addcomment vbcrlf & "Waiting..."
+   SN = DL.WaitForSequence("FFF2 null data", 1, 200)
+   if SN = 0 then SN = DL.WaitForSequence("9F1E null data", 1, 200)
+   if SN = 1 then 
+      countf = countf + 1
+      dl.addcomment vbcrlf & "SN = NULL...FAIL!"
+   end if
    newtagcheck()
 
    DL.ResetReceiveCounter
@@ -625,6 +673,12 @@ if result <> 0 then
    DL.SendSequence "60-11"
    dl.pause 2000
    dl.addcomment vbcrlf & "Waiting..."
+   SN = DL.WaitForSequence("FFF2 null data", 1, 200)
+   if SN = 0 then SN = DL.WaitForSequence("9F1E null data", 1, 200)
+   if SN = 1 then 
+      countf = countf + 1
+      dl.addcomment vbcrlf & "SN = NULL...FAIL!"
+   end if
    newtagcheck()
 
    DL.ResetReceiveCounter
@@ -633,6 +687,12 @@ if result <> 0 then
    DL.SendSequence "60-12"
    dl.pause 2000
    dl.addcomment vbcrlf & "Waiting..."
+   SN = DL.WaitForSequence("FFF2 null data", 1, 200)
+   if SN = 0 then SN = DL.WaitForSequence("9F1E null data", 1, 200)
+   if SN = 1 then 
+      countf = countf + 1
+      dl.addcomment vbcrlf & "SN = NULL...FAIL!"
+   end if
    newtagcheck()
    msgbox "Remove card --> Click OK", vbokonly
 end if

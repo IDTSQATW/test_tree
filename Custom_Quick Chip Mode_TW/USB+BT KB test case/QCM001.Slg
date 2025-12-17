@@ -1,69 +1,49 @@
 
-13:55:31: If Issue ?
-Path_File:C:\test_tree\Custom_Quick Chip Mode_TW\USB+BT KB test case\QCM001.txt
-Running Info>>
-[Issue Count: 1]
-[Wrong Items]
->>>Error item ( 27 ).
->>> 03-02
+10:11:10: 
+>>[Stop Scripts]>>
 
 
-13:55:31: >>[Do Scripts]>>
+10:11:10: 
+>>[Stop Scripts]>>
+
+
+10:11:10: >>[Do Scripts]>>
 
 Objective: power off/ on reader, after send cmd, reader sent bluetooth signal data all the time
 --------------------
 >>> Change to Poll On Demand
-Pack L = 17-5669564F74656368320001000000125300
 CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
-OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
-ASCII: Otech2    
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 
+ASCII: Otech2   
 MESSAGECK: Wait for the reader bootup ready --> Click OK.
 User Judgment Pass
 
 >>> Set transaction interface = ALL
-Pack L = 17-5669564F74656368320004000000AE1600
 CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EF 37 01 07 9B 0F 
-OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
-ASCII: Otech2    
+OUT: NULL
+Error! >>>> Expect OUT:EXR: 04 00 00 00
 >>> Change to Quick Chip Mode
-Pack L = 17-5669564F74656368320001000000125300
 CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
-OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
-ASCII: Otech2    
+OUT: NULL
+Error! >>>> Expect OUT:EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
 MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
-User Judgment Pass
+>>> Change to Quick Chip Mode
+Error! >>>> User Judgment Fail:MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
 
 --------------------
 >>> Check USB connection type
 MESSAGE: Disconnect w/ PC --> reset reader --> reconnect w/ PC --> Click OK
 ----------------------------------------
 >>> Ping
-Pack L = 17-5669564F74656368320018000000FA8300
-CMD: 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 CD B3 
-OUT: 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83 
-ASCII: Otech2    
-MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
-User Judgment Pass
+>>[Stop Scripts]>>
 
-SWIPEKB: Click OK --> Watch/ check screen for 5 min --> Click OK
-MESSAGECK: Reader did NOT send strange data (ex. Bluetooth signal data, error code, ...etc.)
-User Judgment Pass
+>>[Stop Scripts]>>
 
-MESSAGECK: Reader connect w/ PC via USB cable and then click OK
-User Judgment Pass
-
-----------------------------------------
->>> 03-02
-CMD: 56 69 56 4F 74 65 63 68 32 00 03 02 00 00 91 5B 
+CMD:
 OUT: NULL
-Error! >>>> Expect OUT:EXR: 03 00
-MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
-User Judgment Pass
 
-SWIPEKB: Click OK --> Watch/ check screen for 5 min --> Click OK
-MESSAGECK: Reader did NOT send strange data (ex. Bluetooth signal data, error code, ...etc.)
-User Judgment Pass
-
-MESSAGECK: Reader connect w/ PC via USB cable and then click OK
-User Judgment Pass
+10:18:27: [Load Script File]
+Path_File:C:\test_tree\Custom_Quick Chip Mode_TW\USB+BT KB test case\QCM001.txt
+Items: 32
+Load Case Succeed!
 

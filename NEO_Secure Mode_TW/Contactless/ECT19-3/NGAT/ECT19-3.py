@@ -19,19 +19,40 @@ if lcdtype == 1:
 else:
 	DL.SetWindowText("Green", "*** The project has NO LCD ***")
     
-# Encryption Type -- TransArmor TDES
-if (Result):
-	RetOfStep = DL.SendCommand('C7-A2 TDES DUKPT manage_TransArmor TDES, data key')
-	time.sleep(1)
+# Check platform
+pf = DL.ShowMessageBox("", "Is the project platform NEOI(GR)?", 0)
+if pf == 1:
+	DL.SetWindowText("Green", "*** The project platform is NEOI(GR) ***")
+else:
+	DL.SetWindowText("Green", "*** The project platform is not NEOI(GR) ***")
+    
+if pf != 1:
+    # Encryption Type -- TransArmor TDES
+    if (Result):
+        RetOfStep = DL.SendCommand('C7-A2 TDES DUKPT manage_TransArmor TDES, data key')
+        time.sleep(1)
 
-# Check data encryption TYPE is TDES: TransArmor TDES	
-if (Result):
-	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
-	if (RetOfStep):
-		Result = DL.Check_RXResponse("C7 00 00 06 00 02 00 00 00 00")
-		if Result == False:
-			DL.SetWindowText("red", "Please change TDES DUKPT Output Mode as TransArmor TDES first...")
-		
+    # Check data encryption TYPE is TDES: TransArmor TDES	
+    if (Result):
+        RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+        if (RetOfStep):
+            Result = DL.Check_RXResponse("C7 00 00 06 00 02 00 00 00 00")
+            if Result == False:
+                DL.SetWindowText("red", "Please change TDES DUKPT Output Mode as TransArmor TDES first...")
+else:
+    # 2-use TransArmor TDES to encrypt (C7-32)
+    if (Result):
+        RetOfStep = DL.SendCommand('2-use TransArmor TDES to encrypt (C7-32)')
+        time.sleep(1)
+
+    # Encryption Type -- TransArmor TDES	
+    if (Result):
+        RetOfStep = DL.SendCommand('Encryption Type -- TransArmor TDES')
+        if (RetOfStep):
+            Result = DL.Check_RXResponse("C7 00 00 01 02")
+            if Result == False:
+                DL.SetWindowText("red", "Please change TDES DUKPT Output Mode as TransArmor TDES first...")
+
 # Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
@@ -44,13 +65,23 @@ if (Result):
         RetOfStep = DL.SendCommand('Activate Transaction w/ LCD')
         rx = 0
     if lcdtype == 0:
-        RetOfStep = DL.SendCommand('Activate Transaction w/o LCD')	
-        rx = 5
+        if pf != 1: #non-NEOI/GR
+            RetOfStep = DL.SendCommand('Activate Transaction w/o LCD')	
+            rx = 5
+        if pf == 1: #NEOI/GR
+            RetOfStep = DL.SendCommand('Activate Transaction (NEOI/ GR)')	
+            rx = 0
     if (RetOfStep):
-        Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E5 ** DF EE 12")
+        if pf != 1: #non-NEOI/GR
+            Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E5 ** DF EE 12")
+        if pf == 1: #NEOI/GR
+            Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** F5 ** FF EE 12")
         if (Result):
             alldata = DL.Get_RXResponse(rx)
-            ksn = DL.GetTLV(alldata,"DFEE12")	
+            if pf != 1: #non-NEOI/GR
+                ksn = DL.GetTLV(alldata,"DFEE12")	
+            if pf == 1: #NEOI/GR
+                ksn = DL.GetTLV(alldata,"FFEE12")	
             
             if DL.GetTLV(alldata,"57", 0) == "":
                 alldata = DL.GetTLV(alldata,"FF8105", 0)

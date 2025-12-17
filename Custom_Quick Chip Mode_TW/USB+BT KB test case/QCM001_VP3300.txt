@@ -1,0 +1,37 @@
+Objective: power off/ on reader, after send cmd, reader sent bluetooth signal data all the time
+
+--------------------
+>>> Set transaction interface = ALL
+CMD: 04 00 DF EF 37 01 07
+EXR: 04 00 00 00
+
+>>> Change to Quick Chip Mode
+CMD: 01 01 02
+EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+
+--------------------
+>>> Check USB connection type
+MESSAGE: Disconnect w/ PC --> reset reader --> reconnect w/ PC --> Click OK
+
+----------------------------------------
+>>> Ping
+CMD: 18 01
+EXR: 18 00
+MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+
+SWIPEKB: Click OK --> Watch/ check screen for 5 min --> Click OK
+
+MESSAGECK: Reader did NOT send strange data (ex. Bluetooth signal data, error code, ...etc.)
+
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+----------------------------------------
+>>> 03-02
+CMD: 03 02
+EXR: 03 00
+MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+
+SWIPEKB: Click OK --> Watch/ check screen for 5 min --> Click OK
+
+MESSAGECK: Reader did NOT send strange data (ex. Bluetooth signal data, error code, ...etc.)
+
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK

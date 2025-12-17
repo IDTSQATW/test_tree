@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-51195
+64702
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -321,7 +321,7 @@ If result <> 0 Then
    next
 End If
 
-if msrcheck = 6 then
+if result <> 0 and msrcheck = 6 then
 dl.resetreceivecounter
 dl.addcomment vbcrlf
 msgbox "Click OK --> Swipe card", vbokonly

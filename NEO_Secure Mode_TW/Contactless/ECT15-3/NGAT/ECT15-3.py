@@ -47,8 +47,18 @@ if (Result):
             alldata = DL.GetTLV(DL.Get_RXResponse(rx),"FF8105")
         if lcdtype == 0:
             rx = 5
+            Result = DL.Check_RXResponse(0, "56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 82 54 1C 02 00 00 60 7A 35")
+            if (Result):
+                Result = DL.Check_RXResponse(1, "56 69 56 4F 74 65 63 68 32 00 61 01 00 1A 04 00 00 02 00 45 4E 0D 00 84 01 1C 04 24 1C 04 31 30 2E 30 30 1C 02 00 F4 21 2B DF")
+                if (Result):
+                    Result = DL.Check_RXResponse(2, "56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 82 1A 1C 02 00 F4 21 29 58")
+                    if (Result):
+                        Result = DL.Check_RXResponse(3, "56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 82 68 1C 02 00 F4 21 F5 96")
+                        if (Result):
+                            Result = DL.Check_RXResponse(4, "56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 82 15 1C 02 00 F4 21 2A 9D")
             alldata = DL.GetTLV(DL.Get_RXResponse(rx),"FF8105")
-        Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E1 ** DF EE 12")
+        if (Result):
+            Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E1 ** DF EE 12")
         if (Result):
             ksn = DL.GetTLV(DL.Get_RXResponse(rx),"DFEE12")	
             

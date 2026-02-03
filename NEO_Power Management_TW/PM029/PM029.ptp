@@ -34,7 +34,7 @@ SEND
 F0-02 Get Battery Level = w/ data 00 Coin Battery Voltage Value
 56 69 56 4F 74 65 63 68 32 00 F0 02 00 01 00 2D 2A
 0
-5
+1
 
 SEND
 2

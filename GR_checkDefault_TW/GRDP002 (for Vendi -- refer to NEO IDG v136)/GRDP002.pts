@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-32739
+56615
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -94,7 +94,7 @@ DL.StartCommunication
 'Result reporting (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
 MasterResult = 0
-If ProjectName <> "" And Prompting(1) = "ON " Then
+If ProjectName <> "" And Prompting(1) = "ON" Then
    caseValid = 1
 Else
    caseValid =(Int((max-min+1)*Rnd+min))
@@ -1594,6 +1594,21 @@ notify = msgbox ("Must load F/W via J-Link before running this case. Click OK to
           errorCounter = errorCounter + 1
        else
           dl.addcomment vbcrlf & "Interac AID: PASS"
+       End If
+'-----------------------------------------------------------------------------
+' check issue #CS-6661
+'-----------------------------------------------------------------------------
+
+  	DL.ResetReceiveCounter
+       dl.addcomment vbcrlf
+  	DL.AddComment "--- Get MSR Secure Parameters (C7-39)"
+  	DL.SendSequence "Get MSR Secure Parameters (C7-39)"
+       result = DL.WaitForSequence ("C7-39 rx", 1,300)
+       If result = 0 Then
+          DL.AddComment vbCrLf & "***C7-39 rx is missing match."
+          errorCounter = errorCounter + 1
+       else
+          dl.addcomment vbcrlf & "C7-39 rx: PASS"
        End If
 
 '------------------------------------------------------------

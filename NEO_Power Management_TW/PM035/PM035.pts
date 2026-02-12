@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-23697
+23518
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -130,10 +130,12 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+' Objective: to test ALL models that have battery.
+
 '1) Set reader standby time = 30 sec
 '2) Set reader sleep time = close
-'3) Reader connected w/ SDK via BT, 5 transactions per day (card: MasterCard MC21)
-'4) Reader BT disconnected, stay in standby mode if not in used
+'3) Reader connected w/ SDK via BT/ Lightning-Male, 5 transactions per day (card: MasterCard MC21)
+'4) Reader disconnected w/ phone, stay in standby mode if not in used
 '5) pass criteria: Last for 7 days
 '------------------------------------------------------------
 DL.AddComment vbCrLf

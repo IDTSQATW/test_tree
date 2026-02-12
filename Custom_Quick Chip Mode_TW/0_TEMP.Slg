@@ -30,3 +30,9 @@ Pack L = 17-5669564F74656368320001000000125300
 CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
 OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
 ASCII: Otech2    
+
+16:27:01: [Load Script File]
+Path_File:C:\test_tree\Custom_Quick Chip Mode_TW\0_TEMP.txt
+Items: 15
+Load Case Succeed!
+

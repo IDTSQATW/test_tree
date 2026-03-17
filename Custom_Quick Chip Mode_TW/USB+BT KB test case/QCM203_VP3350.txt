@@ -2,9 +2,9 @@ Objective: VP3350 model D, USB-Female test w/ 3 interfaces.
 
 1) Switch to auto transaction mode.
 
-2) Model D reader USB-Female connect w/ PC.
+2) Model D reader USB-Female connect w/ PC, Android phone, iPhone.
 
-3) PC launch note APP.
+3) PC/ phone launch note APP.
 
 4) Run 3 interfaces transaction.
 => can output data successfully.

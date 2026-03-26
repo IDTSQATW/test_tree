@@ -66,7 +66,7 @@ if (Result):
 				rx = 3	
 				Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 00 ** E8 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 37 00 28 69 86 B6")
 			if readertype == 0:     #NEOI project
-				rx = 3	   
+				rx = 0	   
 				Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 00 ** C8 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 37 00 28 69 86 B6")
 		sResult=DL.Get_RXResponse(rx)
 		if Result == True and sResult!=None and sResult!="":

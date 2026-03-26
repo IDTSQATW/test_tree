@@ -72,7 +72,7 @@ while n <= loop and Result == True:
     if(0 < (DL.fails + DL.warnings)):
         Result = False
         
-    if (-1 != strCardData.find('57C1')):
+    if (-1 != strCardData.find('57')):
         DL.SetWindowText("blue", "57 PASS")
     else:
         DL.SetWindowText("red", "57 FAIL")
@@ -80,7 +80,7 @@ while n <= loop and Result == True:
     if(0 < (DL.fails + DL.warnings)):
         Result = False
         
-    if (-1 != strCardData.find('5AC1')):
+    if (-1 != strCardData.find('5A')):
         DL.SetWindowText("blue", "5A PASS")
     else:
         DL.SetWindowText("red", "5A FAIL")

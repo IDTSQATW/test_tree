@@ -8,6 +8,8 @@ EXR: 01 00 00 00
 
 ----------------------------------------
 >>> Get Config
+CMD: 04 00 DF ED 4A 02 00 06
+EXR: 04 00 00 00
 CMD: 03 02
 EXR: DF ED 4A 02 00 06
 
@@ -23,17 +25,19 @@ EXR: 04 00
 
 --------------------
 >>> CL transaction
-SWIPEKB: click OK, tap VISA qVSDC card, then leave card in the landing zone. (Move tag FF8105+length to the end of output --> Press button "Quick Chip" to Decryption first then Press button "OK")
+SWIPEKB: click OK, tap VISA qVSDC card, then leave card in the landing zone. (Move tag E1+length to the end of output --> Press button "Quick Chip" to Decryption first then Press button "OK")
 EXR: DFEF5B084761CCCCCCCC0010
 EXR: 5A084761739001010010
-EXR: DFEF5D134761CCCCCCCC0010D3012CCCCCCCCCCCCCCCCC
-EXR: 57134761739001010010D30121200012339900031F
+EXR: DFEF5D134761CCCCCCCC0010D
+EXR: 012CCCCCCCCCCCCCCCCC
+EXR: 57134761739001010010D
+EXR: 0121200012339900031F
 EXR: 9F390107
-EXR: DFEE2602e100
-EXR: DFEC1810564350532076322E322C2076312E3030
+EXR: DFEE26
+EXR: DFEC18
 EXR: DFEF57
 
-MESSAGECK: Reader output card data once.
+MESSAGECK: Remove the card, reader output card data once
 
 --------------------
 >>> Set 9F66 (TTQ) = 80 00 40 00

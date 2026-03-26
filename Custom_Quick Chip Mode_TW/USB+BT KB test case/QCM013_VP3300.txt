@@ -52,7 +52,7 @@ EXR: 9F4F
 EXR: 9F53
 EXR: 9F5B
 EXR: DFEF57
-EXR: DFEC181D454D5620436F6D6D6F6E2047656E2033204C322056312E33302E303339
+EXR: DFEC180956312e31302e303337
 
 >>> Fallback to CT, then Fallback to MSR
 SWIPEKB: Click OK -> Swipe Discover card ->  LED 3 was turned ON (steady status) -> Insert IDT test card 3 times -> LED 3 was turned ON (flash status) -> swipe Discover card.

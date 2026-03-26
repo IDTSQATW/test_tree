@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-16936
+50770
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -152,7 +152,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-if readerType = "NEO2" then
+platform = msgbox("Is this NEO1 project?", vbyesno)
 If result <> 0 Then
    DL.ResetReceiveCounter
    DL.AddComment "--- Poll Mode"
@@ -164,17 +164,21 @@ If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Set Configuration"
-   DL.SendSequence "Set Configuration"
+   if platform = 6 then DL.SendSequence "Set Configuration (NEO1)"
+   if platform = 7 then DL.SendSequence "Set Configuration"
    result = DL.WaitForSequence("04 00", 1, 3000)
 End If
 
 If result <> 0 Then
-   for i = 1 to 15
+   if platform = 6 then n = 13
+   if platform = 7 then n = 15
+   for i = 1 to n
        If result <> 0 Then
           DL.ResetReceiveCounter
           dl.addcomment vbcrlf
           DL.AddComment "--- Set Configurable Group " & i
-          DL.SendSequence "Set Configurable Group " & i
+          if platform = 6 then DL.SendSequence "Set Configurable Group " & i & " (NEO1)"
+          if platform = 7 then DL.SendSequence "Set Configurable Group " & i
           result = DL.WaitForSequence("04 00", 1, 3000)
        end if
    next
@@ -186,7 +190,8 @@ If result <> 0 Then
           DL.ResetReceiveCounter
           dl.addcomment vbcrlf
           DL.AddComment "--- Set Configurable AID " & i
-          DL.SendSequence "Set Configurable AID " & i
+          if platform = 6 then DL.SendSequence "Set Configurable AID " & i & " (NEO1)"
+          if platform = 7 then DL.SendSequence "Set Configurable AID " & i
           result = DL.WaitForSequence("04 00", 1, 3000)
        end if
    next
@@ -200,10 +205,6 @@ If result <> 0 Then
    DL.SendSequence "02-40"
    result = DL.WaitForSequence("02 23", 1, 3500)
 End If
-else
-   dl.addcomment vbcrlf
-   DL.AddComment "*** This is NEO2/3 test case...NEO1 may need to modify some tags (uncompleted)."
-end if
 '------------------------------------------------
 dl.addcomment vbcrlf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf

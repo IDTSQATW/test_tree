@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-6506
+1314
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -161,6 +161,7 @@ If result <> 0 Then
    DL.AddComment "--- CS-5644"
    msgbox "iPhone launch APP 'Wallet' --> choose VISA card --> click OK and then tap iPhone w/o passcode or face ID directly", vbokonly
    DL.SendSequence "CS-5644"
+   dl.pause 1000
    result = DL.WaitForSequence("02 00", 1, 3000)
    ReverseResult(result)
    if result <> 0 then

@@ -1,22 +1,25 @@
 
-16:10:13: If Issue ?
+15:59:13: If Issue ?
 Pass Test
 [Issue Count: 0]
 
-16:10:13: >>[Do Scripts]>>
+15:59:13: >>[Do Scripts]>>
 
 Objective: Under Quick Chip mode, set reader to Poll on demand mode (USB/ KBD to USB/ HID)
 --------------------
 >>> Change to Poll On Demand
+Pack L = 17-5669564F74656368320001000000125300
 CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
-OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 
-ASCII: Otech2   
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
 MESSAGECK: Wait for the reader bootup ready --> Click OK.
 User Judgment Pass
 
 >>> Bluetooth change back to default.
+Pack L = 17-5669564F746563683200772B0000018800
 CMD: 56 69 56 4F 74 65 63 68 32 00 77 81 00 00 7B D5 
-OUT: NULL
+OUT: 56 69 56 4F 74 65 63 68 32 00 77 2B 00 00 01 88 
+ASCII: Otech2 w+ 
 --------------------
 >>> Check USB connection type
 MESSAGECK: 1) Check USB connection type = HID; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again

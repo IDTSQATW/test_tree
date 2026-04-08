@@ -97,6 +97,13 @@ while n <= loop and Result == True:
 
     n = n + 1
     if n <= loop and Result == True:
+        time.sleep(2)
+        DL.SendIOCommand("IDG", "05 01", 3000, 1) 
+        time.sleep(1)
+        DL.SendIOCommand("IDG", "05 01", 3000, 1) 
+        time.sleep(1)
+        DL.SendIOCommand("IDG", "05 01", 3000, 1) 
+        time.sleep(1)
         DL.SendIOCommand("IDG", "05 01", 3000, 1) 
         time.sleep(1)
 #-----------------------------------------------------------------

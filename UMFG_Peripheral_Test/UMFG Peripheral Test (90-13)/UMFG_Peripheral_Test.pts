@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-46555
+64442
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -8,8 +8,6 @@ DL_SCRIPTVERSION
 '------------------------------------------------------------
 Dim ProjectName
 ProjectName = "UMFG_Peripheral_Test" ' !!!!! EDIT THIS !!!!!
-' Modify from SGP039
-' [20200410] for VP6300, modify by NEO 2 IDG Supplement for VP6300 STD v1.0.9 Draft
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -160,7 +158,7 @@ end if
 
 '------------------------------------------------------------
 if result <> 0 then
-choice = inputbox ("Please select test item (1-9):" & vbCrLf & vbCrLf & _
+choice = inputbox ("Please select test item (0-11):" & vbCrLf & vbCrLf & _
                    "1. LCD" & vbCrLf & _
                    "2. RFLED" & vbCrLf & _
                    "3. flashled RFLED" & vbCrLf & _
@@ -169,16 +167,18 @@ choice = inputbox ("Please select test item (1-9):" & vbCrLf & vbCrLf & _
                    "6. TM4 Front LED" & vbCrLf & _
                    "7. TM4 Diagnose LED" & vbCrLf & _
                    "8. All peripherals" & vbCrLf & _
-                   "9. All Test item 1~8" & vbCrLf & _
+                   "9. LCD msg" & vbCrLf & _
+                   "10. Flash Size" & vbCrLf & _
+                   "11. All Test item 1~10" & vbCrLf & _
                    "0. Exit", "inputbox", 0)
 
 If choice = "0" Then 
      DL.AddComment "Exit test"
     startItem = 0
     endItem = 0
-ElseIf choice = "9" Then
+ElseIf choice = "11" Then
     startItem = 1
-    endItem = 8
+    endItem = 10
 Else
     startItem = choice
     endItem = choice
@@ -187,6 +187,7 @@ end if
 
 '------------------------------------------------------------
 If result <> 0 Then
+   dl.resetreceivecounter
   DL.AddComment "--- 90-07_UMFG Start Secure Task"
   DL.SendSequence "90-07_UMFG Start Secure Task"
   result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -203,6 +204,7 @@ if i = 1 then
    
    if j = 1 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_LCD_All pixels on"
          DL.SendSequence "90-13_LCD_All pixels on"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -217,6 +219,7 @@ if i = 1 then
 
    if j = 2 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_LCD_All pixels off"
          DL.SendSequence "90-13_LCD_All pixels off"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -238,6 +241,7 @@ if i = 2 then
    for j = 1 to 8
      if j = 1 then
       If result <> 0 Then
+	  dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_RFLED_RFLED 1 on"
          DL.SendSequence "90-13_RFLED_RFLED 1 on"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -252,6 +256,7 @@ if i = 2 then
 
      if j = 2 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_RFLED_RFLED 1 off"
          DL.SendSequence "90-13_RFLED_RFLED 1 off"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -266,6 +271,7 @@ if i = 2 then
  
      if j = 3 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_RFLED_RFLED 2 on"
          DL.SendSequence "90-13_RFLED_RFLED 2 on"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -280,6 +286,7 @@ if i = 2 then
 
      if j = 4 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_RFLED_RFLED 2 off"
          DL.SendSequence "90-13_RFLED_RFLED 2 off"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -294,6 +301,7 @@ if i = 2 then
  
      if j = 5 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_RFLED_RFLED 3 on"
          DL.SendSequence "90-13_RFLED_RFLED 3 on"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -308,6 +316,7 @@ if i = 2 then
 
      if j = 6 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_RFLED_RFLED 3 off"
          DL.SendSequence "90-13_RFLED_RFLED 3 off"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -322,6 +331,7 @@ if i = 2 then
 
      if j = 7 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_RFLED_RFLED 4 on"
          DL.SendSequence "90-13_RFLED_RFLED 4 on"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -336,6 +346,7 @@ if i = 2 then
 
      if j = 8 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_RFLED_RFLED 4 off"
          DL.SendSequence "90-13_RFLED_RFLED 4 off"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -358,6 +369,7 @@ if i = 3 then
    for j = 1 to 8
      if j = 1 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_FLASHLED_RFLED 1 on"
          DL.SendSequence "90-13_FLASHLED_RFLED 1 on"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -372,6 +384,7 @@ if i = 3 then
 
      if j = 2 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_FLASHLED_RFLED 1 off"
          DL.SendSequence "90-13_FLASHLED_RFLED 1 off"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -386,6 +399,7 @@ if i = 3 then
  
      if j = 3 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_FLASHLED_RFLED 2 on"
          DL.SendSequence "90-13_FLASHLED_RFLED 2 on"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -400,6 +414,7 @@ if i = 3 then
 
      if j = 4 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_FLASHLED_RFLED 2 off"
          DL.SendSequence "90-13_FLASHLED_RFLED 2 off"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -414,6 +429,7 @@ if i = 3 then
  
      if j = 5 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_FLASHLED_RFLED 3 on"
          DL.SendSequence "90-13_FLASHLED_RFLED 3 on"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -428,6 +444,7 @@ if i = 3 then
 
      if j = 6 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_FLASHLED_RFLED 3 off"
          DL.SendSequence "90-13_FLASHLED_RFLED 3 off"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -442,6 +459,7 @@ if i = 3 then
 
      if j = 7 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_FLASHLED_RFLED 4 on"
          DL.SendSequence "90-13_FLASHLED_RFLED 4 on"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -456,6 +474,7 @@ if i = 3 then
 
      if j = 8 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_FLASHLED_RFLED 4 off"
          DL.SendSequence "90-13_FLASHLED_RFLED 4 off"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -478,6 +497,7 @@ if i = 4 then
    
    if j = 1 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_ICCLED_All ICCLED on"
          DL.SendSequence "90-13_ICCLED_All ICCLED on"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -492,6 +512,7 @@ if i = 4 then
 
    if j = 2 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_ICCLED_All ICCLED off"
          DL.SendSequence "90-13_ICCLED_All ICCLED off"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -514,6 +535,7 @@ if i = 5 then
    
    if j = 1 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_Buzzer_Beep on"
          DL.SendSequence "90-13_Buzzer_Beep on"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -528,6 +550,7 @@ if i = 5 then
 
    if j = 2 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_Buzzer_Beep off"
          DL.SendSequence "90-13_Buzzer_Beep off"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -550,6 +573,7 @@ if i = 6 then
    
    if j = 1 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_TM4 Front LED_Red on, green off"
          DL.SendSequence "90-13_TM4 Front LED_Red on, green off"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -564,6 +588,7 @@ if i = 6 then
 
    if j = 2 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_TM4 Front LED_Red off, green on"
          DL.SendSequence "90-13_TM4 Front LED_Red off, green on"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -578,6 +603,7 @@ if i = 6 then
 
    if j = 3 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_TM4 Front LED_Both on"
          DL.SendSequence "90-13_TM4 Front LED_Both on"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -592,6 +618,7 @@ if i = 6 then
 
    if j = 4 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_TM4 Front LED_Red flash, green off"
          DL.SendSequence "90-13_TM4 Front LED_Red flash, green off"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -606,6 +633,7 @@ if i = 6 then
 
    if j = 5 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_TM4 Front LED_Red flash, green on"
          DL.SendSequence "90-13_TM4 Front LED_Red flash, green on"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -620,6 +648,7 @@ if i = 6 then
 
    if j = 6 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_TM4 Front LED_Red off, green flash"
          DL.SendSequence "90-13_TM4 Front LED_Red off, green flash"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -634,6 +663,7 @@ if i = 6 then
 
    if j = 7 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_TM4 Front LED_Red on, green flash"
          DL.SendSequence "90-13_TM4 Front LED_Red on, green flash"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -648,6 +678,7 @@ if i = 6 then
 
    if j = 8 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_TM4 Front LED_Both flash"
          DL.SendSequence "90-13_TM4 Front LED_Both flash"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -662,6 +693,7 @@ if i = 6 then
 
    if j = 9 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_TM4 Front LED_Both off"
          DL.SendSequence "90-13_TM4 Front LED_Both off"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -685,6 +717,7 @@ if i = 7 then
    
    if j = 1 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_TM4 Diagnose LED_Red on, green off"
          DL.SendSequence "90-13_TM4 Diagnose LED_Red on, green off"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -699,6 +732,7 @@ if i = 7 then
 
    if j = 2 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_TM4 Diagnose LED_Red off, green on"
          DL.SendSequence "90-13_TM4 Diagnose LED_Red off, green on"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -713,6 +747,7 @@ if i = 7 then
 
    if j = 3 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_TM4 Diagnose LED_Both on"
          DL.SendSequence "90-13_TM4 Diagnose LED_Both on"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -727,6 +762,7 @@ if i = 7 then
 
    if j = 4 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_TM4 Diagnose LED_Both off"
          DL.SendSequence "90-13_TM4 Diagnose LED_Both off"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -750,6 +786,7 @@ if i = 8 then
    
    if j = 1 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_All peripherals_All pixels and leds on, short beeps 3 times"
          DL.SendSequence "90-13_All peripherals_All pixels and leds on, short beeps 3 times"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -764,6 +801,7 @@ if i = 8 then
 
    if j = 2 then
       If result <> 0 Then
+         dl.resetreceivecounter
          DL.AddComment vbCrLf & "--- 90-13_All peripherals_All pixels and leds off"
          DL.SendSequence "90-13_All peripherals_All pixels and leds off"
          result = DL.WaitForSequence("90 0x00", 1, 3000)
@@ -777,14 +815,41 @@ if i = 8 then
    end if
    next
 end if
+'------------------------------------------------------------ 
+if i = 9 then
+         if result <> 0 then DL.AddComment vbCrLf & vbCrLf & " **** Check LCD msg ****" & vbCrLf   
+
+   If result <> 0 Then
+      dl.resetreceivecounter
+      DL.AddComment vbCrLf & "--- 90-13_Transaction Message_msg ID 14 (TRY AGAIN)"
+      DL.SendSequence "90-13_Transaction Message_msg ID 14 (TRY AGAIN)"
+      result = DL.WaitForSequence("90 0x00", 1, 3000)
+   end if
+   
+   if result <> 0 Then 
+      check = msgbox("Do you see msg 'TRY AGAIN' on LCD?", vbyesno)
+      if check = 6 then result = 1
+      if check = 7 then result = 0
+   end if
+end if
+'------------------------------------------------------------ 
+if i = 9 then
+         if result <> 0 then DL.AddComment vbCrLf & vbCrLf & " **** Query Flash Size ****" & vbCrLf   
+
+   If result <> 0 Then
+      dl.resetreceivecounter
+      DL.AddComment vbCrLf & "--- 90-13_Query Flash Size"
+      DL.SendSequence "90-13_Query Flash Size"
+      result = DL.WaitForSequence("90 0x00 1 byte", 1, 3000)
+   end if
+end if
  
 next
 '------------------------------------------------------------ 
 
 DL.AddComment vbCrLf
-PrintMyResult(result)
-
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
@@ -792,36 +857,36 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
+'DL.pause 1000
 
-If 0 Then
-If result = 0 then
-  DL.AddComment Chr(13) & "Result = FAILED"
-Else
-  DL.AddComment Chr(13) & "Result = PASSED"
-End If
-End If
+'If 0 Then
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+'End If
 
-If Prompting(0) = "ON" Then
-  If result = 0 then
-    MsgBox "Result = FAILED", VBOKOnly, "Result"
-  Else 
-    MsgBox "Result = PASSED", VBOKOnly, "Result"
-  End If
-End If
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
 
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
 
-If MasterResult = 1 Then
-      MasterVerdict = "PASSED"
-ElseIf MasterResult = 0 Then
-      MasterVerdict = "FAILED"
-End If
-result = MasterResult
-DL.AddComment vbCrLf
-DL.AddComment "MASTER RESULT = " & MasterVerdict
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
 'MasterResult = 0
 '------------------------------------------------------------
 ' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)

@@ -6,6 +6,10 @@ TID:Check DUKPT Key Type 81-02
 CMD:81 02
 EXR:81 00 00 0C FF FF 01 FF FF 01
 
+TID:Retrieve Key Info (81-0C)
+CMD:81 0C
+EXR:14 00 00 02 00 00
+
 TID:Get Data Encryption (C7-37)
 CMD:C7 37
 EXR:C7 00 00 01 03 
@@ -34,14 +38,38 @@ TID:0105 default (VP3350)
 CMD:01 05 19 05
 EXR:
 
-TID:AT w/ LCD
+TID:AT w/ LCD, card_PAN 6396210
 CMD:02 40 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
-MSG: Pls swipe card, PAN=6396210.......
+MSG: Pls swipe card, PAN 6396210.......
 EXR:
 TIMEOUT:12000
 
-TID:AT w/ LCD 2
+TID:AT w/ LCD, card_PAN 6396211
 CMD:02 40 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
-MSG: Pls swipe card, PAN=6396211.......
+MSG: Pls swipe card, PAN 6396211.......
+EXR:
+TIMEOUT:12000
+
+TID:AT w/ LCD, card_Gift/Stored Value Card
+CMD:02 40 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG: Pls swipe card, Gift/Stored Value Card.......
+EXR:
+TIMEOUT:12000
+
+TID:AT w/ LCD, card_Operator/Driver Maintenance Card
+CMD:02 40 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG: Pls swipe card, Operator/Driver Maintenance Card.......
+EXR:
+TIMEOUT:12000
+
+TID:AT w/ LCD, card_Prepaid Card
+CMD:02 40 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG: Pls swipe card, Prepaid Card.......
+EXR:
+TIMEOUT:12000
+
+TID:AT w/ LCD, card_Payroll Deduct Card
+CMD:02 40 0A 9F 02 06 00 00 00 00 10 00 9A 03 07 11 21 9F 21 03 10 15 20
+MSG: Pls swipe card, Payroll Deduct Card.......
 EXR:
 TIMEOUT:12000

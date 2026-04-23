@@ -44,9 +44,9 @@ if readertype == 1:
     # cmd 02-40, tap card
     if (Result):
         for i in range(1, 4):
-            if i == 1 or i == 3:
-                RetOfStep = DL.SendCommand('DFEC4A--06 04 2A 0C 31')
-            if i == 2:
+            if i == 1 or i == 3:     #test PAN15 & PAN14 card
+                RetOfStep = DL.SendCommand('DFEC4A--08 04 2A 0C 31')
+            if i == 2:     #test PAN15 card
                 RetOfStep = DL.SendCommand('DFEE1D--06 04 2A 0C 31')
             if (RetOfStep):
                 Result = Result and DL.Check_RXResponse("C7 00 00 00")	

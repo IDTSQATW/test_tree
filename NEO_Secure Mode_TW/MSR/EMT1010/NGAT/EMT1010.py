@@ -17,7 +17,11 @@ PAN=''
 if (Result):
     RetOfStep = DL.SendCommand('Check DUKPT Key Type 81-02')
     if (RetOfStep):
-        Result = DL.Check_RXResponse("81 00 00 0C FF FF 01 FF FF 01")	
+        Result = DL.Check_RXResponse("81 00 00 0C FF FF 01 FF FF 01")
+        if Result == 0:
+            RetOfStep = DL.SendCommand('Retrieve Key Info (81-0C)')
+            if (RetOfStep):
+                Result = DL.Check_RXResponse("14 00 00 02 00 00")
         
 # C7-36 -- 03
 if (Result):
@@ -33,10 +37,19 @@ if (Result):
 
 # AT w/ LCD
 if (Result):
-    for i in range(1, 3):
-        if i == 1: RetOfStep = DL.SendCommand('AT w/ LCD')
-        if i == 2: RetOfStep = DL.SendCommand('AT w/ LCD 2')
-        #Result = DL.Check_RXResponse(0, "56 69 56 4F 74 65 63 68 32 00 02 00 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 44 28 00 A3 00")
+    for i in range(1, 7):
+        if i == 1: RetOfStep = DL.SendCommand('AT w/ LCD, card_PAN 6396210')
+        if i == 2: RetOfStep = DL.SendCommand('AT w/ LCD, card_PAN 6396211')
+        if i == 3: RetOfStep = DL.SendCommand('AT w/ LCD, card_Gift/Stored Value Card')
+        if i == 4: RetOfStep = DL.SendCommand('AT w/ LCD, card_Operator/Driver Maintenance Card')
+        if i == 5: RetOfStep = DL.SendCommand('AT w/ LCD, card_Prepaid Card')
+        if i == 6: RetOfStep = DL.SendCommand('AT w/ LCD, card_Payroll Deduct Card')
+        if i <= 2: #service code 2 or 6
+            Result = DL.Check_RXResponse(0, "56 69 56 4F 74 65 63 68 32 00 02 00 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 44 28 00 A3 00")
+        if i == 3 or i == 5 or i == 6: #service code is not 2 or 6
+            Result = DL.Check_RXResponse(0, "56 69 56 4F 74 65 63 68 32 00 02 00 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 40 24 00 83 00")
+        if i == 4: #service code is not 2 or 6
+            Result = DL.Check_RXResponse(0, "56 69 56 4F 74 65 63 68 32 00 02 00 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 3B 1F 00 83 00")
         sResult=DL.Get_RXResponse(0)
         if Result == True and sResult!=None and sResult!="":
             sResult=sResult.replace(" ","")
@@ -68,7 +81,7 @@ if (Result):
                         TRK3DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK3)
 
                     # Transaction result verification
-                    if i == 1:
+                    if i == 1: #card_PAN 6396210
                         TR1plaintextdata = "%B6396210000000026^CARD/IMAGE 03             ^17122011000021000000?."
                         TR2plaintextdata = ";6396210000000026=17122011000021000000?0"
                                             
@@ -84,9 +97,73 @@ if (Result):
                             DL.fails += 1
                             DL.SetWindowText("red", "Track data is missing (NULL)")
                                 
-                    if i == 2:
+                    if i == 2: #card_PAN 6396211
                         TR1plaintextdata = "%B6396211000000026^CARD/IMAGE 03             ^17122011000021000000?/"
                         TR2plaintextdata = ";6396211000000026=17122011000021000000?1"
+                                            
+                        if Track1_CardData and Track2_CardData:
+                            res1 = DL.Check_StringAB(TR1plaintextdata, Track1_CardData)
+                            res2 = DL.Check_StringAB(TR2plaintextdata, Track2_CardData)
+                            if not res1 or not res2:
+                                DL.fails += 1
+                                DL.SetWindowText("red", "Plaintext comparison FAIL")
+                            else:
+                                DL.SetWindowText("blue", "Plaintext comparison PASS")
+                        else:
+                            DL.fails += 1
+                            DL.SetWindowText("red", "Track data is missing (NULL)")
+                            
+                    if i == 3: #card_Gift/Stored Value Card
+                        TR1plaintextdata = "%B6396210060541276099^CARD/IMAGE 03             ^3912006465555?&"
+                        TR2plaintextdata = ";6396210060541276099=3912006465555?8"
+                                            
+                        if Track1_CardData and Track2_CardData:
+                            res1 = DL.Check_StringAB(TR1plaintextdata, Track1_CardData)
+                            res2 = DL.Check_StringAB(TR2plaintextdata, Track2_CardData)
+                            if not res1 or not res2:
+                                DL.fails += 1
+                                DL.SetWindowText("red", "Plaintext comparison FAIL")
+                            else:
+                                DL.SetWindowText("blue", "Plaintext comparison PASS")
+                        else:
+                            DL.fails += 1
+                            DL.SetWindowText("red", "Track data is missing (NULL)")
+                            
+                    if i == 4: #card_Operator/Driver Maintenance Card
+                        TR1plaintextdata = "%B639621150520000032^CARD/IMAGE 03             ^391275235?3"
+                        TR2plaintextdata = ";639621150520000032=391275235?="
+                                            
+                        if Track1_CardData and Track2_CardData:
+                            res1 = DL.Check_StringAB(TR1plaintextdata, Track1_CardData)
+                            res2 = DL.Check_StringAB(TR2plaintextdata, Track2_CardData)
+                            if not res1 or not res2:
+                                DL.fails += 1
+                                DL.SetWindowText("red", "Plaintext comparison FAIL")
+                            else:
+                                DL.SetWindowText("blue", "Plaintext comparison PASS")
+                        else:
+                            DL.fails += 1
+                            DL.SetWindowText("red", "Track data is missing (NULL)")
+                            
+                    if i == 5: #card_Prepaid Card
+                        TR1plaintextdata = "%B6396212054657605009^CARD/IMAGE 03             ^3912005798080?!"
+                        TR2plaintextdata = ";6396212054657605009=3912005798080??"
+                                            
+                        if Track1_CardData and Track2_CardData:
+                            res1 = DL.Check_StringAB(TR1plaintextdata, Track1_CardData)
+                            res2 = DL.Check_StringAB(TR2plaintextdata, Track2_CardData)
+                            if not res1 or not res2:
+                                DL.fails += 1
+                                DL.SetWindowText("red", "Plaintext comparison FAIL")
+                            else:
+                                DL.SetWindowText("blue", "Plaintext comparison PASS")
+                        else:
+                            DL.fails += 1
+                            DL.SetWindowText("red", "Track data is missing (NULL)")
+                            
+                    if i == 6: #card_Payroll Deduct Card
+                        TR1plaintextdata = "%B6396213040926264891^CARD/IMAGE 03             ^3912001371387?%"
+                        TR2plaintextdata = ";6396213040926264891=3912001371387?;"
                                             
                         if Track1_CardData and Track2_CardData:
                             res1 = DL.Check_StringAB(TR1plaintextdata, Track1_CardData)

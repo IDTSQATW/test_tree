@@ -11,7 +11,9 @@ Key='0123456789abcdeffedcba9876543210'
 MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 
-# Objective: CS-6753, [Vendi] ISO PAN prefixes 6396210 to 6396211 are converted to plaintext.
+# Objective: 
+# CS-6753, [Vendi] ISO PAN prefixes 6396210 to 6396211 are converted to plaintext.
+# CS-6754, expand the range to 6396210-6396213, 4 customer cards.
 
 # Check DUKPT Key  Type (81-02)
 if (Result):
@@ -168,7 +170,7 @@ if (Result):
                         if Track1_CardData and Track2_CardData:
                             res1 = DL.Check_StringAB(TR1plaintextdata, Track1_CardData)
                             res2 = DL.Check_StringAB(TR2plaintextdata, Track2_CardData)
-                            if not res1 or not res2:
+                            if res1 == False or res2 == False:
                                 DL.fails += 1
                                 DL.SetWindowText("red", "Plaintext comparison FAIL")
                             else:

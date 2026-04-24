@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-24993
+17387
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -167,10 +167,11 @@ If result <> 0 Then
    if result <> 0 then
       dl.resetreceivecounter
       DL.AddComment vbCrLf
-      DL.AddComment "--- Card Detect"     'no card
-      DL.SendSequence "Card Detect "
-      result = DL.WaitForSequence("no insert card", 1, 3000)
-      if result = 7 then 
+      DL.AddComment "--- Buzzer ON"
+      DL.SendSequence "Buzzer ON"
+      result = DL.WaitForSequence("90 00", 1, 3000)
+      check = msgbox("Buzzer ON?", vbyesno)
+      if check = 7 then 
          fcount = fcount + 1
          DL.AddComment vbCrLf 
          DL.AddComment "** FAIL **"
@@ -178,61 +179,16 @@ If result <> 0 Then
 
       dl.resetreceivecounter
       DL.AddComment vbCrLf 
-      msgbox "Insert card --> Click OK", vbokonly
-      DL.AddComment "--- Card Detect"     'has card but no power
-      DL.SendSequence "Card Detect "
-      result = DL.WaitForSequence("has card but no power", 1, 3000)
-      if result = 7 then 
-         fcount = fcount + 1
-         DL.AddComment vbCrLf 
-         DL.AddComment "** FAIL **"
-      end if
-
-      dl.resetreceivecounter
-      DL.AddComment vbCrLf
-      DL.AddComment "--- Card Get ATR"
-      DL.SendSequence "Card Get ATR"
+      DL.AddComment "--- Buzzer OFF"
+      DL.SendSequence "Buzzer OFF"
       result = DL.WaitForSequence("90 00", 1, 3000)
-      if result = 7 then 
+      check = msgbox("Buzzer OFF?", vbyesno)
+      if check = 7 then 
          fcount = fcount + 1
          DL.AddComment vbCrLf 
          DL.AddComment "** FAIL **"
       end if
 
-      dl.resetreceivecounter
-      DL.AddComment vbCrLf
-      DL.AddComment "--- Card APDU"
-      DL.SendSequence "Card APDU"
-      result = DL.WaitForSequence("90 00", 1, 3000)
-      if result = 7 then 
-         fcount = fcount + 1
-         DL.AddComment vbCrLf 
-         DL.AddComment "** FAIL **"
-      end if
-
-      dl.resetreceivecounter
-      DL.AddComment vbCrLf 
-      DL.AddComment "--- Card Detect"     'has card and has power
-      DL.SendSequence "Card Detect "
-      result = DL.WaitForSequence("has card and has power", 1, 3000)
-      if result = 7 then 
-         fcount = fcount + 1
-         DL.AddComment vbCrLf 
-         DL.AddComment "** FAIL **"
-      end if
-
-      dl.resetreceivecounter
-      DL.AddComment vbCrLf
-      DL.AddComment "--- Card Power OFF"
-      DL.SendSequence "Card Power OFF"
-      result = DL.WaitForSequence("90 00", 1, 3000)
-      if result = 7 then 
-         fcount = fcount + 1
-         DL.AddComment vbCrLf 
-         DL.AddComment "** FAIL **"
-      end if
-
-      msgbox "Remove card --> Click OK", vbokonly
       if fcount <> 0 then result = 0
    end if
 end if

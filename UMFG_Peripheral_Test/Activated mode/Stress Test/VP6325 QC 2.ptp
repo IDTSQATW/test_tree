@@ -636,7 +636,7 @@ Stress Test - Set Test Count-M
 56 69 56 4F 74 65 63 68 32 00 99 10 00 07 04 0A 03 03 03 03 03 00 00
 0
 5
-CHECKSUM 
+CHECKSUM crc-ccitt
 
 SEND
 77

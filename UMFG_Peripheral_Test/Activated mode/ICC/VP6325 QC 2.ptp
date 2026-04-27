@@ -662,3 +662,59 @@ Transaction msg ID 14 (TRY AGAIN)
 5
 CHECKSUM 
 
+RECEIVE
+0
+2C 00
+56 69 56 4F 74 65 63 68 32 00 2C 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+1
+no insert card
+56 69 56 4F 74 65 63 68 32 00 60 00 00 01 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+2
+has card but no power
+56 69 56 4F 74 65 63 68 32 00 60 00 00 01 06
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+3
+has card and has power
+56 69 56 4F 74 65 63 68 32 00 60 00 00 01 07
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+

@@ -1,13 +1,13 @@
 DL_SCRIPTVERSION
 1
-57137
+45196
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "VP6325 TS 4" ' !!!!! EDIT THIS !!!!!
+ProjectName = "VP6325 QC 2" ' !!!!! EDIT THIS !!!!!
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -149,20 +149,11 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-statuscheck = msgbox ("If Reader already do master reset?", vbyesno)
-
-if statuscheck = 7 then 
-   result = 0
-   DL.AddComment vbCrLf & "Please do master reset first....."
-elseif statuscheck = 6 then 
-        result = 1
-end if
-'------------------------------------------------------------
 If result <> 0 Then
    dl.resetreceivecounter
-   DL.AddComment "--- 90-07_UMFG Start Secure Task"
-   DL.SendSequence "UMFG Start Secure Task Control"
-   result = DL.WaitForSequence("90 00", 1, 3000)
+   DL.AddComment "---  Pass-Through ON"
+   DL.SendSequence " Pass-Through ON"
+   result = DL.WaitForSequence("2C 00", 1, 3000)
    '------------------------------------------------------------
    if result <> 0 then
       dl.resetreceivecounter
@@ -192,7 +183,7 @@ If result <> 0 Then
       DL.AddComment vbCrLf
       DL.AddComment "--- Card Get ATR"
       DL.SendSequence "Card Get ATR"
-      result = DL.WaitForSequence("90 00", 1, 3000)
+      result = DL.WaitForSequence("2C 00", 1, 3000)
       if result = 0 then 
          fcount = fcount + 1
          DL.AddComment vbCrLf 
@@ -203,7 +194,7 @@ If result <> 0 Then
       DL.AddComment vbCrLf
       DL.AddComment "--- Card APDU"
       DL.SendSequence "Card APDU"
-      result = DL.WaitForSequence("90 00", 1, 3000)
+      result = DL.WaitForSequence("2C 00", 1, 3000)
       if result = 0 then 
          fcount = fcount + 1
          DL.AddComment vbCrLf 
@@ -225,7 +216,7 @@ If result <> 0 Then
       DL.AddComment vbCrLf
       DL.AddComment "--- Card Power OFF"
       DL.SendSequence "Card Power OFF"
-      result = DL.WaitForSequence("90 00", 1, 3000)
+      result = DL.WaitForSequence("2C 00", 1, 3000)
       if result = 0 then 
          fcount = fcount + 1
          DL.AddComment vbCrLf 
@@ -237,13 +228,11 @@ If result <> 0 Then
    end if
 end if
 '------------------------------------------------------------
-if statuscheck = 6 then
    dl.resetreceivecounter
    DL.AddComment vbCrLf
-   DL.AddComment "--- 90-07_UMFG Start Secure Task"
-   DL.SendSequence "UMFG Start Secure Task Disable"
-   resultignore = DL.WaitForSequence("90 00", 1, 3000)
-end if
+   DL.AddComment "--- Card Power OFF"
+   DL.SendSequence "Card Power OFF"
+   resultignore = DL.WaitForSequence("2C 00", 1, 3000)
 '------------------------------------------------------------ 
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf

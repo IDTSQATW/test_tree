@@ -1,13 +1,13 @@
 DL_SCRIPTVERSION
 1
-51830
+36024
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "VP6325 QC 2" ' !!!!! EDIT THIS !!!!!
+ProjectName = "EVT111" ' !!!!! EDIT THIS !!!!!
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -155,7 +155,7 @@ End Function
 
 2. cmd "Stress Test - ON" --> non-stop test
 
-3. cmd "Stress Test - OFF" --> stop manually
+3. cmd "Stress Test - OFF" --> stop manually, MUST > 12h
 
 4. cmd "Stress Test - Get Verified Count"
    => Check result if has fail item.

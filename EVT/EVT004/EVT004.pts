@@ -1,13 +1,13 @@
 DL_SCRIPTVERSION
 1
-57137
+28470
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "VP6325 TS 4" ' !!!!! EDIT THIS !!!!!
+ProjectName = "EVT004" ' !!!!! EDIT THIS !!!!!
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"

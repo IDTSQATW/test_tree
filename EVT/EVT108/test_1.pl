@@ -27,7 +27,7 @@ for(;;)						# forever loop
 
 }						# end forever
 
-`start /REALTIME docklight_scripting -r -m Button.pts`;
+`start /REALTIME docklight_scripting -r -m EVT108.pts`;
 
 # Main Code
 

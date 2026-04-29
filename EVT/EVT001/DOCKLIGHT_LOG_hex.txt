@@ -1,0 +1,53 @@
+Docklight Log File (HEX) - Started 2026/4/27 15:47:10.480 
+ TEST CASE: 2C-20
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM1 @ 115200 baud...
+ Set POS COM PORT - COMPLETE
+
+  -- Bank card -- 
+ 
+--- Check MSR Swipe Function (2C-20)
+
+2026/4/27 15:47:12.833 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 20 00 00 5D 9A 
+2026/4/27 15:47:16.692 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 02 80 1B A2 6E   -- AAMAV card -- 
+ 
+--- Check MSR Swipe Function (2C-20)
+
+2026/4/27 15:47:19.920 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 20 00 00 5D 9A 
+2026/4/27 15:47:21.314 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 02 80 3F C6 88  
+==> Expected data byte is 81 3F
+  --  idt_std card -- 
+ 
+--- Check MSR Swipe Function (2C-20)
+
+2026/4/27 15:47:26.339 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 20 00 00 5D 9A 
+2026/4/27 15:47:27.996 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 02 80 3F C6 88  
+==> Expected data byte is 83 3F
+  -- jis_1 card -- 
+ 
+--- Check MSR Swipe Function (2C-20)
+
+2026/4/27 15:47:33.746 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 20 00 00 5D 9A 
+2026/4/27 15:47:35.052 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 02 80 09 90 1D  
+==> Expected data byte is 86 1B
+  -- jis_2 card -- 
+ 
+--- Check MSR Swipe Function (2C-20)
+
+2026/4/27 15:47:39.853 [TX] - 56 69 56 4F 74 65 63 68 32 00 2C 20 00 00 5D 9A 
+2026/4/27 15:47:41.166 [RX] - 56 69 56 4F 74 65 63 68 32 00 2C 00 00 02 80 09 90 1D  
+==> Expected data byte is 86 1B
+ 
+
+ Result = FAILED
+ ---------- END OF TEST ----------
+
+ 
+
+ MASTER RESULT = FAILED
+
+
+Docklight Log File (HEX) - Stopped 2026/4/27 15:47:45.001 
+

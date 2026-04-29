@@ -1,0 +1,16 @@
+Docklight Log File (HEX) - Started 2026/4/29 09:05:59.163 
+ TEST CASE: VP6325 QC 2
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+ POS operating on COM90 @ 9600 baud...
+ Set POS COM PORT - COMPLETE
+
+ 
+
+ --- Buzzer ON
+
+2026/4/29 09:06:00.409 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 0B 00 02 05 01 CC 62 
+
+Docklight Log File (HEX) - Stopped 2026/4/29 09:06:03.293 
+

@@ -4,7 +4,7 @@ import time
 import System
 
 Reader = \
-	[["Kiosk III",0],["Kiosk IV",7],["VP3600", 11],['VP6800', 12],['VP5300',13],['VP3320',14],['VP3320S',15],['VP6300',16],['VP3350',17]]
+	[["Kiosk III",0],["Kiosk IV",7],["VP3600", 11],['VP6800', 12],['VP5300',13],['VP3320',14],['VP3320S',15],['VP6300',16],['VP3350',17],['VP6325',18],['VP6328',18]]
 
 class Pro_GetDevice:
 # get reader firmware version

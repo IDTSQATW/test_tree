@@ -78,6 +78,8 @@ if (Result):
             if platform == 1: #NEOII and upward
                 Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** F1 ** DFEE12")
                 ksn = DL.GetTLV(alldata,"DFEE12")
+                FF8106 = DL.GetTLV(alldata,"FF8106", 0)
+                FF8105 = DL.GetTLV(alldata,"FF8105", 0)
             if platform == 0: #NEOI
                 Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** D1 ** FFEE12")
                 ksn = DL.GetTLV(alldata,"FFEE12")
@@ -91,14 +93,19 @@ if (Result):
                     encDF812B = DL.GetTLV_Embedded(alldata,"DF812B", 0)
                     decDF812B = DL.DecryptDLL(0,1, strKey, ksn, encDF812B)
                 
-                if platform == 0: #NEOI
+                if platform == 1: #NEOII
                     alldata = FF8105
                     mask56 = DL.GetTLV_Embedded(alldata,"56", 0)
                     enc56 = DL.GetTLV_Embedded(alldata,"56", 1)
                     dec56 = DL.DecryptDLL(0,1, strKey, ksn, enc56)
                     mask9F6B = DL.GetTLV_Embedded(alldata,"9F6B", 0)
                     enc9F6B = DL.GetTLV_Embedded(alldata,"9F6B", 1)
-                    dec9F6B = DL.DecryptDLL(0,1, strKey, ksn, enc9F6B)	
+                    dec9F6B = DL.DecryptDLL(0,1, strKey, ksn, enc9F6B)
+                    alldata = FF8106
+                    encDF812A = DL.GetTLV_Embedded(alldata,"DF812A", 0)
+                    decDF812A = DL.DecryptDLL(0,1, strKey, ksn, encDF812A)
+                    encDF812B = DL.GetTLV_Embedded(alldata,"DF812B", 0)
+                    decDF812B = DL.DecryptDLL(0,1, strKey, ksn, encDF812B)
                     
                 # Tag DF812A/ DF812B (only need enc data)
                 Result = DL.Check_StringAB(decDF812A, 'DF 81 2A 0D 30 30 30 30 30 30 30 30 30 30 30 30 30')

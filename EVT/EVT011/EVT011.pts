@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-12294
+1890
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -160,7 +160,13 @@ End Function
 4. cmd "Stress Test - Get Verified Count"
    => Check result if has fail item.
    => Data[0-2] :  test cycles
-      Data[3] :  Fail item, if > 0
+      Data[3-5] :  NFC Fail Count
+      Data[6-8] :  Flash Fail Count
+      Data[9-11] :  Backllight Fail Count
+      Data[12-14] :  Beeper Fail Count
+      Data[15-17] :  LED Fail Count
+      Data[18-20] :  LCD Fail Count
+      Data[21-23] :  Test Timing Setting
 
 5. cmd "Stress Test - Remove File" --> clear record and setting
 '------------------------------------------------------------

@@ -6,10 +6,7 @@ Objective: NEO3-12555_[VP3350][v1.00.872.2449.T] Under Auto Transaction mode, LE
 
 2) Mobile phone Bluetooth UI paired w/ the reader.
 
-3) SDK connected w/ the reader via Bluetooth.
-=> Check LEDs/ buzzer behavior.
-
-4) Close SDK, and disconnect w/ the reader via mobile phone Bluetooth UI.
+3) Disconnect w/ the reader via mobile phone Bluetooth UI.
 => Check LEDs/ buzzer behavior.
 
 ===== w/o AC cable: 
@@ -23,8 +20,7 @@ step 1~4
 2) PC Bluetooth UI paired & connected w/ the reader.
 
 3) PC turned off Bluetooth.
-=> Check if have: beep twice, 4 red LEDs on once
-=> Check if LED 1 change to flash status
+=> Check LEDs/ buzzer behavior.
 
 4) Remove AC cable, waited over 30 sec.
 => Check if reader enter sleep mode.

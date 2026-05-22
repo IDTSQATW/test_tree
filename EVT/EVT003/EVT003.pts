@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-21157
+1517
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -197,7 +197,7 @@ If result <> 0 Then
           result = DL.WaitForSequence("90 00", 1, 3000)
           if i = 1 then check = msgbox("RF LED 1 ON?", vbyesno)
           if i = 2 then check = msgbox("RF LED 1 OFF?", vbyesno)
-          if i = 3 then check = msgbox("F LED 2 ON", vbyesno)
+          if i = 3 then check = msgbox("RF LED 2 ON", vbyesno)
           if i = 4 then check = msgbox("RF LED 2 OFF?", vbyesno)
           if i = 5 then check = msgbox("RF LED 3 ON?", vbyesno)
           if i = 6 then check = msgbox("RF LED 3 OFF?", vbyesno)

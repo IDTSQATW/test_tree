@@ -1,13 +1,17 @@
 
-15:39:01: 
+16:23:47: 
 >>[Stop Scripts]>>
 
 
-15:39:01: 
+16:23:47: 
 >>[Stop Scripts]>>
 
 
-15:39:01: >>[Do Scripts]>>
+16:23:47: 
+>>[Stop Scripts]>>
+
+
+16:23:47: >>[Do Scripts]>>
 
 Objective: Verify tag DFEC17 (CS-3064)
 1) Set MSR White List (VISA MSD card)
@@ -37,6 +41,8 @@ Error! >>>> User Judgment Fail:MESSAGECK: Reader returned raw MSR data only (tra
 
 6) Switch to poll on demand mode
 7) Set DFEC17 = 00 in group 0
+>>[Stop Scripts]>>
+
 >>[Stop Scripts]>>
 
 >>[Stop Scripts]>>

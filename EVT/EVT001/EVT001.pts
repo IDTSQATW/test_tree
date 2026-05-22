@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-11687
+46945
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -169,6 +169,7 @@ End If
 
 '------------------------------------------------------------
 If i = 2 Then
+    DL.AddComment vbCrLf
     DL.AddComment " -- AAMAV card -- "
 
     MsgBox "Press OK, then swipe AAMAV card.", VBOKOnly, "Test step"
@@ -184,6 +185,7 @@ If i = 2 Then
 End If
 '------------------------------------------------------------
 If i = 3 Then
+    DL.AddComment vbCrLf
     DL.AddComment " --  idt_std card -- "
 
     MsgBox "Press OK, then swipe  idt_std card.", VBOKOnly, "Test step"
@@ -200,6 +202,7 @@ End If
 
 '------------------------------------------------------------ 
 If i = 4 Then
+    DL.AddComment vbCrLf
     DL.AddComment " -- jis_1 card -- "
 
     MsgBox "Press OK, then swipe  jis_1 card.", VBOKOnly, "Test step"
@@ -215,6 +218,7 @@ If i = 4 Then
 End If
 '------------------------------------------------------------ 
 If i = 5 Then
+    DL.AddComment vbCrLf
     DL.AddComment " -- jis_2 card -- "
 
     MsgBox "Press OK, then swipe  jis_2 card.", VBOKOnly, "Test step"

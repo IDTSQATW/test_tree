@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-58558
+54486
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -258,7 +258,7 @@ for k = 1 to 4
     if k = 4 then cmd = "02-40 NO timeout"
 
     If result <> 0 Then
-       msgbox "Click OK --> Tap MChip (ANY) card"
+       msgbox "Click OK --> Tap ANY card"
        dl.resetreceivecounter
        dl.addcomment vbcrlf
        DL.AddComment "--- " & cmd

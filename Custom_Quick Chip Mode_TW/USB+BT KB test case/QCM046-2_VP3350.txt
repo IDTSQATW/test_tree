@@ -27,14 +27,11 @@ EXR: 04 00 00 00
 CMD: 01 01 02
 EXR: 01 00 00 00
 
-SWIPEKB: Click OK and wait. Click OK after receiving data.
+SWIPEKB: Click OK and wait around 20 sec.
 EXR: dfed420a
 EXR: dfed180102
 EXR: dfef571a565033333530204657
 EXR: dfef6100
-MESSAGECK: Whole RX data are lower case
-
-SWIPEKB: Click OK and wait. Click OK after receiving data.
 EXR: dfed420a
 EXR: dfed180102
 MESSAGECK: Whole RX data are lower case
@@ -55,15 +52,12 @@ EXR: 04 00 00 00
 >>> Quick Chip mode = 02
 CMD: 01 01 02
 EXR: 01 00 00 00
-SWIPEKB: Click OK and wait. Click OK after receiving data.
+SWIPEKB: Click OK and wait around 20 sec.
 EXR: 5669564f7465636832001401
 EXR: dfed420a
 EXR: dfed180102
 EXR: dfef571a565033333530204657
 EXR: dfef6100
-MESSAGECK: Whole RX data are upper case
-
-SWIPEKB: Click OK and wait. Click OK after receiving data.
 EXR: 5669564f74656368320014010013
 EXR: dfed420a
 EXR: dfed180102

@@ -1,0 +1,298 @@
+
+11:45:42: If Issue ?
+Path_File:C:\test_tree\Custom_Quick Chip Mode_TW\USB+BT KB test case\QCM006-4-T_VP3350.txt
+Running Info>>
+[Issue Count: 3]
+[Wrong Items]
+>>>Error item ( 4 ).
+>>> poll on demand = 01
+
+>>>Error item ( 8 ).
+>>> DF7D = 02 (NEO2)
+
+>>>Error item ( 12 ).
+>>> Quick Chip mode = 02
+
+
+11:45:42: >>[Do Scripts]>>
+
+Objective: Encryption ON, MSR test under Quick Chip Mode. (IDT/ VISA MSD/ AAMVA/ JIS 2/ ISO4909 3T)
+--------------------------------------------------------------------------------
+>>> poll on demand = 01
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
+OUT: NULL
+Error! >>>> Expect OUT:EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Wait for the reader bootup ready --> Click OK.
+User Judgment Pass
+
+>>> DF7D = 02 (NEO2)
+CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 05 DF EE 7D 01 02 67 72 
+OUT: NULL
+Error! >>>> Expect OUT:EXR: 04 00 00 00
+--------------------------------------------------------------------------------
+>>> Quick Chip mode = 02
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: NULL
+Error! >>>> Expect OUT:EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
+MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+User Judgment Pass
+
+--------------------
+>>> MSR transaction
+SWIPEKB: click OK, then swipe IDT test card.
+KB Unit Swipe Card:
+020401833F4F286B8700%TRACK17676760707077676760707077676760707077676760707077676760707077676760707?C;2121212121767676070707767676762121212?0;33333333337676760707077676763333333333767676070707767676333333333376767607070776767633333333337676760707?2353137543531333336336D0903
+--------------------
+>>> MSR transaction
+SWIPEKB: click OK, then swipe AAMVA card.
+KB Unit Swipe Card:
+02C700813F3023528700%NYNEW YORK^LEE$BRUCE$JR^655 N. BERRY ST., #K^?R;3555551111111111111=000919770303??%##92821-00440AABBBBBBBBBBTTTTF507125BRWBLK0123456789                CCCCCCSSSSS?%35313754353133333633465803
+--------------------
+>>> MSR transaction
+SWIPEKB: click OK, then swipe JIS 1 card. (Press button "MSR Dec" to Decryption then Press button "OK")
+KB Unit Swipe Card:
+02D601801F482800A39B;a900*************************************************************0000?*;4322********2833=1108****************?*6CEA30E088EDD5702A78D56BFB1FE2EFC92BD62E01A0CB3305A727D29F7D40AEB6B167A3D85F180AEEABDB5B045738593D984BA6CF02185D49A3D9E894DBFB5F78065CE732B1778817DC6AB30C58010082D161796E28D6CBD1C3859F1F85D1B1A1B6FE12682F1AEF8DAB7B6908BFD5F40000000000000000000000000000000000000000000000000000000000000000000000000000000035313754353133333633FFFFFF02001948A00005385403
+Enhanced
+Key: Key:
+0123456789ABCDEFFEDCBA9876543210
+Total length: [D601]- 470
+Card Type:ISO/ABA Card
+Track 1-3 Status:
+	track1 decode success,
+	track2 decode success,
+	track3 decode success,
+	track1 sampling success,
+	track2 sampling success,
+	track3 sampling fail,
+Track Length:
+	Track 1 Length:72
+	Track 2 Length:40
+	Track 3 Length:0
+Byte8: 0xA3
+Status byte 1:
+	Track1 Clear/Mask data present,
+	Track2 Clear/Mask data present, 
+	Track3 Clear/Mask data not present, 
+	Key Management: DUKPT Key, 
+	Encrypted Type : TDES 
+	Smart Card
+	Key Type : DATA Key 
+	Out Put Serial Number Enable
+Encrypted Type: TDES
+Byte9: 0x9B
+Encrypted data sent status byte:
+	Track1 encrypted data present,
+	Track2 encrypted data present,
+	Track3 encrypted data not present,
+	Track1 hash data present, 
+	Track2 hash data present, 
+	Track3 hash data not present, 
+	Session ID not Present(level 3),
+	KSN Present(encrypted),
+
+Track1 Mask :
+;a900*************************************************************0000?*
+Track2 Mask :
+;4322********2833=1108****************?*
+Track3 Mask :
+
+Track1 Encrypted Data Length:72
+Track2 Encrypted Data Length:40
+Track3 Encrypted Data Length:0
+Track1 Encrypted Data:
+6CEA30E088EDD5702A78D56BFB1FE2EFC92BD62E01A0CB3305A727D29F7D40AEB6B167A3D85F180AEEABDB5B045738593D984BA6CF02185D49A3D9E894DBFB5F78065CE732B17788
+Track2 Encrypted Data:
+17DC6AB30C58010082D161796E28D6CBD1C3859F1F85D1B1A1B6FE12682F1AEF8DAB7B6908BFD5F4
+Track3 Encrypted Data:
+
+Track1 Hash Data:
+0000000000000000000000000000000000000000
+Track2 Hash Data:
+0000000000000000000000000000000000000000
+Track3 Hash Data:
+
+Serial Number:
+35313754353133333633
+KSN:FFFFFF02001948A00005
+Track1 clear(Hex):
+7F6139303030303030303231313131313233343536373839303132323232323333333333343434343435353535353636363636373737373738383838383939393939303030307F15
+Track2 clear(Hex):
+3B343332323036313030303837323833333D31313038323031383836343038323531303030303F3B
+Track3 clear(Hex):
+
+Track1 Clear Data:
+a90000000211111234567890122222333334444455555666667777788888999990000
+Track2 Clear Data:
+;4322061000872833=11082018864082510000?;
+Track3 Clear Data:
+
+
+--------------------
+>>> MSR transaction
+SWIPEKB: click OK, then swipe JIS 2 card.
+KB Unit Swipe Card:
+026A00831D4800008100;123456789012345678901234567890123456789012345678901234567890123456789?N3531375435313333363300CE03026A0085170048008200;123456789012345678901234567890123456789012345678901234567890123456789?N3531375435313333363376C403
+--------------------
+>>> MSR transaction
+SWIPEKB: click OK, then swipe VISA MSD card. (Press button "MSR Dec" to Decryption then Press button "OK")
+KB Unit Swipe Card:
+02D60080170028008292;4761********0010=2012****************?*2935FEBEDA9E8E19163181ECC087921CF9B52BFF6EBB512628E31CB27C0E152777F711D415F5B7A1000000000000000000000000000000000000000035313754353133333633FFFFFF02001948A000066F1903
+Enhanced
+Key: Key:
+0123456789ABCDEFFEDCBA9876543210
+Total length: [D600]- 214
+Card Type:ISO/ABA Card
+Track 1-3 Status:
+	track1 decode success,
+	track2 decode success,
+	track3 decode success,
+	track1 sampling fail,
+	track2 sampling success,
+	track3 sampling fail,
+Track Length:
+	Track 1 Length:0
+	Track 2 Length:40
+	Track 3 Length:0
+Byte8: 0x82
+Status byte 1:
+	Track1 Clear/Mask data not present,
+	Track2 Clear/Mask data present, 
+	Track3 Clear/Mask data not present, 
+	Key Management: DUKPT Key, 
+	Encrypted Type : TDES 
+	Magnetic Card
+	Key Type : DATA Key 
+	Out Put Serial Number Enable
+Encrypted Type: TDES
+Byte9: 0x92
+Encrypted data sent status byte:
+	Track1 encrypted data not present,
+	Track2 encrypted data present,
+	Track3 encrypted data not present,
+	Track1 hash data not present, 
+	Track2 hash data present, 
+	Track3 hash data not present, 
+	Session ID not Present(level 3),
+	KSN Present(encrypted),
+
+Track1 Mask :
+
+Track2 Mask :
+;4761********0010=2012****************?*
+Track3 Mask :
+
+Track1 Encrypted Data Length:0
+Track2 Encrypted Data Length:40
+Track3 Encrypted Data Length:0
+Track1 Encrypted Data:
+
+Track2 Encrypted Data:
+2935FEBEDA9E8E19163181ECC087921CF9B52BFF6EBB512628E31CB27C0E152777F711D415F5B7A1
+Track3 Encrypted Data:
+
+Track1 Hash Data:
+
+Track2 Hash Data:
+0000000000000000000000000000000000000000
+Track3 Hash Data:
+
+Serial Number:
+35313754353133333633
+KSN:FFFFFF02001948A00006
+Track1 clear(Hex):
+
+Track2 clear(Hex):
+3B343736313733393030313031303031303D32303132313230303031323333393930303033313F32
+Track3 clear(Hex):
+
+Track1 Clear Data:
+
+Track2 Clear Data:
+;4761739001010010=20121200012339900031?2
+Track3 Clear Data:
+
+
+--------------------
+>>> MSR transaction
+SWIPEKB: click OK, then swipe ISO 4909 (3T) card. (Press button "MSR Dec" to Decryption then Press button "OK")
+KB Unit Swipe Card:
+025B03803F4D276987BF%*4547********0000^LLIBRE ROBERT-GUILLERMO ^1102***************************?*;4547********0000=1102***************?*;**4547********0000=***********************************************************************************?*6611923588EC91D3E797FE601E1CA909993FA01B3639F3D4A81D9ED93344BA6A7487D45B43BB963DBA928BA77130D4F033EA8FF92E5E1CD3FD811BF3226BC5EF044C687E40A9639F52298A9B297F3DB5F5E21909D573ABD47E08A6003FA16BF6C0BDE55151955769C59703339D3521F91CFC7B527D81FD27C5633EED4AF750B0B492D43D9B881393CB2D554C01895D53F03FEF70D197D508ACAE94047302BEFCF928276F31D932EEC784E0020CD7F440E337D290451CA641D527E4DFE0069FB423DA9AF887F55D186F667BEB5CEA67B58150DF85C1DEBE4C6A7902D36561E95C14125CF479BB5B2600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000035313754353133333633FFFFFF02001948A00007550503
+Enhanced
+Key: Key:
+0123456789ABCDEFFEDCBA9876543210
+Total length: [5B03]- 859
+Card Type:ISO/ABA Card
+Track 1-3 Status:
+	track1 decode success,
+	track2 decode success,
+	track3 decode success,
+	track1 sampling success,
+	track2 sampling success,
+	track3 sampling success,
+Track Length:
+	Track 1 Length:77
+	Track 2 Length:39
+	Track 3 Length:105
+Byte8: 0x87
+Status byte 1:
+	Track1 Clear/Mask data present,
+	Track2 Clear/Mask data present, 
+	Track3 Clear/Mask data present, 
+	Key Management: DUKPT Key, 
+	Encrypted Type : TDES 
+	Magnetic Card
+	Key Type : DATA Key 
+	Out Put Serial Number Enable
+Encrypted Type: TDES
+Byte9: 0xBF
+Encrypted data sent status byte:
+	Track1 encrypted data present,
+	Track2 encrypted data present,
+	Track3 encrypted data present,
+	Track1 hash data present, 
+	Track2 hash data present, 
+	Track3 hash data present, 
+	Session ID not Present(level 3),
+	KSN Present(encrypted),
+
+Track1 Mask :
+%*4547********0000^LLIBRE ROBERT-GUILLERMO ^1102***************************?*
+Track2 Mask :
+;4547********0000=1102***************?*
+Track3 Mask :
+;**4547********0000=***********************************************************************************?*
+Track1 Encrypted Data Length:80
+Track2 Encrypted Data Length:40
+Track3 Encrypted Data Length:112
+Track1 Encrypted Data:
+6611923588EC91D3E797FE601E1CA909993FA01B3639F3D4A81D9ED93344BA6A7487D45B43BB963DBA928BA77130D4F033EA8FF92E5E1CD3FD811BF3226BC5EF044C687E40A9639F52298A9B297F3DB5
+Track2 Encrypted Data:
+F5E21909D573ABD47E08A6003FA16BF6C0BDE55151955769C59703339D3521F91CFC7B527D81FD27
+Track3 Encrypted Data:
+C5633EED4AF750B0B492D43D9B881393CB2D554C01895D53F03FEF70D197D508ACAE94047302BEFCF928276F31D932EEC784E0020CD7F440E337D290451CA641D527E4DFE0069FB423DA9AF887F55D186F667BEB5CEA67B58150DF85C1DEBE4C6A7902D36561E95C14125CF479BB5B26
+Track1 Hash Data:
+0000000000000000000000000000000000000000
+Track2 Hash Data:
+0000000000000000000000000000000000000000
+Track3 Hash Data:
+0000000000000000000000000000000000000000
+Serial Number:
+35313754353133333633
+KSN:FFFFFF02001948A00007
+Track1 clear(Hex):
+2542343534373537303030313037303030305E4C4C4942524520524F424552542D4755494C4C45524D4F205E313130323130313030303030303034303030303030303330363030303030303F2E
+Track2 clear(Hex):
+3B343534373537303030313037303030303D313130323130313030303030333036303030303F38
+Track3 clear(Hex):
+3B3031343534373537303030313037303030303D37393738303030303030303030303030303030333031393031383034303230303031313032343D33303235303030313134313430313035383539383D3D313D30303030303032363030303030303030303030303F35
+Track1 Clear Data:
+%B4547570001070000^LLIBRE ROBERT-GUILLERMO ^1102101000000040000000306000000?.
+Track2 Clear Data:
+;4547570001070000=1102101000003060000?8
+Track3 Clear Data:
+;014547570001070000=79780000000000000003019018040200011024=30250001141401058598==1=00000026000000000000?5
+
+--------------------------------------------------------------------------------
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+User Judgment Pass
+

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-49216
+50520
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -200,7 +200,7 @@ end if
 '--------------------------------------------------------------------------- AT 02-01
 If result <> 0 Then
    DL.ResetReceiveCounter
-   msgbox "Click OK --> Tap Applepay AMEX_PAN ****2212"
+   msgbox "Click OK --> Tap Applepay AMEX"
 
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT (02-01)"
@@ -235,7 +235,7 @@ If result <> 0 Then
    end if
 '----------------------------------------------------------------------------- AT 02-40
    DL.ResetReceiveCounter
-   msgbox "Click OK --> Tap Applepay AMEX_PAN ****2212"
+   msgbox "Click OK --> Tap Applepay AMEX"
 
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT (02-40)"

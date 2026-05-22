@@ -1,6 +1,7 @@
 DL_SCRIPTVERSION
 1
-50520
+47629
+
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -184,9 +185,11 @@ if readerType = "NEO2" then
 If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
-   DL.AddComment "--- Set group A0"
-   DL.SendSequence "Set group A0"
-   result = DL.WaitForSequence("Configuration Change Response", 1, 3000)
+   DL.AddComment "--- Set group/ AID/ CA Public key"
+   for i = 1 to 35
+       DL.SendSequence i
+       dl.pause 200
+   next
 End If
 else
 If result <> 0 Then
@@ -200,7 +203,7 @@ end if
 '--------------------------------------------------------------------------- AT 02-01
 If result <> 0 Then
    DL.ResetReceiveCounter
-   msgbox "Click OK --> Tap Applepay AMEX"
+   msgbox "Click OK --> Tap Applepay AMEX card"
 
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT (02-01)"
@@ -235,7 +238,7 @@ If result <> 0 Then
    end if
 '----------------------------------------------------------------------------- AT 02-40
    DL.ResetReceiveCounter
-   msgbox "Click OK --> Tap Applepay AMEX"
+   msgbox "Click OK --> Tap Applepay AMEX card"
 
    dl.addcomment vbcrlf
    DL.AddComment "--- ACT (02-40)"

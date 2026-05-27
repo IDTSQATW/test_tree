@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-55013
+40593
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -104,15 +104,24 @@ End Sub
 '-------------------------------------------------------------
 ' TEST BEGINS
 '-------------------------------------------------------------
+platform = msgbox("Is this NEO4 reader?", vbyesno)
+
+dl.resetreceivecounter
 DL.AddComment "--- Get Bootloader Version"
 DL.SendSequence "Get Bootloader Version"
 result = DL.WaitForSequence("Positive Response", 1, 5000)
-dl.pause 200
-DL.AddComment vbCrLf
-PrintMyResult(result)
+
+if platform = 6 then
+   DL.AddComment vbCrLf
+   dl.resetreceivecounter
+   DL.AddComment "--- Get Boot Version (NEO4)"
+   DL.SendSequence "Get Boot Version (NEO4)"
+   result = DL.WaitForSequence("Positive Response", 1, 5000)
+end if
 
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 DL.AddComment vbCrLf
 dl.addcomment "///// NOTICE ///////////////////////////////////////////////////////////" & vbcrlf & vbcrlf & "Please check ASCII screen, make sure reader return correct data that meet spec!!"
 Else '""

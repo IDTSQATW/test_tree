@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-33185
+54869
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -177,6 +177,7 @@ if result <> 0 then
      result = DL.WaitForSequence("25-06 resp", 1, 2000)
      dl.pause 500
      if int(MinNow) = int(MinTarget(0)) then i = n + 1
+     if (int(MinNow) = int(MinTarget(0)) - 1) and int(SecNow) >= 57 then i = n + 1
    next
    usercheck = msgbox ("Does reader reboot on time (Target Self-Check time)?", vbyesno)
    if usercheck = 7 then result = 0
@@ -256,6 +257,7 @@ Select Case resultName
 		MyArray = Split(rx , " ", -1, 1)
 		CheckTimeNow= MyArray(17) & " " & MyArray(18)
               MinNow = MyArray(18)
+              SecNow = MyArray(19)
 		DL.AddComment vbCrLf & vbCrLf & "Reader current time (H/M) = " & CheckTimeNow
               if MyArray(18) = 58 then 
                  MyArray(18) = 00

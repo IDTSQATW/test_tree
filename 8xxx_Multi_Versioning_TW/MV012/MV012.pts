@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-62700
+12808
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -132,18 +132,21 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+MHcheck = msgbox ("Does the reader support MH1903?", vbyesno)
 k81check = msgbox ("Does the reader support K81?", vbyesno)
 rt1050check = msgbox ("Does the reader support RT1050?", vbyesno)
 
-if k81check = 6 then
-If result <> 0 Then
-   DL.ResetReceiveCounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- 29-0B Get Version of Secure Device Tree in K81"
-   DL.SendSequence "29-0B Get Version of Secure Device Tree in K81"
-   'result = DL.WaitForSequence("Positive Response", 1, 5000)
-   dl.pause 500
-End If
+if k81check = 6 or MHcheck = 6 then
+if k81check = 6 or MHcheck = 7 then
+   If result <> 0 Then
+      DL.ResetReceiveCounter
+      dl.addcomment vbcrlf
+      DL.AddComment "--- 29-0B Get Version of Secure Device Tree in K81"
+      DL.SendSequence "29-0B Get Version of Secure Device Tree in K81"
+      'result = DL.WaitForSequence("Positive Response", 1, 5000)
+      dl.pause 500
+   End If
+end if
 
 If result <> 0 Then
    DL.ResetReceiveCounter

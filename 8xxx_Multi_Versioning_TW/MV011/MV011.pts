@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-54816
+27219
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -132,6 +132,9 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+platform = msgbox ("Does the reader support CT?", vbyesno)
+
+if platform = 6 then
 If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
@@ -140,6 +143,7 @@ If result <> 0 Then
    result = DL.WaitForSequence("Positive Response", 1, 5000)
    dl.pause 500
 End If
+end if
 
 If result <> 0 Then
    DL.ResetReceiveCounter

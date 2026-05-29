@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-53609
+63369
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -132,8 +132,8 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-k81check = msgbox ("Does the reader support K81?", vbyesno)
-rt1050check = msgbox ("Does the reader support RT1050?", vbyesno)
+k81check = msgbox ("Does the reader support secure chip?", vbyesno)
+rt1050check = msgbox ("Does the reader support app chip?", vbyesno)
 
 if k81check = 6 then
 If result <> 0 Then

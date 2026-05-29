@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2025/12/2 10:16:39.866 
+Docklight Log File (HEX) - Started 2026/5/28 14:41:25.728 
  TEST CASE: FV010
 
  --- Set POS COM PORT Settings
@@ -8,8 +8,20 @@ Docklight Log File (HEX) - Started 2025/12/2 10:16:39.866
 
  --- 29-80 Get RT1050 Firmware Version
 
-2025/12/2 10:16:41.305 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 80 00 00 9B 84 
-2025/12/2 10:16:41.313 [RX] - 56 69 56 4F 74 65 63 68 32 00 29 03 00 00 F9 8E 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2026/5/28 14:41:27.024 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 80 00 00 9B 84 
+2026/5/28 14:41:27.026 [RX] - 56 69 56 4F 74 65 63 68 32 00 29 03 00 00 F9 8E 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
-Docklight Log File (HEX) - Stopped 2025/12/2 10:16:46.015 
+ Result = FAILED
+ 
+
+ ---------- END OF TEST ----------
+
+ 
+
+ ///// NOTICE ///////////////////////////////////////////////////////////
+
+Please check ASCII screen, make sure reader return correct data that meet spec!!
+
+
+Docklight Log File (HEX) - Stopped 2026/5/28 14:41:32.323 
 

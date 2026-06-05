@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-6202
+37172
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -135,6 +135,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+hwcheck = msgbox ("Does the reader support CT interface?", vbyesno)
 If result <> 0 Then
    dl.resetreceivecounter
   DL.AddComment "--- Poll on Demand"
@@ -150,6 +151,7 @@ If result <> 0 Then
   result = DL.WaitForSequence("Time Out Response", 1, 12000)
 End If
 
+if hwcheck = 6 then
 If result <> 0 Then
    dl.resetreceivecounter
   DL.AddComment vbCrLf
@@ -157,6 +159,7 @@ If result <> 0 Then
   DL.SendSequence "02-40 (enable CT only)"
   result = DL.WaitForSequence("Time Out Response", 1, 12000)
 End If
+end if
 
 If result <> 0 Then
    dl.resetreceivecounter

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-17055
+42063
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -230,8 +230,8 @@ end if
 '------------------------------------------------------------
    dl.resetreceivecounter
    DL.AddComment vbCrLf
-   DL.AddComment "--- Card Power OFF"
-   DL.SendSequence "Card Power OFF"
+   DL.AddComment "---  Pass-Through OFF"
+   DL.SendSequence " Pass-Through OFF"
    resultignore = DL.WaitForSequence("2C 00", 1, 3000)
 '------------------------------------------------------------ 
 DL.AddComment vbCrLf

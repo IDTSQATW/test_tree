@@ -123,6 +123,8 @@ if (Result):
 					if Result != True:
 						DL.fails=DL.fails+1
 						DL.SetWindowText("red", "TR3plaintextdata: FAIL")
+		else:
+			DL.fails=DL.fails+1
 else:
 	DL.fails=DL.fails+1
                 

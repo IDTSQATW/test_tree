@@ -29,7 +29,7 @@ if (Result):
 if (Result):
     RetOfStep = DL.SendCommand('C7-36 -- 03')
     if (RetOfStep):
-        Result = DL.Check_RXResponse("C7 00 00 00")	
+        DL.Check_RXResponse("C7 00 00 00")	
 
 # Poll on demand	
 if (Result):

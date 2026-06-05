@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-37453
+26997
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -160,9 +160,10 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-
+enccheck = msgbox ("Is reader data enryption status ON?", vbyesno)
 
 If result <> 0 Then
+   dl.resetreceivecounter
    DL.AddComment "--- 04-00_Fallback to CL disable"
    DL.SendSequence "04-00_DFEC53_OFF"
    result = DL.WaitForSequence("04-00 OK", 1, 10000)
@@ -170,6 +171,7 @@ End If
 
 
 If result <> 0 Then
+   dl.resetreceivecounter
    DL.AddComment  vbcrlf & vbcrlf & "--- Poll on Demand (01-01)"
    DL.SendSequence "Poll on Demand (01-01)"
    result = DL.WaitForSequence("01-01 OK", 1, 10000)
@@ -179,17 +181,16 @@ If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf & "--- Burst Off (04-00)"
    if readerType = "GR" or readerType = "NEO1" then DL.SendSequence "Burst Off (04-00)"
-   'if readerType = "NEO2" then DL.SendSequence "Burst Off (NEO2)"
+   if readerType = "NEO2" then DL.SendSequence "Burst Off (NEO2)"
    result = DL.WaitForSequence("04-00 OK", 1, 10000)
 End If
 
 
-for i = 1 to 2
-
-if i = 1 then
+if enccheck = 7 then
 If result <> 0 Then msgbox "Click OK --> Swipe Discover PAN=xxxx0026 (MSR card)"
 
 If result <> 0 Then
+   dl.resetreceivecounter
    DL.AddComment vbcrlf & vbcrlf & "--- 02-01_w/o DFEC53"
    DL.SendSequence "02-01_w/o DFEC53"
    result = DL.WaitForSequence("MSR_0201", 1, 10000)
@@ -197,7 +198,6 @@ If result <> 0 Then
          dl.addcomment vbcrlf & vbcrlf & "**Card data FAIL**"
       end if   
 End If
-
 
 If result <> 0 Then
    output = msgbox("Did you see msg 'EVM Card Please Tap'",vbyesno)
@@ -210,13 +210,10 @@ If result <> 0 Then
 End If
 end if
 
-
-
-if i = 2 then
-
 If result <> 0 Then msgbox "Click OK --> Swipe Discover PAN=xxxx0026 (MSR card)"
 
 If result <> 0 Then
+   dl.resetreceivecounter
    DL.AddComment vbcrlf & vbcrlf & "--- 02-40_w/o DFEC53"
    DL.SendSequence "02-40_w/o DFEC53"
    result = DL.WaitForSequence("MSR_0240", 1, 10000)
@@ -233,9 +230,7 @@ If result <> 0 Then
    end if
    if output = 7 then result = 1
 End If
-end if
 
-next
 
 '------------------------------------------------------------
 DL.AddComment vbCrLf

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-21043
+1878
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -232,7 +232,7 @@ If result <> 0 Then
 End If
 DL.Pause 200
 DL.AddComment vbcrlf & vbcrlf & "///////////////////////////////////////////////////////////////////"
-
+if result = 0 then i = 16
 Next
 
 End Sub
@@ -294,7 +294,7 @@ If result <> 0 Then
 End If
 DL.Pause 200
 DL.AddComment vbcrlf & vbcrlf & "///////////////////////////////////////////////////////////////////"
-
+if result = 0 then k = 16
 Next
 
 End Sub
@@ -366,7 +366,7 @@ If result <> 0 Then
 End If
 DL.Pause 200
 DL.AddComment vbcrlf & vbcrlf & "///////////////////////////////////////////////////////////////////"
-
+if result = 0 then i = 16
 Next
 
 End Sub
@@ -428,7 +428,7 @@ If result <> 0 Then
 End If
 DL.Pause 200
 DL.AddComment vbcrlf & vbcrlf & "///////////////////////////////////////////////////////////////////"
-
+if result = 0 then k = 16
 Next
 
 End Sub

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-42063
+51351
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -195,6 +195,17 @@ If result <> 0 Then
       DL.AddComment "--- Card APDU"
       DL.SendSequence "Card APDU"
       result = DL.WaitForSequence("2C 00", 1, 3000)
+      if result = 0 then 
+         fcount = fcount + 1
+         DL.AddComment vbCrLf 
+         DL.AddComment "** FAIL **"
+      end if
+
+      dl.resetreceivecounter
+      DL.AddComment vbCrLf
+      DL.AddComment "--- Retrieve ADC Voltage"
+      DL.SendSequence "Retrieve ADC Voltage"
+      result = DL.WaitForSequence("Retrieve ADC Voltage rx", 1, 3000)
       if result = 0 then 
          fcount = fcount + 1
          DL.AddComment vbCrLf 

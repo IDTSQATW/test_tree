@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-46945
+42910
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -94,6 +94,7 @@ max=1
 min=0
 Randomize
 result = 1
+failcount = 0
 
 DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
 If authn Then '""
@@ -149,10 +150,6 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-
-for i = 1 to 5 
-
-If i = 1 Then
     DL.AddComment " -- Bank card -- "
 
     MsgBox "Press OK, then swipe Discover card.", VBOKOnly, "Test step"
@@ -164,11 +161,9 @@ If i = 1 Then
 
     If result = 0 Then
         DL.AddComment vbCrLf & "==> Expected data byte is 80 1B"
+        failcount = failcount + 1
     End If
-End If
-
 '------------------------------------------------------------
-If i = 2 Then
     DL.AddComment vbCrLf
     DL.AddComment " -- AAMAV card -- "
 
@@ -181,10 +176,9 @@ If i = 2 Then
 
     If result = 0 Then
         DL.AddComment vbCrLf & "==> Expected data byte is 81 3F"
+        failcount = failcount + 1
     End If
-End If
 '------------------------------------------------------------
-If i = 3 Then
     DL.AddComment vbCrLf
     DL.AddComment " --  idt_std card -- "
 
@@ -197,11 +191,9 @@ If i = 3 Then
 
     If result = 0 Then
         DL.AddComment vbCrLf & "==> Expected data byte is 83 3F"
+        failcount = failcount + 1
     End If
-End If
-
 '------------------------------------------------------------ 
-If i = 4 Then
     DL.AddComment vbCrLf
     DL.AddComment " -- jis_1 card -- "
 
@@ -214,10 +206,9 @@ If i = 4 Then
 
     If result = 0 Then
         DL.AddComment vbCrLf & "==> Expected data byte is 86 1B"
+        failcount = failcount + 1
     End If
-End If
 '------------------------------------------------------------ 
-If i = 5 Then
     DL.AddComment vbCrLf
     DL.AddComment " -- jis_2 card -- "
 
@@ -229,12 +220,15 @@ If i = 5 Then
     result = DL.WaitForSequence("jis_2 card", 1, 3000)
 
     If result = 0 Then
-        DL.AddComment vbCrLf & "==> Expected data byte is 86 1B"
+        DL.AddComment vbCrLf & "==> Expected data byte is 85 12"
+        failcount = failcount + 1
     End If
-End If
-
-next
 '------------------------------------------------------------ 
+if failcount <> 0 then 
+   result = 0
+else
+   result = 1
+end if
 
 DL.AddComment vbCrLf
 PrintMyResult(result)

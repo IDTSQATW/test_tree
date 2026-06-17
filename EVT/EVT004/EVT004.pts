@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-29654
+64655
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -244,6 +244,18 @@ If result <> 0 Then
       end if
 
       msgbox "Remove card --> Click OK", vbokonly
+
+      dl.resetreceivecounter
+      DL.AddComment vbCrLf
+      DL.AddComment "--- Retrieve ADC Voltage"
+      DL.SendSequence "Retrieve ADC Voltage"
+      result = DL.WaitForSequence("Retrieve ADC Voltage rx-00", 1, 3000)
+      if result = 0 then 
+         fcount = fcount + 1
+         DL.AddComment vbCrLf 
+         DL.AddComment "** FAIL **"
+      end if
+
       if fcount <> 0 then result = 0
    end if
 end if

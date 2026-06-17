@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-11371
+2069
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -8,7 +8,7 @@ DL_SCRIPTVERSION
 '------------------------------------------------------------
 Dim ProjectName
 ProjectName = "EGN38" ' !!!!! EDIT THIS !!!!!
-' Objective: to test multiple DEK, ex. KeySlot 00 = TDES KEY, KeySlot 03 = AES KEY.
+' Objective: to test multiple DEK, ex. KeySlot 03 = TDES KEY, KeySlot 00 = AES KEY.
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -173,6 +173,7 @@ End Function
          dl.addcomment vbcrlf
          DL.AddComment "--- C7-A3 (KeySlot 00)"
          DL.SendSequence "C7-A3 (KeySlot 00)"
+         aescheck = DL.WaitForSequence("aes", 1, 1000)
          tdescheck = DL.WaitForSequence("tdes", 1, 1000)
       end if
       if keyslot3 <> 0 then
@@ -180,7 +181,7 @@ End Function
          dl.addcomment vbcrlf
          DL.AddComment "--- C7-A3 (KeySlot 03)"
          DL.SendSequence "C7-A3 (KeySlot 03)"
-         aescheck = DL.WaitForSequence("aes", 1, 1000)
+         tdescheck = DL.WaitForSequence("tdes", 1, 1000)
       end if
       if keyslot0 = 0 or keyslot3 = 0 then result = 0
    End If
@@ -191,7 +192,7 @@ for i = 1 to 3
    If result <> 0 Then
       dl.resetreceivecounter
       dl.addcomment vbcrlf
-      DL.AddComment "--- C7-A4 Set DEK KeySlot = 00 *** TDES DUKPT DEK: TDES"
+      DL.AddComment "--- C7-A4 Set DEK KeySlot = 00 *** AES DUKPT DEK: AES-128"
       DL.SendSequence "C7-A4 Set DEK KeySlot = 00"
       result = DL.WaitForSequence("C7 00", 1, 2000)
       dl.pause 200
@@ -200,7 +201,7 @@ for i = 1 to 3
    If result <> 0 Then
       dl.resetreceivecounter
       dl.addcomment vbcrlf
-      DL.AddComment "--- C7-A4 Set DEK KeySlot = 03 *** AES DUKPT DEK: AES-128"
+      DL.AddComment "--- C7-A4 Set DEK KeySlot = 03 *** TDES DUKPT DEK: TDES"
       DL.SendSequence "C7-A4 Set DEK KeySlot = 03"
       result = DL.WaitForSequence("C7 00", 1, 2000)
       dl.pause 200
@@ -215,38 +216,46 @@ for i = 1 to 3
       DL.SendSequence "02-40"
       dl.pause 1000
       if i <> 2 then
-         result = DL.WaitForSequence("KSN 10", 1, 4000)
-         if result <> 0 then result = DL.WaitForSequence("DFEE26 = TDES DUKPT DEK: TDES", 1, 4000)
-      elseif i = 2 then
          result = DL.WaitForSequence("KSN 12", 1, 4000)
          if result <> 0 then result = DL.WaitForSequence("DFEE26 = AES DUKPT DEK: AES-128", 1, 4000)
+      elseif i = 2 then
+         result = DL.WaitForSequence("KSN 10", 1, 4000)
+         if result <> 0 then result = DL.WaitForSequence("DFEE26 = TDES DUKPT DEK: TDES", 1, 4000)
       end if
       dl.pause 500
    End If
 next
 else
-   if keyslot0 = 0 then
-      dl.resetreceivecounter
-      dl.addcomment vbcrlf
-      DL.AddComment "--- C7-A2 TDES DUKPT manage_TDES, data key (KeySlot 00)"
-      DL.SendSequence "C7-A2 TDES DUKPT manage_TDES, data key (KeySlot 00)"
-      resultignore = DL.WaitForSequence("C7 00", 1, 2000)
-      dl.pause 200
-   end if
+   'if keyslot0 = 0 then
+   '   dl.resetreceivecounter
+   '   dl.addcomment vbcrlf
+   '   DL.AddComment "--- C7-A2 TDES DUKPT manage_TDES, data key (KeySlot 00)"
+   '   DL.SendSequence "C7-A2 TDES DUKPT manage_TDES, data key (KeySlot 00)"
+   '   resultignore = DL.WaitForSequence("C7 00", 1, 2000)
+   '   dl.pause 200
+   'end if
 
-   if keyslot3 = 0 then
+   'if keyslot3 = 0 then
+   '   dl.resetreceivecounter
+   '   dl.addcomment vbcrlf
+   '   DL.AddComment "--- C7-A2 AES DUKPT manage_AES-128, Data key both ways (KeySlot 3)"
+   '   DL.SendSequence "C7-A2 AES DUKPT manage_AES-128, Data key both ways (KeySlot 3)"
+   '   resultignore = DL.WaitForSequence("C7 00", 1, 2000)
+   '   dl.pause 200
+   'end if
+   dl.addcomment vbcrlf
+   if tdescheck = 0 and aescheck = 0 then DL.AddComment "***** Please load DEK (TDES DUKPT: TDES) in KeySlot 03 & DEK (AES DUKPT: AES-128) in KeySlot 00 to reader first....." & vbcrlf & vbcrlf & "Use TX cmd: " & vbcrlf & "C7-A2 TDES DUKPT manage_TDES, data key (KeySlot 3)" & vbcrlf & "C7-A2 AES DUKPT manage_AES-128, Data key both ways (KeySlot 0)"
+   if tdescheck = 0 and aescheck <> 0 then DL.AddComment "***** Please load DEK (TDES DUKPT: TDES) in KeySlot 03 to reader first....." & vbcrlf & vbcrlf & "Use TX cmd: " & vbcrlf & "C7-A2 TDES DUKPT manage_TDES, data key (KeySlot 3)"
+
+   if tdescheck <> 0 and aescheck = 0 then DL.AddComment "***** Please load DEK (AES DUKPT: AES-128) in KeySlot 00 to reader first....." & vbcrlf & vbcrlf & "Use TX cmd: " & vbcrlf & "C7-A2 AES DUKPT manage_AES-128, Data key both ways (KeySlot 0)"
+
+end if
+
       dl.resetreceivecounter
       dl.addcomment vbcrlf
-      DL.AddComment "--- C7-A2 AES DUKPT manage_AES-128, Data key both ways (KeySlot 3)"
-      DL.SendSequence "C7-A2 AES DUKPT manage_AES-128, Data key both ways (KeySlot 3)"
-      resultignore = DL.WaitForSequence("C7 00", 1, 2000)
+      DL.AddComment "--- C7-A4 Set DEK KeySlot = 00"
+      DL.SendSequence "C7-A4 Set DEK KeySlot = 00"
       dl.pause 200
-   end if
-   dl.addcomment vbcrlf
-   if tdescheck = 0 and aescheck = 0 then DL.AddComment "***** Please load DEK (TDES DUKPT: TDES) in KeySlot 00 & DEK (AES DUKPT: AES-128) in KeySlot 03 to reader first....."
-   if tdescheck = 0 and aescheck <> 0 then DL.AddComment "***** Please load DEK (TDES DUKPT: TDES) in KeySlot 00 to reader first....."
-   if tdescheck <> 0 and aescheck = 0 then DL.AddComment "***** Please load DEK (AES DUKPT: AES-128) in KeySlot 03 to reader first....."
-end if
 '------------------------------------------------------------
 DL.AddComment vbcrlf & "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)

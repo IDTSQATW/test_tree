@@ -11,6 +11,9 @@ PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 rx = 0
 		
+# HWcheck
+HWcheck = DL.ShowMessageBox("", "Does the project support CT reader?", 0)
+        
 # Auto poll support check
 autopollcheck = DL.ShowMessageBox("", "Does the project support Auto-Poll mode?", 0)
 if autopollcheck == 1: 
@@ -24,7 +27,10 @@ if lcdtype == 1:
 	DL.SetWindowText("Green", "*** The project has LCD ***")
 else:
 	DL.SetWindowText("Green", "*** The project has NO LCD ***")
-	
+
+# Check platform
+platform = DL.ShowMessageBox("", "Is this NEO3 and upward project?", 0)
+
 # Check reader is VP3350 or not
 readermodel = DL.ShowMessageBox("", "Is this VP3350?", 0)
 if readermodel == 1:
@@ -68,13 +74,15 @@ if (Result):
 				RetOfStep = DL.SendCommand('Poll on Demand')
 				if (RetOfStep):
 					Result = DL.Check_RXResponse("01 00 00 00")	
-			if (Result):			
-				if i == 1:
-					RetOfStep = DL.SendCommand('02-40, MSR -- Discover w/ LCD')
-				if i == 2:
-					time.sleep(1)
-					RetOfStep = DL.SendCommand('02-40, CL -- Discover w/ LCD')
-				if i == 3:
+			if i == 1:
+				RetOfStep = DL.SendCommand('02-40, MSR -- Discover w/ LCD')
+			if i == 2:
+				time.sleep(1)
+				RetOfStep = DL.SendCommand('02-40, CL -- Discover w/ LCD')
+			if i == 3:
+				if HWcheck == 0:     #Not support CT
+					i == i + 1
+				else:
 					time.sleep(1)
 					RetOfStep = DL.SendCommand('60-10, CT -- EMV Test Card V2 T=0 w/ LCD')	
 					rx = 1
@@ -169,7 +177,7 @@ if (Result):
 			# CL transaction
 			if i == 2 or i == 5:
 				if (RetOfStep):
-					if readermodel == 0:
+					if platform == 0:     #NEOII project
 						alldata=DL.Get_RXResponse(rx)	
 						DL.Check_RXResponse(rx, 'F1 ** DF EE 12')
 						ksn = DL.GetTLV(alldata,"DFEE12")	
@@ -277,7 +285,7 @@ if (Result):
 						if DL.Check_RXResponse(rx, "DFEE26 ** F100") == False:
 							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")	
-					if readermodel == 1:	
+					if platform == 1:     #NEO3 and upward project
 						DL.Check_RXResponse(rx, "E1 ** DF EE 12")
 						alldata = DL.GetTLV(DL.Get_RXResponse(rx),"FF8105")
 						ksn = DL.GetTLV(DL.Get_RXResponse(rx),"DFEE12")

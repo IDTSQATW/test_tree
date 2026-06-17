@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-32064
+5877
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -176,6 +176,18 @@ End Function
    DL.AddComment "--- C7-3A"
    DL.SendSequence "C7-3A"
    result = DL.WaitForSequence("C7 00", 1, 3000)
+   if result = 0 then 
+      fcount = fcount + 1
+      DL.AddComment vbCrLf 
+      DL.AddComment "** FAIL **"
+   end if
+
+   dl.resetreceivecounter
+   DL.AddComment vbCrLf
+   DL.AddComment "--- C7-3A w/ 01"
+   DL.SendSequence "C7-3A w/ 01"
+   result = DL.WaitForSequence("C7 00-12", 1, 1000)
+   if result = 0 then result = DL.WaitForSequence("C7 00-13", 1, 1000)
    if result = 0 then 
       fcount = fcount + 1
       DL.AddComment vbCrLf 

@@ -1,9 +1,9 @@
 
-11:29:49: If Issue ?
+15:24:28: If Issue ?
 Pass Test
 [Issue Count: 0]
 
-11:29:49: >>[Do Scripts]>>
+15:24:28: >>[Do Scripts]>>
 
 Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
 --------------------
@@ -63,4 +63,10 @@ ASCII: Otech2
 >>> Check USB connection type
 MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
 User Judgment Pass
+
+
+15:59:04: [Load Script File]
+Path_File:C:\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=02, DFEC4F=USB KB).txt
+Items: 37
+Load Case Succeed!
 

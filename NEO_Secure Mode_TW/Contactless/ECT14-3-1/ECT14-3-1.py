@@ -18,9 +18,11 @@ if readermodel == 1:
 	RetOfStep = DL.SendCommand('0105 do not use LCD')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("01 00 00 00")
-	readertype = DL.ShowMessageBox("", "Is this NSRED project?", 0)
+	
 else:
 	DL.SetWindowText("Green", "*** non-VP3350 reader ***")	
+    
+readertype = DL.ShowMessageBox("", "Is this NSRED project?", 0)
 
 if readertype == 1:
     # Check data encryption TYPE is TDES	
@@ -32,6 +34,12 @@ if readertype == 1:
     # Enable encryption (03)
     if (Result):
         RetOfStep = DL.SendCommand('Enable Encryption (03)')
+        if (RetOfStep):
+            Result = Result and DL.Check_RXResponse("C7 00 00 00")
+            
+    # Set DFec60, mask/ truncate mode selection = 2
+    if (Result):
+        RetOfStep = DL.SendCommand('Set DFec60, mask/ truncate mode selection = 2')
         if (RetOfStep):
             Result = Result and DL.Check_RXResponse("C7 00 00 00")
             
@@ -55,6 +63,7 @@ if readertype == 1:
                 time.sleep(1)
                 if i <= 2:
                     RetOfStep = DL.SendCommand('Activate Transaction-D')
+                    
                 if i == 3:
                     RetOfStep = DL.SendCommand('Activate Transaction-V')
                 if (RetOfStep):
@@ -72,11 +81,11 @@ if readertype == 1:
                         dec5A = DL.DecryptDLL(0,1, strKey, ksn, enc5A)	
                     
                         # Tag 57
-                        if i == 1:
+                        if i == 1: #check DFEC4A (pre8post4), PAN = 15, At least Truncate 5 digits
                             Result = DL.Check_RXResponse('36 07 05 CC CC C0 00 1D 49 12 CC CC CC CC CC CC CC CC')
-                        if i == 2:
+                        if i == 2: #check DFEE1D (pre6post4), At least Mask 6 digits
                             Result = DL.Check_RXResponse('36 07 0C CC CC C0 00 1D 49 12 CC CC CC CC CC CC CC CC')
-                        if i == 3:
+                        if i == 3: #check DFEC4A (pre8post4), PAN = 14, At least Truncate 4 digits
                             Result = DL.Check_RXResponse('47 61 73 CC CC 01 00 D2 01 2C CC CC CC CC CC CC CC CC')
                             
                         if Result == True and DL.Check_RXResponse("57 A1 12"):
@@ -133,6 +142,12 @@ if readertype == 1:
     RetOfStep = DL.SendCommand('Reset to default')
     if (RetOfStep):
         DL.Check_RXResponse("04 00 00 00")
+        
+    # Set DFec60, mask/ truncate mode selection = default
+    if (Result):
+        RetOfStep = DL.SendCommand('Set DFec60, mask/ truncate mode selection = default')
+        if (RetOfStep):
+            Result = Result and DL.Check_RXResponse("C7 00 00 00")
 else:
     DL.SetWindowText("red", "Please use NSRED reader to test...")
     DL.fails=DL.fails+1

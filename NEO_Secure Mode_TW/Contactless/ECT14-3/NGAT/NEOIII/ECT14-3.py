@@ -48,7 +48,7 @@ if (Result):
 # cmd 02-40, tap card
 if (Result):
     for i in range(1, 3):
-        if readermodel == 1 or platformcheck == 1: #VP3350 or NEO 3/ 4 projects
+        if readermodel == 1 or platformcheck == 1: #VP3350 or NEO 3/ 4 projects (use C7-D7 to set DFEE1D)
             if i == 1:
                 RetOfStep = DL.SendCommand('DFEE1D--02 02 21 0A 30 (NEO3)')
                 if (RetOfStep):
@@ -57,7 +57,7 @@ if (Result):
                 RetOfStep = DL.SendCommand('DFEE1D--06 04 7E 0F 31 (NEO3)')
                 if (RetOfStep):
                     Result = Result and DL.Check_RXResponse("C7 00 00 00")	
-        if platformcheck == 0: #NEO 1/ 2 projects
+        if platformcheck == 0: #NEO 1/ 2 projects (use 04-00 to set DFEE1D)
             if i == 1:
                 RetOfStep = DL.SendCommand('DFEE1D--02 02 21 0A 30')
                 if (RetOfStep):

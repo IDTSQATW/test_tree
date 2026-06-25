@@ -1,7 +1,3 @@
-TID:Set DFec60, mask/ truncate mode selection = 2
-CMD:C7 D7 DFEC60 01 01
-EXR:
-
 TID:Set DFec60, mask/ truncate mode selection = 3
 CMD:C7 D7 DFEC60 01 02
 EXR:
@@ -54,45 +50,39 @@ TID:DFEE1D--02 04 2A 0C 31
 CMD:C7D7 DF EE 1D 05 02 04 2A 0C 31
 EXR:
 
-TID:Activate Transaction-D16
+TID:Activate Transaction-D15
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00 DF EF 37 01 02
-MSG:Tap Card 11#, Discover DPAS card (PAN = 16)...
+MSG:Tap Card 84#, Discover card (PAN = 15)...
 EXR:
 TIMEOUT:120000
 
 TID:Activate Transaction-JCB
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00 DF EF 37 01 02
-MSG:Tap JCB EMV card (PAN = 16)...
+MSG:Tap Card 331#, JCB card (PAN = 14)...
 EXR:
 TIMEOUT:120000
 
 TID:Activate Transaction-MasterCard
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00 DF EF 37 01 02
-MSG:Tap Card 02#, MC no.21 card (PAN = 16)...
+MSG:Tap Card 199#, MC no.21 card (PAN = 14)...
 EXR:
 TIMEOUT:120000
 
 TID:Activate Transaction-Visa
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00 DF EF 37 01 02
-MSG:Tap VISA qVSDC card (PAN = 16)...
+MSG:Tap Card 97#, VISA card (PAN = 14)...
 EXR:
 TIMEOUT:120000
 
 TID:Activate Transaction-AMEX
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00 DF EF 37 01 02
-MSG:Tap Card 86#, AMEX card (PAN = 15)...
+MSG:Tap Card 315#, AMEX XP8 card (PAN = 14)...
 EXR:
 TIMEOUT:120000
 
-TID:Activate Transaction-D14
+TID:Activate Transaction-interac
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00 DF EF 37 01 02
-MSG:Tap Card 308#, Discover card (PAN = 14)...
-EXR:
-TIMEOUT:120000
-
-TID:Activate Transaction-cup
-CMD:02 40 78 9F 02 06 00 00 00 00 10 00 DF EF 37 01 02
-MSG:Tap Card 69#, CUP card (PAN = 16)...
+MSG:Tap INTERAC card (PAN = 16)...
 EXR:
 TIMEOUT:120000
 

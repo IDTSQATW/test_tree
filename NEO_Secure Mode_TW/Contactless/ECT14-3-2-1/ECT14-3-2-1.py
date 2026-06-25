@@ -51,11 +51,11 @@ if readertype == 1:
 
     # cmd 02-40, tap card
     if (Result):
-        for i in range(1, 8):     #6 card brand transaction: Discover-16PAN/ JCB/ MC/ VISA/ AMEX/ Discover-14PAN; ***UnionPay should add when it support.
+        for i in range(1, 7):     #6 card brand transaction, those cards did not meet New_Truncate table.
             if (Result):
                 time.sleep(0.3)
                 if i == 1: 
-                    RetOfStep = DL.SendCommand('Activate Transaction-D16')
+                    RetOfStep = DL.SendCommand('Activate Transaction-D15')
                 if i == 2: 
                     RetOfStep = DL.SendCommand('Activate Transaction-JCB')
                 if i == 3: 
@@ -63,11 +63,9 @@ if readertype == 1:
                 if i == 4: 
                     RetOfStep = DL.SendCommand('Activate Transaction-Visa')
                 if i == 5: 
-                    RetOfStep = DL.SendCommand('Activate Transaction-cup')
-                if i == 6: 
                     RetOfStep = DL.SendCommand('Activate Transaction-AMEX')
-                if i == 7: 
-                    RetOfStep = DL.SendCommand('Activate Transaction-D14')
+                if i == 6: 
+                    RetOfStep = DL.SendCommand('Activate Transaction-interac')
                 if (RetOfStep):
                     Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 ** DF EE 12")
                     if (Result):
@@ -84,46 +82,36 @@ if readertype == 1:
                     
                         # Tag 57
                         if i == 1:
-                            Result = DL.Check_RXResponse('36 07 05 00 CC CC 00 14 D4 91 2C CC CC CC CC CC CC CC CC')
-                            if (Result):
-                                Result = DL.Check_RXResponse('56 A1 41 2A 33 36 30 37 30 35 30 30 2A 2A 2A 2A 30 30 31 34 5E 54 45 53 54 20 43 41 52 44 2F 4D 53 20 20 20 20 20 20 20 20 20 20 20 20 20 20 5E 34 39 31 32 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A')
+                            Result = DL.Check_RXResponse('57 A1 12 36 CC CC CC CC C0 00 1D 49 12 CC CC CC CC CC CC CC CC')
                         if i == 2: 
-                            Result = DL.Check_RXResponse('35 40 82 99 CC CC 10 12 D4 91 2C CC CC CC CC CC CC CC CC')
+                            Result = DL.Check_RXResponse('57 A1 12 35 CC CC CC CC 10 12 D4 91 2C CC CC CC CC CC CC CC CC')
                         if i == 3:
-                            Result = DL.Check_RXResponse('54 13 33 00 CC CC 00 10 D1 41 2C CC CC CC CC CC CC')
+                            Result = DL.Check_RXResponse('57 A1 10 54 CC CC CC CC 60 00 D1 41 2C CC CC CC CC CC CC')
                         if i == 4:
-                            Result = DL.Check_RXResponse('47 61 73 90 CC CC 00 10 D2 01 2C CC CC CC CC CC CC CC CC')
+                            Result = DL.Check_RXResponse('57 A1 12 47 CC CC CC CC 01 00 D2 01 2C CC CC CC CC CC CC CC CC')
                         if i == 5:
-                            Result = DL.Check_RXResponse('62 28 00 01 CC CC 11 17 D2 01 2C CC CC CC CC CC CC CC CC')
+                            Result = DL.Check_RXResponse('57 A1 12 37 CC CC CC CC 10 14 D1 41 0C CC CC CC CC CC CC CC CC')
                         if i == 6:
-                            Result = DL.Check_RXResponse('37 42 45 CC CC C0 00 1D 14 10 CC CC CC CC CC CC CC CC CC')
-                        if i == 7:
-                            Result = DL.Check_RXResponse('36 07 05 CC CC 00 14 D4 91 2C CC CC CC CC CC CC CC')
+                            Result = DL.Check_RXResponse('57 A1 11 54 CC CC CC CC CC 15 13 D0 51 2C CC CC CC CC CC CC')
                             
-                        if i <= 2 or i == 4 or i == 6:
-                            if Result == True and Result2 == DL.Check_RXResponse("57 A1 13"):
-                                DL.SetWindowText("blue", "Tag 57_Mask: PASS")
-                        if i == 3 or i == 7:
-                            if Result == True and Result2 == DL.Check_RXResponse("57 A1 11"):
-                                DL.SetWindowText("blue", "Tag 57_Mask: PASS")
-                        if Result == False or Result2 == False:
+                        if Result == False:
                             DL.SetWindowText("red", "Tag 57_Mask: FAIL")
                             DL.fails=DL.fails+1
+                        else:
+                            DL.SetWindowText("blue", "Tag 57_Mask: PASS")
                                 
                         if i == 1:
-                            Result = DL.Check_StringAB(dec57, '57 13 36 07 05 00 00 00 00 14 D4 91 21 01 00 00 33 21 12 30 1F')
+                            Result = DL.Check_StringAB(dec57, '57 12 36 07 05 00 00 00 00 1D 49 12 10 10 00 03 32 11 23 01')
                         if i == 2:
-                            Result = DL.Check_StringAB(dec57, '57 13 35 40 82 99 99 42 10 12 D4 91 22 01 55 55 55 55 55 55 2F')
+                            Result = DL.Check_StringAB(dec57, '57 12 35 40 82 99 42 10 12 D4 91 22 01 55 55 55 55 55 55 2F')
                         if i == 3:
-                            Result = DL.Check_StringAB(dec57, '57 11 54 13 33 00 89 60 00 10 D1 41 22 01 01 23 40 91 72')
+                            Result = DL.Check_StringAB(dec57, '57 10 54 13 33 00 89 60 00 D1 41 22 01 01 23 40 91 72')
                         if i == 4:
-                            Result = DL.Check_StringAB(dec57, '57 13 47 61 73 90 01 01 00 10 D2 01 21 20 00 12 33 99 00 03 1F')
+                            Result = DL.Check_StringAB(dec57, '57 12 47 61 73 90 01 01 00 D2 01 21 20 00 12 33 99 00 03 1F')
                         if i == 5:
-                            Result = DL.Check_StringAB(dec57, '57 13 62 28 00 01 00 00 11 17 D2 01 21 20 00 12 33 99 00 03 1F')
+                            Result = DL.Check_StringAB(dec57, '57 12 37 42 45 45 54 10 14 D1 41 07 02 10 10 00 00 00 00 00')
                         if i == 6:
-                            Result = DL.Check_StringAB(dec57, '57 13 37 42 45 45 54 00 00 1D 14 10 70 21 01 00 00 00 00 00 0F')
-                        if i == 7:
-                            Result = DL.Check_StringAB(dec57, '57 11 36 07 05 00 00 00 14 D4 91 21 01 00 00 33 21 12 30')
+                            Result = DL.Check_StringAB(dec57, '57 11 54 13 33 90 00 00 15 13 D0 51 22 20 01 23 45 67 89')
                             
                         if Result == True and DL.Check_RXResponse("57 C1 18"):
                             DL.SetWindowText("blue", "Tag 57_Enc: PASS")
@@ -133,44 +121,36 @@ if readertype == 1:
                             
                         # Tag 5A
                         if i == 1:
-                            Result = DL.Check_RXResponse('36 07 05 00 CC CC 00 14')
+                            Result = DL.Check_RXResponse('5A A1 08 36 CC CC CC CC C0 00 1F')
                         if i == 2:
-                            Result = DL.Check_RXResponse('35 40 82 99 CC CC 10 12')
+                            Result = DL.Check_RXResponse('5A A1 07 35 CC CC CC CC 10 12')
                         if i == 3:
-                            Result = DL.Check_RXResponse('54 13 33 00 CC CC 00 10')
+                            Result = DL.Check_RXResponse('5A A1 07 54 CC CC CC CC 60 00')
                         if i == 4:
-                            Result = DL.Check_RXResponse('47 61 73 90 CC CC 00 10')
+                            Result = DL.Check_RXResponse('5A A1 07 47 CC CC CC CC 01 00')
                         if i == 5:
-                            Result = DL.Check_RXResponse('62 28 00 01 CC CC 11 17')
+                            Result = DL.Check_RXResponse('5A A1 07 37 CC CC CC CC 10 14')
                         if i == 6:
-                            Result = DL.Check_RXResponse('37 42 45 CC CC C0 00 1F')
-                        if i == 7:
-                            Result = DL.Check_RXResponse('36 07 05 CC CC 00 14')
-                            
-                        if i <= 6:
-                            if Result == True and Result2 == DL.Check_RXResponse("5A A1 08"):
-                                DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
-                        if i == 7:
-                            if Result == True and Result2 == DL.Check_RXResponse("5A A1 07"):
-                                DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
-                        if Result == False or Result2 == False:
+                            Result = DL.Check_RXResponse('5A A1 08 54 CC CC CC CC CC 15 13')
+
+                        if Result == False:
                             DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
                             DL.fails=DL.fails+1
+                        else:
+                            DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
                                 
                         if i == 1:
-                            Result = DL.Check_StringAB(dec5A, '5A 08 36 07 05 00 00 00 00 14')
+                            Result = DL.Check_StringAB(dec5A, '5A 08 36 07 05 00 00 00 00 1F')
                         if i == 2:
-                            Result = DL.Check_StringAB(dec5A, '5A 08 35 40 82 99 99 42 10 12')
+                            Result = DL.Check_StringAB(dec5A, '5A 07 35 40 82 99 42 10 12')
                         if i == 3:
-                            Result = DL.Check_StringAB(dec5A, '5A 08 54 13 33 00 89 60 00 10')
+                            Result = DL.Check_StringAB(dec5A, '5A 07 54 13 33 00 89 60 00')
                         if i == 4:
-                            Result = DL.Check_StringAB(dec5A, '5A 08 47 61 73 90 01 01 00 10')
+                            Result = DL.Check_StringAB(dec5A, '5A 07 47 61 73 90 01 01 00')
                         if i == 5:
-                            Result = DL.Check_StringAB(dec5A, '5A 08 62 28 00 01 00 00 11 17')
+                            Result = DL.Check_StringAB(dec5A, '5A 07 37 42 45 45 54 10 14')
                         if i == 6:
-                            Result = DL.Check_StringAB(dec5A, '5A 08 37 42 45 45 54 00 00 1F')
-                        if i == 7:
-                            Result = DL.Check_StringAB(dec5A, '5A 07 36 07 05 00 00 00 14')
+                            Result = DL.Check_StringAB(dec5A, '5A 08 54 13 33 90 00 00 15 13')
                             
                         if Result == True and DL.Check_RXResponse("5A C1 10"):
                             DL.SetWindowText("blue", "Tag 5A_Enc: PASS")
@@ -193,8 +173,13 @@ if readertype == 1:
     RetOfStep = DL.SendCommand('Set DFec60, mask/ truncate mode selection = default')
     if (RetOfStep):
         DL.Check_RXResponse("C7 00 00 00")
+        
 else:
-    DL.fails=DL.fails+1
+    # Set DFec60, mask/ truncate mode selection = 3, only support on SRED project
+    if (Result):
+        RetOfStep = DL.SendCommand('Set DFec60, mask/ truncate mode selection = 3')
+        if (RetOfStep):
+            Result = Result and DL.Check_RXResponse("C7 05")
     
 if readermodel == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')

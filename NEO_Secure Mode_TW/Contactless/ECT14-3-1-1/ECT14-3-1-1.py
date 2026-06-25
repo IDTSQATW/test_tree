@@ -11,6 +11,8 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
+# Objective: If TLV DFEC4A is present, Default Set to Mode 2; related issue -- NEO3-18481
+
 # Check reader is VP3350 or not
 readermodel = DL.ShowMessageBox("", "Is this VP3350?", 0)
 if readermodel == 1:
@@ -21,6 +23,11 @@ if readermodel == 1:
 	
 else:
 	DL.SetWindowText("Green", "*** non-VP3350 reader ***")	
+    
+# Reset to default
+RetOfStep = DL.SendCommand('Reset to default')
+if (RetOfStep):
+    DL.Check_RXResponse("04 00 00 00")
     
 readertype = DL.ShowMessageBox("", "Is this NSRED project?", 0)
 
@@ -37,12 +44,6 @@ if readertype == 1:
         if (RetOfStep):
             Result = Result and DL.Check_RXResponse("C7 00 00 00")
             
-    # Set DFec60, mask/ truncate mode selection = 2
-    if (Result):
-        RetOfStep = DL.SendCommand('Set DFec60, mask/ truncate mode selection = 2')
-        if (RetOfStep):
-            Result = Result and DL.Check_RXResponse("C7 00 00 00")
-            
     # Poll on demand
     if (Result):
         RetOfStep = DL.SendCommand('Poll on Demand')
@@ -51,30 +52,23 @@ if readertype == 1:
 
     # cmd 02-40, tap card
     if (Result):
-        for i in range(1, 4):
-            if i == 1 or i == 3:     #test PAN15 & PAN14 card
-                RetOfStep = DL.SendCommand('DFEC4A--08 04 2A 0C 31')
-            if i == 2:     #test PAN15 card
-                RetOfStep = DL.SendCommand('DFEE1D--06 04 2A 0C 31')
+        for i in range(1, 2):
+            if i == 1:     #test PAN15 card
+                RetOfStep = DL.SendCommand('DFEC4A--08 04 2A 0C 31')   #only set tag DFEC4A
             if (RetOfStep):
                 Result = Result and DL.Check_RXResponse("C7 00 00 00")	
                 if (Result):     #Check C7-D7 config
                     RetOfStep = DL.SendCommand('Read C7-D7 config (NEO3-18218)')
                     if (RetOfStep):
-                        if i == 1 or i == 3:
-                            ResultC = DL.Check_RXResponse("DFEE1D05FF022A0C31DFEC4A0508042A0C31")
-                        if i == 2:
-                            ResultC = DL.Check_RXResponse("DFEE1D0506042A0C31DFEC4A0508042A0C31")
+                        if i == 1:
+                            ResultC = DL.Check_RXResponse("5669564F746563683200C700000EDFEC4A0508042A0C31DFEC600101DF49")     #Change to mode 2 auto
                     if ResultC == False:
                         DL.fails=DL.fails+1
 
             if (Result):
                 time.sleep(1)
-                if i <= 2:
+                if i == 1:
                     RetOfStep = DL.SendCommand('Activate Transaction-D')
-                    
-                if i == 3:
-                    RetOfStep = DL.SendCommand('Activate Transaction-V')
                 if (RetOfStep):
                     Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** E1 ** DF EE 12")
                     if (Result):
@@ -90,52 +84,34 @@ if readertype == 1:
                         dec5A = DL.DecryptDLL(0,1, strKey, ksn, enc5A)	
                     
                         # Tag 57
-                        if i == 1: #check DFEC4A (pre8post4), PAN = 15, At least Truncate 5 digits
-                            Result = DL.Check_RXResponse('36 07 05 CC CC C0 00 1D 49 12 CC CC CC CC CC CC CC CC')
-                        if i == 2: #check DFEE1D (pre6post4), At least Mask 6 digits
-                            Result = DL.Check_RXResponse('36 07 0C CC CC C0 00 1D 49 12 CC CC CC CC CC CC CC CC')
-                        if i == 3: #check DFEC4A (pre8post4), PAN = 14, At least Truncate 4 digits
-                            Result = DL.Check_RXResponse('47 61 73 CC CC 01 00 D2 01 2C CC CC CC CC CC CC CC CC')
-                            
+                        if i == 1:     #Follow default value of tag DFEE1D
+                            Result = DL.Check_RXResponse('36 07 CC CC CC C0 00 1D 49 12 CC CC CC CC CC CC CC CC')
                         if Result == True and DL.Check_RXResponse("57 A1 12"):
                             DL.SetWindowText("blue", "Tag 57_Mask: PASS")
                         else:
                             DL.SetWindowText("red", "Tag 57_Mask: FAIL")
                             DL.fails=DL.fails+1
                                 
-                        if i <= 2:
-                            r1 = DL.Check_StringAB(dec57, '57 12 36 07 05 00 00 00 00 1D 49 12 10 10 00 03 32 11 23 01 00 00 00 00 00 00 00 00 00 00 00 00')
-                        if i == 3:
-                            r1 = DL.Check_StringAB(dec57, '57 12 47 61 73 90 01 01 00 D2 01 21 20 00 12 33 99 00 03 1F 00 00 00 00')
-                        if r1 == True and DL.Check_RXResponse("57 C1 18"):
+                        if i == 1:
+                            Result = DL.Check_StringAB(dec57, '57 12 36 07 05 00 00 00 00 1D 49 12 10 10 00 03 32 11 23 01 00 00 00 00 00 00 00 00 00 00 00 00')
+                        if Result == True and DL.Check_RXResponse("57 C1 18"):
                             DL.SetWindowText("blue", "Tag 57_Enc: PASS")
                         else:
                             DL.SetWindowText("red", "Tag 57_Enc: FAIL")
                             DL.fails=DL.fails+1
                             
                         # Tag 5A
-                        if i == 1:
-                            Result = DL.Check_RXResponse('36 07 05 CC CC C0 00 1F')
-                        if i == 2:
-                            Result = DL.Check_RXResponse('36 07 0C CC CC C0 00 1F')
-                        if i == 3:
-                            Result = DL.Check_RXResponse('47 61 73 CC CC 01 00')
-                            
-                        if i <= 2:
-                            if Result == True and Result2 == DL.Check_RXResponse("5A A1 08"):
-                                DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
-                        if i == 3:
-                            if Result == True and Result2 == DL.Check_RXResponse("5A A1 07"):
-                                DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
-                        if Result == False or Result2 == False:
+                        if i == 1:     #Follow default value of tag DFEE1D
+                            Result = DL.Check_RXResponse('36 07 CC CC CC C0 00 1F')
+                        if Result == True and DL.Check_RXResponse("5A A1 08"):
+                            DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
+                        else:
                             DL.SetWindowText("red", "Tag 5A_Mask: FAIL")
                             DL.fails=DL.fails+1
                                 
-                        if i <= 2:
-                            r1 = DL.Check_StringAB(dec5A, '5A 08 36 07 05 00 00 00 00 1F')
-                        if i == 3:
-                            r1 = DL.Check_StringAB(dec5A, '5A 07 47 61 73 90 01 01 00 00 00 00 00 00 00 00')
-                        if r1 == True and DL.Check_RXResponse("5A C1 10"):
+                        if i == 1:
+                            Result = DL.Check_StringAB(dec5A, '5A 08 36 07 05 00 00 00 00 1F')
+                        if Result == True and DL.Check_RXResponse("5A C1 10"):
                             DL.SetWindowText("blue", "Tag 5A_Enc: PASS")
                         else:
                             DL.SetWindowText("red", "Tag 5A_Enc: FAIL")

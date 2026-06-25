@@ -25,9 +25,10 @@ if readermodel == 1:
 	RetOfStep = DL.SendCommand('0105 do not use LCD')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("01 00 00 00")
-	readertype = DL.ShowMessageBox("", "Is this NSRED project?", 0)
 else:
 	DL.SetWindowText("Green", "*** non-VP3350 reader ***")		
+    
+readertype = DL.ShowMessageBox("", "Is this NSRED project?", 0)
 		
 # Poll on demand		
 if (Result):

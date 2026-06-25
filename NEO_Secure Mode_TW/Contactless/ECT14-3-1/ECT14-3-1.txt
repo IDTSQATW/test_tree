@@ -6,6 +6,10 @@ TID:Set DFec60, mask/ truncate mode selection = default
 CMD:C7 D7 DFEC60 01 00
 EXR:
 
+TID:Read C7-D7 config (NEO3-18218)
+CMD:C7 D7
+EXR:
+
 TID:Get DUKPT DEK Attribution based on KeySlot (C7-A3)
 CMD:C7 A3 01 00
 EXR:

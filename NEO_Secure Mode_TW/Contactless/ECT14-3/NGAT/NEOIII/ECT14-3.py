@@ -17,7 +17,6 @@ if readermodel == 1:
 	RetOfStep = DL.SendCommand('0105 do not use LCD')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("01 00 00 00")
-	readertype = DL.ShowMessageBox("", "Is this NSRED project?", 0)
 else:
 	DL.SetWindowText("Green", "*** non-VP3350 reader ***")	
     
@@ -28,6 +27,12 @@ if (Result):
 	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
+        
+# DFEE1D--08 02 21 0A 30 (NEO3)	
+if (Result):
+	RetOfStep = DL.SendCommand('DFEE1D--08 02 21 0A 30 (NEO3)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("C7 05")
 
 # Set group B0
 if (Result):

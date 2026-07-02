@@ -1,0 +1,10 @@
+/// NGAT Test SW is available on the URL below ///
+
+https://atlassian.idtechproducts.com/confluence/display/DVT/Binary+Files
+
+
+
+---------------------------------------------------------------------------------------------
+/// If NGAT SW has any problem, please report issue on Project below///
+
+https://atlassian.idtechproducts.com/jira/projects/NGAT/issues/NGAT-27?filter=allopenissues

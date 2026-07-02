@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-65226
+57455
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -148,6 +148,7 @@ If result <> 0 Then
    DL.AddComment "--- Poll on demand"
    DL.SendSequence "poll on demand"
    result = DL.WaitForSequence("01-01 resp 00", 1, 3000)
+   dl.pause 600
 End If
 
 If result <> 0 Then

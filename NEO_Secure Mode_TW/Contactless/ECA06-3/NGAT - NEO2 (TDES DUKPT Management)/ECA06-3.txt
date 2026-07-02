@@ -28,13 +28,9 @@ MSG:Tap Discover card (ANY)...
 EXR:
 TIMEOUT:120000
 
-TID:Activate Transaction w/o LCD
+TID:Activate Transaction w/ LCD-2
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00
 MSG:Tap Discover card... (card#84)
-EXR:
-EXR:
-EXR:
-EXR:
 EXR:
 TIMEOUT:120000
 

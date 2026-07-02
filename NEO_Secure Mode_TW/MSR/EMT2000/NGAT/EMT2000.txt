@@ -6,6 +6,10 @@ TID:C7-A2 TDES DUKPT manage_TransArmor TDES, data key
 CMD:C7 A2 01 00 00 02 00 00 00 00
 EXR:C7 00 00 00
 
+TID:C7-A2 TDES DUKPT manage_TDES, data key (defautl)
+CMD:C7 A2 01 00 00 00 00 00 00 00
+EXR:C7 00 00 00
+
 TID:Get Data Encryption Enable Flag (C7-37)
 CMD:C7 37
 EXR:03

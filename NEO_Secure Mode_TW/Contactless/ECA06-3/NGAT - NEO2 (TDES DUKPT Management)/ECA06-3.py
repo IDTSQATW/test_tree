@@ -10,12 +10,12 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
-# Check project has LCD or not
-lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
-if lcdtype == 1:
-	DL.SetWindowText("Green", "*** The project has LCD ***")
+# Check project was NEO2 or NEO3/ 4
+platform = DL.ShowMessageBox("", "Is this NEO2 project?", 0)
+if platform == 1:
+	DL.SetWindowText("Green", "*** The project is NEO2 ***")
 else:
-	DL.SetWindowText("Green", "*** The project has NO LCD ***")
+	DL.SetWindowText("Green", "*** The project is NOT NEO2 ***")
 
 # Check data encryption TYPE is TDES	
 if (Result):
@@ -37,16 +37,16 @@ if (Result):
 
 # cmd 02-40, tap card
 if (Result):
-    if lcdtype == 1:
+    if platform == 1:     #NEO2 project
         RetOfStep = DL.SendCommand('Activate Transaction w/ LCD')
         rx = 0
-    if lcdtype == 0:
-        RetOfStep = DL.SendCommand('Activate Transaction w/o LCD')	
-        rx = 4
+    if platform == 0:     #NEO3/ 4 projects
+        RetOfStep = DL.SendCommand('Activate Transaction w/ LCD-2')	
+        rx = 0
     if (RetOfStep):
-        if lcdtype == 1:
+        if platform == 1:
             Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** F3 ** DF EE 12")
-        if lcdtype == 0:
+        if platform == 0:
             Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E3 ** DF EE 12")	
         if (Result):
             alldata = DL.Get_RXResponse(rx)		
@@ -69,7 +69,7 @@ if (Result):
             enc57 = DL.GetTLV(FF8105,"57", 1)
             dec57 = DL.DecryptDLL(0,2, strKey, ksn, enc57)	
 
-            if lcdtype == 1:		
+            if platform == 1:		
             # Tag DFEF17
                 r1 = DL.Check_StringAB(maskDFEF17, '2A 36 35 31 30 2A 2A 2A 2A 2A 2A 2A 2A')
                 r2 = DL.Check_StringAB(maskDFEF17, '5E 43 41 52 44 2F 49 4D 41 47 45')
@@ -155,7 +155,7 @@ if (Result):
                     DL.fails=DL.fails+1
                     DL.SetWindowText("Red", "Tag DFEE26: FAIL")	
                     
-            if lcdtype == 0:					
+            if platform == 0:					
             # Tag 57
                 r1 = DL.Check_StringAB(mask57, '36 07 CC CC CC C0 00 1D 49 12 CC CC CC CC CC CC CC CC')
                 if r1 == True and DL.Check_RXResponse(rx, "57 A1 12"):

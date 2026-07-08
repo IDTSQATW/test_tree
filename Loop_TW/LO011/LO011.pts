@@ -1,0 +1,142 @@
+DL_SCRIPTVERSION
+1
+26945
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "LO011" ' !!!!! EDIT THIS !!!!!
+' Objective: stress test for 2c-02 poll for token
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+
+result = 1
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.StartCommunication
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+msgbox "Place any CL card on reader --> Click OK"
+
+ For i = 1 to 100000
+
+   If result <> 0 Then
+      dl.addcomment vbcrlf & vbcrlf
+      DL.AddComment "//////////////    PT mode, poll card test # " & i & "  //////////////"
+   
+      if result <> 0 then
+         dl.resetreceivecounter
+         dl.addcomment vbcrlf
+         DL.SendSequence "2C-01-----Pass Through ON"
+         result = DL.WaitForSequence("2C 00", 1, 3000)
+      end if
+
+      if result <> 0 then
+         dl.resetreceivecounter
+         dl.addcomment vbcrlf
+         DL.SendSequence "2C-02 Poll for Token (10 sec)"
+         result = DL.WaitForSequence("2C 00, w/ card", 1, 3000)
+      end if
+
+      if result <> 0 then
+         dl.resetreceivecounter
+         dl.addcomment vbcrlf
+         DL.SendSequence "2C-01-----Pass Through OFF"
+         result = DL.WaitForSequence("2C 00", 1, 3000)
+      end if
+   End If
+
+  Next
+
+
+   DL.AddComment  vbcrlf & "Stress test is completed"
+
+
+'------------------------------------------------------------
+DL.AddComment vbCrLf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'DL.pause 1000
+
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+'FileOutput.CreateFile "FINAL_VERDICT.txt"
+
+'If MasterResult = 0 Then 
+'	FileOutput.WriteLine "0|FAIL|NOK"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.WriteLine "1|PASS|OK"
+'End If
+'FileOutput.WriteLine MasterResult
+'FileOutput.CloseFile 

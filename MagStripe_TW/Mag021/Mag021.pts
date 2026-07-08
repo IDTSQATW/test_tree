@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-26864
+26548
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -162,6 +162,14 @@ if result <> 0 then
    DL.AddComment "--- DF7D = 02 (NEO2)" 
    DL.SendSequence "DF7D = 02 (NEO2)"
    result = DL.WaitForSequence("04 00", 1, 3000)
+end if
+
+if result <> 0 then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- C7-45 Get MSR Tracks" 
+   DL.SendSequence "C7-45 Get MSR Tracks"
+   result = DL.WaitForSequence("C7-45 =30", 1, 3000)
 end if
 '------------------------------------------------------------
 if result <> 0 then

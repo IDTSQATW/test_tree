@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-11840
+865
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -225,12 +225,12 @@ If result <> 0 Then
    if r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 or r5 = 0 or r6 = 0 or r7 = 0 or r12 = 1 or r13 = 1 then
       result = 0
       if r1 = 0 then dl.addcomment vbcrlf & "Card data: FAIL!"
-      if result2 = 0 then dl.addcomment vbcrlf & "Tag 9F39: FAIL!"
-      if result3 = 0 then dl.addcomment vbcrlf & "Tag DF30: FAIL!"
-      if result4 = 0 then dl.addcomment vbcrlf & "Tag DFEE26: FAIL!"
-      if result5 = 0 then dl.addcomment vbcrlf & "Tag DFEF4C: FAIL!"
-      if result6 = 0 then dl.addcomment vbcrlf & "Tag DFEF4D: FAIL!"
-      if result7 = 0 then dl.addcomment vbcrlf & "Tag 9F02: FAIL!"
+      if r2 = 0 then dl.addcomment vbcrlf & "Tag 9F39: FAIL!"
+      if r3 = 0 then dl.addcomment vbcrlf & "Tag DF30: FAIL!"
+      if r4 = 0 then dl.addcomment vbcrlf & "Tag DFEE26: FAIL!"
+      if r5 = 0 then dl.addcomment vbcrlf & "Tag DFEF4C: FAIL!"
+      if r6 = 0 then dl.addcomment vbcrlf & "Tag DFEF4D: FAIL!"
+      if r7 = 0 then dl.addcomment vbcrlf & "Tag 9F02: FAIL!"
       if r12 = 1 then dl.addcomment vbcrlf & "Tag DFEF17: Should NOT return this!"
       if r13 = 1 then dl.addcomment vbcrlf & "Tag DFEF18: Should NOT return this!"
    end if

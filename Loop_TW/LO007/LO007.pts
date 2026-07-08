@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-53659
+35590
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -90,7 +90,7 @@ msgbox "Place any CL card (can return 23 status code) on reader --> Click OK"
   Next
 
 
-   DL.AddComment  vbcrlf & "Stress test: Cancel ACT is completed"
+   DL.AddComment  vbcrlf & "Stress test is completed"
 
 
 '------------------------------------------------------------

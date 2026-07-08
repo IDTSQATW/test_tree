@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2026/6/2 10:26:32.333 
+Docklight Log File (HEX) - Started 2026/7/7 16:20:53.105 
  TEST CASE: AC007_1
 
  --- Set POS COM PORT Settings
@@ -15,5 +15,5 @@ The case for GR/ NEO1 product only
  Result = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2026/6/2 10:26:35.354 
+Docklight Log File (HEX) - Stopped 2026/7/7 16:20:56.067 
 

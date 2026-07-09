@@ -1,12 +1,15 @@
-Docklight Log File (HEX) - Started 2026/5/13 13:35:36.985 
+Docklight Log File (HEX) - Started 2026/7/8 16:05:25.109 
  TEST CASE: EMT3000
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on com90 @ 115200 baud...
+ POS operating on COM90 @ 115200 baud...
  Set POS COM PORT - COMPLETE
 
+ 
+---------- END OF TEST ----------
 
 
-Docklight Log File (HEX) - Stopped 2026/5/13 13:35:37.722 
+
+Docklight Log File (HEX) - Stopped 2026/7/8 16:05:26.355 
 

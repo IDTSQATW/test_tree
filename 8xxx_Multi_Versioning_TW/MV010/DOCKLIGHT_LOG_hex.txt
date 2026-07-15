@@ -1,27 +1,15 @@
-Docklight Log File (HEX) - Started 2026/5/28 15:20:11.699 
+Docklight Log File (HEX) - Started 2026/7/9 14:51:17.649 
  TEST CASE: MV010
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 9600 baud...
+ POS operating on COM90 @ 115200 baud...
  Set POS COM PORT - COMPLETE
 
  --- Get RT1050 Chip Memory Usage Information (09-31) *** NEO2
 
-2026/5/28 15:20:13.016 [TX] - 56 69 56 4F 74 65 63 68 32 00 09 31 00 00 65 05 
-2026/5/28 15:20:13.019 [RX] - 56 69 56 4F 74 65 63 68 32 00 09 03 00 00 CE C0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+2026/7/9 14:51:18.955 [TX] - 56 69 56 4F 74 65 63 68 32 00 09 31 00 00 65 05 
+2026/7/9 14:51:18.959 [RX] - 56 69 56 4F 74 65 63 68 32 00 09 03 00 00 CE C0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
 
- Result = FAILED
- 
-
- ---------- END OF TEST ----------
-
- 
-
- ///// NOTICE ///////////////////////////////////////////////////////////
-
-Please make sure reader return correct data that meet spec!!
-
-
-Docklight Log File (HEX) - Stopped 2026/5/28 15:20:18.602 
+Docklight Log File (HEX) - Stopped 2026/7/9 14:51:23.357 
 

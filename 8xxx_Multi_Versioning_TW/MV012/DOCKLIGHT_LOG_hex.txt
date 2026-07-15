@@ -1,17 +1,17 @@
-Docklight Log File (HEX) - Started 2026/5/28 15:48:08.974 
+Docklight Log File (HEX) - Started 2026/7/9 15:06:54.801 
  TEST CASE: MV012
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on com90 @ 115200 baud...
+ POS operating on COM90 @ 115200 baud...
  Set POS COM PORT - COMPLETE
 
  
 
  --- 29-0B Get Version of Project Device Tree in K81
 
-2026/5/28 15:48:12.533 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 0B 00 01 01 56 E5 
-2026/5/28 15:48:12.538 [RX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 12  
+2026/7/9 15:06:57.822 [TX] - 56 69 56 4F 74 65 63 68 32 00 29 0B 00 01 01 56 E5 
+2026/7/9 15:06:57.832 [RX] - 56 69 56 4F 74 65 63 68 32 00 29 00 00 12  
 56 50 36 33 32 38 5F 44 54 5F 50 52 4A 5F 41 5F 56 31 9C EE 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  ---------- END OF TEST ----------
@@ -23,5 +23,5 @@ Docklight Log File (HEX) - Started 2026/5/28 15:48:08.974
 Please check ASCII screen, make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (HEX) - Stopped 2026/5/28 15:48:13.137 
+Docklight Log File (HEX) - Stopped 2026/7/9 15:06:58.433 
 

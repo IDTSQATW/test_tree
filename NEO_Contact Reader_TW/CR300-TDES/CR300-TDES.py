@@ -75,13 +75,9 @@ if (Result):
 				if (Result):
 					Result = Result and DL.Check_RXResponse(8, "61 01 ** 03 00 00 02 00 ** 03 00 ** 23 1C")
 		if (Result) and CTresultcode == "0003":
-			Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')
-			if (Result):
-				DL.SetWindowText("blue", "FastEMV: PASS")
-			else:
+			if DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00') == False:
 				DL.fails=DL.fails+1
-				DL.SetWindowText("red", "FastEMV: FAIL")
-			
+				DL.SetWindowText("red", "Status code: FAIL")
 			if DL.Check_RXResponse(rx, "9F39 01 05") == False: 
 				DL.fails=DL.fails+1
 				DL.SetWindowText("Red", "Tag 9F39: FAIL")	
@@ -91,6 +87,12 @@ if (Result):
 			if DL.Check_RXResponse(rx, "DFEE26 02 E000") == False: 
 				DL.fails=DL.fails+1
 				DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+			if DL.Check_RXResponse(rx, "8A 02 5A 33") == False: 
+				DL.fails=DL.fails+1
+				DL.SetWindowText("Red", "Tag 8A: FAIL")
+		else:
+			DL.fails=DL.fails+1
+			DL.SetWindowText("red", "FastEMV: FAIL")
 else:
 	DL.fails=DL.fails+1
 
@@ -349,13 +351,9 @@ if (Result):
 				if (Result):
 					Result = Result and DL.Check_RXResponse(8, "61 01 ** 03 00 00 02 00 ** 03 00 ** 23 1C")
 		if (Result) and CTresultcode == "0003":
-			Result = DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00')
-			if (Result):
-				DL.SetWindowText("blue", "FastEMV: PASS")
-			else:
+			if DL.Check_RXResponse(rx, '56 69 56 4F 74 65 63 68 32 00 60 00') == False:
 				DL.fails=DL.fails+1
-				DL.SetWindowText("red", "FastEMV: FAIL")
-			
+				DL.SetWindowText("red", "Status code: FAIL")
 			if DL.Check_RXResponse(rx, "9F39 01 05") == False: 
 				DL.fails=DL.fails+1
 				DL.SetWindowText("Red", "Tag 9F39: FAIL")	
@@ -365,8 +363,14 @@ if (Result):
 			if DL.Check_RXResponse(rx, "DFEE26 02 E000") == False: 
 				DL.fails=DL.fails+1
 				DL.SetWindowText("Red", "Tag DFEE26: FAIL")		
+			if DL.Check_RXResponse(rx, "8A 02 5A 33") == False: 
+				DL.fails=DL.fails+1
+				DL.SetWindowText("Red", "Tag 8A: FAIL")
 		else:
 			DL.fails=DL.fails+1
+			DL.SetWindowText("red", "FastEMV: FAIL")
+	else:
+		DL.fails=DL.fails+1
 else:
 	DL.fails=DL.fails+1
                 

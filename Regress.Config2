@@ -2,9 +2,9 @@ $Prompt - Test Case Number
 OFF
 $Prompt - Test Case Steps
 ON
-$Prompt - COM Port
+$Prompt - COM Port COM Port, com8, com91, USBHID:ACD:3530:,1,63
 COM90
-$Prompt - Reader Baud Rate: 0 (if use USB to Serial Converter)
+$Prompt - Reader Baud Rate: 0 (if use USB to Serial Converter), 9600, 115200
 115200
 $Prompt - reader type: GR (2 byte TLV), AR (3 byte TLV), NEO1 (2 byte TLV), NEO2 (3 byte TLV), NC (Not care)
 NEO2

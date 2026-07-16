@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-50368
+6033
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -149,7 +149,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-0. Reader is under Deactivated mode.
+0. Reader is under activated mode.
 =====
 1. cmd "Stress Test - Set Test Count-M"
 

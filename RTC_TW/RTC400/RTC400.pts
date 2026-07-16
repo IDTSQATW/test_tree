@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-60836
+45855
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -142,11 +142,21 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-'Pass criteria: time offset shout not > 1.7sec after idling 24 hr
+'Pass criteria: 
+'1) time offset shout not > 1.7sec after idling 24 hr. (TE-5450)
+'2) IDTech standard is 20 PPM. (NEO3-18156)
+
+'Pre-condition:
+'Reader:
+' Step1. SMFG Start PCI Secure CMD
+' Step2. SMFG Set UTC to sync the device time with local time
+'PC: sync time once. 
 
 'Test scope:
 'case 1) power off reader and idle 24 hr.
 'case 2) power on reader and idle 24 hr.
+
+'Note: (Time offset(second)/ Total test time(second)) * 1000000 = PPM
 
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf

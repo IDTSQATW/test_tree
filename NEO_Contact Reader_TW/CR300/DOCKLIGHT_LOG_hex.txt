@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2025/10/28 10:43:19.017 
+Docklight Log File (HEX) - Started 2026/7/15 09:58:39.692 
  TEST CASE: CR300
 
  --- Set POS COM PORT Settings
@@ -8,5 +8,5 @@ Docklight Log File (HEX) - Started 2025/10/28 10:43:19.017
 
 
 
-Docklight Log File (HEX) - Stopped 2025/10/28 10:43:19.254 
+Docklight Log File (HEX) - Stopped 2026/7/15 09:58:39.810 
 

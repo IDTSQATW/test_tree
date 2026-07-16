@@ -1,15 +1,15 @@
-Docklight Log File (HEX) - Started 2026/5/28 15:12:47.071 
+Docklight Log File (HEX) - Started 2026/7/9 14:09:35.885 
  TEST CASE: MV004
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on com90 @ 115200 baud...
+ POS operating on COM90 @ 115200 baud...
  Set POS COM PORT - COMPLETE
 
  --- Get All reader Variables
 
-2026/5/28 15:12:48.486 [TX] - 56 69 56 4F 74 65 63 68 32 00 09 00 00 00 90 97 
-2026/5/28 15:12:48.490 [RX] - 56 69 56 4F 74 65 63 68 32 00 09 02 00 00 F9 F0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+2026/7/9 14:09:37.181 [TX] - 56 69 56 4F 74 65 63 68 32 00 09 00 00 00 90 97 
+2026/7/9 14:09:37.185 [RX] - 56 69 56 4F 74 65 63 68 32 00 09 02 00 00 F9 F0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  Result = FAILED
  
@@ -24,5 +24,5 @@ Docklight Log File (HEX) - Started 2026/5/28 15:12:47.071
 2) cmd 09-00 will return the same result as cmd 09-20
 
 
-Docklight Log File (HEX) - Stopped 2026/5/28 15:12:54.092 
+Docklight Log File (HEX) - Stopped 2026/7/9 14:09:42.794 
 

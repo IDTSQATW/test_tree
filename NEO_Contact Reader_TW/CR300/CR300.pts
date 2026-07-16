@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-17278
+23110
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -368,7 +368,9 @@ If result <> 0 Then
          r3 = DL.WaitForSequence("dfef4c-4d", 1, 2000)
       end if
 
-      if r1 = 0 or r2 = 0 or r3 = 0 then result = 0
+      r4 = DL.WaitForSequence("8A 02 5A 33", 1, 2000)
+
+      if r1 = 0 or r2 = 0 or r3 = 0 or r4 = 0 then result = 0
    end if
 end if
 

@@ -1,18 +1,23 @@
-Docklight Log File (HEX) - Started 2026/5/28 15:52:07.438 
+Docklight Log File (HEX) - Started 2026/7/9 15:07:15.084 
  TEST CASE: MV014
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on com90 @ 115200 baud...
+ POS operating on COM90 @ 115200 baud...
  Set POS COM PORT - COMPLETE
 
  
 
  --- 09-15 Get System Info (Get K81 all available system info)
 
-2026/5/28 15:52:10.612 [TX] - 56 69 56 4F 74 65 63 68 32 00 09 15 00 01 3F 30 31 
-2026/5/28 15:52:10.626 [RX] - 56 69 56 4F 74 65 63 68 32 00 09 00 00 13  
+2026/7/9 15:07:25.472 [TX] - 56 69 56 4F 74 65 63 68 32 00 09 15 00 01 3F 30 31 
+2026/7/9 15:07:25.480 [RX] - 56 69 56 4F 74 65 63 68 32 00 09 00 00 13  
 01 01 10 0C 09 53 54 32 35 52 33 39 31 36 0F 03 EF 00 18 CC 55 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+
+ --- 09-15 Get System Info (Get RT1050 all available system info)
+
+2026/7/9 15:07:26.011 [TX] - 56 69 56 4F 74 65 63 68 32 00 09 15 00 01 7F 78 F5 
+2026/7/9 15:07:26.021 [RX] - 56 69 56 4F 74 65 63 68 32 00 09 05 00 00 7C 60 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  ---------- END OF TEST ----------
 
@@ -23,5 +28,5 @@ Docklight Log File (HEX) - Started 2026/5/28 15:52:07.438
 Please check ASCII screen, make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (HEX) - Stopped 2026/5/28 15:52:11.242 
+Docklight Log File (HEX) - Stopped 2026/7/9 15:07:26.623 
 

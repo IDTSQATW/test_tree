@@ -85,7 +85,7 @@ if (Result):
 							
 		if lcdtype == 1:					
 			RetOfStep = DL.SendCommand('Activate Transaction_w LCD')
-			rx = 1
+			rx6010 = 1
 		if lcdtype == 0:
 			RetOfStep = DL.SendCommand('Activate Transaction_w/o LCD')	
 			rx6010 = 5 #for VP3350	

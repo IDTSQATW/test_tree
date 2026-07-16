@@ -75,7 +75,7 @@ if (Result):
 			if readertype == 1:
 				Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
 				if (Result):
-					Result = DL.Check_StringAB(DL.Get_RXResponse(1), 'E8 DF EE 25')
+					Result = DL.Check_StringAB(DL.Get_RXResponse(1), 'EC DF EE 25')
 					sResult=DL.Get_RXResponse(1)
 			if readertype == 0:   
 				rx = 4

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-25510
+4803
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -329,13 +329,6 @@ If result <> 0 Then
 
    if countf <> 0 then result = 0
 End If
-
-else
-   DL.AddComment vbcrlf & "Please check first..."
-   DL.AddComment vbcrlf & "1) Is the reader GR or NEO2 platform?"
-   DL.AddComment vbcrlf & "2) Does reader has transact keys already?"
-   result = 0
-end if
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 '============================================================

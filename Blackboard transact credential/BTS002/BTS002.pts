@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-45018
+25913
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -223,6 +223,7 @@ if readerType <> "NEO2" or readercheck = 6 then
       DL.SendSequence "Data Encrypt disable"
       result = DL.WaitForSequence("C7 00", 1, 2000)
       if result = 0 then dl.addcomment vbcrlf & vbcrlf & "** Please set data encryption off first... (C7-36 = 00)"
+      dl.pause 500
    End If
 
    if readerType <> "NEO2" then 

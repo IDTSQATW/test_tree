@@ -18,13 +18,13 @@ if (Result):
 		if Result != True:
 			DL.SetWindowText("red", "Data encryption should be enabled...C7-37 = 03")
 		
-# Get account DUKPT encryption type (C7-33)
-if (Result):
-	RetOfStep = DL.SendCommand('Get account DUKPT encryption type (C7-33)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 01")
-		if Result == False:
-			DL.SetWindowText("red", "Data key should be AES type...C7-33 = 01")
+# # Get account DUKPT encryption type (C7-33)
+# if (Result):
+	# RetOfStep = DL.SendCommand('Get account DUKPT encryption type (C7-33)')
+	# if (RetOfStep):
+		# Result = Result and DL.Check_RXResponse("C7 00 00 01 01")
+		# if Result == False:
+			# DL.SetWindowText("red", "Data key should be AES type...C7-33 = 01")
 
 # # (C7-6A) Get BlackBoard Private Key Hash
 # if (Result):

@@ -51,7 +51,7 @@ if (Result):
 if (Result):
 	Result = DL.SendCommand('Activate Transaction')
 	if (Result):
-		#Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EC DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 4F 6A 00 00 A1 89 02 1A 00")
+		Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** EC DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 4F 6A 00 00 A1 89 02 1A 00")
 		sResult=DL.Get_RXResponse(0)
 		if (Result):
 			sResult=sResult.replace(" ","")

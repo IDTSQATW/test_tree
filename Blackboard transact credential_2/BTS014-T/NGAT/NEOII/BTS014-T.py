@@ -18,30 +18,11 @@ if (Result):
 		if Result == False:
 			DL.SetWindowText("red", "Data encryption should be disabled...C7-37 = 00")
 		
-# Get account DUKPT encryption type (C7-33)
+# Check data encryption TYPE is TDES	
 if (Result):
-	RetOfStep = DL.SendCommand('Get account DUKPT encryption type (C7-33)')
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 00")
-		if Result == False:
-			DL.SetWindowText("red", "Data key should be TDES type...C7-33 = 00")
-
-# # (C7-6A) Get BlackBoard Private Key Hash
-# if (Result):
-	# RetOfStep = DL.SendCommand('(C7-6A) Get BlackBoard Private Key Hash')
-	# if (RetOfStep):
-		# Result = Result and DL.Check_RXResponse("C7 00 00 20")
-		# if Result == False:
-			# DL.SetWindowText("red", "Reader should load BlackBoard Private Key first...")
-
-# # (C7-6A) Get BlackBoard LTPK Hash
-# if (Result):
-	# RetOfStep = DL.SendCommand('(C7-6A) Get BlackBoard LTPK Hash')
-	# if (RetOfStep):
-		# Result = Result and DL.Check_RXResponse("C7 00 00 20")	
-		# if Result == False:
-			# DL.SetWindowText("red", "Reader should load BlackBoard LTPK first...")	
-			
+		Result = DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")			
 			
 # (C7-6D) Load Campus Card Key Block / Retrieve Key Block Info
 if (Result):
@@ -106,39 +87,43 @@ if (Result):
 				Tag9F39 = DL.GetTLV(alldata,"9F39")
 				TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
 				TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
-						
+                
 				# Tag DFEF4C-4D	
-				# Result = DL.Check_StringAB(TagDFEF4C, '00 00 00 00 30 00')
-				# if Result == True:
-					# DL.SetWindowText("blue", "Tag DFEF4C: PASS")
-				# else:
-					# DL.SetWindowText("red", "Tag DFEF4C: FAIL")
-									
-				# Result = DL.Check_StringAB(decDFEF4D, '00040000000355000000000003455900000000001001000001AC60010DFF28580000000000000000FCF86DBC68704101')
-				# if Result == True:
-					# DL.SetWindowText("blue", "Tag DFEF4D: PASS")
-				# else:
-					# DL.SetWindowText("red", "Tag DFEF4D: FAIL)
-					
-			# Tags 9F39/ FFEE01/ DFEE26 /DFED44
+				Result = DL.Check_RXResponse("DF EF 4C 06 00 00 00 00 00 00 DF EF 4D 00")
+				if Result == True:
+					DL.SetWindowText("blue", "Tag DFEF4C/ 4D: PASS")
+				else:
+					DL.SetWindowText("red", "Tag DFEF4C/ 4D: FAIL")
+					DL.fails=DL.fails+1
+						
+				# Tags 9F39/ FFEE01/ DFEE26 /DFED44
 				if (DL.Check_StringAB(Tag9F39, '07')): 
 					DL.SetWindowText("blue", "Tag 9F39: PASS")
 				else:
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")
+					DL.fails=DL.fails+1
 				
 				if (DL.Check_StringAB(TagFFEE01, "DFEE300100")): 
 					DL.SetWindowText("blue", "Tag FFEE01: PASS")
 				else:
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
+					DL.fails=DL.fails+1
 				
 				if (DL.Check_StringAB(TagDFEE26, '2100')):
 					DL.SetWindowText("blue", "Tag DFEE26: PASS")
 				else:
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+					DL.fails=DL.fails+1
 					
 				if (DL.Check_StringAB(TagDFED44, '901DAB2A8F9604')):
 					DL.SetWindowText("blue", "Tag DFED44: PASS")
 				else:
 					DL.SetWindowText("Red", "Tag DFED44: FAIL")
+					DL.fails=DL.fails+1
 				
 				time.sleep(1)
+                
+if(0 < (DL.fails + DL.warnings)):
+	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
+else:
+	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )

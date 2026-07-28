@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-56048
+45769
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -214,9 +214,6 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------Pre-condition
-if readerType = "NEO2" then readercheck = msgbox("Does reader erase keys and reload Admin/ Data (KSN = 629949012C0004600001) keys first?", vbyesno)
-
-if readercheck = 6 or readerType <> "NEO2" then
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- Data Encrypt disable"
@@ -279,25 +276,14 @@ If result <> 0 Then
    dl.pause 500
 End If
 '------------------------------------------------------------Start test
-if result <> 0 then
-for i = 1 to 3
-    If result <> 0 Then
-       if i = 1 then cmd = "(C7-6B) Get the next DEK KSN"
-       if i = 2 then cmd = "(C7-6C) Set KTK Private Key KSN 01h"
-       if i = 3 then cmd = "(C7-67) Set Card Key - Take about 15 seconds"
-       dl.resetreceivecounter
-       dl.addcomment vbcrlf
-       DL.AddComment "--- " & cmd
-       DL.SendSequence cmd
-       if i = 1 then 
-          result = DL.WaitForSequence("C7-6B resp", 1, 5000)
-       else
-          result = DL.WaitForSequence("C7 00", 1, 160000)
-       end if
-       dl.pause 500
-    End If
-next
-end if
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- C7-6D"
+   DL.SendSequence "C7-6D"
+   result = DL.WaitForSequence("C7 00, 2D", 1, 3000)
+   dl.pause 500
+End If
 
 If result <> 0 Then
    msgbox "Click OK --> Tap ApplePay w/ Blackboard card (iPhone_AOU1264501 w/ Camden University card)", vbyesno
@@ -334,14 +320,6 @@ If result <> 0 Then
    if r6 = 0 then DL.AddComment vbcrlf & "Tag DF30: FAIL"
    if r7 = 0 then DL.AddComment vbcrlf & "Tag FFEE12: FAIL"
 End If
-
-else
-   DL.AddComment vbcrlf & "Please preset..."
-   dl.addcomment vbcrlf & "1) Erase keys and reload Admin/ Data (KSN = 629949012C0004600001) keys first."
-   dl.addcomment vbcrlf & "2) Set Key Encryption Type = AES."
-   dl.addcomment vbcrlf & "3) Set Encryption = off."
-   result = 0
-end if
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 '============================================================

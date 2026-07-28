@@ -18,13 +18,11 @@ if (Result):
 		if Result == False:
 			DL.SetWindowText("red", "Data encryption should be disabled...C7-37 = 00")
 		
-# Get account DUKPT encryption type (C7-33)
+# Check data encryption TYPE is TDES	
 if (Result):
-	RetOfStep = DL.SendCommand('Get account DUKPT encryption type (C7-33)')
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 00")	
-		if Result == False:
-			DL.SetWindowText("red", "Data key should be TDES type...C7-33 = 00")
+		Result = DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
 
 # (C7-6A) Get BlackBoard Private Key Hash
 if (Result):

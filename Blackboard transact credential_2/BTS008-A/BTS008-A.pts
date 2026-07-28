@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-64505
+49523
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -265,25 +265,14 @@ If result <> 0 Then
    dl.pause 500
 End If
 '------------------------------------------------------------Start test
-if result <> 0 then
-for i = 1 to 3
-    If result <> 0 Then
-       if i = 1 then cmd = "(C7-6B) Get the next DEK KSN"
-       if i = 2 then cmd = "(C7-6C) Set KTK Private Key KSN 01h"
-       if i = 3 then cmd = "(C7-67) Set Card Key - Take about 15 seconds"
-       dl.resetreceivecounter
-       dl.addcomment vbcrlf
-       DL.AddComment "--- " & cmd
-       DL.SendSequence cmd
-       if i = 1 then 
-          result = DL.WaitForSequence("C7-6B resp", 1, 5000)
-       else
-          result = DL.WaitForSequence("C7 00", 1, 160000)
-       end if
-       dl.pause 500
-    End If
-next
-end if
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- C7-6D"
+   DL.SendSequence "C7-6D"
+   result = DL.WaitForSequence("C7 00, 2D", 1, 3000)
+   dl.pause 500
+End If
 
 If result <> 0 Then
    countf = 0

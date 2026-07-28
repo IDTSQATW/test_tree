@@ -18,29 +18,11 @@ if (Result):
 		if Result != True:
 			DL.SetWindowText("red", "Data encryption should be enabled...C7-37 = 03")
 		
-# # Get account DUKPT encryption type (C7-33)
-# if (Result):
-	# RetOfStep = DL.SendCommand('Get account DUKPT encryption type (C7-33)')
-	# if (RetOfStep):
-		# Result = Result and DL.Check_RXResponse("C7 00 00 01 01")
-		# if Result == False:
-			# DL.SetWindowText("red", "Data key should be AES type...C7-33 = 01")
-
-# # (C7-6A) Get BlackBoard Private Key Hash
-# if (Result):
-	# RetOfStep = DL.SendCommand('(C7-6A) Get BlackBoard Private Key Hash')
-	# if (RetOfStep):
-		# Result = Result and DL.Check_RXResponse("C7 00 00 20")
-		# if Result == False:
-			# DL.SetWindowText("red", "Reader should load BlackBoard Private Key first...")
-
-# # (C7-6A) Get BlackBoard LTPK Hash
-# if (Result):
-	# RetOfStep = DL.SendCommand('(C7-6A) Get BlackBoard LTPK Hash')
-	# if (RetOfStep):
-		# Result = Result and DL.Check_RXResponse("C7 00 00 20")	
-		# if Result == False:
-			# DL.SetWindowText("red", "Reader should load BlackBoard LTPK first...")	
+# Check data encryption TYPE is AES	
+if (Result):
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("C7 00 00 06 00 01 00 00 00 00")
 			
 # (C7-6D) Load Campus Card Key Block / Retrieve Key Block Info
 if (Result):

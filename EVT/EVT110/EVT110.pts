@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-54040
+36094
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -153,6 +153,17 @@ End Function
       DL.AddComment vbCrLf
       DL.AddComment "--- Get PCB Ver"
       DL.SendSequence "Get PCB Ver"
+      result = DL.WaitForSequence("01 00", 1, 1500)
+      if result = 0 then 
+         fcount = fcount + 1
+         DL.AddComment vbCrLf 
+         DL.AddComment "** FAIL **"
+      end if
+
+      dl.resetreceivecounter
+      DL.AddComment vbCrLf
+      DL.AddComment "--- PCB SN Get"
+      DL.SendSequence "PCB SN Get"
       result = DL.WaitForSequence("01 00", 1, 1500)
       if result = 0 then 
          fcount = fcount + 1

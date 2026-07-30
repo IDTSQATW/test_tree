@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-16515
+4587
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -163,6 +163,7 @@ if result <> 0 then
    if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then dl.sendsequence "DF7D = 00"
    if readerType = "NEO2" then dl.sendsequence "DF7D = 00 (NEO2)"
    result = dl.waitforsequence("burst off", 1, 2000)
+   dl.pause 500
 end if
 
 if result <> 0 then
@@ -173,6 +174,7 @@ if result <> 0 then
    if readerType = "GR" or readerType = "NEO1" or readerType = "USAT" then dl.sendsequence "Burst OFF"
    if readerType = "NEO2" then dl.sendsequence "Burst OFF (NEO2)"
    result = dl.waitforsequence("burst off", 1, 2000)
+   dl.pause 500
 end if
 
 if result <> 0 then
@@ -181,6 +183,7 @@ if result <> 0 then
    dl.addcomment "--- Poll on demand"
    dl.sendsequence "Poll on Demand"
    result = dl.waitforsequence("Poll Response", 1, 2000)
+   dl.pause 500
 end if
 
 If result <> 0 Then

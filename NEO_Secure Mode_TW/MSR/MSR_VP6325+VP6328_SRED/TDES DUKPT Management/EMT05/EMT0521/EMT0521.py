@@ -58,14 +58,14 @@ if readertype == 1:
             Result = Result and DL.Check_RXResponse("04 00 00 00")	
 
     # cmd 02-40, swipe Discover card
-    # if (Result):
+    if (Result):
         for i in range(1, 4):
             if i == 1 or i == 3:     #test PAN15 & PAN14 card
                 RetOfStep = DL.SendCommand('DFEC4A--08 04 2A 0C 31')
             if i == 2:     #test PAN15 card
                 RetOfStep = DL.SendCommand('DFEE1D--06 04 2A 0C 31')
             if (RetOfStep):
-                Result = DL.Check_RXResponse("C7 00 00 00")	
+                Result = Result and DL.Check_RXResponse("C7 00 00 00")	
             if (Result):
                 time.sleep(1)
                 if i <= 2:
@@ -151,6 +151,8 @@ if readertype == 1:
                                         DL.fails=DL.fails+1
                     else:
                         DL.fails=DL.fails+1
+    else:
+        DL.fails=DL.fails+1
 else:
     DL.SetWindowText("red", "Please use NSRED reader to test...")
     DL.fails=DL.fails+1
@@ -162,6 +164,7 @@ if lcdtype == 1:
         
 # Reset to default
 RetOfStep = DL.SendCommand('Reset to default')
+time.sleep(0.8)
 if (RetOfStep):
     DL.Check_RXResponse("04 00 00 00")
         

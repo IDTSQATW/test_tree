@@ -18,7 +18,7 @@ if lcdtype == 1:
 		Result = DL.Check_RXResponse("01 00 00 00")
 else:
 	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
-
+    
 # Check data encryption TYPE is TDES	
 if (Result):
 	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')

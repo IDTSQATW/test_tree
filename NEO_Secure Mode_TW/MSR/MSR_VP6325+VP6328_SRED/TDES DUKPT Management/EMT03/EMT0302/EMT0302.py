@@ -9,12 +9,20 @@ Key='0123456789abcdeffedcba9876543210'
 MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 
+# Check if reader support Auto poll or not
+pollmode = DL.ShowMessageBox("", "The reader support Auto Poll mode?", 0)
+if pollmode == 1:
+	DL.SetWindowText("Green", "*** The reader support Auto Poll mode ***")
+	pollmode = 3
+else:
+	DL.SetWindowText("Green", "*** The reader does not support Auto Poll mode ***")
+	pollmode = 2
+    
 # Get Data Encryption Enable Flag (C7-37)
 if (Result):
 	RetOfStep = DL.SendCommand('Get Data Encryption Enable Flag (C7-37)')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
-
 
 # Set/ Get MSR Secure Parameters		
 if (Result):
@@ -34,7 +42,7 @@ if (Result):
 
 # cmd 02-40, swipe card
 if (Result):
-	for j in range (1, 3):
+	for j in range (1, pollmode):
 		if j == 1:
 			RetOfStep = DL.SendCommand('Poll on Demand')
 			if (RetOfStep):
@@ -348,7 +356,7 @@ if (Result):
 								# PAN = 12	
 								if i == 8:
 									# Transaction result verification
-									TR1maskdata = "%*4071****0469^DOW/JOHN ^1711***************************?*"
+									TR1maskdata = "%*40******0469^DOW/JOHN ^1711***************************?*"
 									TR1plaintextdata = "25423430373136363231303436395E444F572F4A4F484E205E313731313230313132373837313130303030303030303834393030303030303F39"
 									
 									Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
@@ -410,7 +418,9 @@ if (Result):
 									if Result != True:
 										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR3plaintextdata: FAIL")
-
+					else:
+						DL.fails=DL.fails+1
+                        
 if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
 else:

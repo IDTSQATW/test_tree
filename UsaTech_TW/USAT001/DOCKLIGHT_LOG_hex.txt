@@ -1,32 +1,33 @@
-Docklight Log File (HEX) - Started 2025/12/4 13:21:07.190 
+Docklight Log File (HEX) - Started 2026/8/6 16:33:23.690 
  TEST CASE: USAT001
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on com90 @ 115200 baud...
+ POS operating on COM14 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  --- Config buttons: enable 2 buttons
 
-2025/12/4 13:21:08.638 [TX] - 56 69 56 4F 74 65 63 68 32 00 F0 F4 00 03 01 01 10 E7 FB 
-2025/12/4 13:21:08.643 [RX] - 56 69 56 4F 74 65 63 68 32 00 F0 00 00 00 FB AA 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
+2026/8/6 16:33:25.517 [TX] - 56 69 56 4F 74 65 63 68 32 00 F0 F4 00 03 01 01 10 E7 FB 
+2026/8/6 16:33:25.539 [RX] - 56 69 56 4F 74 65 63 68 32 00 F0 00 00 00 FB AA  
 
 
-2025/12/4 13:21:09.560 [TX] - F9 F9 F9 
-2025/12/4 13:21:10.565 [TX] - C0 61 62 63 64 66 67 68 69 6A 6B 6C 6D 6E 6F 70 71 F8 
-2025/12/4 13:21:12.078 [TX] - 80 61 62 63 64 66 67 68 69 6A 6B 6C 6D 6E 6F 70 71 F8 
-2025/12/4 13:21:13.593 [TX] - F6 F6 F6 
-2025/12/4 13:21:14.601 [TX] - F7 F7 F7  
+2026/8/6 16:33:26.577 [TX] - F9 F9 F9 
+2026/8/6 16:33:27.584 [TX] - C0 61 62 63 64 66 67 68 69 6A 6B 6C 6D 6E 6F 70 71 F8 
+2026/8/6 16:33:29.084 [TX] - 80 61 62 63 64 66 67 68 69 6A 6B 6C 6D 6E 6F 70 71 F8 
+2026/8/6 16:33:30.584 [TX] - F6 F6 F6 
+2026/8/6 16:33:31.596 [TX] - F7 F7 F7 
+2026/8/6 16:33:35.914 [RX] - 41 41 41  
 
- Did you hear a tone & see triple A strings on Docklight? NO
+ Did you hear a tone & see triple A strings on Docklight? YES
  
 
- Result = FAILED
+ Result = PASSED
  ---------- END OF TEST ----------
  
 
- MASTER RESULT = FAILED
+ MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2025/12/4 13:21:35.829 
+Docklight Log File (HEX) - Stopped 2026/8/6 16:33:46.441 
 

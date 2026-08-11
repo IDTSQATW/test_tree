@@ -10,11 +10,14 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey ='FEDCBA9876543210F1F1F1F1F1F1F1F1'
 
-# Check reader is VP3350 or not
-if (Result):
-	RetOfStep = DL.SendCommand('0105 do not use LCD')
-	if (RetOfStep):
-		Result = DL.Check_RXResponse("01 00 00 00")
+# Check if reader support Auto poll or not
+pollmode = DL.ShowMessageBox("", "The reader support Auto Poll mode?", 0)
+if pollmode == 1:
+	DL.SetWindowText("Green", "*** The reader support Auto Poll mode ***")
+	pollmode = 3
+else:
+	DL.SetWindowText("Green", "*** The reader does not support Auto Poll mode ***")
+	pollmode = 2
 
 # Check data encryption TYPE is TDES	
 if (Result):
@@ -46,7 +49,7 @@ if (Result):
 
 # cmd 02-40, swipe Discover card
 if (Result):
-	for j in range (1, 2):
+	for j in range (1, pollmode):
 		if j == 1:
 			RetOfStep = DL.SendCommand('Poll on Demand')
 			if (RetOfStep):
@@ -232,11 +235,7 @@ if (Result):
 						DL.fails=DL.fails+1
 else:
 	DL.fails=DL.fails+1
-							
-RetOfStep = DL.SendCommand('0105 default (VP3350)')
-if (RetOfStep):
-	Result = DL.Check_RXResponse("01 00 00 00")
-        
+							       
 if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
 else:

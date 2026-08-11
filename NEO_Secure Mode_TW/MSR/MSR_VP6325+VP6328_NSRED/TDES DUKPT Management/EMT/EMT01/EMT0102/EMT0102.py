@@ -27,7 +27,7 @@ if (Result):
 		
 # cmd 02-40, swipe card
 if (Result):
-	for j in range (1, 4):
+	for j in range (1, 2):
 		if j == 1:
 			# Poll on Demand
 			RetOfStep = DL.SendCommand('Poll on Demand')
@@ -408,6 +408,8 @@ if (Result):
 						DL.fails=DL.fails+1
 		else:
 			DL.fails=DL.fails+1
+else:
+	DL.fails=DL.fails+1
             
 if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))

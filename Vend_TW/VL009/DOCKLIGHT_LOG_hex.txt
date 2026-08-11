@@ -1,9 +1,9 @@
-Docklight Log File (HEX) - Started 2026/6/4 10:13:39.265 
+Docklight Log File (HEX) - Started 2026/8/6 16:06:20.163 
  TEST CASE: VL009
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on com14 @ 115200 baud...
+ POS operating on COM14 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
  ****LED status for this case: 
@@ -14,7 +14,24 @@ Docklight Log File (HEX) - Started 2026/6/4 10:13:39.265
  60-Center+Right blue LED ON (1.27 sec)
  20-Right blue LED ON        (1.27 sec)
  E0-3 blue LED ON            (0.31 sec)
+ 
+
+ --- F0-F7: Enable Blue LED Sequence
+
+2026/8/6 16:06:36.177 [TX] - 56 69 56 4F 74 65 63 68 32 00 F0 F7 00 13 00 80 00 1F C0 00 1F E0 00 7F 60 00 7F 20 00 7F E0 00 1F 51 FC 
+2026/8/6 16:06:36.215 [RX] - 56 69 56 4F 74 65 63 68 32 00 F0 00 00 00 FB AA  
+User selected 'Yes'
+
+ 
+
+ Result = PASSED
+ ---------- END OF TEST ----------
+
+ Result = PASSED
+ 
+
+ MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2026/6/4 10:13:47.337 
+Docklight Log File (HEX) - Stopped 2026/8/6 16:06:50.688 
 

@@ -36,6 +36,26 @@ if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("01 00 00 00")
+        
+# Enable Encryption (03)
+if (Result):
+	RetOfStep = DL.SendCommand('Enable Encryption (03)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("C7 00 00 00")
+        
+# CT config		
+if (Result):
+	RetOfStep = DL.SendCommand('60-16 Contact Set ICS Identification (02)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("60 00 00 00")	
+if (Result):
+	RetOfStep = DL.SendCommand('60-03 Contact Set Application Data (VISA)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("60 00 00 00")	
+if (Result):
+	RetOfStep = DL.SendCommand('60-06 KEY/ PIN pad NA')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("60 00 00 00")	
 
 if readertype == 1:
     if (Result):
@@ -67,7 +87,7 @@ if readertype == 1:
                 RetOfStep = DL.SendCommand('Activate Transaction')
                 if (RetOfStep):
                     Result = DL.Check_RXResponse("60 63 00 00")
-                    alldata = DL.Get_RXResponse(1)
+                    alldata = DL.Get_RXResponse(1)                    
                     CTresultcode = DL.GetTLV(alldata,"DFEE25")
                     if (Result):
                         Result = DL.Check_StringAB(DL.Get_RXResponse(1), '56 69 56 4F 74 65 63 68 32 00 60 00')
@@ -117,7 +137,7 @@ if readertype == 1:
                                 DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
                             
                             # Tags 9F39/ FFEE01/ DFEE26
-                            if DL.Check_RXResponse(1, "9F39 01 05") == False: 
+                            if DL.Check_RXResponse(1, "9F39 01") == False: 
                                 DL.fails=DL.fails+1
                                 DL.SetWindowText("Red", "Tag 9F39: FAIL")
                             if DL.Check_RXResponse(1, "FFEE01 ** DFEE300101") == False: 
@@ -138,7 +158,7 @@ if readertype == 1:
                                 Result = DL.Check_RXResponse(1, '56 69 56 4F 74 65 63 68 32 00 60 00')
                                 if (Result):
                                     # Tags 9F39/ FFEE01/ DFEE26
-                                    if DL.Check_RXResponse(1, "9F39 01 05") == False: 
+                                    if DL.Check_RXResponse(1, "9F39 01") == False: 
                                         DL.fails=DL.fails+1
                                         DL.SetWindowText("Red", "Tag 9F39: FAIL")
                                     if DL.Check_RXResponse(1, "FFEE01 ** DFEE300101") == False: 
@@ -159,7 +179,7 @@ if readertype == 1:
                                 Result = DL.Check_RXResponse(1, '56 69 56 4F 74 65 63 68 32 00 60 00')
                                 if (Result):
                                     # Tags 9F39/ FFEE01/ DFEE26
-                                    if DL.Check_RXResponse(1, "9F39 01 05") == False: 
+                                    if DL.Check_RXResponse(1, "9F39 01") == False: 
                                         DL.fails=DL.fails+1
                                         DL.SetWindowText("Red", "Tag 9F39: FAIL")
                                     if DL.Check_RXResponse(1, "FFEE01 ** DFEE300101") == False: 
@@ -181,6 +201,7 @@ if lcdtype == 1:
         
 # Reset to default
 RetOfStep = DL.SendCommand('Reset to default')
+time.sleep(0.5)
 if (RetOfStep):
     DL.Check_RXResponse("04 00 00 00")
         

@@ -9,23 +9,31 @@ Key='0123456789abcdeffedcba9876543210'
 MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 
+# Check reader is VP3350 or not
+lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
+
+# Check data encryption TYPE is TDES	
+if (Result):
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
+if (Result):
+    RetOfStep = DL.SendCommand('DF7D = 02 (NEO2)')
+    if (RetOfStep):
+        Result = Result and DL.Check_RXResponse("04 00 00 00")
+
 # Tag DFEE1D = 04 04 7E 0C 31
 if (Result):
 	RetOfStep = DL.SendCommand('Tag DFEE1D = 04 04 7E 0C 31')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")
-
-# Get Data Encryption Enable Flag (C7-37)
-if (Result):
-	RetOfStep = DL.SendCommand('Get Data Encryption Enable Flag (C7-37)')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
-		
-# Encryption type -- TDES
-if (Result):
-	RetOfStep = DL.SendCommand('Encryption type -- TDES')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 00")
+		Result = Result and DL.Check_RXResponse("C7 00 00 00")
 
 # Set/ Get MSR Secure Parameters		
 if (Result):
@@ -36,16 +44,10 @@ if (Result):
 	RetOfStep = DL.SendCommand('Get MSR Secure Parameters')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 05 DF EF 04 01 10")
-		
-# Burst mode OFF		
-if (Result):
-	RetOfStep = DL.SendCommand('Burst mode Off')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("04 00 00 00")	
 
 # cmd 02-40, swipe Discover card
 if (Result):
-	for j in range (1, 3):
+	for j in range (1, 2):
 		if j == 1:
 			RetOfStep = DL.SendCommand('Poll on Demand')
 			if (RetOfStep):
@@ -192,16 +194,16 @@ if (Result):
 								# Verify specific tags
 								Result = DL.Check_StringAB(Tag9F39, '90')
 								if Result != True:
-									DL.fails=DL.fails+1
 									DL.SetWindowText("red", "Tag9F39: FAIL")
+									DL.fails=DL.fails+1
 								Result = DL.Check_StringAB(TagFFEE01, 'DFEE30010C')
 								if Result != True:
-									DL.fails=DL.fails+1
 									DL.SetWindowText("red", "TagFFEE01: FAIL")	
+									DL.fails=DL.fails+1
 								Result = DL.Check_StringAB(TagDFEE26, 'E800')
 								if Result != True:
-									DL.fails=DL.fails+1
 									DL.SetWindowText("red", "TagDFEE26: FAIL")	
+									DL.fails=DL.fails+1
 								
 								# IDT
 								# if i == 1:
@@ -232,23 +234,23 @@ if (Result):
 									
 									Result = DL.Check_StringAB(TR1maskdata, Track1_CardData)
 									if Result != True:
-										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR1maskdata: FAIL")
+										DL.fails=DL.fails+1
 
 									Result = DL.Check_StringAB(TR2maskdata, Track2_CardData)
 									if Result != True:
-										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR2maskdata: FAIL")
+										DL.fails=DL.fails+1
 
 									Result = DL.Check_StringAB(TR1plaintextdata, TRK1DecryptData)
 									if Result != True:
-										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR1plaintextdata: FAIL")
+										DL.fails=DL.fails+1
 										
 									Result = DL.Check_StringAB(TR2plaintextdata, TRK2DecryptData)
 									if Result != True:
-										DL.fails=DL.fails+1
 										DL.SetWindowText("red", "TR2plaintextdata: FAIL")
+										DL.fails=DL.fails+1
 									
 								# # JIS 1	
 								# if i == 3:
@@ -375,8 +377,17 @@ if (Result):
 										
 									# Result = DL.Check_StringAB(TR3plaintextdata, TRK3DecryptData)
 									# if Result != True:
-										# DL.SetWindowText("red", "TR3plaintextdata: FAIL")
-
+										# DL.SetWindowText("red", "TR3plaintextdata: FAIL")					
+						else:
+							DL.SetWindowText("RED", "Parse Card Data Fail")
+					else:
+						DL.fails=DL.fails+1
+            
+if lcdtype == 1:
+	RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")	
+        
 if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
 else:

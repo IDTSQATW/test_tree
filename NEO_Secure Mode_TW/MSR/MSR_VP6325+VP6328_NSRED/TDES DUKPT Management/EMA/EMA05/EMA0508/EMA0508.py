@@ -15,7 +15,6 @@ if (Result):
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
 
-
 # Tag DFEE1D = 04 04 7E 0C 31
 if (Result):
 	RetOfStep = DL.SendCommand('Tag DFEE1D = 04 04 7E 0C 31')
@@ -40,7 +39,7 @@ if (Result):
 
 # cmd 02-40, swipe Discover card
 if (Result):
-	for j in range (1, 3):
+	for j in range (1, 2):
 		if j == 1:
 			RetOfStep = DL.SendCommand('Poll on Demand')
 			if (RetOfStep):

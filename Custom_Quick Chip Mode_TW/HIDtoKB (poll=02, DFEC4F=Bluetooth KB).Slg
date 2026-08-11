@@ -1,9 +1,14 @@
 
-15:59:19: If Issue ?
-Pass Test
-[Issue Count: 0]
+10:26:45: If Issue ?
+Path_File:C:\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=02, DFEC4F=Bluetooth KB).txt
+Running Info>>
+[Issue Count: 1]
+[Wrong Items]
+>>>Error item ( 7 ).
+>>> Set output interface (BT)
 
-15:59:19: >>[Do Scripts]>>
+
+10:26:45: >>[Do Scripts]>>
 
 Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
 --------------------
@@ -13,10 +18,11 @@ User Judgment Pass
 
 --------------------
 >>> Set output interface (BT)
-Pack L = 17-5669564F74656368320004000000AE1600
+Pack L = 33-5669564F746563683200610100100300000200454E030082231C0200002063F000
 CMD: 56 69 56 4F 74 65 63 68 32 00 04 00 00 0C DF EC 4F 08 02 00 00 00 00 00 00 00 3B C5 
-OUT: 56 69 56 4F 74 65 63 68 32 00 04 00 00 00 AE 16 
-ASCII: Otech2    
+OUT: 56 69 56 4F 74 65 63 68 32 00 61 01 00 10 03 00 00 02 00 45 4E 03 00 82 23 1C 02 00 00 20 63 F0 
+ASCII: Otech2 a        EN  ‚#    
+Error! >>>> Expect OUT:EXR: 04 00 00 00
 >>> 77-86 Set security = enable
 Pack L = 17-5669564F746563683200770A0000B07E00
 CMD: 56 69 56 4F 74 65 63 68 32 00 77 86 00 04 00 01 01 00 46 4D 

@@ -49,7 +49,6 @@ if (Result):
         if platform == 0: #NEOI
             Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** C1 ** FF EE 12")
             ksn = DL.GetTLV(alldata,"FFEE12")
-            alldata = DL.GetTLV(alldata,"FF8105", 0)
         if (Result):
             # 57
             DL.SetWindowText("blue", "Tag 57 Mask/ Encryption data:")

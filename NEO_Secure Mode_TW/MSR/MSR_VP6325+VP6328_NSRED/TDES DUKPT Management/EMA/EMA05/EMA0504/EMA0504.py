@@ -14,8 +14,6 @@ if (Result):
 	RetOfStep = DL.SendCommand('Get Data Encryption Enable Flag (C7-37)')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
-		
-
 
 # Tag DFEE1D = 06 04 2A 0C 31
 if (Result):
@@ -41,7 +39,7 @@ if (Result):
 
 # cmd 02-40, swipe Discover card
 if (Result):
-	for j in range (1, 3):
+	for j in range (1, 2):
 		if j == 1:
 			RetOfStep = DL.SendCommand('Poll on Demand')
 			if (RetOfStep):

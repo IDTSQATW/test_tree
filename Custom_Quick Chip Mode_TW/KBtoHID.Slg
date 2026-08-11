@@ -1,17 +1,21 @@
 
-13:48:44: If Issue ?
-Pass Test
-[Issue Count: 0]
+10:27:15: If Issue ?
+Path_File:C:\test_tree\Custom_Quick Chip Mode_TW\KBtoHID.txt
+Running Info>>
+[Issue Count: 1]
+[Wrong Items]
+>>>Error item ( 4 ).
+>>> Change to Poll On Demand
 
-13:48:44: >>[Do Scripts]>>
+
+10:27:15: >>[Do Scripts]>>
 
 Objective: Under Quick Chip mode, set reader to Poll on demand mode (USB/ KBD to USB/ HID)
 --------------------
 >>> Change to Poll On Demand
-Pack L = 17-5669564F74656368320001000000125300
 CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
-OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
-ASCII: Otech2    
+OUT: NULL
+Error! >>>> Expect OUT:EXR: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00
 MESSAGECK: Wait for the reader bootup ready --> Click OK.
 User Judgment Pass
 

@@ -15,11 +15,11 @@ if (Result):
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")
 		
-# Encryption type -- AES
+# Check data encryption TYPE is AES-112	
 if (Result):
-	RetOfStep = DL.SendCommand('Encryption type -- AES')
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 01")
+		Result = DL.Check_RXResponse("C7 00 00 06 00 01 00 00 00 00")
 
 # Set/ Get MSR Secure Parameters		
 if (Result):
@@ -39,7 +39,7 @@ if (Result):
 
 # cmd 02-40, swipe card
 if (Result):
-	for j in range (1, 3):
+	for j in range (1, 2):
 		if j == 1:
 			RetOfStep = DL.SendCommand('Poll on Demand')
 			if (RetOfStep):

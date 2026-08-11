@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-19509
+29448
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -151,7 +151,7 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   DL.AddComment "--- Activate Transaction (02-40)"
   DL.SendSequence " Activate Transaction (02-40)"
-  dl.pause 100
+  dl.pause 50
   DL.ResetReceiveCounter
   DL.AddComment "--- Cancel Transaction"
   DL.SendSequence " Cancel Transaction"

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-1881
+22211
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -224,9 +224,14 @@ If result <> 0 Then
    if readerType <> "NEO2" then DL.SendSequence "burst mode off"
    if readerType = "NEO2" then DL.SendSequence "burst mode off (NEO2)"
    result = DL.WaitForSequence("burst off", 1, 2000)
-   if result <> 0 then DL.SendSequence "04-03 (NEO2)"
+   if result <> 0 then 
+      dl.resetreceivecounter
+      DL.SendSequence "04-03 (NEO2)"
+      resultcheck = DL.WaitForSequence("burst off", 1, 1000)
+      if resultcheck = 0 then DL.SendSequence "04-03 (NEO4)"
+   end if
    dl.pause 500
-else 
+else
    countf = countf + 1
 End If
 '------------------------------------------------------------

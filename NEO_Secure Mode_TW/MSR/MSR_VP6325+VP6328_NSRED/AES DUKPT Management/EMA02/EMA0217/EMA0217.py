@@ -15,16 +15,6 @@ if (Result):
 	RetOfStep = DL.SendCommand('Enable Encryption (00)')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 00")
-		
-# Check reader is VP3350 or not
-lcdtype = 1 #DL.ShowMessageBox("", "Is this VP3350?", 0)
-if lcdtype == 1:
-	DL.SetWindowText("Green", "*** This is VP3350 ***")
-	RetOfStep = DL.SendCommand('0105 do not use LCD')
-	if (RetOfStep):
-		Result = DL.Check_RXResponse("01 00 00 00")
-else:
-	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
 
 # Check data encryption TYPE is AES	
 if (Result):
@@ -423,12 +413,7 @@ if (Result):
 						DL.fails=DL.fails+1
 		else:
 			DL.fails=DL.fails+1
-							
-if lcdtype == 1:
-	RetOfStep = DL.SendCommand('0105 default (VP3350)')
-	if (RetOfStep):
-		Result = DL.Check_RXResponse("01 00 00 00")
-        
+
 if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
 else:

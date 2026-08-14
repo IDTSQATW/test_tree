@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-32105
+63940
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -236,6 +236,14 @@ If result <> 0 Then
    dl.pause 500
 End If
 end if
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- (C7-6D) Del Key Block"
+   DL.SendSequence "(C7-6D) Del Key Block"
+   dl.pause 500
+End If
 
 If result <> 0 Then
    dl.resetreceivecounter

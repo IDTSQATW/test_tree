@@ -18,6 +18,10 @@ if (Result):
 		if Result == False:
 			DL.SetWindowText("red", "Data encryption should be disabled...C7-37 = 03")
 		
+# (C7-6D) Del Key Block
+RetOfStep = DL.SendCommand('(C7-6D) Del Key Block')
+time.sleep(0.5)
+        
 # Check data encryption TYPE is AES	
 if (Result):
 	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')

@@ -17,7 +17,11 @@ if (Result):
 		Result = Result and DL.Check_RXResponse("C7 00 00 01 00")
 		if Result == False:
 			DL.SetWindowText("red", "Data encryption should be disabled...C7-37 = 00")
-		
+
+# (C7-6D) Del Key Block
+RetOfStep = DL.SendCommand('(C7-6D) Del Key Block')
+time.sleep(0.5)
+
 # Check data encryption TYPE is TDES	
 if (Result):
 	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')

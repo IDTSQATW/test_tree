@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-47086
+29599
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -269,6 +269,14 @@ If result <> 0 Then
    if readerType <> "NEO2" then DL.SendSequence "Burst mode off"
    if readerType = "NEO2" then DL.SendSequence "Burst mode off (NEO2)"
    result = DL.WaitForSequence("04 00", 1, 3000)
+   dl.pause 500
+End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- (C7-6D) Del Key Block"
+   DL.SendSequence "(C7-6D) Del Key Block"
    dl.pause 500
 End If
 '------------------------------------------------------------Start test

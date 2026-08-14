@@ -1,3 +1,7 @@
+TID:(C7-6D) Del Key Block
+CMD:C7 6D FF FF
+EXR:
+
 TID:Get DUKPT DEK Attribution based on KeySlot (C7-A3)
 CMD:C7 A3 01 00
 EXR:

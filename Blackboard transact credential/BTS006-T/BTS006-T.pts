@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-49732
+38111
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -234,6 +234,14 @@ if readercheck = 6 or readerType <> "NEO2" then
       result = DL.WaitForSequence("C7 00", 1, 2000)
       dl.pause 500
    End If
+
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- (C7-6D) Del Key Block"
+   DL.SendSequence "(C7-6D) Del Key Block"
+   dl.pause 500
+End If
 
 If result <> 0 Then
    dl.resetreceivecounter

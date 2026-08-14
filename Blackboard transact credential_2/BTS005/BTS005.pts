@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-38140
+11514
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -278,6 +278,20 @@ If result <> 0 Then
    DL.SendSequence "(C7-6D) Del Campus Card Key Block"
    dl.pause 600
 End If
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- (C7-69) Del BlackBoard Private Key"
+   DL.SendSequence "(C7-69) Del BlackBoard Private Key"
+   dl.pause 600
+End If
+If result <> 0 Then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- (C7-69) Del BlackBoard LTPK"
+   DL.SendSequence "(C7-69) Del BlackBoard LTPK"
+   dl.pause 600
+End If
 
 If result <> 0 Then
    countf = 0
@@ -296,7 +310,8 @@ If result <> 0 Then
        dl.resetreceivecounter
        dl.addcomment vbcrlf
        DL.AddComment "--- (02-40) Apple VAS"
-       DL.SendSequence "(02-40) Apple VAS"
+       if readerType <> "NEO2" then DL.SendSequence "(02-40) Apple VAS"
+       if readerType = "NEO2" then DL.SendSequence "(02-40) Apple VAS (NEO2)"
        dl.pause 1500
        r1 = DL.WaitForSequence("02 57", 1, 2000)
        r2 = DL.WaitForSequence("02 0A", 1, 2000)

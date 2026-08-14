@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-31180
+34620
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -145,7 +145,8 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-reader = msgbox ("This reader is VP6300_USAT?", vbyesno)
+readercheck = msgbox ("This reader is Vendi/ VP6325/ VP6328 (for USAT)?", vbyesno)
+reader = msgbox ("This reader is VP6300 (for USAT)?", vbyesno)
 
 DL.SendSequence "04-0A"
 dl.pause 12000
@@ -169,21 +170,21 @@ if result <> 0 then
    dl.sendsequence "Enable yellow LED (FB FB FB)"
    dl.pause 2000
 
-   if reader  = 7 then usercheck = msgbox ("Do you see clear LCD/ Blue+Yellow LEDs ON?", vbyesno)
+   if reader  = 7 then usercheck = msgbox ("Do you see clear LCD/ Blue+Yellow LEDs ON? (if have the LED)", vbyesno)
    if reader  = 6 then usercheck = msgbox ("Do you see clear LCD/ Blue LEDs ON/ Yellow LED OFF?", vbyesno)
    if usercheck = 7 then result = 0
 end if
 
 if result <> 0 then
    msgbox "Press Complete button --> Click OK", vbokonly
-   if reader  = 7 then usercheck = msgbox ("Do you see clear LCD/ Blue+Yellow LEDs ON?", vbyesno)
+   if reader  = 7 then usercheck = msgbox ("Do you see clear LCD/ Blue+Yellow LEDs ON?  (if have the LED)", vbyesno)
    if reader  = 6 then usercheck = msgbox ("Do you see clear LCD/ Blue LEDs ON/ Yellow LED OFF?", vbyesno)
    if usercheck = 7 then result = 0
 end if
 
 if result <> 0 then
    msgbox "Swipe valid credit card --> Click OK", vbokonly
-   if reader  = 7 then usercheck = msgbox ("Do you see clear LCD/ Blue+Yellow LEDs ON?", vbyesno)
+   if reader  = 7 then usercheck = msgbox ("Do you see clear LCD/ Blue+Yellow LEDs ON?  (if have the LED)", vbyesno)
    if reader  = 6 then usercheck = msgbox ("Do you see clear LCD/ Blue LEDs ON/ Yellow LED OFF?", vbyesno)
    if usercheck = 7 then result = 0
 end if

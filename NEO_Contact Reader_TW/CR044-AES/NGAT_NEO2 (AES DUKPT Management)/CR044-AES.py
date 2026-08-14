@@ -127,32 +127,50 @@ if (Result):
 							DL.SetWindowText("Blue", "Track 1 Clear data: PASS")
 						else:
 							DL.SetWindowText("Red", "Track 1 Clear data: FAIL")
+							DL.fails=DL.fails+1
 						if TR2cleardata == Track2_CardData: 
 							DL.SetWindowText("Blue", "Track 2 Clear data: PASS")
 						else:
 							DL.SetWindowText("Red", "Track 2 Clear data: FAIL")
+							DL.fails=DL.fails+1
 						if TR3cleardata == Track3_CardData: 
 							DL.SetWindowText("Blue", "Track 3 Clear data: PASS")
 						else:
 							DL.SetWindowText("Red", "Track 3 Clear data: FAIL")
+							DL.fails=DL.fails+1
 									
 						# Verify specific tags
 						Result = DL.Check_StringAB(CardData, '83 7F 4F 28 6B 87 00')
 						if Result == False:
 							DL.SetWindowText("Red", "Tag DFEE23: FAIL")
+							DL.fails=DL.fails+1
 							
 						if TagDFEE25 != "0011": 
 							DL.SetWindowText("Red", "Tag DFEE25: FAIL")
+							DL.fails=DL.fails+1
 						if Tag9F39 != "90": 
 							DL.SetWindowText("Red", "Tag 9F39: FAIL")
+							DL.fails=DL.fails+1
 						if TagFFEE01 != "DFEE30010C": 
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
+							DL.fails=DL.fails+1
 						if TagDFEE26 != "EC01": 
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+							DL.fails=DL.fails+1
 				else:
 					DL.SetWindowText("RED", "Parse Card Data Fail")							
-					
+else:
+	DL.fails=DL.fails+1
+
 # cmd 60-13
 RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result')
 if (RetOfStep):
-	DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** EC ** 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
+	Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** EC ** 57 00 5A 00 5F 34 00 5F 20 00 5F 24 00 9F 20 00 5F 25 00 5F 2D 00 50 00 4F 00 84 00 DF EE 23 00 9F 39 00")
+	if Result == False:
+		DL.SetWindowText("Red", "cmd 60-13: FAIL")
+		DL.fails=DL.fails+1
+        
+if(0 < (DL.fails + DL.warnings)):
+	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
+else:
+	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )    

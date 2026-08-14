@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-42257
+36080
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -174,7 +174,7 @@ dl.pause 200
 dl.sendsequence "F0-F7-----Enable Blue LED"
 dl.pause 500
 
-MyInput = MsgBox ("Are you testing a Vend reader?", VBYesNo, "Test Step")
+MyInput = MsgBox ("Are you testing a Vend/ VP63xx series reader?", VBYesNo, "Test Step")
 If MyInput = 6 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf

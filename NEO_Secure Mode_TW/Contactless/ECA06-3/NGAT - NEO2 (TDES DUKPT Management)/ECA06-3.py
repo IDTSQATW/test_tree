@@ -11,11 +11,11 @@ PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
 # Check project was NEO2 or NEO3/ 4
-platform = DL.ShowMessageBox("", "Is this NEO2 project?", 0)
+platform = DL.ShowMessageBox("", "Is this NEO3/ 4 project?", 0)
 if platform == 1:
-	DL.SetWindowText("Green", "*** The project is NEO2 ***")
+	DL.SetWindowText("Green", "*** The project is NEO3/ 4 ***")
 else:
-	DL.SetWindowText("Green", "*** The project is NOT NEO2 ***")
+	DL.SetWindowText("Green", "*** The project is NOT NEO3/ 4 ***")
 
 # Check data encryption TYPE is TDES	
 if (Result):
@@ -37,16 +37,16 @@ if (Result):
 
 # cmd 02-40, tap card
 if (Result):
-    if platform == 1:     #NEO2 project
+    if platform == 0:     #NEO2 project
         RetOfStep = DL.SendCommand('Activate Transaction w/ LCD')
         rx = 0
-    if platform == 0:     #NEO3/ 4 projects
+    if platform == 1:     #NEO3/ 4 projects
         RetOfStep = DL.SendCommand('Activate Transaction w/ LCD-2')	
         rx = 0
     if (RetOfStep):
-        if platform == 1:
-            Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** F3 ** DF EE 12")
         if platform == 0:
+            Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** F3 ** DF EE 12")
+        if platform == 1:
             Result = DL.Check_RXResponse(rx, "56 69 56 4F 74 65 63 68 32 00 02 23 ** E3 ** DF EE 12")	
         if (Result):
             alldata = DL.Get_RXResponse(rx)		
@@ -69,7 +69,7 @@ if (Result):
             enc57 = DL.GetTLV(FF8105,"57", 1)
             dec57 = DL.DecryptDLL(0,2, strKey, ksn, enc57)	
 
-            if platform == 1:		
+            if platform == 0:		
             # Tag DFEF17
                 r1 = DL.Check_StringAB(maskDFEF17, '2A 36 35 31 30 2A 2A 2A 2A 2A 2A 2A 2A')
                 r2 = DL.Check_StringAB(maskDFEF17, '5E 43 41 52 44 2F 49 4D 41 47 45')
@@ -155,7 +155,7 @@ if (Result):
                     DL.fails=DL.fails+1
                     DL.SetWindowText("Red", "Tag DFEE26: FAIL")	
                     
-            if platform == 0:					
+            if platform == 1:					
             # Tag 57
                 r1 = DL.Check_StringAB(mask57, '36 07 CC CC CC C0 00 1D 49 12 CC CC CC CC CC CC CC CC')
                 if r1 == True and DL.Check_RXResponse(rx, "57 A1 12"):
@@ -191,7 +191,8 @@ else:
 # Reset to default
 RetOfStep = DL.SendCommand('Reset to default')
 if (RetOfStep):
-	DL.Check_RXResponse("04 00 00 00")	
+    time.sleep(1)
+    DL.Check_RXResponse("04 00 00 00")	
     
 if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))

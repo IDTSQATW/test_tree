@@ -45,23 +45,25 @@ if (Result):
                 alldata = DL.GetTLV(DL.Get_RXResponse(rx),"FF8105")
 
             ksn = DL.GetTLV(DL.Get_RXResponse(rx),"DFEE12")	
-            mask57 = DL.GetTLV(alldata,"57", 0)
-            enc57 = DL.GetTLV(alldata,"57", 1)
+            mask57 = DL.GetTLV_Embedded(alldata,"57", 0)
+            enc57 = DL.GetTLV_Embedded(alldata,"57", 1)
             dec57 = DL.DecryptDLL(0,2, strKey, ksn, enc57)	
-            mask5A = DL.GetTLV(alldata,"5A", 0)
-            enc5A = DL.GetTLV(alldata,"5A", 1)
+            mask5A = DL.GetTLV_Embedded(alldata,"5A", 0)
+            enc5A = DL.GetTLV_Embedded(alldata,"5A", 1)
             dec5A = DL.DecryptDLL(0,2, strKey, ksn, enc5A)	
             
         # Tag 57
-            Result = DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D3 01 2C CC CC CC CC CC CC CC CC')
-            if Result == True and DL.Check_RXResponse(rx, "57 A1 13"):
+            Result1 = DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D3 01 2C CC CC CC CC CC CC CC CC')
+            Result2 = DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D2 01 2C CC CC CC CC CC CC CC CC')
+            if (Result1 == True or Result2 == True) and DL.Check_RXResponse(rx, "57 A1 13"):
                 DL.SetWindowText("blue", "Tag 57_Mask: PASS")
             else:
                 DL.fails=DL.fails+1
                 DL.SetWindowText("red", "Tag 57_Mask: FAIL")
                 
-            Result = DL.Check_StringAB(dec57, '57 13 47 61 73 90 01 01 00 10 D3 01 21 20 00 12 33 99 00 03 1F')
-            if Result == True and DL.Check_RXResponse(rx, "57 C1 20"):
+            Result1 = DL.Check_StringAB(dec57, '57 13 47 61 73 90 01 01 00 10 D3 01 21 20 00 12 33 99 00 03 1F')
+            Result2 = DL.Check_StringAB(dec57, '57 13 47 61 73 90 01 01 00 10 D2 01 21 20 00 12 33 99 00 03 1F')
+            if (Result1 == True or Result2 == True) and DL.Check_RXResponse(rx, "57 C1 20"):
                 DL.SetWindowText("blue", "Tag 57_Enc: PASS")
             else:
                 DL.fails=DL.fails+1

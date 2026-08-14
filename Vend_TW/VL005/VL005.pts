@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-64593
+13252
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -175,7 +175,7 @@ dl.addcomment "--- Enable Blue LEDs"
 DL.SendSequence "Enable Blue VL005"
 dl.pause 1000
 '------------------------------------------------------------
-readercheck = msgbox("Is this VP6300 (USAT) reader?", vbyesno)
+readercheck = msgbox("Is this VP63xx (USAT) reader?", vbyesno)
 
 if result <> 0 then   
    dl.resetreceivecounter

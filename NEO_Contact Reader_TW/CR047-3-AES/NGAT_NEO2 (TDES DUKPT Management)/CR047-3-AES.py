@@ -131,7 +131,7 @@ if (Result):
 					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 		
-				if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False: 
+				if DL.Check_RXResponse(rx, "DFEE26 02 E200") == False: 
 					DL.fails=DL.fails+1
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 			else:
@@ -274,14 +274,14 @@ if (Result):
 							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 
-						if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False: 
+						if DL.Check_RXResponse(rx, "DFEE26 02 E200") == False: 
 							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 
 						# cmd 60-13
 						RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result, for 60-11')
 						if (RetOfStep):
-							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** E1 ** 9F 10 07 06 01 1A 03 90 00 00 9F 26 08 ** 9F 27 01 80 9F 36 02 00 01 9F 37 04 ** 9F 02 06 00 00 00 00 02 00 9F 4D 00 9F 13 00 95 05 ** 9B 02 C8 00 9F 03 06 00 00 00 00 00 00 9F 34 03 5F 03 02")
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** E2 ** 9F 10 07 06 01 1A 03 90 00 00 9F 26 08 ** 9F 27 01 80 9F 36 02 00 01 9F 37 04 ** 9F 02 06 00 00 00 00 02 00 9F 4D 00 9F 13 00 95 05 ** 9B 02 C8 00 9F 03 06 00 00 00 00 00 00 9F 34 03 5F 03 02")
 							if Result == False:
 								DL.fails=DL.fails+1
 								DL.SetWindowText("Red", "FAIL")
@@ -356,14 +356,14 @@ if (Result):
 									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 
-								if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False: 
+								if DL.Check_RXResponse(rx, "DFEE26 02 E200") == False: 
 									DL.fails=DL.fails+1
 									DL.SetWindowText("Red", "Tag DFEE26: FAIL")
 
 								# cmd 60-13
 								RetOfStep = DL.SendCommand('60-13 Contact Retrieve Transaction Result, for 60-12')
 								if (RetOfStep):
-									Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** E1 ** 9F 10 07 06 01 1A 03 60 00 00 9F 26 08 ** 9F 27 01 40 9F 36 02 00 01 9F 37 04 ** 9F 02 06 00 00 00 00 02 00 9F 4D 00 9F 13 00 95 05 ** 9B 02 F8 00 9F 03 06 00 00 00 00 00 00 9F 34 03 5F 03 02 99 00 9F 5B 00")
+									Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 60 00 ** E2 ** 9F 10 07 06 01 1A 03 60 00 00 9F 26 08 ** 9F 27 01 40 9F 36 02 00 01 9F 37 04 ** 9F 02 06 00 00 00 00 02 00 9F 4D 00 9F 13 00 95 05 ** 9B 02 F8 00 9F 03 06 00 00 00 00 00 00 9F 34 03 5F 03 02 99 00 9F 5B 00")
 									if Result == False:
 										DL.fails=DL.fails+1
 										DL.SetWindowText("Red", "FAIL")

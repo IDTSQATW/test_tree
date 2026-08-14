@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-11901
+53663
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -220,6 +220,7 @@ If result <> 0 Then
    DL.SendSequence "Data Encrypt disable"
    result = DL.WaitForSequence("C7 00", 1, 2000)
    if result = 0 then dl.addcomment vbcrlf & vbcrlf & "** Please set data encryption off first... (C7-36 = 00)"
+   dl.pause 500
 End If
 
 if readerType <> "NEO2" then 
@@ -334,13 +335,6 @@ If result <> 0 Then
 
    if countf <> 0 then result = 0
 End If
-
-else
-   DL.AddComment vbcrlf & "Please check first..."
-   DL.AddComment vbcrlf & "1) Is the reader GR or NEO2 platform?"
-   DL.AddComment vbcrlf & "2) Does reader has transact keys already?"
-   result = 0
-end if
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 '============================================================

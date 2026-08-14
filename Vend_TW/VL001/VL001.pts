@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-24514
+63936
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -221,7 +221,8 @@ sub check()
     End If
 end sub
 '------------------------------------------------------------
-readercheck = msgbox("Is this VP6300 (USAT) reader?", vbyesno)
+readercheck = msgbox("Is this VP63xx (USAT) reader?", vbyesno)
+pollmodecheck = msgbox ("Does the reader support Auto Poll mode?", vbyesno)
 
 if result <> 0 then
    dl.resetreceivecounter
@@ -241,10 +242,12 @@ if result <> 0 then
       dl.pause 500
       check()                'check LCD msg
       dl.pause 1500
-      ap()                   'set to auto poll
-      dl.pause 500
-      check()                'check LCD msg
-      dl.pause 1500
+      if pollmodecheck =6 then
+         ap()                   'set to auto poll
+         dl.pause 500
+         check()                'check LCD msg
+         dl.pause 1500
+      end if
    end if
 end if
 '------------------------------------------------------------

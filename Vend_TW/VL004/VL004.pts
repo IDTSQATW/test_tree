@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-37747
+12997
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -160,7 +160,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-readercheck = msgbox("Is this VP6300 (USAT) reader?", vbyesno)
+readercheck = msgbox("Is this VP63xx (USAT) reader?", vbyesno)
 if readercheck = 6 then
 if result <> 0 then   
    dl.resetreceivecounter

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-37089
+13744
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -134,7 +134,7 @@ End Function
 '------------------------------------------------------------
 
 
-MyInput = MsgBox ("Are you testing a Vend reader?", VBYesNo, "Test Step")
+MyInput = MsgBox ("Are you testing a Vend/ VP63xx series reader?", VBYesNo, "Test Step")
 
 
 DL.SendSequence "Done/Swipe Buttons 01 00"

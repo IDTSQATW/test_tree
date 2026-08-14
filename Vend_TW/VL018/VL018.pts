@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-30279
+9544
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -159,6 +159,7 @@ End Function
 '------------------------------------------------------------
 msgbox"Power off/ on the reader once --> Click OK", vbokonly
 dl.pause 8000
+reader = MsgBox ("Is this Vendi/ VP6325/ VP6328 (USAT) reader?", VBYesNo)
 readercheck = MsgBox ("Is this VP6300 (USAT) reader?", VBYesNo)
 
 ledcheck = msgbox("Yellow LED is OFF status?", vbyesno)

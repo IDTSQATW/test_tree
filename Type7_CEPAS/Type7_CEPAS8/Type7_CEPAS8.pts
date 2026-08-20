@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-50579
+41414
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -159,52 +159,7 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   DL.AddComment "--- 2C-0C FeliCa Type F Polling"
   DL.SendSequence "2C-0C FeliCa Type F Polling"
-  result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
-End If
-'------------------------------------------------------------
-If result <> 0 Then
-  DL.AddComment vbCrLf
-  DL.ResetReceiveCounter
-  DL.AddComment "--- PPSE "
-  DL.SendSequence " PPSE "
-  result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
-  dl.pause 500
-End If
-'------------------------------------------------------------
-If result <> 0 Then
-  DL.AddComment vbCrLf
-  DL.ResetReceiveCounter
-  DL.AddComment "--- Select "
-  DL.SendSequence " Select "
-  result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
-  dl.pause 500
-End If
-'------------------------------------------------------------
-If result <> 0 Then
-  DL.AddComment vbCrLf
-  DL.ResetReceiveCounter
-  DL.AddComment "--- GPO "
-  DL.SendSequence " GPO "
-  result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
-  dl.pause 500
-End If
-'------------------------------------------------------------
-If result <> 0 Then
-  DL.AddComment vbCrLf
-  DL.ResetReceiveCounter
-  DL.AddComment "--- Read Record "
-  DL.SendSequence " Read Record "
-  result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
-  dl.pause 500
-End If
-'------------------------------------------------------------
-If result <> 0 Then
-  DL.AddComment vbCrLf
-  DL.ResetReceiveCounter
-  DL.AddComment "--- ccc"
-  DL.SendSequence " ccc"
-  result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
-  dl.pause 500
+  result = DL.WaitForSequence("Type F 08 card", 1, 10000)
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -219,11 +174,9 @@ End If
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
 DL.Pause 1000
 
-PrintMyResult(result)
-DL.Pause 1000
-
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""

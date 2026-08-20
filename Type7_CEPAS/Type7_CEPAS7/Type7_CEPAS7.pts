@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-27639
+23378
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -159,9 +159,20 @@ If result <> 0 Then
   DL.ResetReceiveCounter
   DL.AddComment "--- 2C-0C ISO 14443 Type B Polling"
   DL.SendSequence "2C-0C ISO 14443 Type B Polling"
+  result = DL.WaitForSequence("Type B card read", 1, 10000)
+  carddata()
+End If
+
+If result <> 0 Then
+  DL.AddComment vbCrLf
+  DL.ResetReceiveCounter
+  DL.AddComment "--- 2C-0C Type A+B+F combination polling"
+  DL.SendSequence "2C-0C Type A+B+F combination polling"
   result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
+  carddata()
 End If
 '------------------------------------------------------------
+sub carddata()
 If result <> 0 Then
   DL.AddComment vbCrLf
   DL.ResetReceiveCounter
@@ -206,15 +217,7 @@ If result <> 0 Then
   result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
   dl.pause 500
 End If
-'------------------------------------------------------------
-If result <> 0 Then
-  DL.AddComment vbCrLf
-  DL.ResetReceiveCounter
-  DL.AddComment "--- PT STOP"
-  DL.SendSequence " PT STOP"
-  result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
-End If
-
+end sub
 '------------------------------------------------------------
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
 DL.Pause 1000

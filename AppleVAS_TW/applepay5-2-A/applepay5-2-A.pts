@@ -170,7 +170,7 @@ End If
 '============================================================
 If result <> 0 Then
    DL.AddComment vbcrlf & "============================================================Bank card"
-   MsgBox "Click OK --> Tap bank card", VBOKOnly
+   MsgBox "Click OK --> Tap ApplePay bank card", VBOKOnly
 
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf 
@@ -187,7 +187,7 @@ If result <> 0 Then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   MsgBox "Click OK --> Tap bank card", VBOKOnly
+   MsgBox "Click OK --> Tap ApplePay bank card", VBOKOnly
 
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
@@ -200,7 +200,7 @@ If result <> 0 Then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   MsgBox "Click OK --> Tap bank card", VBOKOnly
+   MsgBox "Click OK --> Tap ApplePay bank card", VBOKOnly
 
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
@@ -213,7 +213,7 @@ If result <> 0 Then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   MsgBox "Click OK --> Tap bank card", VBOKOnly
+   MsgBox "Click OK --> Tap ApplePay bank card", VBOKOnly
 
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
@@ -226,7 +226,7 @@ If result <> 0 Then
       DL.AddComment vbcrlf & "** FAIL **"
    end if
 '============================================================
-   MsgBox "Click OK --> Tap bank card", VBOKOnly
+   MsgBox "Click OK --> Tap ApplePay bank card", VBOKOnly
 
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf

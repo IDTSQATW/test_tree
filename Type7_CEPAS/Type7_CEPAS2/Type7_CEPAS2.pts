@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-62969
+29947
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -153,6 +153,7 @@ If result <> 0 Then
   DL.AddComment "--- PT START"
   DL.SendSequence " PT START"
   result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
+  dl.pause 500
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -212,10 +213,9 @@ End If
 
 '------------------------------------------------------------
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 3000
+DL.Pause 1000
 
 PrintMyResult(result)
-DL.Pause 1000
 
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf

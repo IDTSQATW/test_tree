@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-3815
+26329
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -151,6 +151,7 @@ If result <> 0 Then
   DL.AddComment "--- PT START"
   DL.SendSequence " PT START"
   result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
+  dl.pause 500
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -158,6 +159,7 @@ If result <> 0 Then
   DL.AddComment "--- E P4T 01"
   DL.SendSequence " E P4T 01"
   result = DL.WaitForSequence("Passthrough Good response", 1, 10000)
+  dl.pause 500
 End If
 '------------------------------------------------------------
 If result <> 0 Then

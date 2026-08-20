@@ -14,6 +14,7 @@ PAN=''
 # Objective: 
 # CS-6753, [Vendi] ISO PAN prefixes 6396210 to 6396211 are converted to plaintext.
 # CS-6754, expand the range to 6396210-6396213, 4 customer cards.
+# CS-7009, [Vendi] CTLP ISO Pan in clear text - issue with card blob on revs 170/171
 
 # Check DUKPT Key  Type (81-02)
 if (Result):
@@ -47,11 +48,11 @@ if (Result):
         if i == 5: RetOfStep = DL.SendCommand('AT w/ LCD, card_Prepaid Card')
         if i == 6: RetOfStep = DL.SendCommand('AT w/ LCD, card_Payroll Deduct Card')
         if i <= 2: #service code 2 or 6
-            Result = DL.Check_RXResponse(0, "56 69 56 4F 74 65 63 68 32 00 02 00 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 44 28 00 A3 00")
+            Result = DL.Check_RXResponse(0, "56 69 56 4F 74 65 63 68 32 00 02 00 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 44 28 00 A3 9B")
         if i == 3 or i == 5 or i == 6: #service code is not 2 or 6
-            Result = DL.Check_RXResponse(0, "56 69 56 4F 74 65 63 68 32 00 02 00 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 40 24 00 83 00")
+            Result = DL.Check_RXResponse(0, "56 69 56 4F 74 65 63 68 32 00 02 00 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 40 24 00 83 9B")
         if i == 4: #service code is not 2 or 6
-            Result = DL.Check_RXResponse(0, "56 69 56 4F 74 65 63 68 32 00 02 00 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 3B 1F 00 83 00")
+            Result = DL.Check_RXResponse(0, "56 69 56 4F 74 65 63 68 32 00 02 00 ** DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 3B 1F 00 83 9B")
         sResult=DL.Get_RXResponse(0)
         if Result == True and sResult!=None and sResult!="":
             sResult=sResult.replace(" ","")
@@ -84,12 +85,14 @@ if (Result):
 
                     # Transaction result verification
                     if i == 1: #card_PAN 6396210
-                        TR1plaintextdata = "%B6396210000000026^CARD/IMAGE 03             ^17122011000021000000?."
-                        TR2plaintextdata = ";6396210000000026=17122011000021000000?0"
+                        TR1maskdata = "%B6396210000000026^CARD/IMAGE 03             ^17122011000021000000?."
+                        TR2maskdata = ";6396210000000026=17122011000021000000?0"
+                        TR1plaintextdata = "2542363339363231303030303030303032365E434152442F494D414745203033202020202020202020202020205E31373132323031313030303032313030303030303F2E"
+                        TR2plaintextdata = "3B363339363231303030303030303032363D31373132323031313030303032313030303030303F30"
                                             
                         if Track1_CardData and Track2_CardData:
-                            res1 = DL.Check_StringAB(TR1plaintextdata, Track1_CardData)
-                            res2 = DL.Check_StringAB(TR2plaintextdata, Track2_CardData)
+                            res1 = DL.Check_StringAB(TR1maskdata, Track1_CardData)
+                            res2 = DL.Check_StringAB(TR2maskdata, Track2_CardData)
                             if not res1 or not res2:
                                 DL.fails += 1
                                 DL.SetWindowText("red", "Plaintext comparison FAIL")
@@ -98,62 +101,118 @@ if (Result):
                         else:
                             DL.fails += 1
                             DL.SetWindowText("red", "Track data is missing (NULL)")
-                                
+                                            
+                        if TRK1DecryptData and TRK2DecryptData:
+                            res1 = DL.Check_StringAB(TR1plaintextdata, TRK1DecryptData)
+                            res2 = DL.Check_StringAB(TR2plaintextdata, TRK2DecryptData)
+                            if not res1 or not res2:
+                                DL.fails += 1
+                                DL.SetWindowText("red", "Encryption comparison FAIL")
+                            else:
+                                DL.SetWindowText("blue", "Encryption comparison PASS")
+                        else:
+                            DL.fails += 1
+                            DL.SetWindowText("red", "Track data is missing (NULL)")
+                                                                            
                     if i == 2: #card_PAN 6396211
-                        TR1plaintextdata = "%B6396211000000026^CARD/IMAGE 03             ^17122011000021000000?/"
-                        TR2plaintextdata = ";6396211000000026=17122011000021000000?1"
+                        TR1maskdata = "%B6396211000000026^CARD/IMAGE 03             ^17122011000021000000?/"
+                        TR2maskdata = ";6396211000000026=17122011000021000000?1"
+                        TR1plaintextdata = "2542363339363231313030303030303032365E434152442F494D414745203033202020202020202020202020205E31373132323031313030303032313030303030303F2F"
+                        TR2plaintextdata = "3B363339363231313030303030303032363D31373132323031313030303032313030303030303F31"
                                             
                         if Track1_CardData and Track2_CardData:
-                            res1 = DL.Check_StringAB(TR1plaintextdata, Track1_CardData)
-                            res2 = DL.Check_StringAB(TR2plaintextdata, Track2_CardData)
+                            res1 = DL.Check_StringAB(TR1maskdata, Track1_CardData)
+                            res2 = DL.Check_StringAB(TR2maskdata, Track2_CardData)
                             if not res1 or not res2:
                                 DL.fails += 1
                                 DL.SetWindowText("red", "Plaintext comparison FAIL")
                             else:
                                 DL.SetWindowText("blue", "Plaintext comparison PASS")
+                        else:
+                            DL.fails += 1
+                            DL.SetWindowText("red", "Track data is missing (NULL)")
+                                            
+                        if TRK1DecryptData and TRK2DecryptData:
+                            res1 = DL.Check_StringAB(TR1plaintextdata, TRK1DecryptData)
+                            res2 = DL.Check_StringAB(TR2plaintextdata, TRK2DecryptData)
+                            if not res1 or not res2:
+                                DL.fails += 1
+                                DL.SetWindowText("red", "Encryption comparison FAIL")
+                            else:
+                                DL.SetWindowText("blue", "Encryption comparison PASS")
                         else:
                             DL.fails += 1
                             DL.SetWindowText("red", "Track data is missing (NULL)")
                             
                     if i == 3: #card_Gift/Stored Value Card
-                        TR1plaintextdata = "%B6396210060541276099^CARD/IMAGE 03             ^3912006465555?&"
-                        TR2plaintextdata = ";6396210060541276099=3912006465555?8"
+                        TR1maskdata = "%B6396210060541276099^CARD/IMAGE 03             ^3912006465555?&"
+                        TR2maskdata = ";6396210060541276099=3912006465555?8"
+                        TR1plaintextdata = "2542363339363231303036303534313237363039395E434152442F494D414745203033202020202020202020202020205E333931323030363436353535353F26"
+                        TR2plaintextdata = "3B363339363231303036303534313237363039393D333931323030363436353535353F38"
                                             
                         if Track1_CardData and Track2_CardData:
-                            res1 = DL.Check_StringAB(TR1plaintextdata, Track1_CardData)
-                            res2 = DL.Check_StringAB(TR2plaintextdata, Track2_CardData)
+                            res1 = DL.Check_StringAB(TR1maskdata, Track1_CardData)
+                            res2 = DL.Check_StringAB(TR2maskdata, Track2_CardData)
                             if not res1 or not res2:
                                 DL.fails += 1
                                 DL.SetWindowText("red", "Plaintext comparison FAIL")
                             else:
                                 DL.SetWindowText("blue", "Plaintext comparison PASS")
+                        else:
+                            DL.fails += 1
+                            DL.SetWindowText("red", "Track data is missing (NULL)")
+                                            
+                        if TRK1DecryptData and TRK2DecryptData:
+                            res1 = DL.Check_StringAB(TR1plaintextdata, TRK1DecryptData)
+                            res2 = DL.Check_StringAB(TR2plaintextdata, TRK2DecryptData)
+                            if not res1 or not res2:
+                                DL.fails += 1
+                                DL.SetWindowText("red", "Encryption comparison FAIL")
+                            else:
+                                DL.SetWindowText("blue", "Encryption comparison PASS")
                         else:
                             DL.fails += 1
                             DL.SetWindowText("red", "Track data is missing (NULL)")
                             
                     if i == 4: #card_Operator/Driver Maintenance Card
-                        TR1plaintextdata = "%B639621150520000032^CARD/IMAGE 03             ^391275235?3"
-                        TR2plaintextdata = ";639621150520000032=391275235?="
+                        TR1maskdata = "%B639621150520000032^CARD/IMAGE 03             ^391275235?3"
+                        TR2maskdata = ";639621150520000032=391275235?="
+                        TR1plaintextdata = "25423633393632313135303532303030303033325E434152442F494D414745203033202020202020202020202020205E3339313237353233353F33"
+                        TR2plaintextdata = "3B3633393632313135303532303030303033323D3339313237353233353F3D"
                                             
                         if Track1_CardData and Track2_CardData:
-                            res1 = DL.Check_StringAB(TR1plaintextdata, Track1_CardData)
-                            res2 = DL.Check_StringAB(TR2plaintextdata, Track2_CardData)
+                            res1 = DL.Check_StringAB(TR1maskdata, Track1_CardData)
+                            res2 = DL.Check_StringAB(TR2maskdata, Track2_CardData)
                             if not res1 or not res2:
                                 DL.fails += 1
                                 DL.SetWindowText("red", "Plaintext comparison FAIL")
                             else:
                                 DL.SetWindowText("blue", "Plaintext comparison PASS")
+                        else:
+                            DL.fails += 1
+                            DL.SetWindowText("red", "Track data is missing (NULL)")
+                                            
+                        if TRK1DecryptData and TRK2DecryptData:
+                            res1 = DL.Check_StringAB(TR1plaintextdata, TRK1DecryptData)
+                            res2 = DL.Check_StringAB(TR2plaintextdata, TRK2DecryptData)
+                            if not res1 or not res2:
+                                DL.fails += 1
+                                DL.SetWindowText("red", "Encryption comparison FAIL")
+                            else:
+                                DL.SetWindowText("blue", "Encryption comparison PASS")
                         else:
                             DL.fails += 1
                             DL.SetWindowText("red", "Track data is missing (NULL)")
                             
                     if i == 5: #card_Prepaid Card
-                        TR1plaintextdata = "%B6396212054657605009^CARD/IMAGE 03             ^3912005798080?!"
-                        TR2plaintextdata = ";6396212054657605009=3912005798080??"
+                        TR1maskdata = "%B6396212054657605009^CARD/IMAGE 03             ^3912005798080?!"
+                        TR2maskdata = ";6396212054657605009=3912005798080??"
+                        TR1plaintextdata = "2542363339363231323035343635373630353030395E434152442F494D414745203033202020202020202020202020205E333931323030353739383038303F21"
+                        TR2plaintextdata = "3B363339363231323035343635373630353030393D333931323030353739383038303F3F"
                                             
                         if Track1_CardData and Track2_CardData:
-                            res1 = DL.Check_StringAB(TR1plaintextdata, Track1_CardData)
-                            res2 = DL.Check_StringAB(TR2plaintextdata, Track2_CardData)
+                            res1 = DL.Check_StringAB(TR1maskdata, Track1_CardData)
+                            res2 = DL.Check_StringAB(TR2maskdata, Track2_CardData)
                             if not res1 or not res2:
                                 DL.fails += 1
                                 DL.SetWindowText("red", "Plaintext comparison FAIL")
@@ -162,19 +221,45 @@ if (Result):
                         else:
                             DL.fails += 1
                             DL.SetWindowText("red", "Track data is missing (NULL)")
+                                            
+                        if TRK1DecryptData and TRK2DecryptData:
+                            res1 = DL.Check_StringAB(TR1plaintextdata, TRK1DecryptData)
+                            res2 = DL.Check_StringAB(TR2plaintextdata, TRK2DecryptData)
+                            if not res1 or not res2:
+                                DL.fails += 1
+                                DL.SetWindowText("red", "Encryption comparison FAIL")
+                            else:
+                                DL.SetWindowText("blue", "Encryption comparison PASS")
+                        else:
+                            DL.fails += 1
+                            DL.SetWindowText("red", "Track data is missing (NULL)")
                             
                     if i == 6: #card_Payroll Deduct Card
-                        TR1plaintextdata = "%B6396213040926264891^CARD/IMAGE 03             ^3912001371387?%"
-                        TR2plaintextdata = ";6396213040926264891=3912001371387?;"
+                        TR1maskdata = "%B6396213040926264891^CARD/IMAGE 03             ^3912001371387?%"
+                        TR2maskdata = ";6396213040926264891=3912001371387?;"
+                        TR1plaintextdata = "2542363339363231333034303932363236343839315E434152442F494D414745203033202020202020202020202020205E333931323030313337313338373F25"
+                        TR2plaintextdata = "3B363339363231333034303932363236343839313D333931323030313337313338373F3B"
                                             
                         if Track1_CardData and Track2_CardData:
-                            res1 = DL.Check_StringAB(TR1plaintextdata, Track1_CardData)
-                            res2 = DL.Check_StringAB(TR2plaintextdata, Track2_CardData)
-                            if res1 == False or res2 == False:
+                            res1 = DL.Check_StringAB(TR1maskdata, Track1_CardData)
+                            res2 = DL.Check_StringAB(TR2maskdata, Track2_CardData)
+                            if not res1 or not res2:
                                 DL.fails += 1
                                 DL.SetWindowText("red", "Plaintext comparison FAIL")
                             else:
                                 DL.SetWindowText("blue", "Plaintext comparison PASS")
+                        else:
+                            DL.fails += 1
+                            DL.SetWindowText("red", "Track data is missing (NULL)")
+                                            
+                        if TRK1DecryptData and TRK2DecryptData:
+                            res1 = DL.Check_StringAB(TR1plaintextdata, TRK1DecryptData)
+                            res2 = DL.Check_StringAB(TR2plaintextdata, TRK2DecryptData)
+                            if not res1 or not res2:
+                                DL.fails += 1
+                                DL.SetWindowText("red", "Encryption comparison FAIL")
+                            else:
+                                DL.SetWindowText("blue", "Encryption comparison PASS")
                         else:
                             DL.fails += 1
                             DL.SetWindowText("red", "Track data is missing (NULL)")

@@ -1,18 +1,19 @@
-Docklight Log File (HEX) - Started 2026/8/13 15:05:57.117 
+Docklight Log File (HEX) - Started 2026/8/17 15:08:18.368 
  TEST CASE: USAT022
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 115200 baud...
+ POS operating on COM14 @ 9600 baud...
  Set POS COM PORT - COMPLETE
 
 
-2026/8/13 15:05:59.485 [TX] - F7 F7 F7 
-2026/8/13 15:06:00.488 [TX] - F6 F6 F6 
-2026/8/13 15:06:01.504 [TX] - F9 F9 F9 
-2026/8/13 15:06:02.507 [TX] - FE FE FE  --- USA Tech (Pls swipe card..)
+2026/8/17 15:08:21.284 [TX] - F7 F7 F7 
+2026/8/17 15:08:22.292 [TX] - F6 F6 F6 
+2026/8/17 15:08:23.293 [TX] - F9 F9 F9 
+2026/8/17 15:08:24.307 [TX] - FE FE FE  --- USA Tech (Pls swipe card..)
 
-2026/8/13 15:06:05.474 [TX] - 80 20 50 6C 73 20 73 77 69 70 65 20 63 61 72 64 20 F8  
+2026/8/17 15:08:27.671 [TX] - 80 20 50 6C 73 20 73 77 69 70 65 20 63 61 72 64 20 F8 
+2026/8/17 15:08:29.071 [RX] - 42 42 42  
 
  Result = PASSED
  ---------- END OF TEST ----------
@@ -22,5 +23,5 @@ Docklight Log File (HEX) - Started 2026/8/13 15:05:57.117
  MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2026/8/13 15:06:17.082 
+Docklight Log File (HEX) - Stopped 2026/8/17 15:08:39.334 
 

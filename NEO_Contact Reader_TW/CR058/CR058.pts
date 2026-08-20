@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-22336
+62536
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -171,6 +171,7 @@ if readerType = "NEO2" then
       DL.AddComment "--- First response control = Send First Response 0x63"
       DL.SendSequence "First response control = Send First Response 0x63"
       result = DL.WaitForSequence("04 00", 1, 5000)
+      dl.pause 500
    End If
 
    If result <> 0 Then
@@ -179,7 +180,7 @@ if readerType = "NEO2" then
       DL.AddComment "--- 60-03 Contact Set Application Data (VISA)"
       DL.SendSequence "60-03 Contact Set Application Data (VISA)"
       result = DL.WaitForSequence("60-xx 00 status", 1, 3000)
-      dl.pause 1000
+      dl.pause 500
    End If
 
    If result <> 0 Then
@@ -188,7 +189,7 @@ if readerType = "NEO2" then
       DL.AddComment "--- 60-16 Contact Set ICS Identification (04)"
       DL.SendSequence "60-16 Contact Set ICS Identification (04)"
       result = DL.WaitForSequence("60-xx 00 status", 1, 3000)
-      dl.pause 1000
+      dl.pause 500
    End If
 
    If result <> 0 Then
@@ -197,7 +198,7 @@ if readerType = "NEO2" then
       DL.AddComment "--- 60-06 4C config (NEO2)"
       DL.SendSequence "60-06 4C config (NEO2)"
       result = DL.WaitForSequence("60-xx 00 status", 1, 3000)
-      dl.pause 1000
+      dl.pause 500
    End If
 
    If result <> 0 Then
@@ -206,7 +207,7 @@ if readerType = "NEO2" then
       DL.AddComment "--- 60-0A Contact Set CA Public Key"
       DL.SendSequence "60-0A Contact Set CA Public Key"
       result = DL.WaitForSequence("60-xx 00 status", 1, 3000)
-      dl.pause 1000
+      dl.pause 500
    End If
 end if
 '---------------------------------------------A) byte 1&2 value error

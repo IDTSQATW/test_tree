@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-53531
+5720
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -243,7 +243,7 @@ If result <> 0 Then
    if readerType <> "NEO2" then DL.SendSequence "Burst mode OFF"
    if readerType = "NEO2" then DL.SendSequence "Burst mode OFF (NEO2)"
    result = DL.WaitForSequence("04 00", 1, 3000)
-   dl.pause 200
+   dl.pause 500
 End If
 
 If result <> 0 Then
@@ -252,7 +252,7 @@ If result <> 0 Then
    DL.AddComment "--- C7-66 set private key all 00"
    DL.SendSequence "C7-66 set private key all 00"
    result = DL.WaitForSequence("C7 00", 1, 2000)
-   dl.pause 200
+   dl.pause 500
 End If
 
 If result <> 0 Then

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-54032
+41102
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -194,6 +194,7 @@ For i = 1 to 63
 	      DL.AddComment vbCrLf & "Mifare auth - " & cmd & vbCrLf
 	      DL.SendSequence "Mifare auth - " & cmd
 	      result = DL.WaitForSequence("PT command (OK)", 1, 3000)
+             dl.pause 500
 	   End If
           auth = auth + 4
        end if
@@ -267,6 +268,7 @@ If result <> 0 Then
  DL.AddComment vbCrLf & "Antenna Enable" & vbCrLf
  DL.SendSequence "Antenna Enable"
  result = DL.WaitForSequence("Antenna Enable (OK)", 1, 3000)
+ dl.pause 500
 End If
 
 If result <> 0 Then

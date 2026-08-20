@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-59939
+41877
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -161,6 +161,7 @@ Sub The_Test()
           if i = 56 then cmd = "Sector 14"
           if i = 60 then cmd = "Sector 15"
 	   If result <> 0 Then
+             dl.pause 500
 	      DL.ResetReceiveCounter
 	      DL.AddComment vbCrLf & "Mifare auth - " & cmd & vbCrLf
 	      DL.SendSequence "Mifare auth - " & cmd
@@ -217,6 +218,7 @@ If result <> 0 Then
  DL.AddComment vbCrLf & "Antenna Enable" & vbCrLf
  DL.SendSequence "Antenna Enable"
  result = DL.WaitForSequence("Antenna Enable (OK)", 1, 3000)
+ dl.pause 500
 End If
 
 If result <> 0 Then
@@ -225,6 +227,7 @@ If result <> 0 Then
  DL.AddComment vbCrLf & "Poll for Token (10 sec)" & vbCrLf
  DL.SendSequence "Poll for Token (10 sec)"
  result = DL.WaitForSequence("Poll for Token (OK)", 1, 3000)
+ dl.pause 500
 End If
 
 The_Test

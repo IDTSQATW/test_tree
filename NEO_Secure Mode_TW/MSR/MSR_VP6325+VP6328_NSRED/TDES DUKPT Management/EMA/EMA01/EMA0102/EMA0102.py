@@ -247,7 +247,7 @@ if (Result):
 								if Result != True:
 									DL.fails=DL.fails+1
 									DL.SetWindowText("red", "TagFFEE01: FAIL")	
-								Result = DL.Check_StringAB(TagDFEE26, '2A01')
+								Result = DL.Check_StringAB(TagDFEE26, '2A00')
 								if Result != True:
 									DL.fails=DL.fails+1
 									DL.SetWindowText("red", "TagDFEE26: FAIL")	

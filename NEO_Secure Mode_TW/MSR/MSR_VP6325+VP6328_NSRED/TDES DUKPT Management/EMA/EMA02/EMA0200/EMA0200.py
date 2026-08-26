@@ -15,11 +15,11 @@ if (Result):
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 00")
 		
-# Encryption type -- AES
+# Check data encryption TYPE is AES-112	
 if (Result):
-	RetOfStep = DL.SendCommand('Encryption type -- AES')
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 01")
+		Result = DL.Check_RXResponse("C7 00 00 06 00 01 00 00 00 00")
 
 # Set/ Get MSR Secure Parameters		
 if (Result):
@@ -56,7 +56,7 @@ if (Result):
 				Result = DL.Check_RXResponse("04 00 00 00")
 					
 		if (Result):
-			for i in range (3, 4):
+			for i in range (1, 11):
 				if j == 1:
 					if i == 1:
 						RetOfStep = DL.SendCommand('Activate Transaction -- IDT')
@@ -247,7 +247,7 @@ if (Result):
 								if Result != True:
 									DL.fails=DL.fails+1
 									DL.SetWindowText("red", "TagFFEE01: FAIL")	
-								Result = DL.Check_StringAB(TagDFEE26, '2A01')
+								Result = DL.Check_StringAB(TagDFEE26, '2A00')
 								if Result != True:
 									DL.fails=DL.fails+1
 									DL.SetWindowText("red", "TagDFEE26: FAIL")	

@@ -52,3 +52,17 @@ COMMENT
 CHECKSUM 
 0
 
+RECEIVE
+1
+item 0E
+0E ?? 56 50 36 33 32 ??
+-1
+1
+COMMENT <-- model name check
+0
+1
+0
+0
+CHECKSUM 
+0
+

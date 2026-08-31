@@ -201,7 +201,7 @@ if lcdtype == 1:
         
 # Reset to default
 RetOfStep = DL.SendCommand('Reset to default')
-time.sleep(0.5)
+time.sleep(1)
 if (RetOfStep):
     DL.Check_RXResponse("04 00 00 00")
         

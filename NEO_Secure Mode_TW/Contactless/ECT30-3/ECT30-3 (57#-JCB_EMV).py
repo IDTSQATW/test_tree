@@ -97,6 +97,8 @@ if (Result):
 	else:
 		DL.fails=DL.fails+1
 		DL.SetWindowText("red", "RX status code: FAIL")
+else:
+	DL.fails=DL.fails+1
         
 # cmd 03-03
 if (Result):

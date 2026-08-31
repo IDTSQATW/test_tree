@@ -346,6 +346,20 @@ CHECKSUM
 
 RECEIVE
 11
+02-40 resp (NEO4)
+56 69 56 4F 74 65 63 68 32 00 02 0A ?? ?? ?? ## ## ## ## ## ## DF EE 02 04 27 90 00 00
+-1
+1
+COMMENT 
+0
+1
+0
+0
+CHECKSUM 
+0
+
+RECEIVE
+12
 Tag DFEC0F (01) any
 DF EC 0F ?? 01 44 03 20 07
 -1
@@ -359,7 +373,7 @@ CHECKSUM
 0
 
 RECEIVE
-12
+13
 Collision detected resp
 56 69 56 4F 74 65 63 68 32 00 02 0A ?? ?? ?? FF EE 1F 04 21 00 00 00
 -1
@@ -373,7 +387,7 @@ CHECKSUM
 0
 
 RECEIVE
-13
+14
 Collision detected resp (NEO2)
 56 69 56 4F 74 65 63 68 32 00 02 0A ?? ?? ?? ## ## ## ## ## ## DF EE 02 04 21 00 00 00
 -1

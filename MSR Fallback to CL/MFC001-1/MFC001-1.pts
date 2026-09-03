@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-26997
+9337
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -208,7 +208,6 @@ If result <> 0 Then
    if output = 7 then result = 1
 
 End If
-end if
 
 If result <> 0 Then msgbox "Click OK --> Swipe Discover PAN=xxxx0026 (MSR card)"
 
@@ -230,7 +229,10 @@ If result <> 0 Then
    end if
    if output = 7 then result = 1
 End If
-
+else
+   result = 0
+   DL.AddComment vbcrlf & vbcrlf & "Change to Enc OFF reader first..."
+end if
 
 '------------------------------------------------------------
 DL.AddComment vbCrLf

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-13389
+31644
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -145,7 +145,7 @@ k = 0
 result = 1
 
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 3000
+DL.Pause 1000
 
 
 The_Test

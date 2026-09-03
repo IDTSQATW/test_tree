@@ -100,7 +100,7 @@ if (Result):
                     dec5A = DL.DecryptDLL(0,1, strKey, ksn, enc5A)					
 
                     # Tag DFEF18
-                    if lcdtype == 1: #w/ LCD
+                    if maskDFEF18 != '':
                         Result = DL.Check_StringAB(maskDFEF18, '35 34 31 33 2A 2A 2A 2A 2A 2A 2A 2A 31 35 31 33 3D 30 35 31 32 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A')
                         if Result == True and DL.Check_StringAB(alldata, "DF EF 18 A1 22"):
                             DL.SetWindowText("blue", "Tag DFEF18_Mask: PASS")
@@ -160,6 +160,7 @@ if (Result):
                         DL.fails=DL.fails+1
                         DL.SetWindowText("Red", "Tag DFEE26: FAIL")
             
+                    time.sleep(2)
                     if lcdtype == 1: DL.SendCommand('03-03 w/ LCD')
                     if lcdtype == 0: DL.SendCommand('03-03 w/o LCD')	
                     time.sleep(2)

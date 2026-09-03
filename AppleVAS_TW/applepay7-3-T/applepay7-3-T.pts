@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-53138
+33281
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -297,7 +297,7 @@ If result <> 0 Then
    end if
 else
    dl.addcomment vbcrlf & vbcrlf
-   DL.AddComment "*** Please load data key (AES type) and enabled encryption (03) by manual first..."
+   DL.AddComment "*** Please enabled encryption (03) by manual first..."
 End If
 '============================================================
 DL.AddComment vbCrLf

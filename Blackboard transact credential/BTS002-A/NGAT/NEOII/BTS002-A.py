@@ -95,6 +95,7 @@ if (Result):
 						DL.SetWindowText("blue", "Tag FFEE08: PASS")
 					else:
 						DL.SetWindowText("red", "Tag FFEE08: FAIL")
+						DL.fails=DL.fails+1
 						
 				# Tag DFEF4C-4D	
 					Result = DL.Check_StringAB(TagDFEF4C, '00 00 00 00 10 00')
@@ -102,25 +103,39 @@ if (Result):
 						DL.SetWindowText("blue", "Tag DFEF4C: PASS")
 					else:
 						DL.SetWindowText("red", "Tag DFEF4C: FAIL")
+						DL.fails=DL.fails+1
 									
 					Result = DL.Check_StringAB(decDFEF4D, '39 39 39 38 37 38 30 30 31 30 30')
 					if Result == True:
 						DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					else:
-						DL.SetWindowText("red", "Tag DFEF4D: FAIL")										
+						DL.SetWindowText("red", "Tag DFEF4D: FAIL")
+						DL.fails=DL.fails+1
 			# Tags 9F39/ FFEE01/ DFEE26
 				if (DL.Check_StringAB(Tag9F39, '07')): 
 					DL.SetWindowText("blue", "Tag 9F39: PASS")
 				else:
 					DL.SetWindowText("Red", "Tag 9F39: FAIL")
+					DL.fails=DL.fails+1
 				
 				if (DL.Check_StringAB(TagFFEE01, "DFEE300100")): 
 					DL.SetWindowText("blue", "Tag FFEE01: PASS")
 				else:
 					DL.SetWindowText("Red", "Tag FFEE01: FAIL")
+					DL.fails=DL.fails+1
 				
 				if (DL.Check_StringAB(TagDFEE26, '2300')):
 					DL.SetWindowText("blue", "Tag DFEE26: PASS")
 				else:
 					DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+					DL.fails=DL.fails+1
 				time.sleep(1)
+			else:
+				DL.fails=DL.fails+1
+else:
+	DL.fails=DL.fails+1
+                
+if(0 < (DL.fails + DL.warnings)):
+	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
+else:
+	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )

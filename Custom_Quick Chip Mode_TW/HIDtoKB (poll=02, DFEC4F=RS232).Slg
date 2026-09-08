@@ -1,5 +1,5 @@
 
-15:42:28: If Issue ?
+16:19:21: If Issue ?
 Path_File:C:\test_tree\Custom_Quick Chip Mode_TW\HIDtoKB (poll=02, DFEC4F=RS232).txt
 Running Info>>
 [Issue Count: 8]
@@ -29,7 +29,7 @@ Running Info>>
 >>> Change to Quick Chip Mode
 
 
-15:42:28: >>[Do Scripts]>>
+16:19:21: >>[Do Scripts]>>
 
 Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
 --------------------

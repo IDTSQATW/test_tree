@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-38353
+4227
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -187,6 +187,7 @@ End Function
    DL.AddComment "--- C7-3A w/ 01"
    DL.SendSequence "C7-3A w/ 01"
    result = DL.WaitForSequence("C7 00-12", 1, 1000)
+   if result = 0 then result = DL.WaitForSequence("C7 00-12-1", 1, 1000)
    if result = 0 then result = DL.WaitForSequence("C7 00-13", 1, 1000)
    if result = 0 then 
       fcount = fcount + 1

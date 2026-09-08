@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-44094
+6226
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -156,6 +156,8 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+pollmode = msgbox ("Does the reader support Auto poll mode?", vbyesno)
+
 If result <> 0 Then
    readercheck = msgbox ("This is VP3300 & F/W ver. greater than v1.10?", vbyesno)
    DL.ResetReceiveCounter
@@ -186,6 +188,7 @@ If result <> 0 Then
    dl.pause 1000
 End If
 
+if pollmode = 6 then
 If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
@@ -205,6 +208,7 @@ If result <> 0 Then
    if readerType = "NEO2" then result = DL.WaitForSequence("Activate Tran Response (NEO2)", 1, 10000)
    dl.pause 1000
 End If
+end if
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 PrintMyResult(result)

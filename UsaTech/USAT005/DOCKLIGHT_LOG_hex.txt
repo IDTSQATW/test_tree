@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2026/8/13 15:01:30.656 
+Docklight Log File (HEX) - Started 2026/9/3 16:24:14.120 
  TEST CASE: USAT005
 
  --- Set POS COM PORT Settings
@@ -7,7 +7,7 @@ Docklight Log File (HEX) - Started 2026/8/13 15:01:30.656
  Set POS COM PORT - COMPLETE
 
 
-2026/8/13 15:01:33.122 [TX] - F9 F9 F9  
+2026/9/3 16:24:16.577 [TX] - F9 F9 F9  
 
  Result = PASSED
  ---------- END OF TEST ----------
@@ -17,5 +17,5 @@ Docklight Log File (HEX) - Started 2026/8/13 15:01:30.656
  MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2026/8/13 15:01:45.054 
+Docklight Log File (HEX) - Stopped 2026/9/3 16:24:22.464 
 

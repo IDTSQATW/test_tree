@@ -1,0 +1,5 @@
+Docklight Log File (HEX) - Started 2026/9/4 10:47:46.625 
+
+
+Docklight Log File (HEX) - Stopped 2026/9/4 10:47:46.645 
+

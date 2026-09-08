@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-28354
+63370
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -160,8 +160,6 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-
-
 If result <> 0 Then
    DL.AddComment "--- 04-09"
    DL.SendSequence "04-09"
@@ -179,7 +177,7 @@ If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf & "--- Burst Off (04-00)"
    if readerType = "GR" or readerType = "NEO1" then DL.SendSequence "Burst Off (04-00)"
-   'if readerType = "NEO2" then DL.SendSequence "Burst Off (NEO2)"
+   if readerType = "NEO2" then DL.SendSequence "Burst Off (NEO2)"
    result = DL.WaitForSequence("04-00 OK", 1, 10000)
 End If
 
@@ -192,9 +190,10 @@ if i = 1 then
 If result <> 0 Then msgbox "Click OK --> Swipe Discover PAN=xxxx0026 (MSR card)"
 
 If result <> 0 Then
+   dl.resetreceivecounter
    DL.AddComment vbcrlf & vbcrlf & "--- 02-01_w/ DFEC53 OFF"
    DL.SendSequence "02-01_w/ DFEC53 OFF"
-   result = DL.WaitForSequence("MSR_0201", 1, 10000)
+   result = DL.WaitForSequence("MSR_0201", 1, 5000)
    output = msgbox("Did you see msg 'EVM Card Please Tap'",vbyesno)
 
       if result = 0 then 
@@ -204,8 +203,6 @@ If result <> 0 Then
       if output = 6 then
          result = 0
          dl.addcomment  vbcrlf & vbcrlf & "**LCD MSG FAIL**"
-      if output = 7 then result = 1
-
       end if   
 End If
 
@@ -218,9 +215,10 @@ if i = 2 then
 If result <> 0 Then msgbox "Click OK --> Swipe Discover PAN=xxxx0026 (MSR card)"
 
 If result <> 0 Then
+   dl.resetreceivecounter
    DL.AddComment vbcrlf & vbcrlf & "--- 02-40_w/ DFEC53 OFF"
    DL.SendSequence "02-40_w/ DFEC53 OFF"
-   result = DL.WaitForSequence("MSR_0240", 1, 10000)
+   result = DL.WaitForSequence("MSR_0240", 1, 5000)
    output = msgbox("Did you see msg 'EVM Card Please Tap'",vbyesno)
       if result = 0 then 
          dl.addcomment vbcrlf & vbcrlf & "**Card data FAIL**"
@@ -229,8 +227,6 @@ If result <> 0 Then
       if output = 6 then
          result = 0
          dl.addcomment  vbcrlf & vbcrlf & "**LCD MSG FAIL**"
-      if output = 7 then result = 1
-
       end if   
 End If
 

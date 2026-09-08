@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-61575
+56507
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -178,7 +178,7 @@ If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf & "--- Burst Off (04-00)"
    if readerType = "GR" or readerType = "NEO1" then DL.SendSequence "Burst Off (04-00)"
-   'if readerType = "NEO2" then DL.SendSequence "Burst Off (NEO2)"
+   if readerType = "NEO2" then DL.SendSequence "Burst Off (NEO2)"
    result = DL.WaitForSequence("04-00 OK", 1, 10000)
 End If
 
@@ -188,49 +188,51 @@ for i = 1 to 2
 
 if i = 1 then
 
-If result <> 0 Then msgbox "Click OK --> Swipe Discover PAN=xxxx0026 (MSR card)"
-
 If result <> 0 Then
+   msgbox "Click OK --> Swipe Discover PAN=xxxx0026 (MSR card)"
+   dl.resetreceivecounter
    DL.AddComment vbcrlf & vbcrlf & "--- 02-01_w/ DFEC53 ON"
    DL.SendSequence "02-01_w/ DFEC53 ON"
+
    result = DL.WaitForSequence("CL_0201", 1, 10000)
    output = msgbox("Did you see msg 'EVM Card Please Tap'",vbyesno)
 
-      if result = 0 then 
-         dl.addcomment vbcrlf & vbcrlf & "**Card data FAIL**"
-      end if   
-
-      if output = 7 then
-         result = 0
-         dl.addcomment  vbcrlf & vbcrlf & "**LCD MSG FAIL**"
-      if output = 6 then result = 1
-
-      end if   
+   output = msgbox("Did you see msg 'EVM Card Please Tap'",vbyesno)
+   if output = 7 then 
+      result = 0
+      dl.addcomment  vbcrlf & vbcrlf & "**LCD MSG FAIL**"
+      DL.SendSequence "05-01"
+      dl.pause 800
+   elseif output = 6 then
+          msgbox "Click OK --> Tap any CL card"
+          result = DL.WaitForSequence("CL_0201", 1, 10000)
+          dl.pause 200
+          if result = 0 then dl.addcomment vbcrlf & vbcrlf & "**Card data FAIL**"
+   end if
 End If
 
 end if
 
-
-
 if i = 2 then
 
-If result <> 0 Then msgbox "Click OK --> Swipe Discover PAN=xxxx0026 (MSR card)"
-
 If result <> 0 Then
+   msgbox "Click OK --> Swipe Discover PAN=xxxx0026 (MSR card)"
+   dl.resetreceivecounter
    DL.AddComment vbcrlf & vbcrlf & "--- 02-40_w/ DFEC53 ON"
    DL.SendSequence "02-40_w/ DFEC53 ON"
-   result = DL.WaitForSequence("CL_0240", 1, 10000)
+
    output = msgbox("Did you see msg 'EVM Card Please Tap'",vbyesno)
-      if result = 0 then 
-         dl.addcomment vbcrlf & vbcrlf & "**Card data FAIL**"
-      end if   
-
-      if output = 7 then
-         result = 0
-         dl.addcomment  vbcrlf & vbcrlf & "**LCD MSG FAIL**"
-      if output = 6 then result = 1
-
-      end if   
+   if output = 7 then 
+      result = 0
+      dl.addcomment  vbcrlf & vbcrlf & "**LCD MSG FAIL**"
+      DL.SendSequence "05-01"
+      dl.pause 800
+   elseif output = 6 then
+          msgbox "Click OK --> Tap any CL card"
+          result = DL.WaitForSequence("CL_0240", 1, 10000)
+          dl.pause 200
+          if result = 0 then dl.addcomment vbcrlf & vbcrlf & "**Card data FAIL**"
+   end if 
 End If
 
 end if

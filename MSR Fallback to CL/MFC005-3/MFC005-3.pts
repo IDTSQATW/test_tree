@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-36730
+58896
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -170,6 +170,7 @@ End If
 
 
 If result <> 0 Then
+   dl.resetreceivecounter
    DL.AddComment  vbcrlf & vbcrlf & "--- Auto Poll (01-01)"
    DL.SendSequence "Auto Poll (01-01)"
    result = DL.WaitForSequence("01-01 OK", 1, 10000)
@@ -179,7 +180,7 @@ If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf & "--- Burst Off (04-00)"
    if readerType = "GR" or readerType = "NEO1" then DL.SendSequence "Burst Off (04-00)"
-   'if readerType = "NEO2" then DL.SendSequence "Burst Off (NEO2)"
+   if readerType = "NEO2" then DL.SendSequence "Burst Off (NEO2)"
    result = DL.WaitForSequence("04-00 OK", 1, 10000)
 End If
 
@@ -194,6 +195,7 @@ If result <> 0 Then msgbox "Swipe Discover PAN=xxxx0026 (MSR card) --> Click OK"
 output = msgbox("Did you see msg 'EVM Card Please Tap'",vbyesno)
 
 if output = 7 then
+   dl.resetreceivecounter
    DL.AddComment vbcrlf & vbcrlf & "--- 03-00"
    DL.SendSequence "03-00"
    result = DL.WaitForSequence("MSR_0300", 1, 10000)
@@ -216,6 +218,7 @@ If result <> 0 Then msgbox "Swipe Discover PAN=xxxx0026 (MSR card) --> Click OK"
 output = msgbox("Did you see msg 'EVM Card Please Tap'",vbyesno)
 
 if output = 7 then
+   dl.resetreceivecounter
    DL.AddComment vbcrlf & vbcrlf & "--- 03-40"
    DL.SendSequence "03-40"
    result = DL.WaitForSequence("MSR_0340", 1, 10000)

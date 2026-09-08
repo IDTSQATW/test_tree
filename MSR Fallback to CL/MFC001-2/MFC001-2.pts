@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-31600
+12626
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -179,7 +179,7 @@ If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf & "--- Burst Off (04-00)"
    if readerType = "GR" or readerType = "NEO1" then DL.SendSequence "Burst Off (04-00)"
-   'if readerType = "NEO2" then DL.SendSequence "Burst Off (NEO2)"
+   if readerType = "NEO2" then DL.SendSequence "Burst Off (04-00) (NEO2)"
    result = DL.WaitForSequence("04-00 OK", 1, 10000)
 End If
 

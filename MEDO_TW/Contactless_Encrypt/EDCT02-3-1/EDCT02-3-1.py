@@ -12,11 +12,21 @@ PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
 # Check project type (NEOI or NEOII)
-readertype = DL.ShowMessageBox("", "Is this NEOII project?", 0)
+readertype = DL.ShowMessageBox("", "Is this NEOII and upward project project?", 0)
 if readertype == 1:
 	DL.SetWindowText("Green", "*** NEOII project ***")
 else:
 	DL.SetWindowText("Green", "*** NEOI project ***")
+    
+# Check reader is VP3350 or not
+lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+if lcdtype == 1:
+	DL.SetWindowText("Green", "*** This is VP3350 ***")
+	RetOfStep = DL.SendCommand('0105 do not use LCD')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("01 00 00 00")
+else:
+	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
     
 # Check if reader support auto poll mode or not
 pollmodetype = DL.ShowMessageBox("", "Does the reader support auto poll mode?", 0)
@@ -27,22 +37,14 @@ else:
 	DL.SetWindowText("Green", "*** The reader did NOT support auto poll mode ***")
 	pollmode = 2
 	
-# Check reader is VP3350 or not
-lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
-if lcdtype == 1:
-	DL.SetWindowText("Green", "*** This is VP3350 ***")
-	RetOfStep = DL.SendCommand('0105 do not use LCD')
-	if (RetOfStep):
-		Result = DL.Check_RXResponse("01 00 00 00")
-else:
-	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
-
 if readertype == 1:
 	# Check data encryption TYPE is TDES	
 	if (Result):
 		RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
 		if (RetOfStep):
 			Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
+			if Result == False:
+				DL.SetWindowText("Red", "Check data encryption TYPE is TDES...")
 else:
 	# Get Data Encryption (C7-37)
 	if (Result):
@@ -146,7 +148,7 @@ if (Result):
 				TagDFEF4C = DL.GetTLV(alldata,"DFEF4C", 0)
 				encDFEF4D = DL.GetTLV(alldata,"DFEF4D", 0)
 				decDFEF4D = DL.DecryptDLL(0,1, strKey, KSN, encDFEF4D)	
-
+                
 				# #1 Tag DFEF4C-4D	
 				# if i == 1:
 					# Result = DL.Check_StringAB(TagDFEF4C, '2B 00 00 00 00 00')
@@ -254,7 +256,9 @@ if (Result):
 						# DL.SetWindowText("blue", "Tag DFEF4D: PASS")
 					# else:
 						# DL.SetWindowText("red", "Tag DFEF4D: FAIL")
-						
+else:
+	DL.fails=DL.fails+1
+
 if lcdtype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):

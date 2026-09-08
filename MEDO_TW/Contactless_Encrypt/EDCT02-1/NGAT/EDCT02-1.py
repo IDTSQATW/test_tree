@@ -10,15 +10,6 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 
-# Check if reader support auto poll mode or not
-pollmodetype = DL.ShowMessageBox("", "Does the reader support auto poll mode?", 0)
-if pollmodetype == 1:
-	DL.SetWindowText("Green", "*** The reader support auto poll mode ***")
-	pollmode = 3
-else:
-	DL.SetWindowText("Green", "*** The reader did NOT support auto poll mode ***")
-	pollmode = 2
-	
 # Check reader is VP3350 or not
 readertype = DL.ShowMessageBox("", "Is this VP3350?", 0)
 if readertype == 1:
@@ -28,7 +19,16 @@ if readertype == 1:
 		Result = DL.Check_RXResponse("01 00 00 00")
 else:
 	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
-
+    
+# Check if reader support auto poll mode or not
+pollmodetype = DL.ShowMessageBox("", "Does the reader support auto poll mode?", 0)
+if pollmodetype == 1:
+	DL.SetWindowText("Green", "*** The reader support auto poll mode ***")
+	pollmode = 3
+else:
+	DL.SetWindowText("Green", "*** The reader did NOT support auto poll mode ***")
+	pollmode = 2
+	
 # Check data encryption TYPE is TDES	
 if (Result):
 	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')

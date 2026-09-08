@@ -75,7 +75,7 @@ if readertype == 1:
 # cmd 02-40, tap VISA qVSDC card
 if (Result):
 	for i in range (1, 8):
-		time.sleep(0.4)
+		time.sleep(0.5)
 		if i == 1:
 			RetOfStep = DL.SendCommand('04-00-----DFEF4B 1')
 			if (RetOfStep):

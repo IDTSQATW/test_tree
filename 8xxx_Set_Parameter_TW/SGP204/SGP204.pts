@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-16164
+1052
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -189,8 +189,8 @@ If result <> 0 then
       DL.ResetReceiveCounter
       dl.addcomment vbcrlf
       msgbox "Click OK --> Tap Card 101#-19 PAN-VISA"
-      DL.AddComment "--- 02-40 (enable 3 interfaces)"
-      DL.SendSequence "02-40 (enable 3 interfaces)" 
+      DL.AddComment "--- 02-40 (enable CL interface)"
+      DL.SendSequence "02-40 (enable CL interface)" 
       result = DL.WaitForSequence("DFEC11", 1, 10000)
       dl.pause 200
    End If

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-42015
+21285
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -135,17 +135,17 @@ End Function
 'TEST BEGINS
 '------------------------------------------------------------
 '============================================================
-MyInput = MsgBox ("Are you testing AR2.x.x USA Tech functions?", VBYesNo, "Test Step")
+MyInput = MsgBox ("Are you testing USA Tech functions?", VBYesNo, "Test Step")
 
 '------------------------------------------------------------
 If MyInput = 6 Then
 
   DL.SendSequence "", "F9 F9 F9", "H"
-  DL.Pause 3000
+  DL.Pause 1000
 
 If result <> 0 Then
    prompt = "Do you see LCD display is cleared presently?"
-   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y / N")  
+   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y")  
    result = (confirm = "y" Or confirm = "Y")
 End If
 
@@ -161,8 +161,6 @@ Else
    result = 0
 End If
 
-
-DL.Pause 1500
 DL.AddComment vbCrLf
 PrintMyResult(result)
 

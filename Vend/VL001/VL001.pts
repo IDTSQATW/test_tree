@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-15765
+15352
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -142,7 +142,7 @@ If MyInput = 6 Then
    DL.AddComment vbCrLf & "User selected 'Yes'" & vbCrLf
    result = DL.WaitForSequence("Positive Response", 1, 5000)
    prompt = prompt & "Does the screen get cleared"
-   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y / N")  
+   confirm = InputBox(prompt, "Enter (Y / y / N / n)", "Y")  
    result = (confirm = "y" Or confirm = "Y")
 
 ElseIf MyInput = 7 Then

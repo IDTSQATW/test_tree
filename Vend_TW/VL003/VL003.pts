@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-8851
+42038
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -136,7 +136,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-readercheck = msgbox("Is this USAT project?", vbyesno)
+readercheck = msgbox("Is this VP63xx series project?", vbyesno)
 
 DL.SendSequence "Enable Blue VL005"
 dl.pause 500
@@ -171,7 +171,6 @@ end if
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 DL.SendSequence "Disable Blue VL005"
-DL.Pause 1500
 
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf

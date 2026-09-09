@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-54864
+60068
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -219,13 +219,11 @@ if result <> 0 then
    next
 end if
 
-If result <> 0 Then
-   dl.resetreceivecounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- SSet tag DFEC66 = disable a3"
-   DL.SendSequence "Set tag DFEC66 = disable a3"
-   resultignore = DL.WaitForSequence("04-00 resp 00", 1, 3000)
-End If
+dl.resetreceivecounter
+dl.addcomment vbcrlf
+DL.AddComment "--- Set tag DFEC66 = disable a3"
+DL.SendSequence "Set tag DFEC66 = disable a3"
+resultignore = DL.WaitForSequence("04-00 resp 00", 1, 3000)
 
 DL.AddComment vbCrLf
 '============================================================

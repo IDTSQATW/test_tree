@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-30635
+48172
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -190,7 +190,7 @@ sub engfra()
     end if
 end sub
 '------------------------------------------------------------
-readercheck = msgbox("Is this VP63xx (USAT) reader?", vbyesno)
+'readercheck = msgbox("Is this VP63xx (USAT) reader?", vbyesno)
 
 if result <> 0 then
    dl.resetreceivecounter
@@ -212,12 +212,12 @@ end if
 if result <> 0 then
    eng()
    dl.pause 1000
-   msga = msgbox("Does LCD show correct (Eng) msg?", vbyesno)
+   msga = msgbox("Does LCD show Eng msg?", vbyesno)
    if msga = 7 then PrintMyResult(0)
       
    engfra()
    dl.pause 1000
-   msgb = msgbox("Does LCD show correct (Eng + Fra) msg?", vbyesno)
+   msgb = msgbox("Does LCD show correct Eng + Fra msg?", vbyesno)
    if msgb = 7 then PrintMyResult(0)
 end if  
 

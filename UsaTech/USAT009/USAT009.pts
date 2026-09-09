@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-61321
+44142
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -134,12 +134,6 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-'============================================================
-MyInput = MsgBox ("Are you testing USA Tech functions?", VBYesNo, "Test Step")
-
-'------------------------------------------------------------
-If MyInput = 6 Then
-
   DL.SendSequence "", "F9 F9 F9", "H"
   DL.Pause 600
 
@@ -162,11 +156,6 @@ End If
    result = 0
   End If
   DL.Pause 1000
-
-Else
-   DL.AddComment vbCrLf & "User selected 'No'. It is not for testing USA Tech functions." & vbCrLf
-   result = 0
-End If
 
 DL.AddComment vbCrLf
 PrintMyResult(result)

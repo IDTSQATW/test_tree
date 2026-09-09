@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-54764
+6773
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -303,9 +303,6 @@ next
 '------------------------------------------------------------
 if readerType = "GR" or readerType = "NEO1" then 
    DL.SendSequence "04-F0"
-   dl.pause 2000
-else
-   DL.SendSequence "04-0A"
    dl.pause 2000
 end if
 

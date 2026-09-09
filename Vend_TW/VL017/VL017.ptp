@@ -29,6 +29,13 @@ Vend Yellow On VL002
 0
 5
 
+SEND
+1
+77-05
+56 69 56 4F 74 65 63 68 32 00 77 05 00 00 4F 9C
+0
+5
+
 RECEIVE
 0
 Positive Response

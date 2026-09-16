@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-6033
+26453
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -149,26 +149,26 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-0. Reader is under activated mode.
-=====
-1. cmd "Stress Test - Set Test Count-M"
+'0. Reader is under activated mode.
+'=====
+'1. cmd "Stress Test - Set Test Count-M"
 
-2. cmd "Stress Test - ON" --> non-stop test
+'2. cmd "Stress Test - ON" --> non-stop test
 
-3. cmd "Stress Test - OFF" --> stop manually, MUST > 12h
+'3. cmd "Stress Test - OFF" --> stop manually, MUST > 12h
 
-4. cmd "Stress Test - Get Verified Count"
-   => Check result if has fail item.
-   => Data[0-2] :  test cycles
-      Data[3-5] :  NFC Fail Count
-      Data[6-8] :  Flash Fail Count
-      Data[9-11] :  Backllight Fail Count
-      Data[12-14] :  Beeper Fail Count
-      Data[15-17] :  LED Fail Count
-      Data[18-20] :  LCD Fail Count
-      Data[21-23] :  Test Timing Setting
+'4. cmd "Stress Test - Get Verified Count"
+'   => Check result if has fail item.
+'   => Data[0-2] :  test cycles
+'      Data[3-5] :  NFC Fail Count
+'      Data[6-8] :  Flash Fail Count
+'      Data[9-11] :  Backllight Fail Count
+'      Data[12-14] :  Beeper Fail Count
+'      Data[15-17] :  LED Fail Count
+'      Data[18-20] :  LCD Fail Count
+'      Data[21-23] :  Test Timing Setting
 
-5. cmd "Stress Test - Remove File" --> clear record and setting
+'5. cmd "Stress Test - Remove File" --> clear record and setting
 '------------------------------------------------------------
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf

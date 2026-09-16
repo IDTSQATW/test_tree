@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-49720
+20097
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -150,7 +150,7 @@ End Function
 'TEST BEGINS
 '------------------------------------------------------------
 hwcheck = msgbox ("Does reader support ICC?", vbyesno)
-      for i = 1 to 20
+      for i = 1 to 22
           if i = 1 then cmd = "RF LED 1 ON"
           if i = 2 then cmd = "RF LED 1 OFF"
           if i = 3 then cmd = "RF LED 2 ON"
@@ -172,6 +172,8 @@ hwcheck = msgbox ("Does reader support ICC?", vbyesno)
           if i = 18 then cmd = "NFC LED OFF"
           if i = 19 then cmd = "Key LED ON"
           if i = 20 then cmd = "Key LED OFF"
+          if i = 22 then cmd = "All peripherals-OFF"
+          if i = 21 then cmd = "All peripherals-ON"
 
           dl.resetreceivecounter
           DL.AddComment vbCrLf
@@ -198,6 +200,8 @@ hwcheck = msgbox ("Does reader support ICC?", vbyesno)
           if i = 18 then check = msgbox("NFC LED OFF?", vbyesno)
           if i = 19 then check = msgbox("Button LED ON?", vbyesno)
           if i = 20 then check = msgbox("Button LED OFF?", vbyesno)
+          if i = 22 then check = msgbox("All pixels and leds off?", vbyesno)
+          if i = 21 then check = msgbox("All pixels and leds on, short beeps 3 times?", vbyesno)
           if check = 7 then 
              fcount = fcount + 1
              DL.AddComment vbCrLf 

@@ -162,6 +162,8 @@ if (Result):
 										DL.fails=DL.fails+1
 					else:
 						DL.fails=DL.fails+1
+else:
+	DL.fails=DL.fails+1
             
 if lcdtype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')

@@ -106,13 +106,15 @@ if (Result):
 						DL.SetWindowText("blue", "Tag DFEF76_Enc: PASS")
 					else:
 						DL.SetWindowText("red", "Tag DFEF76_Enc: FAIL")	
+						DL.fails=DL.fails+1
 
 				if i == 3:			
 					Result = DL.Check_StringAB(FFEE08, 'FF EE 08 04 DF EF 76 00')
 					if Result == True:
 						DL.SetWindowText("blue", "Tag FFEE08: PASS")
 					else:
-						DL.SetWindowText("red", "Tag FFEE08: FAIL")						
+						DL.SetWindowText("red", "Tag FFEE08: FAIL")
+						DL.fails=DL.fails+1
 						
 				if i == 4:
 					# Tag 56
@@ -120,25 +122,39 @@ if (Result):
 					if Result == True and DL.Check_RXResponse("56 A1 3E"):
 						DL.SetWindowText("blue", "Tag 56_Mask: PASS")
 					else:
-						DL.SetWindowText("red", "Tag 56_Mask: FAIL")						
+						DL.SetWindowText("red", "Tag 56_Mask: FAIL")
+						DL.fails=DL.fails+1
+                        
 					Result = DL.Check_StringAB(dec56, '56 3E 42 35 34 31 33 31 32 33 34 35 36 37 38 34 38 30 30 5E 53 55 50 50 4C 49 45 44 2F 4E 4F 54 5E 31 39 30 36 31 30 31')
 					if Result == True and DL.Check_RXResponse("56 C1"):
 						DL.SetWindowText("blue", "Tag 56_Enc: PASS")
 					else:
 						DL.SetWindowText("red", "Tag 56_Enc: FAIL")	
+						DL.fails=DL.fails+1
+                        
 					# Tag 9F6B
 					Result = DL.Check_StringAB(mask9F6B, '54 13 CC CC CC CC 48 00 D1 90 6C CC CC CC CC CC CC CC CC')
 					if Result == True and DL.Check_RXResponse("9F 6B A1 13"):
 						DL.SetWindowText("blue", "Tag 9F6B_Mask: PASS")
 					else:
-						DL.SetWindowText("red", "Tag 9F6B_Mask: FAIL")						
+						DL.SetWindowText("red", "Tag 9F6B_Mask: FAIL")
+						DL.fails=DL.fails+1
+                        
 					Result = DL.Check_StringAB(dec9F6B, '9F 6B 13 54 13 12 34 56 78 48 00 D1 90 61 01')
 					if Result == True and DL.Check_RXResponse("9F 6B C1"):
 						DL.SetWindowText("blue", "Tag 9F6B_Enc: PASS")
 					else:
 						DL.SetWindowText("red", "Tag 9F6B_Enc: FAIL")
+						DL.fails=DL.fails+1
+else:
+	DL.fails=DL.fails+1
 						
 if lcdtype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')
 	if (RetOfStep):
 		Result = DL.Check_RXResponse("01 00 00 00")
+        
+if(0 < (DL.fails + DL.warnings)):
+	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))
+else:
+	DL.setText("GREEN", "[Test Result] - PASS\r\n Warning:0\r\n Fail:0" )

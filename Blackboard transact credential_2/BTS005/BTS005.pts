@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-11514
+64102
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -360,6 +360,12 @@ If result <> 0 Then
        end if
        if result = 0 then 
           dl.addcomment vbcrlf & "** FAIL **"
+          countf = 1
+       end if
+
+       beepcheck = msgbox ("Does reader has 2 beeps sound?", vbyesno)
+       if beepcheck = 7 then 
+          dl.addcomment vbcrlf & "** FAIL >>>>> Buzzer incorrect!"
           countf = 1
        end if
    next

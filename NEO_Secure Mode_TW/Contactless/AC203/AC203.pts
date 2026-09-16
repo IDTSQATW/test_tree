@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-58003
+18777
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -153,7 +153,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-neo3check = msgbox ("Is Reader NEO3 project?", vbyesno)
+neo3check = msgbox ("Is Reader NEO3/ 4 project?", vbyesno)
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment "--- Set default config"

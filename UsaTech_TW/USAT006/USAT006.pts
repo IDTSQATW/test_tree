@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-2387
+24134
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -133,9 +133,8 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-'============================================================
-readercheck = MsgBox ("Are you testing Vendi project?", VBYesNo, "Test Step")
-reader = MsgBox ("Are you testing VP63xx series project?", VBYesNo, "Test Step")
+reader = MsgBox ("Are you testing VP63xx series project (not Vendi)?", VBYesNo, "Test Step")
+readercheck = MsgBox ("Are you testing Vendi project (not VP63xx series)?", VBYesNo, "Test Step")
 
    DL.SendSequence "", "FB FB FB", "H"
    DL.Pause 600

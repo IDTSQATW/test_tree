@@ -182,6 +182,7 @@ else:
     DL.fails=DL.fails+1
 
 # Reset to default
+time.sleep(1)
 RetOfStep = DL.SendCommand('Reset to default')
 if (RetOfStep):
 	DL.Check_RXResponse("04 00 00 00")	

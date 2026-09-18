@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-10020
+28020
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -157,7 +157,6 @@ If result <> 0 Then
    DL.AddComment "--- PassThrough: START"
    DL.SendSequence "*** Step 2: PassThrough-----START"
    result = DL.WaitForSequence("2C-xx ok", 1, 2000)
-   dl.pause 400
 End If
 
 for i = 1 to 2
@@ -166,8 +165,9 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Get ATR (SAM " & i & ")"
    DL.SendSequence "*** Step 3: Get ATR (SAM " & i & ")"
-   result = DL.WaitForSequence("2C-xx ok", 1, 2000)
-   dl.pause 400
+   result = DL.WaitForSequence("2C-xx ok", 1, 90)
+
+   if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."
 End If
 
 If result <> 0 Then
@@ -175,8 +175,9 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Exchange APDU Data -- 1 PAY (SAM " & i & ")"
    DL.SendSequence "*** Step 4: Exchange APDU Data -- 1 PAY (SAM " & i & ")"
-   result = DL.WaitForSequence("2C-xx ok", 1, 2000)
-   dl.pause 400
+   result = DL.WaitForSequence("2C-xx ok", 1, 101)
+
+   if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."
 End If
 
 If result <> 0 Then
@@ -184,19 +185,17 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Contact Power Off (SAM " & i & ")"
    DL.SendSequence "*** Step 5: Contact Power Off (SAM " & i & ")"
-   result = DL.WaitForSequence("2c-18 ok", 1, 2000)
-   dl.pause 400
+   result = DL.WaitForSequence("2c-18 ok", 1, 26)
+
+   if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."
 End If
 next
 
-If result <> 0 Then
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- PassThrough: STOP"
    DL.SendSequence "*** Step 6: PassThrough-----STOP"
-   result = DL.WaitForSequence("2C-xx ok", 1, 2000)
-   dl.pause 400
-End If
+   dl.pause 500
 else
    result = 0
 end if

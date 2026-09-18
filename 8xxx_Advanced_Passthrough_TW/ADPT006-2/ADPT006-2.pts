@@ -1,17 +1,14 @@
 DL_SCRIPTVERSION
 1
-14905
+6132
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "MF000100" ' !!!!! EDIT THIS !!!!!
-'+++
-' This script verifies reader reads all the data blocks w/ positive resp
-'---
-
+ProjectName = "ADPT006-2" ' !!!!! EDIT THIS !!!!!
+' Objective: to test Felica, performance check.
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -21,41 +18,65 @@ ProjectName = "MF000100" ' !!!!! EDIT THIS !!!!!
 '   - Assign Docklight COM port
 '   - Assign Docklight Baud Rate
 '------------------------------------------------------------
-FileInput.OpenFile prefix & "Regress.Config"
+FileInput.OpenFile prefix & "Regress.Config2"
 Dim Prompting(1)
 Dim COM_Port(1)
 Dim POSBaudRate(1)
 
 Do Until FileInput.EndOfFile
-  'Display Test Case Number and Description	
+  'Display Test Case Number and Description     
   result = FileInput.GetLine() 'by pass variable name
   result = FileInput.GetLine()
   Prompting(0) = result
-	
-  'Display Test Steps 	
+      
+  'Display Test Steps   
   result = FileInput.GetLine() 'by pass variable name
-  result = FileInput.GetLine()	 
+  result = FileInput.GetLine()      
   Prompting(1) = result
 
-  'Set Docklight COM Port	
+  'Set Docklight COM Port     
   result = FileInput.GetLine() 'by pass variable name
-  result = FileInput.GetLine()	 
+  result = FileInput.GetLine()      
   COM_Port(1) = result
 
   'Set Reader Baud Rate
   result = FileInput.GetLine() 'by pass variable name
-  result = FileInput.GetLine()	 
+  result = FileInput.GetLine()      
   POSBaudRate(1) = result
-	
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  genFlag = result
 Loop
 
 Sub StepPrompt(PromptString)
-	DL.AddComment PromptString
-	If Prompting(1) = "ON" Then
-		MsgBox PromptString, VBOKOnly, "Test Step"
-	Else
-	End If
-	
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+            MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If
+      
 End Sub
 
 '------------------------------------------------------------
@@ -120,133 +141,69 @@ Sub PrintMyResult(ResultX)
 End Sub
 
 Function ReverseResult(ResultParam)
-	If ResultParam = 1 Then
-		result = 0
-	ElseIf ResultParam = 0 Then
-		result = 1
-	End If
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
 End Function
-
-Sub DL_OnSend()
-    usDataLen = DL.OnSend_GetSize() - 2
-    If usDataLen > 0 Then
-        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
-        ' Write result to the last two bytes of the sequence
-        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Left(crcStr, 2)) ' low byte
-        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Right(crcStr, 2)) ' high byte
-    End If
-End Sub
-
-Pass = 0
-Fail = 0
-Sub The_Test()
- DL.AddComment "---------- READ ALL BLOCKS ----------"
- For i = 0 to 63
-       if i = 0 then auth = 0
-       if i = auth then 
-          if auth = 0 then cmd = "Sector 0"
-          if i = 4 then cmd = "Sector 1"
-          if i = 8 then cmd = "Sector 2"
-          if i = 12 then cmd = "Sector 3"
-          if i = 16 then cmd = "Sector 4"
-          if i = 20 then cmd = "Sector 5"
-          if i = 24 then cmd = "Sector 6"
-          if i = 28 then cmd = "Sector 7"
-          if i = 32 then cmd = "Sector 8"
-          if i = 36 then cmd = "Sector 9"
-          if i = 40 then cmd = "Sector 10"
-          if i = 44 then cmd = "Sector 11"
-          if i = 48 then cmd = "Sector 12"
-          if i = 52 then cmd = "Sector 13"
-          if i = 56 then cmd = "Sector 14"
-          if i = 60 then cmd = "Sector 15"
-	   If result <> 0 Then
-	      DL.ResetReceiveCounter
-	      DL.AddComment vbCrLf & "Mifare auth - " & cmd & vbCrLf
-	      DL.SendSequence "Mifare auth - " & cmd
-	      result = DL.WaitForSequence("PT command (OK)", 1, 25)
-             if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."                                                            
-	   End If
-          auth = auth + 4
-       end if
-	DL.AddComment vbCrLf & "--- Read Block #" & i & " ---" & vbCrLf
-	If i <= 9 Then
-		i = "00" & i
-	Else
-		i = "0" & i
-	End If
-      DL.AddComment vbCrLf
-      DL.ResetReceiveCounter
-	DL.SendSequence "Read Block", i, "D"
-	result = DL.WaitForSequence("Read Block OK" , 1, 25)
-       if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."
-
-      If result <> 0 Then
-		Pass = Pass + 1
-	Else
-		Fail = Fail + 1
-	End If
- Next
- DL.AddComment vbCrLf & "PASSED = " & Pass & vbCrLf & "FAILED = " & Fail
-End Sub
-
 
 '------------------------------------------------------------
 'Debugging (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
 Function MyDebug(DebugString)
-	DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
-	MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+      DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+      MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
 End Function
 
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-result = 1
-
-DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 300
-
+DL.ResetReceiveCounter
+DL.AddComment "--- Pass-Through, Start"
+DL.SendSequence " Pass-Through, Start"
+result = DL.WaitForSequence("Pass-Through, Start", 1, 300)
+'============================================================
 If result <> 0 Then
- DL.ResetReceiveCounter
- DL.AddComment vbCrLf & "PT Start" & vbCrLf
- DL.SendSequence "PT Start"
- result = DL.WaitForSequence("PT command (OK)", 1, 3000)
-End If
+   MsgBox "Place FeliCa Lite-S card --> Click OK", VBOKOnly, "Advanced PassThrough"
 
+   dl.addcomment vbcrlf
+   DL.ResetReceiveCounter
+   DL.AddComment "--- Polling Felica Card"
+   DL.SendSequence "Polling Felica Card"
+   result = DL.WaitForSequence("2c 00", 1, 45)
+   if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."   
+End If
+'------------------------------------------------------------
 If result <> 0 Then
- DL.ResetReceiveCounter
- DL.AddComment vbCrLf & "Antenna Enable" & vbCrLf
- DL.SendSequence "Antenna Enable"
- result = DL.WaitForSequence("Antenna Enable (OK)", 1, 3000)
+   dl.addcomment vbcrlf
+   DL.ResetReceiveCounter
+   DL.AddComment "--- Normal Write S_PAD1 -- 00"
+   DL.SendSequence "Normal Write S_PAD1 -- 00"
+   result = DL.WaitForSequence("2c 00", 1, 25)
+   if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."   
 End If
-
+'------------------------------------------------------------
 If result <> 0 Then
- MsgBox "Press OK, then tap your card and leave it on landing zone.", VBOKOnly, "Test step"
- DL.ResetReceiveCounter
- DL.AddComment vbCrLf & "Poll for Token (10 sec)" & vbCrLf
- DL.SendSequence "Poll for Token (10 sec)"
- result = DL.WaitForSequence("Poll for Token (OK)", 1, 125)
-if result = 0 then 
-   DL.AddComment "=> FAIL! check RX or RX respond time..."
-   Fail = Fail +1
-end if
+   dl.addcomment vbcrlf
+   DL.ResetReceiveCounter
+   DL.AddComment "--- Normal Read S_PAD1 -- 00"
+   DL.SendSequence "Normal Read S_PAD1 -- 00"
+   result = DL.WaitForSequence("Normal Read S_PAD1 -- 00", 1, 25)
+   if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."   
 End If
+'------------------------------------------------------------
+DL.ResetReceiveCounter
+dl.addcomment vbcrlf
+DL.AddComment "--- Pass-Through Mode, Stop "
+DL.SendSequence " Pass-Through Mode, Stop "
+dl.pause 500
 
-The_Test
+DL.AddComment vbCrLf
 
-If Fail <> 0 Then
-   result = 0
-Else
-   result = 1
-End If
-
-DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 500
-
-PrintMyResult(result)
 
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
@@ -254,8 +211,6 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
-
 If 0 Then
 If result = 0 then
   DL.AddComment Chr(13) & "Result = FAILED"
@@ -277,18 +232,22 @@ End If
 '-------------------------------------------------------------
 
 If MasterResult = 1 Then
-	MasterVerdict = "PASSED"
+      MasterVerdict = "PASSED"
 ElseIf MasterResult = 0 Then
-	MasterVerdict = "FAILED"
+      MasterVerdict = "FAILED"
 End If
 result = MasterResult
 DL.AddComment vbCrLf
 DL.AddComment "MASTER RESULT = " & MasterVerdict
-
-
+'MasterResult = 0
 '------------------------------------------------------------
-' WRITE FINAL VERDICT FILE(!!!!! DO NOT EDIT !!!!!)
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
 
 FileOutput.CreateFile "FINAL_VERDICT.txt"
 

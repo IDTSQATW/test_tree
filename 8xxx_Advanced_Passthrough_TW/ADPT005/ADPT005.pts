@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-29844
+2366
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -173,7 +173,8 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Poll for token"
    DL.SendSequence "Step 2. Poll for token"
-   result = DL.WaitForSequence("poll token resp (NEO2)", 1, 2000)
+   result = DL.WaitForSequence("poll token resp (NEO2)", 1, 125)
+   if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -181,24 +182,21 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- GetVersion 1"
    DL.SendSequence "Step 3. GetVersion 1"
-   result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   result = DL.WaitForSequence("2c cmd 00 resp", 1, 25)
 End If
 If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- GetVersion 2"
    DL.SendSequence "Step 4. GetVersion 2"
-   result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   result = DL.WaitForSequence("2c cmd 00 resp", 1, 25)
 End If
 If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- GetVersion 3"
    DL.SendSequence "Step 5. GetVersion 3"
-   result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   result = DL.WaitForSequence("2c cmd 00 resp", 1, 25)
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -206,8 +204,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Select default AID"
    DL.SendSequence "Step 6. Select default AID"
-   result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   result = DL.WaitForSequence("2c cmd 00 resp", 1, 25)
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -215,8 +212,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Auth 1 Get RandA"
    DL.SendSequence "Step 7. Auth 1 Get RandA"
-   result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   result = DL.WaitForSequence("2c cmd 00 resp", 1, 25)
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -224,8 +220,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Authenticate"
    DL.SendSequence "Step 8. Authenticate"
-   result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   result = DL.WaitForSequence("2c cmd 00 resp", 1, 25)
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -233,8 +228,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Select APP 000000"
    DL.SendSequence "Step 9. Select APP 000000"
-   result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   result = DL.WaitForSequence("2c cmd 00 resp", 1, 25)
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -242,8 +236,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Create App 000111 with KeySetting 0F and 01 Key"
    DL.SendSequence "Step 10. Create App 000111 with KeySetting 0F and 01 Key"
-   result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   result = DL.WaitForSequence("2c cmd 00 resp", 1, 25)
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -251,8 +244,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Select APP 000111"
    DL.SendSequence "Step 11. Select APP 000111"
-   result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   result = DL.WaitForSequence("2c cmd 00 resp", 1, 25)
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -260,8 +252,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Create a Plain Text with ID 01, size 100000"
    DL.SendSequence "Step 12. Create a Plain Text with ID 01, size 100000"
-   result = DL.WaitForSequence("2c cmd 00 resp", 1, 2000)
-   dl.pause 300
+   result = DL.WaitForSequence("2c cmd 00 resp", 1, 25)
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -269,8 +260,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Write Data  AA AA BB BB CC CC DD DD AA AA BB BB CC CC DD DD"
    DL.SendSequence "Step 13. Write Data  AA AA BB BB CC CC DD DD AA AA BB BB CC CC DD DD"
-   result = DL.WaitForSequence("write data resp", 1, 2000)
-   dl.pause 300
+   result = DL.WaitForSequence("write data resp", 1, 25)
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -278,8 +268,7 @@ If result <> 0 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- Read file 01, no offset , no size"
    DL.SendSequence "Step 14. Read file 01, no offset , no size"
-   result = DL.WaitForSequence("read data resp", 1, 2000)
-   dl.pause 300
+   result = DL.WaitForSequence("read data resp", 1, 25)
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -293,7 +282,7 @@ else
    dl.addcomment vbcrlf
    DL.AddComment "--- PassThrough Stop"
    DL.SendSequence ">>>>> Set PT mode OFF >>>>>>>>>>>>>>>"
-   dl.pause 1000
+   dl.pause 500
 End If
 '------------------------------------------------------------
 DL.AddComment vbCrLf
@@ -307,8 +296,6 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
-
 If 0 Then
    If result = 0 then
       DL.AddComment Chr(13) & "Result = FAILED"

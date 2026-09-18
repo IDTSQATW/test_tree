@@ -273,11 +273,11 @@ PT command (OK)
 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B
 -1
 1
-COMMENT PT command (OK)
-1
-1
+COMMENT 
 0
 1
+0
+0
 
 RECEIVE
 1
@@ -297,11 +297,11 @@ Poll for Token (OK)
 56 69 56 4F 74 65 63 68 32 00 2C 00 00 08 ##
 -1
 1
-COMMENT Poll for Token (OK)
-1
-1
+COMMENT 
 0
 1
+0
+0
 
 RECEIVE
 3
@@ -369,11 +369,11 @@ Read Block OK
 56 69 56 4F 74 65 63 68 32 00 2C 00 00 10
 -1
 1
-COMMENT Read Block OK
-1
-1
+COMMENT 
 0
 1
+0
+0
 
 RECEIVE
 9

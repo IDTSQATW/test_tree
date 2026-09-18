@@ -155,7 +155,7 @@ if (Result):
 									TRK3DecryptData = DL.DecryptDLL(EncryptType, EncryptMode, Key, KSN, TRK3)
 									
 					if i == 1:
-						TR2maskdata = ";6396**********1212=3712*****?*"
+						TR2maskdata = ";639621120010001212=371254302?5"
 						TR2plaintextdata = "3B 36 33 39 36 32 31 31 32 30 30 31 30 30 30 31 32 31 32 3D 33 37 31 32 35 34 33 30 32 3F 35"
 									
 						Result = DL.Check_StringAB(TR2maskdata, Track2_CardData)

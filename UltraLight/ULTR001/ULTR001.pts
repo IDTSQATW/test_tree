@@ -1,6 +1,7 @@
 DL_SCRIPTVERSION
 1
-31644
+53490
+
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -137,7 +138,6 @@ End Function
 '------------------------------------------------------------
 
 DL.StartCommunication
-' Endless loop until stopped by user
 Pass = 0
 Fail = 0
 j = 1
@@ -145,31 +145,29 @@ k = 0
 result = 1
 
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 1000
-
 
 The_Test
 
 Sub The_Test()
 DL.AddComment vbCrLf & "PT Start" & vbCrLf
+DL.ResetReceiveCounter
 DL.SendSequence "PT Start"
 result = DL.WaitForSequence("PT command (OK)", 1, 3000)
-PrintMyResult(result)
-DL.ResetReceiveCounter
 
 DL.AddComment vbCrLf & "Antenna Enable" & vbCrLf
+DL.ResetReceiveCounter
 DL.SendSequence "Antenna Enable"
 result = DL.WaitForSequence("Antenna Enable (OK)", 1, 3000)
-PrintMyResult(result)
-DL.ResetReceiveCounter
 
 MsgBox "Press OK, then tap Mifare Ultralight card and leave it on landing zone.", VBOKOnly, "Test step"
 DL.AddComment vbCrLf & "Poll for Token (10 sec)" & vbCrLf
-DL.SendSequence "Poll for Token (10 sec)"
-result = DL.WaitForSequence("Poll for Token (OK)", 1, 3000)
-PrintMyResult(result)
 DL.ResetReceiveCounter
-
+DL.SendSequence "Poll for Token (10 sec)"
+result = DL.WaitForSequence("Poll for Token (OK)", 1, 125)
+if result = 0 then 
+       DL.AddComment "=> FAIL! check RX or RX respond time..."
+       Fail = Fail + 1
+end if
 
 'This Loop Controls Read sequence where i = the read block, j = the authentication sector on every 4th block
 'and k = reset k on every fourth read.  Also if J = 065 it exits the loop so the last authentication does
@@ -184,9 +182,10 @@ For i = 0 to 15
 	Else
 		i = "0" & i
 	End If
+       DL.ResetReceiveCounter
 	DL.SendSequence "Read Block", i, "D"
-	result = DL.WaitForSequence("Read Block OK" , 1, 3000)
-	PrintMyResult(result)
+	result = DL.WaitForSequence("Read Block OK" , 1, 25)
+       if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."
 	If k = 4 Then
 		j = j + 4
 		If j <= 9 Then
@@ -201,7 +200,7 @@ For i = 0 to 15
 		k = 0
 	End If
 
-      DL.ResetReceiveCounter "Read Block OK"
+      DL.ResetReceiveCounter
       If result = 1 Then
 		Pass = Pass + 1
 	Else
@@ -210,10 +209,11 @@ For i = 0 to 15
 Next
 
 DL.SendSequence "PT Stop"
-resultIgNore = DL.WaitForSequence("PT command (OK)", 1, 3000)
+dl.pause 500
 
 
 DL.AddComment vbCrLf & "PASSED = " & Pass & vbCrLf & "FAILED = " & Fail
+if Fail <> 0 then result = 0
 
 End Sub
 
@@ -244,13 +244,8 @@ Sub DL_OnSend()
         DL.OnSend_Poke usDataLen + 2, CInt("&h" + Right(crcStr, 2)) ' high byte
     End If
 End Sub
-
 '------------------------
-DL.Pause 1500
-DL.AddComment vbCrLf
-DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 1000
-
+dL.AddComment vbCrLf
 
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)

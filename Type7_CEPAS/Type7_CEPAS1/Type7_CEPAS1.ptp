@@ -140,11 +140,11 @@ Type 7 Card Read (OK)
 56 69 56 4F 74 65 63 68 32 00 2C 00 00 05 07 ## ## ## ## ## ##
 -1
 1
-COMMENT Type 7 Card Read (OK)
-1
-1
+COMMENT 
 0
 1
+0
+0
 
 RECEIVE
 1
@@ -176,11 +176,11 @@ PT Command (OK)
 56 69 56 4F 74 65 63 68 32 00 2C 00 00 00 1C 9B
 -1
 1
-COMMENT PT Command (OK)
-1
-1
+COMMENT 
 0
 1
+0
+0
 
 RECEIVE
 4

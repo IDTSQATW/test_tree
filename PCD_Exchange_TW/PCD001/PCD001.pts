@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-25108
+23007
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -134,96 +134,92 @@ result = 1
 cardowner = inputbox ("Which card do u want to test?" & vbcrlf & "1) UID = D3 AC 5A E3" & vbcrlf & "2) UID = 7E BD BA E5", vbokonly)
 
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 3000
+DL.Pause 300
 
 If result <> 0 Then
-   prompt1 = prompt1 & "Place MPS001 Card onto reader. When Ready Click OK"
+   prompt1 = prompt1 & "Place Mifare 1K Card --> Click OK"
    result = MsgBox(prompt1, VBOKOnly, "PAL Tests")
 End If
 '============================================================
 If result <> 0 Then
-  DL.Pause 400
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- Start PT Mode"
   DL.SendSequence "Start PT Mode"
-  result = DL.WaitForSequence("Start Pass Through Response", 1, 10000)
+  result = DL.WaitForSequence("Start Pass Through Response", 1, 2000)
 End If
 '============================================================
 If result <> 0 Then
-  DL.Pause 500
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "---Turn On Antenna"
   DL.SendSequence "Turn On Antenna"
-  result = DL.WaitForSequence("Turn On Attenna response", 1, 10000)
+  result = DL.WaitForSequence("Turn On Attenna response", 1, 2000)
 End If
 '============================================================
 If result <> 0 Then
-  DL.Pause 500
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "---Poll For Token"
   DL.SendSequence "Poll For Token"
-  if cardowner = 1 then result = DL.WaitForSequence("Poll For Token MPS001 4 byte UID", 1, 10000)
-  if cardowner = 2 then result = DL.WaitForSequence("Poll For Token MPS001 4 byte UID-mindy", 1, 10000)
+  if cardowner = 1 then result = DL.WaitForSequence("Poll For Token MPS001 4 byte UID", 1, 125)
+  if cardowner = 2 then result = DL.WaitForSequence("Poll For Token MPS001 4 byte UID-mindy", 1, 125)
+  if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."   
 End If
 '============================================================
 
 If result <> 0 Then
-  DL.Pause 500
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- PCD Load Key 0F0F0F0F"
   DL.SendSequence "PCD Load Key 0F0F0F0F"
-  result = DL.WaitForSequence("Auth Sector Response", 1, 10000)
+  result = DL.WaitForSequence("Auth Sector Response", 1, 25)
+  if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."   
 End If
 '============================================================
 If result <> 0 Then
-  DL.Pause 500
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- PCD Auth Sector 1 - add card snr"
   if cardowner  = 1 then DL.SendSequence "PCD Auth Sector 1 - add card snr"
   if cardowner  = 2 then DL.SendSequence "PCD Auth Sector 1 - add card snr-mindy"
-  result = DL.WaitForSequence("Auth Sector Response", 1, 10000)
+  result = DL.WaitForSequence("Auth Sector Response", 1, 25)
+  if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."   
 End If
 '============================================================
 
 If result <> 0 Then
-  DL.Pause 500
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- PCD Write Block 4"
   DL.SendSequence "PCD Write Block 4"
-  result = DL.WaitForSequence("Write Block Response", 1, 10000)
+  result = DL.WaitForSequence("Write Block Response", 1, 25)
+  if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."   
 End If
 '------------------------------------------------------------
 
 If result <> 0 Then
-  DL.Pause 500
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- PCD Write Data - 00's"
   DL.SendSequence "PCD Write Data - 00's"
-  result = DL.WaitForSequence("Write in Block Response", 1, 10000)
+  result = DL.WaitForSequence("Write in Block Response", 1, 25)
+  if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."   
 End If
 '------------------------------------------------------------
 
 If result <> 0 Then
-  DL.Pause 500
   DL.ResetReceiveCounter
   dl.addcomment vbcrlf
   DL.AddComment "--- PCD Read Block 4"
   DL.SendSequence "PCD Read Block 4"
-  result = DL.WaitForSequence("Read Block 4 Response", 1, 10000)
+  result = DL.WaitForSequence("Read Block 4 Response", 1, 25)
+  if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."   
 End If
-
-
 '------------------------------------------------------------
   dl.addcomment vbcrlf
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 1500
+DL.Pause 500
 
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf

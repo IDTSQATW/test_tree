@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-4840
+54887
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -151,14 +151,15 @@ If result <> 0 Then
    result = DL.WaitForSequence("Positive Response", 1, 2000)
 End If
 '------------------------------------------------------------
-notify = msgbox("Click OK and then tap MasterCard", vbokonly)
+notify = msgbox("Place MasterCard first --> Click OK", vbokonly)
 
 If result <> 0 Then
    DL.ResetReceiveCounter
    dl.addcomment vbcrlf
    DL.AddComment "--- 2C-0B: ANT ON/ Poll for token/ 1 beep/ LED 0 ON"
    dl.sendsequence "NCR Pass Through - Antenna On, Poll Token On, 1 Beep, LED 0 On"
-   result = DL.WaitForSequence("2c0b ok resp", 1, 10000)
+   result = DL.WaitForSequence("2c0b ok resp", 1, 135)
+   if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."
 End If  
 '------------------------------------------------------------
 If result <> 0 and PF = 7 Then
@@ -166,15 +167,15 @@ If result <> 0 and PF = 7 Then
    dl.addcomment vbcrlf
    DL.AddComment "--- AR >> 2C-13: Exchange APDU Data"
    dl.sendsequence "ar_2c-13"
-   result = DL.WaitForSequence("card ok1 resp", 1, 10000)
-   dl.pause 500
+   result = DL.WaitForSequence("card ok1 resp", 1, 45)
+   if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."
 elseIf result <> 0 and PF = 6 Then
        DL.ResetReceiveCounter
        dl.addcomment vbcrlf
        DL.AddComment "--- GR >> 2C-13: Exchange APDU Data"
        dl.sendsequence "gr_2c-13"
-       result = DL.WaitForSequence("card ok1 resp", 1, 10000)
-       dl.pause 500
+       result = DL.WaitForSequence("card ok1 resp", 1, 45)
+       if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."
 End If
 '------------------------------------------------------------
 If result <> 0 Then
@@ -189,7 +190,7 @@ DL.ResetReceiveCounter
 dl.addcomment vbcrlf
 DL.AddComment "--- PassThrough Stop"
 DL.SendSequence "PassThrough Stop"
-dl.pause 1000
+dl.pause 500
 
 DL.AddComment vbCrLf
 PrintMyResult(result)
@@ -202,7 +203,6 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
 
 If 0 Then
    If result = 0 then

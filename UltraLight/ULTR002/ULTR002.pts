@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-58830
+20812
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -138,7 +138,7 @@ End Function
 result = 1
 
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 1000
+DL.Pause 300
 
 MsgBox "Place Mifare Ultralight card on landing zone of reader, then press OK.", VBOKOnly, "Test Step"
 
@@ -149,81 +149,101 @@ DL.StartCommunication
 '------------------------------------------------------------
 If result <> 0 Then
   DL.ResetReceiveCounter
+  DL.AddComment vbCrLf
   DL.AddComment "---PT Start"
   DL.SendSequence "PT Start"
-  result = DL.WaitForSequence("PT command (OK)", 1, 10000)
+  result = DL.WaitForSequence("PT command (OK)", 1, 2000)
 End If
 '------------------------------------------------------------
 If result <> 0 Then
   DL.ResetReceiveCounter
+  DL.AddComment vbCrLf
   DL.AddComment "---Poll For Token"
   DL.SendSequence "Poll For Token"
-  result = DL.WaitForSequence("Poll for Token (OK)", 1, 10000)
+  result = DL.WaitForSequence("Poll for Token (OK)", 1, 125)
+   if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."
 End If
 '------------------------------------------------------------
 If result <> 0 Then
   DL.ResetReceiveCounter
+  DL.AddComment vbCrLf
   DL.AddComment "---Write Block #2"
   DL.SendSequence "Write Block #2"
-  result = DL.WaitForSequence("PT command (OK)", 1, 10000)
+  result = DL.WaitForSequence("PT command (OK)", 1, 25)
+   if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."
 End If
 '------------------------------------------------------------
 If result <> 0 Then
   DL.ResetReceiveCounter
+  DL.AddComment vbCrLf
   DL.AddComment "---Write Block #3"
   DL.SendSequence "Write Block #3"
-  result = DL.WaitForSequence("PT command (OK)", 1, 10000)
+  result = DL.WaitForSequence("PT command (OK)", 1, 25)
+   if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."
 End If
 '------------------------------------------------------------
 
 If result <> 0 Then
   DL.ResetReceiveCounter
+  DL.AddComment vbCrLf
   DL.AddComment "---Write Block #6"
   DL.SendSequence "Write Block #6"
-  result = DL.WaitForSequence("PT command (OK)", 1, 10000)
+  result = DL.WaitForSequence("PT command (OK)", 1, 25)
+   if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."
 End If
 '------------------------------------------------------------
 If result <> 0 Then
   DL.ResetReceiveCounter
+  DL.AddComment vbCrLf
   DL.AddComment "---Write Block #7"
   DL.SendSequence "Write Block #7"
-  result = DL.WaitForSequence("PT command (OK)", 1, 10000)
+  result = DL.WaitForSequence("PT command (OK)", 1, 25)
+   if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."
 End If
 '------------------------------------------------------------
 If result <> 0 Then
   DL.ResetReceiveCounter
+  DL.AddComment vbCrLf
   DL.AddComment "---Write Block #10"
   DL.SendSequence "Write Block #10"
-  result = DL.WaitForSequence("PT command (OK)", 1, 10000)
+  result = DL.WaitForSequence("PT command (OK)", 1, 25)
+   if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."
 End If
 '------------------------------------------------------------
 If result <> 0 Then
   DL.ResetReceiveCounter
+  DL.AddComment vbCrLf
   DL.AddComment "---Write Block #11"
   DL.SendSequence "Write Block #11"
-  result = DL.WaitForSequence("PT command (OK)", 1, 10000)
+  result = DL.WaitForSequence("PT command (OK)", 1, 25)
+   if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."
 End If
 '------------------------------------------------------------
 If result <> 0 Then
   DL.ResetReceiveCounter
+  DL.AddComment vbCrLf
   DL.AddComment "---Write Block #14"
   DL.SendSequence "Write Block #14"
-  result = DL.WaitForSequence("PT command (OK)", 1, 10000)
+  result = DL.WaitForSequence("PT command (OK)", 1, 25)
+   if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."
 End If
 '------------------------------------------------------------
 If result <> 0 Then
   DL.ResetReceiveCounter
+  DL.AddComment vbCrLf
   DL.AddComment "---Write Block #15"
   DL.SendSequence "Write Block #15"
-  result = DL.WaitForSequence("PT command (OK)", 1, 10000)
+  result = DL.WaitForSequence("PT command (OK)", 1, 25)
+   if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."
 End If
 '------------------------------------------------------------
-If result <> 0 Then
+
+  DL.AddComment vbCrLf
   DL.ResetReceiveCounter
   DL.AddComment "---PT Stop"
   DL.SendSequence "PT Stop"
-  result = DL.WaitForSequence("PT command (OK)", 1, 10000)
-End If
+  dl.pause 500
+
 
 '===============================================
 'Pass Through CRC Calculation
@@ -255,11 +275,7 @@ Sub DL_OnSend()
     End If
 End Sub
 
-
-DL.Pause 1500
 DL.AddComment vbCrLf
-DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 1000
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)
 Else '""

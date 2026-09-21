@@ -1,14 +1,16 @@
 DL_SCRIPTVERSION
 1
-64995
+22165
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
 ' - Assign project name
 '------------------------------------------------------------
 Dim ProjectName
-ProjectName = "ADPT102" ' !!!!! EDIT THIS !!!!!
-' Objective: to test tag DFEE7C = 02 (Felica auto switch (NEO3))
+ProjectName = "VL102" ' !!!!! EDIT THIS !!!!!
+'+++
+' CS-6732: [Cantaloupe/VP6300] Set TagDFDE04=08 for default configuration
+
 '------------------------------------------------------------
 ' Config Variables (!!!!! DO NOT EDIT !!!!!)
 #include "..\..\docklight.inc"
@@ -96,6 +98,7 @@ min=0
 Randomize
 errCnt = 0
 caseValid = 0
+
 result = 1
 
 DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
@@ -110,15 +113,13 @@ DL.AddComment "Set POS COM PORT..."
 DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
 DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
 DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
-DL.Pause 1000
-
 DL.StartCommunication
 
 '------------------------------------------------------------
 'Result reporting (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
 MasterResult = 0
-If ProjectName <> "" And Prompting(1) = "ON" Then
+If ProjectName <> "" And Prompting(1) = "ON " Then
    caseValid = 1
 Else
    caseValid =(Int((max-min+1)*Rnd+min))
@@ -134,6 +135,7 @@ Sub PrintMyResult(ResultX)
             DL.AddComment "Result = FAILED"
       End If
 End Sub
+
 
 Function ReverseResult(ResultParam)
       If ResultParam = 1 Then
@@ -154,103 +156,50 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 300
-
-If result <> 0 Then
-   DL.Pause 200
-   DL.ResetReceiveCounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Set Configuration Global On = 02 = Felica auto switch (NEO3)"
-   DL.SendSequence "Set Configuration Global On (NEO2) 02"
-   result = DL.WaitForSequence("04 00", 1, 10000)
-End If
-
-If result <> 0 Then
-   msgbox "Place tag 3 card on reader --> Click OK", vbyesonly
-   DL.ResetReceiveCounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- cmd 02-40"
-   DL.SendSequence "CLT 02-40"
-   result = DL.WaitForSequence("02 50", 1, 4000)
-   if result <> 0 then result = DL.WaitForSequence("DFEE02", 1, 2000)
-   if result <> 0 then result = DL.WaitForSequence("DFEC0F", 1, 2000)     'NEO3-13289
-   dl.pause 500
-End If
-'============================================================NFC Tag 3 testing *****
-'============================================================
-If result <> 0 Then
-   DL.Pause 200
-   DL.ResetReceiveCounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Poll tag 3 "
-   DL.SendSequence " Poll tag 3 "
-   result = DL.WaitForSequence("Poll tag 3 res", 1, 10000)
-End If
-'------------------------------------------------------------
-If result <> 0 Then
-   DL.Pause 200
-   DL.ResetReceiveCounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Tag3 Write Data"
-   DL.SendSequence " Tag3 Write Data"
-   result = DL.WaitForSequence("Tag3 Write Data res", 1, 10000)
-End If
-'------------------------------------------------------------
-If result <> 0 Then
-   DL.Pause 200
-   DL.ResetReceiveCounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Tag3 Read Data"
-   DL.SendSequence " Tag3 Read Data"
-   result = DL.WaitForSequence("Tag3 Read Data res", 1, 10000)
-End If
-'============================================================
-If result <> 0 Then
-   DL.Pause 200
-   DL.ResetReceiveCounter
-   dl.addcomment vbcrlf
-   DL.AddComment "--- Pass-Through Mode, Stop "
-   DL.SendSequence " Pass-Through Mode, Stop "
-   result = DL.WaitForSequence("Pass-Through, Start", 1, 10000)
-End If
-
-if result = 0 then 
-   DL.SendSequence " Pass-Through Mode, Stop "
-   dl.pause 800
+if result <> 0 then
+  DL.ResetReceiveCounter 
+  dl.addcomment vbcrlf
+  DL.AddComment "--- 04-0A"
+  DL.SendSequence "04-0A"
+  result = DL.WaitForSequence("04 00", 1, 6000)
+  dl.pause 10000
 end if
 
-dl.addcomment vbcrlf
-DL.SendSequence "Set Configuration Global Off (NEO2)"
-dl.pause 1000
+if result <> 0 then
+  DL.ResetReceiveCounter 
+  dl.addcomment vbcrlf
+  DL.AddComment "--- C7-39"
+  if readerType <> "NEO2" then DL.SendSequence "C7-39 (NEO1)"
+  if readerType = "NEO2" then DL.SendSequence "C7-39 (NEO2)"
+  if readerType <> "NEO2" then result = DL.WaitForSequence("C7 39 rx (NEO1)", 1, 2000)
+  if readerType = "NEO2" then result = DL.WaitForSequence("C7 39 rx (NEO2)", 1, 2000)
+end if
 
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 PrintMyResult(result)
-
 Else '""
   DL.AddComment vbCrLf & authnMsg & vbCrLf
 End If '""
+
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-'DL.pause 1000
 
-'If 0 Then
-'If result = 0 then
-'  DL.AddComment Chr(13) & "Result = FAILED"
-'Else
-'  DL.AddComment Chr(13) & "Result = PASSED"
-'End If
-'End If
+If result = 0 then
+  DL.AddComment Chr(13) & "Result = FAILED"
+Else
+  DL.AddComment Chr(13) & "Result = PASSED"
+End If
 
-'If Prompting(0) = "ON" Then
-'  If result = 0 then
-'    MsgBox "Result = FAILED", VBOKOnly, "Result"
-'  Else 
-'    MsgBox "Result = PASSED", VBOKOnly, "Result"
-'  End If
-'End If
+If Prompting(0) = "ON" Then
+  If result = 0 then
+    MsgBox "Result = FAILED", VBOKOnly, "Result"
+  Else 
+    MsgBox "Result = PASSED", VBOKOnly, "Result"
+  End If
+End If
+
 '-------------------------------------------------------------
 ' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
 '-------------------------------------------------------------
@@ -283,12 +232,5 @@ End If
 'FileOutput.WriteLine MasterResult
 FileOutput.CloseFile 
 
-Sub DL_OnSend()
-    usDataLen = DL.OnSend_GetSize() - 2
-    If usDataLen > 0 Then
-        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
-        ' Write result to the last two bytes of the sequence
-        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Left(crcStr, 2)) ' low byte
-        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Right(crcStr, 2)) ' high byte
-    End If
-End Sub
+
+

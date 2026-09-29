@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-48602
+53439
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -198,7 +198,7 @@ end if
 end if
 '============================================================
 If result <> 0 Then
-   MsgBox "Click OK --> Tap AMEX XP4 card (For NEO3, tap Amex XP8-online: card #86)", VBOKOnly
+   MsgBox "Click OK --> Tap AMEX XP4 card (For NEO3/ 4, tap Amex XP8-online: card #86)", VBOKOnly
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Activate Transaction (02-40)"

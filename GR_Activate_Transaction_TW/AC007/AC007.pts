@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-4018
+59819
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -193,8 +193,8 @@ If result <> 0 Then
    DL.AddComment "--- Activate Transaction"
    DL.SendSequence "Activate Transaction"
 
-   if readerType <> "NEO2" then result1 = DL.WaitForSequence("Activate Tran Response", 1, 5000)
-   if readerType = "NEO2" then result1 = DL.WaitForSequence("Activate Tran Response (NEO2)", 1, 5000)
+   if readerType <> "NEO2" then result1 = DL.WaitForSequence("Activate Tran Response", 1, 8000)
+   if readerType = "NEO2" then result1 = DL.WaitForSequence("Activate Tran Response (NEO2)", 1, 8000)
 
    result2 = dl.waitforsequence("9f39", 1, 1000)
    

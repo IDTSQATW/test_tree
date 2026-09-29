@@ -1,0 +1,9 @@
+Docklight Log File (HEX) - Started 2026/9/29 11:11:25.274 
+ TEST CASE: QCM022
+
+ --- Set POS COM PORT Settings
+ Set POS COM PORT...
+
+
+Docklight Log File (HEX) - Stopped 2026/9/29 11:11:25.648 
+

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-55728
+57866
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -159,7 +159,7 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
-platformcheck = msgbox ("Is this NEO3 project?", vbyesno)
+platformcheck = msgbox ("Is this NEO3/ 4 project?", vbyesno)
 
 If result <> 0 Then
    dl.resetreceivecounter
@@ -189,7 +189,7 @@ if readerType = "NEO2" then
 end if
 '============================================================
 If result <> 0 Then
-   MsgBox "Click OK --> Tap Discover card (for NEO3, tap card#84)", VBOKOnly
+   MsgBox "Click OK --> Tap Discover card (for NEO3/ 4, tap card#84)", VBOKOnly
    dl.resetreceivecounter
    dl.addcomment vbcrlf
    DL.AddComment "--- Activate Transaction (02-40)"

@@ -88,7 +88,7 @@ if readertype == 1:
                             if (Result):
                                 Result = DL.Check_RXResponse('56 A1 41 2A 33 36 30 37 30 35 30 30 2A 2A 2A 2A 30 30 31 34 5E 54 45 53 54 20 43 41 52 44 2F 4D 53 20 20 20 20 20 20 20 20 20 20 20 20 20 20 5E 34 39 31 32 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A')
                         if i == 2: 
-                            Result = DL.Check_RXResponse('35 40 82 99 CC CC 10 12 D4 91 2C CC CC CC CC CC CC CC CC')
+                            Result = DL.Check_RXResponse('35699900 CC CC 2211 D2112C CC CC CC CC CC CC CC CC')
                         if i == 3:
                             Result = DL.Check_RXResponse('54 13 33 00 CC CC 00 10 D1 41 2C CC CC CC CC CC CC')
                         if i == 4:
@@ -113,7 +113,7 @@ if readertype == 1:
                         if i == 1:
                             Result = DL.Check_StringAB(dec57, '57 13 36 07 05 00 00 00 00 14 D4 91 21 01 00 00 33 21 12 30 1F')
                         if i == 2:
-                            Result = DL.Check_StringAB(dec57, '57 13 35 40 82 99 99 42 10 12 D4 91 22 01 55 55 55 55 55 55 2F')
+                            Result = DL.Check_StringAB(dec57, '57 13 3569990010082211D21122010000000000000F000000')
                         if i == 3:
                             Result = DL.Check_StringAB(dec57, '57 11 54 13 33 00 89 60 00 10 D1 41 22 01 01 23 40 91 72')
                         if i == 4:
@@ -135,7 +135,7 @@ if readertype == 1:
                         if i == 1:
                             Result = DL.Check_RXResponse('36 07 05 00 CC CC 00 14')
                         if i == 2:
-                            Result = DL.Check_RXResponse('35 40 82 99 CC CC 10 12')
+                            Result = DL.Check_RXResponse('35699900CCCC2211')
                         if i == 3:
                             Result = DL.Check_RXResponse('54 13 33 00 CC CC 00 10')
                         if i == 4:
@@ -160,7 +160,7 @@ if readertype == 1:
                         if i == 1:
                             Result = DL.Check_StringAB(dec5A, '5A 08 36 07 05 00 00 00 00 14')
                         if i == 2:
-                            Result = DL.Check_StringAB(dec5A, '5A 08 35 40 82 99 99 42 10 12')
+                            Result = DL.Check_StringAB(dec5A, '5A 08 3569990010082211000000000000')
                         if i == 3:
                             Result = DL.Check_StringAB(dec5A, '5A 08 54 13 33 00 89 60 00 10')
                         if i == 4:
@@ -185,6 +185,7 @@ if readertype == 1:
         DL.fails=DL.fails+1
         
     # Reset to default
+    time.sleep(2)
     RetOfStep = DL.SendCommand('Reset to default')
     if (RetOfStep):
         DL.Check_RXResponse("04 00 00 00")

@@ -56,11 +56,11 @@ if (Result):
                 alldata = DL.GetTLV(DL.Get_RXResponse(rx),"FF8105")
 
             ksn = DL.GetTLV(DL.Get_RXResponse(rx),"DFEE12")	
-            mask57 = DL.GetTLV(alldata,"57", 0)
-            enc57 = DL.GetTLV(alldata,"57", 1)
+            mask57 = DL.GetTLV_Embedded(alldata,"57", 0)
+            enc57 = DL.GetTLV_Embedded(alldata,"57", 1)
             dec57 = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc57)	
-            mask5A = DL.GetTLV(alldata,"5A", 0)
-            enc5A = DL.GetTLV(alldata,"5A", 1)
+            mask5A = DL.GetTLV_Embedded(alldata,"5A", 0)
+            enc5A = DL.GetTLV_Embedded(alldata,"5A", 1)
             dec5A = DL.AES_DUPKT_EMVData_Decipher(ksn, strKey, enc5A)	
             
         # Tag 57

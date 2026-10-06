@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-26782
+46808
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -193,24 +193,22 @@ If result <> 0 Then  msgbox "Click OK --> Swipe Discover PAN=xxxx0026 (MSR card)
 If result <> 0 Then
    DL.AddComment vbcrlf & vbcrlf & "--- 02-01_w/o DFEC53"
    DL.SendSequence "02-01_w/o DFEC53"
-   result = DL.WaitForSequence("CL_0201", 1, 10000)
-      if result = 0 then 
-         dl.addcomment vbcrlf & vbcrlf & "**Card data FAIL**"
-      end if   
-End If
-
-
-If result <> 0 Then
    output = msgbox("Did you see msg 'EVM Card Please Tap'",vbyesno)
-   if output = 7 then 
-      result = 0
+   if output = 6 then
+      dl.addcomment  vbcrlf & vbcrlf & "**LCD MSG PASS**"
+      msgbox "Click OK --> Tap any CL card", vbokonly
+      result = DL.WaitForSequence("CL_0201", 1, 10000)
+      dl.pause 300
+      if result = 0 then dl.addcomment vbcrlf & vbcrlf & "**Card data FAIL**"
+   else
       dl.addcomment  vbcrlf & vbcrlf & "**LCD MSG FAIL**"
+      result = 0
+      DL.SendSequence "05-01"
+      dl.pause 500
    end if
-   if output = 6 then result = 1
-
-End If
 end if
 
+end if
 
 
 if i = 2 then
@@ -220,20 +218,21 @@ If result <> 0 Then msgbox "Click OK --> Swipe Discover PAN=xxxx0026 (MSR card)"
 If result <> 0 Then
    DL.AddComment vbcrlf & vbcrlf & "--- 02-40_w/o DFEC53"
    DL.SendSequence "02-40_w/o DFEC53"
-   result = DL.WaitForSequence("CL_0240", 1, 10000)
-      if result = 0 then 
-         dl.addcomment vbcrlf & vbcrlf & "**Card data FAIL**"
-      end if 
-End If
-
-If result <> 0 Then
    output = msgbox("Did you see msg 'EVM Card Please Tap'",vbyesno)
-   if output = 7 then 
-      result = 0
+   if output = 6 then
+      dl.addcomment  vbcrlf & vbcrlf & "**LCD MSG PASS**"
+      msgbox "Click OK --> Tap any CL card", vbokonly
+      result = DL.WaitForSequence("CL_0240", 1, 10000)
+      dl.pause 500
+      if result = 0 then dl.addcomment vbcrlf & vbcrlf & "**Card data FAIL**"
+   else
       dl.addcomment  vbcrlf & vbcrlf & "**LCD MSG FAIL**"
+      result = 0
+      DL.SendSequence "05-01"
+      dl.pause 500
    end if
-   if output = 6 then result = 1
-End If
+end if
+
 end if
 
 next

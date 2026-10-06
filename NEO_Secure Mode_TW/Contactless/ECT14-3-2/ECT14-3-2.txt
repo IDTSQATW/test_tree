@@ -62,7 +62,7 @@ TIMEOUT:120000
 
 TID:Activate Transaction-JCB
 CMD:02 40 78 9F 02 06 00 00 00 00 10 00 DF EF 37 01 02
-MSG:Tap JCB EMV card (PAN = 16)...
+MSG:Tap Card 136#, JCB card (PAN = 16)...
 EXR:
 TIMEOUT:120000
 

@@ -1,1 +1,1 @@
-1|PASS|OK
+0|FAIL|NOK

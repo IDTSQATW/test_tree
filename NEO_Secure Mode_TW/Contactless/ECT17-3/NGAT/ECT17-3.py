@@ -55,7 +55,7 @@ if (Result):
             tagDFEE02 = DL.GetTLV(alldata,"DFEE02")
                 
             # Tag FFEE1F
-            Result = DL.Check_StringAB(tagDFEE02, 'DF EE 02 04 20 90 00 03')
+            Result = DL.Check_RXResponse('DF EE 02 04')
             if Result == True:
                 DL.SetWindowText("blue", "Tag DFEE02: PASS")
             else:

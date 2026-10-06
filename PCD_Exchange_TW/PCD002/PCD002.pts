@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-38555
+60998
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -133,7 +133,7 @@ result = 1
 cardowner = inputbox ("Which card do u want to test?" & vbcrlf & "1) UID = D3 AC 5A E3" & vbcrlf & "2) UID = 7E BD BA E5", vbokonly)
 
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 3000
+DL.Pause 500
 
 If result <> 0 Then
    prompt1 = prompt1 & "Place MPS001 Card onto reader. When Ready Click OK"

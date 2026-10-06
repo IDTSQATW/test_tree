@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-56507
+15438
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -193,10 +193,6 @@ If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment vbcrlf & vbcrlf & "--- 02-01_w/ DFEC53 ON"
    DL.SendSequence "02-01_w/ DFEC53 ON"
-
-   result = DL.WaitForSequence("CL_0201", 1, 10000)
-   output = msgbox("Did you see msg 'EVM Card Please Tap'",vbyesno)
-
    output = msgbox("Did you see msg 'EVM Card Please Tap'",vbyesno)
    if output = 7 then 
       result = 0
@@ -220,7 +216,6 @@ If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment vbcrlf & vbcrlf & "--- 02-40_w/ DFEC53 ON"
    DL.SendSequence "02-40_w/ DFEC53 ON"
-
    output = msgbox("Did you see msg 'EVM Card Please Tap'",vbyesno)
    if output = 7 then 
       result = 0

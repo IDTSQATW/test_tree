@@ -19,6 +19,13 @@ if readertype == 1:
 		Result = DL.Check_RXResponse("01 00 00 00")
 else:
 	DL.SetWindowText("Green", "*** non-VP3350 reader ***")	
+    
+# Check if reader support Auto Poll mode or not
+readertype = DL.ShowMessageBox("", "Reader support Auto Poll mode?", 0)
+if readertype == 1:
+    n = 3
+if readertype == 0:
+    n = 2
 
 # Check data encryption TYPE is TDES	
 if (Result):
@@ -34,7 +41,7 @@ if (Result):
 
 # cmd 02-40/ 03-40, tap card
 if (Result):
-    for i in range(1, 3):
+    for i in range(1, n):
         if i == 1:
             RetOfStep = DL.SendCommand('Poll on Demand')
             if (RetOfStep):
@@ -113,6 +120,8 @@ if (Result):
                     time.sleep(1.2)
                 else:
                     DL.fails=DL.fails+1
+        else:
+            DL.fails=DL.fails+1
 else:
     DL.fails=DL.fails+1
 				

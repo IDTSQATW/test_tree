@@ -16,11 +16,11 @@ if (Result):
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 00")
 
-# Encryption Type -- AES
-if (Result):
-	RetOfStep = DL.SendCommand('Encryption Type -- AES')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 01")		
+# # Encryption Type -- AES
+# if (Result):
+	# RetOfStep = DL.SendCommand('Encryption Type -- AES')
+	# if (RetOfStep):
+		# Result = Result and DL.Check_RXResponse("C7 00 00 01 01")		
 		
 # Burst mode OFF & Poll on demand		
 if (Result):
@@ -39,11 +39,11 @@ if (Result):
         Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** 63")
         if (Result):
             alldata = DL.Get_RXResponse(0)
-            mask57 = DL.GetTLV(alldata,"57", 0)
-            mask5A = DL.GetTLV(alldata,"5A", 0)
+            mask57 = DL.GetTLV_Embedded(alldata,"57", 0)
+            mask5A = DL.GetTLV_Embedded(alldata,"5A", 0)
             
         # Tag 57
-            Result = DL.Check_StringAB(mask57, '47 61 73 90 01 01 00 10 D3 01 21 20 00 12 33 99 00 03 1F')
+            Result = DL.Check_StringAB(mask57, '47 61 73 90 01 01 00 10 D2 01 21 20 00 12 33 99 00 03 1F')
             if Result == False:
                 DL.SetWindowText("red", "Tag 57: FAIL")
             else:

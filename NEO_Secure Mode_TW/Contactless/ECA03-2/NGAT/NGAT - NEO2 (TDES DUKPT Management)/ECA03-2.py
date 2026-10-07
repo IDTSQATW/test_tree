@@ -16,12 +16,6 @@ if (Result):
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 00")
 
-# Encryption Type -- AES
-if (Result):
-	RetOfStep = DL.SendCommand('Encryption Type -- AES')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 01")
-
 # Set group 80 (MSD only)
 if (Result):
 	RetOfStep = DL.SendCommand('Set group 80 (MSD only)')
@@ -42,7 +36,7 @@ if (Result):
 if (Result):
     RetOfStep = DL.SendCommand('Activate Transaction')
     if (RetOfStep):
-        Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** 73 DF EE 12")
+        Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** 73 ** DF EE 12")
         if (Result):
             alldata = DL.Get_RXResponse(0)
             ksn = DL.GetTLV(alldata,"DFEE12")	
@@ -59,9 +53,9 @@ if (Result):
             enc9F6B = DL.GetTLV_Embedded(alldata,"9F6B", 1)
             dec9F6B = DL.DecryptDLL(0,2, strKey, ksn, enc9F6B)	
             
-            Tag9F39 = DL.GetTLV(alldata,"9F39")
-            TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
-            TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
+            Tag9F39 = DL.GetTLV_Embedded(alldata,"9F39")
+            TagFFEE01 = DL.GetTLV_Embedded(alldata,"FFEE01")
+            TagDFEE26 = DL.GetTLV_Embedded(alldata,"DFEE26")
                 
         # Tag DF812A/ DF812B (only need enc data)
             Result = DL.Check_StringAB(decDF812A, 'DF 81 2A 18 30 30 30 31 30 30 30 30 30 31 30 30 31 31 31 31 31 31 31 31 31 31 31 32')

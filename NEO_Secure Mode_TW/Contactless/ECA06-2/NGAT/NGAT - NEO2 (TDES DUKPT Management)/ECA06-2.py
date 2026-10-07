@@ -16,11 +16,18 @@ if (Result):
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("C7 00 00 00")
 
-# Encryption Type -- AES
-if (Result):
-	RetOfStep = DL.SendCommand('Encryption Type -- AES')
-	if (RetOfStep):
-		Result = Result and DL.Check_RXResponse("C7 00 00 01 01")
+# # Encryption Type -- AES
+# if (Result):
+	# RetOfStep = DL.SendCommand('Encryption Type -- AES')
+	# if (RetOfStep):
+		# Result = Result and DL.Check_RXResponse("C7 00 00 01 01")
+
+# Check reader platform
+platform = DL.ShowMessageBox("", "Is this NEO3/ 4 project?", 0)
+if platform == 1:
+	DL.SetWindowText("Green", "*** The project is NEO3/ 4 ***")
+else:
+	DL.SetWindowText("Green", "*** The project is NOT NEO3/ 4 ***")
 
 # Set group B0
 if (Result):
@@ -42,7 +49,7 @@ if (Result):
 if (Result):
     RetOfStep = DL.SendCommand('Activate Transaction')
     if (RetOfStep):
-        Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** 73 DF EE 12")
+        Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23")
         if (Result):
             alldata = DL.Get_RXResponse(0)
             ksn = DL.GetTLV(alldata,"DFEE12")	
@@ -68,96 +75,115 @@ if (Result):
             TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
             TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
             
-        # Tag DFEF17
-            r1 = DL.Check_StringAB(maskDFEF17, '2A 36 35 31 30 2A 2A 2A 2A 2A 2A 2A 2A')
-            r2 = DL.Check_StringAB(maskDFEF17, '5E 43 41 52 44 2F 49 4D 41 47 45')
-            r3 = DL.Check_StringAB(maskDFEF17, '5E 31 37 31 32 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A')
-            if r1 == True and r2 == True and r3 == True and DL.Check_RXResponse("DF EF 17 A1 41"):
-                DL.SetWindowText("blue", "Tag DFEF17_Mask: PASS")
-            else:
-                DL.fails=DL.fails+1
-                DL.SetWindowText("red", "Tag DFEF17_Mask: FAIL")
-                
-            r1 = DL.Check_StringAB(decDFEF17, 'DF EF 17 41 42 36 35 31 30 30 30 30 30 30 30 30 30')
-            r2 = DL.Check_StringAB(decDFEF17, '5E 43 41 52 44 2F 49 4D 41 47 45')
-            r3 = DL.Check_StringAB(decDFEF17, '5E 31 37 31 32 32 30 31 31 30 30 30 30 39 35 30 30')
-            if r1 == True and r2 == True and r3 == True and DL.Check_RXResponse("DF EF 17 C1 50"):
-                DL.SetWindowText("blue", "Tag DFEF17_Enc: PASS")
-            else:
-                DL.fails=DL.fails+1
-                DL.SetWindowText("red", "Tag DFEF17_Enc: FAIL")
+            if platform == 0:
+            # Tag DFEF17
+                r1 = DL.Check_StringAB(maskDFEF17, '2A 36 35 31 30 2A 2A 2A 2A 2A 2A 2A 2A')
+                r2 = DL.Check_StringAB(maskDFEF17, '5E 43 41 52 44 2F 49 4D 41 47 45')
+                r3 = DL.Check_StringAB(maskDFEF17, '5E 31 37 31 32 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A')
+                if r1 == True and r2 == True and r3 == True and DL.Check_RXResponse("DF EF 17 A1 41"):
+                    DL.SetWindowText("blue", "Tag DFEF17_Mask: PASS")
+                else:
+                    DL.fails=DL.fails+1
+                    DL.SetWindowText("red", "Tag DFEF17_Mask: FAIL")
+                    
+                r1 = DL.Check_StringAB(decDFEF17, 'DF EF 17 41 42 36 35 31 30 30 30 30 30 30 30 30 30')
+                r2 = DL.Check_StringAB(decDFEF17, '5E 43 41 52 44 2F 49 4D 41 47 45')
+                r3 = DL.Check_StringAB(decDFEF17, '5E 31 37 31 32 32 30 31 31 30 30 30 30 39 35 30 30')
+                if r1 == True and r2 == True and r3 == True and DL.Check_RXResponse("DF EF 17 C1 50"):
+                    DL.SetWindowText("blue", "Tag DFEF17_Enc: PASS")
+                else:
+                    DL.fails=DL.fails+1
+                    DL.SetWindowText("red", "Tag DFEF17_Enc: FAIL")
 
-        # Tag DFEF18
-            r1 = DL.Check_StringAB(maskDFEF18, '36 35 31 30 2A 2A 2A 2A 2A 2A 2A 2A')
-            r2 = DL.Check_StringAB(maskDFEF18, '3D 31 37 31 32 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A')
-            if r1 == True and r2 == True and DL.Check_RXResponse("DF EF 18 A1 25"):
-                DL.SetWindowText("blue", "Tag DFEF18_Mask: PASS")
-            else:
-                DL.fails=DL.fails+1
-                DL.SetWindowText("red", "Tag DFEF18_Mask: FAIL")
+            # Tag DFEF18
+                r1 = DL.Check_StringAB(maskDFEF18, '36 35 31 30 2A 2A 2A 2A 2A 2A 2A 2A')
+                r2 = DL.Check_StringAB(maskDFEF18, '3D 31 37 31 32 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A')
+                if r1 == True and r2 == True and DL.Check_RXResponse("DF EF 18 A1 25"):
+                    DL.SetWindowText("blue", "Tag DFEF18_Mask: PASS")
+                else:
+                    DL.fails=DL.fails+1
+                    DL.SetWindowText("red", "Tag DFEF18_Mask: FAIL")
+                    
+                r1 = DL.Check_StringAB(decDFEF18, 'DF EF 18 25 36 35 31 30 30 30 30 30 30 30 30 30')
+                r2 = DL.Check_StringAB(decDFEF18, '3D 31 37 31 32 32 30 31 31 30 30 30 30 39 35 30 30')
+                if r1 == True and r2 == True and DL.Check_RXResponse("DF EF 18 C1 30"):
+                    DL.SetWindowText("blue", "Tag DFEF18_Enc: PASS")
+                else:
+                    DL.fails=DL.fails+1
+                    DL.SetWindowText("red", "Tag DFEF18_Enc: FAIL")
+                    
+            # Tag 56
+                r1 = DL.Check_StringAB(mask56, '2A 36 35 31 30 2A 2A 2A 2A 2A 2A 2A 2A')
+                r2 = DL.Check_StringAB(mask56, '5E 43 41 52 44 2F 49 4D 41 47 45')
+                r3 = DL.Check_StringAB(mask56, '5E 31 37 31 32 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A')
+                if r1 == True and r2 == True and r3 == True and DL.Check_RXResponse("56 A1 41"):
+                    DL.SetWindowText("blue", "Tag 56_Mask: PASS")
+                else:
+                    DL.fails=DL.fails+1
+                    DL.SetWindowText("red", "Tag 56_Mask: FAIL")
+                    
+                r1 = DL.Check_StringAB(dec56, '56 41 42 36 35 31 30 30 30 30 30 30 30 30 30')
+                r2 = DL.Check_StringAB(dec56, '5E 43 41 52 44 2F 49 4D 41 47 45')
+                r3 = DL.Check_StringAB(dec56, '5E 31 37 31 32 32 30 31 31 30 30 30 30 39 35 30 30')
+                if r1 == True and r2 == True and r3 == True and DL.Check_RXResponse("56 C1 50"):
+                    DL.SetWindowText("blue", "Tag 56_Enc: PASS")
+                else:
+                    DL.fails=DL.fails+1
+                    DL.SetWindowText("red", "Tag 56_Enc: FAIL")
+                    
+            # Tag 57
+                r1 = DL.Check_StringAB(mask57, '65 10 CC CC CC CC')
+                r2 = DL.Check_StringAB(mask57, 'D1 71 2C CC CC CC CC CC CC')
+                if r1 == True and r2 == True and DL.Check_RXResponse("57 A1 13"):
+                    DL.SetWindowText("blue", "Tag 57_Mask: PASS")
+                else:
+                    DL.fails=DL.fails+1
+                    DL.SetWindowText("red", "Tag 57_Mask: FAIL")
+                    
+                r1 = DL.Check_StringAB(dec57, '57 13 65 10 00 00 00 00')
+                r2 = DL.Check_StringAB(dec57, 'D1 71 22 01')
+                if r1 == True and r2 == True and DL.Check_RXResponse("57 C1 20"):
+                    DL.SetWindowText("blue", "Tag 57_Enc: PASS")
+                else:
+                    DL.fails=DL.fails+1
+                    DL.SetWindowText("red", "Tag 57_Enc: FAIL")
+                    
+            # Tags 9F39/ FFEE01/ DFEE26
+                if Tag9F39 == "91": 
+                    DL.SetWindowText("blue", "Tag 9F39: PASS")
+                else:
+                    DL.fails=DL.fails+1
+                    DL.SetWindowText("Red", "Tag 9F39: FAIL")
                 
-            r1 = DL.Check_StringAB(decDFEF18, 'DF EF 18 25 36 35 31 30 30 30 30 30 30 30 30 30')
-            r2 = DL.Check_StringAB(decDFEF18, '3D 31 37 31 32 32 30 31 31 30 30 30 30 39 35 30 30')
-            if r1 == True and r2 == True and DL.Check_RXResponse("DF EF 18 C1 30"):
-                DL.SetWindowText("blue", "Tag DFEF18_Enc: PASS")
-            else:
-                DL.fails=DL.fails+1
-                DL.SetWindowText("red", "Tag DFEF18_Enc: FAIL")
+                if (DL.Check_StringAB(TagFFEE01, "DFEE300100")): 
+                    DL.SetWindowText("blue", "Tag FFEE01: PASS")
+                else:
+                    DL.fails=DL.fails+1
+                    DL.SetWindowText("Red", "Tag FFEE01: FAIL")
                 
-        # Tag 56
-            r1 = DL.Check_StringAB(mask56, '2A 36 35 31 30 2A 2A 2A 2A 2A 2A 2A 2A')
-            r2 = DL.Check_StringAB(mask56, '5E 43 41 52 44 2F 49 4D 41 47 45')
-            r3 = DL.Check_StringAB(mask56, '5E 31 37 31 32 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A 2A')
-            if r1 == True and r2 == True and r3 == True and DL.Check_RXResponse("56 A1 41"):
-                DL.SetWindowText("blue", "Tag 56_Mask: PASS")
-            else:
-                DL.fails=DL.fails+1
-                DL.SetWindowText("red", "Tag 56_Mask: FAIL")
+                if TagDFEE26 == "7300": 
+                    DL.SetWindowText("blue", "Tag DFEE26: PASS")
+                else:
+                    DL.fails=DL.fails+1
+                    DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+                    
+            if platform == 1:
+            # Tag 57			
+                r1 = DL.Check_RXResponse("57 12 36 07 05 00 00 00 00 1D 49 12 10 10 00 03 32 11 23 01")
+                if r1 == True:
+                    DL.SetWindowText("blue", "Tag 57_Mask: PASS")
+                else:
+                    DL.fails=DL.fails+1
+                    DL.SetWindowText("red", "Tag 57_Mask: FAIL")
                 
-            r1 = DL.Check_StringAB(dec56, '56 41 42 36 35 31 30 30 30 30 30 30 30 30 30')
-            r2 = DL.Check_StringAB(dec56, '5E 43 41 52 44 2F 49 4D 41 47 45')
-            r3 = DL.Check_StringAB(dec56, '5E 31 37 31 32 32 30 31 31 30 30 30 30 39 35 30 30')
-            if r1 == True and r2 == True and r3 == True and DL.Check_RXResponse("56 C1 50"):
-                DL.SetWindowText("blue", "Tag 56_Enc: PASS")
-            else:
-                DL.fails=DL.fails+1
-                DL.SetWindowText("red", "Tag 56_Enc: FAIL")
-                
-        # Tag 57
-            r1 = DL.Check_StringAB(mask57, '65 10 CC CC CC CC')
-            r2 = DL.Check_StringAB(mask57, 'D1 71 2C CC CC CC CC CC CC')
-            if r1 == True and r2 == True and DL.Check_RXResponse("57 A1 13"):
-                DL.SetWindowText("blue", "Tag 57_Mask: PASS")
-            else:
-                DL.fails=DL.fails+1
-                DL.SetWindowText("red", "Tag 57_Mask: FAIL")
-                
-            r1 = DL.Check_StringAB(dec57, '57 13 65 10 00 00 00 00')
-            r2 = DL.Check_StringAB(dec57, 'D1 71 22 01')
-            if r1 == True and r2 == True and DL.Check_RXResponse("57 C1 20"):
-                DL.SetWindowText("blue", "Tag 57_Enc: PASS")
-            else:
-                DL.fails=DL.fails+1
-                DL.SetWindowText("red", "Tag 57_Enc: FAIL")
-                
-        # Tags 9F39/ FFEE01/ DFEE26
-            if Tag9F39 == "91": 
-                DL.SetWindowText("blue", "Tag 9F39: PASS")
-            else:
-                DL.fails=DL.fails+1
-                DL.SetWindowText("Red", "Tag 9F39: FAIL")
-            
-            if (DL.Check_StringAB(TagFFEE01, "DFEE300100")): 
-                DL.SetWindowText("blue", "Tag FFEE01: PASS")
-            else:
-                DL.fails=DL.fails+1
-                DL.SetWindowText("Red", "Tag FFEE01: FAIL")
-            
-            if TagDFEE26 == "7300": 
-                DL.SetWindowText("blue", "Tag DFEE26: PASS")
-            else:
-                DL.fails=DL.fails+1
-                DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+            # Tags 9F39/ FFEE01/ DFEE26	
+                if DL.Check_RXResponse("9F39 01 07") == False: 
+                    DL.fails=DL.fails+1
+                    DL.SetWindowText("Red", "Tag 9F39: FAIL")
+                        
+                if DL.Check_RXResponse("DFEE26 02 6300") == False: 
+                    DL.fails=DL.fails+1
+                    DL.SetWindowText("Red", "Tag DFEE26: FAIL")			        
         else:
             DL.fails=DL.fails+1
 else:

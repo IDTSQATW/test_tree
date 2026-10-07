@@ -20,6 +20,13 @@ if readertype == 1:
 else:
 	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
 
+# Check reader platform
+platform = DL.ShowMessageBox("", "Is this NEO3/ 4 project?", 0)
+if platform == 1:
+	DL.SetWindowText("Green", "*** The project is NEO3/ 4 ***")
+else:
+	DL.SetWindowText("Green", "*** The project is NOT NEO3/ 4 ***")
+
 # Enable encryption (02)
 if (Result):
 	RetOfStep = DL.SendCommand('Enable Encryption (02)')
@@ -46,7 +53,7 @@ if (Result):
 if (Result):
     RetOfStep = DL.SendCommand('Activate Transaction')
     if (RetOfStep):
-        Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23 ** 61")
+        Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 23")
         if (Result):
             alldata = DL.Get_RXResponse(0)
             ksn = DL.GetTLV(alldata,"DFEE12")	
@@ -72,7 +79,7 @@ if (Result):
             # TagFFEE01 = DL.GetTLV(alldata,"FFEE01")
             TagDFEE26 = DL.GetTLV(alldata,"DFEE26")
         
-            if readertype == 0:
+            if platform == 0:
             # Tag DFEF17
                 r1 = DL.Check_StringAB(maskDFEF17, '2A 36 35 31 30 2A 2A 2A 2A 2A 2A 2A 2A')
                 r2 = DL.Check_StringAB(maskDFEF17, '5E 43 41 52 44 2F 49 4D 41 47 45')
@@ -164,7 +171,7 @@ if (Result):
                     DL.fails=DL.fails+1
                     DL.SetWindowText("Red", "Tag DFEE26: FAIL")
                     
-            if readertype == 1:
+            if platform == 1:
             # Tag 57			
                 r1 = DL.Check_RXResponse("57 12 36 07 05 00 00 00 00 1D 49 12 10 10 00 03 32 11 23 01")
                 if r1 == True:

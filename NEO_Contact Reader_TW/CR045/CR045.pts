@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-57562
+4372
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -171,7 +171,7 @@ if readerType = "NEO2" then
       DL.AddComment "--- 60-03 Contact Set Application Data (VISA)"
       DL.SendSequence "60-03 Contact Set Application Data (VISA)"
       result = DL.WaitForSequence("60-xx 00 status", 1, 3000)
-      dl.pause 1000
+      dl.pause 300
    End If
 
    If result <> 0 Then
@@ -180,7 +180,7 @@ if readerType = "NEO2" then
       DL.AddComment "--- 60-16 Set Terminal config_4C"
       DL.SendSequence "60-16 Set Terminal config_4C"
       result = DL.WaitForSequence("60-xx 00 status", 1, 3000)
-      dl.pause 1000
+      dl.pause 300
    End If
 
    If result <> 0 Then
@@ -189,7 +189,7 @@ if readerType = "NEO2" then
       DL.AddComment "--- 60-06 4C config (NEO2)"
       DL.SendSequence "60-06 4C config (NEO2)"
       result = DL.WaitForSequence("60-xx 00 status", 1, 3000)
-      dl.pause 1000
+      dl.pause 300
    End If
 
    If result <> 0 Then
@@ -198,7 +198,7 @@ if readerType = "NEO2" then
       DL.AddComment "--- 60-0A Contact Set CA Public Key"
       DL.SendSequence "60-0A Contact Set CA Public Key"
       result = DL.WaitForSequence("60-xx 00 status", 1, 3000)
-      dl.pause 1000
+      dl.pause 300
    End If
 
 if result <> 0 then

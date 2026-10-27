@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-21798
+50087
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -229,7 +229,7 @@ If result <> 0 Then
    if result <> 0 then 
 
       if readerType <> "NEO2" then 
-         result = DL.WaitForSequence("60-11 00 04", 1, 15000)
+         result = DL.WaitForSequence("60-11 00 04", 1, 10000)
          if result <> 0 then result = DL.WaitForSequence("df30 + dfee26", 1, 15000)
       elseif readerType = "NEO2" then 
          result = DL.WaitForSequence("60-11 00 04 (NEO2)", 1, 3000)

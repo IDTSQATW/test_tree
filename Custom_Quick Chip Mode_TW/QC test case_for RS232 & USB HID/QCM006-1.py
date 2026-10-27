@@ -13,19 +13,33 @@ strKey ='FEDCBA9876543210F1F1F1F1F1F1F1F1'
 #Objective: Encryption OFF, MSR test under Quick Chip Mode. (IDT/ VISA MSD/ AAMVA/ JIS 2/ ISO4909 3T)
 
 #-----------------------------------------------------------------
+# Check output interface
+interfacecheck1 = DL.ShowMessageBox("", "Current output interface = USB-HID?", 0)
+if interfacecheck1 == 1:
+    DL.SetWindowText("Green", "*** output interface = USB-HID ***")
+    # Output = USB-HID, Data Case Sensitivity = Default (Original from Card, upper/lower mixed)
+    DL.SetWindowText("black", "*** Data Case Sensitivity = Default (Original from Card, upper/lower mixed)")
+    DL.SendIOCommand("IDG", "04 00 DFEC4F 08 05 00 00 00 00 00 00 00", 3000, 1) 
+    DL.Check_RXResponse("04 00 00 00")	
+else:
+    interfacecheck2 = DL.ShowMessageBox("", "Current output interface = RS232?", 0)
+    if interfacecheck2 == 1:
+        DL.SetWindowText("Green", "*** output interface = RS232 ***")
+        # Output = RS232, Data Case Sensitivity = Default (Original from Card, upper/lower mixed)
+        DL.SetWindowText("black", "*** Data Case Sensitivity = Default (Original from Card, upper/lower mixed)")
+        DL.SendIOCommand("IDG", "04 00 DFEC4F 08 03 00 00 00 00 00 00 00", 3000, 1) 
+        DL.Check_RXResponse("04 00 00 00")	
+    else:
+        DL.fails=DL.fails+1
+        Result = False
+    
 # Poll on demand
 if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(5)
-    
-# Output = RS232, Data Case Sensitivity = Default (Original from Card, upper/lower mixed)
-if (Result):
-	DL.SetWindowText("black", "*** Data Case Sensitivity = Default (Original from Card, upper/lower mixed)")
-	DL.SendIOCommand("IDG", "04 00 DFEC4F 08 03 00 00 00 00 00 00 00", 3000, 1) 
-	DL.Check_RXResponse("04 00 00 00")	
-    
+        
 # DF7D = 01 (NEO2)
 if (Result):
 	DL.SetWindowText("black", "*** DF7D = 01 (NEO2)")
@@ -51,9 +65,16 @@ if (Result):
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
 	DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(6)
+    
+# 18-01 to let NGAT to reconnect
+if (Result):
+	DL.SetWindowText("black", "*** Ping the reader")
+	DL.SendIOCommand("IDG", "1801", 3000, 1) 
+	DL.Check_RXResponse("18 00 00 00")	
+	time.sleep(0.2)
 #-----------------------------------------------------------------
 if (Result):       
-    DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, RS232")
+    DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, RS232 or USB")
     for i in range (1, 7):
         if i == 1:
             DL.SetWindowText("black", "*** Swipe IDT test card")
@@ -67,7 +88,7 @@ if (Result):
             DL.SetWindowText("black", "*** Swipe JIS 2 card")
         if i == 6:
             DL.SetWindowText("black", "*** Swipe ISO 4909 (3T) card")
-        time.sleep(5)
+        time.sleep(8)
         strCardData = DL.GetResponse()
         DL.SetWindowText("blue", strCardData)
         target_patterns = [

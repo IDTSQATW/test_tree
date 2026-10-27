@@ -92,6 +92,8 @@ if (Result):
 						DL.SetWindowText("red", "TR1plaintextdata: FAIL")
 		else:
 			DL.fails=DL.fails+1
+else:
+	DL.fails=DL.fails+1
 
 if modeltype == 1:
 	RetOfStep = DL.SendCommand('0105 default (VP3350)')

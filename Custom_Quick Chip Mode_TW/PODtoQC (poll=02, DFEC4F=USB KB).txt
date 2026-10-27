@@ -1,7 +1,7 @@
 Objective: set reader to Quick Chip mode = 02 (USB/ HID to USB/ KBD), reader MUST have 5C terminal data. 02 = CT, CL and MSR would be active.
 
 --------------------
->>> Set output interface (USB)
+>>> Set output interface (USB KB)
 CMD: 04 00 DFEC4F 08 01 00 00 00 00 00 00 00
 EXR: 04 00 00 00
 

@@ -8,5 +8,6 @@ Objective: VP3350 model D, USB-Female test w/ 3 interfaces.
 
 4) Run 3 interfaces transaction.
 => can output data successfully.
+=> Refer to https://idtechproducts.atlassian.net/browse/TE-6543 for output speed.
 
 Note: MUST check SRED/ NSRED readers.

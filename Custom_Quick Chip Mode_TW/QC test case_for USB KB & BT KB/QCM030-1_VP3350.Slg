@@ -49,3 +49,9 @@ Error! >>>> User Judgment Fail:MESSAGECK: Reader returned raw MSR data only (tra
 
 CMD:
 OUT: NULL
+
+14:25:00: [Load Script File]
+Path_File:C:\test_tree\Custom_Quick Chip Mode_TW\QC test case_for USB KB & BT KB\QCM030-1_VP3350.txt
+Items: 34
+Load Case Succeed!
+

@@ -9,15 +9,15 @@ Key='0123456789abcdeffedcba9876543210'
 MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 
-# Check reader is VP3350 or not
-lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
-if lcdtype == 1:
-	DL.SetWindowText("Green", "*** This is VP3350 ***")
-	RetOfStep = DL.SendCommand('0105 do not use LCD')
-	if (RetOfStep):
-		Result = DL.Check_RXResponse("01 00 00 00")
-else:
-	DL.SetWindowText("Green", "*** non-VP3350 reader ***")
+# # Check reader is VP3350 or not
+# lcdtype = DL.ShowMessageBox("", "Is this VP3350?", 0)
+# if lcdtype == 1:
+	# DL.SetWindowText("Green", "*** This is VP3350 ***")
+	# RetOfStep = DL.SendCommand('0105 do not use LCD')
+	# if (RetOfStep):
+		# Result = DL.Check_RXResponse("01 00 00 00")
+# else:
+	# DL.SetWindowText("Green", "*** non-VP3350 reader ***")
 
 # Check data encryption TYPE is TDES	
 if (Result):

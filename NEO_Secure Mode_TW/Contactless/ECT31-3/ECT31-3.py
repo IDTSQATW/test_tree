@@ -128,19 +128,19 @@ if readertype == 0: #non-VP3350
 if (Result):
 	DL.SetWindowText("black", "*** Contact Set ICS Identification (60-16)")
 	DL.SendIOCommand("IDG", "60 16 01", 3000, 1) 
-	Result = DL.Check_RXResponse("60 00 00 00")		
+	time.sleep(0.3)		
 	
 # Contact Set Application Data (60-03)
 if (Result):
 	DL.SetWindowText("black", "*** Contact Set Application Data (60-03)")
 	DL.SendIOCommand("IDG", "60 03 05 00 A0 00 00 03 33 14 00 9F 01 06 01 23 45 67 89 10 5F 57 01 00 5F 2A 02 08 40 9F 09 02 00 96 5F 36 01 02 9F 15 02 12 34 9F 1C 08 46 72 6F 6E 74 31 32 33 9F 4E 06 53 48 4F 50 20 31 9F 1B 04 00 00 3A 98 9F 3C 02 08 40 9F 3D 01 02 DF 25 03 9F 37 04 DF 28 03 9F 08 02 DF EE 15 01 01 DF 13 05 00 00 00 00 00 DF 14 05 FF FF FF FF FF DF 15 05 00 00 00 00 00 DF 18 01 00 DF 17 04 00 00 27 10 DF 19 01 00", 3000, 1) 
-	Result = DL.Check_RXResponse("60 00 00 00")	
+	time.sleep(0.3)		
 
 # Contact Set Terminal Data (60-06)
 if (Result):
 	DL.SetWindowText("black", "*** Contact Set Terminal Data (60-06)")
 	DL.SendIOCommand("IDG", "60 06 18 00 5F 36 01 02 9F 1A 02 08 40 9F 35 01 22 9F 33 03 60 F8 C8 9F 40 05 F0 00 F0 A0 01 9F 1E 08 54 65 72 6D 69 6E 61 6C 9F 15 02 12 34 9F 16 0F 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 9F 1C 08 38 37 36 35 34 33 32 31 9F 4E 22 31 30 37 32 31 20 57 61 6C 6B 65 72 20 53 74 2E 20 43 79 70 72 65 73 73 2C 20 43 41 20 2C 55 53 41 2E DF 26 01 01 DF 10 08 65 6E 66 72 65 73 7A 68 DF 11 01 01 DF 27 01 00 DF EE 15 01 01 DF EE 16 01 00 DF EE 17 01 05 DF EE 18 01 80 DF EE 1E 08 F0 DC 3C F0 C2 9E 94 00 DF EE 1F 01 80 DF EE 1B 08 30 30 30 31 35 31 30 30 DF EE 20 01 3C DF EE 21 01 0A DF EE 22 03 32 3C 3C", 3000, 1) 
-	Result = DL.Check_RXResponse("60 00 00 00")		
+	time.sleep(0.3)		
 	
 # cmd 02-40
 if (Result):
@@ -197,7 +197,9 @@ if (Result):
 	else:
 		DL.fails=DL.fails+1
 		DL.SetWindowText("red", "RX data: FAIL")
-    
+else:
+		DL.fails=DL.fails+1
+        
 # cmd 03-03
 if (Result):
 	DL.SetWindowText("black", "*** cmd 03-03, Approve")

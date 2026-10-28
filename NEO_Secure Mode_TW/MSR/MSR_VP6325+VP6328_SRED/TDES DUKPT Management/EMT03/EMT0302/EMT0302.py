@@ -18,6 +18,16 @@ else:
 	DL.SetWindowText("Green", "*** The reader does not support Auto Poll mode ***")
 	pollmode = 2
     
+# Check data encryption TYPE is TDES	
+if (Result):
+	RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
+	if (RetOfStep):
+		Result = DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
+if (Result):
+	RetOfStep = DL.SendCommand('DF7D = 02 (NEO2)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("04 00 00 00")
+    
 # Get Data Encryption Enable Flag (C7-37)
 if (Result):
 	RetOfStep = DL.SendCommand('Get Data Encryption Enable Flag (C7-37)')

@@ -32,12 +32,24 @@ if readertype == 1:
         RetOfStep = DL.SendCommand('Get DUKPT DEK Attribution based on KeySlot (C7-A3)')
         if (RetOfStep):
             Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")	
+            
+# Set tag DFEE7D
+if (Result):
+	RetOfStep = DL.SendCommand('DF7D = 02 (NEO2)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("04 00 00 00")
 			
 # Poll on demand		
 if (Result):
 	RetOfStep = DL.SendCommand('Poll on Demand')
 	if (RetOfStep):
 		Result = Result and DL.Check_RXResponse("01 00 00 00")
+        
+# Set MSR Secure Parameters		
+if (Result):
+	RetOfStep = DL.SendCommand('Set MSR Secure Parameters (10)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("C7 00 00 00")	
 
 # cmd 02-40, swipe card
 if (Result):
@@ -237,6 +249,9 @@ if (Result):
 				DL.fails=DL.fails+1
 else:
 	DL.fails=DL.fails+1
+                            
+DL.SendCommand('reset to default')
+time.sleep(2)
                             
 if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))

@@ -1,5 +1,17 @@
+TID:DF7D = 02 (NEO2)
+CMD:04 00 DF EE 7D 01 02
+EXR:
+
+TID:Set MSR Secure Parameters (10)
+CMD:C7 38 DFEF04 01 10
+EXR:C7 00 00 00
+
 TID:Get DUKPT DEK Attribution based on KeySlot (C7-A3)
 CMD:C7 A3 01 00
+EXR:
+
+TID:reset to default
+CMD:04 0a
 EXR:
 
 TID:Get Data Encryption (C7-37) = 03

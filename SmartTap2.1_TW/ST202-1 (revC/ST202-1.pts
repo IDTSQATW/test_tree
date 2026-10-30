@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-64510
+43463
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -170,6 +170,16 @@ If result <> 0 Then
    dl.pause 500
 else 
    countf = countf + 1
+End If
+'------------------------------------------------------------
+' for issue NEO3-19457
+If result <> 0 Then
+   DL.Pause 500
+   DL.ResetReceiveCounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set MC CAPK_Real card"
+   DL.SendSequence "MC CAPK_Real card"
+   result = DL.WaitForSequence("D0 xx", 1, 10000)
 End If
 '------------------------------------------------------------
 If result <> 0 Then

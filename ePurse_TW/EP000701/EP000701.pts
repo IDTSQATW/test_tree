@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-61035
+54196
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -532,7 +532,7 @@ Sub Initialize_Reader()
 	
 	DL.AddComment vbCrLf & "--- Turn On Antenna"
 	DL.SendSequence "Turn On Antenna"
-	result = DL.WaitForSequence ("Turn On Antenna (OK)", 1, 5000)
+	result = DL.WaitForSequence ("Turn On Antenna (OK)", 1, 3000)
 
 	DL.AddComment vbCrLf & "--- Start PT Mode" 
 	DL.SendSequence "Start PT Mode"

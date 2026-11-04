@@ -1,5 +1,5 @@
 
-11:52:28: If Issue ?
+10:10:37: If Issue ?
 Path_File:C:\test_tree\Custom_Quick Chip Mode_TW\QC test case_for USB KB & BT KB\QCM002.txt
 Running Info>>
 [Issue Count: 4]
@@ -17,7 +17,7 @@ Running Info>>
 >>> cmd 60-16
 
 
-11:52:28: >>[Do Scripts]>>
+10:10:37: >>[Do Scripts]>>
 
 Objective: under Quick Chip mode, some transaction cmd can not be worked. (02-01, 02-40, 60-10~12, 60-16)
 ----------------------------------------

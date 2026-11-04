@@ -10,28 +10,28 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey ='FEDCBA9876543210F1F1F1F1F1F1F1F1'
 
-#Objective: Encryption OFF, MSR test under Quick Chip Mode. (IDT/ VISA MSD/ AAMVA/ JIS 2/ ISO4909 3T)
+#Objective: Encryption OFF, CL test under Quick Chip Mode. (Discover/ VISA MSD/ VISA qVSDC (EMV)/ MasterCard (MSD)/ MChip (EMV)/ INTERAC)
 
 #-----------------------------------------------------------------
-# Check output interface
-interfacecheck1 = DL.ShowMessageBox("", "Current output interface = USB-HID?", 0)
-if interfacecheck1 == 1:
-    DL.SetWindowText("Green", "*** output interface = USB-HID ***")
-    # Output = USB-HID, Data Case Sensitivity = Default (Original from Card, upper/lower mixed)
-    DL.SetWindowText("black", "*** Data Case Sensitivity = Default (Original from Card, upper/lower mixed)")
-    DL.SendIOCommand("IDG", "04 00 DFEC4F 08 05 00 00 00 00 00 00 00", 3000, 1) 
-    DL.Check_RXResponse("04 00 00 00")	
-else:
-    interfacecheck2 = DL.ShowMessageBox("", "Current output interface = RS232?", 0)
-    if interfacecheck2 == 1:
-        DL.SetWindowText("Green", "*** output interface = RS232 ***")
-        # Output = RS232, Data Case Sensitivity = Default (Original from Card, upper/lower mixed)
-        DL.SetWindowText("black", "*** Data Case Sensitivity = Default (Original from Card, upper/lower mixed)")
-        DL.SendIOCommand("IDG", "04 00 DFEC4F 08 03 00 00 00 00 00 00 00", 3000, 1) 
-        DL.Check_RXResponse("04 00 00 00")	
-    else:
-        DL.fails=DL.fails+1
-        Result = False
+# # Check output interface
+# interfacecheck1 = DL.ShowMessageBox("", "Current output interface = USB-HID?", 0)
+# if interfacecheck1 == 1:
+    # DL.SetWindowText("Green", "*** output interface = USB-HID ***")
+    # # Output = USB-HID, Data Case Sensitivity = Default (Original from Card, upper/lower mixed)
+    # DL.SetWindowText("black", "*** Data Case Sensitivity = Default (Original from Card, upper/lower mixed)")
+    # DL.SendIOCommand("IDG", "04 00 DFEC4F 08 05 00 00 00 00 00 00 00", 3000, 1) 
+    # DL.Check_RXResponse("04 00 00 00")	
+# else:
+    # interfacecheck2 = DL.ShowMessageBox("", "Current output interface = RS232?", 0)
+    # if interfacecheck2 == 1:
+        # DL.SetWindowText("Green", "*** output interface = RS232 ***")
+        # # Output = RS232, Data Case Sensitivity = Default (Original from Card, upper/lower mixed)
+        # DL.SetWindowText("black", "*** Data Case Sensitivity = Default (Original from Card, upper/lower mixed)")
+        # DL.SendIOCommand("IDG", "04 00 DFEC4F 08 03 00 00 00 00 00 00 00", 3000, 1) 
+        # DL.Check_RXResponse("04 00 00 00")	
+    # else:
+        # DL.fails=DL.fails+1
+        # Result = False
     
 # # Poll on demand
 # if (Result):
@@ -53,45 +53,45 @@ else:
 	# DL.Check_RXResponse("C7 00 00 01 00")
 	# time.sleep(0.5)
 
-# # QuickChip mode
-# if (Result):
-	# DL.SetWindowText("black", "*** QuickChip mode (02)")
-	# DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	# DL.Check_RXResponse("01 00 00 00")	
-	# time.sleep(6)
+# QuickChip mode
+if (Result):
+	DL.SetWindowText("black", "*** QuickChip mode (02)")
+	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
+	DL.Check_RXResponse("01 00 00 00")	
+	time.sleep(6)
     
-# # 18-01 to let NGAT to reconnect
-# if (Result):
-	# DL.SetWindowText("black", "*** Ping the reader")
-	# DL.SendIOCommand("IDG", "1801", 3000, 1) 
-	# DL.Check_RXResponse("18 00 00 00")	
-	# time.sleep(0.2)
+# 18-01 to let NGAT to reconnect
+if (Result):
+	DL.SetWindowText("black", "*** Ping the reader")
+	DL.SendIOCommand("IDG", "1801", 3000, 1) 
+	DL.Check_RXResponse("18 00 00 00")	
+	time.sleep(0.2)
 #-----------------------------------------------------------------
 if (Result):       
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, RS232 or USB")
     for i in range (1, 8):
         if i == 1:
-            DL.SetWindowText("black", "*** Tap Discover #84 card")
+            DL.ShowMessageBox("Notice", "Tap Discover #84 card --> Click OK")
         if i == 2:
-            DL.SetWindowText("black", "*** Tap INTERAC card")
+            DL.ShowMessageBox("Notice", "Tap INTERAC card --> Click OK")
         if i == 3:
-            DL.SetWindowText("black", "*** Tap VISA #97 card")
+            DL.ShowMessageBox("Notice", "Tap VISA #97 card --> Click OK")
         if i == 4:
-            DL.SetWindowText("black", "*** Tap MasterCard MC21 card")
+            DL.ShowMessageBox("Notice", "Tap MasterCard MC21 card --> Click OK")
         if i == 5:
-            DL.SetWindowText("black", "*** Tap AMEX XP8 #86 card")
+            DL.ShowMessageBox("Notice", "Tap AMEX XP8 #86 card --> Click OK")
         if i == 6:
-            DL.SetWindowText("black", "*** Tap JCB #136 card")
+            DL.ShowMessageBox("Notice", "Tap JCB #136 card --> Click OK")
         if i == 7:
-            DL.SetWindowText("black", "*** Tap CUP #69 card")
-        time.sleep(8)
+            DL.ShowMessageBox("Notice", "Tap CUP #69 card --> Click OK")
+        # time.sleep(0.2)
         strCardData = DL.GetResponse()
         DL.SetWindowText("blue", strCardData)
         target_patterns = [
             '56 69 56 4F 74 65 63 68 32 00 02',
             '9F 39 01 07',
             'FF EE 01 05 DF EE 30 01 00',
-            'DF EE 26 02 21 00',
+            '21 DF EE 26 02 21 00',
             '9F 02 06 00 00 00 00 04 44',
             '9A 03',
             '9F 21 03',]

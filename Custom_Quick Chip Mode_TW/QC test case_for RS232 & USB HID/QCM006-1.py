@@ -13,25 +13,25 @@ strKey ='FEDCBA9876543210F1F1F1F1F1F1F1F1'
 #Objective: Encryption OFF, MSR test under Quick Chip Mode. (IDT/ VISA MSD/ AAMVA/ JIS 2/ ISO4909 3T)
 
 #-----------------------------------------------------------------
-# Check output interface
-interfacecheck1 = DL.ShowMessageBox("", "Current output interface = USB-HID?", 0)
-if interfacecheck1 == 1:
-    DL.SetWindowText("Green", "*** output interface = USB-HID ***")
-    # Output = USB-HID, Data Case Sensitivity = Default (Original from Card, upper/lower mixed)
-    DL.SetWindowText("black", "*** Data Case Sensitivity = Default (Original from Card, upper/lower mixed)")
-    DL.SendIOCommand("IDG", "04 00 DFEC4F 08 05 00 00 00 00 00 00 00", 3000, 1) 
-    DL.Check_RXResponse("04 00 00 00")	
-else:
-    interfacecheck2 = DL.ShowMessageBox("", "Current output interface = RS232?", 0)
-    if interfacecheck2 == 1:
-        DL.SetWindowText("Green", "*** output interface = RS232 ***")
-        # Output = RS232, Data Case Sensitivity = Default (Original from Card, upper/lower mixed)
-        DL.SetWindowText("black", "*** Data Case Sensitivity = Default (Original from Card, upper/lower mixed)")
-        DL.SendIOCommand("IDG", "04 00 DFEC4F 08 03 00 00 00 00 00 00 00", 3000, 1) 
-        DL.Check_RXResponse("04 00 00 00")	
-    else:
-        DL.fails=DL.fails+1
-        Result = False
+# # Check output interface
+# interfacecheck1 = DL.ShowMessageBox("", "Current output interface = USB-HID?", 0)
+# if interfacecheck1 == 1:
+    # DL.SetWindowText("Green", "*** output interface = USB-HID ***")
+    # # Output = USB-HID, Data Case Sensitivity = Default (Original from Card, upper/lower mixed)
+    # DL.SetWindowText("black", "*** Data Case Sensitivity = Default (Original from Card, upper/lower mixed)")
+    # DL.SendIOCommand("IDG", "04 00 DFEC4F 08 05 00 00 00 00 00 00 00", 3000, 1) 
+    # DL.Check_RXResponse("04 00 00 00")	
+# else:
+    # interfacecheck2 = DL.ShowMessageBox("", "Current output interface = RS232?", 0)
+    # if interfacecheck2 == 1:
+        # DL.SetWindowText("Green", "*** output interface = RS232 ***")
+        # # Output = RS232, Data Case Sensitivity = Default (Original from Card, upper/lower mixed)
+        # DL.SetWindowText("black", "*** Data Case Sensitivity = Default (Original from Card, upper/lower mixed)")
+        # DL.SendIOCommand("IDG", "04 00 DFEC4F 08 03 00 00 00 00 00 00 00", 3000, 1) 
+        # DL.Check_RXResponse("04 00 00 00")	
+    # else:
+        # DL.fails=DL.fails+1
+        # Result = False
     
 # Poll on demand
 if (Result):
@@ -77,23 +77,22 @@ if (Result):
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, RS232 or USB")
     for i in range (1, 7):
         if i == 1:
-            DL.SetWindowText("black", "*** Swipe IDT test card")
+            DL.ShowMessageBox("Notice", "Swipe IDT test card --> Click OK")
         if i == 2:
-            DL.SetWindowText("black", "*** Swipe VISA MSD card")
+            DL.ShowMessageBox("Notice", "Swipe VISA MSD card --> Click OK")
         if i == 3:
-            DL.SetWindowText("black", "*** Swipe AAMVA card")
+            DL.ShowMessageBox("Notice", "Swipe AAMVA card --> Click OK")
         if i == 4:
-            DL.SetWindowText("black", "*** Swipe JIS 1 card")
+            DL.ShowMessageBox("Notice", "Swipe JIS 1 card --> Click OK")
         if i == 5:
-            DL.SetWindowText("black", "*** Swipe JIS 2 card")
+            DL.ShowMessageBox("Notice", "Swipe JIS 2 card --> Click OK")
         if i == 6:
-            DL.SetWindowText("black", "*** Swipe ISO 4909 (3T) card")
-        time.sleep(8)
+            DL.ShowMessageBox("Notice", "Swipe ISO 4909 (3T) card --> Click OK")
         strCardData = DL.GetResponse()
         DL.SetWindowText("blue", strCardData)
         target_patterns = [
             '56 69 56 4F 74 65 63 68 32 00 02 00',
-            'DF EE 25 02 00 11', 
+            '28 DF EE 25 02 00 11', 
             'DF EE 23',
             '9F 39 01 90',
             'FF EE 01 05 DF EE 30 01 0C',

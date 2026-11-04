@@ -70,3 +70,9 @@ ASCII: Otech2
 MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
 User Judgment Pass
 
+
+09:51:54: [Load Script File]
+Path_File:C:\test_tree\Custom_Quick Chip Mode_TW\PODtoQC (poll=02, DFEC4F=USB KB).txt
+Items: 37
+Load Case Succeed!
+

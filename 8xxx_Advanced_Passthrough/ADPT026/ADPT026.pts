@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-30904
+9529
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -133,7 +133,7 @@ End Function
 result = 1
 
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 3000
+DL.Pause 500
 
 
 If result <> 0 Then
@@ -166,10 +166,9 @@ End If
 
 DL.AddComment vbCrLf
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 3000
+DL.Pause 500
 
 PrintMyResult(result)
-DL.Pause 1000
 
 
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
@@ -180,7 +179,6 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
 
 If 0 Then
 If result = 0 then

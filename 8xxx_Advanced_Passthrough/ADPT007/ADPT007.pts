@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-26205
+25426
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -149,6 +149,7 @@ If result <> 0 Then
   DL.AddComment "--- NCR Pass Through - Antenna On, Poll Token Off, 400ms Beep, LED 0 On"
   DL.SendSequence " NCR Pass Through - Antenna On, Poll Token Off, 400ms Beep, LED 0 On"
   result = DL.WaitForSequence("Positive Response", 1, 10000)
+  dl.pause 500
 End If
 
 '------------------------------------------------------------
@@ -173,10 +174,9 @@ End If
 
 DL.AddComment vbCrLf
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 3000
+DL.Pause 500
 
 PrintMyResult(result)
-DL.Pause 1000
 
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf
 Else '""
@@ -186,7 +186,6 @@ End If '""
 '------------------------------------------------------------
 'Result verdict (!!!!! DO NOT EDIT !!!!!)
 '------------------------------------------------------------
-DL.pause 1000
 
 If 0 Then
 If result = 0 then

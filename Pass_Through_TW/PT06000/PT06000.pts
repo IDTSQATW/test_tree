@@ -1,0 +1,312 @@
+DL_SCRIPTVERSION
+1
+40093
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "PT06000" ' !!!!! EDIT THIS !!!!!
+' Objective: to verify cmd 0A-04
+'------------------------------------------------------------
+' Config Variables (!!!!! DO NOT EDIT !!!!!)
+#include "..\..\docklight.inc"
+' - Set the following:
+'   - Enable/disable Test Case Number and Description
+'   - Enable/disable Test Step prompting
+'   - Assign Docklight COM port
+'   - Assign Docklight Baud Rate
+'------------------------------------------------------------
+FileInput.OpenFile prefix & "Regress.Config2"
+Dim Prompting(1)
+Dim COM_Port(1)
+Dim POSBaudRate(1)
+
+Do Until FileInput.EndOfFile
+  'Display Test Case Number and Description     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()
+  Prompting(0) = result
+      
+  'Display Test Steps   
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  Prompting(1) = result
+
+  'Set Docklight COM Port     
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  COM_Port(1) = result
+
+  'Set Reader Baud Rate
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  POSBaudRate(1) = result
+
+  'Set Reader Type
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerType = result
+
+  'Set Reader Model
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  readerModel = result
+
+  'Set Reader FW version
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwVersion = result
+
+  'Set Reader FW build
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  fwBuild = result
+
+  'Set Reader General Flag
+  result = FileInput.GetLine() 'by pass variable name
+  result = FileInput.GetLine()      
+  genFlag = result
+Loop
+
+Sub StepPrompt(PromptString)
+      DL.AddComment PromptString
+      If Prompting(1) = "ON" Then
+         MsgBox PromptString, VBOKOnly, "Test Step"
+      Else
+      End If    
+End Sub
+'------------------------------------------------------------
+' Definitions and Initializations (!!!!! DO NOT EDIT !!!!!)
+' -  
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+'DL.StartCommunication
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+If authn Then '""
+'------------------------------------------------------------
+'POS COM port and Baud Rate settings (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+DL.AddComment "--- Set POS COM PORT Settings"
+DL.StopCommunication
+DL.AddComment "Set POS COM PORT..."
+if POSBaudRate(1) = 0 then 
+   DL.SetChannelSettings(COM_Port(1))
+else
+   DL.SetChannelSettings(COM_Port(1) & ":" & POSBaudRate(1) & ",NONE,8,1")
+end if
+DL.AddComment "POS operating on " & COM_Port(1) & " @ " & POSBaudRate(1) & " baud..."
+DL.AddComment "Set POS COM PORT - COMPLETE" & vbCrLf
+DL.Pause 1000
+
+DL.StartCommunication
+'------------------------------------------------------------
+'Result reporting (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+MasterResult = 0
+If ProjectName <> "" And Prompting(1) = "ON" Then
+   caseValid = 1
+Else
+   caseValid =(Int((max-min+1)*Rnd+min))
+   'DL.AddComment "caseValid = " & caseValid
+End If
+
+Sub PrintMyResult(ResultX)
+    If ResultX <> 0 And errCnt = 0 And caseValid <> 0 Then
+       MasterResult = 1
+       DL.AddComment "Result = PASSED"
+    Else
+       MasterResult = 0
+       DL.AddComment "Result = FAILED"
+    End If
+End Sub
+'------------------------------------------------------------
+'Debugging (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+Function MyDebug(DebugString)
+         DL.AddComment  vbCrLf & DebugString & " = " & result & vbCrLf
+         MsgBox DebugString & " = " & result, VBOKOnly, "Debug"
+End Function
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------PT start
+if result <> 0 then
+   dl.resetreceivecounter
+   dl.addcomment "--- 0A-04_01 = 'Hello' on line 1 & 'Tap Card' on line 3"
+   DL.SendSequence "0A-04_01 = 'Hello' on line 1 & 'Tap Card' on line 3"
+   result = dl.waitforsequence("0A 0C", 1, 2000)
+   dl.pause 200
+end if
+
+if result <> 0 then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   dl.addcomment "--- Enable Pass Through"
+   DL.SendSequence "Enable Pass Through"
+   result = dl.waitforsequence("2C 00", 1, 2000)
+   dl.pause 200
+end if
+'------------------------------------------------------------main test
+for i = 1 to 20
+    if i = 1 then 
+       cmd = "0A-04_01 = 'Hello' on line 1 & 'Tap Card' on line 3"
+       msg = "'Hello' on line 1 & 'Tap Card' on line 3?"
+    end if
+    if i = 2 then 
+       cmd = "0A-04_01 = display 1~5 lines (short)"
+       msg = "'Hello' on line 1~5?"
+    end if
+    if i = 3 then 
+       cmd = "0A-04_01 = display 1~5 lines (long)"
+       msg = "'This is line x' on line 1~5? (x = line number)"
+    end if
+    if i = 4 then 
+       cmd = "0A-04_01 = the shorest"
+       msg = "'A' on line 1?"
+    end if
+    if i = 5 then 
+       cmd = "0A-04_01 = the longest"
+       msg = "'1234567890abcdef' on line 1~5?"
+    end if
+    if i = 6 then cmd = "0A-04_01 = wrong line index"
+    if i = 7 then cmd = "0A-04_01 = wrong string"
+    if i = 8 then cmd = "0A-04_01 = wrong end data"
+    if i = 9 then cmd = "0A-04_01 = too short01"
+    if i = 10 then cmd = "0A-04_01 = L1 too long"
+    if i = 11 then cmd = "0A-04_01 = L2 too long"
+    if i = 12 then cmd = "0A-04_01 = L3 too long"
+    if i = 13 then cmd = "0A-04_01 = L4 too long"
+    if i = 14 then cmd = "0A-04_01 = L5 too long"
+    if i = 15 then cmd = "0A-04_03 = NA"
+    if i = 16 then 
+       cmd = "0A-04_02 = 00h, Check"
+       msg = "'check' icon on the screen & 64x64 monochrome bitmaps position and graphical clarity?"
+    end if
+    if i = 17 then 
+       cmd = "0A-04_02 = 01h, Cross"
+       msg = "'cross' icon on the screen & 64x64 monochrome bitmaps position and graphical clarity?"
+    end if
+    if i = 18 then cmd = "0A-04_02 = wrong ID"
+    if i = 19 then cmd = "0A-04_02 = too short02"
+    if i = 20 then cmd = "0A-04_02 = too long"
+
+    dl.resetreceivecounter
+    dl.addcomment vbcrlf
+    dl.addcomment "--- " & cmd
+    DL.SendSequence cmd
+
+    if i <= 5 then 
+       result = dl.waitforsequence("0A 00", 1, 2000)
+       if result <> 0 then usercheck = msgbox (msg, vbyesno)
+       if usercheck = 7 then result = 0
+    end if
+
+    if (i >= 6 and i <= 15) then result = dl.waitforsequence("0A 05", 1, 2000)
+
+    if i = 16 or i = 17 then 
+       result = dl.waitforsequence("0A 00", 1, 2000)
+       if result <> 0 then usercheck = msgbox (msg, vbyesno)
+       if usercheck = 7 then result = 0
+    end if
+
+    if i >= 18 then result = dl.waitforsequence("0A 05", 1, 2000)
+
+    dl.pause 200
+    if result = 0 then 
+       failcount = failcount + 1
+       dl.addcomment vbcrlf & "** FAIL **"  
+    end if
+next
+'------------------------------------------------------------PT off
+if result <> 0 then
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   dl.addcomment "--- Pass-Through - STOP"
+   DL.SendSequence "Pass-Through - STOP"
+   result = dl.waitforsequence("2C 00", 1, 2000)
+   dl.pause 200
+else
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   dl.addcomment "--- Pass-Through - STOP"
+   DL.SendSequence "Pass-Through - STOP"
+   dl.pause 500
+end if
+
+if failcount <> 0 then result = 0
+'------------------------------------------------------------
+DL.AddComment vbCrLf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)
+Else '""
+  DL.AddComment vbCrLf & authnMsg & vbCrLf
+End If '""
+'------------------------------------------------------------
+'Result verdict (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'DL.pause 1000
+'If result = 0 then
+'  DL.AddComment Chr(13) & "Result = FAILED"
+'Else
+'  DL.AddComment Chr(13) & "Result = PASSED"
+'End If
+'If Prompting(0) = "ON" Then
+'  If result = 0 then
+'    MsgBox "Result = FAILED", VBOKOnly, "Result"
+'  Else 
+'    MsgBox "Result = PASSED", VBOKOnly, "Result"
+'  End If
+'End If
+'-------------------------------------------------------------
+' DETERMINE MASTER VERDICT (!!!!! DO NOT EDIT !!!!!)
+'-------------------------------------------------------------
+'If MasterResult = 1 Then
+'      MasterVerdict = "PASSED"
+'ElseIf MasterResult = 0 Then
+'      MasterVerdict = "FAILED"
+'End If
+'result = MasterResult
+'DL.AddComment vbCrLf
+'DL.AddComment "MASTER RESULT = " & MasterVerdict
+'MasterResult = 0
+'------------------------------------------------------------
+' WRITE FINAL VERDICT (!!!!! DO NOT EDIT !!!!!)
+'------------------------------------------------------------
+'If MasterResult = 0 Then 
+'	FileOutput.CreateFile "MR_FAIL"
+'ElseIf MasterResult = 1 Then
+'	FileOutput.CreateFile "MR_PASS"
+'End If
+FileOutput.CreateFile "FINAL_VERDICT.txt"
+If MasterResult = 0 Then 
+   FileOutput.WriteLine "0|FAIL|NOK"
+ElseIf MasterResult = 1 Then
+       FileOutput.WriteLine "1|PASS|OK"
+End If
+'FileOutput.WriteLine MasterResult
+FileOutput.CloseFile 
+
+Sub DL_OnSend()
+    usDataLen = DL.OnSend_GetSize() - 2
+    If usDataLen > 0 Then
+        crcStr = DL.CalcChecksum("CRC-CCITT", DL.OnSend_GetData("H"), "H", 1, usDataLen) 
+        ' Write result to the last two bytes of the sequence
+        DL.OnSend_Poke usDataLen + 1, CInt("&h" + Right(crcStr, 2)) ' low byte
+        DL.OnSend_Poke usDataLen + 2, CInt("&h" + Left(crcStr, 2)) ' high byte
+    End If
+End Sub

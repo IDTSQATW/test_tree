@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-3123
+3485
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -172,14 +172,13 @@ If MyInput = 7 Then ' No
 End If
 
 '------------------------------------------------------------
-DL.pause 1000
+DL.pause 500
 
 DL.AddComment vbCrLf
 DL.SendSequence "", "56 69 56 4F 74 65 63 68 32 00 2C 01 00 01 00 0D 38","H"
-DL.Pause 3000
+DL.Pause 500
 
 PrintMyResult(result)
-DL.Pause 1000
 
 
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf

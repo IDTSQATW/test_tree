@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-30786
+52248
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -312,7 +312,9 @@ If result <> 0 Then
    r2 = DL.WaitForSequence("Tag FFEE06", 1, 2000)
 
    r3 = DL.WaitForSequence("Tag DFEF4C/ DFEF4D", 1, 2000)
-
+        if r3 = 0 then
+        r3 = DL.WaitForSequence("Tag DFEF4C/ DFEF4D_Xs", 1, 2000)
+        end if 
    r4 = DL.WaitForSequence("Tag 9F39", 1, 2000)
 
    if readerType <> "NEO2" then r5 = DL.WaitForSequence("Tag DFEE26", 1, 2000)

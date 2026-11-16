@@ -11,6 +11,23 @@ PAN=''
 strKey = '0123456789ABCDEFFEDCBA9876543210'
 rx = 0
 		
+# Check project was NEO2 or NEO3/ 4
+platform = DL.ShowMessageBox("", "Is this NEO3/ 4 project?", 0)
+if platform == 1:
+	DL.SetWindowText("Green", "*** The project is NEO3/ 4 ***")
+else:
+	DL.SetWindowText("Green", "*** The project is NOT NEO3/ 4 ***")
+        
+# HWcheck
+HWcheck = DL.ShowMessageBox("", "Does the project support CT reader?", 0)
+        
+# Auto poll support check
+autopollcheck = DL.ShowMessageBox("", "Does the project support Auto-Poll mode?", 0)
+if autopollcheck == 1: 
+    autopoll = 6
+else:
+    autopoll = 4
+        
 # Check project has LCD or not
 lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
 if lcdtype == 1:
@@ -32,6 +49,12 @@ if (Result):
 		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 01 01 00 00 00")
 		if Result == False:
 			DL.SetWindowText("red", "Data key should be: TDES DUKPT Management/ AES/ PIN Key, please check setting first...")
+            
+# Data encryption on
+if (Result):
+	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")	
 			
 # First Response Control (0x63) = enable
 if (Result):
@@ -47,7 +70,7 @@ if (Result):
 
 # cmd 02-40, MSR/ CL/ CT				
 if (Result):	
-	for i in range (1, 6):
+	for i in range (1, autopoll):
 		if i <= 3:
 			if i == 1:
 				RetOfStep = DL.SendCommand('Poll on Demand')
@@ -64,7 +87,10 @@ if (Result):
 						rx = 1
 				if i == 2:
 					if lcdtype == 1:
-						RetOfStep = DL.SendCommand('02-40, CL -- Discover w/ LCD')
+						if platform == 0:
+							RetOfStep = DL.SendCommand('02-40, CL -- Discover w/ LCD')
+						if platform == 1:
+							RetOfStep = DL.SendCommand('02-40, CL -- VISA w/ LCD')
 						rx = 0
 					if lcdtype == 0:
 						if readermodel == 0:
@@ -74,13 +100,16 @@ if (Result):
 							RetOfStep = DL.SendCommand('02-40, CL -- VISA w/o LCD')
 						rx = 4
 				if i == 3:
-					if lcdtype == 1:
-						RetOfStep = DL.SendCommand('60-10, CT -- EMV Test Card V2 T=0 w/ LCD')	
-						rx = 1
-					if lcdtype == 0:
-						time.sleep(1)
-						RetOfStep = DL.SendCommand('60-10, CT -- EMV Test Card V2 T=0 w/o LCD')	
-						rx = 7
+					if HWcheck == 0:     #Not support CT
+						i == i + 1
+					else:
+						if lcdtype == 1:
+							RetOfStep = DL.SendCommand('60-10, CT -- EMV Test Card V2 T=0 w/ LCD')	
+							rx = 1
+						if lcdtype == 0:
+							time.sleep(1)
+							RetOfStep = DL.SendCommand('60-10, CT -- EMV Test Card V2 T=0 w/o LCD')	
+							rx = 7
 		if i >= 4:
 			if i == 4:
 				if lcdtype == 1:
@@ -157,7 +186,7 @@ if (Result):
 							if DL.Check_RXResponse(rx, "FFEE01 ** DFEE30010C") == False:	
 								DL.fails=DL.fails+1
 								DL.SetWindowText("red", "TagFFEE01: FAIL")	
-							if DL.Check_RXResponse(rx, "DFEE26 ** E800") == False:	
+							if DL.Check_RXResponse(rx, "DFEE26 ** EA00") == False:	
 								DL.fails=DL.fails+1
 								DL.SetWindowText("red", "TagDFEE26: FAIL")
 																							
@@ -186,9 +215,9 @@ if (Result):
 			# CL transaction
 			if i == 2 or i == 5:
 				if (RetOfStep):
-					if readermodel == 0:
+					if platform == 0:   #The project is NEO2=============================
 						alldata=DL.Get_RXResponse(rx)	
-						DL.Check_RXResponse(rx, 'F1 ** DF EE 12')
+						DL.Check_RXResponse(rx, 'F3 ** DF EE 12')
 						ksn = DL.GetTLV(alldata,"DFEE12")	
 								
 						maskDFEF17 = DL.GetTLV(alldata,"DFEF17", 0)
@@ -293,11 +322,12 @@ if (Result):
 							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag FFEE01: FAIL")
 								
-						if DL.Check_RXResponse(rx, "DFEE26 ** F100") == False:
+						if DL.Check_RXResponse(rx, "DFEE26 ** F300") == False:
 							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag DFEE26: FAIL")	
-					if readermodel == 1:	
-						DL.Check_RXResponse(rx, "E1 ** DF EE 12")
+                            
+					if platform == 1:	#The project is NEO3/ 4==========================
+						DL.Check_RXResponse(rx, "E3 ** DF EE 12")
 						alldata = DL.GetTLV(DL.Get_RXResponse(rx),"FF8105")
 						ksn = DL.GetTLV(DL.Get_RXResponse(rx),"DFEE12")
 						
@@ -308,7 +338,7 @@ if (Result):
 						mask5A = DL.GetTLV(alldata,"5A", 0)
 						enc5A = DL.GetTLV(alldata,"5A", 1)
 						dec5A = DL.DecryptDLL(1,2, strKey, ksn, enc5A)
-					# Tag 57
+						# Tag 57
 						Result = DL.Check_StringAB(mask57, '47 61 CC CC CC CC 00 10 D')
 						if Result == True:
 							Result = DL.Check_StringAB(mask57, '01 2C CC CC CC CC CC CC CC CC')
@@ -320,14 +350,14 @@ if (Result):
 							
 						Result = DL.Check_StringAB(dec57, '57 13 47 61 73 90 01 01 00 10 D')
 						if Result == True:
-							Result = DL.Check_StringAB(dec57, '57 13 47 61 73 90 01 01 00 10 D3 01 21 20 00 12 33 99 00 03 1F')
+							Result = DL.Check_StringAB(dec57, '01 21 20 00 12 33 99 00 03 1F')
 						if Result == True and DL.Check_RXResponse(rx, "57 C1 20"):
 							DL.SetWindowText("blue", "Tag 57_Enc: PASS")
 						else:
 							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag 57_Enc: FAIL")
 
-					# Tag 5A
+						# Tag 5A
 						Result = DL.Check_StringAB(mask5A, '47 61 CC CC CC CC 00 10')
 						if Result == True and DL.Check_RXResponse(rx, "5A A1 08"):
 							DL.SetWindowText("blue", "Tag 5A_Mask: PASS")
@@ -342,13 +372,14 @@ if (Result):
 							DL.fails=DL.fails+1
 							DL.SetWindowText("red", "Tag 5A_Enc: FAIL")
 							
-					# Tags 9F39/ FFEE01/ DFEE26
+						# Tags 9F39/ FFEE01/ DFEE26
 						if DL.Check_RXResponse(rx, "9F39 01 07") == False: 
 							DL.fails=DL.fails+1
 							DL.SetWindowText("Red", "Tag 9F39: FAIL")
-						if DL.Check_RXResponse(rx, "DFEE26 02 E100") == False: 
+						if DL.Check_RXResponse(rx, "DFEE26 02 E300") == False: 
 							DL.fails=DL.fails+1
-							DL.SetWindowText("Red", "Tag DFEE26: FAIL")							
+							DL.SetWindowText("Red", "Tag DFEE26: FAIL")
+                            
 			# CT transaction
 			if i == 3:						
 				Result = Result and DL.Check_RXResponse("60 63 00 00")

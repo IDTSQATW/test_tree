@@ -21,12 +21,12 @@ if autopollcheck == 1:
 else:
     autopoll = 4
         
-# Check project has LCD or not
-lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
-if lcdtype == 1:
-	DL.SetWindowText("Green", "*** The project has LCD ***")
-else:
-	DL.SetWindowText("Green", "*** The project has NO LCD ***")
+# # Check project has LCD or not
+# lcdtype = DL.ShowMessageBox("", "Does the project has LCD?", 0)
+# if lcdtype == 1:
+	# DL.SetWindowText("Green", "*** The project has LCD ***")
+# else:
+	# DL.SetWindowText("Green", "*** The project has NO LCD ***")
 
 # Check platform
 platform = DL.ShowMessageBox("", "Is this NEO3 and upward project?", 0)
@@ -48,6 +48,12 @@ if (Result):
 		Result = Result and DL.Check_RXResponse("C7 00 00 06 00 00 01 00 00 00")
 		if Result == False:
 			DL.SetWindowText("red", "Data key should be: TDES DUKPT Management/ TDES/ PIN Key, please check setting first...")
+            
+# Data encryption on
+if (Result):
+	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")	
 			
 # First Response Control (0x63) = enable
 if (Result):

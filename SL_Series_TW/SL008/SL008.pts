@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-26550
+42239
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -1429,7 +1429,40 @@ End If
      count()
    end if
 '------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 4D"
+  DL.SendSequence " Index 4D"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
 
+  if result = 1 Then
+     ans = msgbox("Do you See (Card Detect)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
+If result <> 0 Then
+  dl.resetreceivecounter
+  dl.addcomment vbcrlf
+  DL.AddComment "--- Index 4E"
+  DL.SendSequence " Index 4E"
+  result = DL.WaitForSequence("Get Index", 1, 10000)
+End If
+
+  if result = 1 Then
+     ans = msgbox("Do you See (Card Detect)", vbyesno)
+     if ans = 7 then
+        count()
+     end if
+   else
+     count()
+   end if
+'------------------------------------------------------------
 
 if countf <> 0 then
    result = 0

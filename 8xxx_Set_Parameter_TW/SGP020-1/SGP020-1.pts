@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-24686
+23732
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -192,6 +192,17 @@ If result <> 0 Then
 End If
 
 If result <> 0 Then
+   msgbox "Click OK --> Watch the reader LCD", vbokonly
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 02-40 (2 sec timeout)"
+   DL.SendSequence "02-40 (2 sec timeout)"
+   result = DL.WaitForSequence("02 08", 1, 2500)
+   if result <> 0 then usercheck = msgbox ("Do you see msg 'Time out'?", vbyesno)
+   if usercheck = 6 then result = 0
+End If
+
+If result <> 0 Then
    dl.addcomment vbcrlf
    dl.resetreceivecounter
    DL.AddComment "--- show timeout/cancel msg (default)"
@@ -208,6 +219,17 @@ If result <> 0 Then
    DL.SendSequence "05-01 Cancel transaction"
    result = DL.WaitForSequence("05 00", 1, 2000)
    if result <> 0 then usercheck = msgbox ("Do you see msg 'Cancel'?", vbyesno)
+   if usercheck = 7 then result = 0
+End If
+
+If result <> 0 Then
+   msgbox "Click OK --> Watch the reader LCD", vbokonly
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 02-40 (2 sec timeout)"
+   DL.SendSequence "02-40 (2 sec timeout)"
+   result = DL.WaitForSequence("02 08", 1, 2500)
+   if result <> 0 then usercheck = msgbox ("Do you see msg 'Time out'?", vbyesno)
    if usercheck = 7 then result = 0
 End If
 

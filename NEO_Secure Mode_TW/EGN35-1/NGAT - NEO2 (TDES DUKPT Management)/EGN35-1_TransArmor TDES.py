@@ -51,6 +51,12 @@ if (Result):
 			if (RetOfStep):
 				Result = DL.Check_RXResponse("C7 00 00 00")	
 		
+# Data encryption on
+if (Result):
+	RetOfStep = DL.SendCommand('Get Data Encryption (C7-37)')
+	if (RetOfStep):
+		Result = Result and DL.Check_RXResponse("C7 00 00 01 03")	
+        
 # First Response Control (0x63) = enable
 if (Result):
 	RetOfStep = DL.SendCommand('First Response Control (0x63) = enable')

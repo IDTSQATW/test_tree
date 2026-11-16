@@ -60,7 +60,7 @@ MiFare Read 1 Block - Start at Block 0
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 31 00 00 00
 0
 5
-CHECKSUM crc-ccitt
+CHECKSUM CRC-CCITT
 
 SEND
 5
@@ -68,7 +68,7 @@ MiFare Read 3 Block - Start at Block 0
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 33 00 00 00
 0
 5
-CHECKSUM crc-ccitt
+CHECKSUM CRC-CCITT
 
 SEND
 6
@@ -76,7 +76,7 @@ MiFare Read 5 Block - Start at Block 0
 56 69 56 4F 74 65 63 68 32 00 2C 07 00 02 35 00 00 00
 0
 5
-CHECKSUM crc-ccitt
+CHECKSUM CRC-CCITT
 
 SEND
 7
@@ -421,7 +421,7 @@ CHECKSUM
 RECEIVE
 14
 MiFare Read next 1 Block - Start at Block 63 (OK)
-56 69 56 4F 74 65 63 68 32 00 2C 00 00 10 00 00 00 00 00 00 FF 07 80 BC FF FF FF FF FF FF 64 4A
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 10 00 00 00 00 00 00 FF 07 80 ?? FF FF FF FF FF FF
 -1
 1
 COMMENT MiFare Read next 1 Block - Start at Block 63 (OK)

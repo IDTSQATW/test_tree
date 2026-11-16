@@ -1,20 +1,20 @@
-Docklight Log File (HEX) - Started 2026/10/5 15:06:14.481 
+Docklight Log File (HEX) - Started 2026/11/13 11:49:54.401 
  TEST CASE: CA012
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM14 @ 115200 baud...
+ POS operating on COM90 @ 115200 baud...
  Set POS COM PORT - COMPLETE
 
  --- Create AID No Transaction Flow
 
-2026/10/5 15:06:16.167 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 02 00 0F DF EE 2D 01 02 9F 06 07 A0 21 43 65 04 11 10 20 3D 
-2026/10/5 15:06:16.180 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 05  Action Code 06 Pass 00 00 45 E6  
+2026/11/13 11:49:55.841 [TX] - 56 69 56 4F 74 65 63 68 32 00 04 02 00 0F DF EE 2D 01 02 9F 06 07 A0 21 43 65 04 11 10 20 3D 
+2026/11/13 11:49:55.848 [RX] - 56 69 56 4F 74 65 63 68 32 00 04 07  Action Code 06 Pass 00 00 2B 86 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 
  ---------- END OF TEST ----------
 
  Result = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2026/10/5 15:06:17.292 
+Docklight Log File (HEX) - Stopped 2026/11/13 11:49:55.944 
 

@@ -804,3 +804,17 @@ COMMENT
 CHECKSUM 
 0
 
+RECEIVE
+9
+ID 2E check
+2E 0C 00 00 00 55 80 00 00 55 00 00 00 AA
+-1
+1
+COMMENT Glitch Tamper enabled
+0
+1
+0
+0
+CHECKSUM 
+0
+

@@ -251,7 +251,7 @@ else:
 	DL.fails=DL.fails+1
                             
 DL.SendCommand('reset to default')
-time.sleep(2)
+time.sleep(3)
                             
 if(0 < (DL.fails + DL.warnings)):
 	DL.setText("RED", "[Test Result] - Fail\r\n Warning:" +str(DL.warnings)+"\r\n Fail:" + str(DL.fails))

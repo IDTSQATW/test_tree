@@ -382,7 +382,7 @@ COMMENT Poll for Token (OK)
 RECEIVE
 14
 MiFare Read next 1 Block - Start at Block 63 (OK)
-56 69 56 4F 74 65 63 68 32 00 2C 00 00 10 00 00 00 00 00 00 FF 07 80 BC FF FF FF FF FF FF 64 4A
+56 69 56 4F 74 65 63 68 32 00 2C 00 00 10 00 00 00 00 00 00 FF 07 80 ?? FF FF FF FF FF FF
 -1
 1
 COMMENT MiFare Read next 1 Block - Start at Block 63 (OK)

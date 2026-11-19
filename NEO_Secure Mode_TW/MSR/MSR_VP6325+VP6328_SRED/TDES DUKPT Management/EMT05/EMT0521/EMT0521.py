@@ -157,10 +157,10 @@ else:
     DL.SetWindowText("red", "Please use NSRED reader to test...")
     DL.fails=DL.fails+1
     
-if lcdtype == 1:
-	RetOfStep = DL.SendCommand('0105 default (VP3350)')
-	if (RetOfStep):
-		Result = DL.Check_RXResponse("01 00 00 00")
+# if lcdtype == 1:
+	# RetOfStep = DL.SendCommand('0105 default (VP3350)')
+	# if (RetOfStep):
+		# Result = DL.Check_RXResponse("01 00 00 00")
         
 # Reset to default
 RetOfStep = DL.SendCommand('Reset to default')

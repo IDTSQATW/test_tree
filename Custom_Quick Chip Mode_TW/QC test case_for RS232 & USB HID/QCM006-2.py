@@ -36,7 +36,7 @@ def read_card():
                 
             if i == 1:#T=0 card
                 target_patterns1 = [
-                    '20 DF EE 26 02 20 00',
+                    'DF EE 26 02 20 00',
                     'DF EE 25 02 00 03',
                     '57 11 47 61 73 90 01 01 00 10 D2 01 22 01 01 23 45 67 89',
                     '5A 08 47 61 73 90 01 01 00 10',
@@ -86,7 +86,7 @@ def read_card():
                     
             if i == 2:#Discover card (PAN = xxxx....0026)
                 target_patterns1 = [
-                    '28 DF EE 25 02 00 11', 
+                    'DF EE 25 02 00 11', 
                     'DF EE 23',
                     '02 7D 00 80 1F 44 28 00 A3 00 25 42 36 35 31 30 30 30 30 30 30 30 30 30 30 30 32 36 5E 43 41 52 44 2F 49 4D 41 47 45 20 30 33 20 20 20 20 20 20 20 20 20 20 20 20 20 5E 31 37 31 32 32 30 31 31 30 30 30 30 32 31 30 30 30 30 30 30 3F 25 3B 36 35 31 30 30 30 30 30 30 30 30 30 30 30 32 36 3D 31 37 31 32 32 30 31 31 30 30 30 30 32 31 30 30 30 30 30 30 3F 3B',
                     '9F 39 01 90',
@@ -139,7 +139,7 @@ def read_card():
                 strCardData = DL.GetResponse()
                 DL.SetWindowText("blue", strCardData)
                 target_patterns1 = [
-                    '28 DF EE 25 02 00 07', 
+                    'DF EE 25 02 00 07', 
                     'DF EE 23',
                     '02 7D 00 80 1F 44 28 00 A3 00 25 42 36 35 31 30 30 30 30 30 30 30 30 30 30 30 32 36 5E 43 41 52 44 2F 49 4D 41 47 45 20 30 33 20 20 20 20 20 20 20 20 20 20 20 20 20 5E 31 37 31 32 32 30 31 31 30 30 30 30 32 31 30 30 30 30 30 30 3F 25 3B 36 35 31 30 30 30 30 30 30 30 30 30 30 30 32 36 3D 31 37 31 32 32 30 31 31 30 30 30 30 32 31 30 30 30 30 30 30 3F 3B',
                     '9F 39 01 80',
@@ -185,10 +185,10 @@ if (Result):
 	DL.SendIOCommand("IDG", "04 00 DF EF 37 01 07", 3000, 1) 
 	DL.Check_RXResponse("04 00 00 00")	
     
-# DF7D = 01 (NEO2)
+# DF7D = 02 (NEO2)
 if (Result):
-	DL.SetWindowText("black", "*** DF7D = 01 (NEO2)")
-	DL.SendIOCommand("IDG", "04 00 DF EE 7D 01 01 ", 3000, 1) 
+	DL.SetWindowText("black", "*** DF7D = 02 (NEO2)")
+	DL.SendIOCommand("IDG", "04 00 DF EE 7D 01 02 ", 3000, 1) 
 	DL.Check_RXResponse("04 00 00 00")	
     
 # Get Data Encryption (C7-37) = encryption OFF

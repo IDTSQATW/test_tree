@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-56323
+1632
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -154,6 +154,7 @@ If result <> 0 Then
    DL.AddComment "--- 60-04 length error"
    DL.SendSequence "60-04 length error"
    result = DL.WaitForSequence("60-xx 04 status", 1, 2000)
+   dl.pause 200
 End If
 
 If result <> 0 Then

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-46481
+41549
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -154,6 +154,13 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+If result <> 0 Then
+   dl.resetreceivecounter
+   DL.AddComment "--- Set tag DFEC66 = enable a3"
+   DL.SendSequence "Set tag DFEC66 = enable a3"
+   result = DL.WaitForSequence("04 00", 1, 6000)
+end if
+
 for k = 1 to 2
     if k = 1 then cmd = "02-01"
     if k = 2 then cmd = "02-40"
@@ -167,7 +174,7 @@ for k = 1 to 2
        if k = 1 then result = DL.WaitForSequence(cmd, 1, 6000)
        if k = 2 then
 
-          if readerType = "GR" or readerType = "NEO1" then 
+          if readerType <> "NEO2" then 
              result = DL.WaitForSequence(cmd, 1, 6000)
           elseif readerType = "NEO2" or readerType = "USAT" then 
              result = DL.WaitForSequence(cmd & " (NEO2)", 1, 6000)

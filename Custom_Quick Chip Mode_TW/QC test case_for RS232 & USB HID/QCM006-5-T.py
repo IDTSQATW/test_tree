@@ -15,13 +15,13 @@ strKey = '0123456789ABCDEFFEDCBA9876543210'
 #-----------------------------------------------------------------
 def msr_data_analysis(strCardData):
 	global Key
-    
 	Track1_CardData = ""
 	Track2_CardData = ""
 	Track3_CardData = ""
 	TRK1DecryptData = ""
 	TRK2DecryptData = ""
 	TRK3DecryptData = ""
+	strCardData = strCardData[:41] + " 00" + strCardData[41:]     #add fake attribution to meet NGAT parse rule. (AT mode had no attribution data)
     
 	if strCardData!=None and strCardData!="":
 		strCardData=strCardData.replace(" ","")
@@ -59,16 +59,14 @@ def msr_data_analysis(strCardData):
 #-----------------------------------------------------------------
 def ct_data_analysis(strCardData):
     global strKey
-    
     dec57 = ""
     dec5A = ""
+    strCardData = strCardData[:41] + " 00" + strCardData[41:]     #add fake attribution to meet NGAT parse rule. (AT mode had no attribution data)
     
     ksn = DL.GetTLV(strCardData,"DFEE12")	
-		
     enc57 = DL.GetTLV(strCardData,"57", 0)
     if ksn and enc57:
         dec57 = DL.DecryptDLL(0,1, strKey, ksn, enc57)	
-		
     enc5A = DL.GetTLV(strCardData,"5A", 0)
     if ksn and enc5A:
         dec5A = DL.DecryptDLL(0,1, strKey, ksn, enc5A)	
@@ -102,7 +100,7 @@ def read_card():
                 dec57, dec5A = ct_data_analysis(strCardData)
                 
                 target_patterns1 = [
-                    'E0 DF EE 26 02 E0 00',
+                    'DF EE 26 02 E0 00',
                     'DF EE 25 02 00 03',
                     'DF EF 5D 11 47 61 CC CC CC CC 00 10 D2 01 2C CC CC CC CC CC CC',
                     'DF EF 5B 08 47 61 CC CC CC CC 00 10',
@@ -167,7 +165,7 @@ def read_card():
                 Track1_CardData, Track2_CardData, Track3_CardData, TRK1DecryptData, TRK2DecryptData, TRK3DecryptData = msr_data_analysis(strCardData)
                 
                 target_patterns1 = [
-                    'E8 DF EE 25 02 00 11', 
+                    'DF EE 25 02 00 11', 
                     'DF EE 23',
                     '80 1F 44 28 00 A3 9B',
                     '9F 39 01 90',
@@ -243,7 +241,7 @@ def read_card():
                 Track1_CardData, Track2_CardData, Track3_CardData, TRK1DecryptData, TRK2DecryptData, TRK3DecryptData = msr_data_analysis(strCardData)
                 
                 target_patterns1 = [
-                    'E8 DF EE 25 02 00 07', 
+                    'DF EE 25 02 00 07', 
                     'DF EE 23',
                     '80 1F 44 28 00 A3 9B',
                     '9F 39 01 80',
@@ -303,10 +301,10 @@ if (Result):
 	DL.SendIOCommand("IDG", "04 00 DF EF 37 01 07", 3000, 1) 
 	DL.Check_RXResponse("04 00 00 00")	
     
-# DF7D = 01 (NEO2)
+# DF7D = 02 (NEO2)
 if (Result):
-	DL.SetWindowText("black", "*** DF7D = 01 (NEO2)")
-	DL.SendIOCommand("IDG", "04 00 DF EE 7D 01 01 ", 3000, 1) 
+	DL.SetWindowText("black", "*** DF7D = 02 (NEO2)")
+	DL.SendIOCommand("IDG", "04 00 DF EE 7D 01 02 ", 3000, 1) 
 	DL.Check_RXResponse("04 00 00 00")	
     
 # Get Data Encryption (C7-37) = encryption ON

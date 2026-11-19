@@ -66,8 +66,8 @@ if (Result):
 						RetOfStep = DL.SendCommand('Activate Transaction -- Discover')
 					if i == 3:
 						RetOfStep = DL.SendCommand('Activate Transaction -- JIS 1')
-					# if i == 4:
-						# RetOfStep = DL.SendCommand('Activate Transaction -- JIS 2')
+					if i == 4:
+						RetOfStep = DL.SendCommand('Activate Transaction -- JIS 2')
 					if i == 5:
 						RetOfStep = DL.SendCommand('Activate Transaction -- AAMVA')
 					if i == 6:
@@ -87,8 +87,8 @@ if (Result):
 						RetOfStep = DL.SendCommand('Get Transaction Result -- Discover')
 					if i == 3:
 						RetOfStep = DL.SendCommand('Get Transaction Result -- JIS 1')
-					# if i == 4:
-						# RetOfStep = DL.SendCommand('Get Transaction Result -- JIS 2')
+					if i == 4:
+						RetOfStep = DL.SendCommand('Get Transaction Result -- JIS 2')
 					if i == 5:
 						RetOfStep = DL.SendCommand('Get Transaction Result -- AAMVA')
 					if i == 6:
@@ -110,8 +110,8 @@ if (Result):
 							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** E8 DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 44 28 00 A3 83")
 						if i == 3:
 							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** E8 DF EE 25 02 00 11 DF EE 23 ** 02 ** 80 1F 48 28 00 A3 83")
-						# if i == 4:
-							# Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** E8 DF EE 25 02 00 11 DF EE 23 ** 02 ** 85 17 00 48 00 82 82")
+						if i == 4:
+							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** E8 DF EE 25 02 00 11 DF EE 23 ** 02 ** 85 17 00 48 00 82 82")
 						if i == 5:
 							Result = DL.Check_RXResponse("56 69 56 4F 74 65 63 68 32 00 02 00 ** E8 DF EE 25 02 00 11 DF EE 23 ** 02 ** 81 3F 30 23 52 82 87")
 						if i == 6:
@@ -135,8 +135,8 @@ if (Result):
 									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 1F 44 28 00 A3 83")
 								if i == 3:
 									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"80 1F 48 28 00 A3 83")
-								# if i == 4:
-									# Result = DL.Check_StringAB(DL.Get_RXResponse(1),"85 17 00 48 00 82 00")
+								if i == 4:
+									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"85 17 00 48 00 82 82")
 								if i == 5:
 									Result = DL.Check_StringAB(DL.Get_RXResponse(1),"81 3F 30 23 52 82 87")
 								if i == 6:
@@ -291,20 +291,20 @@ if (Result):
 										DL.SetWindowText("red", "TR2plaintextdata: FAIL")
 
 								# JIS 2	
-								# if i == 4:
-									# # Transaction result verification
-									# TR2maskdata = ";1234*************************************************************6789?*"
-									# TR2plaintextdata = "313233343536373839303132333435363738393031323334353637383930313233343536373839303132333435363738393031323334353637383930313233343536373839"
+								if i == 4:
+									# Transaction result verification
+									TR2maskdata = ";1234*************************************************************6789?*"
+									TR2plaintextdata = "7F3132333435363738393031323334353637383930313233343536373839303132333435363738393031323334353637383930313233343536373839303132333435363738397F4E"
 									
-									# Result = DL.Check_StringAB(TR2maskdata, Track2_CardData)
-									# if Result != True:
-										# DL.fails=DL.fails+1
-										# DL.SetWindowText("red", "TR2maskdata: FAIL")
+									Result = DL.Check_StringAB(TR2maskdata, Track2_CardData)
+									if Result != True:
+										DL.fails=DL.fails+1
+										DL.SetWindowText("red", "TR2maskdata: FAIL")
                                         
-									# Result = DL.Check_StringAB(TR2plaintextdata, TRK2DecryptData)
-									# if Result != True:
-										# DL.fails=DL.fails+1
-										# DL.SetWindowText("red", "TR2plaintextdata: FAIL")
+									Result = DL.Check_StringAB(TR2plaintextdata, TRK2DecryptData)
+									if Result != True:
+										DL.fails=DL.fails+1
+										DL.SetWindowText("red", "TR2plaintextdata: FAIL")
 
 								# AAMVA
 								if i == 5:

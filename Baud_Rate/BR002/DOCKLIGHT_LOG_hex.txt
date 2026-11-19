@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2026/10/5 14:48:28.607 
+Docklight Log File (HEX) - Started 2026/11/16 11:39:40.999 
  TEST CASE: BR002
 
  --- Set POS COM PORT Settings
@@ -11,10 +11,10 @@ Docklight Log File (HEX) - Started 2026/10/5 14:48:28.607
  --- Testing 19200 Baud
  Set Reader Baud Rate...
 
-2026/10/5 14:48:33.426 [TX] - 56 69 56 4F 74 65 63 68 32 00 30 01 00 01 02 0B A2 
-2026/10/5 14:48:33.431 [RX] - 56 69 56 4F 74 65 63 68 32 00 30 00 00 00 48  Baud Rate accepted
+2026/11/16 11:39:45.685 [TX] - 56 69 56 4F 74 65 63 68 32 00 30 01 00 01 02 0B A2 
+2026/11/16 11:39:45.691 [RX] - 56 69 56 4F 74 65 63 68 32 00 30 00 00 00 48  Baud Rate accepted
 
-2026/10/5 14:48:33.431 [RX] - 0E  Result = PASSED
+2026/11/16 11:39:45.691 [RX] - 0E  Result = PASSED
  Reader Baud Rate set to 19200...
  Set Reader Baud Rate - COMPLETE
 
@@ -25,8 +25,8 @@ Docklight Log File (HEX) - Started 2026/10/5 14:48:28.607
  --- Ping OPEN COM PORT
  Pinging open port...
 
-2026/10/5 14:48:37.868 [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD 
-2026/10/5 14:48:37.883 [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Ping Successful
+2026/11/16 11:39:50.132 [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD 
+2026/11/16 11:39:50.145 [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Ping Successful
  Result = PASSED
  COM port pinged...
  Ping OPEN COM PORT - COMPLETE
@@ -34,10 +34,10 @@ Docklight Log File (HEX) - Started 2026/10/5 14:48:28.607
  --- Set Reader back to Regress.Config baudrate of 115200
 
 
-2026/10/5 14:48:37.906 [TX] - 56 69 56 4F 74 65 63 68 32 00 30 01 00 01 05 EC D2 
-2026/10/5 14:48:37.919 [RX] - 56 69 56 4F 74 65 63 68 32 00 30 00 00 00 48  Baud Rate accepted
+2026/11/16 11:39:50.169 [TX] - 56 69 56 4F 74 65 63 68 32 00 30 01 00 01 05 EC D2 
+2026/11/16 11:39:50.181 [RX] - 56 69 56 4F 74 65 63 68 32 00 30 00 00 00 48  Baud Rate accepted
 
-2026/10/5 14:48:37.927 [RX] - 0E  --- Set POS COM PORT to default Settings
+2026/11/16 11:39:50.188 [RX] - 0E  --- Set POS COM PORT to default Settings
  Set POS COM PORT...
  POS operating on COM14 @ 115200 baud...
  Set POS COM PORT - COMPLETE
@@ -45,8 +45,8 @@ Docklight Log File (HEX) - Started 2026/10/5 14:48:28.607
  --- Ping OPEN COM PORT
  Pinging open port...
 
-2026/10/5 14:48:39.373 [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD 
-2026/10/5 14:48:39.382 [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Ping Successful
+2026/11/16 11:39:51.639 [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD 
+2026/11/16 11:39:51.653 [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Ping Successful
  Result = PASSED
  COM port pinged...
  Ping OPEN COM PORT - COMPLETE
@@ -56,5 +56,5 @@ Docklight Log File (HEX) - Started 2026/10/5 14:48:28.607
  MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2026/10/5 14:48:40.542 
+Docklight Log File (HEX) - Stopped 2026/11/16 11:39:52.799 
 

@@ -13,64 +13,6 @@ strKey = '0123456789ABCDEFFEDCBA9876543210'
 #Objective: Encryption OFF, CL test under Quick Chip Mode. (Discover/ VISA MSD/ VISA qVSDC (EMV)/ MasterCard (MSD)/ MChip (EMV)/ INTERAC)
 
 #-----------------------------------------------------------------
-# # Check output interface
-# interfacecheck1 = DL.ShowMessageBox("", "Current output interface = USB-HID?", 0)
-# if interfacecheck1 == 1:
-    # DL.SetWindowText("Green", "*** output interface = USB-HID ***")
-    # # Output = USB-HID, Data Case Sensitivity = Default (Original from Card, upper/lower mixed)
-    # DL.SetWindowText("black", "*** Data Case Sensitivity = Default (Original from Card, upper/lower mixed)")
-    # DL.SendIOCommand("IDG", "04 00 DFEC4F 08 05 00 00 00 00 00 00 00", 3000, 1) 
-    # DL.Check_RXResponse("04 00 00 00")	
-# else:
-    # interfacecheck2 = DL.ShowMessageBox("", "Current output interface = RS232?", 0)
-    # if interfacecheck2 == 1:
-        # DL.SetWindowText("Green", "*** output interface = RS232 ***")
-        # # Output = RS232, Data Case Sensitivity = Default (Original from Card, upper/lower mixed)
-        # DL.SetWindowText("black", "*** Data Case Sensitivity = Default (Original from Card, upper/lower mixed)")
-        # DL.SendIOCommand("IDG", "04 00 DFEC4F 08 03 00 00 00 00 00 00 00", 3000, 1) 
-        # DL.Check_RXResponse("04 00 00 00")	
-    # else:
-        # DL.fails=DL.fails+1
-        # Result = False
-#-----------------------------------------------------------------
-def cl_data_analysis(strCardData):
-    global strKey
-    
-    dec57 = ""
-    dec5A = ""
-    
-    ksn = DL.GetTLV(strCardData,"DFEE12")	
-		
-    enc57 = DL.GetTLV(strCardData,"57", 0)
-    if ksn and enc57:
-        dec57 = DL.DecryptDLL(0,1, strKey, ksn, enc57)	
-		
-    enc5A = DL.GetTLV(strCardData,"5A", 0)
-    if ksn and enc5A:
-        dec5A = DL.DecryptDLL(0,1, strKey, ksn, enc5A)	
-		    
-    return dec57, dec5A
-#-----------------------------------------------------------------
-# # Poll on demand
-# if (Result):
-	# DL.SetWindowText("black", "*** Poll on demand")
-	# DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
-	# Result = DL.Check_RXResponse("01 00 00 00")	
-	# time.sleep(5)
-        
-# # DF7D = 01 (NEO2)
-# if (Result):
-	# DL.SetWindowText("black", "*** DF7D = 01 (NEO2)")
-	# DL.SendIOCommand("IDG", "04 00 DF EE 7D 01 01 ", 3000, 1) 
-	# DL.Check_RXResponse("04 00 00 00")	
-    
-# # Get Data Encryption (C7-37) = encryption OFF
-# if (Result):
-	# DL.SetWindowText("black", "*** Get Data Encryption (C7-37)")
-	# DL.SendIOCommand("IDG", "C7 37", 3000, 1) 
-	# DL.Check_RXResponse("C7 00 00 01 03")
-	# time.sleep(0.5)
-
 # QuickChip mode
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
@@ -84,6 +26,22 @@ if (Result):
 	DL.SendIOCommand("IDG", "1801", 3000, 1) 
 	DL.Check_RXResponse("18 00 00 00")	
 	time.sleep(0.2)
+#-----------------------------------------------------------------
+def cl_data_analysis(strCardData):
+    global strKey
+    dec57 = ""
+    dec5A = ""
+    strCardData = strCardData[:41] + " 00" + strCardData[41:]     #add fake attribution to meet NGAT parse rule. (AT mode had no attribution data)
+
+    ksn = DL.GetTLV(strCardData,"DFEE12")	
+    enc57 = DL.GetTLV_Embedded(strCardData,"57", 0)
+    if ksn and enc57:
+        dec57 = DL.DecryptDLL(0,1, strKey, ksn, enc57)	
+    enc5A = DL.GetTLV_Embedded(strCardData,"5A", 0)
+    if ksn and enc5A:
+        dec5A = DL.DecryptDLL(0,1, strKey, ksn, enc5A)	
+		    
+    return dec57, dec5A
 #-----------------------------------------------------------------
 if (Result):       
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, RS232 or USB")
@@ -106,14 +64,14 @@ if (Result):
         strCardData = DL.GetResponse()
         DL.SetWindowText("blue", strCardData)
         
-        # call function: ct_data_analysis(strCardData)
-        dec57, dec5A = ct_data_analysis(strCardData)
+        # call function: cl_data_analysis(strCardData)
+        dec57, dec5A = cl_data_analysis(strCardData)
         
         target_patterns = [
             '56 69 56 4F 74 65 63 68 32 00 02',
             '9F 39 01 07',
             'FF EE 01 05 DF EE 30 01 00',
-            'E1 DF EE 26 02 E1 00',
+            'DF EE 26 02 E1 00',
             '9F 02 06 00 00 00 00 04 44',
             '9A 03',
             '9F 21 03',]
@@ -130,9 +88,9 @@ if (Result):
                 'DF EC 18',
                 'DF EF 57']
             if all(pattern in strCardData for pattern in target_patterns1):
-                DL.SetWindowText("GREEN", "Discover #84 PASS")
+                DL.SetWindowText("GREEN", "Mask tags PASS")
             else:
-                DL.SetWindowText("red", "Discover #84 FAIL")
+                DL.SetWindowText("red", "Mask tags FAIL")
                 DL.fails=DL.fails+1
                 
             expect57_Pdata = "57 12 36 07 05 00 00 00 00 1D 49 12 10 10 00 03 32 11 23 01"
@@ -153,9 +111,9 @@ if (Result):
                 'DF EC 18',
                 'DF EF 57']
             if all(pattern in strCardData for pattern in target_patterns1):
-                DL.SetWindowText("GREEN", "INTERAC PASS")
+                DL.SetWindowText("GREEN", "Mask tags PASS")
             else:
-                DL.SetWindowText("red", "INTERAC FAIL")
+                DL.SetWindowText("red", "Mask tags FAIL")
                 DL.fails=DL.fails+1
                 
             expect57_Pdata = "57115413339000001513D05122200123456789"
@@ -174,9 +132,9 @@ if (Result):
                 'DF EF 5D 12 47 61 CC CC CC 01 00 D2 01 2C CC CC CC CC CC CC CC CC',
                 '84 07 A0 00 00 00 03 10 10',]
             if all(pattern in strCardData for pattern in target_patterns1):
-                DL.SetWindowText("GREEN", "VISA #97 PASS")
+                DL.SetWindowText("GREEN", "Mask tags PASS")
             else:
-                DL.SetWindowText("red", "VISA #97 FAIL")
+                DL.SetWindowText("red", "Mask tags FAIL")
                 DL.fails=DL.fails+1
                 
             expect57_Pdata = "571247617390010100D20121200012339900031F"
@@ -197,9 +155,9 @@ if (Result):
                 'DF EC 18',
                 'DF EF 57']
             if all(pattern in strCardData for pattern in target_patterns1):
-                DL.SetWindowText("GREEN", "MasterCard MC21 PASS")
+                DL.SetWindowText("GREEN", "Mask tags PASS")
             else:
-                DL.SetWindowText("red", "MasterCard MC21 FAIL")
+                DL.SetWindowText("red", "Mask tags FAIL")
                 DL.fails=DL.fails+1
                 
             expect57_Pdata = "57 11 54 13 33 00 89 60 00 10 D1 41 22 01"
@@ -221,9 +179,9 @@ if (Result):
                 'DF EC 18',
                 'DF EF 57']
             if all(pattern in strCardData for pattern in target_patterns1):
-                DL.SetWindowText("GREEN", "AMEX XP8 #86 PASS")
+                DL.SetWindowText("GREEN", "Mask tags PASS")
             else:
-                DL.SetWindowText("red", "AMEX XP8 #86 FAIL")
+                DL.SetWindowText("red", "Mask tags FAIL")
                 DL.fails=DL.fails+1
                 
             expect57_Pdata = "57 13 37 42 45 45 54 00 00 1D 14 10"
@@ -244,9 +202,9 @@ if (Result):
                 'DF EC 18',
                 'DF EF 57']
             if all(pattern in strCardData for pattern in target_patterns1):
-                DL.SetWindowText("GREEN", "JCB #136 PASS")
+                DL.SetWindowText("GREEN", "Mask tags PASS")
             else:
-                DL.SetWindowText("red", "JCB #136 FAIL")
+                DL.SetWindowText("red", "Mask tags FAIL")
                 DL.fails=DL.fails+1
                 
             expect57_Pdata = "57"
@@ -267,9 +225,9 @@ if (Result):
                 'DF EC 18',
                 'DF EF 57']
             if all(pattern in strCardData for pattern in target_patterns1):
-                DL.SetWindowText("GREEN", "CUP #69 PASS")
+                DL.SetWindowText("GREEN", "Mask tags PASS")
             else:
-                DL.SetWindowText("red", "CUP #69 FAIL")
+                DL.SetWindowText("red", "Mask tags FAIL")
                 DL.fails=DL.fails+1
                 
             expect57_Pdata = "57 13 62 28 00 01 00 00 11 17 D2 01 21 20"

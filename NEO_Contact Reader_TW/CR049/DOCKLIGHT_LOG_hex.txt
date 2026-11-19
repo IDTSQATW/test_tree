@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2026/10/16 11:58:41.035 
+Docklight Log File (HEX) - Started 2026/11/16 14:57:50.367 
  TEST CASE: CR049
 
  --- Set POS COM PORT Settings
@@ -19,5 +19,5 @@ NEOII spec did not define tag DFEE27 (u should check new ver. AGAIN). Skip this 
  MASTER RESULT = FAILED
 
 
-Docklight Log File (HEX) - Stopped 2026/10/16 11:58:45.124 
+Docklight Log File (HEX) - Stopped 2026/11/16 14:57:58.154 
 

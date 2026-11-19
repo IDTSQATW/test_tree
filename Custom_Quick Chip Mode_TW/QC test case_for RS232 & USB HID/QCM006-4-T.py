@@ -82,13 +82,13 @@ if (Result):
 #-----------------------------------------------------------------
 def msr_data_analysis(strCardData):
 	global Key
-        
 	Track1_CardData = ""
 	Track2_CardData = ""
 	Track3_CardData = ""
 	TRK1DecryptData = ""
 	TRK2DecryptData = ""
 	TRK3DecryptData = ""
+	strCardData = strCardData[:41] + " 00" + strCardData[41:]     #add fake attribution to meet NGAT parse rule. (AT mode had no attribution data)
     
 	if strCardData!=None and strCardData!="":
 		strCardData=strCardData.replace(" ","")
@@ -145,7 +145,7 @@ if (Result):
 
         target_patterns = [
             '56 69 56 4F 74 65 63 68 32 00 02 00',
-            'E8 DF EE 25 02 00 11', 
+            'DF EE 25 02 00 11', 
             'DF EE 23',
             '9F 39 01 90',
             'FF EE 01 05 DF EE 30 01 0C',
@@ -200,7 +200,7 @@ if (Result):
                 DL.fails=DL.fails+1
             
             TR2maskdata = ";4761********0010=2012****************?"
-            TR2plaintextdata = ";4761739001010010=20121200012339900031?"
+            TR2plaintextdata = "3B343736313733393030313031303031303D32303132313230303031323333393930303033313F32"
 
             tracks = [
                 (TR2maskdata, Track2_CardData, "TR2maskdata"),

@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-21412
+35501
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -250,10 +250,8 @@ if result = 0 then
    dl.pause 2000
 end if
 
-DL.SendSequence "Contact ICS 2C (60-16)"
-dl.pause 1000
 DL.SendSequence "04-09"
-dl.pause 4000
+dl.pause 2000
 
 DL.AddComment vbCrLf
 DL.AddComment "---------- END OF TEST ----------" & vbCrLf

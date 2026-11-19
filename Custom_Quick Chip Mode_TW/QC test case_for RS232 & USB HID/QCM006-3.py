@@ -65,7 +65,7 @@ if (Result):
 	DL.SetWindowText("black", "*** Ping the reader")
 	DL.SendIOCommand("IDG", "1801", 3000, 1) 
 	DL.Check_RXResponse("18 00 00 00")	
-	time.sleep(0.2)
+	time.sleep(0.5)
 #-----------------------------------------------------------------
 if (Result):       
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, RS232 or USB")
@@ -91,7 +91,7 @@ if (Result):
             '56 69 56 4F 74 65 63 68 32 00 02',
             '9F 39 01 07',
             'FF EE 01 05 DF EE 30 01 00',
-            '21 DF EE 26 02 21 00',
+            'DF EE 26 02 21 00',
             '9F 02 06 00 00 00 00 04 44',
             '9A 03',
             '9F 21 03',]

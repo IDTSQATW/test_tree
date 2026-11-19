@@ -1,17 +1,17 @@
-Docklight Log File (HEX) - Started 2026/6/4 16:40:21.609 
+Docklight Log File (HEX) - Started 2026/11/16 10:46:12.451 
  TEST CASE: EGN39
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on com14 @ 115200 baud...
+ POS operating on COM90 @ 115200 baud...
  Set POS COM PORT - COMPLETE
 
  
 
  --- 19-01 Get Random Number, 00: Generic
 
-2026/6/4 16:40:23.469 [TX] - 56 69 56 4F 74 65 63 68 32 00 19 01 00 03 00 00 01 1C 64 
-2026/6/4 16:40:23.479 [RX] - 56 69 56 4F 74 65 63 68 32 00 19 02 00 00 E2 57  
+2026/11/16 10:46:13.763 [TX] - 56 69 56 4F 74 65 63 68 32 00 19 01 00 03 00 00 01 1C 64 
+2026/11/16 10:46:13.765 [RX] - 56 69 56 4F 74 65 63 68 32 00 19 02 00 00 E2 57 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  
 ---------- END OF TEST ----------
 
  Result = FAILED
@@ -20,5 +20,5 @@ Docklight Log File (HEX) - Started 2026/6/4 16:40:21.609
  MASTER RESULT = FAILED
 
 
-Docklight Log File (HEX) - Stopped 2026/6/4 16:40:25.590 
+Docklight Log File (HEX) - Stopped 2026/11/16 10:46:15.849 
 

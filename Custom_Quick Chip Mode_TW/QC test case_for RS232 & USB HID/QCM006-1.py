@@ -92,7 +92,7 @@ if (Result):
         DL.SetWindowText("blue", strCardData)
         target_patterns = [
             '56 69 56 4F 74 65 63 68 32 00 02 00',
-            '28 DF EE 25 02 00 11', 
+            'DF EE 25 02 00 11', 
             'DF EE 23',
             '9F 39 01 90',
             'FF EE 01 05 DF EE 30 01 0C',

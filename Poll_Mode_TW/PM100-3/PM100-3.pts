@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-36366
+61991
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -160,6 +160,7 @@ cmdcheck = msgbox("Does reader support cmd 02-01?", vbyesno)
 if cmdcheck = 6 then s = 1
 if cmdcheck = 7 then s = 2
 msrcheck = msgbox("Does reader support MSR?", vbyesno)
+ctcheck = msgbox ("Does reader supprot CT?", vbyesno)
 readercheck = msgbox("Does reader support tags DFEF37 & DFEF3C?", vbyesno)
 if readercheck = 6 then
 '------------------------------------------------------------
@@ -193,7 +194,7 @@ If result <> 0 Then
    dl.pause 500
 End If
 
-if readerType = "NEO2" then
+if readerType = "NEO2" and ctcheck = 6 then
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment vbcrlf
@@ -263,6 +264,7 @@ If result <> 0 Then
    dl.pause 1000
 End If
 
+if ctcheck = 6 then 
 If result <> 0 Then
    msgbox "Click OK -> Insert P/N:80005206-002 card", vbokonly
    dl.resetreceivecounter
@@ -286,6 +288,7 @@ If result <> 0 Then
       dl.pause 1000
    end if
 End If
+end if
 next
 '------------------------------------------------------------
 else

@@ -1,17 +1,17 @@
-Docklight Log File (ASCII) - Started 2026/9/30 14:26:39.413 
+Docklight Log File (ASCII) - Started 2026/11/16 11:49:23.980 
  TEST CASE: MV003
 
  --- Set POS COM PORT Settings
  Set POS COM PORT...
- POS operating on COM90 @ 115200 baud...
+ POS operating on COM14 @ 115200 baud...
  Set POS COM PORT - COMPLETE
 
  --- Get Hardware Information 09-14
 
-2026/9/30 14:26:40.584 [TX] - ViVOtech2<NUL><HT>	<DC4><NUL><NUL>3<BS>
-2026/9/30 14:26:40.598 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL><DC4> 
+2026/11/16 11:49:25.781 [TX] - ViVOtech2<NUL><HT>	<DC4><NUL><NUL>3<BS>
+2026/11/16 11:49:25.788 [RX] - ViVOtech2<NUL><HT>	<NUL><NUL><DC4> 
 HW, VP6328<CR><LF>
-1903CB21v<RS><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL><NUL> 
+1903CB21v<RS> 
 
  Result = PASSED
  
@@ -25,5 +25,5 @@ HW, VP6328<CR><LF>
 Please check ASCII screen, make sure reader return correct data that meet spec!!
 
 
-Docklight Log File (ASCII) - Stopped 2026/9/30 14:26:41.210 
+Docklight Log File (ASCII) - Stopped 2026/11/16 11:49:26.429 
 

@@ -1,4 +1,4 @@
-Docklight Log File (HEX) - Started 2026/10/5 14:48:51.608 
+Docklight Log File (HEX) - Started 2026/11/16 11:39:57.923 
  TEST CASE: BR003
 
  --- Set POS COM PORT Settings
@@ -11,8 +11,8 @@ Docklight Log File (HEX) - Started 2026/10/5 14:48:51.608
  --- Testing 38400 Baud
  Set Reader Baud Rate...
 
-2026/10/5 14:48:53.273 [TX] - 56 69 56 4F 74 65 63 68 32 00 30 01 00 01 03 2A B2 
-2026/10/5 14:48:53.286 [RX] - 56 69 56 4F 74 65 63 68 32 00 30 00 00 00 48 0E  Baud Rate accepted
+2026/11/16 11:39:59.591 [TX] - 56 69 56 4F 74 65 63 68 32 00 30 01 00 01 03 2A B2 
+2026/11/16 11:39:59.606 [RX] - 56 69 56 4F 74 65 63 68 32 00 30 00 00 00 48 0E  Baud Rate accepted
  Result = PASSED
  Reader Baud Rate set to 38400...
  Set Reader Baud Rate - COMPLETE
@@ -24,8 +24,8 @@ Docklight Log File (HEX) - Started 2026/10/5 14:48:51.608
  --- Ping OPEN COM PORT
  Pinging open port...
 
-2026/10/5 14:48:55.726 [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD 
-2026/10/5 14:48:55.732 [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Ping Successful
+2026/11/16 11:40:02.049 [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD 
+2026/11/16 11:40:02.055 [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Ping Successful
  Result = PASSED
  COM port pinged...
  Ping OPEN COM PORT - COMPLETE
@@ -33,8 +33,8 @@ Docklight Log File (HEX) - Started 2026/10/5 14:48:51.608
  --- Set Reader back to Regress.Config baudrate of 115200
 
 
-2026/10/5 14:48:55.772 [TX] - 56 69 56 4F 74 65 63 68 32 00 30 01 00 01 05 EC D2 
-2026/10/5 14:48:55.778 [RX] - 56 69 56 4F 74 65 63 68 32 00 30 00 00 00 48 0E  Baud Rate accepted
+2026/11/16 11:40:02.078 [TX] - 56 69 56 4F 74 65 63 68 32 00 30 01 00 01 05 EC D2 
+2026/11/16 11:40:02.084 [RX] - 56 69 56 4F 74 65 63 68 32 00 30 00 00 00 48 0E  Baud Rate accepted
  --- Set POS COM PORT to default Settings
  Set POS COM PORT...
  POS operating on COM14 @ 115200 baud...
@@ -43,8 +43,8 @@ Docklight Log File (HEX) - Started 2026/10/5 14:48:51.608
  --- Ping OPEN COM PORT
  Pinging open port...
 
-2026/10/5 14:48:57.238 [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD 
-2026/10/5 14:48:57.250 [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Ping Successful
+2026/11/16 11:40:03.530 [TX] - 56 69 56 4F 74 65 63 68 32 00 18 01 00 00 B3 CD 
+2026/11/16 11:40:03.541 [RX] - 56 69 56 4F 74 65 63 68 32 00 18 00 00 00 FA 83  Ping Successful
  Result = PASSED
  COM port pinged...
  Ping OPEN COM PORT - COMPLETE
@@ -54,5 +54,5 @@ Docklight Log File (HEX) - Started 2026/10/5 14:48:51.608
  MASTER RESULT = PASSED
 
 
-Docklight Log File (HEX) - Stopped 2026/10/5 14:48:58.402 
+Docklight Log File (HEX) - Stopped 2026/11/16 11:40:04.675 
 

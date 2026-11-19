@@ -215,7 +215,7 @@ If result <> 0 Then
    msgbox "Click OK --> Swipe Discover PAN=xxxx0026 (MSR card)"
    dl.resetreceivecounter
    DL.AddComment vbcrlf & vbcrlf & "--- 02-40_w/ DFEC53 ON"
-   DL.SendSequence "02-40_w/ DFEC53 ON"
+   DL.SendSequence "02-40_w/ DFEC53 ON_msr+cl"
    output = msgbox("Did you see msg 'EVM Card Please Tap'",vbyesno)
    if output = 7 then 
       result = 0

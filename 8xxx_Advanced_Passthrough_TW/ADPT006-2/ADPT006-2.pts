@@ -1,6 +1,6 @@
 DL_SCRIPTVERSION
 1
-6132
+2493
 
 '------------------------------------------------------------
 ' SCRIPT SETUP
@@ -159,6 +159,10 @@ End Function
 '------------------------------------------------------------
 'TEST BEGINS
 '------------------------------------------------------------
+result = 1
+cardowner = inputbox ("Which card do u want to test?" & vbcrlf & "1) Felica Lite-S" & vbcrlf & "2)  Felica Lite-S_Kate", vbokonly)
+
+
 DL.ResetReceiveCounter
 DL.AddComment "--- Pass-Through, Start"
 DL.SendSequence " Pass-Through, Start"
@@ -171,27 +175,43 @@ If result <> 0 Then
    DL.ResetReceiveCounter
    DL.AddComment "--- Polling Felica Card"
    DL.SendSequence "Polling Felica Card"
-   result = DL.WaitForSequence("2c 00", 1, 45)
+   'result = DL.WaitForSequence("2c 00", 1, 45)
+   result = DL.WaitForSequence("2c 00", 1, 1000)
    if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."   
 End If
+
 '------------------------------------------------------------
 If result <> 0 Then
    dl.addcomment vbcrlf
    DL.ResetReceiveCounter
    DL.AddComment "--- Normal Write S_PAD1 -- 00"
-   DL.SendSequence "Normal Write S_PAD1 -- 00"
-   result = DL.WaitForSequence("2c 00", 1, 25)
+     if cardowner = 1 then DL.SendSequence "Normal Write S_PAD1 -- 00"
+     if cardowner = 2 then DL.SendSequence "Normal Write S_PAD1 -- 00_kate"
+   'result = DL.WaitForSequence("2c 00", 1, 25)
+   result = DL.WaitForSequence("2c 00", 1, 1000)
    if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."   
 End If
+
 '------------------------------------------------------------
 If result <> 0 Then
    dl.addcomment vbcrlf
    DL.ResetReceiveCounter
    DL.AddComment "--- Normal Read S_PAD1 -- 00"
-   DL.SendSequence "Normal Read S_PAD1 -- 00"
-   result = DL.WaitForSequence("Normal Read S_PAD1 -- 00", 1, 25)
+   if cardowner = 1 then  
+      DL.SendSequence "Normal Read S_PAD1 -- 00"
+         result = DL.WaitForSequence("Normal Read S_PAD1 -- 00", 1, 25)
+         result = DL.WaitForSequence("Normal Read S_PAD1 -- 00", 1, 1000) 'for testing
+   end if
+
+   if cardowner = 2 then  
+      DL.SendSequence "Normal Read S_PAD1 -- 00_kate"
+         result = DL.WaitForSequence("Normal Read S_PAD1 -- 00_kate", 1, 25)
+         'result = DL.WaitForSequence("Normal Read S_PAD1 -- 00_kate", 1, 1000)  'for testing
+   end if
+
    if result = 0 then DL.AddComment "=> FAIL! check RX or RX respond time..."   
 End If
+
 '------------------------------------------------------------
 DL.ResetReceiveCounter
 dl.addcomment vbcrlf

@@ -218,7 +218,7 @@ If result <> 0 Then msgbox "Click OK --> Swipe Discover PAN=xxxx0026 (MSR card)"
 If result <> 0 Then
    dl.resetreceivecounter
    DL.AddComment vbcrlf & vbcrlf & "--- 02-40_w/o DFEC53"
-   DL.SendSequence "02-40_w/o DFEC53"
+   DL.SendSequence "02-40_w/o DFEC53_msr+cl"
    result = DL.WaitForSequence("MSR_0240", 1, 10000)
       if result = 0 then 
          dl.addcomment vbcrlf & vbcrlf & "**Card data FAIL**"

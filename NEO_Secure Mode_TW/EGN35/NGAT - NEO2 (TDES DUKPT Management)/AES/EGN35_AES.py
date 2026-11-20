@@ -91,7 +91,7 @@ if (Result):
 							RetOfStep = DL.SendCommand('02-40, CL -- Discover w/ LCD')
 						if platform == 1:
 							RetOfStep = DL.SendCommand('02-40, CL -- VISA w/ LCD')
-						rx = 0
+						rx = 1
 					if lcdtype == 0:
 						if readermodel == 0:
 							RetOfStep = DL.SendCommand('02-40, CL -- Discover w/o LCD')	

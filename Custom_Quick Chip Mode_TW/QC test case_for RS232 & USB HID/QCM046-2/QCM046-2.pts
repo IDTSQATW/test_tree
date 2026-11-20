@@ -1,0 +1,182 @@
+DL_SCRIPTVERSION
+1
+1260
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "QCM046-2" ' !!!!! EDIT THIS !!!!!
+' Objective: Tag DFEC4F: bootup notification
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+sub podmode()
+if result <> 0 then 
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Poll On Demand"
+   DL.SendSequence "Poll On Demand"
+   result = DL.WaitForSequence("01 00", 1, 1000)
+   dl.pause 6000
+end if
+end sub
+
+sub msrfallback()
+if result <> 0 then 
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- enable MSR fallback to CT function"
+   DL.SendSequence "enable MSR fallback to CT function"
+   result = DL.WaitForSequence("60 00", 1, 1000)
+end if
+end sub
+
+sub atmode()
+if result <> 0 then 
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Quick Chip Mode"
+   DL.SendSequence "Quick Chip Mode"
+   result = DL.WaitForSequence("01 00", 1, 1000)
+   dl.pause 6000
+end if
+end sub
+
+sub ping()
+if result <> 0 then 
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Ping"
+   DL.SendSequence "Ping"
+   result = DL.WaitForSequence("18 00", 1, 1000)
+   dl.addcomment vbcrlf
+end if
+end sub
+
+sub change2interface()
+if result <> 0 then 
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set transaction interface = CT+MSR"
+   DL.SendSequence "Set transaction interface = CT+MSR"
+   result = DL.WaitForSequence("04 00", 1, 1000)
+end if
+end sub
+
+sub change3interface()
+if result <> 0 then 
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set transaction interface = ALL"
+   DL.SendSequence "Set transaction interface = ALL"
+   result = DL.WaitForSequence("04 00", 1, 1000)
+end if
+end sub
+'------------------------------------------------------------
+usbcheck = msgbox("Do you test USB-HID?", vbyesno)
+
+if result <> 0 then 
+   dl.resetreceivecounter
+   DL.AddComment "--- 14-01 01"
+   DL.SendSequence "14-01 01"
+   result = DL.WaitForSequence("14 05", 1, 1000)
+end if
+
+if result <> 0 then 
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 14-01 02"
+   DL.SendSequence "14-01 02"
+   result = DL.WaitForSequence("14 05", 1, 1000)
+end if
+
+if result <> 0 then 
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- 14-01 03"
+   DL.SendSequence "14-01 03"
+   result = DL.WaitForSequence("14 00", 1, 1000)
+end if
+
+for i = 1 to 2
+if i = 1 then
+   podmode()
+   atmode()
+elseif i = 2 then
+   podmode()
+   if usbcheck = 6 then DL.SendSequence "Set output interface (USB-HID)IDG R-Frame"
+   if usbcheck = 7 then DL.SendSequence "Set output interface (RS232)IDG R-Frame"
+   dl.pause 200
+   atmode()
+end if
+
+if result <> 0 then 
+   DL.AddComment vbcrlf
+   DL.AddComment "--- Boot up notification"
+   DL.AddComment vbcrlf & "wait.........." 
+   if i = 2 then result = DL.WaitForSequence("1401 boot notice", 1, 20000)
+   if result <> 0 then result = DL.WaitForSequence("DFED42", 1, 20000)
+   if result <> 0 then result = DL.WaitForSequence("DFED18", 1, 200)
+   if result <> 0 then result = DL.WaitForSequence("DFEF57", 1, 200)
+   if result <> 0 then result = DL.WaitForSequence("DFEF61", 1, 200)
+
+   if i = 2 then result = DL.WaitForSequence("1401 boot notice 2nd part", 1, 20000)
+   if result <> 0 then result = DL.WaitForSequence("DFED42-2", 1, 20000)
+   if result <> 0 then result = DL.WaitForSequence("DFED18-2", 1, 200)
+
+   if result = 0 then DL.AddComment vbcrlf & "Boot up notice data: FAIL!!"
+end if
+next
+
+'------------------------------------------------------------reset default
+dl.resetreceivecounter
+dl.addcomment vbcrlf
+DL.AddComment "--- 14-01 00 (disable)"
+DL.SendSequence "14-01 00"
+dl.pause 200
+dl.addcomment vbcrlf
+DL.AddComment "--- Boot up config change to default (raw data)"
+if usbcheck = 6 then DL.SendSequence "Set output interface (USB-HID)"
+if usbcheck = 7 then DL.SendSequence "Set output interface (RS232)"
+dl.pause 200
+'------------------------------------------------------------
+DL.AddComment vbCrLf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)

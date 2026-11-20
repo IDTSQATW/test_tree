@@ -10,7 +10,7 @@ MacKey=''
 PAN=''
 strKey ='FEDCBA9876543210F1F1F1F1F1F1F1F1'
 
-# Objective: Verify tag DFED0A
+# Objective: Verify tag DFED0A (Enable/Disable DFEE25 output when ICC falls back to MSR. )
 #-----------------------------------------------------------------
 # Poll on demand
 if (Result):

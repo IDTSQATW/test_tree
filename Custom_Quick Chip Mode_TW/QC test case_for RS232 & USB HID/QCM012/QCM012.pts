@@ -1,0 +1,151 @@
+DL_SCRIPTVERSION
+1
+11735
+
+'------------------------------------------------------------
+' SCRIPT SETUP
+' - Assign project name
+'------------------------------------------------------------
+Dim ProjectName
+ProjectName = "QCM012" ' !!!!! EDIT THIS !!!!!
+' Objective: 
+'#[JIRA] GRN-56 >> [Quick Chip Mode] Swiped card (service code = 201) -> waited for fallback transaction timeout, reader returned timeout status but LED 3 was still ON.
+'#[JIRA] GRN-60 >> [Quick Chip Mode] Fallback to chip reader -> swiped IDT test card, reader can read the card.
+'------------------------------------------------------------
+DL.OpenProject ProjectName & ".ptp"
+DL.ClearCommWindows 
+DL.StartLogging "DOCKLIGHT_LOG",False, "H"
+', false, true
+
+Sub PrintMyResult(ResultX)
+      If ResultX <> 0 Then
+            MasterResult = 1
+            DL.AddComment "Result = PASSED"
+      Else
+            MasterResult = 0
+            DL.AddComment "Result = FAILED"
+      End If
+End Sub
+
+Function ReverseResult(ResultParam)
+      If ResultParam = 1 Then
+            result = 0
+      ElseIf ResultParam = 0 Then
+            result = 1
+      End If
+End Function
+
+Dim prompt
+Dim confirm
+max=1
+min=0
+Randomize
+errCnt = 0
+caseValid = 0
+
+result = 1
+
+DL.AddComment "TEST CASE: " & ProjectName & vbCrLf
+'------------------------------------------------------------
+'TEST BEGINS
+'------------------------------------------------------------
+sub podmode()
+if result <> 0 then 
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Poll On Demand"
+   DL.SendSequence "Poll On Demand"
+   result = DL.WaitForSequence("01 00", 1, 1000)
+   dl.pause 6000
+end if
+end sub
+
+sub msrfallback()
+if result <> 0 then 
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- enable MSR fallback to CT function"
+   DL.SendSequence "enable MSR fallback to CT function"
+   result = DL.WaitForSequence("60 00", 1, 1000)
+end if
+end sub
+
+sub atmode()
+if result <> 0 then 
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Quick Chip Mode"
+   DL.SendSequence "Quick Chip Mode"
+   result = DL.WaitForSequence("01 00", 1, 1000)
+   dl.pause 8000
+end if
+end sub
+
+sub ping()
+if result <> 0 then 
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Ping"
+   DL.SendSequence "Ping"
+   result = DL.WaitForSequence("18 00", 1, 1000)
+   dl.addcomment vbcrlf
+end if
+end sub
+
+sub change2interface()
+if result <> 0 then 
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set transaction interface = CT+MSR"
+   DL.SendSequence "Set transaction interface = CT+MSR"
+   result = DL.WaitForSequence("04 00", 1, 1000)
+end if
+end sub
+
+sub change3interface()
+if result <> 0 then 
+   dl.resetreceivecounter
+   dl.addcomment vbcrlf
+   DL.AddComment "--- Set transaction interface = ALL"
+   DL.SendSequence "Set transaction interface = ALL"
+   result = DL.WaitForSequence("04 00", 1, 1000)
+end if
+end sub
+'------------------------------------------------------------
+for i = 1 to 2
+
+if i = 1 then
+   podmode()
+   msrfallback()
+   change2interface()
+   atmode()
+   ping()
+elseif i = 2 then
+   podmode()
+   change3interface()
+   atmode()
+   ping()
+end if
+
+if result <> 0 then 
+   dl.resetreceivecounter
+   msgbox "Swipe the card that service code is 2xx or 6xx --> Click OK", vbokonly
+   msgbox "Swipe any MSR card --> Click OK, waited fallback timeout ", vbokonly
+   DL.AddComment vbcrlf & "Waiting for 1 min.........." 
+   result = DL.WaitForSequence("02 08", 1, 61000)
+   if result <> 0 then result = DL.WaitForSequence("DF EF 61 02 30 13", 1, 200)
+   if result = 0 then DL.AddComment vbcrlf & "Output data: FAIL!!"
+
+   if result <> 0 then 
+      ledcheck = msgbox("When fallback to chip reader, MSR reader did not work?", vbyesno)
+      if ledcheck = 7 then 
+         result = 0
+         DL.AddComment vbcrlf & "MSR reader behavior during fallback: FAIL!!"
+      end if
+   end if
+end if
+next
+'------------------------------------------------------------
+DL.AddComment vbCrLf
+DL.AddComment "---------- END OF TEST ----------" & vbCrLf
+PrintMyResult(result)

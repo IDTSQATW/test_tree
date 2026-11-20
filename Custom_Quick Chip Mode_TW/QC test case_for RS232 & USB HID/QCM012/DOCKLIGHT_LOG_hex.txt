@@ -1,0 +1,11 @@
+Docklight Log File (HEX) - Started 2026/11/20 14:02:32.056 
+ TEST CASE: QCM012
+
+ 
+
+ --- Poll On Demand
+
+2026/11/20 14:02:32.314 [TX] - 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
+
+Docklight Log File (HEX) - Stopped 2026/11/20 14:02:33.799 
+

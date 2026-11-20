@@ -37,7 +37,7 @@ if (Result):
 	DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(10)
     
-# Fallback to CT, then Fallback to MSR
+# Fallback to MSR
 if (Result): 
     DL.SetWindowText("black", "*** Insert IDT test card, @1st time")
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")

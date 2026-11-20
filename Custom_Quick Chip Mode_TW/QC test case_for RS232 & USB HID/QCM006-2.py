@@ -15,7 +15,6 @@ strKey ='FEDCBA9876543210F1F1F1F1F1F1F1F1'
 #---------------------------------------------------------Define main test, use subroutine
 def read_card():
     if (Result):       
-        DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, RS232 or USB")
         for i in range (1, 4):
             if i == 1:
                 DL.ShowMessageBox("Notice", "Insert T=0 card --> (read over, remove card) --> Click OK")

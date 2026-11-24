@@ -13,6 +13,7 @@ strKey = '0123456789ABCDEFFEDCBA9876543210'
 # Objective: 
 # NEO3-14580 [KIOSKV FW v1.01.359.2525.T][AT][CS-6236]No UID returned for Mifare DESFire virtual card in Auto transaction mode
 # NEO3-14035, [VP3350][v2.00.012.2519.D] Under Auto Transaction mode, reader can not read the Mifare DESFire virtual card.
+# NEO3-20529, [NEO3][K81][AT] Support Mifare Classic Card Information Output via TAG DFEC0F in AT Mode.
 
 # Poll on demand
 if (Result):
@@ -32,13 +33,13 @@ if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
 	DL.Check_RXResponse("01 00 00 00")	
-	time.sleep(10)
+	# # time.sleep(10)
 #-----------------------------------------------------------------
 if (Result):
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
-    for i in range (1, 6):
+    for i in range (1, 9):
         if i == 1:
-            DL.SetWindowText("black", "*** Tap Mifare Classic card (UID = 7E BD BA E5)")
+            DL.SetWindowText("black", "*** Tap Mifare Classic card (UID = any)")
         if i == 2:
             DL.SetWindowText("black", "*** Tap Mifare DESFire card (UID = 04 9B 4C FA 22 2A 80)")
         if i == 3:
@@ -47,11 +48,17 @@ if (Result):
             DL.SetWindowText("black", "*** Tap Mifare Ultralight C card (UID = 04 2B 6E 9A 67 34 80)")
         if i == 5:
             DL.SetWindowText("black", "*** Tap Mifare DESFire Virtual card (Android MIFARE 2GO Client Test App w/ MIFARE 2GO Accenture Card Bundle.json)")
-            
+        if i == 6:
+            DL.SetWindowText("black", "*** Tap Felica card (UID = 01 2E 30 D3 47 18 85 7B)")
+        if i == 7:
+            DL.SetWindowText("black", "*** Tap Mifare Plus card (UID = 04 33 3F E2 08 5D 80)")
+        if i == 8:
+            DL.SetWindowText("black", "*** Tap Broadcom NFC tag 1 card (UID = 68 E3 D3 00)")
+
         strCardData = DL.ReadKeyBoardCardData(20000)
               
         if i == 1:#Mifare Classic card
-            if(-1 != strCardData.find('05007EBDBAE5')):
+            if(-1 != strCardData.find('DFEC0F090504000804')):
                 DL.SetWindowText("blue", "PASS")
             else:
                 DL.SetWindowText("red", "FAIL")
@@ -80,6 +87,27 @@ if (Result):
                 
         if i == 5:#Mifare DESFire Virtual card
             if(-1 != strCardData.find('DFEC0F17036F12851014020C1122334455667700006141A95D9000')):
+                DL.SetWindowText("blue", "PASS")
+            else:
+                DL.SetWindowText("red", "FAIL")
+                DL.fails=DL.fails+1
+                
+        if i == 6:#Felica card 
+            if(-1 != strCardData.find('DFEC0F 13 04 FF FF 012E30D34718857B 00F1000000014300')):
+                DL.SetWindowText("blue", "PASS")
+            else:
+                DL.SetWindowText("red", "FAIL")
+                DL.fails=DL.fails+1
+                
+        if i == 7:#Mifare Plus 
+            if(-1 != strCardData.find('DFEC0F 17 06 4400 20 07 04333FE2085D80 75778002C1052F2F01BCD6')):
+                DL.SetWindowText("blue", "PASS")
+            else:
+                DL.SetWindowText("red", "FAIL")
+                DL.fails=DL.fails+1
+                
+        if i == 8:#Broadcom NFC tag 1DFEC0F0900000C00046BE3D300
+            if(-1 != strCardData.find('DFEC0F0900000C00046BE3D300')):
                 DL.SetWindowText("blue", "PASS")
             else:
                 DL.SetWindowText("red", "FAIL")

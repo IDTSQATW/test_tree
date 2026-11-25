@@ -58,7 +58,7 @@ if (Result):
         if i == 6:
             DL.SetWindowText("black", "*** Tap Felica card (UID = 01 2E 30 D3 47 18 85 7B)")
         if i == 7:
-            DL.SetWindowText("black", "*** Tap Mifare Plus card (UID = 04 33 3F E2 08 5D 80)")
+            DL.SetWindowText("black", "*** Tap Mifare PlusX card (UID = 04 33 3F E2 08 5D 80)")
         if i == 8:
             DL.SetWindowText("black", "*** Tap Broadcom NFC tag 1 card (UID = 68 E3 D3 00)")
 

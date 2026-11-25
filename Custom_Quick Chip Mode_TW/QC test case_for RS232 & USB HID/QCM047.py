@@ -52,7 +52,7 @@ if (Result):
 if (Result):
     for i in range (1, 9):
         if i == 1:
-            DL.ShowMessageBox("", "Tap Mifare Classic card (UID = 7E BD BA E5) --> Click OK")
+            DL.ShowMessageBox("", "Tap Mifare Classic card (UID = any) --> Click OK")
         if i == 2:
             DL.ShowMessageBox("", "Tap Mifare DESFire card (UID = 04 9B 4C FA 22 2A 80) --> Click OK")
         if i == 3:
@@ -62,11 +62,11 @@ if (Result):
         if i == 5:
             DL.ShowMessageBox("", "Tap Mifare DESFire Virtual card (Android MIFARE 2GO Client Test App w/ MIFARE 2GO Accenture Card Bundle.json) --> Click OK")
         if i == 6:
-            DL.SetWindowText("black", "*** Tap Felica card (UID = 01 2E 30 D3 47 18 85 7B)")
+            DL.ShowMessageBox("black", "Tap Felica card (UID = 01 2E 30 D3 47 18 85 7B) --> Click OK")
         if i == 7:
-            DL.SetWindowText("black", "*** Tap Mifare Plus card (UID = 04 33 3F E2 08 5D 80)")
+            DL.ShowMessageBox("black", "Tap Mifare PlusX card (UID = 04 33 3F E2 08 5D 80) --> Click OK")
         if i == 8:
-            DL.SetWindowText("black", "*** Tap Broadcom NFC tag 1 card (UID = 68 E3 D3 00)")
+            DL.ShowMessageBox("black", "Tap Broadcom NFC tag 1 card (UID = 68 E3 D3 00) --> Click OK")
             
         strCardData = DL.GetResponse()
         DL.SetWindowText("blue", strCardData)
@@ -80,7 +80,7 @@ if (Result):
             DL.fails=DL.fails+1
               
         if i == 1:#Mifare Classic card
-            if(-1 != strCardData.find('05 00 7E BD BA E5')):
+            if(-1 != strCardData.find('DF EC 0F 09 05 04 00 08 04')):
                 DL.SetWindowText("blue", "PASS")
             else:
                 DL.SetWindowText("red", "FAIL")

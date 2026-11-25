@@ -164,7 +164,7 @@ if (Result):
             
         if i == 1:#IDT-----------------------------------------------------------
             target_patterns = [
-                '83 3F 4F 28 6B 87 00',]
+                '83 3F 4F 28 6B 82 87',]
 
             if all(pattern in strCardData for pattern in target_patterns):
                 DL.SetWindowText("GREEN", "Format PASS")

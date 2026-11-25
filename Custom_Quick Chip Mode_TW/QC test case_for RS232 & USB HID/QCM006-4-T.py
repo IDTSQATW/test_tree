@@ -164,7 +164,7 @@ if (Result):
             
         if i == 1:#IDT-----------------------------------------------------------
             target_patterns = [
-                '83 3F 4F 28 6B 87 00',]
+                '83 3F 4F 28 6B 82 BF',]
 
             if all(pattern in strCardData for pattern in target_patterns):
                 DL.SetWindowText("GREEN", "Format PASS")
@@ -214,7 +214,7 @@ if (Result):
         
         if i == 3:#AAMVA-----------------------------------------------------------
             target_patterns = [
-                '81 3F 30 23 52 82 87',]
+                '81 3F 30 23 52 82 BF',]
 
             if all(pattern in strCardData for pattern in target_patterns):
                 DL.SetWindowText("GREEN", "Format PASS")

@@ -1,0 +1,53 @@
+
+15:54:30: If Issue ?
+Path_File:C:\test_tree\Custom_Quick Chip Mode_TW\QC test case_for USB KB & BT KB\QCM007_NEO3.txt
+Running Info>>
+[Issue Count: 4]
+[Wrong Items]
+>>>Error item ( 9 ).
+>>> MSR transaction (#NEO3-10624)
+
+>>>Error item ( 10 ).
+SWIPEKB: click OK, then swipe card w/ abnormal method (transaction is failed).
+
+>>>Error item ( 14 ).
+>>> CT transaction
+
+>>>Error item ( 18 ).
+>>> CL transaction
+
+
+15:54:30: >>[Do Scripts]>>
+
+Objective: Encryption OFF, MSR/ CT/ CL transaction are failed under Quick Chip Mode.
+--------------------
+>>> Quick Chip mode = 02
+Pack L = 17-5669564F74656368320001000000125300
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 02 04 B4 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
+MESSAGECK: Remain only 1 connection w/ PC, USB or Bluetooth, and then click OK.
+User Judgment Pass
+
+--------------------
+>>> MSR transaction (#NEO3-10624)
+SWIPEKB: click OK, then swipe card w/ abnormal method (transaction is failed).
+KB Unit Swipe Card:
+FEF61025024DFEF57135650363332382046572076322E30302E323739
+Error! >>>> Expect OUT:EXR: DFEF61025024
+Error! >>>> Expect OUT:EXR: DFEF6102F220
+--------------------
+>>> CT transaction
+SWIPEKB: click OK, then insert card (P/N: 80005206-002).
+Error! >>>> Expect OUT:EXR: DF EE 25 02 50
+--------------------
+>>> CL transaction
+SWIPEKB: click OK, then tap T=0 card.
+Error! >>>> Expect OUT:EXR: DFEE02 04
+MESSAGECK: hear beep twice
+User Judgment Pass
+
+--------------------
+MESSAGECK: Reader connect w/ PC via USB cable and then click OK
+User Judgment Pass
+

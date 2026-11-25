@@ -48,7 +48,9 @@ if (Result):
         if i == 1:#MSR----------------------------
             target_patterns1 = [
                 'DF EE 25 02 30 12',
-                'DF EF 57']
+                'DF EF 57',
+                'DF EF 61 02 50 24',
+                'DF EF 61 02 F2 20',]
             if all(pattern in strCardData for pattern in target_patterns1):
                 DL.SetWindowText("GREEN", "MSR PASS")
             else:
@@ -57,7 +59,7 @@ if (Result):
         
         if i == 2:#CL----------------------------
             target_patterns1 = [
-                'DF EE 02 04']
+                'DF EE 02 04',]
             if all(pattern in strCardData for pattern in target_patterns1):
                 DL.SetWindowText("GREEN", "CL PASS")
             else:

@@ -16,6 +16,14 @@ strKey ='FEDCBA9876543210F1F1F1F1F1F1F1F1'
 # Check output interface
 ointerface = DL.ShowMessageBox("Check output interface", "Do u test Bluetooth output interface?", 0)
 
+# Salt key check
+if (Result):
+	DL.SetWindowText("black", "*** Salt key check")
+	DL.SendIOCommand("IDG", "81 0C", 3000, 1) 
+	Result = DL.Check_RXResponse("51 00 00")
+	if Result == 0:
+		DL.SetWindowText("Red", "Pls load salt key first......")
+
 # Poll on demand
 if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
@@ -61,7 +69,12 @@ if (Result):
 #-----------------------------------------------------------------
 if (Result):       
     DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, USB or Bluetooth")
-    for i in range (1, 3):
+    ctcheck = DL.ShowMessageBox("Check HW", "Does the project support CT reader?", 0)
+    if ctcheck == 1: #w/ CT reader
+        n = 3
+    if ctcheck == 0: #w/o CT reader
+        n = 2
+    for i in range (1, n):
         if i == 1:
             DL.SetWindowText("black", "*** Swipe ISO 4909 (3T) card")
             strCardData = DL.ReadKeyBoardCardData(60000)
@@ -116,14 +129,12 @@ if (Result):
             else:
                 DL.SetWindowText("red", "DFEE23 FAIL")
                 DL.fails=DL.fails+1
-
 else:
     DL.fails=DL.fails+1
-    
-DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
 #-----------------------------------------------------------------Back to default
 # Poll on demand
 if (Result):
+	DL.ShowMessageBox("Connection check", "Reader connect w/ PC via USB cable and then click OK", 0)
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	

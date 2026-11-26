@@ -143,13 +143,13 @@ if (Result):
         if i == 1:
             DL.ShowMessageBox("Notice", "Swipe ISO 4909 (3T) card --> Click OK")
         if i == 2:
-            DL.ShowMessageBox("Notice", "Insert MSR card 1 time --> Click OK")
+            DL.ShowMessageBox("Notice", "Insert MSR card the 1st time --> Click OK")
             strCardData = DL.GetResponse()
             DL.SetWindowText("blue", strCardData)
-            DL.ShowMessageBox("Notice", "Insert MSR card 1 time --> Click OK")
+            DL.ShowMessageBox("Notice", "Insert MSR card the 2nd time --> Click OK")
             strCardData = DL.GetResponse()
             DL.SetWindowText("blue", strCardData)
-            DL.ShowMessageBox("Notice", "Insert MSR card 1 time --> Click OK")
+            DL.ShowMessageBox("Notice", "Insert MSR card the 3rd time --> Click OK")
             strCardData = DL.GetResponse()
             DL.SetWindowText("blue", strCardData)
             DL.ShowMessageBox("Notice", "Swipe ISO 4909 (3T) card --> Click OK")

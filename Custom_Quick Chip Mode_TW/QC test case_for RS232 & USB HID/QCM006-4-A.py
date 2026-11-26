@@ -77,7 +77,7 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** Get DUKPT DEK Attribution based on KeySlot (C7-A3)")
 	DL.SendIOCommand("IDG", "C7 A3 01 00", 3000, 1) 
-	Result = DL.Check_RXResponse("C7 00 00 06 00 00 00 00 00 00")
+	Result = DL.Check_RXResponse("C7 00 00 06 01 02 00 00 00 00")
 	time.sleep(0.5)
 #-----------------------------------------------------------------
 def msr_data_analysis(strCardData):
@@ -152,7 +152,7 @@ if (Result):
             'DF EE 26 02 EC 01',
             '9F 02 06 00 00 00 00 04 44',
             '9A 03',
-            '9F 21 03']
+            '9F 21 03',]
         if all(pattern in strCardData for pattern in target_patterns):
             DL.SetWindowText("GREEN", "Format PASS")
         else:
@@ -164,7 +164,7 @@ if (Result):
             
         if i == 1:#IDT-----------------------------------------------------------
             target_patterns = [
-                '83 3F 4F 28 6B 82 87',]
+                '83 7F 4F 28 6B 82 BF',]
 
             if all(pattern in strCardData for pattern in target_patterns):
                 DL.SetWindowText("GREEN", "Format PASS")
@@ -191,7 +191,7 @@ if (Result):
         
         if i == 2:#VISA MSD-----------------------------------------------------------
             target_patterns = [
-                '80 17 00 28 00 82 92',]
+                '80 57 00 28 00 82 92',]
 
             if all(pattern in strCardData for pattern in target_patterns):
                 DL.SetWindowText("GREEN", "Format PASS")
@@ -200,7 +200,7 @@ if (Result):
                 DL.fails=DL.fails+1
             
             TR2maskdata = ";4761********0010=2012****************?"
-            TR2plaintextdata = ";4761739001010010=20121200012339900031?"
+            TR2plaintextdata = "3B343736313733393030313031303031303D32303132313230303031323333393930303033313F"
 
             tracks = [
                 (TR2maskdata, Track2_CardData, "TR2maskdata"),
@@ -214,7 +214,7 @@ if (Result):
         
         if i == 3:#AAMVA-----------------------------------------------------------
             target_patterns = [
-                '81 3F 30 23 52 82 87',]
+                '81 7F 30 23 52 82 BF',]
 
             if all(pattern in strCardData for pattern in target_patterns):
                 DL.SetWindowText("GREEN", "Format PASS")
@@ -241,7 +241,7 @@ if (Result):
                 
         if i == 4:#JIS 1-----------------------------------------------------------
             target_patterns = [
-                '80 1F 48 28 00 A3 9B',]
+                '80 5F 48 28 00 A3 9B',]
 
             if all(pattern in strCardData for pattern in target_patterns):
                 DL.SetWindowText("GREEN", "Format PASS")
@@ -268,7 +268,7 @@ if (Result):
                     
         if i == 5:#JIS 2-----------------------------------------------------------
             target_patterns = [
-                '85 17 00 48 00 82 92',]
+                '85 57 00 48 00 82 92',]
 
             if all(pattern in strCardData for pattern in target_patterns):
                 DL.SetWindowText("GREEN", "Format PASS")
@@ -291,7 +291,7 @@ if (Result):
                     
         if i == 6:#ISO 4909 (3T)-----------------------------------------------------------
             target_patterns = [
-                '80 3F 4D 27 69 87 BF',]
+                '80 7F 4D 27 69 87 BF',]
 
             if all(pattern in strCardData for pattern in target_patterns):
                 DL.SetWindowText("GREEN", "Format PASS")

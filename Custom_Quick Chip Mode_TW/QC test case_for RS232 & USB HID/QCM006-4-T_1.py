@@ -16,52 +16,43 @@ KSN='629949012C0004600001'
 #-----------------------------------------------------------------
 # Check output interface
 interfacecheck1 = DL.ShowMessageBox("", "Current output interface = USB-HID?", 0)
-if interfacecheck1 == 1:
-    DL.SetWindowText("Green", "*** output interface = USB-HID, enable MSR Additional Tags ***")
-    # Output = USB-HID, enable MSR Additional Tags
-    DL.SendIOCommand("IDG", "04 00 DFEC4F 08 05 00 01 00 00 00 00 00", 3000, 1) 
-    DL.Check_RXResponse("04 00 00 00")	
-else:
-    interfacecheck2 = DL.ShowMessageBox("", "Current output interface = RS232?", 0)
-    if interfacecheck2 == 1:
-        DL.SetWindowText("Green", "*** output interface = RS232, enable MSR Additional Tags ***")
-        # Output = RS232, enable MSR Additional Tags
-        DL.SendIOCommand("IDG", "04 00 DFEC4F 08 03 00 01 00 00 00 00 00", 3000, 1) 
-        DL.Check_RXResponse("04 00 00 00")	
-    else:
-        DL.fails=DL.fails+1
-        Result = False
-    
+interfacecheck2 = DL.ShowMessageBox("", "Current output interface = RS232?", 0)
+
 # Poll on demand
 if (Result):
 	DL.SetWindowText("black", "*** Poll on demand")
 	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
 	Result = DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(5)
+    
+if interfacecheck1 == 1:
+    DL.SetWindowText("Green", "*** output interface = USB-HID, enable MSR Additional Tags ***")
+    # Output = USB-HID, enable MSR Additional Tags
+    DL.SendIOCommand("IDG", "04 00 DFEC4F 08 05 00 01 00 00 00 00 00", 3000, 1) 
+    Result = DL.Check_RXResponse("04 00 00 00")	
+if interfacecheck2 == 1:
+    DL.SetWindowText("Green", "*** output interface = RS232, enable MSR Additional Tags ***")
+    # Output = RS232, enable MSR Additional Tags
+    DL.SendIOCommand("IDG", "04 00 DFEC4F 08 03 00 01 00 00 00 00 00", 3000, 1) 
+    Result = DL.Check_RXResponse("04 00 00 00")	
         
 # DF7D = 02 (NEO2)
 if (Result):
 	DL.SetWindowText("black", "*** DF7D = 02 (NEO2)")
 	DL.SendIOCommand("IDG", "04 00 DF EE 7D 01 02 ", 3000, 1) 
-	DL.Check_RXResponse("04 00 00 00")	
+	Result = DL.Check_RXResponse("04 00 00 00")	
     
 # DFEF4B = 3F
 if (Result):
 	DL.SetWindowText("black", "*** DFEF4B = 3F")
 	DL.SendIOCommand("IDG", "04 00 DF EF 4B 03 3F 00 00", 3000, 1) 
-	DL.Check_RXResponse("04 00 00 00")	
-    
-# enable MSR only
-if (Result):
-	DL.SetWindowText("black", "*** DFEF37 = 01 = enable MSR only")
-	DL.SendIOCommand("IDG", "04 00 DF EF 37 01 01", 3000, 1) 
-	DL.Check_RXResponse("04 00 00 00")	
+	Result = DL.Check_RXResponse("04 00 00 00")	
     
 # Get Data Encryption (C7-37) = encryption ON
 if (Result):
 	DL.SetWindowText("black", "*** Get Data Encryption (C7-37)")
 	DL.SendIOCommand("IDG", "C7 37", 3000, 1) 
-	DL.Check_RXResponse("C7 00 00 01 03")
+	Result = DL.Check_RXResponse("C7 00 00 01 03")
 	time.sleep(0.5)
     
 # Get DUKPT DEK Attribution based on KeySlot (C7-A3)
@@ -75,14 +66,14 @@ if (Result):
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	DL.Check_RXResponse("01 00 00 00")	
+	Result = DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(6)
     
 # 18-01 to let NGAT to reconnect
 if (Result):
 	DL.SetWindowText("black", "*** Ping the reader")
 	DL.SendIOCommand("IDG", "1801", 3000, 1) 
-	DL.Check_RXResponse("18 00 00 00")	
+	Result = DL.Check_RXResponse("18 00 00 00")	
 	time.sleep(0.2)
 #-----------------------------------------------------------------
 def cl_data_analysis(strCardData):
@@ -99,7 +90,7 @@ def cl_data_analysis(strCardData):
 #-----------------------------------------------------------------
 def msr_data_analysis(strCardData):
 	global Key
-    global KSN
+	global KSN
 	Track1_CardData = ""
 	Track2_CardData = ""
 	Track3_CardData = ""
@@ -143,8 +134,12 @@ def msr_data_analysis(strCardData):
 	return Track1_CardData, Track2_CardData, Track3_CardData, TRK1DecryptData, TRK2DecryptData, TRK3DecryptData
 #-----------------------------------------------------------------
 if (Result):       
-    DL.SetWindowText("red", "/// Must remain only 1 connection w/ PC, RS232 or USB")
-    for i in range (1, 3):
+    ctcheck = DL.ShowMessageBox("Check HW", "Does the project support CT reader?", 0)
+    if ctcheck == 1: #w/ CT reader
+        n = 3
+    if ctcheck == 0: #w/o CT reader
+        n = 2
+    for i in range (1, n):
         if i == 1:
             DL.ShowMessageBox("Notice", "Swipe ISO 4909 (3T) card --> Click OK")
         if i == 2:

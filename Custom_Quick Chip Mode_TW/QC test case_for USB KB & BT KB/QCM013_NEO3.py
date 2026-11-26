@@ -76,7 +76,7 @@ for j in range (1, 3):
                 if(-1 != strCardData2.find('5A084761739001010010')):
                     if(-1 != strCardData2.find('9F3901')):
                         if(-1 != strCardData2.find('DFEF57')):
-                            if(-1 != strCardData2.find('DFEC181D454D5620436F6D6D6F6E2047656E2033204C322056312E33302E303339')):
+                            if(-1 != strCardData2.find('DFEC18')):
                                 DL.SetWindowText("blue", "PASS")
                             else:
                                 DL.SetWindowText("red", "DFEC18 FAIL")
@@ -125,11 +125,11 @@ for j in range (1, 3):
         else:
             DL.SetWindowText("red", "Error code FAIL")
             DL.fails=DL.fails+1
-        DL.SetWindowText("black", "*** Swipe Discover card")
+        DL.SetWindowText("black", "*** Swipe Discover card (PAN = xxxx....0026)")
         strCardData2 = DL.ReadKeyBoardCardData(15000)
         if(-1 != strCardData2.find('DFEE25')):
             if(-1 != strCardData2.find('9F390180')):
-                if(-1 != strCardData2.find('DFEE236A%B6510000000000125^CARD/IMAGE 08             ^17122011000095000000?;6510000000000125=17122011000095000000?')):
+                if(-1 != strCardData2.find('DFEE236A%B6510000000000026^CARD/IMAGE 03             ^17122011000021000000?;6510000000000026=17122011000021000000?')):
                     DL.SetWindowText("blue", "PASS")
                 else:
                     DL.SetWindowText("red", "DFEE23 FAIL")

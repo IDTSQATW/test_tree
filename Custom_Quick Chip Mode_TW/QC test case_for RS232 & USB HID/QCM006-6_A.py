@@ -17,14 +17,14 @@ strKey = 'FEDCBA9876543210F1F1F1F1F1F1F1F1'
 if (Result):
 	DL.SetWindowText("black", "*** QuickChip mode (02)")
 	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	DL.Check_RXResponse("01 00 00 00")	
+	Result = DL.Check_RXResponse("01 00 00 00")	
 	time.sleep(6)
     
 # 18-01 to let NGAT to reconnect
 if (Result):
 	DL.SetWindowText("black", "*** Ping the reader")
 	DL.SendIOCommand("IDG", "1801", 3000, 1) 
-	DL.Check_RXResponse("18 00 00 00")	
+	Result = DL.Check_RXResponse("18 00 00 00")	
 	time.sleep(0.2)
 #-----------------------------------------------------------------
 def cl_data_analysis(strCardData):

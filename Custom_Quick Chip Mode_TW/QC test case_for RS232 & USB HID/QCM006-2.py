@@ -22,6 +22,7 @@ def read_card():
                 DL.ShowMessageBox("Notice", "Swipe Discover card (PAN = xxxx....0026) --> Click OK")
             if i == 3:
                 DL.ShowMessageBox("Notice", "Insert MSR card: the 1st time (remove card) --> Click OK")
+                
             strCardData = DL.GetResponse()
             DL.SetWindowText("blue", strCardData)
             

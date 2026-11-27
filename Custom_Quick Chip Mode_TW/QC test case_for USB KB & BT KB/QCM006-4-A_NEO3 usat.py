@@ -12,35 +12,61 @@ strKey ='FEDCBA9876543210F1F1F1F1F1F1F1F1'
 
 #Objective: Encryption ON, MSR test under Quick Chip Mode. (IDT/ VISA MSD/ AAMVA/ JIS 2/ ISO4909 3T)
 
-# # Poll on demand
-# if (Result):
-	# DL.SetWindowText("black", "*** Poll on demand")
-	# DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
-	# Result = DL.Check_RXResponse("01 00 00 00")	
-	# time.sleep(12)
+# Poll on demand
+if (Result):
+	DL.SetWindowText("black", "*** Poll on demand")
+	DL.SendIOCommand("IDG", "01 01 01", 3000, 1) 
+	Result = DL.Check_RXResponse("01 00 00 00")	
+	time.sleep(12)
     
-# # Set DF7D = 02 (NEO2)
-# if (Result):
-	# DL.SetWindowText("black", "*** Set DF7D = 02 (NEO2)")
-	# DL.SendIOCommand("IDG", "04 00 DF EE 7D 01 02", 3000, 1) 
-	# DL.Check_RXResponse("04 00 00 00")	
+# Set DF7D = 02 (NEO2)
+if (Result):
+	DL.SetWindowText("black", "*** Set DF7D = 02 (NEO2)")
+	DL.SendIOCommand("IDG", "04 00 DF EE 7D 01 02", 3000, 1) 
+	DL.Check_RXResponse("04 00 00 00")	
 
-# # QuickChip mode
-# if (Result):
-	# DL.SetWindowText("black", "*** QuickChip mode (02)")
-	# DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
-	# DL.Check_RXResponse("01 00 00 00")	
-	# time.sleep(10)
+# QuickChip mode
+if (Result):
+	DL.SetWindowText("black", "*** QuickChip mode (02)")
+	DL.SendIOCommand("IDG", "01 01 02", 3000, 1) 
+	DL.Check_RXResponse("01 00 00 00")	
+	time.sleep(10)
     
-# # Get DUKPT DEK Attribution based on KeySlot (C7-A3)
-# if (Result):
-	# DL.SetWindowText("black", "*** Get DUKPT DEK Attribution based on KeySlot (C7-A3)")
-	# DL.SendIOCommand("IDG", "C7 A3 01 00", 3000, 1) 
-	# Result = DL.Check_RXResponse("C7 00 00 06 01 02 00 00 00 00")
-	# time.sleep(0.5)
+# Get DUKPT DEK Attribution based on KeySlot (C7-A3)
+if (Result):
+	DL.SetWindowText("black", "*** Get DUKPT DEK Attribution based on KeySlot (C7-A3)")
+	DL.SendIOCommand("IDG", "C7 A3 01 00", 3000, 1) 
+	Result = DL.Check_RXResponse("C7 00 00 06 01 02 00 00 00 00")
+	time.sleep(0.5)
 #-----------------------------------------------------------------
+def format_msr_rawdata(card_data):
+    # 1. 切除尾端韌體資訊 (DFEF57...)，只保留到結束符 '03'
+    fw_tag_idx = card_data.find('DFEF57')
+    clean_data = card_data[:fw_tag_idx] if fw_tag_idx != -1 else card_data
+
+    # 2. 自動定位明文遮罩區段 (從第 26 碼到最後一個 '?*' 結尾)
+    mask_start = 26
+    mask_end = clean_data.rfind('?*') + 2
+
+    # 3. 將明文區段由 ASCII 轉為 HEX，並轉大寫
+    hex_tracks = DL.stringToHexString(clean_data[mask_start:mask_end])
+    rawdata = (clean_data[:mask_start] + hex_tracks + clean_data[mask_end:]).upper()
+
+    # 4. 安全計算長度並轉為 4 碼小端序 (Little-Endian) Hex
+    payload_bytes = (len(rawdata) - 12) // 2
+    hex_len = "{:04X}".format(payload_bytes)
+    little_endian_len = hex_len[2:] + hex_len[:2]
+    rawdata = rawdata[:2] + little_endian_len + rawdata[6:]
+
+    # 5. 使用負數切片動態計算並回填 LRC 與 Checksum
+    payload_body = rawdata[6:-6]
+    lrc = DL.GetLRC(payload_body)
+    checksum = DL.GetSUM(payload_body)
+    
+    return rawdata[:-6] + lrc + checksum + rawdata[-2:]
+    
 def verify_data(source_data, expected_substring, label):
-    if expected_substring in source_data:
+    if expected_substring and (expected_substring in source_data):
         DL.SetWindowText("blue", label + " PASS")
     else:
         DL.SetWindowText("red", label + " FAIL")
@@ -62,21 +88,10 @@ if (Result):
         if i == 6:
             DL.SetWindowText("black", "*** Swipe ISO 4909 (3T) card")
             
-        strCardData = DL.ReadKeyBoardCardData(60000)
+        strCardData = DL.ReadKeyBoardCardData(60000)   #Catch output data
+        rawdata = format_msr_rawdata(strCardData)   #data reorganization
         
         if i == 1:#IDT
-            # Tracks data, ASCII convert to HEX
-            rawdata = strCardData[0:26] + DL.stringToHexString(strCardData[26:66]) + strCardData[66:716]
-            # Length update
-            l = str(0) + str(hex((len(rawdata) - 12) / 2)[2:])
-            l = l[2:] + l[0:2]
-            rawdata = rawdata[0:2] + l + rawdata[6:756]
-            rawdata = rawdata.upper()
-            # LRC/ check sum update
-            lrc = DL.GetLRC(rawdata[6:750])
-            checksum = DL.GetSUM(rawdata[6:750])
-            # Final MSR data
-            rawdata = rawdata[0:750] + lrc + checksum + rawdata[754:756]
             objectMSR = DL.ParseCardData(rawdata, Key)
             KSN = DL.Get_KSN_CardData()
             TRK1 = DL.Get_EncryptTrackN_CardData(1)
@@ -97,18 +112,6 @@ if (Result):
                 verify_data(target_data, expected_val, test_name)
         
         if i == 2:#AAMVA
-            # Tracks data, ASCII convert to HEX
-            rawdata = strCardData[0:26] + DL.stringToHexString(strCardData[26:61]) + strCardData[61:615]
-            # Length update
-            l = str(0) + str(hex((len(rawdata) - 12) / 2)[2:])
-            l = l[2:] + l[0:2]
-            rawdata = rawdata[0:2] + l + rawdata[6:650]
-            rawdata = rawdata.upper()
-            # LRC/ check sum update
-            lrc = DL.GetLRC(rawdata[6:644])
-            checksum = DL.GetSUM(rawdata[6:644])
-            # Final MSR data
-            rawdata = rawdata[0:644] + lrc + checksum + rawdata[648:650]
             objectMSR = DL.ParseCardData(rawdata, Key)
             KSN = DL.Get_KSN_CardData()
             TRK1 = DL.Get_EncryptTrackN_CardData(1)
@@ -129,18 +132,6 @@ if (Result):
                 verify_data(target_data, expected_val, test_name)
         
         if i == 3:#JIS 1
-            #Tracks data, ASCII convert to HEX 
-            rawdata = strCardData[0:26] + DL.stringToHexString(strCardData[26:138])+ strCardData[138:524]
-            #Length update
-            l = str(0)+str(hex((len(rawdata)-12)/2)[2:])
-            l = l[2:]+l[0:2]
-            rawdata = rawdata[0:2] + l + rawdata[6:636]
-            rawdata = rawdata.upper()
-            #LRC/ check sum update
-            lrc = DL.GetLRC(rawdata[6:630])
-            checksum = DL.GetSUM(rawdata[6:630])
-            #Final MSR data
-            rawdata = rawdata[0:630] + lrc + checksum + rawdata[634:636]
             objectMSR = DL.ParseCardData(rawdata, Key)
             KSN = DL.Get_KSN_CardData()
             TRK1 = DL.Get_EncryptTrackN_CardData(1)
@@ -159,18 +150,6 @@ if (Result):
                 verify_data(target_data, expected_val, test_name)
         
         if i == 4:#JIS 2
-            # Tracks data, ASCII convert to HEX
-            rawdata = strCardData[0:26] + DL.stringToHexString(strCardData[26:98]) + strCardData[98:412]
-            # Length update
-            l = str(0) + str(hex((len(rawdata) - 12) / 2)[2:])
-            l = l[2:] + l[0:2]
-            rawdata = rawdata[0:2] + l + rawdata[6:484]
-            rawdata = rawdata.upper()
-            # LRC/ check sum update
-            lrc = DL.GetLRC(rawdata[6:478])
-            checksum = DL.GetSUM(rawdata[6:478])
-            # Final MSR data
-            rawdata = rawdata[0:478] + lrc + checksum + rawdata[482:484]
             objectMSR = DL.ParseCardData(rawdata, Key)
             KSN = DL.Get_KSN_CardData()
             TRK2 = DL.Get_EncryptTrackN_CardData(2)
@@ -179,24 +158,12 @@ if (Result):
             test_cases = [
                 (strCardData, '85570048008292021600', 'MSR format'),
                 (strCardData, ';1234*************************************************************6789?*', 'Mask2 data'),
-                ('3132333435363738393031323334353637383930313233343536373839303132333435363738393031323334353637383930313233343536373839303132333435363738390000000000000000000000', TRK2DecryptData, 'TRK2DecryptData'),
+                ('7F3132333435363738393031323334353637383930313233343536373839303132333435363738393031323334353637383930313233343536373839303132333435363738397F4E0000000000000000', TRK2DecryptData, 'TRK2DecryptData'),
             ]
             for target_data, expected_val, test_name in test_cases:
                 verify_data(target_data, expected_val, test_name)
             
         if i == 5:#VISA MSD
-            #Tracks data, ASCII convert to HEX 
-            rawdata = strCardData[0:26] + DL.stringToHexString(strCardData[26:66])+ strCardData[66:252]
-            #Length update
-            l = str(0)+str(0)+str(hex((len(rawdata)-12)/2)[2:])
-            l = l[2:]+l[0:2]
-            rawdata = rawdata[0:2] + l + rawdata[6:292]
-            rawdata = rawdata.upper()
-            #LRC/ check sum update
-            lrc = DL.GetLRC(rawdata[6:286])
-            checksum = DL.GetSUM(rawdata[6:286])
-            #Final MSR data
-            rawdata = rawdata[0:286] + lrc + checksum + rawdata[290:292]
             objectMSR = DL.ParseCardData(rawdata, Key)
             KSN = DL.Get_KSN_CardData()
             TRK2 = DL.Get_EncryptTrackN_CardData(2)
@@ -211,18 +178,6 @@ if (Result):
                 verify_data(target_data, expected_val, test_name)
                 
         if i == 6:#ISO 4909 (3T)
-            #Tracks data, ASCII convert to HEX 
-            rawdata = strCardData[0:26] + DL.stringToHexString(strCardData[26:247])+ strCardData[247:897]
-            #Length update
-            l = str(0)+str(hex((len(rawdata)-12)/2)[2:])
-            l = l[2:]+l[0:2]
-            rawdata = rawdata[0:2] + l + rawdata[6:1118]
-            rawdata = rawdata.upper()
-            #LRC/ check sum update
-            lrc = DL.GetLRC(rawdata[6:1112])
-            checksum = DL.GetSUM(rawdata[6:1112])
-            #Final MSR data
-            rawdata = rawdata[0:1112] + lrc + checksum + rawdata[1116:1118]
             objectMSR = DL.ParseCardData(rawdata, Key)
             KSN = DL.Get_KSN_CardData()
             TRK1 = DL.Get_EncryptTrackN_CardData(1)

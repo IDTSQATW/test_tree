@@ -10,7 +10,7 @@ MacKey='0123456789abcdeffedcba9876543210'
 PAN=''
 strKey ='FEDCBA9876543210F1F1F1F1F1F1F1F1'
 
-#Objective: Encryption OFF, CL test under Quick Chip Mode. (Discover/ VISA MSD/ VISA qVSDC (EMV)/ MasterCard (MSD)/ MChip (EMV)/ INTERAC)
+#Objective: Encryption OFF, MSR/ CT/ CL transaction are failed under Quick Chip Mode.
 
 #-----------------------------------------------------------------
 # Check HW function

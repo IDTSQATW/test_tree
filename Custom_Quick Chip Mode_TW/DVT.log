@@ -145401,3 +145401,11 @@ ASCII: Otech2
 MESSAGECK: 1) Check USB connection type = KBD; 2) Disconnect/ reconnect w/ PC, check again; 3) Reset reader/ reconnect w/ PC, check again
 User Judgment Pass
 
+
+11:26:00: [Send Command]
+
+Protocal:Pack ViVopay2
+
+CMD: 56 69 56 4F 74 65 63 68 32 00 01 01 00 01 01 34 D7 
+OUT: 56 69 56 4F 74 65 63 68 32 00 01 00 00 00 12 53 
+ASCII: Otech2    
